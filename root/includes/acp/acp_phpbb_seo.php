@@ -97,6 +97,9 @@ class acp_phpbb_seo {
   								$this->dyn_select[$optionname . '_' . $key] = $this->multiple_options[$optionname][$key . '_values'];
 								$display_vars['vars'][$optionname . '_' . $key] = array('lang' => $optionname . '_' . $key, 'validate' => 'string', 'type' => 'select', 'method' => 'select_string', 'explain' => true, 'lang_explain' => $optionname . '_' . $key . '_explain');
 								$this->new_config[$optionname . '_' . $key] = $phpbb_seo->seo_opt[$optionname][$key];
+							} else {
+								$display_vars['vars'][$optionname . '_' . $key] = array('lang' => $optionname . '_' . $key, 'validate' => 'string:0:50', 'type' => 'text:50:50', 'explain' => true, 'lang_explain' => $optionname . '_' . $key . '_explain');
+								$this->new_config[$optionname . '_' . $key] = $phpbb_seo->seo_opt[$optionname][$key];
 							}
 
 						}
@@ -104,7 +107,9 @@ class acp_phpbb_seo {
 				}
 			break;
 			case 'forum_url':
+				// used for cache
 				$this->write_type = 'forum';
+				$forbidden = array($phpbb_seo->seo_static['forum'], $phpbb_seo->seo_static['global_announce'], $phpbb_seo->seo_static['user'], $phpbb_seo->seo_static['topic'], $phpbb_seo->seo_static['atopic'], $phpbb_seo->seo_static['utopic'], $phpbb_seo->seo_static['leaders'], $phpbb_seo->seo_static['post'], $phpbb_seo->seo_static['group'], $phpbb_seo->seo_static['npost'], $phpbb_seo->seo_static['index']);
 				if ( $phpbb_seo->modrtype == 1 || !$phpbb_seo->seo_opt['cache_layer'] ) {
 					trigger_error($user->lang['ACP_NO_FORUM_URL'] . preg_replace('`(&amp;|&|\?)mode=forum_url`i', '', adm_back_link($this->u_action)));
 					break;
@@ -128,15 +133,16 @@ class acp_phpbb_seo {
 					if ( empty($phpbb_seo->cache_config['forum'][$forum_id]) ) {
 						// Suggest the one from the title
 						$forum_url_title = $phpbb_seo->format_url($row['forum_name'], $phpbb_seo->seo_static['forum']);
-						if ($forum_url_title != $phpbb_seo->seo_static['forum'] && $forum_url_title != $phpbb_seo->seo_static['global_announce'] && $forum_url_title != $phpbb_seo->seo_static['usermsg']) {
+						if (!in_array($forum_url_title, $forbidden)) {
 							if (array_search($forum_url_title, $phpbb_seo->cache_config['forum'])) {
 								$this->new_config['forum_url' . $forum_id] = $forum_url_title .  $phpbb_seo->seo_delim['forum'] . $forum_id;
-								$error_cust = '<li style="color:red">&nbsp;' . $user->lang['SEO_ADVICE_DUPE'] . '</li>';
+								$error_cust = '<li>&nbsp;' . sprintf($user->lang['SEO_ADVICE_DUPE'], $forum_url_title) . '</li>';
 							} else {
 								$this->new_config['forum_url' . $forum_id] = $forum_url_title . (@$phpbb_seo->cache_config['settings']['rem_ids'] ? '': $phpbb_seo->seo_delim['forum'] . $forum_id);
 			}
 						} else {
 							$this->new_config['forum_url' . $forum_id] = $forum_url_title . $phpbb_seo->seo_delim['forum'] . $forum_id;
+							$error_cust = '<li>&nbsp;' . sprintf($user->lang['SEO_ADVICE_RESERVED'], $forum_url_title) . '</li>';
 						}
 						$title = '<b style="color:red">' . $row['forum_name'] . '</b>';
 						$status_msg = '<b>' . $user->lang['SEO_CACHE_URL_NOT_OK'] . '</b>';
@@ -212,25 +218,27 @@ class acp_phpbb_seo {
 						while (preg_match('`^[a-z0-9_-]+' . $phpbb_seo->seo_delim['forum'] . '[0-9]+$`i', $config_value)) {
 							$config_value = preg_replace('`^([a-z0-9_-]+)' . $phpbb_seo->seo_delim['forum'] . '[0-9]+$`i', '\\1', $config_value);
 							if (@$phpbb_seo->cache_config['settings']['rem_ids']) {
-								$seo_msg['SEO_ADVICE_DELIM_REM'] = '<li style="color:red">&nbsp;' . $user->lang['SEO_ADVICE_DELIM_REM'] . '</li>';
+								$seo_msg['SEO_ADVICE_DELIM_REM'] = '<li>&nbsp;' . $user->lang['SEO_ADVICE_DELIM_REM'] . '</li>';
 							}
 						}
 						// Forums cannot end with the pagination param
 						while (preg_match('`^[a-z0-9_-]+' . $phpbb_seo->seo_delim['start'] . '[0-9]+$`i', $config_value)) {
 							$config_value = preg_replace('`^([a-z0-9_-]+)' . $phpbb_seo->seo_delim['start'] . '[0-9]+$`i', "\\1", $config_value);
-							$seo_msg['SEO_ADVICE_START'] = '<li style="color:red">&nbsp;' . $user->lang['SEO_ADVICE_START'] . '</li>';
+							$seo_msg['SEO_ADVICE_START'] = '<li>&nbsp;' . $user->lang['SEO_ADVICE_START'] . '</li>';
 						}
 						// Only update if the value is not a static one for forums
-						if ($config_value != $phpbb_seo->seo_static['forum'] && $config_value != $phpbb_seo->seo_static['global_announce'] && $config_value != $phpbb_seo->seo_static['usermsg']) {
+						if (!in_array($config_value, $forbidden)) {
 							// and updated (sic)
 							if ($config_value != @$phpbb_seo->cache_config['forum'][$forum_id]) {
 								// and if not already set
 								if (!array_search($config_value, $phpbb_seo->cache_config['forum'])) {
 								$phpbb_seo->cache_config['forum'][$forum_id] = $config_value . (@$phpbb_seo->cache_config['settings']['rem_ids'] ? '': $phpbb_seo->seo_delim['forum'] . $forum_id);
 								} else {
-									$seo_msg['SEO_ADVICE_DUPE'] = '<li style="color:red">&nbsp;' . $user->lang['SEO_ADVICE_DUPE'] . '</li>';
+									$seo_msg['SEO_ADVICE_DUPE_' . $forum_id] = '<li>&nbsp;' . sprintf($user->lang['SEO_ADVICE_DUPE'], $config_value) . '</li>';
 								}
 							}
+						} else {
+							$seo_msg['SEO_ADVICE_RESERVED_' . $forum_id] = '<li>&nbsp;' . sprintf($user->lang['SEO_ADVICE_RESERVED'], $config_value) . '</li>';
 						}
 					}
 				} elseif ($mode == 'settings') {
@@ -264,8 +272,10 @@ class acp_phpbb_seo {
 				if ( $this->write_cache($this->write_type) ) {
 					ksort($phpbb_seo->cache_config[$this->write_type]);
 					add_log('admin', 'SEO_LOG_CONFIG_' . strtoupper($mode));
-					$msg = !empty($seo_msg) ? '<br /><ul>' . implode(' ',$seo_msg) . '</ul><br />' : '';
-					trigger_error($user->lang['SEO_CACHE_MSG_OK'] . $msg . adm_back_link($this->u_action));
+					$msg = !empty($seo_msg) ? '<br /><h1 style="color:red;text-align:left;">' . $user->lang['SEO_VALIDATE_INFO'] . '</h1><ul style="text-align:left;">' . implode(' ',$seo_msg) . '</ul><br />' : '';
+					global $msg_long_text;
+					$msg_long_text = $user->lang['SEO_CACHE_MSG_OK'] . $msg . adm_back_link($this->u_action);
+					trigger_error(false);
 				} else {
 					trigger_error($user->lang['SEO_CACHE_MSG_FAIL'] . adm_back_link($this->u_action));
 				}
@@ -356,7 +366,7 @@ class acp_phpbb_seo {
 			$seo_advice .= $error_cust;
 		}
 		if (strlen($url) > $this->lengh_limit) { // Size
-			$seo_advice .= '<li style="color:red">&nbsp;' . $user->lang['SEO_ADVICE_LENGTH'] . '</li>';
+			$seo_advice .= '<li>&nbsp;' . $user->lang['SEO_ADVICE_LENGTH'] . '</li>';
 		}
 		if (preg_match('`^[a-z0-9_-]+' . $phpbb_seo->seo_delim['forum'] . '[0-9]+$`i', $url)) { // With delimiter and id
 			if (@$phpbb_seo->cache_config['settings']['rem_ids']) {
@@ -364,14 +374,14 @@ class acp_phpbb_seo {
 			}
 		}
 		if ($phpbb_seo->seo_static['forum'] == $url) { // default
-			$seo_advice .= '<li style="color:red">&nbsp;' . $user->lang['SEO_ADVICE_DEFAULT'] . '</li>';
+			$seo_advice .= '<li>&nbsp;' . $user->lang['SEO_ADVICE_DEFAULT'] . '</li>';
 		}
 		// Check the number of word
 		$url_words = explode('-', $url);
 		if (count($url_words) > $this->word_limit) {
-			$seo_advice .= '<li style="color:red">&nbsp;' . $user->lang['SEO_ADVICE_WORDS'] . '</li>';
+			$seo_advice .= '<li>&nbsp;' . $user->lang['SEO_ADVICE_WORDS'] . '</li>';
 		}
-		return '<ul>' . $seo_advice . '</ul>';
+		return '<ul  style="color:red">' . $seo_advice . '</ul>';
 	}
 	/**
 	*  seo_htaccess The evil one ;-)
@@ -381,6 +391,17 @@ class acp_phpbb_seo {
 		static $htaccess_code = '';
 		$htaccess_tpl = '';
 		if ( empty($htaccess_code) ) { // Only generate one .htaccess per submit (saves 338 lines)
+			$colors = array( 'color' => '<b style="color:%1$s">%2$s</b>',
+				'static' => '#A020F0',
+				'ext' => '#6A5ACD',
+				'delim' => '#FF00FF',
+			);
+			$tpl = array('paginpage' => '/?(<b style="color:#A020F0">%1$s</b>([0-9]+)<b style="color:#6A5ACD">%2$s</b>)?',
+				'pagin' => '(<b style="color:#FF00FF">%1$s</b>([0-9]+))?<b style="color:#6A5ACD">%2$s</b>',
+				'static' => sprintf($colors['color'] , $colors['static'], '%1$s'),
+				'ext' => sprintf($colors['color'] , $colors['ext'], '%1$s'),
+				'delim' => sprintf($colors['color'] , $colors['delim'], '%1$s'),
+			);
 			$modrtype = array( 1 => 'SIMPLE', 2 => 'MIXED', 1 => 'SIMPLE', 3 => 'ADVANCED', 'type' => intval($phpbb_seo->modrtype));
 			$htaccess_tpl = '<b style="color:blue"># Lines That should already be in your .htacess</b>' . "\n";
 			$htaccess_tpl .= '<b style="color:brown">&lt;Files</b> <b style="color:#FF00FF">"config.{PHP_EX}"</b><b style="color:brown">&gt;</b>' . "\n";
@@ -411,24 +432,24 @@ class acp_phpbb_seo {
 				$htaccess_tpl .= '<b style="color:green">RewriteRule</b> ^{WIERD_SLASH}{PHPBB_LPATH}{STATIC_INDEX}{EXT_INDEX}$ {DEFAULT_SLASH}{PHPBB_RPATH}index.{PHP_EX} [QSA,L,NC]' . "\n";
 			} else {
 				$htaccess_tpl .= '<b style="color:blue"># FORUM INDEX REWRITERULE WOULD STAND HERE IF USED. \'forum\' REQUIRES TO BE SET AS FORUM INDEX' . "\n";
-				$htaccess_tpl .= '# RewriteRule ^{WIERD_SLASH}{PHPBB_LPATH}forum\.html$ {DEFAULT_SLASH}{PHPBB_RPATH}index.{PHP_EX} [QSA,L,NC]</b>' . "\n";
+				$htaccess_tpl .= '# RewriteRule ^{WIERD_SLASH}{PHPBB_LPATH}<b style="color:#A020F0">forum</b>\.<b style="color:#6A5ACD">html</b>$ {DEFAULT_SLASH}{PHPBB_RPATH}index.{PHP_EX} [QSA,L,NC]</b>' . "\n";
 			}
 			$htaccess_common_tpl = '';
 			if ( $phpbb_seo->seo_opt['profile_noids'] ) {
 				$htaccess_common_tpl .= '<b style="color:blue"># PROFILES THROUGH USERNAME</b>' . "\n";
 				$htaccess_common_tpl .= '<b style="color:green">RewriteRule</b> ^{WIERD_SLASH}{PHPBB_LPATH}{STATIC_MEMBERS}/([^/]+)/?$ {DEFAULT_SLASH}{PHPBB_RPATH}memberlist.{PHP_EX}?mode=viewprofile&un=$1 [QSA,L,NC]' . "\n";
 				$htaccess_common_tpl .= '<b style="color:blue"># USER MESSAGES THROUGH USERNAME</b>' . "\n";
-				$htaccess_common_tpl .= '<b style="color:green">RewriteRule</b> ^{WIERD_SLASH}{PHPBB_LPATH}{STATIC_USERMSG}/([^/]+){USERMSG_PAGINATION}$ {DEFAULT_SLASH}{PHPBB_RPATH}search.{PHP_EX}?author=$1&sr=posts&start=$3 [QSA,L,NC]' . "\n";
+				$htaccess_common_tpl .= '<b style="color:green">RewriteRule</b> ^{WIERD_SLASH}{PHPBB_LPATH}{STATIC_MEMBERS}/([^/]+)/(topics|posts){USERMSG_PAGINATION}$ {DEFAULT_SLASH}{PHPBB_RPATH}search.{PHP_EX}?author=$1&sr=$2&start=$4 [QSA,L,NC]' . "\n";
 			} elseif ( $phpbb_seo->seo_opt['profile_inj'] ) {
 				$htaccess_common_tpl .= '<b style="color:blue"># PROFILES ADVANCED</b>' . "\n";
 				$htaccess_common_tpl .= '<b style="color:green">RewriteRule</b> ^{WIERD_SLASH}{PHPBB_LPATH}[a-z0-9_-]*{DELIM_MEMBERS}([0-9]+){EXT_MEMBERS}$ {DEFAULT_SLASH}{PHPBB_RPATH}memberlist.{PHP_EX}?mode=viewprofile&u=$1 [QSA,L,NC]' . "\n";
 				$htaccess_common_tpl .= '<b style="color:blue"># USER MESSAGES ADVANCED</b>' . "\n";
-				$htaccess_common_tpl .= '<b style="color:green">RewriteRule</b> ^{WIERD_SLASH}{PHPBB_LPATH}[a-z0-9_-]*{DELIM_USERMSG}([0-9]+){USERMSG_PAGINATION}$ {DEFAULT_SLASH}{PHPBB_RPATH}search.{PHP_EX}?author_id=$1&sr=posts&start=$3 [QSA,L,NC]' . "\n";
+				$htaccess_common_tpl .= '<b style="color:green">RewriteRule</b> ^{WIERD_SLASH}{PHPBB_LPATH}[a-z0-9_-]*{DELIM_MEMBERS}([0-9]+){DELIM_SR}(topics|posts){USERMSG_PAGINATION}$ {DEFAULT_SLASH}{PHPBB_RPATH}search.{PHP_EX}?author_id=$1&sr=$2&start=$4 [QSA,L,NC]' . "\n";
 			} else {
 				$htaccess_common_tpl .= '<b style="color:blue"># PROFILES SIMPLE</b>' . "\n";
 				$htaccess_common_tpl .= '<b style="color:green">RewriteRule</b> ^{WIERD_SLASH}{PHPBB_LPATH}{STATIC_MEMBERS}([0-9]+){EXT_MEMBERS}$ {DEFAULT_SLASH}{PHPBB_RPATH}memberlist.{PHP_EX}?mode=viewprofile&u=$1 [QSA,L,NC]' . "\n";
 				$htaccess_common_tpl .= '<b style="color:blue"># USER MESSAGES SIMPLE</b>' . "\n";
-				$htaccess_common_tpl .= '<b style="color:green">RewriteRule</b> ^{WIERD_SLASH}{PHPBB_LPATH}{STATIC_USERMSG}([0-9]+){USERMSG_PAGINATION}$ {DEFAULT_SLASH}{PHPBB_RPATH}search.{PHP_EX}?author_id=$1&sr=posts&start=$3 [QSA,L,NC]' . "\n";
+				$htaccess_common_tpl .= '<b style="color:green">RewriteRule</b> ^{WIERD_SLASH}{PHPBB_LPATH}{STATIC_MEMBERS}([0-9]+){DELIM_SR}(topics|posts){USERMSG_PAGINATION}$ {DEFAULT_SLASH}{PHPBB_RPATH}search.{PHP_EX}?author_id=$1&sr=$2&start=$4 [QSA,L,NC]' . "\n";
 			}
 			if ( $phpbb_seo->seo_opt['profile_inj'] ) {
 				$htaccess_common_tpl .= '<b style="color:blue"># GROUPS ADVANCED</b>' . "\n";
@@ -438,7 +459,13 @@ class acp_phpbb_seo {
 				$htaccess_common_tpl .= '<b style="color:green">RewriteRule</b> ^{WIERD_SLASH}{PHPBB_LPATH}{STATIC_GROUPS}([0-9]+){GROUP_PAGINATION}$ {DEFAULT_SLASH}{PHPBB_RPATH}memberlist.{PHP_EX}?mode=group&g=$1&start=$3 [QSA,L,NC]' . "\n";
 			}
 			$htaccess_common_tpl .= '<b style="color:blue"># POST</b>' . "\n";
-			$htaccess_common_tpl .= '<b style="color:green">RewriteRule</b> ^{WIERD_SLASH}{PHPBB_LPATH}{STATIC_POST}([0-9]+){EXT_POST}$ {DEFAULT_SLASH}{PHPBB_RPATH}viewtopic.{PHP_EX}?p=$1 [QSA,L,NC]' . "\n";
+			$htaccess_common_tpl .= '<b style="color:green">RewriteRule</b> ^{WIERD_SLASH}{PHPBB_LPATH}{STATIC_POST}([0-9]+){EXT_ATOPIC}$ {DEFAULT_SLASH}{PHPBB_RPATH}viewtopic.{PHP_EX}?p=$1 [QSA,L,NC]' . "\n";
+			$htaccess_common_tpl .= '<b style="color:blue"># ACTIVE TOPICS</b>' . "\n";
+			$htaccess_common_tpl .= '<b style="color:green">RewriteRule</b> ^{WIERD_SLASH}{PHPBB_LPATH}{STATIC_ATOPIC}{ATOPIC_PAGINATION}$ {DEFAULT_SLASH}{PHPBB_RPATH}search.{PHP_EX}?search_id=active_topics&start=$2&sr=topics [QSA,L,NC]' . "\n";
+			$htaccess_common_tpl .= '<b style="color:blue"># UNANSWERED TOPICS</b>' . "\n";
+			$htaccess_common_tpl .= '<b style="color:green">RewriteRule</b> ^{WIERD_SLASH}{PHPBB_LPATH}{STATIC_UTOPIC}{UTOPIC_PAGINATION}$ {DEFAULT_SLASH}{PHPBB_RPATH}search.{PHP_EX}?search_id=unanswered&start=$2&sr=topics [QSA,L,NC]' . "\n";
+			$htaccess_common_tpl .= '<b style="color:blue"># NEW POSTS</b>' . "\n";
+			$htaccess_common_tpl .= '<b style="color:green">RewriteRule</b> ^{WIERD_SLASH}{PHPBB_LPATH}{STATIC_NPOST}{NPOST_PAGINATION}$ {DEFAULT_SLASH}{PHPBB_RPATH}search.{PHP_EX}?search_id=newposts&start=$2&sr=topics [QSA,L,NC]' . "\n";
 			$htaccess_common_tpl .= '<b style="color:blue"># THE TEAM</b>' . "\n";
 			$htaccess_common_tpl .= '<b style="color:green">RewriteRule</b> ^{WIERD_SLASH}{PHPBB_LPATH}{STATIC_TEAM}{EXT_TEAM}$ {DEFAULT_SLASH}{PHPBB_RPATH}memberlist.{PHP_EX}?mode=leaders [QSA,L,NC]' . "\n";
 			if ($modrtype['type'] == 3) { // Advanced
@@ -449,14 +476,14 @@ class acp_phpbb_seo {
 				$htaccess_tpl .= '<b style="color:blue"># GLOBAL ANNOUNCES WITH VIRTUAL FOLDER</b>' . "\n";
 				$htaccess_tpl .= '<b style="color:green">RewriteRule</b> ^{WIERD_SLASH}{PHPBB_LPATH}{STATIC_ANNOUNCES}{EXT_ANNOUNCES}[a-z0-9_-]*{DELIM_TOPIC}([0-9]+){TOPIC_PAGINATION}$ {DEFAULT_SLASH}{PHPBB_RPATH}viewtopic.{PHP_EX}?t=$1&start=$3 [QSA,L,NC]' . "\n";
 				$htaccess_tpl .= '<b style="color:blue"># TOPIC WITHOUT FORUM ID & DELIM</b>' . "\n";
-				$htaccess_tpl .= '<b style="color:green">RewriteRule</b> ^{WIERD_SLASH}{PHPBB_LPATH}[a-z0-9_-]*/?[a-z0-9_-]*{DELIM_TOPIC}([0-9]+){TOPIC_PAGINATION}$ {DEFAULT_SLASH}{PHPBB_RPATH}viewtopic.{PHP_EX}?t=$1&start=$3 [QSA,L,NC]' . "\n";
+				$htaccess_tpl .= '<b style="color:green">RewriteRule</b> ^{WIERD_SLASH}{PHPBB_LPATH}([a-z0-9_-]*)/?[a-z0-9_-]*{DELIM_TOPIC}([0-9]+){TOPIC_PAGINATION}$ {DEFAULT_SLASH}{PHPBB_RPATH}viewtopic.{PHP_EX}?forum_uri=$1&t=$2&start=$4 [QSA,L,NC]' . "\n";
 				$htaccess_tpl .= $htaccess_common_tpl . '<b style="color:blue"># HERE IS A GOOD PLACE TO ADD OTHER PHPBB RELATED REWRITERULES</b>' . "\n\n";
 				$htaccess_tpl .= '<b style="color:blue"># FORUM WITHOUT ID & DELIM</b>' . "\n";
 				$htaccess_tpl .= '<b style="color:blue"># THESE FOUR LINES MUST BE LOCATED AT THE END OF YOUR HTACCESS TO WORK PROPERLY</b>' . "\n";
 				$htaccess_tpl .= '<b style="color:green">RewriteCond</b> %{REQUEST_FILENAME} !-f' . "\n";
 				$htaccess_tpl .= '<b style="color:green">RewriteCond</b> %{REQUEST_FILENAME} !-d' . "\n";
 				$htaccess_tpl .= '<b style="color:green">RewriteCond</b> %{REQUEST_FILENAME} !-l' . "\n";
-				$htaccess_tpl .= '<b style="color:green">RewriteRule</b> ^{WIERD_SLASH}{PHPBB_LPATH}[a-z0-9_-]+{FORUM_PAGINATION}$ {DEFAULT_SLASH}{PHPBB_RPATH}viewforum.{PHP_EX}?start=$2 [QSA,L,NC]' . "\n";
+				$htaccess_tpl .= '<b style="color:green">RewriteRule</b> ^{WIERD_SLASH}{PHPBB_LPATH}([a-z0-9_-]+){FORUM_PAGINATION}$ {DEFAULT_SLASH}{PHPBB_RPATH}viewforum.{PHP_EX}?forum_uri=$1&start=$3 [QSA,L,NC]' . "\n";
 			} elseif ($modrtype['type'] == 2) { // Mixed
 				$htaccess_tpl .= '<b style="color:blue"># FORUM</b>' . "\n";
 				$htaccess_tpl .= '<b style="color:green">RewriteRule</b> ^{WIERD_SLASH}{PHPBB_LPATH}[a-z0-9_-]*{DELIM_FORUM}([0-9]+){FORUM_PAGINATION}$ {DEFAULT_SLASH}{PHPBB_RPATH}viewforum.{PHP_EX}?f=$1&start=$3 [QSA,L,NC]' . "\n";
@@ -465,14 +492,14 @@ class acp_phpbb_seo {
 				$htaccess_tpl .= '<b style="color:blue"># GLOBAL ANNOUNCES WITH VIRTUAL FOLDER</b>' . "\n";
 				$htaccess_tpl .= '<b style="color:green">RewriteRule</b> ^{WIERD_SLASH}{PHPBB_LPATH}{STATIC_ANNOUNCES}{EXT_ANNOUNCES}{STATIC_TOPIC}([0-9]+){TOPIC_PAGINATION}$ {DEFAULT_SLASH}{PHPBB_RPATH}viewtopic.{PHP_EX}?t=$1&start=$3 [QSA,L,NC]' . "\n";
 				$htaccess_tpl .= '<b style="color:blue"># TOPIC WITHOUT FORUM ID & DELIM</b>' . "\n";
-				$htaccess_tpl .= '<b style="color:green">RewriteRule</b> ^{WIERD_SLASH}{PHPBB_LPATH}[a-z0-9_-]*/?{STATIC_TOPIC}([0-9]+){TOPIC_PAGINATION}$ {DEFAULT_SLASH}{PHPBB_RPATH}viewtopic.{PHP_EX}?t=$1&start=$3 [QSA,L,NC]' . "\n";
+				$htaccess_tpl .= '<b style="color:green">RewriteRule</b> ^{WIERD_SLASH}{PHPBB_LPATH}([a-z0-9_-]*)/?{STATIC_TOPIC}([0-9]+){TOPIC_PAGINATION}$ {DEFAULT_SLASH}{PHPBB_RPATH}viewtopic.{PHP_EX}?forum_uri=$1&t=$2&start=$4 [QSA,L,NC]' . "\n";
 				$htaccess_tpl .= $htaccess_common_tpl . '<b style="color:blue"># HERE IS A GOOD PLACE TO ADD OTHER PHPBB RELATED REWRITERULES</b>' . "\n\n";
 				$htaccess_tpl .= '<b style="color:blue"># FORUM WITHOUT ID & DELIM</b>' . "\n";
 				$htaccess_tpl .= '<b style="color:blue"># THESE FOUR LINES MUST BE LOCATED AT THE END OF YOUR HTACCESS TO WORK PROPERLY</b>' . "\n";
 				$htaccess_tpl .= '<b style="color:green">RewriteCond</b> %{REQUEST_FILENAME} !-f' . "\n";
 				$htaccess_tpl .= '<b style="color:green">RewriteCond</b> %{REQUEST_FILENAME} !-d' . "\n";
 				$htaccess_tpl .= '<b style="color:green">RewriteCond</b> %{REQUEST_FILENAME} !-l' . "\n";
-				$htaccess_tpl .= '<b style="color:green">RewriteRule</b> ^{WIERD_SLASH}{PHPBB_LPATH}[a-z0-9_-]+{FORUM_PAGINATION}$ {DEFAULT_SLASH}{PHPBB_RPATH}viewforum.{PHP_EX}?start=$2 [QSA,L,NC]' . "\n";
+				$htaccess_tpl .= '<b style="color:green">RewriteRule</b> ^{WIERD_SLASH}{PHPBB_LPATH}([a-z0-9_-]+){FORUM_PAGINATION}$ {DEFAULT_SLASH}{PHPBB_RPATH}viewforum.{PHP_EX}?forum_uri=$1&start=$3 [QSA,L,NC]' . "\n";
 			} elseif ($modrtype['type'] == 1) { // Simple
 				$htaccess_tpl .= '<b style="color:blue"># FORUM</b>' . "\n";
 				$htaccess_tpl .= '<b style="color:green">RewriteRule</b> ^{WIERD_SLASH}{PHPBB_LPATH}{STATIC_FORUM}([0-9]+){FORUM_PAGINATION}$ {DEFAULT_SLASH}{PHPBB_RPATH}viewforum.{PHP_EX}?f=$1&start=$3 [QSA,L,NC]' . "\n";
@@ -513,25 +540,41 @@ class acp_phpbb_seo {
 			foreach ( $phpbb_seo->seo_ext as $type => $value) {
 				$seo_ext[$type] = str_replace('.', '\.', $value);
 			}
+			$reg_ex_page = sprintf($tpl['paginpage'], $phpbb_seo->seo_static['pagination'], $seo_ext['pagination']);
 			if ($phpbb_seo->seo_opt['virtual_folder'] || $phpbb_seo->seo_ext['forum'] === '/') {
-				$reg_ex_fpage = $seo_ext['forum'] . '?(<b style="color:#A020F0">' . $phpbb_seo->seo_static['pagination'] . '</b>([0-9]+)<b style="color:#6A5ACD">' . $seo_ext['pagination'] . '</b>)?';
+				$reg_ex_fpage = $reg_ex_page;
 			} else {
-				$reg_ex_fpage = '(<b style="color:#FF00FF">' . $phpbb_seo->seo_delim['start'] . '</b>([0-9]+))?<b style="color:#6A5ACD">' . $seo_ext['forum'] . '</b>';
+				$reg_ex_fpage = sprintf($tpl['pagin'], $phpbb_seo->seo_delim['start'], $seo_ext['forum']);
 			}
 			if ($phpbb_seo->seo_ext['topic'] === '/') {
-				$reg_ex_tpage = $seo_ext['topic'] . '?(<b style="color:#A020F0">' . $phpbb_seo->seo_static['pagination'] . '</b>([0-9]+)<b style="color:#6A5ACD">' . $seo_ext['pagination'] . '</b>)?';
+				$reg_ex_tpage = $reg_ex_page;
 			} else {
-				$reg_ex_tpage = '(<b style="color:#FF00FF">' . $phpbb_seo->seo_delim['start'] . '</b>([0-9]+))?<b style="color:#6A5ACD">' . $seo_ext['topic'] . '</b>';
+				$reg_ex_tpage = sprintf($tpl['pagin'], $phpbb_seo->seo_delim['start'], $seo_ext['topic']);
+			}
+			if ($phpbb_seo->seo_ext['atopic'] === '/') {
+				$reg_ex_atpage = $reg_ex_page;
+			} else {
+				$reg_ex_atpage = sprintf($tpl['pagin'], $phpbb_seo->seo_delim['start'], $seo_ext['atopic']);
+			}
+			if ($phpbb_seo->seo_ext['utopic'] === '/') {
+				$reg_ex_utpage = $reg_ex_page;
+			} else {
+				$reg_ex_utpage = sprintf($tpl['pagin'], $phpbb_seo->seo_delim['start'], $seo_ext['utopic']);
+			}
+			if ($phpbb_seo->seo_ext['npost'] === '/') {
+				$reg_ex_nppage = $reg_ex_page;
+			} else {
+				$reg_ex_nppage = sprintf($tpl['pagin'], $phpbb_seo->seo_delim['start'], $seo_ext['npost']);
 			}
 			if ($phpbb_seo->seo_ext['group'] === '/') {
-				$reg_ex_gpage = $seo_ext['group'] . '?(<b style="color:#A020F0">' . $phpbb_seo->seo_static['pagination'] . '</b>([0-9]+)<b style="color:#6A5ACD">' . $seo_ext['pagination'] . '</b>)?';
+				$reg_ex_gpage = $reg_ex_page;
 			} else {
-				$reg_ex_gpage = '(<b style="color:#FF00FF">' . $phpbb_seo->seo_delim['start'] . '</b>([0-9]+))?<b style="color:#6A5ACD">' . $seo_ext['group'] . '</b>';
+				$reg_ex_gpage = sprintf($tpl['pagin'], $phpbb_seo->seo_delim['start'], $seo_ext['group']);
 			}
-			if ($phpbb_seo->seo_ext['usermsg'] === '/') {
-				$reg_ex_umpage = $seo_ext['usermsg'] . '?(<b style="color:#A020F0">' . $phpbb_seo->seo_static['pagination'] . '</b>([0-9]+)<b style="color:#6A5ACD">' . $seo_ext['pagination'] . '</b>)?';
+			if ($phpbb_seo->seo_ext['user'] === '/') {
+				$reg_ex_umpage = $reg_ex_page;
 			} else {
-				$reg_ex_umpage = '(<b style="color:#FF00FF">' . $phpbb_seo->seo_delim['start'] . '</b>([0-9]+))?<b style="color:#6A5ACD">' . $seo_ext['usermsg'] . '</b>';
+				$reg_ex_umpage = sprintf($tpl['pagin'], $phpbb_seo->seo_delim['start'], $seo_ext['user']);
 			}
 			// Load the .htaccess vars
 			$htaccess_tpl_vars = array(
@@ -539,31 +582,38 @@ class acp_phpbb_seo {
 				'{PHP_EX}' => $phpEx,
 				'{PHPBB_LPATH}' => ($this->new_config['rbase'] || $phpbb_seo->seo_opt['virtual_root']) ? '' : $phpbb_path, 
 				'{PHPBB_RPATH}' => $this->new_config['rbase'] ? '' : $phpbb_path, 
-				'{STATIC_INDEX}' => '<b style="color:#A020F0">' . $phpbb_seo->seo_static['index'] . '</b>',
-				'{STATIC_FORUM}' => '<b style="color:#A020F0">' . $phpbb_seo->seo_static['forum'] . '</b>',
-				'{STATIC_TOPIC}' => '<b style="color:#A020F0">' . $phpbb_seo->seo_static['topic'] . '</b>',
-				'{STATIC_POST}' => '<b style="color:#A020F0">' . $phpbb_seo->seo_static['post'] . '</b>',
-				'{STATIC_MEMBERS}' => '<b style="color:#A020F0">' . $phpbb_seo->seo_static['user'] . '</b>',
-				'{STATIC_USERMSG}' => '<b style="color:#A020F0">' . $phpbb_seo->seo_static['usermsg'] . '</b>',
-				'{STATIC_GROUPS}' => '<b style="color:#A020F0">' . $phpbb_seo->seo_static['group'] . '</b>',
-				'{STATIC_ANNOUNCES}' => '<b style="color:#A020F0">' . $phpbb_seo->seo_static['global_announce'] . '</b>',
-				'{STATIC_TEAM}' => '<b style="color:#A020F0">' . $phpbb_seo->seo_static['leaders'] . '</b>',
-     		  		'{EXT_INDEX}' =>'<b style="color:#6A5ACD">' . $seo_ext['index'] . '</b>',
-				'{EXT_FORUM}' =>'<b style="color:#6A5ACD">' . $seo_ext['forum'] . '</b>',
-				'{EXT_TOPIC}' =>'<b style="color:#6A5ACD">' . $seo_ext['topic'] . '</b>',
-				'{EXT_POST}' =>'<b style="color:#6A5ACD">' . $seo_ext['post'] . '</b>',
-				'{EXT_MEMBERS}' =>'<b style="color:#6A5ACD">' . $seo_ext['user'] . '</b>',
-				'{EXT_GROUPS}' =>'<b style="color:#6A5ACD">' . $seo_ext['group'] . '</b>',
-				'{EXT_ANNOUNCES}' =>'<b style="color:#6A5ACD">' . $seo_ext['global_announce'] . '</b>',
-				'{EXT_TEAM}' =>'<b style="color:#6A5ACD">' . $seo_ext['leaders'] . '</b>',
-				'{DELIM_FORUM}' =>'<b style="color:#FF00FF">' . $phpbb_seo->seo_delim['forum'] . '</b>',
-				'{DELIM_TOPIC}' =>'<b style="color:#FF00FF">' . $phpbb_seo->seo_delim['topic'] . '</b>',
-				'{DELIM_MEMBERS}' =>'<b style="color:#FF00FF">' . $phpbb_seo->seo_delim['user'] . '</b>',
-				'{DELIM_USERMSG}' =>'<b style="color:#FF00FF">' . $phpbb_seo->seo_delim['usermsg'] . '</b>',
-				'{DELIM_GROUPS}' =>'<b style="color:#FF00FF">' . $phpbb_seo->seo_delim['group'] . '</b>',
-				'{DELIM_START}' =>'<b style="color:#FF00FF">' . $phpbb_seo->seo_delim['start'] . '</b>',
+				'{STATIC_INDEX}' => sprintf($tpl['static'] , $phpbb_seo->seo_static['index']),
+				'{STATIC_FORUM}' => sprintf($tpl['static'] , $phpbb_seo->seo_static['forum']),
+				'{STATIC_TOPIC}' => sprintf($tpl['static'] , $phpbb_seo->seo_static['topic']),
+				'{STATIC_POST}' => sprintf($tpl['static'] , $phpbb_seo->seo_static['post']),
+				'{STATIC_ATOPIC}' => sprintf($tpl['static'] , $phpbb_seo->seo_static['atopic']),
+				'{STATIC_UTOPIC}' => sprintf($tpl['static'] , $phpbb_seo->seo_static['utopic']),
+				'{STATIC_NPOST}' => sprintf($tpl['static'] , $phpbb_seo->seo_static['npost']),
+				'{STATIC_MEMBERS}' => sprintf($tpl['static'] , $phpbb_seo->seo_static['user']),
+				'{STATIC_GROUPS}' => sprintf($tpl['static'] , $phpbb_seo->seo_static['group']),
+				'{STATIC_ANNOUNCES}' => sprintf($tpl['static'] , $phpbb_seo->seo_static['global_announce']),
+				'{STATIC_TEAM}' => sprintf($tpl['static'] , $phpbb_seo->seo_static['leaders']),
+     		  		'{EXT_INDEX}' => sprintf($tpl['static'] , $seo_ext['index']),
+				'{EXT_FORUM}' => sprintf($tpl['static'] , $seo_ext['forum']),
+				'{EXT_TOPIC}' => sprintf($tpl['static'] , $seo_ext['topic']),
+				'{EXT_ATOPIC}' => sprintf($tpl['static'] , $seo_ext['atopic']),
+				'{EXT_UTOPIC}' => sprintf($tpl['static'] , $seo_ext['utopic']),
+				'{EXT_POST}' => sprintf($tpl['static'] , $seo_ext['post']),
+				'{EXT_MEMBERS}' => sprintf($tpl['static'] , $seo_ext['user']),
+				'{EXT_GROUPS}' => sprintf($tpl['static'] , $seo_ext['group']),
+				'{EXT_ANNOUNCES}' => sprintf($tpl['static'] , $seo_ext['global_announce']),
+				'{EXT_TEAM}' => sprintf($tpl['static'] , $seo_ext['leaders']),
+				'{DELIM_FORUM}' => sprintf($tpl['delim'] , $phpbb_seo->seo_delim['forum']),
+				'{DELIM_TOPIC}' => sprintf($tpl['delim'] , $phpbb_seo->seo_delim['topic']),
+				'{DELIM_MEMBERS}' => sprintf($tpl['delim'] , $phpbb_seo->seo_delim['user']),
+				'{DELIM_GROUPS}' => sprintf($tpl['delim'] , $phpbb_seo->seo_delim['group']),
+				'{DELIM_START}' => sprintf($tpl['delim'] , $phpbb_seo->seo_delim['start']),
+				'{DELIM_SR}' => sprintf($tpl['delim'] , $phpbb_seo->seo_delim['sr']),
 				'{FORUM_PAGINATION}' => $reg_ex_fpage,
 				'{TOPIC_PAGINATION}' => $reg_ex_tpage,
+				'{ATOPIC_PAGINATION}' => $reg_ex_atpage,
+				'{UTOPIC_PAGINATION}' => $reg_ex_utpage,
+				'{NPOST_PAGINATION}' => $reg_ex_nppage,
 				'{USERMSG_PAGINATION}' => $reg_ex_umpage,
 				'{GROUP_PAGINATION}' => $reg_ex_gpage,
 				'{DEFAULT_SLASH}' => $default_slash,
@@ -604,7 +654,7 @@ class acp_phpbb_seo {
 			$htaccess_output .= '</script>' . "\n";
 			$htaccess_output .= '<hr/><div class="content">' . "\n" . '<b style="color:red">&rArr;&nbsp;' . (($show_rewritebase_opt && $this->new_config['rbase']) ? $user->lang['SEO_HTACCESS_FOLDER_MSG'] : $user->lang['SEO_HTACCESS_ROOT_MSG']) . '</b><br/><br/><hr/>' . "\n";
 			$htaccess_output .= '<b>. htaccess :&nbsp;<a href="#" onclick="dE(\'htaccess_code\',1); return false;">' . $user->lang['SEO_SHOW'] . '</a>&nbsp;/&nbsp;<a href="#" onclick="dE(\'htaccess_code\',-1); return false;">' . $user->lang['SEO_HIDE'] . '</a></b>' . "\n";
-			$htaccess_output .= '<div id="htaccess_code" style="display: none;"><dl style="padding:5px;background-color:#FFFFFF;border:1px solid #d8d8d8;font-size:12px;"><dt style="border-bottom:1px solid #CCCCCC;margin-bottom:3px;font-weight:bold;display:block;">&nbsp;<a href="#" onclick="selectCode(this); return false;">' . $user->lang['SEO_SELECT_ALL'] . '</a></dt>' . "\n";
+			$htaccess_output .= '<div id="htaccess_code"><dl style="padding:5px;background-color:#FFFFFF;border:1px solid #d8d8d8;font-size:12px;"><dt style="border-bottom:1px solid #CCCCCC;margin-bottom:3px;font-weight:bold;display:block;">&nbsp;<a href="#" onclick="selectCode(this); return false;">' . $user->lang['SEO_SELECT_ALL'] . '</a></dt>' . "\n";
 			$htaccess_output .= '<dd ><code style="padding-top:5px;font:Monaco,Courier,mono;line-height:1.3em;color:#8b8b8b;font-weight:bold"><br/><br/>' . str_replace( "\n", '<br/>', $htaccess_code) . '</code></dd>' . "\n";
 			$htaccess_output .= '</dl>' . "\n";
 			$htaccess_output .= '<dl style="padding:5px;margin-top:10px;background-color:#FFFFFF;border:1px solid #d8d8d8;font-size:12px;"><br/><b>' . $user->lang['SEO_HTACCESS_CAPTION'] . ':</b><ul style="margin-left:30px;margin-top:10px;font-weight:bold;font-size:12px;">' . "\n";
@@ -691,13 +741,13 @@ class acp_phpbb_seo {
 		}
 		$cache_tpl = '<?php' . "\n" . '/**' . "\n" . '* phpBB_SEO Class' . "\n" . '* www.phpBB-SEO.com' . "\n" . '* @package Advanced phpBB3 SEO mod Rewrite' . "\n" . '*/' . "\n" . 'if (!defined(\'IN_PHPBB\')) {' . "\n\t" . 'exit;' . "\n" . '}' . "\n";
 		if ($type == 'forum') { // Add the phpbb_seo_config
-			$update = '$this->cache_config[\'settings\'] = ' . str_replace(array("\n", "\t", ' '), '', var_export($phpbb_seo->cache_config['settings'], true)) . ';'. "\n";
-			$update .= '$this->cache_config[\'forum\'] = ' . str_replace(array("\n", "\t", ' '), '', var_export($phpbb_seo->cache_config['forum'], true)) . ';'. "\n";
+			$update = '$this->cache_config[\'settings\'] = ' . preg_replace('`[\s]+`', ' ', var_export($phpbb_seo->cache_config['settings'], true)) . ';'. "\n";
+			$update .= '$this->cache_config[\'forum\'] = ' . preg_replace('`[\s]+`', ' ', var_export($phpbb_seo->cache_config['forum'], true)) . ';'. "\n";
 			$update = $cache_tpl . $update . '?>';
 		} elseif ($type == 'htaccess') { // .htaccess case
 			$update = $this->seo_htaccess(false);
 		} else { // Allow additional types
-			$update = '$this->cache_config[\'' . $type . '\'] = ' . str_replace(array("\n", "\t", ' '), '', var_export($phpbb_seo->cache_config[$type], true)) . ';'. "\n";
+			$update = '$this->cache_config[\'' . $type . '\'] = ' . preg_replace('`[\s]+`', ' ', var_export($phpbb_seo->cache_config[$type], true)) . ';'. "\n";
 			$update = $cache_tpl . $update . '?>';
 		}
 		$file = SEO_CACHE_PATH . $phpbb_seo->cache_config['files'][$type];

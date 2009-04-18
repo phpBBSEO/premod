@@ -2,10 +2,10 @@
 /** 
 *
 * groups [Standard french]
-* translated by PhpBB-fr.com <http://www.phpbb-fr.com/> and phpBB.biz <http://www.phpbb.biz/>
+* translated originally by PhpBB-fr.com <http://www.phpbb-fr.com/> and phpBB.biz <http://www.phpBB.biz>
 *
 * @package language
-* @version $Id: groups.php,v 1.19 2007/11/22 14:00:20 tonillo Exp $
+* @version $Id: groups.php,v 1.21 2008/04/10 13:13:26 elglobo Exp $
 * @copyright (c) 2005 phpBB Group 
 * @license http://opensource.org/licenses/gpl-license.php GNU Public License 
 *
@@ -40,11 +40,13 @@ $lang = array_merge($lang, array(
    'ALREADY_DEFAULT_GROUP'   => 'Le groupe sélectionné est déjà votre groupe par défaut.',
    'ALREADY_IN_GROUP' => 'Vous êtes déjà membre du groupe sélectionné.',
    'ALREADY_IN_GROUP_PENDING'   => 'Vous avez déjà demandé à rejoindre le groupe choisi.',
-
-   'CHANGED_DEFAULT_GROUP'   => 'Le groupe par défaut a été changé.',
+   
+   'CANNOT_JOIN_GROUP'		=> 'Vous n’êtes pas autorisé à rejoindre ce groupe. Vous ne pouvez rejoindre que les groupes ouverts.',
+   'CANNOT_RESIGN_GROUP'	=> 'Vous n’êtes pas autorisé à vous retirer de ce groupe. Vous ne pouvez vous retirer que des groupes ouverts.',
+   'CHANGED_DEFAULT_GROUP'	=> 'Le groupe par défaut a été modifié.',
    
    'GROUP_AVATAR' => 'Avatar du groupe',
-   'GROUP_CHANGE_DEFAULT' => 'Etes-vous sûr de vouloir changer votre groupe par défaut pour “%s”?',
+   'GROUP_CHANGE_DEFAULT' => 'Etes-vous sûr de vouloir modifier votre groupe par défaut pour “%s”?',
    'GROUP_CLOSED' => 'Fermé',
    'GROUP_DESC' => 'Description du groupe',
    'GROUP_HIDDEN' => 'Invisible',
@@ -87,9 +89,9 @@ $lang = array_merge($lang, array(
    'REMOVE_SELECTED' => 'Supprimer la sélection',
 
    'USER_GROUP_CHANGE' => 'De “%1$s” vers “%2$s”',
-   'USER_GROUP_DEMOTE' => 'Changer le modérateur en simple membre.',
-   'USER_GROUP_DEMOTE_CONFIRM'   => 'Etes-vous sûr de vouloir destituer le modérateur du groupe sélectionné?',
-   'USER_GROUP_DEMOTED' => 'Le modérateur a été changé en simple membre.',
+   'USER_GROUP_DEMOTE' => 'Rétrograder le chef de groupe.',
+   'USER_GROUP_DEMOTE_CONFIRM'   => 'Etes-vous sûr de vouloir rétrograder le chef de groupe sélectionné?',
+   'USER_GROUP_DEMOTED' => 'Le chef de groupe a été rétrogradé en simple membre.',
 ));
 
 ?>

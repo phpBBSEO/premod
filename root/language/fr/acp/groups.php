@@ -2,10 +2,10 @@
 /**
 *
 * acp_groups [Standard french]
-* translated by PhpBB-fr.com <http://www.phpbb-fr.com/> and phpBB.biz <http://www.phpbb.biz/>
+* translated originally by PhpBB-fr.com <http://www.phpbb-fr.com/> and phpBB.biz <http://www.phpBB.biz>
 *
 * @package language
-* @version $Id: groups.php,v 1.19 2007/11/22 11:45:54 elglobo Exp $
+* @version $Id: groups.php,v 1.21 2008/04/10 12:56:54 elglobo Exp $
 * @copyright (c) 2005 phpBB Group
 * @license http://opensource.org/licenses/gpl-license.php GNU Public License
 *
@@ -107,6 +107,7 @@ $lang = array_merge($lang, array(
 	'NO_GROUPS_CREATED'			=> 'Aucun groupe n’a été créé.',
 	'NO_PERMISSIONS'			=> 'Ne pas copier de permissions',
 	'NO_USERS'					=> 'Vous n’avez indiqué aucun utilisateur.',
+	'NO_USERS_ADDED'			=> 'Aucun utilisateur n’a été ajouté au groupe.',
 
 	'SPECIAL_GROUPS'			=> 'Groupes prédéfinis',
 	'SPECIAL_GROUPS_EXPLAIN'	=> 'Les groupes prédéfinis sont des groupes spéciaux, ils ne peuvent pas être supprimés ou modifiés. Vous pouvez néanmoins y ajouter des utilisateurs et modifier les réglages de base. En cliquant sur “Groupe par défaut”, vous pouvez définir le groupe spécifié en tant que groupe par défaut pour tous ses membres.',

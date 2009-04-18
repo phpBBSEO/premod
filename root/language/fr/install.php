@@ -2,10 +2,10 @@
 /** 
 *
 * install [Standard french]
-* translated by PhpBB-fr.com <http://www.phpbb-fr.com/> and phpBB.biz <http://www.phpbb.biz/>
+* translated originally by PhpBB-fr.com <http://www.phpbb-fr.com/> and phpBB.biz <http://www.phpBB.biz>
 *
 * @package language
-* @version $Id: install.php,v 1.19 2007/11/22 16:15:20 elglobo Exp $
+* @version $Id: install.php,v 1.21 2008/04/10 13:18:20 elglobo Exp $
 * @copyright (c) 2005 phpBB Group 
 * @license http://opensource.org/licenses/gpl-license.php GNU Public License 
 *
@@ -316,7 +316,7 @@ $lang = array_merge($lang, array(
 	'SELECT_LANG'   			=> 'Choisissez une langue',
 	'SERVER_CONFIG'   			=> 'Configuration du serveur',
 	'SEARCH_INDEX_UNCONVERTED'  => 'L’index de recherche n’a pas été converti',
-	'SEARCH_INDEX_UNCONVERTED_EXPLAIN'   => 'Votre ancien index de recherche n’a pas été converti. La recherche ne fonctionnera plus jusqu’à ce que vous réindexiez votre recherche via l’ACP, sélectionnez Maintenance puis Index de recherche dans le sous-menu.',
+	'SEARCH_INDEX_UNCONVERTED_EXPLAIN'   => 'Votre ancien index de recherche n’a pas été converti. La recherche ne fonctionnera plus jusqu’à ce que vous réindexiez votre recherche via le panneau d’administration, sélectionnez Maintenance puis Index de recherche dans le sous-menu.',
 	'SOFTWARE'   				=> 'Logiciel de forum',
 	'SPECIFY_OPTIONS'   		=> 'Spécifier les options de conversion',
 	'STAGE_ADMINISTRATOR'   	=> 'Informations sur l’administrateur',
@@ -410,15 +410,15 @@ $lang = array_merge($lang, array(
 	'FILE_DIFF_NOT_ALLOWED'			=> 'Le fichier n’est pas autorisé à être modifié.',
 	'FILE_USED'						=> 'Informations utilisées de',			// Single file
 	'FILES_CONFLICT'				=> 'Fichiers en conflit',
-	'FILES_CONFLICT_EXPLAIN'		=> 'Les fichiers suivants sont modifiés et ne représentent pas les fichiers originaux de l’ancienne version. phpBB a déterminé que ces fichiers créaient des conflits s’il tentait de les mettre à jour. Recherchez les conflits et essayez de les résoudre manuellement ou continuez la mise à jour en choisissant une méthode de mise à jour. Si vous résolvez les conflits manuellement, vérifiez à nouveau les fichiers après leur modification. Vous pouvez aussi choisir une méthode de mise à jour pour chaque fichier. La première donnera un fichier où les modifications contenues dans les lignes en conflit seront perdues, l’autre ignorera les modifications du nouveau fichier.',
+	'FILES_CONFLICT_EXPLAIN'		=> 'Les fichiers suivants sont modifiés et ne représentent pas les fichiers originaux de l’ancienne version. phpBB a déterminé qu’il ne pouvait pas fusionner ce fichier sans créer de conflits. Merci de recherchez les conflits et essayez de les résoudre manuellement ou continuez la mise à jour en choisissant une méthode de mise à jour. Si vous résolvez les conflits manuellement, vérifiez à nouveau les fichiers après leur modification. Vous pouvez aussi choisir une méthode de mise à jour pour chaque fichier. La première donnera un fichier où les modifications contenues dans les lignes en conflit seront perdues, l’autre ignorera les modifications du nouveau fichier.',
 	'FILES_MODIFIED'				=> 'Fichiers modifiés',
-	'FILES_MODIFIED_EXPLAIN'   		=> 'Les fichiers suivants sont modifiés et ne représentent pas les fichiers originaux des anciennes versions. Le fichier mis à jour sera la combinaison entre vos modifications et le nouveau fichier.',
+	'FILES_MODIFIED_EXPLAIN'   		=> 'Les fichiers suivants sont modifiés et ne représentent pas les fichiers originaux de l’ancienne version. Le fichier mis à jour sera une fusion entre vos modifications et le nouveau fichier.',
 	'FILES_NEW'						=> 'Nouveaux fichiers',
-	'FILES_NEW_EXPLAIN'				=> 'Les fichiers actuels suivants n’existent pas dans votre installation. Ces fichiers seront ajoutés à votre installation.',
+	'FILES_NEW_EXPLAIN'				=> 'Les fichiers suivants n’existent actuellement pas dans votre installation. Ces fichiers seront ajoutés à votre installation.',
 	'FILES_NEW_CONFLICT'			=> 'Nouveaux fichiers en conflit',
-	'FILES_NEW_CONFLICT_EXPLAIN'	=> 'Les fichiers suivants sont nouveaux dans la dernière version, mais il existe déjà un fichier du même nom dans le même emplacement. Ce fichier sera écrasé par le nouveau fichier.',
+	'FILES_NEW_CONFLICT_EXPLAIN'	=> 'Les fichiers suivants sont nouveaux dans la dernière version, mais il existe déjà un fichier de même nom au même emplacement. Ce fichier sera écrasé par le nouveau fichier.',
 	'FILES_NOT_MODIFIED'			=> 'Fichier non modifiés',
-	'FILES_NOT_MODIFIED_EXPLAIN'	=> 'Les fichiers suivants ne sont pas modifiés et représentent les fichiers originaux de phpBB de la version que vous souhaitez mettre à jour.',
+	'FILES_NOT_MODIFIED_EXPLAIN'	=> 'Les fichiers suivants ne sont pas modifiés et représentent les fichiers originaux de l’ancienne version.',
 	'FILES_UP_TO_DATE'				=> 'Fichiers déjà à jour',
 	'FILES_UP_TO_DATE_EXPLAIN'		=> 'Les fichiers suivants sont déjà à jour et ne nécessitent pas d’être mis à jour.',
 	'FTP_SETTINGS'					=> 'Réglages FTP',
@@ -463,7 +463,7 @@ $lang = array_merge($lang, array(
 	'NO_VISIBLE_CHANGES'			=> 'Aucune modification visible',
 	'NOTICE'						=> 'Avertissement',
 	'NUM_CONFLICTS'					=> 'Nombre de conflits',
-	'NUMBER_OF_FILES_COLLECTED'		=> 'Il y a actuellement %1$d sur %2$d fichiers collectés qui comportent des différences.<br />Patientez jusqu’à ce que la collecte des fichiers soit terminée.',
+	'NUMBER_OF_FILES_COLLECTED'		=> 'Actuellement, il y a %1$d des %2$d fichiers vérifiés qui comportent des différences.<br />Patientez jusqu’à ce que la vérification des fichiers soit terminée.',
 
 	'OLD_UPDATE_FILES'		=> 'Les fichiers de mise à jour ne sont pas à jour. Les fichiers trouvés pour la mise à jour sont pour phpBB %1$s vers phpBB %2$s mais la dernière version de phpBB est la %3$s.',
 

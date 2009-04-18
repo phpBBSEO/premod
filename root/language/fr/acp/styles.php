@@ -2,10 +2,10 @@
 /** 
 *
 * acp_styles [Standard french]
-* translated by PhpBB-fr.com <http://www.phpbb-fr.com/> and phpBB.biz <http://www.phpbb.biz/>
+* translated originally by PhpBB-fr.com <http://www.phpbb-fr.com/> and phpBB.biz <http://www.phpBB.biz>
 *
 * @package language
-* @version $Id: styles.php,v 1.19 2007/11/27 17:10:31 elglobo Exp $
+* @version $Id: styles.php,v 1.21 2008/03/27 08:57:31 elglobo Exp $
 * @copyright (c) 2005 phpBB Group 
 * @license http://opensource.org/licenses/gpl-license.php GNU Public License 
 *
@@ -99,10 +99,10 @@ $lang = array_merge($lang, array(
 	'EDIT_IMAGESET_EXPLAIN' => 'Vous pouvez modifier les images qui composent le pack d’images. Vous pouvez également spécifier les dimensions d’affichage de ces images. Si vous spécifiez ce paramètre, vous risquez de perturber l’affichage de certains navigateurs, si vous ne les spécifiez pas, vous baissez quelque peu la taille d’enregistrement dans la base de données.',
 	'EDIT_TEMPLATE' => 'Editer un template',
 	'EDIT_TEMPLATE_EXPLAIN' => 'Vous pouvez éditer votre template directement. Attention, ces modifications sont permanentes et irréversibles une fois validées. Si PHP peut modifier les fichiers templates directement dans votre répertoire, les modifications seront automatiquement répercutées sur les fichiers concernés. Si PHP ne peut modifier les fichiers, ils seront copiés dans la base de données et les changements ne pourront être effectués qu’à partir de celle-ci. Faites attention quand vous éditez votre template, n’oubliez pas de fermer correctement toutes les variables {XXXX} et tout ce qui y est rattaché.',
-	'EDIT_TEMPLATE_STORED_DB' => 'Le fichier template n’a pas pu être écrit, le pack template a été stocké dans la base de données avec le fichier modifié.',
+	'EDIT_TEMPLATE_STORED_DB' => 'Le fichier template n’a pas pu être écrit, il a été stocké dans la base de données avec les modifications apportées.',
 	'EDIT_THEME' => 'Editer le thème',
 	'EDIT_THEME_EXPLAIN' => 'Vous pouvez éditer le thème sélectionné, modifier les couleurs, les images, etc.',
-	'EDIT_THEME_STORED_DB' => 'La feuille de style n’a pas pu être écrite, elle a été sauvegardée dans la base de données avec les modifications apportées.',
+	'EDIT_THEME_STORED_DB' => 'La feuille de style n’a pas pu être écrite, elle a été stockée dans la base de données avec les modifications apportées.',
 	'EDIT_THEME_STORE_PARSED'  => 'Le thème nécessite que sa feuille de style soit analysée. Ceci n’est possible que si elle est stockée dans la base de données.',
 	'EXPORT' => 'Exporter',
 

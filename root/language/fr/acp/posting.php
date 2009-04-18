@@ -2,10 +2,10 @@
 /** 
 *
 * posting [Standard french]
-* translated by PhpBB-fr.com <http://www.phpbb-fr.com/> and phpBB.biz <http://www.phpbb.biz/>
+* translated originally by PhpBB-fr.com <http://www.phpbb-fr.com/> and phpBB.biz <http://www.phpBB.biz>
 *
 * @package language
-* @version $Id: posting.php,v 1.19 2007/11/29 09:42:53 elglobo Exp $
+* @version $Id: posting.php,v 1.21 2008/04/10 13:01:53 elglobo Exp $
 * @copyright (c) 2005 phpBB Group 
 * @license http://opensource.org/licenses/gpl-license.php GNU Public License 
 *
@@ -55,7 +55,7 @@ $lang = array_merge($lang, array(
 	'BBCODE_TAG_TOO_LONG'		=> 'Le nom de la balise que vous avez sélectionné est trop long.',
 	'BBCODE_TAG_DEF_TOO_LONG'	=> 'La définition de la balise que vous avez entrée est trop longue, raccourcissez votre définition.',
 	'BBCODE_USAGE'				=> 'Utilisation du BBCode',
-	'BBCODE_USAGE_EXAMPLE'		=> '[hilight={COLOR}]{TEXT}[/hilight]<br /><br />[font={SIMPLETEXT1}]{SIMPLETEXT2}[/font]',
+	'BBCODE_USAGE_EXAMPLE'		=> '[highlight={COLOR}]{TEXT}[/highlight]<br /><br />[font={SIMPLETEXT1}]{SIMPLETEXT2}[/font]',
 	'BBCODE_USAGE_EXPLAIN'		=> 'Vous pouvez définir la façon d’utiliser le BBCode. Remplacez n’importe quelle variable d’entrée par la chaîne de symboles correspondante (%svoir ci-dessous%s).',
 
 	'EXAMPLE'						=> 'Exemple:',
@@ -163,6 +163,8 @@ $lang = array_merge($lang, array(
 	'SMILIES_CONFIG'			=> 'Configuration du smiley',
 	'SMILIES_DELETED'			=> 'Le smiley a été supprimé.',
 	'SMILIES_EDIT'				=> 'Editer le smiley',
+	'SMILIE_NO_CODE'			=> 'Le smiley “%s” a été ignoré car aucun code n’a été saisi.',
+	'SMILIE_NO_EMOTION'			=> 'Le smiley “%s” a été ignoré car aucun smiley n’a été spécifié.',
 	'SMILIES_NONE_EDITED'		=> 'Aucun smiley n’a été mis à jour.',
 	'SMILIES_ONE_EDITED'		=> 'Le smiley a été mis à jour.',
 	'SMILIES_EDITED'			=> 'Les smileys ont été mis à jour.',
@@ -239,7 +241,7 @@ $lang = array_merge($lang, array(
 
 // Reasons
 $lang = array_merge($lang, array(
-	'ACP_REASONS_EXPLAIN'	=> 'Vous pouvez gérer les raisons utilisées dans les rapports lors de la désapprobation de messages. Il y a une raison par défaut (marquée avec *) que vous ne pouvez pas supprimer, cette raison est utilisée normalement pour les messages personnalisés si aucune raison n’est spécifiée.',
+	'ACP_REASONS_EXPLAIN'	=> 'Vous pouvez gérer les raisons utilisées dans les rapports lors de la désapprobation de messages. Il y a une raison par défaut (marquée par une *) que vous ne pouvez pas supprimer, cette raison est utilisée normalement pour les messages personnalisés si aucune raison n’est spécifiée.',
 	'ADD_NEW_REASON'		=> 'Ajouter une nouvelle raison',
 	'AVAILABLE_TITLES'		=> 'Titres des raisons traduits disponibles',
 

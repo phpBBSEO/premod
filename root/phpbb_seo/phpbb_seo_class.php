@@ -2,8 +2,8 @@
 /** 
 *
 * @package Advanced phpBB3 SEO mod Rewrite
-* @version $Id: phpbb_seo_class.php 2007/08/30 13:48:48 dcz Exp $
-* @copyright (c) 2006, 2007 dcz - www.phpbb-seo.com
+* @version $Id: phpbb_seo_class.php dcz Exp $
+* @copyright (c) 2006, 2007, 2008 dcz - www.phpbb-seo.com
 * @license http://www.opensource.org/licenses/rpl.php RPL Public License 
 *
 */
@@ -13,7 +13,7 @@
 * @package Advanced phpBB3 SEO mod Rewrite
 */
 class phpbb_seo {
-	var	$version = '0.4.0';
+	var	$version = '0.4.2';
 	var	$modrtype = 0;
 	var	$seo_paths = array();
 	var	$seo_url = array();
@@ -22,7 +22,7 @@ class phpbb_seo {
 	var	$seo_ext = array();
 	var	$seo_static = array();
 	var	$seo_url_filter = array();
-	var	$get_var = array();
+	var	$get_vars = array();
 	var	$path = '';
 	var	$start = '';
 	var	$filename = '';
@@ -39,7 +39,7 @@ class phpbb_seo {
 	* constuctor
 	*/
 	function phpbb_seo() {
-		global $phpEx, $config, $user, $phpbb_root_path;
+		global $phpEx, $config, $phpbb_root_path;
 		// config
 		$this->modrtype =  3; // 3 = Advanced
 		$this->seo_cache = array();
@@ -48,11 +48,11 @@ class phpbb_seo {
 		$this->start = $this->path = '';
 		// URL Settings
 		// The arrays where the preformated titles are stored.
-		$this->seo_url = array( 'forum' =>  array(), 'topic' =>  array(), 'user' => array(),  'usermsg' => array(), 'username' => array(), 'group' => array() );
+		$this->seo_url = array( 'forum' =>  array(), 'topic' =>  array(), 'user' => array(), 'username' => array(), 'group' => array() );
 		// URL Filters
 		$this->phpbb_filter = array( 'forum' => array('st' => 0, 'sk' => 't', 'sd' => 'd'),
 			'topic' => array('st' => 0, 'sk' => 't', 'sd' => 'a', 'hilit' => ''),
-			'search' => array('st' => 0, 'sk' => 't', 'sd' => 'd', 'sr' => 'topic', 'ch' => ''),
+			'search' => array('st' => 0, 'sk' => 't', 'sd' => 'd', 'ch' => ''),
 		);
 		// Stop files
 		$this->seo_stop_files = array('posting', 'faq', 'ucp', 'swatch', 'mcp');
@@ -62,18 +62,19 @@ class phpbb_seo {
 		$this->get_vars = array();
 		// Delimiters : used as separators in the .htaccess RegEx
 		// can be edited, requires .htaccess update.
-		$this->seo_delim = array( 'forum' => '-f', 'topic' => '-t', 'user' => '-u', 'usermsg' => '-m', 'group' => '-g', 'start' => '-');
+		$this->seo_delim = array( 'forum' => '-f', 'topic' => '-t', 'user' => '-u', 'group' => '-g', 'start' => '-', 'sr' => '-');
 		// Default : Used as URL when format_url would return nothing or with simple URLs
 		// can be edited, requires .htaccess update.
-		$this->seo_static = array( 'forum' => 'forum', 'topic' => 'topic', 'post' => 'post', 'user' => 'member', 'group' => 'group', 'index' => '', 'global_announce' => 'announces', 'leaders' => 'the-team', 'usermsg' => 'messages', 'pagination' => 'page', 'gz_ext' => '.gz' );
+		$this->seo_static = array( 'forum' => 'forum', 'topic' => 'topic', 'post' => 'post', 'user' => 'member', 'group' => 'group', 'index' => '', 'global_announce' => 'announces', 'leaders' => 'the-team', 'atopic' => 'active-topics', 'utopic' => 'unanswered', 'npost' => 'newposts', 'pagination' => 'page', 'gz_ext' => '.gz' );
 		// URL suffixes, for the phpBB URLs
 		// can be edited, requires .htaccess update.
-		$this->seo_ext = array( 'forum' => '.html', 'topic' => '.html', 'post' => '.html', 'user' => '.html', 'usermsg' => '.html', 'group' => '.html',  'index' => '', 'global_announce' => '/', 'leaders' => '.html', 'pagination' => '.html', 'gz_ext' => '');
+		$this->seo_ext = array( 'forum' => '.html', 'topic' => '.html', 'post' => '.html', 'user' => '.html', 'group' => '.html',  'index' => '', 'global_announce' => '/', 'leaders' => '.html', 'atopic' => '.html', 'utopic' => '.html', 'npost' => '.html', 'pagination' => '.html', 'gz_ext' => '');
 		// These options can be set and bypassed from the phpBB SEO settings page
 		// You can safely mod the default values here.
 		$this->seo_opt = array( 'url_rewrite' => false,
 			'modrtype' => intval($this->modrtype),
 			'profile_inj' => false,
+			'profile_vfolder' => false,
 			'profile_noids' => false,
 			'rewrite_usermsg' => false,
 			'rem_sid' => false,
@@ -86,6 +87,11 @@ class phpbb_seo {
 		);
 		// Options that may be bypassed by the cached settings.
 		$this->cache_config['dynamic_options'] = array_keys($this->seo_opt); // Do not change
+		// copyright notice, do not change
+		$this->cache_config['dynamic_options']['copyrights'] = $this->seo_opt['copyrights'] = array('img' => true,
+			'txt' => '',
+			'title' => '',
+		);
 		// --> No Dupe
 		$this->seo_opt['no_dupe']['on'] = $this->cache_config['dynamic_options']['no_dupe']['on'] = false;
 		// <-- No Dupe
@@ -96,9 +102,10 @@ class phpbb_seo {
 		);
 		$this->cache_config['dynamic_options']['zero_dupe'] = $this->seo_opt['zero_dupe']; // Do not change
 		$this->seo_opt['zero_dupe']['do_redir'] = false; // do not change
-		$this->seo_opt['zero_dupe']['bool_redir'] = true; // do not change
+		$this->seo_opt['zero_dupe']['go_redir'] = true; // do not change
 		$this->seo_opt['zero_dupe']['do_redir_post'] = false; // do not change
 		$this->seo_opt['zero_dupe']['start'] = 0; // do not change
+		$this->seo_opt['zero_dupe']['redir_def'] = array(); // do not change
 		// <-- Zero Dupe
 		// Caching config
 		$this->seo_opt['cache_folder'] = 'phpbb_seo/cache/'; // Folder where the cache file is stored
@@ -135,17 +142,22 @@ class phpbb_seo {
 			$this->seo_static['group'] = 'groupe';
 			$this->seo_static['global_announce'] = 'annonces';
 			$this->seo_static['leaders'] = 'equipe';
+			$this->seo_static['atopic'] = 'sujets-actifs';
+			$this->seo_static['utopic'] = 'sans-reponses';
+			$this->seo_static['npost'] = 'nouveaux-messages';
 		}
 		// Some more config
 		// For profiles and user messages pages, if we do not inject, we do not get rid of ids
 		$this->seo_opt['profile_noids'] = $this->seo_opt['profile_inj'] ? $this->seo_opt['profile_noids'] : false;
-		// custom url encoding
-		$this->seo_opt['custom_url_endode'] = 3;
 		// If profile noids ...
 		if ($this->seo_opt['profile_noids']) {
-			$this->seo_ext['user'] = '';
-			$this->seo_ext['usermsg'] = '/';
+			$this->seo_ext['user'] = '/';
 		}
+		// Profile ans user messages virtual folder
+		if ($this->seo_opt['profile_vfolder']) {
+			$this->seo_ext['user'] = '/';
+		}
+		$this->seo_delim['sr'] = $this->seo_ext['user'] == '/' ? '/' : $this->seo_delim['sr'];
 		// If we use virtual folder, we need '/' at the end of the forum URLs
 		if ($this->seo_opt['virtual_folder']) {
 			$this->seo_ext['forum'] = $this->seo_ext['global_announce'] = '/';
@@ -154,14 +166,15 @@ class phpbb_seo {
 		if (!$this->seo_opt['cache_layer']) {
 			$this->seo_opt['rem_ids'] = false;
 		}
+		// In case the zero dupe is installed and mod_rewrite deactivated
+		if (!$this->seo_opt['url_rewrite']) {
+			$this->seo_opt['zero_dupe']['on'] = false;
+		}
 		$this->seo_opt['topic_per_page'] = ($config['posts_per_page'] <= 0) ? 1 : $config['posts_per_page']; // do not change
 		// preg_replace() pattern for format_url()
-		$this->seo_opt['url_pattern'] = array('`&(amp;)?#?[a-z0-9]+;`i', '`[^a-z0-9]`i'); // Do not remove : html/xml entities & non a-z chars
+		$this->seo_opt['url_pattern'] = array('`&(amp;|#)?[a-z0-9]+;`i', '`[^a-z0-9]`i'); // Do not remove : html/xml entities & non a-z chars
 		if ($this->seo_opt['rem_small_words']) {
-			$this->seo_opt['url_pattern'][] = '`-[a-z0-9]{1,2}(?=-)`i'; // Startig / Ending with hyphen (thx pvchat1)
-			$this->seo_opt['url_pattern'][] = '`^[a-z0-9]{1,2}-`i'; // Ending with hyphen
-			$this->seo_opt['url_pattern'][] = '`-[a-z0-9]{1,2}$`i'; // Starting with hyphen
-			$this->seo_opt['url_pattern'][] = '`^[a-z0-9]{1,2}$`i'; // Single word in title : z1-txx.html vs topic-txx.hmtl
+			$this->seo_opt['url_pattern'][] = '`(^|-)[a-z0-9]{1,2}(?=-|$)`i';
 		}
 		$this->seo_opt['url_pattern'][] ='`[-]+`'; // Do not remove : multi hyphen reduction
 		// Rewrite functions array : array('file_name' => 'function_name');
@@ -175,7 +188,10 @@ class phpbb_seo {
 			'topic_pagination' => $this->seo_ext['topic'] === '/' ? 'rewrite_pagination_page' : 'rewrite_pagination',
 			'forum_pagination' => $this->seo_ext['forum'] === '/' ? 'rewrite_pagination_page' : 'rewrite_pagination',
 			'group_pagination' => $this->seo_ext['group'] === '/' ? 'rewrite_pagination_page' : 'rewrite_pagination',
-			'usermsg_pagination' => $this->seo_ext['usermsg'] === '/' ? 'rewrite_pagination_page' : 'rewrite_pagination',
+			'user_pagination' => $this->seo_ext['user'] === '/' ? 'rewrite_pagination_page' : 'rewrite_pagination',
+			'atopic_pagination' => $this->seo_ext['atopic'] === '/' ? 'rewrite_pagination_page' : 'rewrite_pagination',
+			'utopic_pagination' => $this->seo_ext['utopic'] === '/' ? 'rewrite_pagination_page' : 'rewrite_pagination',
+			'npost_pagination' => $this->seo_ext['npost'] === '/' ? 'rewrite_pagination_page' : 'rewrite_pagination',
 		);
 		if ($this->modrtype == 3) {
 			$this->rewrite_functions['viewtopic'] = $this->seo_opt['virtual_folder'] ? 'viewtopic_uadv' : 'viewtopic_adv';
@@ -185,7 +201,7 @@ class phpbb_seo {
 			$this->rewrite_functions['viewtopic'] = $this->seo_opt['virtual_folder'] ? 'viewtopic_usmpl' : 'viewtopic_smpl';
 		}
 		// --> DOMAIN SETTING <-- //
-		// Path Settings
+		// Path Settings, only rely on DB
 		$server_protocol = ($config['server_protocol']) ? $config['server_protocol'] : (($config['cookie_secure']) ? 'https://' : 'http://');
 		$server_name = trim($config['server_name'], '/') . '/';
 		$server_port = (int) $config['server_port'];
@@ -195,7 +211,7 @@ class phpbb_seo {
 		$this->seo_path['root_url'] =  $server_protocol . $server_name;
 		$this->seo_path['phpbb_urlR'] = $this->seo_path['phpbb_url'] =  $this->seo_path['root_url'] . $script_path;
 		$this->seo_path['phpbb_script'] =  $script_path;
-		// Array of the filenames that may require the use of a base href tag : for phpBB it only concerns two files.
+		// Array of the filenames that may require the use of a base href tag.
 		$this->seo_opt['file_hbase'] = array('viewtopic', 'viewforum', 'memberlist', 'search');
 		// virtual root option
 		if ($this->seo_opt['virtual_root']) {
@@ -206,13 +222,16 @@ class phpbb_seo {
 		$this->seo_ext['index'] = empty($this->seo_static['index']) ? '' : ( empty($this->seo_ext['index']) ? '.html' : $this->seo_ext['index']);
 		// File setting
 		$this->seo_req_uri();
-		$parsed_url = @parse_url($this->seo_path['uri']);
-		$this->seo_path['file'] = basename($parsed_url['path']);
-		// Path from root to the file, including virtual folders.
-		$this->seo_path['current_path'] = trim(trim(str_replace('\\', '/', $parsed_url['path']), '/'),  '.');
-		$this->seo_opt['seo_base_href'] = '';
-		$this->seo_opt['req_file'] = @parse_url($_SERVER['PHP_SELF']);
-		$this->seo_opt['req_file'] = str_replace( '.' . $phpEx, '', basename($this->seo_opt['req_file']['path']));
+		$this->seo_opt['seo_base_href'] = $this->seo_opt['req_file'] = '';
+		if ($script_name = (!empty($_SERVER['PHP_SELF'])) ? $_SERVER['PHP_SELF'] : getenv('PHP_SELF')) {
+			// From sessions.php
+			// Replace backslashes and doubled slashes (could happen on some proxy setups)
+			$script_name = str_replace(array('\\', '//'), '/', $script_name);
+			// basenamed page name (for example: index.php)
+			$script_name = basename($script_name);
+			$script_name = urlencode(htmlspecialchars($script_name));
+			$this->seo_opt['req_file'] = str_replace('.' . $phpEx, '', $script_name);
+		}
 		if ( !defined('ADMIN_START') && in_array($this->seo_opt['req_file'], $this->seo_opt['file_hbase'])) {	
 			$this->seo_opt['seo_base_href'] = '<base href="' . $this->seo_path['phpbb_url'] . '"/>';
 		}
@@ -240,17 +259,13 @@ class phpbb_seo {
 	* Prepare profile url
 	*/
 	function set_user_url( $username, $user_id = 0 ) {
-		if (empty($this->seo_url['usermsg'][$username])) {
+		if (empty($this->seo_url['user'][$user_id])) {
 			$this->seo_url['username'][$username] = $user_id;
 			if ( $this->seo_opt['profile_inj'] ) {
 				if ( $this->seo_opt['profile_noids'] ) {
-					$username = $this->seo_url_encode($username);
-					$this->seo_url['user'][$user_id] = $this->seo_static['user'] . '/' . $username;
-					$this->seo_url['usermsg'][$user_id] = $this->seo_static['usermsg'] . '/' . $username;
+					$this->seo_url['user'][$user_id] = $this->seo_static['user'] . '/' . $this->seo_url_encode($username);
 				} else {
-					$username = $this->format_url( $username,  $this->seo_delim['user'] );
-					$this->seo_url['user'][$user_id] = $username . $this->seo_delim['user'] . $user_id . $this->seo_ext['user'];
-					$this->seo_url['usermsg'][$user_id] = $username . $this->seo_delim['usermsg'] . $user_id;
+					$this->seo_url['user'][$user_id] = $this->format_url($username,  $this->seo_delim['user']) . $this->seo_delim['user'] . $user_id;
 				}
 			}
 		}
@@ -262,30 +277,20 @@ class phpbb_seo {
 		// can be faster to return $url directly if you do not allow more chars than 
 		// [a-zA-Z0-9_\.-] in your usernames
 		// return $url;
-		switch ($this->seo_opt['custom_url_endode']) {
-			case 1 : // Here we only hanlde the "&" ( http://www.php.net/urlencode => http://issues.apache.org/bugzilla/show_bug.cgi?id=34602 )
-			// and " " case proper
-				return str_replace( array( ' ', '&'), array( '+', '%2526'), utf8_normalize_nfc(htmlspecialchars_decode($url)));
-				break;
-			case 2 : // Should be ok in many other cases, just hanlde the "&" and " " case proper
-				return urlencode(str_replace( array( ' ', '&'), array( '+', '%26'), utf8_normalize_nfc(htmlspecialchars_decode($url))));
-				break;
-			default: // Safest method
-				return urlencode(urlencode(utf8_normalize_nfc(htmlspecialchars_decode($url))));
-				break;
-		}
-
+		// Here we hanlde the "&", "/", "+" and "#" case proper ( http://www.php.net/urlencode => http://issues.apache.org/bugzilla/show_bug.cgi?id=34602 )
+		static $find = array('&', '/', '#', '+');
+		static $replace = array('%26', '%2F', '%23', '%2b');
+		return rawurlencode(str_replace( $find, $replace, utf8_normalize_nfc(htmlspecialchars_decode(str_replace('&amp;amp;', '%26', rawurldecode($url))))));
 	}
 	/**
 	* Rewrite URLs.
 	* Allow adding of many more cases than just the
 	* regular phpBB URL rewritting without slowing up the process.
 	*/
-	function url_rewrite($url, $is_amp = TRUE ) {
+	function url_rewrite($url, $is_amp = true ) {
 		global $phpEx, $user;
-		$url = ($is_amp) ? str_replace('&amp;', '&', $url) : $url;
-		$url = str_replace('?&', '?', $url);
-		$this->url = $this->url_in = $url;
+		$url = $is_amp ? str_replace('&amp;', '&', $url) : $url;
+		$this->url = $this->url_in = $url = str_replace('?&', '?', $url);
 		if (!empty($this->seo_cache[$url])) {
 			return $this->seo_cache[$url];
 		}
@@ -300,7 +305,7 @@ class phpbb_seo {
 		if ( in_array($this->filename, $this->seo_stop_files) ) {
 			return ($is_amp) ? str_replace('&', '&amp;', $url) : $url;
 		}
-		if ( !$user->data['is_registered'] ) {
+		if (empty($user->data['is_registered'])) {
 			if ( $this->seo_opt['rem_sid'] ) {
 				unset($this->get_vars['sid']);
 			}
@@ -313,7 +318,7 @@ class phpbb_seo {
 		if ( !empty($this->rewrite_functions[$this->filename]) ) {
 			$this->{$this->rewrite_functions[$this->filename]}();
 			// Assamble URL
-			$this->url .= @$this->query_string($this->get_vars);
+			$this->url .= $this->query_string($this->get_vars);
 			$this->url = ($is_amp) ? str_replace('&', '&amp;', $this->url) : $this->url;
 			$this->seo_cache[$url] = $this->path . $this->url . ((!empty($parsed_url['fragment'])) ? '#' . $parsed_url['fragment'] : '');
 			return  $this->seo_cache[$url];
@@ -332,7 +337,7 @@ class phpbb_seo {
 		$this->path = $this->seo_path['phpbb_urlR'];
 		if ( !empty($this->get_vars['p']) ) {
 			$this->url = $this->seo_static['post'] . $this->get_vars['p'] . $this->seo_ext['post'];
-			unset($this->get_vars['p'], $this->get_vars['f'], $this->get_vars['t']);
+			unset($this->get_vars['p'], $this->get_vars['f'], $this->get_vars['t'], $this->get_vars['start']);
 			return;
 		}
 		if ( !empty($this->get_vars['t']) && !empty($this->get_vars['f']) && !empty($this->seo_url['topic'][$this->get_vars['t']]) && !empty($this->seo_url['forum'][$this->get_vars['f']])) {
@@ -345,7 +350,7 @@ class phpbb_seo {
 			} else {
 				$this->url = $this->seo_url['forum'][$this->get_vars['f']] . $this->seo_ext['forum'] . $this->url;
 			}
-			unset($this->get_vars['t'], $this->get_vars['f'],$this->get_vars['p']);
+			unset($this->get_vars['t'], $this->get_vars['f'], $this->get_vars['p']);
 			return;
 		}
 		$this->path = $this->seo_path['phpbb_url'];
@@ -361,7 +366,7 @@ class phpbb_seo {
 		$this->path = $this->seo_path['phpbb_urlR'];
 		if ( !empty($this->get_vars['p']) ) {
 			$this->url = $this->seo_static['post'] . $this->get_vars['p'] . $this->seo_ext['post'];
-			unset($this->get_vars['p'], $this->get_vars['f'], $this->get_vars['t']);
+			unset($this->get_vars['p'], $this->get_vars['f'], $this->get_vars['t'], $this->get_vars['start']);
 			return;
 		}
 		if ( !empty($this->get_vars['t']) && !empty($this->get_vars['f']) && !empty($this->seo_url['forum'][$this->get_vars['f']]) ) {
@@ -390,7 +395,7 @@ class phpbb_seo {
 		$this->path = $this->seo_path['phpbb_urlR'];
 		if ( !empty($this->get_vars['p']) ) {
 			$this->url = $this->seo_static['post'] . $this->get_vars['p'] . $this->seo_ext['post'];
-			unset($this->get_vars['p'], $this->get_vars['f'], $this->get_vars['t']);
+			unset($this->get_vars['p'], $this->get_vars['f'], $this->get_vars['t'], $this->get_vars['start']);
 			return;
 		}
 		if ( !empty($this->get_vars['t']) && !empty($this->get_vars['f']) ) {
@@ -418,7 +423,7 @@ class phpbb_seo {
 		$this->path = $this->seo_path['phpbb_urlR'];
 		if ( !empty($this->get_vars['p']) ) {
 			$this->url = $this->seo_static['post'] . $this->get_vars['p'] . $this->seo_ext['post'];
-			unset($this->get_vars['p'], $this->get_vars['f'], $this->get_vars['t']);
+			unset($this->get_vars['p'], $this->get_vars['f'], $this->get_vars['t'], $this->get_vars['start']);
 			return;
 		}
 		if ( !empty($this->get_vars['t']) && !empty($this->seo_url['topic'][$this->get_vars['t']]) ) {
@@ -442,7 +447,7 @@ class phpbb_seo {
 		$this->path = $this->seo_path['phpbb_urlR'];
 		if ( !empty($this->get_vars['p']) ) {
 			$this->url = $this->seo_static['post'] . $this->get_vars['p'] . $this->seo_ext['post'];
-			unset($this->get_vars['p'], $this->get_vars['f'], $this->get_vars['t']);
+			unset($this->get_vars['p'], $this->get_vars['f'], $this->get_vars['t'], $this->get_vars['start']);
 			return;
 		}
 		if ( !empty($this->get_vars['t']) ) {
@@ -500,7 +505,7 @@ class phpbb_seo {
 	function memberlist_adv() {
 		$this->path = $this->seo_path['phpbb_urlR'];
 		if ( !empty($this->get_vars['u']) && @$this->get_vars['mode'] === 'viewprofile' && !empty($this->seo_url['user'][$this->get_vars['u']]) ) {
-			$this->url = $this->seo_url['user'][$this->get_vars['u']];
+			$this->url = $this->seo_url['user'][$this->get_vars['u']] . $this->seo_ext['user'];
 			unset($this->get_vars['mode'], $this->get_vars['u']);
 			return;
 		} elseif ( !empty($this->get_vars['g']) && @$this->get_vars['mode'] === 'group' && !empty($this->seo_url['group'][$this->get_vars['g']]) ) {
@@ -542,45 +547,117 @@ class phpbb_seo {
 	}
 	/**
 	* URL rewritting for search.php
-	*  search.php?author=nickname&sr=posts & search.php?author_id=xx&sr=posts
 	* @access private
 	*/
 	function search_smpl() {
 		$this->path = $this->seo_path['phpbb_urlR'];
-		$user_id = !empty($this->get_vars['author_id']) ? $this->get_vars['author_id'] : ( !empty($this->seo_url['username'][urldecode(urldecode(@$this->get_vars['author']))]) ? $this->seo_url['username'][urldecode(urldecode(@$this->get_vars['author']))] : 0);
+		$user_id = !empty($this->get_vars['author_id']) ? $this->get_vars['author_id'] : ( !empty($this->seo_url['username'][rawurldecode(@$this->get_vars['author'])]) ? $this->seo_url['username'][rawurldecode($this->get_vars['author'])] : 0);
 		if ( $user_id ) {
 			// Filter default params
 			$this->filter_get_var($this->phpbb_filter['search']);
-			$this->{$this->rewrite_functions['usermsg_pagination']}($this->seo_ext['usermsg']);
-			$this->url = $this->seo_static['usermsg'] . $user_id . $this->start;
+			$this->{$this->rewrite_functions['user_pagination']}($this->seo_ext['user']);
+			$sr = (@$this->get_vars['sr'] == 'topics' ) ? 'topics' : 'posts';
+			$this->url = $this->seo_static['user'] . $user_id . $this->seo_delim['sr'] . $sr . $this->start;
 			unset($this->get_vars['author_id'], $this->get_vars['author'], $this->get_vars['sr']);
 			return;
+		} elseif (!empty($this->get_vars['search_id'])) {
+			switch ($this->get_vars['search_id']) {
+				case 'active_topics':
+					$this->filter_get_var($this->phpbb_filter['search']);
+					$this->{$this->rewrite_functions['atopic_pagination']}($this->seo_ext['atopic']);
+					$this->url = $this->seo_static['atopic'] . $this->start;
+					unset($this->get_vars['search_id'], $this->get_vars['sr']);
+					if (@$this->get_vars['st'] == 7) {
+						unset($this->get_vars['st']);
+					}
+					break;
+				case 'unanswered':
+					$this->filter_get_var($this->phpbb_filter['search']);
+					$this->{$this->rewrite_functions['utopic_pagination']}($this->seo_ext['utopic']);
+					$this->url = $this->seo_static['utopic'] . $this->start;
+					unset($this->get_vars['search_id']);
+					if (@$this->get_vars['sr'] == 'topics') {
+						unset($this->get_vars['sr']);
+					}
+					break;
+				case 'egosearch':
+					global $user;
+					$this->url =  $this->seo_static['user'] . $user->data['user_id'] . $this->seo_delim['sr'] . 'topics' . $this->seo_ext['user'];
+					unset($this->get_vars['search_id']);
+					break;
+				case 'newposts':
+					$this->filter_get_var($this->phpbb_filter['search']);
+					$this->{$this->rewrite_functions['npost_pagination']}($this->seo_ext['npost']);
+					$this->url = $this->seo_static['npost'] . $this->start;
+					unset($this->get_vars['search_id']);
+					if (@$this->get_vars['sr'] == 'topics') {
+						unset($this->get_vars['sr']);
+					}
+					break;
+			}
 		}
 		$this->path = $this->seo_path['phpbb_url'];
 		return;
 	}
 	/**
 	* URL rewritting for search.php
-	*  search.php?author=nickname&sr=posts & search.php?author_id=xx&sr=posts
 	* @access private
 	*/
 	function search_adv() {
 		$this->path = $this->seo_path['phpbb_urlR'];
-		$user_id = !empty($this->get_vars['author_id']) ? $this->get_vars['author_id'] : ( !empty($this->seo_url['username'][urldecode(urldecode(@$this->get_vars['author']))]) ? $this->seo_url['username'][urldecode(urldecode(@$this->get_vars['author']))] : 0);
+		$user_id = !empty($this->get_vars['author_id']) ? $this->get_vars['author_id'] : ( !empty($this->seo_url['username'][rawurldecode(@$this->get_vars['author'])]) ? $this->seo_url['username'][rawurldecode($this->get_vars['author'])] : 0);
 		if ( $user_id && !empty($this->seo_url['user'][$user_id]) ) {
 			// Filter default params
 			$this->filter_get_var($this->phpbb_filter['search']);
-			$this->{$this->rewrite_functions['usermsg_pagination']}($this->seo_ext['usermsg']);
-			$this->url = $this->seo_url['usermsg'][$user_id] . $this->start;
+			$this->{$this->rewrite_functions['user_pagination']}($this->seo_ext['user']);
+			$sr = (@$this->get_vars['sr'] == 'topics' ) ? 'topics' : 'posts';
+			$this->url = $this->seo_url['user'][$user_id] . $this->seo_delim['sr'] . $sr . $this->start;
 			unset($this->get_vars['author_id'], $this->get_vars['author'], $this->get_vars['sr']);
 			return;
 		} elseif ( $this->seo_opt['profile_noids'] && !empty($this->get_vars['author']) ) {
 			// Filter default params
 			$this->filter_get_var($this->phpbb_filter['search']);
 			$this->rewrite_pagination_page();
-			$this->url = $this->seo_static['usermsg'] . '/' . $this->seo_url_encode(urldecode(urldecode($this->get_vars['author']))) . $this->start;
+			$sr = (@$this->get_vars['sr'] == 'topics' ) ? '/topics' : '/posts';
+			$this->url = $this->seo_static['user'] . '/' . $this->seo_url_encode($this->get_vars['author']) . $sr . $this->start;
 			unset($this->get_vars['author'], $this->get_vars['author_id'], $this->get_vars['sr']);
 			return;
+		} elseif (!empty($this->get_vars['search_id'])) {
+			switch ($this->get_vars['search_id']) {
+				case 'active_topics':
+					$this->filter_get_var($this->phpbb_filter['search']);
+					$this->{$this->rewrite_functions['atopic_pagination']}($this->seo_ext['atopic']);
+					$this->url = $this->seo_static['atopic'] . $this->start;
+					unset($this->get_vars['search_id'], $this->get_vars['sr']);
+					if (@$this->get_vars['st'] == 7) {
+						unset($this->get_vars['st']);
+					}
+					break;
+				case 'unanswered':
+					$this->filter_get_var($this->phpbb_filter['search']);
+					$this->{$this->rewrite_functions['utopic_pagination']}($this->seo_ext['utopic']);
+					$this->url = $this->seo_static['utopic'] . $this->start;
+					unset($this->get_vars['search_id']);
+					if (@$this->get_vars['sr'] == 'topics') {
+						unset($this->get_vars['sr']);
+					}
+					break;
+				case 'egosearch':
+					global $user;
+					$this->set_user_url($user->data['username'], $user->data['user_id']);
+					$this->url = $this->seo_url['user'][$user->data['user_id']] . $this->seo_delim['sr'] . 'topics' . $this->seo_ext['user'];
+					unset($this->get_vars['search_id']);
+					break;
+				case 'newposts':
+					$this->filter_get_var($this->phpbb_filter['search']);
+					$this->{$this->rewrite_functions['npost_pagination']}($this->seo_ext['npost']);
+					$this->url = $this->seo_static['npost'] . $this->start;
+					unset($this->get_vars['search_id']);
+					if (@$this->get_vars['sr'] == 'topics') {
+						unset($this->get_vars['sr']);
+					}
+					break;
+			}
 		}
 		$this->path = $this->seo_path['phpbb_url'];
 		return;
@@ -591,7 +668,11 @@ class phpbb_seo {
 	*/
 	function index() {
 		$this->path = $this->seo_path['phpbb_urlR'];
-		$this->url = $this->seo_static['index'] . $this->seo_ext['index'];
+		if ($this->filter_url($this->seo_stop_vars)) {
+			$this->url = $this->seo_static['index'] . $this->seo_ext['index'];
+			return;
+		}
+		$this->path = $this->seo_path['phpbb_url'];
 		return;
 	}
 	/**
@@ -601,13 +682,13 @@ class phpbb_seo {
 	*/
 	function filter_url($filter = array()) {
 		foreach ($filter as $patern ) {
-			if ( strpos($this->url_in, $patern) !== FALSE ) {
-				unset($this->get_vars);
+			if ( strpos($this->url_in, $patern) !== false ) {
+				$this->get_vars = array();
 				$this->url = $this->url_in;
-				break;
+				return false;
 			}
 		}
-		return;
+		return true;
 	}
 	/**
 	* Will unset all default var stored in $filter array.
@@ -661,7 +742,7 @@ class phpbb_seo {
 	* -xx
 	*/
 	function seo_start($start) {
-		return ($start > 0 ) ? $this->seo_delim['start'] . intval($start) : '';
+		return ($start >= 1 ) ? $this->seo_delim['start'] . (int) $start : '';
 	}
 	/**
 	* Returns usable start param
@@ -669,7 +750,7 @@ class phpbb_seo {
 	* Only used in virtual folder mode
 	*/
 	function seo_start_page($start) {
-		return ($start > 0 ) ? $this->seo_static['pagination'] . intval($start) . $this->seo_ext['pagination'] : '';
+		return ($start >=1 ) ? $this->seo_static['pagination'] . (int) $start . $this->seo_ext['pagination'] : '';
 	}
 	/**
 	* Returns the full REQUEST_URI
@@ -682,7 +763,12 @@ class phpbb_seo {
 		} else { // no mod rewrite
 			$this->seo_path['uri'] =  ltrim($_SERVER['SCRIPT_NAME'], '/') . ( ( !empty($_SERVER['QUERY_STRING']) ) ? '?'.$_SERVER['QUERY_STRING'] : '' );
 		}
-		$this->seo_path['uri'] = $this->seo_path['root_url'] . str_replace('&amp;', '&', $this->seo_path['uri']);
+		$this->seo_path['uri'] = str_replace( '%26', '&', rawurldecode($this->seo_path['uri']));
+		// workaround for FF default iso encoding
+		if (!$this->is_utf8($this->seo_path['uri']) && function_exists('utf8_encode')) {
+			$this->seo_path['uri'] = utf8_normalize_nfc(utf8_encode($this->seo_path['uri']));
+		}
+		$this->seo_path['uri'] = $this->seo_path['root_url'] . $this->seo_path['uri'];
 		return $this->seo_path['uri'];
 	}
 	/**
@@ -693,12 +779,18 @@ class phpbb_seo {
 	* (can be small but visible) link on your home page or your forum Index using this code for example :
 	* <a href="http://www.phpbb-seo.com/" title="Search Engine Optimization">phpBB SEO</a>
 	*/
-	function seo_end($return = false, $img = true) {
+	function seo_end($return = false) {
 		global $user, $config;
-		if ($img) {
-			$output = '<div style="padding-top:5px; text-align: middle"><a href="http://www.phpbb-seo.com/" title="' . ( strpos($config['default_lang'], 'fr') !== false  ?  'Optimisation du R&eacute;f&eacute;rencement' : 'Search Engine Optimization') . '"><img src="' . $this->seo_path['phpbb_url'] . 'images/phpbb-seo.png" alt="phpBB SEO"/></a></div>';
+		if (empty($this->seo_opt['copyrights']['title'])) {
+			$this->seo_opt['copyrights']['title'] = strpos($config['default_lang'], 'fr') !== false  ?  'Optimisation du R&eacute;f&eacute;rencement' : 'Search Engine Optimization';
+		}
+		if (empty($this->seo_opt['copyrights']['txt'])) {
+			$this->seo_opt['copyrights']['txt'] = 'phpBB SEO';
+		}
+		if ($this->seo_opt['copyrights']['img']) {
+			$output = '<div style="padding-top:5px;text-align:middle"><a href="http://www.phpbb-seo.com/" title="' . $this->seo_opt['copyrights']['title'] . '"><img src="' . $this->seo_path['phpbb_url'] . 'images/phpbb-seo.png" alt="' . $this->seo_opt['copyrights']['txt'] . '"/></a></div>';
 		} else {
-			$output = '<div style="padding-top:5px" text-align: middle"><a href="http://www.phpbb-seo.com/" title="' . ( strpos($config['default_lang'], 'fr') !== false  ?  'Optimisation du R&eacute;f&eacute;rencement' : 'Search Engine Optimization') . '">phpBB SEO</a></div>';
+			$output = '<div style="padding-top:5px;text-align:middle"><a href="http://www.phpbb-seo.com/" title="' . $this->seo_opt['copyrights']['title'] . '">' . $this->seo_opt['copyrights']['txt'] . '</a></div>';
 		}
 		if ($return) {
 			return $output;
@@ -709,25 +801,16 @@ class phpbb_seo {
 	}
 	// -> Cache functions
 	/**
-	* forum_id() will tell the start param by the uri and the ID from the cache.
+	* forum_id(&$forum_id, $forum_uri = '') 
+	* will tell the forum id from the uri or the forum_uri GET var by checking the cache.
 	*/
-	function get_forum_id(&$forum_id, &$start) {
-		$path = str_replace($this->seo_path['phpbb_script'], '', $this->seo_path['current_path']);
-		if (preg_match('`^[a-z0-9_-]+/(' . $this->seo_static['pagination'] . '([0-9]+)\\' . $this->seo_ext['pagination'] . ')?$`i', $path, $matches)) {
-			if (@$matches[2] > 0) {
-				$start = intval($matches[2]);
-			}
-			$path = preg_replace('`^([a-z0-9_-]+)/?(' . $this->seo_static['pagination'] . '[0-9]+\\' . $this->seo_ext['pagination'] . ')?$`i', '\\1', $path);
-		} elseif (preg_match('`^[a-z0-9_-]+' . $this->seo_delim['start'] . '([0-9]+)(\.[a-z0-9]+)?$`i', $path, $matches)) { // all other paginated cases with or without .ext
-			if ($matches[1] > 0) {
-				$start = intval($matches[1]);
-			}
-			$path = preg_replace('`^([a-z0-9_-]+)' . $this->seo_delim['start'] . '[0-9]+(\.[a-z0-9]+)?$`i', '\\1', $path);
-		} else { // un-paginated left overs, required because $this->seo_delim['start'] can be an hyphen
-			$path = preg_replace('`^([a-z0-9_-]+)(\.[a-z0-9]+)?$`i', '\\1', $path);
+	function get_forum_id(&$forum_id, $forum_uri = '') {
+		if (empty($forum_uri)) {
+			$forum_uri = request_var('forum_uri', '');
+			unset($_GET['forum_uri'], $_REQUEST['forum_uri']);
 		}
-		if ($id = @array_search($path, $this->cache_config['forum']) ) {
-			$forum_id = intval($id);
+		if ($id = @array_search($forum_uri, $this->cache_config['forum']) ) {
+			$forum_id = (int) $id;
 		}
 		return 0;
 	}
@@ -735,25 +818,33 @@ class phpbb_seo {
 	* check_cache() will tell if the required file exists.
 	* @access private
 	*/
-	function check_cache( $type = 'forum', $from_bkp = FALSE ) {
+	function check_cache( $type = 'forum', $from_bkp = false ) {
 		$file = SEO_CACHE_PATH . @$this->cache_config['files'][$type];
 		if( !$this->cache_config['cache_enable'] || !array_key_exists($type, $this->cache_config['files']) || !file_exists($file) ) {
-			$this->cache_config['cached'] = FALSE;
-			return FALSE;
+			$this->cache_config['cached'] = false;
+			return false;
 		}
 		include($file);
 		if (is_array($this->cache_config[$type]) ) {
-			$this->cache_config['cached'] = TRUE;
-			return TRUE;
+			$this->cache_config['cached'] = true;
+			return true;
 		} else {
 			if ( !$from_bkp ) {
 				// Try the current backup
 				@copy($file . '.current', $file);
 				$this->check_cache( $type, true );
 			}
-			$this->cache_config['cached'] = FALSE;
-			return FALSE;
+			$this->cache_config['cached'] = false;
+			return false;
 		}
+	}
+	/**
+	* is_utf8($string)
+	* Borrowed from php.net : http://www.php.net/mb_detect_encoding (detectUTF8)
+	*/
+	function is_utf8($string) {
+		// non-overlong 2-byte|excluding overlongs|straight 3-byte|excluding surrogates|planes 1-3|planes 4-15|plane 16
+		return preg_match('%(?:[\xC2-\xDF][\x80-\xBF]|\xE0[\xA0-\xBF][\x80-\xBF]|[\xE1-\xEC\xEE\xEF][\x80-\xBF]{2}|\xED[\x80-\x9F][\x80-\xBF] |\xF0[\x90-\xBF][\x80-\xBF]{2}|[\xF1-\xF3][\x80-\xBF]{3}|\xF4[\x80-\x8F][\x80-\xBF]{2})+%xs', $string);
 	}
 	// --> Add on Functions <--
 	// --> Gen stats
@@ -771,7 +862,7 @@ class phpbb_seo {
 	*/
 	function seo_redirect($url, $header = '301 Moved Permanently', $code = 301, $replace = TRUE) {
 		global $db;
-		if (!$this->seo_opt['zero_dupe']['on']) {
+		if (!$this->seo_opt['zero_dupe']['on'] || headers_sent()) {
 			return;
 		}
 		garbage_collection();
@@ -786,22 +877,6 @@ class phpbb_seo {
 		exit();
 	}
 	/**
-	 * Helps out grabbing boolean vars
-	 *
-	*/
-	function seo_cond($bool = false, $and = true, $do = 'bool') {
-		static $been_here = false;
-		if ( !$been_here ) {
-			$this->seo_opt['zero_dupe'][$do . '_redir'] = $bool;
-			$been_here = true;
-		} elseif ( $and ) {
-			$this->seo_opt['zero_dupe'][$do . '_redir'] = ($bool && $this->seo_opt['zero_dupe'][$do . '_redir']);
-		} else {
-			$this->seo_opt['zero_dupe'][$do . '_redir'] = ($bool || $this->seo_opt['zero_dupe'][$do . '_redir']);
-		}
-		return;
-	}
-	/**
 	* Set the do_redir_post option right
 	*/
 	function set_do_redir_post() {
@@ -809,36 +884,89 @@ class phpbb_seo {
 		switch ($this->seo_opt['zero_dupe']['post_redir']) {
 			case 'guest':
 				if (  !$user->data['is_registered'] ) {
-					$this->seo_opt['zero_dupe']['do_redir_post'] = TRUE;
+					$this->seo_opt['zero_dupe']['do_redir_post'] = true;
 				}
 				break;
 			case 'all':
-				$this->seo_opt['zero_dupe']['do_redir_post'] = TRUE;
+				$this->seo_opt['zero_dupe']['do_redir_post'] = true;
 				break;
 			case 'off': // Do not redirect
-				$this->seo_opt['zero_dupe']['do_redir'] = FALSE;
-				$this->seo_opt['zero_dupe']['bool_redir'] = FALSE;
-				$this->seo_opt['zero_dupe']['do_redir_post'] = FALSE;
+				$this->seo_opt['zero_dupe']['do_redir'] = false;
+				$this->seo_opt['zero_dupe']['go_redir'] = false;
+				$this->seo_opt['zero_dupe']['do_redir_post'] = false;
 				break;
 			default:
-				$this->seo_opt['zero_dupe']['do_redir_post'] = FALSE;
+				$this->seo_opt['zero_dupe']['do_redir_post'] = false;
 				break;	
 		}
 		return $this->seo_opt['zero_dupe']['do_redir_post'];
 	}
 	/**
-	* Returns false if the uri sent does not match (fully) the 
+	* Redirects if the uri sent does not match (fully) the 
 	* attended url
 	*/
-	function seo_chk_dupe($uri = '', $url = '') {
-		if ($this->seo_opt['zero_dupe']['do_redir']) {
-			$this->seo_redirect($this->page_url);
+	function seo_chk_dupe($url = '', $uri = '') {
+		global $auth, $user, $_SID;
+		static $global_defs;
+		if (empty($this->seo_opt['req_file']) || (!$this->seo_opt['rewrite_usermsg'] && $this->seo_opt['req_file'] == 'search') ) {
+			return false;
 		}
-		if ($this->seo_opt['zero_dupe']['strict']) {
-			return $this->seo_opt['zero_dupe']['bool_redir'] && ( ($uri != $url) ? $this->seo_redirect($this->page_url) : false );
+		$uri = !empty($uri) ? $uri : $this->seo_path['uri'];
+		$reg = !empty($user->data['is_registered']) ? true : false;
+		if (empty($global_defs)) {
+			$global_defs = array(
+				'sid' => array('val' => $_SID, 'keep' => $reg ? (boolean) !empty($_SID) :  (boolean) ( !empty($_SID) ? ($this->seo_opt['rem_sid'] ? false : true) : false)),
+				'explain' => array('val' => 1, 'keep' => $reg ? (boolean) ($auth->acl_get('a_') && defined('DEBUG_EXTRA')) : false),
+			);
+		}
+		$this->seo_opt['zero_dupe']['redir_def'] = array_merge($this->seo_opt['zero_dupe']['redir_def'], $global_defs);
+		$this->set_cond(!empty($_REQUEST['sid']) && ($_REQUEST['sid'] != $user->session_id || (!$reg && $this->seo_opt['rem_sid'])), 'do_redir');
+		if (empty($url)) {;
+			$url = $this->expected_url();
 		} else {
-			return $this->seo_opt['zero_dupe']['bool_redir'] && ( (utf8_strpos( $uri, $url ) === false  ) ? $this->seo_redirect($this->page_url) : false );
+			$url = str_replace('&amp;', '&', append_sid($url, false, true, 0));
+			if (!empty($_SID) && $global_defs['sid']['keep']) {
+				$url .=  (utf8_strpos( $url, '?' ) !== false ? '&' : '?') . 'sid=' . $_SID;
+			}
+			if (isset($_REQUEST['explain']) && $global_defs['explain']['keep']) {
+				$url .= (utf8_strpos( $url, '?' ) !== false ? '&' : '?') . 'explain=1';
+			}
 		}
+		$url = str_replace( '%26', '&', urldecode($url));
+		if ($this->seo_opt['zero_dupe']['do_redir']) {
+			$this->seo_redirect($url);
+		} elseif ($this->seo_opt['zero_dupe']['strict']) {
+			return $this->seo_opt['zero_dupe']['go_redir'] && ( ($uri != $url) ? $this->seo_redirect($url) : false );
+		} else {
+			return $this->seo_opt['zero_dupe']['go_redir'] && ( (utf8_strpos( $uri, $url ) === false) ? $this->seo_redirect($url) : false );
+		}
+	}
+	/**
+	* expected_url()
+	* build expected url
+	*/
+	function expected_url() {
+		global $phpEx;
+		$params = array();
+		foreach ($this->seo_opt['zero_dupe']['redir_def'] as $get => $def) {
+			if ((isset($_REQUEST[$get]) && $def['keep']) || !empty($def['force'])) {
+				$params[$get] = $def['val'];
+			}
+		}
+		$this->page_url = append_sid($this->seo_opt['req_file'] . ".$phpEx", $params, false, 0);
+		return $this->page_url;
+	}
+	/**
+	* set_cond($bool, $type = 'bool_redir', $or = true)
+	* Helps out grabbing boolean vars
+	*/
+	function set_cond($bool, $type = 'do_redir', $or = true) {
+		if ( $or ) {
+			$this->seo_opt['zero_dupe'][$type] = (boolean) ($bool || $this->seo_opt['zero_dupe'][$type]);
+		} else {
+			$this->seo_opt['zero_dupe'][$type] = (boolean) ($bool && $this->seo_opt['zero_dupe'][$type]);
+		}
+		return;
 	}
 	/**
 	* check start var consistency
@@ -848,11 +976,11 @@ class phpbb_seo {
 	*/
 	function seo_chk_start($start = 0, $limit = 0) {
 		if ($limit > 0) {
-			$start = ( is_int( $start/$limit ) ) ? intval($start) : intval($start/$limit)*$limit;
+			$start = is_int($start/$limit) ? $start : intval($start/$limit)*$limit;
 		}
-		if ( $start > 0  ) {
-			$this->start = $this->seo_delim['start'] . intval($start);
-			return intval($start);
+		if ( $start >= 1 ) {
+			$this->start = $this->seo_delim['start'] . (int) $start;
+			return (int) $start;
 		}
 		$this->start = '';
 		return 0;

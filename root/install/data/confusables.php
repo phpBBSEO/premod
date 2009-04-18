@@ -2,7 +2,7 @@
 /**
 *
 * @package install
-* @version $Id: confusables.php,v 1.4 2007/10/04 11:33:33 acydburn Exp $
+* @version $Id: confusables.php 8479 2008-03-29 00:22:48Z naderman $
 * @copyright (c) 2007 phpBB Group
 * @license http://opensource.org/licenses/gpl-license.php GNU Public License
 *

@@ -2,7 +2,7 @@
 /**
 *
 * @package install
-* @version $Id: functions_phpbb20.php,v 1.59 2007/10/04 14:53:56 kellanved Exp $
+* @version $Id: functions_phpbb20.php 8489 2008-04-03 14:04:10Z naderman $
 * @copyright (c) 2006 phpBB Group
 * @license http://opensource.org/licenses/gpl-license.php GNU Public License
 *
@@ -455,7 +455,7 @@ function phpbb_get_birthday($birthday = '')
 	{
 		$birthday = (int) $birthday;
 
-		if (!$birthday || $birthday == 999999 || $birthday < 0)
+		if (!$birthday || $birthday == 999999 || ((version_compare(PHP_VERSION, '5.1.0') < 0) && $birthday < 0))
 		{
 			return ' 0- 0-   0';
 		}
@@ -1856,7 +1856,7 @@ function phpbb_check_username_collisions()
 		$result = $src_db->sql_query($sql);
 
 		$colliding_users = array();
-		while ($row = $db->sql_fetchrow($result))
+		while ($row = $src_db->sql_fetchrow($result))
 		{
 			$row['user_id'] = (int) $row['user_id'];
 			if (isset($colliding_user_ids[$row['user_id']]))
@@ -1864,7 +1864,7 @@ function phpbb_check_username_collisions()
 				$colliding_users[$colliding_user_ids[$row['user_id']]][] = $row;
 			}
 		}
-		$db->sql_freeresult($result);
+		$src_db->sql_freeresult($result);
 		unset($colliding_user_ids);
 
 		$list = '';

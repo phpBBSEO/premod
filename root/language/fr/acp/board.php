@@ -2,10 +2,10 @@
 /**
 *
 * acp_board [Standard french]
-* translated by PhpBB-fr.com <http://www.phpbb-fr.com/> and phpBB.biz <http://www.phpbb.biz/>
+* translated originally by PhpBB-fr.com <http://www.phpbb-fr.com/> and phpBB.biz <http://www.phpBB.biz>
 *
 * @package language
-* @version $Id: board.php,v 1.19 2007/11/27 17:11:01 elglobo Exp $
+* @version $Id: board.php,v 1.21 2008/04/10 12:42:59 elglobo Exp $
 * @copyright (c) 2005 phpBB Group
 * @license http://opensource.org/licenses/gpl-license.php GNU Public License
 *
@@ -135,7 +135,7 @@ $lang = array_merge($lang, array(
 	'ACP_POST_SETTINGS_EXPLAIN'			=> 'Vous pouvez définir tous les réglages par défaut pour les messages.',
 	'ALLOW_POST_LINKS'					=> 'Autoriser les liens dans le messages',
 	'ALLOW_POST_LINKS_EXPLAIN'			=> 'Si interdit, la balise bbcode <code>[URL]</code> et les urls seront désactivées.',
-	'ALLOW_POST_FLASH'					=> 'Autoriser le BBCode <code>[FLASH]</code>. ',
+	'ALLOW_POST_FLASH'					=> 'Autoriser le BBCode <code>[FLASH]</code>',
 	'ALLOW_POST_FLASH_EXPLAIN'			=> 'Si interdit, le BBCode <code>[FLASH]</code> sera désactivé. Autrement, le système de permission déterminera les membres pouvant utiliser le BBCode <code>[FLASH]</code>.',
 
 	'BUMP_INTERVAL'					=> 'Intervalle de remontée de sujet',
@@ -216,8 +216,8 @@ $lang = array_merge($lang, array(
 	'PASSWORD_LENGTH_EXPLAIN'	=> 'Nombre de caractères minimum et maximum dans le mot de passe.',
 	'REG_LIMIT'					=> 'Tentatives d’inscription',
 	'REG_LIMIT_EXPLAIN'			=> 'Nombre de tentatives de saisie du code visuel avant d’être exclu pour la session.',
-	'USERNAME_ALPHA_ONLY'		=> 'Alphanumérique',
-	'USERNAME_ALPHA_SPACERS'	=> 'Alphanumérique et spacers',
+	'USERNAME_ALPHA_ONLY'		=> 'Alphanumériques',
+	'USERNAME_ALPHA_SPACERS'	=> 'Alphanumériques et espaces',
 	'USERNAME_ASCII'			=> 'ASCII (aucun caractère unicode international)',
 	'USERNAME_LETTER_NUM'		=> 'Tous chiffres et lettres',
 	'USERNAME_LETTER_NUM_SPACERS'	=> 'Tous chiffres, lettres et espaces',
@@ -322,7 +322,7 @@ $lang = array_merge($lang, array(
 	'LDAP_USER'						=> 'Utilisateur LDAP <var>dn</var>',
 	'LDAP_USER_EXPLAIN'				=> 'Laissez vide pour utiliser un accès invité. Si renseigné dans phpBB, il se connectera au serveur LDAP en tant qu’un utilisateur spécifié, exemple: <samp>uid=Utilisateur,ou=MonUnité,o=MaCompagnie,c=FR</samp>. Requis pour les serveurs possédant un Active Directory.',
 	'LDAP_USER_FILTER'				=> 'Filtre de l’utilisateur LDAP',
-	'LDAP_USER_FILTER_EXPLAIN'		=> 'Sur option, vous pouvez en plus limiter les objets recherchés avec des filtres additionnels. Par exemple <samp>objectClass=posixGroup</samp> aurait comme conséquence l’utilisatiuon de <samp>(&(uid=$username)(objectClass=posixGroup))</samp>',
+	'LDAP_USER_FILTER_EXPLAIN'		=> 'Sur option, vous pouvez en plus limiter les objets recherchés avec des filtres additionnels. Par exemple <samp>objectClass=posixGroup</samp> aurait comme conséquence l’utilisation de <samp>(&amp;(uid=$username)(objectClass=posixGroup))</samp>',
 ));
 
 // Server Settings

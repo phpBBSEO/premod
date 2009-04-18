@@ -2,10 +2,10 @@
 /** 
 *
 * memberlist [Standard french]
-* translated by PhpBB-fr.com <http://www.phpbb-fr.com/> and phpBB.biz <http://www.phpbb.biz/>
+* translated originally by PhpBB-fr.com <http://www.phpbb-fr.com/> and phpBB.biz <http://www.phpBB.biz>
 *
 * @package language
-* @version $Id: memberlist.php,v 1.19 2007/11/22 14:30:20 tonillo Exp $
+* @version $Id: memberlist.php,v 1.21 2008/04/10 14:30:20 elglobo Exp $
 * @copyright (c) 2005 phpBB Group 
 * @license http://opensource.org/licenses/gpl-license.php GNU Public License 
 *
@@ -76,7 +76,7 @@ $lang = array_merge($lang, array(
    'IM_MSNM_CONNECT'   => 'Windows Messenger n’est pas connecté.\nVous devez vous connecter pour continuer.',
    'IM_NAME'   => 'Votre nom',
    'IM_NO_DATA'			=> 'Aucune information de contact pour cet utilisateur.',
-   'IM_NO_JABBER'   => 'Désolé, la transmission de messages instantanés des utilisateurs de Jabber n’est pas supportée sur ce serveur. Votre devez avoir un client Jabber installé sur votre système pour contacter le destinataire ci-dessus.',
+   'IM_NO_JABBER'   => 'Désolé, la transmission de messages instantanés des utilisateurs Jabber n’est pas supportée sur ce forum. Votre devez avoir un client Jabber installé sur votre système pour contacter le destinataire ci-dessus.',
    'IM_RECIPIENT'   => 'Destinataire',
    'IM_SEND'   => 'Envoyer un message',
    'IM_SEND_MESSAGE'   => 'Envoyer un message',

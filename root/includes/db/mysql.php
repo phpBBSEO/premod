@@ -2,7 +2,7 @@
 /**
 *
 * @package dbal
-* @version $Id: mysql.php,v 1.62 2007/10/05 14:36:32 acydburn Exp $
+* @version $Id: mysql.php 8479 2008-03-29 00:22:48Z naderman $
 * @copyright (c) 2005 phpBB Group
 * @license http://opensource.org/licenses/gpl-license.php GNU Public License
 *

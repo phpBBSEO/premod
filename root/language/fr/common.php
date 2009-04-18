@@ -2,10 +2,10 @@
 /** 
 *
 * common [Standard french]
-* translated by PhpBB-fr.com <http://www.phpbb-fr.com/> and phpBB.biz <http://www.phpbb.biz/>
+* translated originally by PhpBB-fr.com <http://www.phpbb-fr.com/> and phpBB.biz <http://www.phpBB.biz>
 *
 * @package language
-* @version $Id: common.php,v 1.19 2007/11/23 10:56:20 elglobo Exp $
+* @version $Id: common.php,v 1.21 2008/04/13 20:16:26 elglobo Exp $
 * @copyright (c) 2005 phpBB Group 
 * @license http://opensource.org/licenses/gpl-license.php GNU Public License 
 *
@@ -41,7 +41,7 @@ if (empty($lang) || !is_array($lang))
 //
 
 $lang = array_merge($lang, array(
-	'TRANSLATION_INFO'	=> 'Traduction par: <a href="http://forums.phpbb-fr.com">phpBB-fr.com</a> &amp; <a href="http://www.phpbb.biz">phpBB.biz</a>',
+	'TRANSLATION_INFO'	=> 'Traduction par: <a href="http://forums.phpbb-fr.com">phpBB-fr.com</a>',
 	'DIRECTION'			=> 'ltr',
 	'DATE_FORMAT'		=> '|d M Y|',	// 01 Jan 2007 (with Relative days enabled)
 	'USER_LANG'			=> 'fr-standard',
@@ -107,6 +107,7 @@ $lang = array_merge($lang, array(
 	'BOARD_DISABLE'			=> 'Désolé, mais ce forum est actuellement indisponible.',
 	'BOARD_DISABLED'		=> 'Ce forum est actuellement désactivé.',
 	'BOARD_UNAVAILABLE'		=> 'Désolé, mais le forum est temporairement indisponible, réessayez dans quelques minutes.',
+	'BROWSING_FORUM'		=> 'Utilisateurs parcourant ce forum : %1$s',
 	'BROWSING_FORUM_GUEST'	=> 'Utilisateurs parcourant ce forum: %1$s et %2$d invité',
 	'BROWSING_FORUM_GUESTS'	=> 'Utilisateurs parcourant ce forum: %1$s et %2$d invités',
 	'BYTES'					=> 'Octets',
@@ -144,9 +145,9 @@ $lang = array_merge($lang, array(
 	'DISABLED'				=> 'Désactivé',
 	'DISPLAY'				=> 'Afficher',
 	'DISPLAY_GUESTS'		=> 'Afficher les invités',
-	'DISPLAY_MESSAGES'		=> 'Afficher les messages précédents',
-	'DISPLAY_POSTS'			=> 'Afficher les messages précédents',
-	'DISPLAY_TOPICS'		=> 'Afficher les sujets précédents',
+	'DISPLAY_MESSAGES'		=> 'Afficher les messages postés depuis',
+	'DISPLAY_POSTS'			=> 'Afficher les messages postés depuis',
+	'DISPLAY_TOPICS'		=> 'Afficher les sujets postés depuis',
 	'DOWNLOADED'			=> 'Téléchargé',
 	'DOWNLOADING_FILE'		=> 'Téléchargement en cours',
 	'DOWNLOAD_COUNT'		=> 'Téléchargé %d fois',
@@ -247,11 +248,14 @@ $lang = array_merge($lang, array(
 	'G_GLOBAL_MODERATORS'		=> 'Modérateurs globaux',
 
 	'HIDDEN_USERS_ONLINE'		=> '%d utilisateurs invisibles en ligne',
-	'HIDDEN_USERS_TOTAL'		=> '%d invisibles et ',
+	'HIDDEN_USERS_TOTAL'		=> '%d invisibles',
+	'HIDDEN_USERS_TOTAL_AND'	=> '%d invisibles et ',
 	'HIDDEN_USERS_ZERO_ONLINE'	=> '0 utilisateur invisible en ligne',
-	'HIDDEN_USERS_ZERO_TOTAL'	=> '0 invisible et ',
+	'HIDDEN_USERS_ZERO_TOTAL'	=> '0 invisible',
+	'HIDDEN_USERS_ZERO_TOTAL_AND'	=> '0 invisible et ',
 	'HIDDEN_USER_ONLINE'		=> '%d utilisateur invisible en ligne',
-	'HIDDEN_USER_TOTAL'			=> '%d invisible et ',
+	'HIDDEN_USER_TOTAL'			=> '%d invisible',
+	'HIDDEN_USER_TOTAL_AND'		=> '%d invisible et ',
 	'HIDE_GUESTS'				=> 'Masquer les invités',
 	'HIDE_ME'					=> 'Cacher mon statut en ligne pour cette session',
 	'HOURS'						=> 'Heures',
@@ -279,6 +283,7 @@ $lang = array_merge($lang, array(
 	'JUMP_TO_PAGE'			=> 'Cliquer pour aller à la page…',
 
 	'KB'					=> 'Ko',
+	'KIB'					=> 'Kio',
 
 	'LAST_POST'							=> 'Dernier message',
 	'LAST_UPDATED'						=> 'Dernière mise à jour',
@@ -312,6 +317,7 @@ $lang = array_merge($lang, array(
 	'MARK_ALL'				=> 'Tout cocher',
 	'MARK_FORUMS_READ'		=> 'Marquer tous les forums comme lus',
 	'MB'					=> 'Mo',
+	'MIB'					=> 'Mio',
 	'MCP'					=> 'Panneau de modération',
 	'MEMBERLIST'			=> 'Membres',
 	'MEMBERLIST_EXPLAIN'	=> 'Voir la liste complète des membres',
@@ -442,13 +448,16 @@ $lang = array_merge($lang, array(
 	'REDIRECT'					=> 'Rediriger',
 	'REDIRECTS'					=> 'Nombre de redirections',
 	'REGISTER'					=> 'M’enregistrer',
-	'REGISTERED_USERS'			=> 'Utilisateurs enregistrés:',
+	'REGISTERED_USERS'			=> 'Utilisateurs enregistrés :',
 	'REG_USERS_ONLINE'			=> 'Il y a %d utilisateurs enregistrés et ',
 	'REG_USERS_TOTAL'			=> '%d enregistrés, ',
+	'REG_USERS_TOTAL_AND'		=> '%d enregistrés et ',
 	'REG_USERS_ZERO_ONLINE'		=> 'Il y a 0 utilisateur enregistré et ',
 	'REG_USERS_ZERO_TOTAL'		=> '0 enregistré, ',
+	'REG_USERS_ZERO_TOTAL_AND'	=> '0 enregistré et ',
 	'REG_USER_ONLINE'			=> 'Il y a %d utilisateur enregistré et ',
 	'REG_USER_TOTAL'			=> '%d enregistré, ',
+	'REG_USER_TOTAL_AND'		=> '%d enregistré et ',
 	'REMOVE'					=> 'Supprimer',
 	'REMOVE_INSTALL'			=> 'Pour finaliser l’installation du forum, supprimez, déplacez ou renommez le dossier install de votre espace FTP. Si ce dossier est toujours présent, seul le panneau d’administration (ACP) sera accessible.',
 	'REPLIES'					=> 'Réponses',
@@ -771,7 +780,7 @@ $lang = array_merge($lang, array(
 		'-8'	=> '[UTC - 8] Pacifique (Etats-unis et Canada), Tijuana',
 		'-7'	=> '[UTC - 7] Arizona, Chihuahua, La Paz, Montagnes Rocheuses',
 		'-6'	=> '[UTC - 6] Amérique Centrale',
-		'-5'	=> '[UTC - 5] Heure pacifique (Etats-Unis, Canada), Bogota, Lima, Quito',
+		'-5'	=> '[UTC - 5] Heure de l’est (Etats-Unis, Canada), Bogota, Lima, Quito',
 		'-4'	=> '[UTC - 4] Heure atlantique (Canada), Caracas, La Paz, Santiago',
 		'-3.5'	=> '[UTC - 3:30] Terre Neuve',
 		'-3'	=> '[UTC - 3] Amazonie, Groenland central',

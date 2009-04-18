@@ -2,10 +2,10 @@
 /** 
 *
 * posting [Standard french]
-* translated by PhpBB-fr.com <http://www.phpbb-fr.com/> and phpBB.biz <http://www.phpbb.biz/>
+* translated originally by PhpBB-fr.com <http://www.phpbb-fr.com/> and phpBB.biz <http://www.phpBB.biz>
 *
 * @package language
-* @version $Id: posting.php,v 1.19 2007/11/22 13:08:20 lolovoisn Exp $
+* @version $Id: posting.php,v 1.21 2007/11/22 13:08:20 lolovoisn Exp $
 * @copyright (c) 2005 phpBB Group 
 * @license http://opensource.org/licenses/gpl-license.php GNU Public License 
 *

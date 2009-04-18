@@ -2,10 +2,10 @@
 /** 
 *
 * acp common [Standard french]
-* translated by PhpBB-fr.com <http://www.phpbb-fr.com/> and phpBB.biz <http://www.phpbb.biz/>
+* translated originally by PhpBB-fr.com <http://www.phpbb-fr.com/> and phpBB.biz <http://www.phpBB.biz>
 *
 * @package language
-* @version $Id: common.php,v 1.19 2007/11/22 11:26:34 elglobo Exp $
+* @version $Id: common.php,v 1.21 2008/04/10 12:47:26 elglobo Exp $
 * @copyright (c) 2005 phpBB Group 
 * @license http://opensource.org/licenses/gpl-license.php GNU Public License 
 *
@@ -126,6 +126,8 @@ $lang = array_merge($lang, array(
 	'ACP_MODULE_MANAGEMENT'		=> 'Gestion de modules',
 	'ACP_MOD_LOGS'				=> 'Journal de modération',
 	'ACP_MOD_ROLES'				=> 'Modèles de modération',
+	
+	'ACP_NO_ITEMS'				=> 'Il n’y a actuellement aucun élément.',
 	
 	'ACP_ORPHAN_ATTACHMENTS'	=> 'Fichiers joints orphelins',
 	
@@ -262,6 +264,11 @@ $lang = array_merge($lang, array(
 
 	'SELECT_ANONYMOUS'		=> 'Sélectionner l’utilisateur invité',
 	'SELECT_OPTION'			=> 'Sélectionner une option',
+	
+	'SETTING_TOO_LOW'		=> 'La valeur indiquée pour le réglage “%1$s” est trop faible. La valeur minimale autorisée est de %2$d.',
+	'SETTING_TOO_BIG'		=> 'La valeur indiquée pour le réglage “%1$s” est trop élevée. La valeur maximale autorisée est de %2$d.',	
+	'SETTING_TOO_LONG'		=> 'La valeur indiquée pour le réglage “%1$s” est trop longue. La longueur maximale autorisée est de %2$d.',
+	'SETTING_TOO_SHORT'		=> 'La valeur indiquée pour le réglage “%1$s” est trop courte. La longueur minimale autorisée est de %2$d.',
 
 	'UCP'					=> 'Panneau de l’utilisateur',
 	'USERNAMES_EXPLAIN'		=> 'Indiquez un nom d’utilisateur par ligne',
@@ -663,8 +670,8 @@ $lang = array_merge($lang, array(
 	'LOG_USER_MOVE_POSTS_USER'	=> '<strong>Déplacement de tous les messages vers le forum</strong> “%s”',
 	'LOG_USER_REACTIVATE_USER'	=> '<strong>Réactivation forcée d’un compte utilisateur</strong>',
 	'LOG_USER_UNLOCK'			=> '<strong>Déverrouillage par son auteur d’un sujet</strong><br />» %s',
-	'LOG_USER_WARNING'			=> '<strong>Ajout d’un avertissement par l’utilisateur</strong><br />» %s',
-	'LOG_USER_WARNING_BODY'		=> '<strong>Un avertissement a été établi par l’utilisateur</strong><br />»%s',
+	'LOG_USER_WARNING'			=> '<strong>Ajout d’un avertissement à l’utilisateur</strong><br />» %s',
+	'LOG_USER_WARNING_BODY'		=> '<strong>Un avertissement a été attribué à l’utilisateur</strong><br />»%s',
 
 	'LOG_USER_GROUP_CHANGE'			=> '<strong>Modification du groupe par défaut de l’utilisateur</strong><br />» %s',
 	'LOG_USER_GROUP_DEMOTE'			=> '<strong>Rétrogradation du chef d’un groupe d’utilisateurs</strong><br />» %s',

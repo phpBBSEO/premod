@@ -2,7 +2,7 @@
 /**
 *
 * @package ucp
-* @version $Id: ucp.php,v 1.93 2007/10/05 14:30:07 acydburn Exp $
+* @version $Id: ucp.php 8479 2008-03-29 00:22:48Z naderman $
 * @copyright (c) 2005 phpBB Group
 * @license http://opensource.org/licenses/gpl-license.php GNU Public License
 *

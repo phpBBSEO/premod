@@ -25,23 +25,19 @@ $user->session_begin();
 $auth->acl($user->data);
 $user->setup('viewforum');
 // www.phpBB-SEO.com SEO TOOLKIT BEGIN -> Zero dupe
-$phpbb_seo->page_url = $phpbb_seo->seo_path['phpbb_urlR'] . $phpbb_seo->seo_static['index'] . $phpbb_seo->seo_ext['index'] . (!empty($_SID) ? '?sid=' . $_SID : '');
-if ( $user->data['is_registered'] ) {
-	$phpbb_seo->seo_cond( !isset($_GET['explain']) );
-	$phpbb_seo->seo_cond( (utf8_strpos($phpbb_seo->seo_path['uri'], 'mark=') === FALSE));
-} 
+$seo_mark = request_var('mark', '');
+$keep_mark = in_array($seo_mark, array('topics', 'forums', 'all')) ? (boolean) ($user->data['is_registered'] || $config['load_anon_lastread']) : false;
+$phpbb_seo->seo_opt['zero_dupe']['redir_def'] = array(
+	'mark' => array('val' => $seo_mark, 'keep' => $keep_mark),
+);
 if ( !$phpbb_seo->seo_opt['zero_dupe']['strict'] ) { // strict mode is here a bit faster
-	if ( !$user->data['is_registered'] ) {
-		$phpbb_seo->seo_cond( isset($_GET['explain']), false, 'do' );
-		$phpbb_seo->seo_cond( (utf8_strpos($phpbb_seo->seo_path['uri'], 'mark=') !== FALSE), false, 'do');
-	}
 	if ( !empty($phpbb_seo->seo_static['index']) ) {
-		$phpbb_seo->seo_cond( (utf8_strpos($phpbb_seo->seo_path['uri'], $phpbb_seo->seo_static['index']) === FALSE), false, 'do');
+		$phpbb_seo->set_cond( (boolean) (utf8_strpos($phpbb_seo->seo_path['uri'], $phpbb_seo->seo_static['index']) === false), 'do_redir', (empty($_GET) || (!empty($seo_mark) && !$keep_mark)));
 	} else {
-		$phpbb_seo->seo_cond( (utf8_strpos($phpbb_seo->seo_path['uri'], 'index.' . $phpEx) !== FALSE), false, 'do' );
+		$phpbb_seo->set_cond( (boolean) (utf8_strpos($phpbb_seo->seo_path['uri'], "index.$phpEx") !== false), 'do_redir', (empty($_GET) || (!empty($seo_mark) && !$keep_mark)));
 	}
 }
-$phpbb_seo->seo_chk_dupe($phpbb_seo->seo_path['uri'], $phpbb_seo->page_url);
+$phpbb_seo->seo_chk_dupe();
 // www.phpBB-SEO.com SEO TOOLKIT END -> Zero dupe
 display_forums('', $config['load_moderators']);
 

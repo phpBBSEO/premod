@@ -2,10 +2,10 @@
 /** 
 *
 * mcp [Standard french]
-* translated by PhpBB-fr.com <http://www.phpbb-fr.com/> and phpBB.biz <http://www.phpbb.biz/>
+* translated originally by PhpBB-fr.com <http://www.phpbb-fr.com/> and phpBB.biz <http://www.phpBB.biz>
 *
 * @package language
-* @version $Id: mcp.php,v 1.19 2007/11/22 14:28:20 Tonillo Exp $
+* @version $Id: mcp.php,v 1.21 2008/04/10 13:21:36 elglobo Exp $
 * @copyright (c) 2005 phpBB Group 
 * @license http://opensource.org/licenses/gpl-license.php GNU Public License 
 *
@@ -107,7 +107,7 @@ $lang = array_merge($lang, array(
 
 	'LATEST_LOGS'				=> 'Les 5 dernières actions notées',
 	'LATEST_REPORTED'			=> 'Les 5 derniers rapports',
-	'LATEST_UNAPPROVED'			=> 'Les 5 derniers messages en attente d’approbation',
+	'LATEST_UNAPPROVED'			=> 'Les 5 derniers messages en attente de modération',
 	'LATEST_WARNING_TIME'		=> 'Dernier avertissement donné',
 	'LATEST_WARNINGS'			=> 'Les 5 derniers avertissements',
 	'LEAVE_SHADOW'				=> 'Laisser un sujet-traceur dans l’ancien forum',
@@ -223,12 +223,12 @@ $lang = array_merge($lang, array(
 	'NO_POST_REPORT'				=> 'Ce message n’a pas été rapporté.',
 	'NO_POST_SELECTED'				=> 'Vous devez sélectionner au moins un message pour effectuer cette action.',
 	'NO_REASON_DISAPPROVAL'			=> 'Donnez la raison de la désapprobation.',
-	'NO_REPORT'						=> 'Aucun rapport trouvé',
-	'NO_REPORTS'					=> 'Aucun rapport trouvé',	
+	'NO_REPORT'						=> 'Aucun rapport n’a été trouvé',
+	'NO_REPORTS'					=> 'Aucun rapport n’a été trouvé',
 	'NO_REPORT_SELECTED'			=> 'Vous devez sélectionner au moins un rapport pour effectuer cette action.',
 	'NO_TOPIC_ICON'					=> 'Aucune',
 	'NO_TOPIC_SELECTED'				=> 'Vous devez choisir au moins un sujet pour effectuer cette action.',
-	'NO_TOPICS_QUEUE'				=> 'Il n’y a aucun sujet en attente d’approbation.',
+	'NO_TOPICS_QUEUE'				=> 'Il n’y a aucun sujet en attente de modération.',
 
 	'ONLY_TOPIC'			=> 'Seulement le sujet “%s”',
 	'OTHER_USERS'			=> 'Autres utilisateurs postant à partir de cette IP',
@@ -274,8 +274,8 @@ $lang = array_merge($lang, array(
 	'REPORT_TOTAL'				=> 'Il reste <strong>1</strong> rapport à passer en revue.',
 	'RESYNC'					=> 'Resynchroniser',
 	'RETURN_MESSAGE'			=> '%sRetourner au message%s',
-	'RETURN_NEW_FORUM'			=> '%sRetourner au nouveau forum%s',
-	'RETURN_NEW_TOPIC'			=> '%sRetourner au nouveau sujet%s',
+	'RETURN_NEW_FORUM'			=> '%sAller au nouveau forum%s',
+	'RETURN_NEW_TOPIC'			=> '%sAller au nouveau sujet%s',
 	'RETURN_POST'				=> '%sRetourner au message%s',
 	'RETURN_QUEUE'				=> '%sRetourner à l’attente de modération%s',
 	'RETURN_REPORTS'			=> '%sRetourner aux rapports%s',
@@ -327,9 +327,9 @@ $lang = array_merge($lang, array(
 	'TOPIC_UNLOCKED_SUCCESS'	=> 'Le sujet sélectionné a été déverrouillé.',
 	'TOTAL_WARNINGS'			=> 'Total des avertissements',
 
-	'UNAPPROVED_POSTS_TOTAL'		=> 'Il y a, au total, <strong>%d</strong> messages en attente d’approbation.',
-	'UNAPPROVED_POSTS_ZERO_TOTAL'	=> 'Il n’y a aucun message en attente d’approbation.',
-	'UNAPPROVED_POST_TOTAL'			=> 'Il reste <strong>1</strong> message en attente d’approbation.',
+	'UNAPPROVED_POSTS_TOTAL'		=> 'Il y a, au total, <strong>%d</strong> messages en attente de modération.',
+	'UNAPPROVED_POSTS_ZERO_TOTAL'	=> 'Il n’y a aucun message en attente de modération.',
+	'UNAPPROVED_POST_TOTAL'			=> 'Il reste <strong>1</strong> message en attente de modération.',
 	'UNLOCK'						=> 'Déverrouiller',
 	'UNLOCK_POST'					=> 'Déverrouiller le message',
 	'UNLOCK_POST_EXPLAIN'			=> 'Autorise l’édition',
