@@ -5,7 +5,7 @@
 ## 			Check http://www.phpbb-seo.com/boards/phpbb-seo-premod/seo-url-premod-vt1549.html
 ## 			for the latest version or to get help.
 ##
-## MOD Version: 	3.0.RC5
+## MOD Version: 	3.0.RC5a
 ##
 ## Installation Level: 	As easy as phpBB3
 ## Installation Time: 	10
@@ -47,6 +47,10 @@
 ## Let's meet in the Premod forum ( http://www.phpbb-seo.com/boards/phpbb-seo-premod-vf61/ ).
 ## 
 ##
+####  UPDATE
+## 3.0.RC5 => 3.0.RC5a Just overwrite all the files in the language/ folder, and all the files in the include/acp/ folder.
+####
+##
 ## LICENSE:
 ## ________
 ##
@@ -65,6 +69,9 @@
 ##############################################################
 ## MOD History:
 ##
+##	2007-09-20 - 3.0.RC5a
+##		- Fixed typos in the language file,
+##		- Enhanced the premod sud-version checking.
 ##	2007-09-11 - 3.0.RC5
 ##		- First public Version, versioned following the phpBB version
 ##
@@ -77,6 +84,15 @@
 #
 #-----[ DIY INSTRUCTIONS ]--------------------------------------------------
 #
+
+________________________________________
+>>>>   UPDATE INSTRUCTION   	   <<<<<
+________________________________________
+
+Update 3.0.RC5 => 3.0.RC5a 
+Just overwrite all the files in the language/ folder, and all the files in the include/acp/ folder.
+
+
 ________________________________________
 >>>>   INSTALLATION INSTRUCTION    <<<<<
 ________________________________________
@@ -88,7 +104,7 @@ Before you start, read this with caution.
 	1) Upload all files and lunch www.yoursite.com/phpBB/ in your browser;
 	2) Follow the installation / conversion / upgrade steps;
 	3) Go to phpBB ACP : It's now time to play with settings described bellow;
-	5) Generate your personalized .htaccess and upload or move it following the instructions;
+	4) Generate your personalized .htaccess and upload or move it following the instructions;
 	5) Test a rewritten URL, such as www.yoursite.com/phpBB/post1.html, if you end up with a 404 (not a phpBB message), go back to step 5;
 	6) Activate URL rewriting in phpBB ACP and allow yourself some auto-congratulation :D
 ________________________________________
@@ -97,7 +113,7 @@ __________
 Settings :
 __________
 
-The settings must be done before step 7 above for the generated .htaccess to be up to date.
+The settings must be done before step 4 above for the generated .htaccess to be up to date.
 Later modification will most likey require a new .htaccess as well as personalized redirections.
 
 

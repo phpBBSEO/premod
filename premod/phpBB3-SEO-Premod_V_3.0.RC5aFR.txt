@@ -6,7 +6,7 @@
 ## 			Visitez http://www.phpbb-seo.com/forums/premod-phpbb-seo/premod-referencement-phpbb-vt1951.html
 ## 			pour obtenir du support et vérifier l'existence de mise à jour.
 ##
-## MOD Version: 	3.0.RC5
+## MOD Version: 	3.0.RC5a
 ##
 ## Installation Level: 	Aussi facile que phpBB3
 ## Installation Time: 	10 Minutes
@@ -50,6 +50,10 @@
 ## Rendez-vous sur le forum Premod phpBB SEO ( http://www.phpbb-seo.com/forums/premod-phpbb-seo-vf64/ ).
 ## 
 ##
+####  MISE A JOUR
+## 3.0.RC5 => 3.0.RC5a Ecrasez simplement tous les fichiers du dossier language/, ainsi que tous les fichiers du dossier inlcudes/acp/
+####
+##
 ## LICENSE:
 ## ________
 ##
@@ -67,6 +71,9 @@
 ##############################################################
 ## MOD History:
 ##
+##	2007-09-20 - 3.0.RC5a
+##		- Fixed typos in the language file,
+##		- Enhanced the premod sud-version checking.
 ##	2007-09-11 - 3.0.RC5
 ##		- First public Version, versioned following the phpBB version
 ##
@@ -79,6 +86,15 @@
 #
 #-----[ DIY INSTRUCTIONS ]--------------------------------------------------
 #
+
+_____________________________________________
+>>>>   MISE A JOUR	                <<<<<
+_____________________________________________
+
+Mise à jour : 3.0.RC5 => 3.0.RC5a 
+Ecrasez simplement tous les fichiers du dossier language/, ainsi que tous les fichiers du dossier inlcudes/acp/
+
+
 _____________________________________________
 >>>>   INSTALLATION POUR VOTRE FORUM    <<<<<
 _____________________________________________
@@ -108,7 +124,7 @@ ___________
  Réglages :
 ___________
 
-Les réglages doivent être fait avant l'étape numéro 7 ci dessus,
+Les réglages doivent être fait avant l'étape numéro 4 ci dessus,
 des modification tardives entraîneront probablement des changement dans le .htaccess, 
 et pourront nécessiter des redirections personnalisées.
 

@@ -79,7 +79,7 @@ $lang = array_merge($lang, array(
 	'CONTINUE_OLD_CONVERSION'	=> 'Continuer la conversion commencée précédemment',
 	'CONVERT'					=> 'Convertir',
 	'CONVERT_COMPLETE'			=> 'La conversion est terminée',
-	'CONVERT_COMPLETE_EXPLAIN'	=> 'Vous avez converti votre forum vers phpBB 3.0. Assurez-vous que les paramètres aient été correctement transférés avant d\'activer votre forum en supprimant le répertoire install. Vous pouvez désormais vous connecter et <a href="../">accédez à votre forum</a>. Souvenez-vous que l\'aide sur l\'utilisation de phpBB est disponible dans le <a href="http://www.phpbb.com/support/documentation/3.0/">Guide de l\'utilisateur</a> et le <a href="http://forums.phpbb-fr.com/">forum d\'assistance</a>',
+	'CONVERT_COMPLETE_EXPLAIN'	=> 'Vous avez converti votre forum vers phpBB 3.0. Assurez-vous que les paramètres aient été correctement transférés avant d\'activer votre forum en supprimant le répertoire install. Vous pouvez désormais vous connecter et <a href="../">accédez à votre forum</a>. Souvenez-vous que l\'aide sur l\'utilisation de phpBB est disponible dans le <a href="http://www.phpbb.com/support/documentation/3.0/">Guide de l\'utilisateur</a> et le <a href="http://www.phpbb-seo.com/forums/premod-phpbb-seo-vf64/">forum d\'assistance</a>',
 	'CONVERT_INTRO'				=> 'Bienvenue sur la plate-forme de conversion unifiée de phpBB (phpBB Unified Convertor Framework)',
 	'CONVERT_INTRO_BODY'		=> 'D\'ici, vous pouvez importer des données à partir d\'autres systèmes de forum. La liste suivante montre tous les modules de conversion actuellement disponibles. Si le module de conversion de votre forum ne s\'y trouve pas, visitez notre site web pour vérifier si le convertisseur est disponible.',
 	'CONVERT_NEW_CONVERSION'	=> 'Nouvelle conversion',
@@ -180,14 +180,14 @@ $lang = array_merge($lang, array(
 	'GPL'						=> 'Licence publique générale',
 
 	'INITIAL_CONFIG'			=> 'Configuration de base',
-	'INITIAL_CONFIG_EXPLAIN'	=> 'L\'installation a déterminée que votre serveur est à même de supporter phpBB, vous devez fournir quelques informations spécifiques. Si vous ne savez pas vous connecter à votre base de données, contactez votre fournisseur d\'hébergement (en premier lieu) ou utilisez <a href="http://forums.phpbb-fr.com/"> le forum d\'assistance</a>.Lors de la saisie des données, assurez-vous de bien les vérifier, avant de continuer.',
+	'INITIAL_CONFIG_EXPLAIN'	=> 'L\'installation a déterminée que votre serveur est à même de supporter phpBB, vous devez fournir quelques informations spécifiques. Si vous ne savez pas vous connecter à votre base de données, contactez votre fournisseur d\'hébergement (en premier lieu) ou utilisez <a href="http://www.phpbb-seo.com/forums/premod-phpbb-seo-vf64/"> le forum d\'assistance</a>.Lors de la saisie des données, assurez-vous de bien les vérifier, avant de continuer.',
 	'INSTALL_CONGRATS'			=> 'Félicitations!',
 	'INSTALL_CONGRATS_EXPLAIN'   => '
       <p>Vous avez installé votre forum phpBB %1$s. Vous avez maintenant la possibilité de choisir entre 2 options:</p>
       <h2>Convertir un forum existant vers phpBB3</h2>
       <p>Le processus de conversion de phpBB3 permet de convertir un forum phpBB2 et d\'autres systèmes de forum en un forum phpBB3. Si vous avez déjà un forum installé, <a href="%2$s">convertissez-le</a>.</p>
       <h2>Utiliser votre forum maintenant!</h2>
-      <p>En cliquant sur le bouton ci-dessous, vous serez redirigé vers le panneau d\'administration de votre forum. Prenez le temps d\'examiner les différentes options disponibles. Une aide en ligne est accessible via <a href="http://www.phpbb.com/support/documentation/3.0/">la documentation </a> et le <a href="http://forums.phpbb-fr.com/">forum de support</a>, consultez le fichier <a href="%3$s">Lisez-moi</a> pour plus d\'informations.</p><p><strong>Effacez, renommez ou déplacez le répertoire install de votre FTP avant d\'utiliser le forum. Si ce répertoire est présent, seul le panneau d\'administration de votre forum sera disponible.</strong></p>',
+      <p>En cliquant sur le bouton ci-dessous, vous serez redirigé vers le panneau d\'administration de votre forum. Prenez le temps d\'examiner les différentes options disponibles. Une aide en ligne est accessible via <a href="http://www.phpbb.com/support/documentation/3.0/">la documentation </a> et le <a href="http://www.phpbb-seo.com/forums/premod-phpbb-seo-vf64/">forum de support</a>, consultez le fichier <a href="%3$s">Lisez-moi</a> pour plus d\'informations.</p><p><strong>Effacez, renommez ou déplacez le répertoire install de votre FTP avant d\'utiliser le forum. Si ce répertoire est présent, seul le panneau d\'administration de votre forum sera disponible.</strong></p>',
 	'INSTALL_INTRO'				=> 'Bienvenue dans l\'installation',
 // TODO: write some more introductions here
 	'INSTALL_INTRO_BODY'		=> 'Avec cette option, il est possible d\'installer phpBB sur votre serveur.</p><p>Pour cela, vous aurez besoin des paramètres de connexion à votre base de données. Si vous ne les connaissez pas, contactez votre fournisseur d\'hébergement pour les lui demander. Vous ne pourrez pas continuer l\'installation sans les paramètres suivants:</p>
@@ -236,7 +236,7 @@ $lang = array_merge($lang, array(
 	'INST_ERR_EMAIL_INVALID'	=> 'L\'adresse e-mail saisie est invalide',
 	'INST_ERR_EMAIL_MISMATCH'	=> 'Les e-mails saisis ne correspondent pas.',
 	'INST_ERR_FATAL'			=> 'Erreur fatale lors de l\'installation',
-	'INST_ERR_FATAL_DB'			=> 'Une erreur fatale et irrécupérable de base de données est survenue. Vous n\'avez peut-être pas les droits appropriés pour effectuer <code>CREATE TABLES</code> ou <code>INSERT</code>, etc. Des informations supplémentaires peuvent être données ci-dessous. Contactez votre hébergeur en premier lieu ou le <a href="http://forums.phpbb-fr.com/">forum d\'assistance</a>',
+	'INST_ERR_FATAL_DB'			=> 'Une erreur fatale et irrécupérable de base de données est survenue. Vous n\'avez peut-être pas les droits appropriés pour effectuer <code>CREATE TABLES</code> ou <code>INSERT</code>, etc. Des informations supplémentaires peuvent être données ci-dessous. Contactez votre hébergeur en premier lieu ou le <a href="http://www.phpbb-seo.com/forums/premod-phpbb-seo-vf64/">forum d\'assistance</a>',
 	'INST_ERR_FTP_PATH'			=> 'Impossible d\'accéder au répertoire donné, vérifiez le chemin.',
 	'INST_ERR_FTP_LOGIN'		=> 'Impossible de s\'identifier sur le serveur FTP, vérifiez vos identifiant et mot de passe',
 	'INST_ERR_MISSING_DATA'		=> 'Vous devez remplir tous les champs de ce bloc',
@@ -337,7 +337,7 @@ $lang = array_merge($lang, array(
 	'SUB_SUPPORT'   			=> 'Support',
 	'SUCCESSFUL_CONNECT'   		=> 'Connexion réussie',
 // TODO: Write some text on obtaining support
-	'SUPPORT_BODY'				=> 'Pendant la phase de release candidate, le support sera effectué sur les <a href="http://forums.phpbb-fr.com/index.html">forums de support phpBB 3.0.x</a>. Nous fournirons des réponses aux questions d\'installation générale, aux problèmes de configuration, de conversions et aux problèmes courants liés aux bugs. Nous autorisons également les discussions à propos des modifications et des codes/styles personnalisés.</p><p>Pour plus d\'assistance, rendez-vous sur notre <a href="http://www.phpbb.com/support/documentation/3.0/quickstart/">Guide de Démarrage Rapide</a> et notre <a href="http://www.phpbb.com/support/documentation/3.0/">documentation en ligne</a>.</p><p>Pour vous assurer d\'être au courant des dernières nouveautés ou des dernières versions, nous vous invitons à <a href="http://www.phpbb.com/support/">souscrire à notre liste de diffusion</a>.',
+	'SUPPORT_BODY'				=> 'Pendant la phase de release candidate, le support sera effectué sur les <a href="http://www.phpbb-seo.com/forums/premod-phpbb-seo-vf64/">forums de support phpBB 3.0.x</a>. Nous fournirons des réponses aux questions d\'installation générale, aux problèmes de configuration, de conversions et aux problèmes courants liés aux bugs. Nous autorisons également les discussions à propos des modifications et des codes/styles personnalisés.</p><p>Pour plus d\'assistance, rendez-vous sur notre <a href="http://www.phpbb.com/support/documentation/3.0/quickstart/">Guide de Démarrage Rapide</a> et notre <a href="http://www.phpbb.com/support/documentation/3.0/">documentation en ligne</a>.</p><p>Pour vous assurer d\'être au courant des dernières nouveautés ou des dernières versions, nous vous invitons à <a href="http://www.phpbb.com/support/">souscrire à notre liste de diffusion</a>.',
 	'SYNC_FORUMS'   			=> 'Synchronisation des forums',
 	'SYNC_POST_COUNT'			=> 'Synchronisation de post_counts',
 	'SYNC_POST_COUNT_ID'		=> 'Synchronisation de post_counts de <var>l\'entrée</var> %1$s à %2$s.',
@@ -451,7 +451,7 @@ $lang = array_merge($lang, array(
 	'NO_ERRORS'						=> 'Aucune erreur',
 	'NO_UPDATE_FILES'				=> 'Ne pas mettre à jour les fichiers suivants',
 	'NO_UPDATE_FILES_EXPLAIN'		=> 'Les fichiers suivants sont nouveaux ou modifiés, mais leur répertoire est introuvable dans votre installation. Si cette liste contient des fichiers vers d\'autres répertoires que language/ ou styles/ que vous pouvez avoir à modifier, votre structure de répertoire et la mise à jour peuvent être incomplètes.',
-	'NO_UPDATE_FILES_OUTDATED'		=> 'Aucun répertoire de mise à jour valide n\'a été trouvé, assurez-vous de bien avoir transféré les fichiers nécessaires.<br /><br />Votre installation ne semble <strong>pas</strong> à jour. Des mises à jour sont disponibles pour votre version de phpBB %1$s, visitez <a href="http://www.phpbb.com/downloads/" rel="external">http://www.phpbb.com/downloads/</a> afin d\'obtenir le pack correct pour mettre à jour votre Version %2$s vers la Version %3$s.',
+	'NO_UPDATE_FILES_OUTDATED'		=> 'Aucun répertoire de mise à jour valide n\'a été trouvé, assurez-vous de bien avoir transféré les fichiers nécessaires.<br /><br />Votre installation ne semble <strong>pas</strong> à jour. Des mises à jour sont disponibles pour votre version de phpBB %1$s, visitez <a href="http://www.phpbb-seo.com/boards/phpbb-seo-premod/seo-url-premod-vt1549.html" rel="external">http://www.phpbb-seo.com/boards/phpbb-seo-premod/seo-url-premod-vt1549.html</a> afin d\'obtenir le pack correct pour mettre à jour votre Version %2$s vers la Version %3$s.',
 	'NO_UPDATE_FILES_UP_TO_DATE'	=> 'Votre version est à jour. Il n\'est pas nécessaire d\'utiliser l\'outil de mise à jour. Si vous souhaitez faire une vérification intégrale de vos fichiers, assurez-vous d\'avoir transféré les fichiers de mise à jour corrects.',
 	'NO_UPDATE_INFO'				=> 'Les informations du fichier de mise à jour sont introuvables.',
 	'NO_UPDATES_REQUIRED'			=> 'Aucune mise à jour nécessaire',
@@ -514,7 +514,7 @@ $lang = array_merge($lang, array(
       <p>Les recommandations de mise à jour pour votre installation indiquées ici ne sont valables que pour le pack de mise à jour automatique. Vous pouvez également mettre à jour votre installation en utilisant les méthodes énumérées dans le document INSTALL.html. Les étapes pour mettre à jour automatiquement phpBB3 sont:</p>
 
       <ul style="margin-left: 20px; font-size: 1.1em;">
-         <li>Allez sur la page <a href="http://www.phpbb.com/downloads/" title="http://www.phpbb.com/downloads/">de téléchargement de phpBB.com</a> et téléchargez l\'archive de mise à jour automatique du forum: "Automatic Update Package".<br /><br /></li>
+         <li>Allez sur la page <a href="http://www.phpbb-seo.com/boards/phpbb-seo-premod/seo-url-premod-vt1549.html" title="http://www.phpbb-seo.com/boards/phpbb-seo-premod/seo-url-premod-vt1549.html">de mise à disposition de la premod</a> et téléchargez l\'archive de mise à jour automatique du forum: "Automatic Update Package".<br /><br /></li>
          <li>Décompressez l\'archive.<br /><br /></li>
          <li>Transférez le répertoire install sur votre serveur FTP, à la racine de votre forum (où votre fichier config.php est situé).<br /><br /></li>
       </ul>

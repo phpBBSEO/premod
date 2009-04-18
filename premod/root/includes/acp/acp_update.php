@@ -40,7 +40,6 @@ class acp_update
 
 		$info = explode("\n", $info);
 		$latest_version = trim($info[0]);
-
 		$announcement_url = trim($info[1]);
 		$update_link = append_sid($phpbb_root_path . 'install/index.' . $phpEx, 'mode=update');
 
@@ -56,20 +55,28 @@ class acp_update
 
 		$up_to_date_automatic = (version_compare(str_replace('rc', 'RC', strtolower($current_version)), str_replace('rc', 'RC', strtolower($latest_version)), '<')) ? false : true;
 		$up_to_date = (version_compare(str_replace('rc', 'RC', strtolower($config['version'])), str_replace('rc', 'RC', strtolower($latest_version)), '<')) ? false : true;
-
+		$phpbb_seo_update = '';
+		if ($up_to_date) {
+			$phpbb_seo_update = trim(str_replace($current_version, '', $latest_version));
+		}
+		if (!empty($phpbb_seo_update)) {
+			$update_instruction = '<br/><br/><hr/>' . sprintf($user->lang['ACP_PREMOD_UPDATE'], $latest_version, $announcement_url) . '<br/><hr/>';
+			$up_to_date = false;
+		} else {
+			$update_instruction = sprintf($user->lang['UPDATE_INSTRUCTIONS'], $announcement_url, $update_link);
+		}
 		$template->assign_vars(array(
 			'S_UP_TO_DATE'		=> $up_to_date,
 			'S_UP_TO_DATE_AUTO'	=> $up_to_date_automatic,
 			'S_VERSION_CHECK'	=> true,
-			'U_ACTION'			=> $this->u_action,
+			'U_ACTION'		=> $this->u_action,
 
 			'LATEST_VERSION'	=> $latest_version,
 			'CURRENT_VERSION'	=> $config['version'],
 			'AUTO_VERSION'		=> $version_update_from,
 
-			'UPDATE_INSTRUCTIONS'	=> sprintf($user->lang['UPDATE_INSTRUCTIONS'], $announcement_url, $update_link),
+			'UPDATE_INSTRUCTIONS'	=> $update_instruction,
 		));
 	}
 }
-
 ?>
