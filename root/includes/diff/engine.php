@@ -1,14 +1,15 @@
 <?php
-/** 
+/**
 *
 * @package diff
-* @version $Id: engine.php,v 1.6 2007/08/16 11:27:59 acydburn Exp $
-* @copyright (c) 2006 phpBB Group 
-* @license http://opensource.org/licenses/gpl-license.php GNU Public License 
+* @version $Id: engine.php,v 1.7 2007/10/05 14:36:33 acydburn Exp $
+* @copyright (c) 2006 phpBB Group
+* @license http://opensource.org/licenses/gpl-license.php GNU Public License
 *
 */
 
 /**
+* @ignore
 */
 if (!defined('IN_PHPBB'))
 {

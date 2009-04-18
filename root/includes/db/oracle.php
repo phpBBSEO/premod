@@ -2,7 +2,7 @@
 /**
 *
 * @package dbal
-* @version $Id: oracle.php,v 1.49 2007/08/02 05:05:44 davidmj Exp $
+* @version $Id: oracle.php,v 1.50 2007/10/05 14:36:32 acydburn Exp $
 * @copyright (c) 2005 phpBB Group
 * @license http://opensource.org/licenses/gpl-license.php GNU Public License
 *
@@ -361,13 +361,13 @@ class dbal_oracle extends dbal
 	/**
 	* Build LIMIT query
 	*/
-	function _sql_query_limit($query, $total, $offset = 0, $cache_ttl = 0) 
+	function _sql_query_limit($query, $total, $offset = 0, $cache_ttl = 0)
 	{
-		$this->query_result = false; 
+		$this->query_result = false;
 
 		$query = 'SELECT * FROM (SELECT /*+ FIRST_ROWS */ rownum AS xrownum, a.* FROM (' . $query . ') a WHERE rownum <= ' . ($offset + $total) . ') WHERE xrownum >= ' . $offset;
 
-		return $this->sql_query($query, $cache_ttl); 
+		return $this->sql_query($query, $cache_ttl);
 	}
 
 	/**

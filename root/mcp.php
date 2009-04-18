@@ -2,7 +2,7 @@
 /**
 *
 * @package mcp
-* @version $Id: mcp.php,v 1.137 2007/07/26 15:49:44 acydburn Exp $
+* @version $Id: mcp.php,v 1.138 2007/08/30 21:19:04 acydburn Exp $
 * @copyright (c) 2005 phpBB Group
 * @license http://opensource.org/licenses/gpl-license.php GNU Public License
 *
@@ -166,7 +166,7 @@ if ($quickmod)
 		case 'delete_post':
 		case 'delete_topic':
 			$module->load('mcp', 'main', 'quickmod');
-			exit;
+			exit_handler();
 		break;
 
 		case 'topic_logs':

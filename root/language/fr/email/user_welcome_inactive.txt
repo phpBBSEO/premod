@@ -1,4 +1,4 @@
-Subject: Bienvenue sur les forums de "{SITENAME}" - {U_BOARD}
+Subject: Bienvenue sur les forums de "{SITENAME}"
  
 {WELCOME_MSG}
 
@@ -7,6 +7,8 @@ Vous êtes prié de conserver cet e-mail dans vos archives. Voici les informatio
 ----------------------------
 Nom d'utilisateur: {USERNAME}
 Mot de passe: {PASSWORD}
+
+Adresse du forum: {U_BOARD}
 ----------------------------
 
 Votre compte est actuellement inactif. Vous ne pourrez pas l'utiliser tant que vous n'aurez pas visité le lien suivant:

@@ -1,14 +1,15 @@
 <?php
-/** 
+/**
 *
 * @package search
-* @version $Id: fulltext_native.php,v 1.59 2007/07/27 17:32:46 acydburn Exp $
-* @copyright (c) 2005 phpBB Group 
-* @license http://opensource.org/licenses/gpl-license.php GNU Public License 
+* @version $Id: fulltext_native.php,v 1.60 2007/10/05 14:36:33 acydburn Exp $
+* @copyright (c) 2005 phpBB Group
+* @license http://opensource.org/licenses/gpl-license.php GNU Public License
 *
 */
 
 /**
+* @ignore
 */
 if (!defined('IN_PHPBB'))
 {

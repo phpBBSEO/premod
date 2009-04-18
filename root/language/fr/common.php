@@ -1,10 +1,10 @@
 <?php
 /**
 *
-* common.php [Standard french]
+* common [Standard french]
 *
 * @package language
-* @version $Id: common.php,v 1.189 2007/08/15 17:32:06 acydburn Exp $
+* @version $Id: common.php,v 1.194 2007/10/04 15:07:24 acydburn Exp $
 * @copyright (c) 2007 phpBB Group 
 * @license http://opensource.org/licenses/gpl-license.php GNU Public License
 *
@@ -18,6 +18,11 @@
 /**
 * DO NOT CHANGE
 */
+if (!defined('IN_PHPBB'))
+{
+	exit;
+}
+
 if (empty($lang) || !is_array($lang))
 {
 	$lang = array();
@@ -36,7 +41,7 @@ if (empty($lang) || !is_array($lang))
 // in a url you again do not need to specify an order e.g., 'Click %sHERE%s' is fine
 //
 // Some characters you may want to copy&paste:
-// ’ » “ ” …
+// \' » “ ” …
 //
 
 $lang = array_merge($lang, array(
@@ -131,7 +136,7 @@ $lang = array_merge($lang, array(
 	'COOKIES_DELETED'		=> 'Tous les cookies du forum ont été supprimés.',
 	'CURRENT_TIME'			=> 'Nous sommes le %s',
 
-	'DAY'					=> 'jour',
+	'DAY'					=> 'Jour',
 	'DAYS'					=> 'jours',
 	'DELETE'				=> 'Supprimer',
 	'DELETE_ALL'			=> 'Tout supprimer',
@@ -165,6 +170,8 @@ $lang = array_merge($lang, array(
 	'ENCLOSURE'							=> 'Fichier joint',
 	'ERR_CHANGING_DIRECTORY'			=> 'Impossible de changer de répertoire.',
 	'ERR_CONNECTING_SERVER'				=> 'Erreur de connexion au serveur.',
+	'ERR_JAB_AUTH'						=> 'Impossible de s\'authentifier sur le serveur Jabber.',
+	'ERR_JAB_CONNECT'					=> 'Impossible de se connecter sur le serveur Jabber.',
 	'ERR_UNABLE_TO_LOGIN'				=> 'Le nom d\'utilisateur ou le mot de passe spécifié est incorrect.',
 	'ERR_WRONG_PATH_TO_PHPBB'			=> 'Le chemin phpBB indiqué ne semble pas être valide.',
 	'EXPAND_VIEW'						=> 'Etendre la vue',
@@ -181,6 +188,7 @@ $lang = array_merge($lang, array(
 	'FIND_USERNAME'			=> 'Rechercher un membre',
 	'FOLDER'				=> 'Dossier',
 	'FORGOT_PASS'			=> 'J\'ai oublié mon mot de passe',
+	'FORM_INVALID'			=> 'Le formulaire envoyé est invalide. Essayez à nouveau.',
 	'FORUM'					=> 'Forums',
 	'FORUMS'				=> 'Forums',
 	'FORUMS_MARKED'			=> 'Tous les forums ont été marqués comme lus.',
@@ -373,7 +381,8 @@ $lang = array_merge($lang, array(
 	'NO_SUCH_SEARCH_MODULE'		=> 'La recherche indiquée n\'existe pas.',
 	'NO_SUPPORTED_AUTH_METHODS'	=> 'Aucune méthode d\'authentification supportée.',
 	'NO_TOPIC'					=> 'Le sujet demandé n\'existe pas.',
-	'NO_TOPICS'					=> 'Il n\'y a pas de sujet ou message dans ce forum.',
+	'NO_TOPIC_FORUM'			=> 'Le sujet ou le forum n\'existe plus.',
+	'NO_TOPICS'					=> 'Il n\'y a aucun sujet ou message dans ce forum.',
 	'NO_TOPICS_TIME_FRAME'		=> 'Aucun sujet n\'a été posté dans ce forum pour la période indiquée.',
 	'NO_UNREAD_PM'				=> '<strong>0</strong> message non lu',
 	'NO_UPLOAD_FORM_FOUND'		=> 'Le transfert a commencé mais aucun fichier valide n\'a été trouvé.',
@@ -484,7 +493,7 @@ $lang = array_merge($lang, array(
 	'SEARCH_ADV_EXPLAIN'		=> 'Voir les options de recherche avancée',
 	'SEARCH_KEYWORDS'			=> 'Recherche par mots-clés',
 	'SEARCHING_FORUMS'			=> 'Recherche dans les forums',
-	'SEARCH_ACTIVE_TOPICS'		=> 'Rechercher les sujets populaires',
+	'SEARCH_ACTIVE_TOPICS'		=> 'Voir les sujets récents',
 	'SEARCH_FOR'				=> 'Rechercher',
 	'SEARCH_FORUM'				=> 'Dans ce forum…',	
 	'SEARCH_NEW'				=> 'Voir les nouveaux messages',

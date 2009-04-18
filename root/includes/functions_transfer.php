@@ -2,11 +2,19 @@
 /**
 *
 * @package phpBB3
-* @version $Id: functions_transfer.php,v 1.19 2007/06/19 13:05:53 acydburn Exp $
+* @version $Id: functions_transfer.php,v 1.20 2007/10/05 14:30:11 acydburn Exp $
 * @copyright (c) 2005 phpBB Group
 * @license http://opensource.org/licenses/gpl-license.php GNU Public License
 *
 */
+
+/**
+* @ignore
+*/
+if (!defined('IN_PHPBB'))
+{
+	exit;
+}
 
 /**
 * Transfer class, wrapper for ftp/sftp/ssh

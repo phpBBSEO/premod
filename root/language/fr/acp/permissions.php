@@ -4,7 +4,7 @@
 * acp_permissions [Standard french]
 *
 * @package language
-* @version $Id: permissions.php,v 1.35 2007/07/14 15:43:45 acydburn Exp $
+* @version $Id: permissions.php,v 1.38 2007/10/08 14:38:26 acydburn Exp $
 * @copyright (c) 2005 phpBB Group 
 * @license http://opensource.org/licenses/gpl-license.php GNU Public License 
 *
@@ -18,6 +18,11 @@
 /**
 * DO NOT CHANGE
 */
+if (!defined('IN_PHPBB'))
+{
+	exit;
+}
+
 if (empty($lang) || !is_array($lang))
 {
 	$lang = array();
@@ -260,8 +265,8 @@ $lang = array_merge($lang, array(
 	'TRACE_TOTAL'							=> 'Total',
 
 	'USERS_NOT_ASSIGNED'			=> 'Aucun utilisateur assigné à ce modèle',
-	'USER_IS_MEMBER_OF_DEFAULT'		=> 'est un membre des groupes par défaut suivants',
-	'USER_IS_MEMBER_OF_CUSTOM'		=> 'est un membre des groupes personnalisés suivants',
+	'USER_IS_MEMBER_OF_DEFAULT'		=> 'est un membre des groupes prédéfinis suivants',
+	'USER_IS_MEMBER_OF_CUSTOM'		=> 'est un membre des groupes normaux suivants',
 
 	'VIEW_ASSIGNED_ITEMS'	=> 'Voir les éléments assignés',
 	'VIEW_LOCAL_PERMS'		=> 'Permissions locales',
@@ -269,6 +274,7 @@ $lang = array_merge($lang, array(
 	'VIEW_PERMISSIONS'		=> 'Voir les permissions',
 
 	'WRONG_PERMISSION_TYPE'	=> 'Mauvais type de permission sélectionné.',
+	'WRONG_PERMISSION_SETTING_FORMAT'	=> 'Les réglages des permissions sont enregistrés dans un mauvais format, phpBB est incapable de les traiter correctement.',
 ));
 
 ?>

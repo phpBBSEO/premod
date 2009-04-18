@@ -4,7 +4,7 @@
 * mcp [English]
 *
 * @package language
-* @version $Id: mcp.php,v 1.81 2007/07/19 20:37:52 acydburn Exp $
+* @version $Id: mcp.php,v 1.83 2007/10/04 15:07:24 acydburn Exp $
 * @copyright (c) 2005 phpBB Group
 * @license http://opensource.org/licenses/gpl-license.php GNU Public License
 *
@@ -13,6 +13,11 @@
 /**
 * DO NOT CHANGE
 */
+if (!defined('IN_PHPBB'))
+{
+	exit;
+}
+
 if (empty($lang) || !is_array($lang))
 {
 	$lang = array();
@@ -224,7 +229,7 @@ $lang = array_merge($lang, array(
 	'NO_TOPIC_SELECTED'				=> 'You must select at least one topic to perform this action.',
 	'NO_TOPICS_QUEUE'				=> 'There are no topics waiting for approval.',
 
-	'ONLY_TOPIC'			=> 'Only topic "%s"',
+	'ONLY_TOPIC'			=> 'Only topic “%s”',
 	'OTHER_USERS'			=> 'Other users posting from this IP',
 
 	'POSTER'					=> 'Poster',

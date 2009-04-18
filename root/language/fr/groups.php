@@ -4,7 +4,7 @@
 * groups [Standard french]
 *
 * @package language
-* @version $Id: groups.php,v 1.21 2007/05/10 15:31:21 acydburn Exp $
+* @version $Id: groups.php,v 1.22 2007/10/04 15:07:24 acydburn Exp $
 * @copyright (c) 2005 phpBB Group 
 * @license http://opensource.org/licenses/gpl-license.php GNU Public License 
 *
@@ -18,6 +18,11 @@
 /**
 * DO NOT CHANGE
 */
+if (!defined('IN_PHPBB'))
+{
+	exit;
+}
+
 if (empty($lang) || !is_array($lang))
 {
    $lang = array();
@@ -43,7 +48,7 @@ $lang = array_merge($lang, array(
    'CHANGED_DEFAULT_GROUP'   => 'Le groupe par défaut a été changé.',
    
    'GROUP_AVATAR' => 'Avatar du groupe',
-   'GROUP_CHANGE_DEFAULT' => 'Etes-vous sûr de vouloir changer votre groupe par défaut pour "%s"?',
+   'GROUP_CHANGE_DEFAULT' => 'Etes-vous sûr de vouloir changer votre groupe par défaut pour “%s”?',
    'GROUP_CLOSED' => 'Fermé',
    'GROUP_DESC' => 'Description du groupe',
    'GROUP_HIDDEN' => 'Invisible',

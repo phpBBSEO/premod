@@ -4,7 +4,7 @@
 * ucp [Standard french]
 *
 * @package language
-* @version $Id: ucp.php,v 1.134 2007/08/21 15:09:52 acydburn Exp $
+* @version $Id: ucp.php,v 1.136 2007/10/08 14:38:26 acydburn Exp $
 * @copyright (c) 2005 phpBB Group
 * @license http://opensource.org/licenses/gpl-license.php GNU Public License
 *
@@ -18,6 +18,11 @@
 /**
 * DO NOT CHANGE
 */
+if (!defined('IN_PHPBB'))
+{
+	exit;
+}
+
 if (empty($lang) || !is_array($lang))
 {
    $lang = array();
@@ -67,6 +72,7 @@ $lang = array_merge($lang, array(
 	'ACCOUNT_INACTIVE'   			=> 'Votre compte a été créé. Cependant, il doit être activé. Une clé d\'activation vous a été envoyée par e-mail. Vérifiez vos e-mails pour plus d\'informations.',
 	'ACCOUNT_INACTIVE_ADMIN'   		=> 'Votre compte a été créé. Cependant, un administrateur doit le valider. Un courrier lui a été envoyé et vous serez informé de l\'activation de votre compte.',
 	'ACTIVATION_EMAIL_SENT'   		=> 'Le message d\'activation a été envoyé à votre adresse e-mail.',
+	'ACTIVATION_EMAIL_SENT_ADMIN'	=> 'Le message d\'activation a été envoyé aux adresses e-mail des administrateurs.',
 	'ADD'  							=> 'Ajouter',
 	'ADD_BCC'   					=> 'Ajout [CCI]',
 	'ADD_FOES'   					=> 'Ajouter des ignorés',
@@ -177,15 +183,15 @@ $lang = array_merge($lang, array(
 	'EXPORT_AS_MSG'   			=> 'Exporter en MSG',
 	'EXPORT_FOLDER'   			=> 'Exporter le dossier',
 
-	'FIELD_REQUIRED'   					=> 'Le champ "%s" doit être rempli.',
+	'FIELD_REQUIRED'   					=> 'Le champ “%s” doit être rempli.',
 	'FIELD_TOO_SHORT'   				=> 'Le champ "%1$s" est trop court, il doit comporter %2$d caractères au minimum.',
 	'FIELD_TOO_LONG'   					=> 'Le champ "%1$s" est trop long, il doit comporter %2$d caractères au maximum.',
 	'FIELD_TOO_SMALL'   				=> 'La valeur de "%1$s" est trop petite, elle doit être de %2$d au minimum.',
 	'FIELD_TOO_LARGE'   				=> 'La valeur de "%1$s" est trop grande, elle doit être de %2$d au maximum.',
-	'FIELD_INVALID_CHARS_NUMBERS_ONLY'  => 'Le champ "%s" comporte des caractères invalides, seuls les nombres sont permis.',
-	'FIELD_INVALID_CHARS_ALPHA_ONLY'   	=> 'Le champ "%s" comporte des caractères invalides, seuls les caractères alphanumériques sont permis.',
-	'FIELD_INVALID_CHARS_SPACERS_ONLY'  => 'Le champ "%s" comporte des caractères invalides, seuls les alphanumériques, espaces ou les caractères -+_[] sont permis.',
-	'FIELD_INVALID_DATE'   				=> 'Le champ "%s" a une date invalide.',
+	'FIELD_INVALID_CHARS_NUMBERS_ONLY'  => 'Le champ “%s” comporte des caractères invalides, seuls les nombres sont permis.',
+	'FIELD_INVALID_CHARS_ALPHA_ONLY'   	=> 'Le champ “%s” comporte des caractères invalides, seuls les caractères alphanumériques sont permis.',
+	'FIELD_INVALID_CHARS_SPACERS_ONLY'  => 'Le champ “%s” comporte des caractères invalides, seuls les alphanumériques, espaces ou les caractères -+_[] sont permis.',
+	'FIELD_INVALID_DATE'   				=> 'Le champ “%s” a une date invalide.',
 
 	'FOE_MESSAGE'   			=> 'Message d\'un ignoré',
 	'FOES_EXPLAIN'   			=> 'Les ignorés sont les membres dont les messages ne seront pas entièrement visibles, mais ils peuvent toujours vous envoyer des messages privés. Notez que vous ne pouvez pas ignorer les modérateurs ou les administrateurs.',
@@ -274,7 +280,7 @@ $lang = array_merge($lang, array(
 	'NOT_ADDED_FOES_FRIENDS'   		=> 'Vous ne pouvez pas ajouter à votre liste d\'ignorés des utilisateurs qui sont sur votre liste d\'amis.',
 	'NOT_ADDED_FOES_SELF'   		=> 'Vous ne pouvez pas vous ajouter à votre liste d\'ignorés.',
 	'NOT_AGREE'   					=> 'Je n\'accepte pas ces conditions',
-	'NOT_ENOUGH_SPACE_FOLDER'   	=> 'Le dossier "%s" est plein. L\'action n\'a pas été effectuée.',
+	'NOT_ENOUGH_SPACE_FOLDER'   	=> 'Le dossier “%s” est plein. L\'action n\'a pas été effectuée.',
 	'NOT_MOVED_MESSAGE'   			=> 'Vous avez actuellement un message en attente car le dossier est plein.',
 	'NOT_MOVED_MESSAGES'   			=> 'Vous avez %d messages en attente car le dossier est plein.',
 	'NO_ACTION_MODE'   				=> 'Aucune action indiquée.',

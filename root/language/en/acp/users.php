@@ -4,7 +4,7 @@
 * acp_users [English]
 *
 * @package language
-* @version $Id: users.php,v 1.30 2007/08/13 12:14:06 acydburn Exp $
+* @version $Id: users.php,v 1.32 2007/10/08 14:38:26 acydburn Exp $
 * @copyright (c) 2005 phpBB Group
 * @license http://opensource.org/licenses/gpl-license.php GNU Public License
 *
@@ -13,6 +13,11 @@
 /**
 * DO NOT CHANGE
 */
+if (!defined('IN_PHPBB'))
+{
+	exit;
+}
+
 if (empty($lang) || !is_array($lang))
 {
 	$lang = array();
@@ -108,9 +113,9 @@ $lang = array_merge($lang, array(
 	'USER_CUSTOM_PROFILE_FIELDS'	=> 'Custom profile fields',
 	'USER_DELETED'					=> 'User deleted successfully.',
 	'USER_GROUP_ADD'				=> 'Add user to group',
-	'USER_GROUP_NORMAL'				=> 'Normal groups user is a member of',
+	'USER_GROUP_NORMAL'				=> 'User defined groups user is a member of',
 	'USER_GROUP_PENDING'			=> 'Groups user is in pending mode',
-	'USER_GROUP_SPECIAL'			=> 'Special groups user is a member of',
+	'USER_GROUP_SPECIAL'			=> 'Pre-defined groups user is a member of',
 	'USER_NO_ATTACHMENTS'			=> 'There are no attached files to display.',
 	'USER_OVERVIEW_UPDATED'			=> 'User details updated.',
 	'USER_POSTS_DELETED'			=> 'Successfully removed all posts made by this user.',

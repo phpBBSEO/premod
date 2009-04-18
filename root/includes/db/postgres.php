@@ -1,10 +1,10 @@
 <?php
-/** 
+/**
 *
 * @package dbal
-* @version $Id: postgres.php,v 1.47 2007/06/24 12:49:12 acydburn Exp $
-* @copyright (c) 2005 phpBB Group 
-* @license http://opensource.org/licenses/gpl-license.php GNU Public License 
+* @version $Id: postgres.php,v 1.48 2007/10/05 14:36:32 acydburn Exp $
+* @copyright (c) 2005 phpBB Group
+* @license http://opensource.org/licenses/gpl-license.php GNU Public License
 *
 */
 
@@ -217,9 +217,9 @@ class dbal_postgres extends dbal
 	/**
 	* Build LIMIT query
 	*/
-	function _sql_query_limit($query, $total, $offset = 0, $cache_ttl = 0) 
-	{ 
-		$this->query_result = false; 
+	function _sql_query_limit($query, $total, $offset = 0, $cache_ttl = 0)
+	{
+		$this->query_result = false;
 
 		// if $total is set to 0 we do not want to limit the number of rows
 		if ($total == 0)
@@ -229,7 +229,7 @@ class dbal_postgres extends dbal
 
 		$query .= "\n LIMIT $total OFFSET $offset";
 
-		return $this->sql_query($query, $cache_ttl); 
+		return $this->sql_query($query, $cache_ttl);
 	}
 
 	/**

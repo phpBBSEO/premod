@@ -1,7 +1,7 @@
 <?php
 /**
 *
-* help_faq.php [Standard french]
+* help_faq [Standard french]
 *
 * @package language
 * @version $Id: help_faq.php,v 1.41 2007/08/19 14:08:26 naderman Exp $
@@ -17,6 +17,10 @@
 */
 /**
 */
+if (!defined('IN_PHPBB'))
+{
+	exit;
+}
 
 // DEVELOPERS PLEASE NOTE
 //
@@ -125,7 +129,7 @@ $help = array(
 	),
 	array(
 		0 => 'Comment créer un sondage?',
-		1 => 'Il est facile de créer un sondage, lors de la publication d\'un nouveau sujet ou la modification du premier message d\'un sujet (si vous en avez les permissions), cliquez sur l\'onglet <em>Sondage</em> sous la partie message (si vous ne le voyez pas, vous n\'avez probablement pas le droit de créer des sondages). Saisissez le titre du sondage et au moins deux options possibles, entrez une option par ligne dans le champ des réponses. Vous pouvez aussi indiquer le nombre de réponses qu\'un utilisateur peut choisir lors de son vote dans “Option(s) par l\'utilisateur”, limiter la durée en jours du sondage (mettez "0" pour une durée illimitée) et enfin permettre aux utilisateurs de modifier leur vote.'
+		1 => 'Il est facile de créer un sondage, lors de la publication d\'un nouveau sujet ou la modification du premier message d\'un sujet (si vous en avez les permissions), cliquez sur l\'onglet <em>Sondage</em> sous la partie message (si vous ne le voyez pas, vous n\'avez probablement pas le droit de créer des sondages). Saisissez le titre du sondage et au moins deux options possibles, entrez une option par ligne dans le champ des réponses. Vous pouvez aussi indiquer le nombre de réponses qu\'un utilisateur peut choisir lors de son vote dans “Option(s) par l\'utilisateur”, limiter la durée en jours du sondage (mettre “0” pour une durée illimitée) et enfin permettre aux utilisateurs de modifier leur vote.'
 	),
 	array(
 		0 => 'Pourquoi ne puis-je pas ajouter plus d\'options à mon sondage?',

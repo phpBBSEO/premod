@@ -4,7 +4,7 @@
 * search_ignore_words [Standard french]
 *
 * @package language
-* @version $Id: search_ignore_words.php,v 1.2 2006/10/08 11:21:39 acydburn Exp $
+* @version $Id: search_ignore_words.php,v 1.0 2007/10/16 10:11:39 Elglobo Exp $
 * @copyright (c) 2005 phpBB Group 
 * @license http://opensource.org/licenses/gpl-license.php GNU Public License 
 *
@@ -15,9 +15,11 @@
 * http://www.phpbb-fr.com
 * http://www.phpbb.biz
 */
-/**
-* DO NOT CHANGE
-*/
+
+if (!defined('IN_PHPBB'))
+{
+	exit;
+}
 
 $words = array(
 	'0',

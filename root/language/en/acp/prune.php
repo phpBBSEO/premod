@@ -1,18 +1,23 @@
 <?php
-/** 
+/**
 *
 * acp_prune [English]
 *
 * @package language
-* @version $Id: prune.php,v 1.13 2007/05/11 12:25:28 acydburn Exp $
-* @copyright (c) 2005 phpBB Group 
-* @license http://opensource.org/licenses/gpl-license.php GNU Public License 
+* @version $Id: prune.php,v 1.14 2007/10/04 15:07:24 acydburn Exp $
+* @copyright (c) 2005 phpBB Group
+* @license http://opensource.org/licenses/gpl-license.php GNU Public License
 *
 */
 
 /**
 * DO NOT CHANGE
 */
+if (!defined('IN_PHPBB'))
+{
+	exit;
+}
+
 if (empty($lang) || !is_array($lang))
 {
 	$lang = array();

@@ -1,14 +1,15 @@
 <?php
-/** 
+/**
 *
 * @package search
-* @version $Id: search.php,v 1.15 2007/06/24 12:49:12 acydburn Exp $
-* @copyright (c) 2005 phpBB Group 
-* @license http://opensource.org/licenses/gpl-license.php GNU Public License 
+* @version $Id: search.php,v 1.16 2007/10/05 14:36:33 acydburn Exp $
+* @copyright (c) 2005 phpBB Group
+* @license http://opensource.org/licenses/gpl-license.php GNU Public License
 *
 */
 
 /**
+* @ignore
 */
 if (!defined('IN_PHPBB'))
 {
@@ -249,7 +250,7 @@ class search_backend
 			}
 			$cache->put('_search_results_' . $search_key, $store, $config['search_store_results']);
 
-			$sql = 'UPDATE ' . SEARCH_RESULTS_TABLE . ' 
+			$sql = 'UPDATE ' . SEARCH_RESULTS_TABLE . '
 				SET search_time = ' . time() . '
 				WHERE search_key = \'' . $db->sql_escape($search_key) . '\'';
 			$db->sql_query($sql);

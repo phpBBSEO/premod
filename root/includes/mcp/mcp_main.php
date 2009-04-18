@@ -2,11 +2,19 @@
 /**
 *
 * @package mcp
-* @version $Id: mcp_main.php,v 1.71 2007/07/28 13:56:23 kellanved Exp $
+* @version $Id: mcp_main.php,v 1.73 2007/10/05 14:36:33 acydburn Exp $
 * @copyright (c) 2005 phpBB Group
 * @license http://opensource.org/licenses/gpl-license.php GNU Public License
 *
 */
+
+/**
+* @ignore
+*/
+if (!defined('IN_PHPBB'))
+{
+	exit;
+}
 
 /**
 * mcp_main
@@ -949,7 +957,7 @@ function mcp_fork_topic($topic_ids)
 
 		if (!sizeof($topic_ids))
 		{
-			$additional_msg = $user->lang['NO_TOPICS_SELECTED'];
+			$additional_msg = $user->lang['NO_TOPIC_SELECTED'];
 		}
 		else if (!sizeof($forum_data))
 		{

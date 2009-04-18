@@ -4,7 +4,7 @@
 * acp_search [Standard french]
 *
 * @package language
-* @version $Id: search.php,v 1.20 2007/07/15 12:09:54 kellanved Exp $
+* @version $Id: search.php,v 1.21 2007/10/04 15:07:24 acydburn Exp $
 * @copyright (c) 2005 phpBB Group 
 * @license http://opensource.org/licenses/gpl-license.php GNU Public License 
 *
@@ -18,6 +18,11 @@
 /**
 * DO NOT CHANGE
 */
+if (!defined('IN_PHPBB'))
+{
+	exit;
+}
+
 if (empty($lang) || !is_array($lang))
 {
 	$lang = array();
@@ -40,7 +45,7 @@ $lang = array_merge($lang, array(
 	'ACP_SEARCH_SETTINGS_EXPLAIN'			=> 'Ici, vous pouvez définir quelle méthode sera utilisée pour indexer les messages et effectuer les recherches. Vous pouvez définir différentes options qui peuvent influencer sur la puissance de calcul requise. Certains réglages sont les mêmes pour toutes les méthodes de recherche.',
 	
 	'COMMON_WORD_THRESHOLD'					=> 'Seuil de mot commun',
-	'COMMON_WORD_THRESHOLD_EXPLAIN'			=> 'Si un mot est contenu dans un nombre de messages supérieur au pourcentage spécifié, ce mot sera défini comme commun. Ces mots seront par la suite ignorés lors des recherches. Mettez "0" pour désactiver cette option. Cette option ne fonctionne que s\'il y a plus de 100 messages sur votre forum.',
+	'COMMON_WORD_THRESHOLD_EXPLAIN'			=> 'Si un mot est contenu dans un nombre de messages supérieur au pourcentage spécifié, ce mot sera défini comme commun. Ces mots seront par la suite ignorés lors des recherches. Mettre “0” pour désactiver cette option. Cette option ne fonctionne que s\'il y a plus de 100 messages sur votre forum.',
 	'CONFIRM_SEARCH_BACKEND'				=> 'Voulez-vous réellement changer la méthode d\'indexation? Vous devrez recréer un index de recherche pour la nouvelle méthode. Si vous ne prévoyez pas de réutiliser l\'ancienne méthode d\'indexation vous pouvez la supprimer pour libérer des ressources système.',
 	'CONTINUE_DELETING_INDEX'				=> 'Confirmer la suppression de l\'index de recherche précédente',
 	'CONTINUE_DELETING_INDEX_EXPLAIN'		=> 'Une suppression d\'index de recherche a été commencée. Celle-ci doit être terminée ou annulée pour pouvoir accéder à la page de recherche.',
@@ -58,7 +63,7 @@ $lang = array_merge($lang, array(
 	'FULLTEXT_MYSQL_MBSTRING'				=> 'Support des caractères non-latin UTF-8 en utilisant la fonction mbstring:',
 	'FULLTEXT_MYSQL_PCRE'					=> 'Support des caractères non-latin UTF-8 en utilisant la fonction PCRE:',
 	'FULLTEXT_MYSQL_MBSTRING_EXPLAIN'		=> 'Si PCRE n\'a pas les propriétés de caractères unicode, la recherche s\'effectuera en utilisant le moteur régulier d\'expression mbstring.',
-	'FULLTEXT_MYSQL_PCRE_EXPLAIN'			=> 'La recherche nécessite les propriétés de caractères unicode PCRE, disponible seulement depuis de PHP 4.4, 5.1 et plus, si vous voulez effectuer une recherche sur des caractères non-latin.',
+	'FULLTEXT_MYSQL_PCRE_EXPLAIN'			=> 'La recherche nécessite les propriétés de caractères unicodes PCRE, disponibles seulement depuis de PHP 4.4, 5.1 et supérieur, si vous voulez effectuer une recherche sur des caractères non-latin.',
 	
 	'GENERAL_SEARCH_SETTINGS'				=> 'Réglages généraux de recherche',
 	'GO_TO_SEARCH_INDEX'					=> 'Page de recherche',
@@ -88,7 +93,7 @@ $lang = array_merge($lang, array(
 	'SEARCH_INTERVAL'						=> 'Intervalle de flood pour les utilisateurs',
 	'SEARCH_INTERVAL_EXPLAIN'				=> 'Nombre de secondes à attendre entre 2 recherches. Cet intervalle est contrôlé indépendamment pour chaque utilisateur.',
 	'SEARCH_STORE_RESULTS'					=> 'Durée du cache des résultats',
-	'SEARCH_STORE_RESULTS_EXPLAIN'			=> 'Les résultats mis en cache expireront après cette durée, en secondes. Mettez "0" pour désactiver le cache.',
+	'SEARCH_STORE_RESULTS_EXPLAIN'			=> 'Les résultats mis en cache expireront après cette durée, en secondes. Mettre “0” pour désactiver le cache.',
 	'SEARCH_TYPE'							=> 'Méthode de recherche',
 	'SEARCH_TYPE_EXPLAIN'					=> 'phpBB vous permet de choisir la méthode utilisée pour rechercher dans le contenu des messages. Par défaut la méthode de recherche par contenu de phpBB sera utilisée.',
 	'SWITCHED_SEARCH_BACKEND'				=> 'Vous avez changé la méthode de recherche. Pour utiliser la nouvelle méthode, vérifiez qu\'il existe bien un index de recherche pour cette méthode.',

@@ -1,10 +1,10 @@
 <?php
-/** 
+/**
 *
 * @package phpBB3
-* @version $Id: viewtopic.php,v 1.506 2007/08/19 13:36:52 naderman Exp $
-* @copyright (c) 2005 phpBB Group 
-* @license http://opensource.org/licenses/gpl-license.php GNU Public License 
+* @version $Id: viewtopic.php,v 1.509 2007/10/05 14:30:07 acydburn Exp $
+* @copyright (c) 2005 phpBB Group
+* @license http://opensource.org/licenses/gpl-license.php GNU Public License
 *
 */
 
@@ -1086,7 +1086,7 @@ while ($row = $db->sql_fetchrow($result))
 				'www'			=> $row['user_website'],
 				'aim'			=> ($row['user_aim'] && $auth->acl_get('u_sendim')) ? append_sid("{$phpbb_root_path}memberlist.$phpEx", "mode=contact&amp;action=aim&amp;u=$poster_id") : '',
 				'msn'			=> ($row['user_msnm'] && $auth->acl_get('u_sendim')) ? append_sid("{$phpbb_root_path}memberlist.$phpEx", "mode=contact&amp;action=msnm&amp;u=$poster_id") : '',
-				'yim'			=> ($row['user_yim']) ? 'http://edit.yahoo.com/config/send_webmesg?.target=' . $row['user_yim'] . '&amp;.src=pg' : '',
+				'yim'			=> ($row['user_yim']) ? 'http://edit.yahoo.com/config/send_webmesg?.target=' . urlencode($row['user_yim']) . '&amp;.src=pg' : '',
 				'jabber'		=> ($row['user_jabber'] && $auth->acl_get('u_sendim')) ? append_sid("{$phpbb_root_path}memberlist.$phpEx", "mode=contact&amp;action=jabber&amp;u=$poster_id") : '',
 				'search'		=> ($auth->acl_get('u_search')) ? append_sid("{$phpbb_root_path}search.$phpEx", 'search_author=' . urlencode($row['username']) .'&amp;showresults=posts') : '',
 			);
@@ -1136,7 +1136,6 @@ while ($row = $db->sql_fetchrow($result))
 	}
 }
 $db->sql_freeresult($result);
-unset($today);
 
 // Load custom profile fields
 if ($config['load_cpf_viewtopic'])
@@ -1308,6 +1307,7 @@ for ($i = 0, $end = sizeof($post_list); $i < $end; ++$i)
 
 	$message = bbcode_nl2br($message);
 	$message = smiley_text($message);
+
 	if (!empty($attachments[$row['post_id']]))
 	{
 		parse_attachments($forum_id, $message, $attachments[$row['post_id']], $update_count);
@@ -1610,7 +1610,6 @@ if (empty($_REQUEST['f']))
 $extra_title = ($start > 0) ? ' - ' . $user->lang['Page'] . ( floor( ($start / $config['posts_per_page']) ) + 1 ) : '';
 page_header($topic_data['topic_title'] . ' : ' .  $topic_data['forum_name'] . $extra_title);
 // www.phpBB-SEO.com SEO TOOLKIT END - TITLE
-
 
 $template->set_filenames(array(
 	'body' => ($view == 'print') ? 'viewtopic_print.html' : 'viewtopic_body.html')

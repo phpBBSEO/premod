@@ -1,10 +1,10 @@
 <?php
-/** 
+/**
 *
 * @package acp
-* @version $Id: acp_permission_roles.php,v 1.3 2006/07/01 19:11:47 acydburn Exp $
-* @copyright (c) 2005 phpBB Group 
-* @license http://opensource.org/licenses/gpl-license.php GNU Public License 
+* @version $Id: acp_permission_roles.php,v 1.4 2007/10/04 15:05:50 acydburn Exp $
+* @copyright (c) 2005 phpBB Group
+* @license http://opensource.org/licenses/gpl-license.php GNU Public License
 *
 */
 

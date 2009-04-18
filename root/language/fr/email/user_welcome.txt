@@ -1,4 +1,4 @@
-Subject: Bienvenue sur les forums de "{SITENAME}" - {U_BOARD}
+Subject: Bienvenue sur les forums de "{SITENAME}"
 
 {WELCOME_MSG}
 
@@ -7,6 +7,8 @@ Vous êtes prié de conserver cet e-mail dans vos archives. Voici les informatio
 ----------------------------
 Nom d'utilisateur: {USERNAME}
 Mot de passe: {PASSWORD}
+
+Adresse du forum: {U_BOARD}
 ----------------------------
 
 N'oubliez pas votre mot de passe étant donné qu'il est crypté dans notre base de données et que nous ne pourrons pas le retrouver pour vous. Toutefois, si vous oubliez votre mot de passe, vous pourrez en demander un nouveau qui sera activé de la même manière que ce compte.

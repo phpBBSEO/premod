@@ -4,7 +4,7 @@
 * acp_users [Standard french]
 *
 * @package language
-* @version $Id: users.php,v 1.30 2007/08/13 12:14:06 acydburn Exp $
+* @version $Id: users.php,v 1.32 2007/10/08 14:38:26 acydburn Exp $
 * @copyright (c) 2005 phpBB Group
 * @license http://opensource.org/licenses/gpl-license.php GNU Public License
 *
@@ -18,6 +18,11 @@
 /**
 * DO NOT CHANGE
 */
+if (!defined('IN_PHPBB'))
+{
+	exit;
+}
+
 if (empty($lang) || !is_array($lang))
 {
 	$lang = array();
@@ -113,9 +118,9 @@ $lang = array_merge($lang, array(
 	'USER_CUSTOM_PROFILE_FIELDS'	=> 'Champs de profil personnalisés',
 	'USER_DELETED'					=> 'Cet utilisateur a été supprimé.',
 	'USER_GROUP_ADD'				=> 'Ajouter cet utilisateur au groupe',
-	'USER_GROUP_NORMAL'				=> 'Membre des groupes',
+	'USER_GROUP_NORMAL'				=> 'L\'utilisateur est membre des groupes définis',
 	'USER_GROUP_PENDING'			=> 'En attente d\'acceptation dans les groupes',
-	'USER_GROUP_SPECIAL'			=> 'Membre des groupes spéciaux',
+	'USER_GROUP_SPECIAL'			=> 'L\'utilisateur est membre des groupes prédéfinis',
 	'USER_NO_ATTACHMENTS'			=> 'Aucun fichier joint à afficher.',
 	'USER_OVERVIEW_UPDATED'			=> 'Les informations de cet utilisateur ont été mises à jour.',
 	'USER_POSTS_DELETED'			=> 'Tous les messages de cet utilisateur ont été supprimés.',

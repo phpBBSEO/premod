@@ -1,6 +1,6 @@
 /*
 
- $Id: oracle_schema.sql,v 1.97 2007/07/31 20:27:39 davidmj Exp $
+ $Id: oracle_schema.sql,v 1.102 2007/10/14 15:46:44 acydburn Exp $
 
 */
 
@@ -15,17 +15,17 @@
 
 /*
 CREATE TABLESPACE "PHPBB"
-	LOGGING 
-	DATAFILE 'E:\ORACLE\ORADATA\LOCAL\PHPBB.ora' 
+	LOGGING
+	DATAFILE 'E:\ORACLE\ORADATA\LOCAL\PHPBB.ora'
 	SIZE 10M
 	AUTOEXTEND ON NEXT 10M
 	MAXSIZE 100M;
 
-CREATE USER "PHPBB" 
-	PROFILE "DEFAULT" 
-	IDENTIFIED BY "phpbb_password" 
-	DEFAULT TABLESPACE "PHPBB" 
-	QUOTA UNLIMITED ON "PHPBB" 
+CREATE USER "PHPBB"
+	PROFILE "DEFAULT"
+	IDENTIFIED BY "phpbb_password"
+	DEFAULT TABLESPACE "PHPBB"
+	QUOTA UNLIMITED ON "PHPBB"
 	ACCOUNT UNLOCK;
 
 GRANT ANALYZE ANY TO "PHPBB";
@@ -482,7 +482,7 @@ CREATE TABLE phpbb_forums (
 	forum_desc clob DEFAULT '' ,
 	forum_desc_bitfield varchar2(255) DEFAULT '' ,
 	forum_desc_options number(11) DEFAULT '7' NOT NULL,
-	forum_desc_uid varchar2(5) DEFAULT '' ,
+	forum_desc_uid varchar2(8) DEFAULT '' ,
 	forum_link varchar2(765) DEFAULT '' ,
 	forum_password varchar2(120) DEFAULT '' ,
 	forum_style number(4) DEFAULT '0' NOT NULL,
@@ -491,7 +491,7 @@ CREATE TABLE phpbb_forums (
 	forum_rules_link varchar2(765) DEFAULT '' ,
 	forum_rules_bitfield varchar2(255) DEFAULT '' ,
 	forum_rules_options number(11) DEFAULT '7' NOT NULL,
-	forum_rules_uid varchar2(5) DEFAULT '' ,
+	forum_rules_uid varchar2(8) DEFAULT '' ,
 	forum_topics_per_page number(4) DEFAULT '0' NOT NULL,
 	forum_type number(4) DEFAULT '0' NOT NULL,
 	forum_status number(4) DEFAULT '0' NOT NULL,
@@ -590,7 +590,7 @@ CREATE TABLE phpbb_groups (
 	group_desc clob DEFAULT '' ,
 	group_desc_bitfield varchar2(255) DEFAULT '' ,
 	group_desc_options number(11) DEFAULT '7' NOT NULL,
-	group_desc_uid varchar2(5) DEFAULT '' ,
+	group_desc_uid varchar2(8) DEFAULT '' ,
 	group_display number(1) DEFAULT '0' NOT NULL,
 	group_avatar varchar2(255) DEFAULT '' ,
 	group_avatar_type number(2) DEFAULT '0' NOT NULL,
@@ -853,7 +853,7 @@ CREATE TABLE phpbb_posts (
 	post_checksum varchar2(32) DEFAULT '' ,
 	post_attachment number(1) DEFAULT '0' NOT NULL,
 	bbcode_bitfield varchar2(255) DEFAULT '' ,
-	bbcode_uid varchar2(5) DEFAULT '' ,
+	bbcode_uid varchar2(8) DEFAULT '' ,
 	post_postcount number(1) DEFAULT '1' NOT NULL,
 	post_edit_time number(11) DEFAULT '0' NOT NULL,
 	post_edit_reason varchar2(765) DEFAULT '' ,
@@ -913,7 +913,7 @@ CREATE TABLE phpbb_privmsgs (
 	message_edit_user number(8) DEFAULT '0' NOT NULL,
 	message_attachment number(1) DEFAULT '0' NOT NULL,
 	bbcode_bitfield varchar2(255) DEFAULT '' ,
-	bbcode_uid varchar2(5) DEFAULT '' ,
+	bbcode_uid varchar2(8) DEFAULT '' ,
 	message_edit_time number(11) DEFAULT '0' NOT NULL,
 	message_edit_count number(4) DEFAULT '0' NOT NULL,
 	to_address clob DEFAULT '' ,
@@ -1761,7 +1761,7 @@ CREATE TABLE phpbb_users (
 	user_avatar_width number(4) DEFAULT '0' NOT NULL,
 	user_avatar_height number(4) DEFAULT '0' NOT NULL,
 	user_sig clob DEFAULT '' ,
-	user_sig_bbcode_uid varchar2(5) DEFAULT '' ,
+	user_sig_bbcode_uid varchar2(8) DEFAULT '' ,
 	user_sig_bbcode_bitfield varchar2(255) DEFAULT '' ,
 	user_from varchar2(300) DEFAULT '' ,
 	user_icq varchar2(15) DEFAULT '' ,
@@ -1773,7 +1773,8 @@ CREATE TABLE phpbb_users (
 	user_occ clob DEFAULT '' ,
 	user_interests clob DEFAULT '' ,
 	user_actkey varchar2(32) DEFAULT '' ,
-	user_newpasswd varchar2(96) DEFAULT '' ,
+	user_newpasswd varchar2(120) DEFAULT '' ,
+	user_form_salt varchar2(96) DEFAULT '' ,
 	CONSTRAINT pk_phpbb_users PRIMARY KEY (user_id),
 	CONSTRAINT u_phpbb_username_clean UNIQUE (username_clean)
 )

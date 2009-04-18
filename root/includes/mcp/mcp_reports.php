@@ -2,11 +2,19 @@
 /**
 *
 * @package mcp
-* @version $Id: mcp_reports.php,v 1.65 2007/08/19 13:36:54 naderman Exp $
+* @version $Id: mcp_reports.php,v 1.67 2007/10/05 14:36:33 acydburn Exp $
 * @copyright (c) 2005 phpBB Group
 * @license http://opensource.org/licenses/gpl-license.php GNU Public License
 *
 */
+
+/**
+* @ignore
+*/
+if (!defined('IN_PHPBB'))
+{
+	exit;
+}
 
 /**
 * mcp_reports
@@ -298,7 +306,7 @@ class mcp_reports
 				$forum_options = '<option value="0"' . (($forum_id == 0) ? ' selected="selected"' : '') . '>' . $user->lang['ALL_FORUMS'] . '</option>';
 				foreach ($forum_list_reports as $row)
 				{
-					$forum_options .= '<option value="' . $row['forum_id'] . '"' . (($forum_id == $row['forum_id']) ? ' selected="selected"' : '') . '>' . $row['forum_name'] . '</option>';
+					$forum_options .= '<option value="' . $row['forum_id'] . '"' . (($forum_id == $row['forum_id']) ? ' selected="selected"' : '') . '>' . str_repeat('&nbsp; &nbsp;', $row['padding']) . $row['forum_name'] . '</option>';
 					$forum_data[$row['forum_id']] = $row;
 				}
 				unset($forum_list_reports);

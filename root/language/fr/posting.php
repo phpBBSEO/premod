@@ -1,10 +1,10 @@
 <?php
 /**
 *
-* posting.php [Standard french]
+* posting [Standard french]
 *
 * @package language
-* @version $Id: posting.php,v 1.71 2007/07/27 15:00:10 kellanved Exp $
+* @version $Id: posting.php,v 1.74 2007/10/04 15:07:24 acydburn Exp $
 * @copyright (c) 2007 phpBB Group
 * @license http://opensource.org/licenses/gpl-license.php GNU Public License
 *
@@ -13,6 +13,11 @@
 /**
 * DO NOT CHANGE
 */
+if (!defined('IN_PHPBB'))
+{
+	exit;
+}
+
 if (empty($lang) || !is_array($lang))
 {
 	$lang = array();
@@ -44,7 +49,7 @@ $lang = array_merge($lang, array(
 	'BBCODE_B_HELP'				=> 'Texte gras: [b]texte[/b]',
 	'BBCODE_C_HELP'				=> 'Code: [code]code[/code]',
 	'BBCODE_E_HELP'				=> 'Liste: Ajouter une liste d\'éléments',
-	'BBCODE_F_HELP'				=> 'Taille de la police: [size=x-small]texte court[/size]',
+	'BBCODE_F_HELP'				=> 'Taille de la police: [size=85]petit texte[/size]',
 	'BBCODE_IS_OFF'				=> 'Les %sBBCodes%s sont <em>désactivés</em>',
 	'BBCODE_IS_ON'				=> 'Les %sBBCodes%s sont <em>activés</em>',
 	'BBCODE_I_HELP'				=> 'Texte italique: [i]texte[/i]',
@@ -139,7 +144,7 @@ $lang = array_merge($lang, array(
 	'PLACE_INLINE'				=> 'Mettre en ligne',
 	'POLL_DELETE'				=> 'Supprimer le sondage',
 	'POLL_FOR'					=> 'Durée du sondage',
-	'POLL_FOR_EXPLAIN'			=> 'Mettez "0" ou laissez vide pour ne jamais terminer le sondage.',
+	'POLL_FOR_EXPLAIN'			=> 'Mettre “0” ou laissez vide pour ne jamais terminer le sondage.',
 	'POLL_MAX_OPTIONS'			=> 'Option(s) par utilisateur',
 	'POLL_MAX_OPTIONS_EXPLAIN'	=> 'C\'est le nombre d\'options que chaque utilisateur peut choisir quand il vote.',
 	'POLL_OPTIONS'				=> 'Options du sondage',
@@ -178,7 +183,7 @@ $lang = array_merge($lang, array(
 	'SMILIES_ARE_ON'			=> 'Les smileys sont <em>activés</em>',
 	'STICKY_ANNOUNCE_TIME_LIMIT'=> 'Durée du post-it ou de l\'annonce',
 	'STICK_TOPIC_FOR'			=> 'Epingler pendant',
-	'STICK_TOPIC_FOR_EXPLAIN'	=> 'Mettez "0" ou laissez vide pour une durée illimitée des post-it/annonces.',
+	'STICK_TOPIC_FOR_EXPLAIN'	=> 'Mettre “0” ou laissez vide pour une durée illimitée des post-it/annonces.',
 	'STYLES_TIP'				=> 'Astuce: les mises en forme peuvent être appliquées rapidement en sélectionnant le texte.',
 
 	'TOO_FEW_CHARS'				=> 'Votre message contient trop peu de caractères.',
@@ -206,7 +211,8 @@ $lang = array_merge($lang, array(
 	'USER_CANNOT_REPLY'			=> 'Vous ne pouvez pas répondre à un sujet dans ce forum.',
 	'USER_CANNOT_FORUM_POST'	=> 'Vous ne pouvez pas effectuer d\'opérations sur ce forum car ce type de forum ne le permet pas.',
 
-	'VIEW_MESSAGE'				=> '%sVoir votre message%s',
+	'VIEW_MESSAGE'				=> '%sVoir le message envoyé%s',
+	'VIEW_PRIVATE_MESSAGE'		=> '%sVoir le message privé envoyé%s',
 
 	'WRONG_FILESIZE'			=> 'Le fichier est trop gros, la taille maximum autorisée est %1d %2s.',
 	'WRONG_SIZE'				=> 'L\'image doit faire au moins %1$d pixels de large, %2$d pixels de haut et au plus %3$d pixels de large et %4$d pixels de haut. L\'image actuelle fait %5$d pixels de large et %6$d pixels de haut.',

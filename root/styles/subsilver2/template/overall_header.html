@@ -4,8 +4,8 @@
 {SEO_BASE_HREF}
 <meta http-equiv="content-type" content="text/html; charset={S_CONTENT_ENCODING}" />
 <title>{PAGE_TITLE}<!-- IF S_IN_MCP -->{L_MCP} &bull; <!-- ELSEIF S_IN_UCP -->{L_UCP} &bull; <!-- ENDIF --></title>
-<meta http-equiv="content-language" content="{S_USER_LANG}" />
 <meta http-equiv="content-style-type" content="text/css" />
+<meta http-equiv="content-language" content="{S_USER_LANG}" />
 <meta http-equiv="imagetoolbar" content="no" />
 {META_TAG}
 {META}
@@ -13,40 +13,46 @@
 <link rel="stylesheet" href="{T_STYLESHEET_LINK}" type="text/css" />
 
 <script type="text/javascript">
-<!--
+// <![CDATA[
 <!-- IF S_USER_PM_POPUP -->
 	if ({S_NEW_PM})
 	{
-		window.open('{UA_POPUP_PM}', '_phpbbprivmsg', 'height=225,resizable=yes,width=400');
+		popup('{UA_POPUP_PM}', 400, 225, '_phpbbprivmsg');
 	}
 <!-- ENDIF -->
 
-function popup(url, width, height)
+function popup(url, width, height, name)
 {
-	window.open(url.replace(/&amp;/g, '&'), '_popup', 'HEIGHT=' + height + ',resizable=yes,scrollbars=yes, WIDTH=' + width);
+	if (!name)
+	{
+		name = '_popup';
+	}
+
+	window.open(url.replace(/&amp;/g, '&'), name, 'height=' + height + ',resizable=yes,scrollbars=yes,width=' + width);
 	return false;
 }
-
 // www.phpBB-SEO.com SEO TOOLKIT BEGIN
 function jumpto()
 {
-	var page = prompt(jump_page, on_page);
-	var seo_ext_html = '.html';
-	var seo_ext_htm = '.htm';
-	var seo_ext_slash = '/';
-	var seo_delim_start = '-';
-	if (page !== null && !isNaN(page) && page > 0)
-	{
-		base_url = base_url.replace(/&amp;/g, '&');
-		if ( ((page - 1) * per_page) > 0 ) {
-			if (base_url.indexOf(seo_ext_html) >0 && base_url.indexOf('?') < 0) {
-				document.location.href = base_url.replace(/.html/, '') + seo_delim_start + ((page - 1) * per_page) + seo_ext_html;
-			} else if (base_url.indexOf(seo_ext_htm) >0 && base_url.indexOf('?') < 0) {
-				document.location.href = base_url.replace(/.htm/, '') + seo_delim_start + ((page - 1) * per_page) + seo_ext_htm;
-			} else if (base_url.indexOf(seo_ext_slash) >0 && base_url.indexOf('?') < 0) {
-				document.location.href = base_url.replace(new RegExp(/\/$/),"") + seo_delim_start + ((page - 1) * per_page) + seo_ext_slash;
-			} else {
-				document.location.href = base_url + '&start=' + ((page - 1) * per_page);
+	var page = prompt('{LA_JUMP_PAGE}:', '{ON_PAGE}');
+	var perpage = '{PER_PAGE}';
+	var base_url = '{A_BASE_URL}';
+	var seo_delim_start = '{SEO_START_DELIM}';
+	var seo_static_pagination = '{SEO_SATIC_PAGE}';
+	var seo_ext_pagination = '{SEO_EXT_PAGE}';
+
+	if (page !== null && !isNaN(page) && page > 0) {
+		var seo_page = (page - 1) * per_page;
+		if ( base_url.indexOf('?') >= 0 ) {
+			document.location.href = base_url.replace(/&amp;/g, '&') + '&start=' + seo_page;
+		} else if ( seo_page > 0 ) {
+			var seo_type1 = base_url.match(/\.[a-z0-9]+$/i);
+			if (seo_type1 !== null) {
+				document.location.href = base_url.replace(/\.[a-z0-9]+$/i, '') + seo_delim_start + seo_page + seo_type1;
+			}
+			var seo_type2 = base_url.match(/\/$/);
+			if (seo_type2 !== null) {
+				document.location.href = base_url + seo_static_pagination + seo_page + seo_ext_pagination;
 			}
 		} else {
 			document.location.href = base_url;
@@ -58,11 +64,9 @@ function jumpto()
 /**
 * Find a member
 */
-function find_username()
+function find_username(url)
 {
-	<!-- IF UA_FIND_USERNAME -->
-	window.open('{UA_FIND_USERNAME}', '_usersearch', 'height=500, resizable=yes, scrollbars=yes, width=740');
-	<!-- ENDIF -->
+	popup(url, 760, 570, '_usersearch');
 	return false;
 }
 
@@ -132,7 +136,7 @@ function marklist(id, name, state)
 	}
 <!-- ENDIF -->
 
-//-->
+// ]]>
 </script>
 </head>
 <body class="{S_CONTENT_DIRECTION}">

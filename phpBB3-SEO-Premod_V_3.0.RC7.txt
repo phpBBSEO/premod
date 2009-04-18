@@ -5,7 +5,7 @@
 ## 			Check http://www.phpbb-seo.com/boards/phpbb-seo-premod/seo-url-premod-vt1549.html
 ## 			for the latest version or to get help.
 ##
-## MOD Version: 	3.0.RC5a
+## MOD Version: 	3.0.RC7
 ##
 ## Installation Level: 	As easy as phpBB3
 ## Installation Time: 	10
@@ -47,10 +47,6 @@
 ## Let's meet in the Premod forum ( http://www.phpbb-seo.com/boards/phpbb-seo-premod-vf61/ ).
 ## 
 ##
-####  UPDATE
-## 3.0.RC5 => 3.0.RC5a Just overwrite all the files in the language/ folder, and all the files in the include/acp/ folder.
-####
-##
 ## LICENSE:
 ## ________
 ##
@@ -69,6 +65,9 @@
 ##############################################################
 ## MOD History:
 ##
+##	2007-10-16 - 3.0.RC7
+##		- Updated the mod rewrites,
+##		- Updated to phpbb3.0.RC7.
 ##	2007-09-20 - 3.0.RC5a
 ##		- Fixed typos in the language file,
 ##		- Enhanced the premod sud-version checking.
@@ -89,9 +88,24 @@ ________________________________________
 >>>>   UPDATE INSTRUCTION   	   <<<<<
 ________________________________________
 
-Update 3.0.RC5 => 3.0.RC5a 
-Just overwrite all the files in the language/ folder, and all the files in the include/acp/ folder.
+Update 3.0.RC5a => 3.0.RC7 :
+First, download the phpBB_SEO_3.0RC5a_to_3.0.RC7 package.
+You can update using two method :
+	1) Auto updating :
+		- Upload the auto_update/install/*.* folder of the update package to install/*.*
+		- Go to ACP => SYSTEM and follow instructions.
+		The auto update method will take the eventual code change you have made into account, 
+		and will attempt to merge the new files with your online modified ones.
+		It's the safest method for most, the installer will tel you if it has trouble to update some files.
+	2) Manual updating :
+		You'll find the modified file list in the modified/ folder of the update package.
+		- Upload / merge / overwrite all file,
+		- Upload the modified/install/*.* to install/*.*,
+		- Run www.example.com/phpbb/install/database_update.php to update the DB.
 
+In all cases, his update procedure will keep the previous URL standard used depending on the phpbb_seo_class.php settings.
+
+No particular changes required in the .htaccess or the phpBB SEO class settings.
 
 ________________________________________
 >>>>   INSTALLATION INSTRUCTION    <<<<<

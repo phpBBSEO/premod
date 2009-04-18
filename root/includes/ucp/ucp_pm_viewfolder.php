@@ -1,12 +1,20 @@
 <?php
-/** 
+/**
 *
 * @package ucp
-* @version $Id: ucp_pm_viewfolder.php,v 1.57 2007/07/27 17:01:37 kellanved Exp $
-* @copyright (c) 2005 phpBB Group 
-* @license http://opensource.org/licenses/gpl-license.php GNU Public License 
+* @version $Id: ucp_pm_viewfolder.php,v 1.58 2007/10/05 14:36:34 acydburn Exp $
+* @copyright (c) 2005 phpBB Group
+* @license http://opensource.org/licenses/gpl-license.php GNU Public License
 *
 */
+
+/**
+* @ignore
+*/
+if (!defined('IN_PHPBB'))
+{
+	exit;
+}
 
 /**
 * View message folder
@@ -132,7 +140,7 @@ function view_folder($id, $mode, $folder_id, $folder)
 					{
 						if ($ug_type == 'u')
 						{
-							$sql = 'SELECT user_id as id, username as name, user_colour as colour 
+							$sql = 'SELECT user_id as id, username as name, user_colour as colour
 								FROM ' . USERS_TABLE . '
 								WHERE ';
 						}

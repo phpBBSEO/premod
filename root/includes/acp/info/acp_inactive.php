@@ -1,10 +1,10 @@
 <?php
-/** 
+/**
 *
 * @package acp
-* @version $Id: acp_inactive.php,v 1.1 2006/09/23 12:27:50 grahamje Exp $
-* @copyright (c) 2006 phpBB Group 
-* @license http://opensource.org/licenses/gpl-license.php GNU Public License 
+* @version $Id: acp_inactive.php,v 1.2 2007/10/04 15:05:50 acydburn Exp $
+* @copyright (c) 2006 phpBB Group
+* @license http://opensource.org/licenses/gpl-license.php GNU Public License
 *
 */
 

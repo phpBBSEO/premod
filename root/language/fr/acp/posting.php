@@ -4,7 +4,7 @@
 * posting [Standard french]
 *
 * @package language
-* @version $Id: posting.php,v 1.44 2007/08/19 21:29:31 naderman Exp $
+* @version $Id: posting.php,v 1.47 2007/10/04 15:07:24 acydburn Exp $
 * @copyright (c) 2005 phpBB Group 
 * @license http://opensource.org/licenses/gpl-license.php GNU Public License 
 *
@@ -18,6 +18,11 @@
 /**
 * DO NOT CHANGE
 */
+if (!defined('IN_PHPBB'))
+{
+	exit;
+}
+
 if (empty($lang) || !is_array($lang))
 {
 	$lang = array();
@@ -68,12 +73,12 @@ $lang = array_merge($lang, array(
 	'TOKENS'				=> 'Chaînes de symboles',
 	'TOKENS_EXPLAIN'		=> 'Les marques sont des conteneurs pour les utilisateurs. Les entrées ne seront validées que si elles trouvent la définition correspondante. Si besoin, vous pouvez les numéroter en y ajoutant un nombre comme dernier caractère entre des accolades, exemple: {TEXT1}, {TEXT2}.<br /><br />Vous pouvez utiliser, en plus du remplacement HTML, une chaîne de langue dans votre répertoire language/ comme ceci: {L_<em>&lt;STRINGNAME&gt;</em>} où <em>&lt;STRINGNAME&gt;</em> est le nom de la chaîne traduite que vous souhaitez ajouter. Par exemple, {L_WROTE} sera affiché en tant que &quot;a écrit&quot; ou sa traduction selon la langue locale de l\'utilisateur.<br /><br /><strong>Notez que seules les chaînes listées ci-dessous sont autorisées à être utilisées dans les BBCodes personnalisés.</strong>',
 	'TOKEN_DEFINITION'		=> 'Que peut il être?',
-	'TOO_MANY_BBCODES'		=> 'Vous ne pouvez pas créer d\'autres BBCodes. Please remove one or more BBCodes then try again.',
+	'TOO_MANY_BBCODES'		=> 'Vous ne pouvez pas créer d\'autres BBCodes. Supprimez un ou plusieurs BBCodes puis réessayez.',
 
 	'tokens'	=>	array(
-		'TEXT'			=> 'Du texte, incluant des caractères étrangers, chiffres, etc. Vous ne devriez pas utiliser cette marque dans les tags HTML. A la place, utilisez les marques IDENTIFIER ou SIMPLETEXT.',
-		'SIMPLETEXT'	=> 'Caractères alphabétiques (A-Z), chiffres, espaces, virgules, points, -, +, - et _',
-		'IDENTIFIER'	=> 'Caractères alphabétiques (A-Z), chiffres, - et _',
+		'TEXT'			=> 'Du texte, incluant des caractères étrangers, chiffres, etc. Vous ne devriez pas utiliser cette marque dans les tags HTML. Essayez d\'utiliser à la place les marques IDENTIFIER ou SIMPLETEXT.',
+		'SIMPLETEXT'	=> 'Caractères alphabétiques latins (A-Z), chiffres, espaces, virgules, points, -, +, - et _',
+		'IDENTIFIER'	=> 'Caractères alphabétiques latins (A-Z), chiffres, - et _',
 		'NUMBER'		=> 'Une série de chiffres',
 		'EMAIL'			=> 'Une adresse e-mail valide',
 		'URL'			=> 'Une URL valide utilisant un quelconque protocole (http, ftp, etc. ne peuvent pas être utilisés pour des exploits javascripts). Si aucun n\'est donné, &quot;http://&quot; sera utilisé par défaut pour la chaîne.',
@@ -85,7 +90,7 @@ $lang = array_merge($lang, array(
 // Smilies and topic icons
 $lang = array_merge($lang, array(
 	'ACP_ICONS_EXPLAIN'		=> 'Depuis cette page, vous pouvez ajouter, supprimer ou éditer les icônes que les utilisateurs pourront ajouter à leur sujet ou message. Ces icônes sont généralement affichées à côté des titres des sujets sur la liste des forums, ou des titres des messages sur la liste des sujets. Vous pouvez également installer et créer de nouveaux packs d\'icônes.',
-	'ACP_SMILIES_EXPLAIN'	=> 'Les smileys ou smileys sont généralement de petites images, parfois des images animées qui sont utilisées pour exprimer une émotion ou un sentiment. Depuis cette page, vous pouvez ajouter, supprimer ou éditer les smileys que les utilisateurs peuvent utiliser dans leurs messages et messages privés. Vous pouvez également installer et créer de nouveaux packs de smileys.',
+	'ACP_SMILIES_EXPLAIN'	=> 'Les smileys ou émoticônes sont généralement de petites images, parfois des images animées qui sont utilisées pour exprimer une émotion ou un sentiment. Depuis cette page, vous pouvez ajouter, supprimer ou éditer les smileys que les utilisateurs peuvent utiliser dans leurs messages et messages privés. Vous pouvez également installer et créer de nouveaux packs de smileys.',
 	'ADD_SMILIES'			=> 'Ajouter de multiples smileys',
 	'ADD_SMILEY_CODE'		=> 'Ajouter un code de smiley additionnel',
 	'ADD_ICONS'				=> 'Ajouter de multiples icônes',
@@ -126,8 +131,8 @@ $lang = array_merge($lang, array(
 	'ICONS_EDITED'			=> 'Les icônes ont été mises à jour.',
 	'ICONS_HEIGHT'			=> 'Hauteur de l\'icône',
 	'ICONS_IMAGE'			=> 'Image de l\'icône',
-	'ICONS_IMPORTED'		=> 'Le pack d\'icône a été installé.',
-	'ICONS_IMPORT_SUCCESS'	=> 'La pack d\'icônes a été importé.',
+	'ICONS_IMPORTED'		=> 'Le pack d\'icônes a été installé.',
+	'ICONS_IMPORT_SUCCESS'	=> 'Le pack d\'icônes a été importé.',
 	'ICONS_LOCATION'		=> 'Emplacement de l\'icône',
 	'ICONS_NOT_DISPLAYED'	=> 'Les icônes suivantes ne sont pas affichées sur la page de rédaction',
 	'ICONS_ORDER'			=> 'Classement de l\'icône',
@@ -181,7 +186,7 @@ $lang = array_merge($lang, array(
 
 // Word censors
 $lang = array_merge($lang, array(
-	'ACP_WORDS_EXPLAIN'		=> 'Depuis ce panneau de contrôle, vous pouvez ajouter, éditer et supprimer les mots qui seront automatiquement censurés sur votre forum. En outre, personne ne pourra s\'inscrire avec un nom d\'utilisateur contenant un de ces mots. Les jokers (*) sont acceptés dans le champ, exemple: *toto* censurera &quot;toto&quot;, toto* censurera &quot;toto&quot;, *toto censurera &quot;toto&quot;.',
+	'ACP_WORDS_EXPLAIN'		=> 'Depuis ce panneau de contrôle, vous pouvez ajouter, éditer et supprimer les mots qui seront automatiquement censurés sur votre forum. En outre, personne ne pourra s\'inscrire avec un nom d\'utilisateur contenant un de ces mots. Les jokers (*) sont acceptés dans le champ, exemple: *test* censurera détestable, test* censurera testament, *test censurera contest.',
 	'ADD_WORD'				=> 'Ajouter un nouveau mot',
 
 	'EDIT_WORD'		=> 'Editer la censure',
@@ -208,14 +213,14 @@ $lang = array_merge($lang, array(
 
 	'NO_ASSIGNED_RANK'		=> 'Pas de rang spécial assigné.',
 	'NO_RANK_TITLE'			=> 'Vous n\'avez pas spécifié de titre pour le rang.',
-	'NO_UPDATE_RANKS'		=> 'Le rang a été supprimé. Cependant les comptes d\'utilisateurs utilisant ce rang n\'ont pas été mis à jour. Vous devrez donc réinitialiser manuellement le rang des ces comptes.',
+	'NO_UPDATE_RANKS'		=> 'Le rang a été supprimé. Cependant les comptes d\'utilisateurs utilisant ce rang n\'ont pas été mis à jour. Vous devrez donc réinitialiser manuellement le rang de ces comptes.',
 
 	'RANK_ADDED'			=> 'Le rang a été ajouté.',
 	'RANK_IMAGE'			=> 'Image du rang',
-	'RANK_IMAGE_EXPLAIN'	=> 'Utilisez ceci pour définir une petite image associée au rang. Le chemin est relatif par rapport à la racine de votre forum phpBB.',
-	'RANK_MINIMUM'			=> 'Messages minimum',
+	'RANK_IMAGE_EXPLAIN'	=> 'Utilisez ceci pour définir une petite image à associer au rang. Le chemin est relatif par rapport à la racine de votre forum phpBB.',
+	'RANK_MINIMUM'			=> 'Messages minimums',
 	'RANK_REMOVED'			=> 'Le rang a été supprimé.',
-	'RANK_SPECIAL'			=> 'Définir un rang spécial',
+	'RANK_SPECIAL'			=> 'Définir comme rang spécial',
 	'RANK_TITLE'			=> 'Titre du rang',
 	'RANK_UPDATED'			=> 'Le rang a été mis à jour.',
 ));
@@ -238,7 +243,7 @@ $lang = array_merge($lang, array(
 
 // Reasons
 $lang = array_merge($lang, array(
-	'ACP_REASONS_EXPLAIN'	=> 'Ici, vous pouvez gérer les raisons utilisées dans les rapports/refus de messages. Il y a une raison par défaut (marquée avec *) que vous ne pouvez pas supprimer, cette raison est utilisée normalement pour les messages personnalisés si aucune raison n\'est spécifiée.',
+	'ACP_REASONS_EXPLAIN'	=> 'Ici, vous pouvez gérer les raisons utilisées dans les rapports lors de la désapprobation de messages. Il y a une raison par défaut (marquée avec *) que vous ne pouvez pas supprimer, cette raison est utilisée normalement pour les messages personnalisés si aucune raison n\'est spécifiée.',
 	'ADD_NEW_REASON'		=> 'Ajouter une nouvelle raison',
 	'AVAILABLE_TITLES'		=> 'Titres des raisons traduits disponibles',
 
@@ -249,7 +254,7 @@ $lang = array_merge($lang, array(
 
 	'NO_REASON'					=> 'La raison est introuvable.',
 	'NO_REASON_INFO'			=> 'Vous devez spécifier un titre et une description pour cette raison.',
-	'NO_REMOVE_DEFAULT_REASON'	=> 'Vous ne pouvez pas supprimer la raison par défaut "Others".',
+	'NO_REMOVE_DEFAULT_REASON'	=> 'Vous ne pouvez pas supprimer la raison par défaut “Autres”.',
 
 	'REASON_ADD'				=> 'Ajouter une raison au rapport',
 	'REASON_ADDED'				=> 'Une raison a été ajoutée au rapport.',
@@ -263,7 +268,7 @@ $lang = array_merge($lang, array(
 	'REASON_TITLE_TRANSLATED'	=> 'Titre affiché de la raison',
 	'REASON_UPDATED'			=> 'La raison a été mise à jour.',
 
-	'USED_IN_REPORTS'		=> 'Utilisé',
+	'USED_IN_REPORTS'		=> 'Utilisé dans les rapports',
 ));
 
 ?>

@@ -1,12 +1,20 @@
 <?php
-/** 
+/**
 *
 * @package acp
-* @version $Id: acp_main.php,v 1.49 2007/07/27 17:32:45 acydburn Exp $
-* @copyright (c) 2005 phpBB Group 
-* @license http://opensource.org/licenses/gpl-license.php GNU Public License 
+* @version $Id: acp_main.php,v 1.50 2007/10/05 14:36:32 acydburn Exp $
+* @copyright (c) 2005 phpBB Group
+* @license http://opensource.org/licenses/gpl-license.php GNU Public License
 *
 */
+
+/**
+* @ignore
+*/
+if (!defined('IN_PHPBB'))
+{
+	exit;
+}
 
 /**
 * @package acp
@@ -117,7 +125,7 @@ class acp_main
 							trigger_error($user->lang['NO_AUTH_OPERATION'] . adm_back_link($this->u_action), E_USER_WARNING);
 						}
 
-						$sql = 'SELECT COUNT(post_id) AS stat 
+						$sql = 'SELECT COUNT(post_id) AS stat
 							FROM ' . POSTS_TABLE . '
 							WHERE post_approved = 1';
 						$result = $db->sql_query($sql);

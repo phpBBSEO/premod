@@ -2,13 +2,14 @@
 /**
 *
 * @package acm
-* @version $Id: cache.php,v 1.10 2007/06/09 11:06:22 acydburn Exp $
+* @version $Id: cache.php,v 1.13 2007/10/05 14:30:07 acydburn Exp $
 * @copyright (c) 2005 phpBB Group
 * @license http://opensource.org/licenses/gpl-license.php GNU Public License
 *
 */
 
 /**
+* @ignore
 */
 if (!defined('IN_PHPBB'))
 {
@@ -293,14 +294,14 @@ class cache extends acm
 			{
 				case 'mssql':
 				case 'mssql_odbc':
-					$sql = 'SELECT user_id, bot_agent, bot_ip 
+					$sql = 'SELECT user_id, bot_agent, bot_ip
 						FROM ' . BOTS_TABLE . '
 						WHERE bot_active = 1
 					ORDER BY LEN(bot_agent) DESC';
 				break;
 
 				case 'firebird':
-					$sql = 'SELECT user_id, bot_agent, bot_ip 
+					$sql = 'SELECT user_id, bot_agent, bot_ip
 						FROM ' . BOTS_TABLE . '
 						WHERE bot_active = 1
 					ORDER BY CHAR_LENGTH(bot_agent) DESC';
@@ -308,7 +309,7 @@ class cache extends acm
 
 				// LENGTH supported by MySQL, IBM DB2 and Oracle for sure...
 				default:
-					$sql = 'SELECT user_id, bot_agent, bot_ip 
+					$sql = 'SELECT user_id, bot_agent, bot_ip
 						FROM ' . BOTS_TABLE . '
 						WHERE bot_active = 1
 					ORDER BY LENGTH(bot_agent) DESC';
@@ -402,6 +403,38 @@ class cache extends acm
 		}
 
 		return $usernames;
+	}
+
+	/**
+	* Obtain hooks...
+	*/
+	function obtain_hooks()
+	{
+		global $phpbb_root_path, $phpEx;
+
+		if (($hook_files = $this->get('_hooks')) === false)
+		{
+			$hook_files = array();
+
+			// Now search for hooks...
+			$dh = @opendir($phpbb_root_path . 'includes/hooks/');
+
+			if ($dh)
+			{
+				while (($file = readdir($dh)) !== false)
+				{
+					if (strpos($file, 'hook_') === 0 && substr($file, -(strlen($phpEx) + 1)) === '.' . $phpEx)
+					{
+						$hook_files[] = substr($file, 0, -(strlen($phpEx) + 1));
+					}
+				}
+				closedir($dh);
+			}
+
+			$this->put('_hooks', $hook_files);
+		}
+
+		return $hook_files;
 	}
 }
 

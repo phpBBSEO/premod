@@ -1,5 +1,5 @@
 #
-# $Id: mysql_40_schema.sql,v 1.36 2007/07/31 20:27:39 davidmj Exp $
+# $Id: mysql_40_schema.sql,v 1.41 2007/10/14 15:46:44 acydburn Exp $
 #
 
 # Table: 'phpbb_attachments'
@@ -225,7 +225,7 @@ CREATE TABLE phpbb_forums (
 	forum_desc blob NOT NULL,
 	forum_desc_bitfield varbinary(255) DEFAULT '' NOT NULL,
 	forum_desc_options int(11) UNSIGNED DEFAULT '7' NOT NULL,
-	forum_desc_uid varbinary(5) DEFAULT '' NOT NULL,
+	forum_desc_uid varbinary(8) DEFAULT '' NOT NULL,
 	forum_link blob NOT NULL,
 	forum_password varbinary(120) DEFAULT '' NOT NULL,
 	forum_style smallint(4) UNSIGNED DEFAULT '0' NOT NULL,
@@ -234,7 +234,7 @@ CREATE TABLE phpbb_forums (
 	forum_rules_link blob NOT NULL,
 	forum_rules_bitfield varbinary(255) DEFAULT '' NOT NULL,
 	forum_rules_options int(11) UNSIGNED DEFAULT '7' NOT NULL,
-	forum_rules_uid varbinary(5) DEFAULT '' NOT NULL,
+	forum_rules_uid varbinary(8) DEFAULT '' NOT NULL,
 	forum_topics_per_page tinyint(4) DEFAULT '0' NOT NULL,
 	forum_type tinyint(4) DEFAULT '0' NOT NULL,
 	forum_status tinyint(4) DEFAULT '0' NOT NULL,
@@ -300,7 +300,7 @@ CREATE TABLE phpbb_groups (
 	group_desc blob NOT NULL,
 	group_desc_bitfield varbinary(255) DEFAULT '' NOT NULL,
 	group_desc_options int(11) UNSIGNED DEFAULT '7' NOT NULL,
-	group_desc_uid varbinary(5) DEFAULT '' NOT NULL,
+	group_desc_uid varbinary(8) DEFAULT '' NOT NULL,
 	group_display tinyint(1) UNSIGNED DEFAULT '0' NOT NULL,
 	group_avatar varbinary(255) DEFAULT '' NOT NULL,
 	group_avatar_type tinyint(2) DEFAULT '0' NOT NULL,
@@ -441,7 +441,7 @@ CREATE TABLE phpbb_posts (
 	post_checksum varbinary(32) DEFAULT '' NOT NULL,
 	post_attachment tinyint(1) UNSIGNED DEFAULT '0' NOT NULL,
 	bbcode_bitfield varbinary(255) DEFAULT '' NOT NULL,
-	bbcode_uid varbinary(5) DEFAULT '' NOT NULL,
+	bbcode_uid varbinary(8) DEFAULT '' NOT NULL,
 	post_postcount tinyint(1) UNSIGNED DEFAULT '1' NOT NULL,
 	post_edit_time int(11) UNSIGNED DEFAULT '0' NOT NULL,
 	post_edit_reason blob NOT NULL,
@@ -476,7 +476,7 @@ CREATE TABLE phpbb_privmsgs (
 	message_edit_user mediumint(8) UNSIGNED DEFAULT '0' NOT NULL,
 	message_attachment tinyint(1) UNSIGNED DEFAULT '0' NOT NULL,
 	bbcode_bitfield varbinary(255) DEFAULT '' NOT NULL,
-	bbcode_uid varbinary(5) DEFAULT '' NOT NULL,
+	bbcode_uid varbinary(8) DEFAULT '' NOT NULL,
 	message_edit_time int(11) UNSIGNED DEFAULT '0' NOT NULL,
 	message_edit_count smallint(4) UNSIGNED DEFAULT '0' NOT NULL,
 	to_address blob NOT NULL,
@@ -943,7 +943,7 @@ CREATE TABLE phpbb_users (
 	user_avatar_width smallint(4) UNSIGNED DEFAULT '0' NOT NULL,
 	user_avatar_height smallint(4) UNSIGNED DEFAULT '0' NOT NULL,
 	user_sig mediumblob NOT NULL,
-	user_sig_bbcode_uid varbinary(5) DEFAULT '' NOT NULL,
+	user_sig_bbcode_uid varbinary(8) DEFAULT '' NOT NULL,
 	user_sig_bbcode_bitfield varbinary(255) DEFAULT '' NOT NULL,
 	user_from blob NOT NULL,
 	user_icq varbinary(15) DEFAULT '' NOT NULL,
@@ -955,7 +955,8 @@ CREATE TABLE phpbb_users (
 	user_occ blob NOT NULL,
 	user_interests blob NOT NULL,
 	user_actkey varbinary(32) DEFAULT '' NOT NULL,
-	user_newpasswd varbinary(96) DEFAULT '' NOT NULL,
+	user_newpasswd varbinary(120) DEFAULT '' NOT NULL,
+	user_form_salt varbinary(96) DEFAULT '' NOT NULL,
 	PRIMARY KEY (user_id),
 	KEY user_birthday (user_birthday),
 	KEY user_email_hash (user_email_hash),

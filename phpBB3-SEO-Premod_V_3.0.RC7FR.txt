@@ -6,7 +6,7 @@
 ## 			Visitez http://www.phpbb-seo.com/forums/premod-phpbb-seo/premod-referencement-phpbb-vt1951.html
 ## 			pour obtenir du support et vérifier l'existence de mise à jour.
 ##
-## MOD Version: 	3.0.RC5a
+## MOD Version: 	3.0.RC7
 ##
 ## Installation Level: 	Aussi facile que phpBB3
 ## Installation Time: 	10 Minutes
@@ -24,7 +24,7 @@
 ## Veuillez lire : http://forums.phpbb-seo.com/toolkit-phpbb-seo/mod-rewrites-phpbb-seo-vt65.html
 ##
 ## Cette Premod est et sera compatible avec tous les mods phpBB SEO, des instructions supplémentaires pouvant intervenir pour l'installation.
-## phpBB SEO fournira les solutions nécessaires pour prendre en charge d'autres formats d'URL, 
+## phpBB SEO fournira les solutions nécessaires pour prendre en charge d'autres formats d'URLs, 
 ## pour que tous puissent tirer parti des avancées des mods Rewrite phpBB SEO sans pour autant risquer de perdre leurs acquis
 ## en référencement et PageRank.
 ##
@@ -35,7 +35,7 @@
 ## 	phpBB3 utilise l'UTF-8 comme encodage final, ce qui devrait être suffisant pour tous les types d'alphabets.
 ## L'UTF-8 est totallement pris en charge par ce mod.
 ##
-## Ce mod rewrite injectera uniquement les caractères ASSII, débarrassés de leurs accents, présents dans les titres.
+## Ce mod rewrite injectera uniquement les caractères ASCII, débarrassés de leurs accents, présents dans les titres.
 ## 
 ## Par exemple : "[caractères non ASCII] Software niño" sera formaté de cette façon : "software-nino".
 ##
@@ -49,10 +49,6 @@
 ## La procédure vous permettant de migrer tout en conservant vos pages indexées est simple, mais doit s'effectuer au cas par cas.
 ## Rendez-vous sur le forum Premod phpBB SEO ( http://www.phpbb-seo.com/forums/premod-phpbb-seo-vf64/ ).
 ## 
-##
-####  MISE A JOUR
-## 3.0.RC5 => 3.0.RC5a Ecrasez simplement tous les fichiers du dossier language/, ainsi que tous les fichiers du dossier inlcudes/acp/
-####
 ##
 ## LICENSE:
 ## ________
@@ -71,6 +67,9 @@
 ##############################################################
 ## MOD History:
 ##
+##	2007-10-16 - 3.0.RC7
+##		- Updated the mod rewrites,
+##		- Updated to phpbb3.0.RC7.
 ##	2007-09-20 - 3.0.RC5a
 ##		- Fixed typos in the language file,
 ##		- Enhanced the premod sud-version checking.
@@ -87,25 +86,34 @@
 #-----[ DIY INSTRUCTIONS ]--------------------------------------------------
 #
 
+Le pack de langue FR mis à jour n'est malheureusement pas disponible à ce jour, il sera inclus à cette archive dès mise à disposition.
+
 _____________________________________________
 >>>>   MISE A JOUR	                <<<<<
 _____________________________________________
 
-Mise à jour : 3.0.RC5 => 3.0.RC5a 
-Ecrasez simplement tous les fichiers du dossier language/, ainsi que tous les fichiers du dossier inlcudes/acp/
+Mise à jour : 3.0.RC5a => 3.0.RC7 : 
+Tout d'abord, téléchargez le package phpBB_SEO_3.0RC5a_to_3.0.RC7.
+Vous pouvez mettre à jour en suivant deux méthodes :
+	1) Mise à jour automatique :
+		- Uplodez le contenu du dossier auto_update/install/*.* vers install/*.*,
+		- Rendez vous à l'ACP => SYSTEM et suivez les instructions.
+		L'auto updateur prendra vos éventuelles modifications en compte et tentera
+		de merger les nouveaux fichiers avec ceux que vous auriez modifié.
+		C'est la methode la plus sûre dans la plupart des cas, l'updateur vous dira
+		s'il a des problème pour modifier certain fichiers.
+	2) Mise à jour manuelle :
+		Vous trouverez les fichiers modifiés dans le dossier modified/ de l'archive.
+		- Uploadez / mergez / écrasez tous les fichiers,
+		- Uploadez le dossier modified/install/*.* vers install/*.*,
+		- Lancez www.example.com/phpbb/install/database_update.php pour mettre à jour la base de données.
 
+Dans tous les cas, la procédure d'installation qui suit conservera votre standard d'URL actuel, en fonction des réglages de la classe phpbb_seo_class.php.
+Auncune modification des réglages et du .htaccess.
 
 _____________________________________________
 >>>>   INSTALLATION POUR VOTRE FORUM    <<<<<
 _____________________________________________
-
-_____________
-TRADUCTIONS : 
-_____________
-
-Le fichier langue Français se trouve dans le dossier translations/ de l'archive.
-Pour l'utiliser copiez simplement le contenu du dossier translation/fr/ dans le dossier
-language/fr/ de votre forum.
 
 ___________
 IMPORTANT :
@@ -141,7 +149,7 @@ Remplacer par :
 Ou par ce que vous voulez.
 C'est surtout pratique dans le cas ou vous utiliseriez un portail dans le même dossier que phpBB.
 
-=> Les premiers réglages à faire sont le choix des parties statiques de vos URL, dont index.html fait parti.
+=> Les premiers réglages à faire sont le choix des parties statiques de vos URLs, dont index.html fait partie.
 Vous pouvez modifier dans phpbb_seo/phpbb_seo_class.php :
 	=> equipe.html
 		$this->seo_static['leaders'] = 'equipe'
@@ -156,34 +164,34 @@ Vous pouvez modifier dans phpbb_seo/phpbb_seo_class.php :
 
 Ces changements seront pris en compte lors de la génération du .htaccess.
 
-=> Les autres options sont accessible sur une page de réglage, stade 7) de l'installation.
-Rendez vous tout d'abords sur la page "Réglages de la classe phpBB SEO", et faites les réglages qui vous conviennent.
+=> Les autres options sont accessibles sur une page de réglages, stade 7 de l'installation.
+Rendez vous tout d'abord sur la page "Réglages de la classe phpBB SEO", et faites les réglages qui vous conviennent.
 
 => C'est le moment de jouer avec les URLs de vos forums (Mode Avancé et Intermédiaire).
 Pour cela, rendez vous sur la page "Gestion des URL des Forums", et commencez à choisir 
 de bon mots clés pour les URLs de vos forums.
 Prenez votre temps pour ce faire, et n'oubliez pas que d'utiliser l'option 
 "Retirer les IDs de forum" rendra les redirections un peu plus compliquées si vous modifiez
-des URLs de forum après avoir commencer à les utiliser.
-Si vous créez de nouveaux forums par la suite, vous devrez simplement vous rendre de nouveaux 
+des URLs de forum après avoir commencé à les utiliser.
+Si vous créez de nouveaux forums par la suite, vous devrez simplement vous rendre de nouveau 
 sur la page "Gestion des URL des Forums" pour personnaliser l'url de votre forum.
 Si non, l'url ne sera pas en cache, et celle par défaut sera utilisée pour ce forum (titre-forum-fxx).
 
 ___________
 NOTE: Cache
 ___________
-Les fichiers cachés se trouve dans le dossier phpbb_seo_/cache/.
-phpbb_cache.php est le fichier contenant vos réglages ainsi que les URL personalisés de vos forums.
+Les fichiers en cache se trouvent dans le dossier phpbb_seo_/cache/.
+phpbb_cache.php est le fichier contenant vos réglages ainsi que les URLs personalisées de vos forums.
 
-Le mod crée toujours un backup du fichier cache en cours : 
+Le mod crée toujours une sauvegarde du fichier cache en cours : 
 	=> phpbb_cache.php.current est une copie de phpbb_cache.php.
-	Elle sera utilisée automatiquement si jamais phpbb_cache.php venait à être effacé ou corrompu (ce qui e devrait pas arriver, mais ...).
-	=> phpbb_cache.php.old est une copie de vos précédent régalges, avant la dernière modification que vous avez faite.
+	Elle sera utilisée automatiquement si jamais phpbb_cache.php venait à être effacé ou corrompu (ce qui ne devrait pas arriver, mais ...).
+	=> phpbb_cache.php.old est une copie de vos précédents réglages, avant la dernière modification que vous avez faite.
 
-Vous devriez sauvegarder ces fichiers après les avoir modifier, ils sont aussi important que
-votre base de donnée pour vos forums, vu qu'il sont requis pour le fonctionnement de leur URLs.
+Vous devriez sauvegarder ces fichiers après les avoir modifiés, ils sont aussi importants que
+votre base de donnée pour vos forums, vu qu'il sont requis pour le fonctionnement de leurs URLs.
 Rassurez vous, ce n'est qu'une précaution standard, vous ne devriez pas avoir de soucis avec ces fichiers,
-mais jamais, c'est mieux, d'où la sauvegarde.
+mais on ne sait jamais, d'où la sauvegarde.
 
 ____________
  .htaccess :
@@ -205,9 +213,8 @@ robots.txt :
 ____________
 
 Vous trouverez un exemple de robots.txt dans le dossier contrib/ de ce package.
-Le robots.txt doit être placer à la racine de votre domaine (qui peut être différent du dossier de phpBB).
+Le robots.txt doit être placé à la racine de votre domaine (qui peut être différent du dossier de phpBB).
 Il faut bien entendu remplacer dossierphpbb/ par votre vrai dossier d'installation (ou par rien pour une installation à la racine du domaine). 
-
 
 #
 #-----[ COPY ]--------------------------------------------------
