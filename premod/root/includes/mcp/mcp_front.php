@@ -1,12 +1,20 @@
 <?php
-/** 
+/**
 *
 * @package mcp
-* @version $Id: mcp_front.php,v 1.31 2007/07/14 15:43:31 acydburn Exp $
-* @copyright (c) 2005 phpBB Group 
-* @license http://opensource.org/licenses/gpl-license.php GNU Public License 
+* @version $Id: mcp_front.php,v 1.33 2007/10/12 18:13:50 acydburn Exp $
+* @copyright (c) 2005 phpBB Group
+* @license http://opensource.org/licenses/gpl-license.php GNU Public License
 *
 */
+
+/**
+* @ignore
+*/
+if (!defined('IN_PHPBB'))
+{
+	exit;
+}
 
 /**
 * MCP Front Panel
@@ -258,7 +266,7 @@ function mcp_front_view($id, $mode, $action)
 	}
 
 	$template->assign_var('S_MCP_ACTION', append_sid("{$phpbb_root_path}mcp.$phpEx"));
-	make_jumpbox(append_sid("{$phpbb_root_path}mcp.$phpEx", 'i=main&amp;mode=forum_view'), 0, false, 'm_');
+	make_jumpbox(append_sid("{$phpbb_root_path}mcp.$phpEx", 'i=main&amp;mode=forum_view'), 0, false, 'm_', true);
 }
 
 ?>

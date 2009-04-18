@@ -5,9 +5,14 @@
 /**
 * Window popup
 */
-function popup(url, width, height)
+function popup(url, width, height, name)
 {
-	window.open(url.replace(/&amp;/g, '&'), '_popup', 'height=' + height + ',resizable=yes,scrollbars=yes, width=' + width);
+	if (!name)
+	{
+		name = '_popup';
+	}
+
+	window.open(url.replace(/&amp;/g, '&'), name, 'height=' + height + ',resizable=yes,scrollbars=yes, width=' + width);
 	return false;
 }
 
@@ -15,25 +20,20 @@ function popup(url, width, height)
 * Jump to page
 */
 // www.phpBB-SEO.com SEO TOOLKIT BEGIN
-function jumpto()
-{
+function jumpto() {
 	var page = prompt(jump_page, on_page);
-	var seo_ext_html = '.html';
-	var seo_ext_htm = '.htm';
-	var seo_ext_slash = '/';
-	var seo_delim_start = '-';
-	if (page !== null && !isNaN(page) && page > 0)
-	{
-		base_url = base_url.replace(/&amp;/g, '&');
-		if ( ((page - 1) * per_page) > 0 ) {
-			if (base_url.indexOf(seo_ext_html) >0 && base_url.indexOf('?') < 0) {
-				document.location.href = base_url.replace(/.html/, '') + seo_delim_start + ((page - 1) * per_page) + seo_ext_html;
-			} else if (base_url.indexOf(seo_ext_htm) >0 && base_url.indexOf('?') < 0) {
-				document.location.href = base_url.replace(/.htm/, '') + seo_delim_start + ((page - 1) * per_page) + seo_ext_htm;
-			} else if (base_url.indexOf(seo_ext_slash) >0 && base_url.indexOf('?') < 0) {
-				document.location.href = base_url.replace(new RegExp(/\/$/),"") + seo_delim_start + ((page - 1) * per_page) + seo_ext_slash;
-			} else {
-				document.location.href = base_url + '&start=' + ((page - 1) * per_page);
+	if (page !== null && !isNaN(page) && page > 0) {
+		var seo_page = (page - 1) * per_page;
+		if ( base_url.indexOf('?') >= 0 ) {
+			document.location.href = base_url.replace(/&amp;/g, '&') + '&start=' + seo_page;
+		} else if ( seo_page > 0 ) {
+			var seo_type1 = base_url.match(/\.[a-z0-9]+$/i);
+			if (seo_type1 !== null) {
+				document.location.href = base_url.replace(/\.[a-z0-9]+$/i, '') + seo_delim_start + seo_page + seo_type1;
+			}
+			var seo_type2 = base_url.match(/\/$/);
+			if (seo_type2 !== null) {
+				document.location.href = base_url + seo_static_pagination + seo_page + seo_ext_pagination;
 			}
 		} else {
 			document.location.href = base_url;

@@ -1,10 +1,10 @@
 <?php
-/** 
+/**
 *
 * @package ucp
-* @version $Id: ucp.php,v 1.91 2007/07/28 09:19:29 acydburn Exp $
-* @copyright (c) 2005 phpBB Group 
-* @license http://opensource.org/licenses/gpl-license.php GNU Public License 
+* @version $Id: ucp.php,v 1.93 2007/10/05 14:30:07 acydburn Exp $
+* @copyright (c) 2005 phpBB Group
+* @license http://opensource.org/licenses/gpl-license.php GNU Public License
 *
 */
 
@@ -69,7 +69,7 @@ switch ($mode)
 
 	case 'confirm':
 		$module->load('ucp', 'confirm');
-		exit;
+		exit_handler();
 	break;
 
 	case 'login':

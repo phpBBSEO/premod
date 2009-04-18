@@ -4,7 +4,7 @@
 * acp common [Standard french]
 *
 * @package language
-* @version $Id: common.php,v 1.119 2007/08/13 12:14:06 acydburn Exp $
+* @version $Id: common.php,v 1.120 2007/10/04 15:07:24 acydburn Exp $
 * @copyright (c) 2005 phpBB Group 
 * @license http://opensource.org/licenses/gpl-license.php GNU Public License 
 *
@@ -18,6 +18,11 @@
 /**
 * DO NOT CHANGE
 */
+if (!defined('IN_PHPBB'))
+{
+	exit;
+}
+
 if (empty($lang) || !is_array($lang))
 {
 	$lang = array();
@@ -448,7 +453,7 @@ $lang = array_merge($lang, array(
 	'LOG_CONFIG_AVATAR'			=> '<strong>Les paramètres d\'avatar ont été modifiés</strong>',
 	'LOG_CONFIG_COOKIE'			=> '<strong>Les paramètres de cookies ont été modifiés</strong>',
 	'LOG_CONFIG_EMAIL'			=> '<strong>Les paramètres d\'e-mails ont été modifiés</strong>',
-	'LOG_CONFIG_FEATURES'		=> '<strong>Les options du forum ont été modifiéss</strong>',
+	'LOG_CONFIG_FEATURES'		=> '<strong>Les options du forum ont été modifiées</strong>',
 	'LOG_CONFIG_LOAD'			=> '<strong>Les paramètres de charge ont été modifiés</strong>',
 	'LOG_CONFIG_MESSAGE'		=> '<strong>Les paramètres de la messagerie privée ont été modifiés</strong>',
 	'LOG_CONFIG_POST'			=> '<strong>Les paramètres de messages ont été modifiés</strong>',

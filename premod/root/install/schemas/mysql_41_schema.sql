@@ -1,5 +1,5 @@
 #
-# $Id: mysql_41_schema.sql,v 1.37 2007/07/31 20:27:39 davidmj Exp $
+# $Id: mysql_41_schema.sql,v 1.42 2007/10/14 15:46:44 acydburn Exp $
 #
 
 # Table: 'phpbb_attachments'
@@ -225,7 +225,7 @@ CREATE TABLE phpbb_forums (
 	forum_desc text NOT NULL,
 	forum_desc_bitfield varchar(255) DEFAULT '' NOT NULL,
 	forum_desc_options int(11) UNSIGNED DEFAULT '7' NOT NULL,
-	forum_desc_uid varchar(5) DEFAULT '' NOT NULL,
+	forum_desc_uid varchar(8) DEFAULT '' NOT NULL,
 	forum_link varchar(255) DEFAULT '' NOT NULL,
 	forum_password varchar(40) DEFAULT '' NOT NULL,
 	forum_style smallint(4) UNSIGNED DEFAULT '0' NOT NULL,
@@ -234,7 +234,7 @@ CREATE TABLE phpbb_forums (
 	forum_rules_link varchar(255) DEFAULT '' NOT NULL,
 	forum_rules_bitfield varchar(255) DEFAULT '' NOT NULL,
 	forum_rules_options int(11) UNSIGNED DEFAULT '7' NOT NULL,
-	forum_rules_uid varchar(5) DEFAULT '' NOT NULL,
+	forum_rules_uid varchar(8) DEFAULT '' NOT NULL,
 	forum_topics_per_page tinyint(4) DEFAULT '0' NOT NULL,
 	forum_type tinyint(4) DEFAULT '0' NOT NULL,
 	forum_status tinyint(4) DEFAULT '0' NOT NULL,
@@ -300,7 +300,7 @@ CREATE TABLE phpbb_groups (
 	group_desc text NOT NULL,
 	group_desc_bitfield varchar(255) DEFAULT '' NOT NULL,
 	group_desc_options int(11) UNSIGNED DEFAULT '7' NOT NULL,
-	group_desc_uid varchar(5) DEFAULT '' NOT NULL,
+	group_desc_uid varchar(8) DEFAULT '' NOT NULL,
 	group_display tinyint(1) UNSIGNED DEFAULT '0' NOT NULL,
 	group_avatar varchar(255) DEFAULT '' NOT NULL,
 	group_avatar_type tinyint(2) DEFAULT '0' NOT NULL,
@@ -441,7 +441,7 @@ CREATE TABLE phpbb_posts (
 	post_checksum varchar(32) DEFAULT '' NOT NULL,
 	post_attachment tinyint(1) UNSIGNED DEFAULT '0' NOT NULL,
 	bbcode_bitfield varchar(255) DEFAULT '' NOT NULL,
-	bbcode_uid varchar(5) DEFAULT '' NOT NULL,
+	bbcode_uid varchar(8) DEFAULT '' NOT NULL,
 	post_postcount tinyint(1) UNSIGNED DEFAULT '1' NOT NULL,
 	post_edit_time int(11) UNSIGNED DEFAULT '0' NOT NULL,
 	post_edit_reason varchar(255) DEFAULT '' NOT NULL,
@@ -476,7 +476,7 @@ CREATE TABLE phpbb_privmsgs (
 	message_edit_user mediumint(8) UNSIGNED DEFAULT '0' NOT NULL,
 	message_attachment tinyint(1) UNSIGNED DEFAULT '0' NOT NULL,
 	bbcode_bitfield varchar(255) DEFAULT '' NOT NULL,
-	bbcode_uid varchar(5) DEFAULT '' NOT NULL,
+	bbcode_uid varchar(8) DEFAULT '' NOT NULL,
 	message_edit_time int(11) UNSIGNED DEFAULT '0' NOT NULL,
 	message_edit_count smallint(4) UNSIGNED DEFAULT '0' NOT NULL,
 	to_address text NOT NULL,
@@ -943,7 +943,7 @@ CREATE TABLE phpbb_users (
 	user_avatar_width smallint(4) UNSIGNED DEFAULT '0' NOT NULL,
 	user_avatar_height smallint(4) UNSIGNED DEFAULT '0' NOT NULL,
 	user_sig mediumtext NOT NULL,
-	user_sig_bbcode_uid varchar(5) DEFAULT '' NOT NULL,
+	user_sig_bbcode_uid varchar(8) DEFAULT '' NOT NULL,
 	user_sig_bbcode_bitfield varchar(255) DEFAULT '' NOT NULL,
 	user_from varchar(100) DEFAULT '' NOT NULL,
 	user_icq varchar(15) DEFAULT '' NOT NULL,
@@ -955,7 +955,8 @@ CREATE TABLE phpbb_users (
 	user_occ text NOT NULL,
 	user_interests text NOT NULL,
 	user_actkey varchar(32) DEFAULT '' NOT NULL,
-	user_newpasswd varchar(32) DEFAULT '' NOT NULL,
+	user_newpasswd varchar(40) DEFAULT '' NOT NULL,
+	user_form_salt varchar(32) DEFAULT '' NOT NULL,
 	PRIMARY KEY (user_id),
 	KEY user_birthday (user_birthday),
 	KEY user_email_hash (user_email_hash),

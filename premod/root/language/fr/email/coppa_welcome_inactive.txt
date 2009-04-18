@@ -1,4 +1,4 @@
-Subject: Bienvenue sur "{SITENAME}" - {U_BOARD}
+Subject: Bienvenue sur "{SITENAME}"
 
 {WELCOME_MSG}
 
@@ -13,7 +13,7 @@ Ou envoyez-le à l'adresse e-mail suivante:
 {MAIL_INFO}
 
 ------------------------------ DECOUPEZ ICI ------------------------------
-Permission de participer à "{SITENAME}"
+Permission de participer à "{SITENAME}" - {U_BOARD}
 
 Nom d'utilisateur: {USERNAME}
 Mot de passe: {PASSWORD}

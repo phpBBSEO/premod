@@ -1,12 +1,20 @@
 <?php
-/** 
+/**
 *
 * @package mcp
-* @version $Id: mcp_logs.php,v 1.23 2007/07/22 23:10:14 davidmj Exp $
-* @copyright (c) 2005 phpBB Group 
-* @license http://opensource.org/licenses/gpl-license.php GNU Public License 
+* @version $Id: mcp_logs.php,v 1.24 2007/10/05 14:36:33 acydburn Exp $
+* @copyright (c) 2005 phpBB Group
+* @license http://opensource.org/licenses/gpl-license.php GNU Public License
 *
 */
+
+/**
+* @ignore
+*/
+if (!defined('IN_PHPBB'))
+{
+	exit;
+}
 
 /**
 * mcp_logs

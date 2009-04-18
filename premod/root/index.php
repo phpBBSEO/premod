@@ -1,11 +1,14 @@
 <?php
-/** 
+/**
 *
 * @package phpBB3
-* @version $Id: index.php,v 1.175 2007/07/26 15:49:44 acydburn Exp $
-* @copyright (c) 2005 phpBB Group 
-* @license http://opensource.org/licenses/gpl-license.php GNU Public License 
+* @version $Id: index.php,v 1.176 2007/10/05 14:30:06 acydburn Exp $
+* @copyright (c) 2005 phpBB Group
+* @license http://opensource.org/licenses/gpl-license.php GNU Public License
 *
+*/
+
+/**
 */
 
 /**
@@ -84,11 +87,9 @@ while ($row = $db->sql_fetchrow($result))
 	{
 		$legend .= (($legend != '') ? ', ' : '') . '<span' . $colour_text . '>' . $user->lang['G_BOTS'] . '</span>';
 	}
-	elseif ($user->data['is_registered'])
+	else
 	{
 		$legend .= (($legend != '') ? ', ' : '') . '<a' . $colour_text . ' href="' . append_sid("{$phpbb_root_path}memberlist.$phpEx", 'mode=group&amp;g=' . $row['group_id']) . '">' . (($row['group_type'] == GROUP_SPECIAL) ? $user->lang['G_' . $row['group_name']] : $row['group_name']) . '</a>';
-	} else {
-		$legend .= (($legend != '') ? ', ' : '') . '<span' . $colour_text . '>' . (($row['group_type'] == GROUP_SPECIAL) ? $user->lang['G_' . $row['group_name']] : $row['group_name']) . '</span>';
 	}
 }
 $db->sql_freeresult($result);

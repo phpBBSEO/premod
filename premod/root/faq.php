@@ -1,10 +1,10 @@
 <?php
-/** 
+/**
 *
 * @package phpBB3
-* @version $Id: faq.php,v 1.36 2007/07/26 15:49:44 acydburn Exp $
-* @copyright (c) 2005 phpBB Group 
-* @license http://opensource.org/licenses/gpl-license.php GNU Public License 
+* @version $Id: faq.php,v 1.37 2007/10/05 14:30:06 acydburn Exp $
+* @copyright (c) 2005 phpBB Group
+* @license http://opensource.org/licenses/gpl-license.php GNU Public License
 *
 */
 

@@ -1,12 +1,20 @@
 <?php
-/** 
+/**
 *
 * @package acp
-* @version $Id: acp_disallow.php,v 1.13 2007/07/22 20:10:08 acydburn Exp $
-* @copyright (c) 2005 phpBB Group 
-* @license http://opensource.org/licenses/gpl-license.php GNU Public License 
+* @version $Id: acp_disallow.php,v 1.15 2007/10/05 14:36:32 acydburn Exp $
+* @copyright (c) 2005 phpBB Group
+* @license http://opensource.org/licenses/gpl-license.php GNU Public License
 *
 */
+
+/**
+* @ignore
+*/
+if (!defined('IN_PHPBB'))
+{
+	exit;
+}
 
 /**
 * @package acp
@@ -28,8 +36,16 @@ class acp_disallow
 		$this->tpl_name = 'acp_disallow';
 		$this->page_title = 'ACP_DISALLOW_USERNAMES';
 
+		$form_key = 'acp_disallow';
+		add_form_key($form_key);
+
 		$disallow = (isset($_POST['disallow'])) ? true : false;
 		$allow = (isset($_POST['allow'])) ? true : false;
+
+		if (($allow || $disallow) && !check_form_key($form_key))
+		{
+			trigger_error($user->lang['FORM_INVALID'] . adm_back_link($this->u_action), E_USER_WARNING);
+		}
 
 		if ($disallow)
 		{

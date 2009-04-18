@@ -1,10 +1,10 @@
 <?php
-/** 
+/**
 *
 * @package phpBB3
-* @version $Id: viewforum.php,v 1.337 2007/08/13 12:14:06 acydburn Exp $
-* @copyright (c) 2005 phpBB Group 
-* @license http://opensource.org/licenses/gpl-license.php GNU Public License 
+* @version $Id: viewforum.php,v 1.338 2007/10/05 14:30:07 acydburn Exp $
+* @copyright (c) 2005 phpBB Group
+* @license http://opensource.org/licenses/gpl-license.php GNU Public License
 *
 */
 
@@ -167,7 +167,6 @@ $seo_meta->meta['keywords'] = $seo_meta->make_keywords($seo_meta->meta['meta_des
 // www.phpBB-SEO.com SEO TOOLKIT END - META
 page_header($forum_data['forum_name'] . $extra_title);
 // www.phpBB-SEO.com SEO TOOLKIT END - TITLE
-
 
 $template->set_filenames(array(
 	'body' => 'viewforum_body.html')

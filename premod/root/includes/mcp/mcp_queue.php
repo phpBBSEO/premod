@@ -2,11 +2,19 @@
 /**
 *
 * @package mcp
-* @version $Id: mcp_queue.php,v 1.87 2007/08/19 13:36:54 naderman Exp $
+* @version $Id: mcp_queue.php,v 1.88 2007/10/05 14:36:33 acydburn Exp $
 * @copyright (c) 2005 phpBB Group
 * @license http://opensource.org/licenses/gpl-license.php GNU Public License
 *
 */
+
+/**
+* @ignore
+*/
+if (!defined('IN_PHPBB'))
+{
+	exit;
+}
 
 /**
 * mcp_queue

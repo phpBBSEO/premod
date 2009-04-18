@@ -4,7 +4,7 @@
 * acp_attachments [Standard french]
 *
 * @package language
-* @version $Id: attachments.php,v 1.30 2007/05/17 14:58:40 acydburn Exp $
+* @version $Id: attachments.php,v 1.31 2007/10/04 15:07:24 acydburn Exp $
 * @copyright (c) 2005 phpBB Group 
 * @license http://opensource.org/licenses/gpl-license.php GNU Public License 
 *
@@ -18,6 +18,11 @@
 /**
 * DO NOT CHANGE
 */
+if (!defined('IN_PHPBB'))
+{
+	exit;
+}
+
 if (empty($lang) || !is_array($lang))
 {
 	$lang = array();
@@ -57,13 +62,13 @@ $lang = array_merge($lang, array(
 	'ATTACH_EXT_GROUPS_URL'				=> 'Groupes d\'extensions',
 	'ATTACH_ID'							=> 'ID',
 	'ATTACH_MAX_FILESIZE'				=> 'Taille maximale du fichier',
-	'ATTACH_MAX_FILESIZE_EXPLAIN'		=> 'Taille maximale de chaque fichier, mettez "0" pour illimité.',
+	'ATTACH_MAX_FILESIZE_EXPLAIN'		=> 'Taille maximale de chaque fichier, mettre “0” pour illimité.',
 	'ATTACH_MAX_PM_FILESIZE'			=> 'Taille maximale des fichiers dans la messagerie privée',
-	'ATTACH_MAX_PM_FILESIZE_EXPLAIN'	=> 'Espace disque maximum disponible par utilisateur pour les fichiers joints dans les messages privés, mettez "0" pour illimité.',
+	'ATTACH_MAX_PM_FILESIZE_EXPLAIN'	=> 'Espace disque maximum disponible par utilisateur pour les fichiers joints dans les messages privés, mettre “0” pour illimité.',
 	'ATTACH_ORPHAN_URL'					=> 'Fichiers orphelins',
 	'ATTACH_POST_ID'					=> 'ID du message',
 	'ATTACH_QUOTA'						=> 'Quota total de fichiers joints',
-	'ATTACH_QUOTA_EXPLAIN'				=> 'Espace disque maximum disponible pour les fichiers joints de tout le forum, mettez "0" pour illimité.',
+	'ATTACH_QUOTA_EXPLAIN'				=> 'Espace disque maximum disponible pour les fichiers joints de tout le forum, mettre “0” pour illimité.',
 	'ATTACH_TO_POST'					=> 'Joindre le fichier au message',
 
 	'CAT_FLASH_FILES'			=> 'Fichiers Flash',
@@ -80,7 +85,7 @@ $lang = array_merge($lang, array(
 	'DOWNLOAD_ADD_IPS_EXPLAIN'		=> 'Pour spécifier plusieurs adresses IPs ou noms d\'hôtes différents, entrez chacun d\'eux sur une nouvelle ligne. Pour spécifier un rang d\'adresses IPs, séparez le début et la fin par un tiret, et utilisez * comme caractère joker.',
 	'DOWNLOAD_REMOVE_IPS_EXPLAIN'	=> 'Vous pouvez supprimer (ou ne plus exclure) plusieurs adresses IPs d\'un coup en utilisant la combinaison de touches appropriée avec votre clavier et votre souris. Les adresses IPs exclues ont un fond bleu.',
 	'DISPLAY_INLINED'				=> 'Afficher les images',
-	'DISPLAY_INLINED_EXPLAIN'		=> 'Si "Non", les images jointes seront affichées en tant que lien.',
+	'DISPLAY_INLINED_EXPLAIN'		=> 'Si “Non”, les images jointes seront affichées en tant que lien.',
 	'DISPLAY_ORDER'					=> 'Ordre d\'affichage des fichiers joints',
 	'DISPLAY_ORDER_EXPLAIN'			=> 'Classer les fichiers joints par date.',
 	

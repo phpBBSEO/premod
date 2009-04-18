@@ -2,13 +2,14 @@
 /**
 *
 * @package search
-* @version $Id: fulltext_mysql.php,v 1.49 2007/07/23 17:03:37 kellanved Exp $
+* @version $Id: fulltext_mysql.php,v 1.50 2007/10/05 14:36:33 acydburn Exp $
 * @copyright (c) 2005 phpBB Group
 * @license http://opensource.org/licenses/gpl-license.php GNU Public License
 *
 */
 
 /**
+* @ignore
 */
 if (!defined('IN_PHPBB'))
 {

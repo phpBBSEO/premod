@@ -1,12 +1,20 @@
 <?php
-/** 
+/**
 *
 * @package acm
-* @version $Id: acm_file.php,v 1.53 2007/07/11 15:02:34 acydburn Exp $
-* @copyright (c) 2005 phpBB Group 
-* @license http://opensource.org/licenses/gpl-license.php GNU Public License 
+* @version $Id: acm_file.php,v 1.54 2007/10/05 14:36:32 acydburn Exp $
+* @copyright (c) 2005 phpBB Group
+* @license http://opensource.org/licenses/gpl-license.php GNU Public License
 *
 */
+
+/**
+* @ignore
+*/
+if (!defined('IN_PHPBB'))
+{
+	exit;
+}
 
 /**
 * ACM File Based Caching
@@ -64,7 +72,7 @@ class acm
 	/**
 	* Save modified objects
 	*/
-	function save() 
+	function save()
 	{
 		if (!$this->is_modified)
 		{

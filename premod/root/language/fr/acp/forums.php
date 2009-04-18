@@ -4,7 +4,7 @@
 * acp_forums [Standard french]
 *
 * @package language
-* @version $Id: forums.php,v 1.29 2007/07/16 14:02:06 acydburn Exp $
+* @version $Id: forums.php,v 1.32 2007/10/05 13:14:58 kellanved Exp $
 * @copyright (c) 2005 phpBB Group 
 * @license http://opensource.org/licenses/gpl-license.php GNU Public License 
 *
@@ -18,6 +18,11 @@
 /**
 * DO NOT CHANGE
 */
+if (!defined('IN_PHPBB'))
+{
+	exit;
+}
+
 if (empty($lang) || !is_array($lang))
 {
 	$lang = array();
@@ -90,6 +95,9 @@ $lang = array_merge($lang, array(
 	'FORUM_PASSWORD_CONFIRM'			=> 'Confirmation du mot de passe',
 	'FORUM_PASSWORD_CONFIRM_EXPLAIN'	=> 'Uniquement si un mot de passe a été saisi.',
 	'FORUM_PASSWORD_EXPLAIN'			=> 'Spécifiez un mot de passe pour ce forum, utilisez de préférence un système de permissions.',
+	'FORUM_PASSWORD_UNSET'				=> 'Supprimer le mot de passe du forum',
+	'FORUM_PASSWORD_UNSET_EXPLAIN'		=> 'Cochez cette case si vous souhaitez supprimer le mot de passe du forum.',
+	'FORUM_PASSWORD_OLD'				=> 'Le mot de passe du forum utilise un ancien encryptage et doit être modifié.',
 	'FORUM_PASSWORD_MISMATCH'			=> 'Les mots de passe saisis ne concordent pas.',
 	'FORUM_PRUNE_SETTINGS'				=> 'Réglages du délestage des forums',
 	'FORUM_RESYNCED'					=> 'Le forum “%s” a été resynchronisé',

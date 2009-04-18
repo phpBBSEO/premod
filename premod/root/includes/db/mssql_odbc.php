@@ -1,10 +1,10 @@
 <?php
-/** 
+/**
 *
 * @package dbal
-* @version $Id: mssql_odbc.php,v 1.36 2007/08/24 16:36:23 acydburn Exp $
-* @copyright (c) 2005 phpBB Group 
-* @license http://opensource.org/licenses/gpl-license.php GNU Public License 
+* @version $Id: mssql_odbc.php,v 1.37 2007/10/05 14:36:32 acydburn Exp $
+* @copyright (c) 2005 phpBB Group
+* @license http://opensource.org/licenses/gpl-license.php GNU Public License
 *
 */
 
@@ -180,7 +180,7 @@ class dbal_mssql_odbc extends dbal
 	/**
 	* Build LIMIT query
 	*/
-	function _sql_query_limit($query, $total, $offset = 0, $cache_ttl = 0) 
+	function _sql_query_limit($query, $total, $offset = 0, $cache_ttl = 0)
 	{
 		$this->query_result = false;
 

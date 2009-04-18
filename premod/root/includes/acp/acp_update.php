@@ -2,11 +2,19 @@
 /**
 *
 * @package acp
-* @version $Id: acp_update.php,v 1.7 2007/06/30 15:04:30 acydburn Exp $
+* @version $Id: acp_update.php,v 1.8 2007/10/04 12:02:03 acydburn Exp $
 * @copyright (c) 2005 phpBB Group
 * @license http://opensource.org/licenses/gpl-license.php GNU Public License
 *
 */
+
+/**
+* @ignore
+*/
+if (!defined('IN_PHPBB'))
+{
+	exit;
+}
 
 /**
 * @package acp
@@ -40,6 +48,7 @@ class acp_update
 
 		$info = explode("\n", $info);
 		$latest_version = trim($info[0]);
+
 		$announcement_url = trim($info[1]);
 		$update_link = append_sid($phpbb_root_path . 'install/index.' . $phpEx, 'mode=update');
 
@@ -59,17 +68,20 @@ class acp_update
 		if ($up_to_date) {
 			$phpbb_seo_update = trim(str_replace($current_version, '', $latest_version));
 		}
+		$update_instruction = sprintf($user->lang['UPDATE_INSTRUCTIONS'], $announcement_url, $update_link);
 		if (!empty($phpbb_seo_update)) {
-			$update_instruction = '<br/><br/><hr/>' . sprintf($user->lang['ACP_PREMOD_UPDATE'], $latest_version, $announcement_url) . '<br/><hr/>';
-			$up_to_date = false;
-		} else {
-			$update_instruction = sprintf($user->lang['UPDATE_INSTRUCTIONS'], $announcement_url, $update_link);
+			$auto_package = trim($info[2]);
+			$auto_update = $auto_package === 'auto_update:yes' ? true : false;
+			$up_to_date = ($latest_version === $config['seo_premod_version']) ? true : false;
+			if (!$auto_update) {
+				$update_instruction = '<br/><br/><hr/>' . sprintf($user->lang['ACP_PREMOD_UPDATE'], $latest_version, $announcement_url) . '<br/><hr/>';
+			}
 		}
 		$template->assign_vars(array(
 			'S_UP_TO_DATE'		=> $up_to_date,
 			'S_UP_TO_DATE_AUTO'	=> $up_to_date_automatic,
 			'S_VERSION_CHECK'	=> true,
-			'U_ACTION'		=> $this->u_action,
+			'U_ACTION'			=> $this->u_action,
 
 			'LATEST_VERSION'	=> $latest_version,
 			'CURRENT_VERSION'	=> $config['version'],
@@ -79,4 +91,5 @@ class acp_update
 		));
 	}
 }
+
 ?>

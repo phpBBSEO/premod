@@ -4,7 +4,7 @@
 * install [Standard french]
 *
 * @package language
-* @version $Id: install.php,v 1.120 2007/08/24 17:18:43 acydburn Exp $
+* @version $Id: install.php,v 1.127 2007/10/12 18:14:15 acydburn Exp $
 * @copyright (c) 2005 phpBB Group
 * @license http://opensource.org/licenses/gpl-license.php GNU Public License
 *
@@ -18,6 +18,11 @@
 /**
 * DO NOT CHANGE
 */
+if (!defined('IN_PHPBB'))
+{
+	exit;
+}
+
 if (empty($lang) || !is_array($lang))
 {
 	$lang = array();
@@ -51,7 +56,7 @@ $lang = array_merge($lang, array(
 	'BEGIN_CONVERT'					=> 'Démarrer la conversion',
 	'BLANK_PREFIX_FOUND'			=> 'Une vérification de vos tables a détectée une installation possible sans préfixe de table.',
 	'BOARD_NOT_INSTALLED'			=> 'Aucune installation détectée',
-	'BOARD_NOT_INSTALLED_EXPLAIN'	=> 'Pour pouvoir effectuer une mise à jour, vous devez avoir un forum phpBB3 installé. Notez que l\'ancien et le nouveau forum doivent être dans la même base de données avec des préfixes différents. Vous devez effectuer <a href="%s">l\'installation du nouveau forum</a>.',
+	'BOARD_NOT_INSTALLED_EXPLAIN'	=> 'Pour pouvoir effectuer une mise à jour, vous devez avoir un forum phpBB3 installé. Notez que l\'ancien et le nouveau forum doivent être dans la même base de données avec des préfixes différents. Vous devez effectuer <a href=“%s”>l\'installation du nouveau forum</a>.',
 
 	'CATEGORY'					=> 'Catégorie',
 	'CACHE_STORE'				=> 'Type de cache',
@@ -70,7 +75,7 @@ $lang = array_merge($lang, array(
 	'CONFIG_CONVERT'			=> 'Conversion de la configuration',
 	'CONFIG_FILE_UNABLE_WRITE'	=> 'Impossible d\'écrire le fichier de configuration. Des méthodes alternatives pour créer ce fichier sont indiquées ci-dessous.',
 	'CONFIG_FILE_WRITTEN'		=> 'Le fichier de configuration a été écrit, vous pouvez désormais procéder à la prochaine étape de l\'installation.',
-	'CONFIG_PHPBB_EMPTY'		=> 'La variable de configuration de phpBB3 pour "%s" est vide.',
+	'CONFIG_PHPBB_EMPTY'		=> 'La variable de configuration de phpBB3 pour “%s” est vide.',
 	'CONFIG_RETRY'				=> 'Réessayer',
 	'CONTACT_EMAIL_CONFIRM'		=> 'Confirmez l\'e-mail de contact',
 	'CONTINUE_CONVERT'			=> 'Continuer la conversion',
@@ -84,15 +89,16 @@ $lang = array_merge($lang, array(
 	'CONVERT_INTRO_BODY'		=> 'D\'ici, vous pouvez importer des données à partir d\'autres systèmes de forum. La liste suivante montre tous les modules de conversion actuellement disponibles. Si le module de conversion de votre forum ne s\'y trouve pas, visitez notre site web pour vérifier si le convertisseur est disponible.',
 	'CONVERT_NEW_CONVERSION'	=> 'Nouvelle conversion',
 	'CONVERT_NOT_EXIST'			=> 'Le convertisseur spécifié n\'existe pas.',
+	'CONVERT_OPTIONS'        	=> 'Options',
 	'CONVERT_SETTINGS_VERIFIED'	=> 'Les informations saisies ont été vérifiées. Pour commencer la conversion, cliquez sur le bouton ci-dessous.',
-	'CONV_ERR_FATAL'					=> 'Erreur fatale lors de la conversion',
+	'CONV_ERR_FATAL'			=> 'Erreur fatale lors de la conversion',
 
 	'CONV_ERROR_ATTACH_FTP_DIR'			=> 'L\'envoi par FTP des fichiers joints est activé sur votre ancien forum. Copiez tous les fichiers joints dans un répertoire, désactivez l\'envoi FTP, et vérifiez que le répertoire spécifié est correct. Vous devrez ensuite redémarrer la conversion.',
 	'CONV_ERROR_CONFIG_EMPTY'			=> 'Il n\'y a aucune information de configuration disponible pour la conversion.',
 	'CONV_ERROR_FORUM_ACCESS'			=> 'Impossible d\'obtenir les informations d\'accès au forum.',
 	'CONV_ERROR_GET_CATEGORIES'			=> 'Impossible d\'obtenir les catégories.',
 	'CONV_ERROR_GET_CONFIG'				=> 'Impossible de récupérer la configuration de votre forum.',
-	'CONV_ERROR_COULD_NOT_READ'			=> 'Impossible d\'accéder/lire "%s".',
+	'CONV_ERROR_COULD_NOT_READ'			=> 'Impossible d\'accéder/lire “%s”.',
 	'CONV_ERROR_GROUP_ACCESS'			=> 'Impossible d\'obtenir les informations d\'authentification des groupes.',
 	'CONV_ERROR_INCONSISTENT_GROUPS'	=> 'Contradiction détectée dans la table des groupes dans add_bots() - vous devez ajouter tous les groupes spéciaux manuellement.',
 	'CONV_ERROR_INSERT_BOT'				=> 'Impossible d\'insérer le robot dans la table des utilisateurs.',
@@ -102,7 +108,7 @@ $lang = array_merge($lang, array(
 	'CONV_ERROR_NO_AVATAR_PATH'			=> 'Note au développeur: vous devez spécifier $convertor[\'avatar_path\'] pour utiliser %s.',
 	'CONV_ERROR_NO_FORUM_PATH'			=> 'Le chemin relatif au forum source n\'a pas été spécifié.',
 	'CONV_ERROR_NO_GALLERY_PATH'		=> 'Note au développeur: vous devez spécifier $convertor[\'avatar_gallery_path\'] pour utiliser %s.',
-	'CONV_ERROR_NO_GROUP'				=> 'Le groupe "%1$s" est introuvable dans %2$s.',
+	'CONV_ERROR_NO_GROUP'				=> 'Le groupe “%1$s” est introuvable dans %2$s.',
 	'CONV_ERROR_NO_RANKS_PATH'			=> 'Note au développeur: vous devez spécifier $convertor[\'ranks_path\'] pour utiliser %s.',
 	'CONV_ERROR_NO_SMILIES_PATH'		=> 'Note au développeur: vous devez spécifier $convertor[\'smilies_path\'] pour utiliser %s.',
 	'CONV_ERROR_NO_UPLOAD_DIR'			=> 'Note au développeur: vous devez spécifier $convertor[\'upload_path\'] pour utiliser %s.',
@@ -111,7 +117,7 @@ $lang = array_merge($lang, array(
 	'CONV_ERROR_REPLACE_CATEGORY'		=> 'Impossible d\'insérer le nouveau forum en remplacement de l\'ancienne catégorie.',
 	'CONV_ERROR_REPLACE_FORUM'			=> 'Impossible d\'insérer le nouveau forum en remplacement de l\'ancien forum.',
 	'CONV_ERROR_USER_ACCESS'			=> 'Impossible d\'obtenir les informations d\'authentification de l\'utilisateur.',
-	'CONV_ERROR_WRONG_GROUP'			=> 'Mauvais groupe "%1$s" défini dans %2$s.',
+	'CONV_ERROR_WRONG_GROUP'			=> 'Mauvais groupe “%1$s” défini dans %2$s.',
 	'CONV_OPTIONS_BODY'					=> 'Cette page collecte les informations qui sont requises pour accéder à votre forum source. Entrez les informations de la base de données de votre ancien forum; Le convertisseur ne modifiera en rien la base de données donnée ci-dessous. Le forum source devrait être désactivé pour permettre une conversion sans risque.',
 	'CONV_SAVED_MESSAGES'				=> 'Messages sauvegardés',
 
@@ -162,10 +168,10 @@ $lang = array_merge($lang, array(
 	'FILES_OPTIONAL'			=> 'Fichiers et répertoires optionnels',
 	'FILES_OPTIONAL_EXPLAIN'	=> '<strong>Optionnel</strong> - Ces fichiers, répertoires ou permissions ne sont pas obligatoires. L\'installation utilisera diverses techniques pour les créer s\'ils n\'existent pas ou ne sont pas permis en écriture. Toutefois, la présence de ces fichiers, ou permissions accéléreront l\'installation.',
 	'FILES_REQUIRED'			=> 'Répertoires et fichiers',
-	'FILES_REQUIRED_EXPLAIN'	=> '<strong>Requis</strong> - Pour fonctionner correctement, phpBB doit pouvoir accéder ou écrire sur certains fichiers ou répertoires. Si vous voyez “Introuvable”, vous devez créer les fichiers ou répertoires adéquats. Si vous voyez “Ecriture interdite”, vous devez modifier les permissions sur le fichier ou répertoire pour autoriser phpBB à y écrire.',
+	'FILES_REQUIRED_EXPLAIN'	=> '<strong>Requis</strong> - Pour fonctionner correctement, phpBB doit pouvoir accéder ou écrire sur certains fichiers ou répertoires. Si vous voyez “Introuvable”, vous devez créer les fichiers ou répertoires adéquats. Si vous voyez “Non autorisé en écriture”, vous devez modifier les permissions sur le fichier ou répertoire pour autoriser phpBB à y écrire.',
 	'FILLING_TABLE'				=> 'Remplissage de la table <strong>%s</strong>',
 	'FILLING_TABLES'			=> 'Remplissage des tables',
-	'FINAL_STEP'				=> 'Etape finale',
+	'FINAL_STEP'				=> 'Etape finale du processus',
 	'FORUM_ADDRESS'				=> 'Adresse du forum',
 	'FORUM_ADDRESS_EXPLAIN'		=> 'Ceci est l\'URL de votre ancien forum, par exemple <samp>http://www.exemple.com/phpBB2/</samp>. Si une adresse est entrée ici et non vide à gauche, chaque exemple de cette adresse sera remplacé par vos nouvelles adresses dans les messages, messages privés et signatures.',
 	'FORUM_PATH'				=> 'Chemin du forum',
@@ -278,7 +284,7 @@ $lang = array_merge($lang, array(
 	'NO_TABLES_FOUND'   		=> 'Aucune table trouvée.',
 // TODO: Write some explanatory introduction text
 
-	'OVERVIEW_BODY'   => 'Bienvenue sur la version RC5 de phpBB 3.0, la prochaine génération de forum après phpBB 2.0.x! Cette version RC5 est destinée aux utilisateurs avancés pour l\'essayer sur des environnements de développement dédiés, afin de nous aider à identifier les derniers bugs et problèmes de navigation.</p><p>Lisez <a href="../docs/INSTALL.html">notre guide</a> pour de plus amples informations sur l\'installation de phpBB3</p><p><strong style="text-transform: uppercase;">Note:</strong> Cette version <strong style="text-transform: uppercase;">n\'est pas finale</strong> et est <strong style="text-transform: uppercase;">uniquement</strong> destinée aux environnements de tests.</p><p>Cet outil vous guidera pour l\'installation, la conversion depuis un autre système de forum ou pour la mise à jour de votre forum phpBB. Pour plus d\'informations sur chaque option, choisissez-la dans le menu ci-dessus.',
+	'OVERVIEW_BODY'   => 'Bienvenue sur la version RC de phpBB 3.0, la prochaine génération de forum après phpBB 2.0.x! Cette version RC est destinée aux utilisateurs avancés pour l\'essayer sur des environnements de développement dédiés, afin de nous aider à identifier les derniers bugs et problèmes de navigation.</p><p>Lisez <a href="../docs/INSTALL.html">notre guide</a> pour de plus amples informations sur l\'installation de phpBB3</p><p><strong style="text-transform: uppercase;">Note:</strong> Cette version <strong style="text-transform: uppercase;">n\'est pas finale</strong> et est <strong style="text-transform: uppercase;">uniquement</strong> destinée aux environnements de tests.</p><p>Cet outil vous guidera pour l\'installation, la conversion depuis un autre système de forum ou pour la mise à jour de votre forum phpBB. Pour plus d\'informations sur chaque option, choisissez-la dans le menu ci-dessus.',
 
 	'PCRE_UTF_SUPPORT'				=> 'Support de PCRE UTF-8',
 	'PCRE_UTF_SUPPORT_EXPLAIN'		=> 'phpBB <strong>ne fonctionnera que</strong> si votre installation PHP est compilée avec le support de l\'extension PCRE UTF-8',
@@ -299,7 +305,7 @@ $lang = array_merge($lang, array(
 	'POST_ID'  							=> 'Id du message',
 	'PREFIX_FOUND'   					=> 'Une vérification de vos tables a trouvé une installation de phpBB avec le préfixe <strong>%s</strong>.',
 	'PREPROCESS_STEP'   				=> 'Exécution des fonctions/requêtes de pré-traitement',
-	'PRE_CONVERT_COMPLETE'   			=> 'Toutes les étapes de pré-conversion sont terminées. Vous pouvez commencer le processus de conversion. Notez que vous pouvez avoir à ajuster plusieurs choses manuellement. Après la conversion, vérifiez particulièrement les permissions assignées, reconstruisez votre index de recherche si nécessaire, et assurez-vous que les fichiers ont été correctement copiés, par exemple, les avatars et les smileys.',
+	'PRE_CONVERT_COMPLETE'   			=> 'Toutes les étapes de pré-conversion sont terminées. Vous pouvez commencer le processus de conversion. Notez que vous pouvez avoir à faire et ajuster plusieurs choses manuellement. Après la conversion, vérifiez particulièrement les permissions assignées, reconstruisez votre index de recherche si nécessaire, et assurez-vous que les fichiers ont été correctement copiés, par exemple, les avatars et les smileys.',
 	'PROCESS_LAST'   					=> 'Exécution des dernières instructions',
 
 	'REFRESH_PAGE'				=> 'Rafraîchir la page pour continuer la conversion',
@@ -355,6 +361,7 @@ $lang = array_merge($lang, array(
 	'UNWRITABLE'   				=> 'Non autorisé en écriture',
 	'UPDATE_TOPICS_POSTED'      => 'Mise à jour des informations de sujets',
 	'UPDATE_TOPICS_POSTED_ERR'  => 'Une erreur est survenue lors de la mise à jour des informations des sujets. Vous pourrez réessayer plus tard via le panneau d\'administration.',
+	'VERIFY_OPTIONS'			=> 'Vérification des options de conversion',
 	'VERSION'               	=> 'Version',
 
 	'WELCOME_INSTALL'  			=> 'Bienvenue dans l\'installation de phpBB 3',
@@ -376,8 +383,9 @@ $lang = array_merge($lang, array(
 	'CHECK_FILES_EXPLAIN'   		=> 'Pendant la prochaine étape, tous les fichiers seront comparés aux fichiers de mise à jour - cela peut prendre du temps si c\'est la première vérification de fichiers.',
 	'CHECK_FILES_UP_TO_DATE'		=> 'Selon votre base de données, votre forum est à jour. Vous pouvez effectuer la vérification de fichiers pour vous assurer que tous les fichiers sont bien à jour avec la dernière version de phpBB.',
 	'CHECK_UPDATE_DATABASE'  		=> 'Continuer la mise à jour',
-	'COLLECTED_INFORMATION'   		=> 'Informations sur les fichiers collectés',
+	'COLLECTED_INFORMATION'   		=> 'Informations du fichier',
 	'COLLECTED_INFORMATION_EXPLAIN' => 'La liste ci-dessous vous montre les informations sur les fichiers à mettre à jour. Lisez ces informations afin de mettre à jour correctement ces fichiers.',
+	'COLLECTING_FILE_DIFFS'			=> 'Collecte les différences entre les fichiers',
 	'COMPLETE_LOGIN_TO_BOARD'   	=> 'Vous pouvez maintenant vous <a href="../ucp.php?mode=login">connecter à votre forum</a> et vérifier si tout fonctionne correctement. N\'oubliez pas de supprimer, renommer ou déplacer le dossier <em>install</em>!',
 	'CONTINUE_UPDATE_NOW'         	=> 'Continuer la mise à jour maintenant',
 	'CURRENT_FILE'   				=> 'Fichier original actuel',
@@ -411,7 +419,7 @@ $lang = array_merge($lang, array(
 	'FILES_MODIFIED'				=> 'Fichiers modifiés',
 	'FILES_MODIFIED_EXPLAIN'   		=> 'Les fichiers suivants sont modifiés et ne représentent pas les fichiers originaux des anciennes versions. Le fichier mis à jour sera la combinaison entre vos modifications et le nouveau fichier.',
 	'FILES_NEW'						=> 'Nouveaux fichiers',
-	'FILES_NEW_EXPLAIN'				=> 'Les fichiers actuels suivants n\'existent pas dans votre installation.',
+	'FILES_NEW_EXPLAIN'				=> 'Les fichiers actuels suivants n\'existent pas dans votre installation. Ces fichiers seront ajoutés à votre installation.',
 	'FILES_NEW_CONFLICT'			=> 'Nouveaux fichiers en conflit',
 	'FILES_NEW_CONFLICT_EXPLAIN'	=> 'Les fichiers suivants sont nouveaux dans la dernière version, mais il existe déjà un fichier du même nom dans le même emplacement. Ce fichier sera écrasé par le nouveau fichier.',
 	'FILES_NOT_MODIFIED'			=> 'Fichier non modifiés',
@@ -444,6 +452,8 @@ $lang = array_merge($lang, array(
 	'MERGE_MOD_FILE_OPTION'		=> 'Fusionner les différences et utiliser le code modifié dans le bloc en conflit',
 	'MERGE_NEW_FILE_OPTION'		=> 'Fusionner les différences et utiliser le code du nouveau fichier dans le bloc en conflit',
 	'MERGE_SELECT_ERROR'		=> 'Les modes du fichier fusionné en conflit ne sont pas correctement sélectionnés.',
+	'MERGING_FILES'				=> 'Fusion des différences',
+	'MERGING_FILES_EXPLAIN'		=> 'Collecte actuellement les modifications finales des fichiers.<br /><br />Patientez jusqu\'à ce que phpBB termine toutes les opérations sur les fichiers modifiés.',
 
 	'NEW_FILE'						=> 'Nouveau fichier à jour',
 	'NEW_USERNAME'					=> 'Nouveau nom d\'utilisateur',
@@ -458,6 +468,7 @@ $lang = array_merge($lang, array(
 	'NO_VISIBLE_CHANGES'			=> 'Aucune modification visible',
 	'NOTICE'						=> 'Avertissement',
 	'NUM_CONFLICTS'					=> 'Nombre de conflits',
+	'NUMBER_OF_FILES_COLLECTED'		=> 'Il y a actuellement %1$d des %2$d fichiers collectés qui comportent des différences.<br />Patientez jusqu\'à ce que la collecte des fichiers soit terminée.',
 
 	'OLD_UPDATE_FILES'		=> 'Les fichiers de mise à jour ne sont pas à jour. Les fichiers trouvés pour la mise à jour sont pour phpBB %1$s vers phpBB %2$s mais la dernière version de phpBB est la %3$s.',
 
@@ -493,6 +504,8 @@ $lang = array_merge($lang, array(
 	'STATUS_NOT_MODIFIED'		=> 'Fichier non modifié',
 	'STATUS_UP_TO_DATE'			=> 'Fichier déjà à jour',
 
+	'TOGGLE_DISPLAY'			=> 'Voir/Masquer la liste des fichiers',
+	
 	'UPDATE_COMPLETED'				=> 'La mise à jour est terminée',
 	'UPDATE_DATABASE'				=> 'Mettre à jour la base de données',
 	'UPDATE_DATABASE_EXPLAIN'		=> 'Dans la prochaine étape, la base de données sera mise à jour.',
@@ -564,7 +577,7 @@ $lang = array_merge($lang, array(
 	'CONFIG_SITE_DESC'				=> 'Description de votre forum',
 	'CONFIG_SITENAME'				=> 'votredomaine.com',
 
-	'DEFAULT_INSTALL_POST'			=> 'Ceci est un exemple de message de votre installation phpBB3. Vous pouvez supprimer ce message, ce sujet et même ce forum si vous souhaitez, puisque tout semble fonctionner!',
+	'DEFAULT_INSTALL_POST'			=> 'Ceci est un exemple de message de votre installation phpBB3. Tout semble fonctionner. Vous pouvez si vous le voulez supprimer ce message et continuer à configurer votre forum. Durant le processus d\'installation, votre première catégorie et votre premier forum sont assignés à un ensemble de permissions appropriées aux groupes d\'utilisateurs que sont les administrateurs, les robots, les modérateurs globaux, les invités, les utilisateurs inscrits et les utilisateurs COPPA inscrits. Si vous choisissez de supprimer également votre première catégorie et votre premier forum, n\'oubliez pas de régler les permissions à tous les groupes d\'utilisateurs, pour toutes les nouvelles catégories et forums que vous allez créer. Il est recommandé de renommer votre première catégorie et votre premier forum et de copier leurs permissions sur chaque nouvelle catégorie et nouveau forum lors de leur création. Amusez-vous bien!',
 
 	'EXT_GROUP_ARCHIVES'			=> 'Archives',
 	'EXT_GROUP_DOCUMENTS'			=> 'Documents',
@@ -576,9 +589,9 @@ $lang = array_merge($lang, array(
 	'EXT_GROUP_REAL_MEDIA'			=> 'Real Media',
 	'EXT_GROUP_WINDOWS_MEDIA'		=> 'Windows Media',
 
-	'FORUMS_FIRST_CATEGORY'			=> 'Ma première catégorie',
-	'FORUMS_TEST_FORUM_DESC'		=> 'Ceci n\'est qu\'un forum de test.',
-	'FORUMS_TEST_FORUM_TITLE'		=> 'Forum de Test 1',
+	'FORUMS_FIRST_CATEGORY'			=> 'Votre première catégorie',
+	'FORUMS_TEST_FORUM_DESC'		=> 'Description de votre premier forum.',
+	'FORUMS_TEST_FORUM_TITLE'		=> 'Votre premier forum',
 
 	'RANKS_SITE_ADMIN_TITLE'		=> 'Administrateur du site',
 	'REPORT_WAREZ'					=> 'Le message contient un lien vers un logiciel illégal ou piraté.',

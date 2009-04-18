@@ -1,10 +1,10 @@
 <?php
-/** 
+/**
 *
 * @package install
-* @version $Id: install_main.php,v 1.12 2006/08/06 17:25:29 naderman Exp $
-* @copyright (c) 2005 phpBB Group 
-* @license http://opensource.org/licenses/gpl-license.php GNU Public License 
+* @version $Id: install_main.php,v 1.13 2007/10/04 11:33:33 acydburn Exp $
+* @copyright (c) 2005 phpBB Group
+* @license http://opensource.org/licenses/gpl-license.php GNU Public License
 *
 */
 

@@ -1,10 +1,10 @@
 <?php
-/** 
+/**
 *
 * @package mcp
-* @version $Id: mcp_notes.php,v 1.2 2006/05/01 19:45:42 grahamje Exp $
-* @copyright (c) 2005 phpBB Group 
-* @license http://opensource.org/licenses/gpl-license.php GNU Public License 
+* @version $Id: mcp_notes.php,v 1.3 2007/10/04 15:06:01 acydburn Exp $
+* @copyright (c) 2005 phpBB Group
+* @license http://opensource.org/licenses/gpl-license.php GNU Public License
 *
 */
 

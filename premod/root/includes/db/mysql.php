@@ -1,10 +1,10 @@
 <?php
-/** 
+/**
 *
 * @package dbal
-* @version $Id: mysql.php,v 1.61 2007/08/14 12:27:35 davidmj Exp $
-* @copyright (c) 2005 phpBB Group 
-* @license http://opensource.org/licenses/gpl-license.php GNU Public License 
+* @version $Id: mysql.php,v 1.62 2007/10/05 14:36:32 acydburn Exp $
+* @copyright (c) 2005 phpBB Group
+* @license http://opensource.org/licenses/gpl-license.php GNU Public License
 *
 */
 
@@ -189,7 +189,7 @@ class dbal_mysql extends dbal
 	/**
 	* Build LIMIT query
 	*/
-	function _sql_query_limit($query, $total, $offset = 0, $cache_ttl = 0) 
+	function _sql_query_limit($query, $total, $offset = 0, $cache_ttl = 0)
 	{
 		$this->query_result = false;
 

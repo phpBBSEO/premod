@@ -1,14 +1,26 @@
 <?php
-/** 
+/**
 *
 * @package phpBB3
-* @version $Id: constants.php,v 1.80 2007/05/13 16:15:19 naderman Exp $
-* @copyright (c) 2005 phpBB Group 
-* @license http://opensource.org/licenses/gpl-license.php GNU Public License 
+* @version $Id: constants.php,v 1.83 2007/10/05 14:30:08 acydburn Exp $
+* @copyright (c) 2005 phpBB Group
+* @license http://opensource.org/licenses/gpl-license.php GNU Public License
 *
 */
 
 /**
+* @ignore
+*/
+if (!defined('IN_PHPBB'))
+{
+	exit;
+}
+
+/**
+* valid external constants:
+* PHPBB_MSG_HANDLER
+* PHPBB_ROOT_PATH
+* PHPBB_ADMIN_PATH
 */
 
 // User related
@@ -136,7 +148,7 @@ define('ATTACHMENT_CATEGORY_FLASH', 5); // Flash/SWF files
 define('ATTACHMENT_CATEGORY_QUICKTIME', 6); // Quicktime/Mov files
 
 // BBCode UID length
-define('BBCODE_UID_LEN', 5);
+define('BBCODE_UID_LEN', 8);
 
 // Number of core BBCodes
 define('NUM_CORE_BBCODES', 12);

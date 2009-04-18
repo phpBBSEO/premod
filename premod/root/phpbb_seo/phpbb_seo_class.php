@@ -13,7 +13,7 @@
 * @package Advanced phpBB3 SEO mod Rewrite
 */
 class phpbb_seo {
-	var	$version = 'Premod3.0.RC5a';
+	var	$version = '0.4.0RC4';
 	var	$modrtype = 0;
 	var	$seo_paths = array();
 	var	$seo_url = array();

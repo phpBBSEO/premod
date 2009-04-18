@@ -1,5 +1,20 @@
 <?php
+/**
+*
+* @package install
+* @version $Id: new_normalizer.php,v 1.3 2007/10/04 11:33:33 acydburn Exp $
+* @copyright (c) 2007 phpBB Group
+* @license http://opensource.org/licenses/gpl-license.php GNU Public License
+*
+*/
 
+/**
+* @ignore
+*/
+if (!defined('IN_PHPBB'))
+{
+	exit;
+}
 
 /**
 * A wrapper function for the normalizer which takes care of including the class if required and modifies the passed strings

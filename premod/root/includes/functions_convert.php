@@ -2,11 +2,19 @@
 /**
 *
 * @package install
-* @version $Id: functions_convert.php,v 1.65 2007/08/15 17:29:41 acydburn Exp $
+* @version $Id: functions_convert.php,v 1.68 2007/10/14 12:31:32 kellanved Exp $
 * @copyright (c) 2006 phpBB Group
 * @license http://opensource.org/licenses/gpl-license.php GNU Public License
 *
 */
+
+/**
+* @ignore
+*/
+if (!defined('IN_PHPBB'))
+{
+	exit;
+}
 
 /**
 * Default avatar width/height
@@ -216,8 +224,16 @@ function is_topic_locked($bool)
 */
 function make_uid($timestamp)
 {
-	return substr(md5($timestamp), 0, BBCODE_UID_LEN);
+	static $last_timestamp, $last_uid;
+
+	if (empty($last_timestamp) || $timestamp != $last_timestamp)
+	{
+		$last_uid = substr(base_convert(unique_id(), 16, 36), 0, BBCODE_UID_LEN);
+	}
+	$last_timestamp = $timestamp;
+	return $last_uid;
 }
+
 
 /**
 * Validate a website address
@@ -372,7 +388,7 @@ function mimetype($filename)
 * There can be significant network overhead if there are a large number of remote avatars
 * @todo Look at the option of allowing the user to decide whether this is called or to force the dimensions
 */
-function remote_avatar_dims() 
+function remote_avatar_dims()
 {
 	global $db;
 
@@ -514,14 +530,14 @@ function base64_unpack($string)
 
 	for ($i = 1; $i <= $length; $i++)
 	{
-		$pos = $length - $i; 
+		$pos = $length - $i;
 		$operand = strpos($chars, substr($string, $pos, 1));
-		$exponent = pow($base, $i-1); 
+		$exponent = pow($base, $i-1);
 		$dec_value = $operand * $exponent;
-		$number += $dec_value; 
+		$number += $dec_value;
 	}
 
-	return $number; 
+	return $number;
 }
 
 function _import_check($config_var, $source, $use_target)
@@ -535,7 +551,7 @@ function _import_check($config_var, $source, $use_target)
 	);
 
 	// copy file will prepend $phpBB_root_path
-	$target = $config[$config_var] . '/' . basename(($use_target === false) ? $source : $use_target); 
+	$target = $config[$config_var] . '/' . basename(($use_target === false) ? $source : $use_target);
 
 	if (!empty($convert->convertor[$config_var]) && strpos($source, $convert->convertor[$config_var]) !== 0)
 	{
@@ -639,7 +655,6 @@ function import_smiley($source, $use_target = false)
 }
 
 /*
-* 
 */
 function import_avatar($source, $use_target = false, $user_id = false)
 {
@@ -998,15 +1013,15 @@ function set_user_options()
 
 	// Key need to be set in row, else default value is chosen
 	$keyoptions = array(
-		'viewimg'		=> array('bit' => 0, 'default' => 1), 
+		'viewimg'		=> array('bit' => 0, 'default' => 1),
 		'viewflash'		=> array('bit' => 1, 'default' => 1),
 		'viewsmilies'	=> array('bit' => 2, 'default' => 1),
 		'viewsigs'		=> array('bit' => 3, 'default' => 1),
-		'viewavatars'	=> array('bit' => 4, 'default' => 1), 
-		'viewcensors'	=> array('bit' => 5, 'default' => 1), 
-		'attachsig'		=> array('bit' => 6, 'default' => 0), 
-		'bbcode'		=> array('bit' => 8, 'default' => 1), 
-		'smilies'		=> array('bit' => 9, 'default' => 1), 
+		'viewavatars'	=> array('bit' => 4, 'default' => 1),
+		'viewcensors'	=> array('bit' => 5, 'default' => 1),
+		'attachsig'		=> array('bit' => 6, 'default' => 0),
+		'bbcode'		=> array('bit' => 8, 'default' => 1),
+		'smilies'		=> array('bit' => 9, 'default' => 1),
 		'popuppm'		=> array('bit' => 10, 'default' => 0),
 	);
 
@@ -1458,7 +1473,7 @@ function mass_auth($ug_type, $forum_id, $ug_id, $acl_list, $setting = ACL_NO)
 		if (!isset($group_ids[$ug_id]))
 		{
 			$sql = 'SELECT group_id
-				FROM ' . GROUPS_TABLE . " 
+				FROM ' . GROUPS_TABLE . "
 				WHERE group_name = '" . $db->sql_escape(strtoupper($ug_id)) . "'";
 			$result = $db->sql_query_limit($sql, 1);
 			$id = (int) $db->sql_fetchfield('group_id');
@@ -1574,7 +1589,7 @@ function mass_auth($ug_type, $forum_id, $ug_id, $acl_list, $setting = ACL_NO)
 				case ACL_NO:
 					if (isset($cur_auth[$forum][$auth_option_id]))
 					{
-						$sql_ary['delete'][] = "DELETE FROM $table 
+						$sql_ary['delete'][] = "DELETE FROM $table
 							WHERE forum_id = $forum
 								AND auth_option_id = $auth_option_id
 								AND $id_field = $ug_id";
@@ -1588,10 +1603,10 @@ function mass_auth($ug_type, $forum_id, $ug_id, $acl_list, $setting = ACL_NO)
 					}
 					else if ($cur_auth[$forum][$auth_option_id] != $setting)
 					{
-						$sql_ary['update'][] = "UPDATE " . $table . " 
-							SET auth_setting = $setting 
-							WHERE $id_field = $ug_id 
-								AND forum_id = $forum 
+						$sql_ary['update'][] = "UPDATE " . $table . "
+							SET auth_setting = $setting
+							WHERE $id_field = $ug_id
+								AND forum_id = $forum
 								AND auth_option_id = $auth_option_id";
 					}
 			}
@@ -1720,7 +1735,7 @@ function add_default_groups()
 }
 
 
-/** 
+/**
 * Sync post count. We might need to do this in batches.
 */
 function sync_post_count($offset, $limit)
@@ -1784,7 +1799,7 @@ function add_bots()
 		'FAST WebCrawler [Crawler]'	=> array('FAST-WebCrawler/', ''),
 		'Francis [Bot]'				=> array('http://www.neomo.de/', ''),
 		'Gigabot [Bot]'				=> array('Gigabot/', ''),
-		'Google Adsense [Bot]'		=> array('Mediapartners-Google/', ''),
+		'Google Adsense [Bot]'		=> array('Mediapartners-Google', ''),
 		'Google Desktop'			=> array('Google Desktop', ''),
 		'Google Feedfetcher'		=> array('Feedfetcher-Google', ''),
 		'Google [Bot]'				=> array('Googlebot', ''),
@@ -1898,7 +1913,7 @@ function update_dynamic_config()
 //	set_config('record_online_users', 1, true);
 //	set_config('record_online_date', time(), true);
 
-	$sql = 'SELECT COUNT(post_id) AS stat 
+	$sql = 'SELECT COUNT(post_id) AS stat
 		FROM ' . POSTS_TABLE . '
 		WHERE post_approved = 1';
 	$result = $db->sql_query($sql);

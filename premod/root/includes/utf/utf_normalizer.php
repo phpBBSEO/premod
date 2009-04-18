@@ -1,12 +1,19 @@
 <?php
-/** 
+/**
 *
 * @package utf
-* @version $Id: utf_normalizer.php,v 1.15 2007/08/16 11:27:59 acydburn Exp $ 
-* @copyright (c) 2005 phpBB Group 
-* @license http://opensource.org/licenses/gpl-license.php GNU Public License 
+* @version $Id: utf_normalizer.php,v 1.16 2007/10/05 14:36:34 acydburn Exp $
+* @copyright (c) 2005 phpBB Group
+* @license http://opensource.org/licenses/gpl-license.php GNU Public License
 *
 */
+
+/**
+*/
+if (!defined('IN_PHPBB'))
+{
+	exit;
+}
 
 /**
 * Some Unicode characters encoded in UTF-8

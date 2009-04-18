@@ -1,4 +1,4 @@
-Subject: Bienvenue sur les forums de "{SITENAME}" - {U_BOARD}
+Subject: Bienvenue sur les forums de "{SITENAME}"
 
 {WELCOME_MSG}
 

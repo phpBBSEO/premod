@@ -1,12 +1,20 @@
 <?php
-/** 
+/**
 *
 * @package acp
-* @version $Id: acp_logs.php,v 1.16 2007/05/11 12:46:46 acydburn Exp $
-* @copyright (c) 2005 phpBB Group 
-* @license http://opensource.org/licenses/gpl-license.php GNU Public License 
+* @version $Id: acp_logs.php,v 1.17 2007/10/05 14:36:32 acydburn Exp $
+* @copyright (c) 2005 phpBB Group
+* @license http://opensource.org/licenses/gpl-license.php GNU Public License
 *
 */
+
+/**
+* @ignore
+*/
+if (!defined('IN_PHPBB'))
+{
+	exit;
+}
 
 /**
 * @package acp

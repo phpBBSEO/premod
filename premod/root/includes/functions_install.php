@@ -2,11 +2,19 @@
 /**
 *
 * @package install
-* @version $Id: functions_install.php,v 1.15 2007/07/28 15:16:07 davidmj Exp $
+* @version $Id: functions_install.php,v 1.16 2007/10/05 14:30:10 acydburn Exp $
 * @copyright (c) 2006 phpBB Group
 * @license http://opensource.org/licenses/gpl-license.php GNU Public License
 *
 */
+
+/**
+* @ignore
+*/
+if (!defined('IN_PHPBB'))
+{
+	exit;
+}
 
 /**
 * Determine if we are able to load a specified PHP module and do so if possible
@@ -27,7 +35,7 @@ function get_available_dbms($dbms = false, $return_unavailable = false, $only_20
 		'firebird'	=> array(
 			'LABEL'			=> 'FireBird',
 			'SCHEMA'		=> 'firebird',
-			'MODULE'		=> 'interbase', 
+			'MODULE'		=> 'interbase',
 			'DELIM'			=> ';;',
 			'COMMENTS'		=> 'remove_remarks',
 			'DRIVER'		=> 'firebird',
@@ -47,7 +55,7 @@ function get_available_dbms($dbms = false, $return_unavailable = false, $only_20
 		'mysql'		=> array(
 			'LABEL'			=> 'MySQL',
 			'SCHEMA'		=> 'mysql',
-			'MODULE'		=> 'mysql', 
+			'MODULE'		=> 'mysql',
 			'DELIM'			=> ';',
 			'COMMENTS'		=> 'remove_remarks',
 			'DRIVER'		=> 'mysql',
@@ -57,7 +65,7 @@ function get_available_dbms($dbms = false, $return_unavailable = false, $only_20
 		'mssql'		=> array(
 			'LABEL'			=> 'MS SQL Server 2000+',
 			'SCHEMA'		=> 'mssql',
-			'MODULE'		=> 'mssql', 
+			'MODULE'		=> 'mssql',
 			'DELIM'			=> 'GO',
 			'COMMENTS'		=> 'remove_comments',
 			'DRIVER'		=> 'mssql',
@@ -67,7 +75,7 @@ function get_available_dbms($dbms = false, $return_unavailable = false, $only_20
 		'mssql_odbc'=>	array(
 			'LABEL'			=> 'MS SQL Server [ ODBC ]',
 			'SCHEMA'		=> 'mssql',
-			'MODULE'		=> 'odbc', 
+			'MODULE'		=> 'odbc',
 			'DELIM'			=> 'GO',
 			'COMMENTS'		=> 'remove_comments',
 			'DRIVER'		=> 'mssql_odbc',
@@ -77,7 +85,7 @@ function get_available_dbms($dbms = false, $return_unavailable = false, $only_20
 		'oracle'	=>	array(
 			'LABEL'			=> 'Oracle',
 			'SCHEMA'		=> 'oracle',
-			'MODULE'		=> 'oci8', 
+			'MODULE'		=> 'oci8',
 			'DELIM'			=> '/',
 			'COMMENTS'		=> 'remove_comments',
 			'DRIVER'		=> 'oracle',
@@ -87,7 +95,7 @@ function get_available_dbms($dbms = false, $return_unavailable = false, $only_20
 		'postgres' => array(
 			'LABEL'			=> 'PostgreSQL 7.x/8.x',
 			'SCHEMA'		=> 'postgres',
-			'MODULE'		=> 'pgsql', 
+			'MODULE'		=> 'pgsql',
 			'DELIM'			=> ';',
 			'COMMENTS'		=> 'remove_comments',
 			'DRIVER'		=> 'postgres',
@@ -97,7 +105,7 @@ function get_available_dbms($dbms = false, $return_unavailable = false, $only_20
 		'sqlite'		=> array(
 			'LABEL'			=> 'SQLite',
 			'SCHEMA'		=> 'sqlite',
-			'MODULE'		=> 'sqlite', 
+			'MODULE'		=> 'sqlite',
 			'DELIM'			=> ';',
 			'COMMENTS'		=> 'remove_remarks',
 			'DRIVER'		=> 'sqlite',
@@ -199,8 +207,8 @@ function get_tables($db)
 
 		case 'mssql':
 		case 'mssql_odbc':
-			$sql = "SELECT name 
-				FROM sysobjects 
+			$sql = "SELECT name
+				FROM sysobjects
 				WHERE type='U'";
 		break;
 

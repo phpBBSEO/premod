@@ -2,11 +2,19 @@
 /**
 *
 * @package phpBB3
-* @version $Id: functions_display.php,v 1.165 2007/08/24 18:00:28 davidmj Exp $
+* @version $Id: functions_display.php,v 1.167 2007/10/05 14:30:10 acydburn Exp $
 * @copyright (c) 2005 phpBB Group
 * @license http://opensource.org/licenses/gpl-license.php GNU Public License
 *
 */
+
+/**
+* @ignore
+*/
+if (!defined('IN_PHPBB'))
+{
+	exit;
+}
 
 /**
 * Display Forums
@@ -880,8 +888,8 @@ function display_reasons($reason_id = 0)
 {
 	global $db, $user, $template;
 
-	$sql = 'SELECT * 
-		FROM ' . REPORTS_REASONS_TABLE . ' 
+	$sql = 'SELECT *
+		FROM ' . REPORTS_REASONS_TABLE . '
 		ORDER BY reason_order ASC';
 	$result = $db->sql_query($sql);
 
@@ -1196,7 +1204,7 @@ function get_user_avatar($avatar, $avatar_type, $avatar_width, $avatar_height, $
 	switch ($avatar_type)
 	{
 		case AVATAR_UPLOAD:
-			$avatar_img = $phpbb_root_path . "download.$phpEx?avatar=";
+			$avatar_img = $phpbb_root_path . "download/file.$phpEx?avatar=";
 		break;
 
 		case AVATAR_GALLERY:

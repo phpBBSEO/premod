@@ -1,12 +1,11 @@
 <?php
 /**
 *
-* mcp.php [Standard french]
+* mcp [Standard french]
 *
 * @package language
-* @version $Id: mcp.php,v 1.81 2007/07/19 20:37:52 acydburn Exp $
-* @copyright (c) 2007 phpBB Group 
-* @author 2007-06-28 - phpBB-fr.com &amp; phpBB.biz Teams
+* @version $Id: mcp.php,v 1.83 2007/10/04 15:07:24 acydburn Exp $
+* @copyright (c) 2005 phpBB Group
 * @license http://opensource.org/licenses/gpl-license.php GNU Public License
 *
 */
@@ -19,6 +18,11 @@
 /**
 * DO NOT CHANGE
 */
+if (!defined('IN_PHPBB'))
+{
+	exit;
+}
+
 if (empty($lang) || !is_array($lang))
 {
 	$lang = array();
@@ -230,7 +234,7 @@ $lang = array_merge($lang, array(
 	'NO_TOPIC_SELECTED'				=> 'Vous devez choisir au moins un sujet pour effectuer cette action.',
 	'NO_TOPICS_QUEUE'				=> 'Il n\'y a aucun sujet en attente d\'approbation.',
 
-	'ONLY_TOPIC'			=> 'Seulement le sujet "%s"',
+	'ONLY_TOPIC'			=> 'Seulement le sujet “%s”',
 	'OTHER_USERS'			=> 'Autres utilisateurs postant à partir de cette IP',
 
 	'POSTER'					=> 'Posteur',
@@ -241,7 +245,7 @@ $lang = array_merge($lang, array(
 	'POSTS_MERGED_SUCCESS'		=> 'Les messages sélectionnés ont été fusionnés.',
 	'POSTS_UNLOCKED_SUCCESS'	=> 'Les messages sélectionnés ont été déverrouillés.',
 	'POSTS_PER_PAGE'			=> 'Messages par page',
-	'POSTS_PER_PAGE_EXPLAIN'	=> '(Mettre "0" pour voir tous les messages.)',
+	'POSTS_PER_PAGE_EXPLAIN'	=> '(Mettre “0” pour voir tous les messages.)',
 	'POST_APPROVED_SUCCESS'		=> 'Le message sélectionné a été approuvé.',
 	'POST_DELETED_SUCCESS'		=> 'Le message sélectionné a été supprimé de la base de données.',
 	'POST_DISAPPROVED_SUCCESS'	=> 'Le message sélectionné a été désapprouvé.',

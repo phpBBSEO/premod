@@ -1,12 +1,20 @@
 <?php
-/** 
+/**
 *
 * @package ucp
-* @version $Id: ucp_activate.php,v 1.27 2007/03/30 10:47:57 acydburn Exp $
-* @copyright (c) 2005 phpBB Group 
-* @license http://opensource.org/licenses/gpl-license.php GNU Public License 
+* @version $Id: ucp_activate.php,v 1.28 2007/10/05 14:36:33 acydburn Exp $
+* @copyright (c) 2005 phpBB Group
+* @license http://opensource.org/licenses/gpl-license.php GNU Public License
 *
 */
+
+/**
+* @ignore
+*/
+if (!defined('IN_PHPBB'))
+{
+	exit;
+}
 
 /**
 * ucp_activate
