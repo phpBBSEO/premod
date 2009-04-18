@@ -2,7 +2,7 @@
 /**
 *
 * @package phpBB3
-* @version $Id: viewforum.php,v 1.342 2007/11/17 20:03:32 acydburn Exp $
+* @version $Id: viewforum.php 8479 2008-03-29 00:22:48Z naderman $
 * @copyright (c) 2005 phpBB Group
 * @license http://opensource.org/licenses/gpl-license.php GNU Public License
 *
@@ -16,7 +16,16 @@ $phpbb_root_path = (defined('PHPBB_ROOT_PATH')) ? PHPBB_ROOT_PATH : './';
 $phpEx = substr(strrchr(__FILE__, '.'), 1);
 include($phpbb_root_path . 'common.' . $phpEx);
 include($phpbb_root_path . 'includes/functions_display.' . $phpEx);
-
+// www.phpBB-SEO.com SEO TOOLKIT BEGIN
+if (empty($_REQUEST['f'])) {
+	$phpbb_seo->get_forum_id($session_forum_id);
+	if ($session_forum_id == 0) {
+		header('HTTP/1.1 404 Not Found');
+	} else {
+		$_REQUEST['f'] = (int) $session_forum_id;
+	}
+}
+// www.phpBB-SEO.com SEO TOOLKIT END
 // Start session
 $user->session_begin();
 $auth->acl($user->data);
@@ -25,14 +34,7 @@ $auth->acl($user->data);
 $forum_id	= request_var('f', 0);
 $mark_read	= request_var('mark', '');
 $start		= request_var('start', 0);
-// www.phpBB-SEO.com SEO TOOLKIT BEGIN
-if ($forum_id == 0) {
-	$phpbb_seo->get_forum_id($forum_id, $start);
-	if ($forum_id == 0) {
-		header('HTTP/1.1 404 Not Found');
-	}
-}
-// www.phpBB-SEO.com SEO TOOLKIT END
+
 $sort_days	= request_var('st', ((!empty($user->data['user_topic_show_days'])) ? $user->data['user_topic_show_days'] : 0));
 $sort_key	= request_var('sk', ((!empty($user->data['user_topic_sortby_type'])) ? $user->data['user_topic_sortby_type'] : 't'));
 $sort_dir	= request_var('sd', ((!empty($user->data['user_topic_sortby_dir'])) ? $user->data['user_topic_sortby_dir'] : 'd'));
@@ -125,20 +127,22 @@ if ($forum_data['forum_topics_per_page']) {
 	$config['topics_per_page'] = $forum_data['forum_topics_per_page'];
 }
 $phpbb_seo->seo_opt['zero_dupe']['start'] = $phpbb_seo->seo_chk_start( $start, $config['topics_per_page'] );
-$phpbb_seo->page_url = str_replace('&amp;', '&', append_sid("viewforum.$phpEx", "f=$forum_id&amp;st=$sort_days&amp;sk=$sort_key&amp;sd=$sort_dir&amp;start=" . $phpbb_seo->seo_opt['zero_dupe']['start'] . (!empty($_SID) ? '&amp;sid=' . $_SID : '')));
-if ( $user->data['is_registered'] ) {
-	$phpbb_seo->seo_cond( !isset($_GET['explain']) || $mark_read != 'topics' || $mark_read != 'forums');
-	$phpbb_seo->seo_cond( (utf8_strpos($phpbb_seo->seo_path['uri'], 'watch=') === FALSE) );
-	$phpbb_seo->seo_cond( (utf8_strpos($phpbb_seo->seo_path['uri'], 'mark=') === FALSE) );
-}
-if ( !$phpbb_seo->seo_opt['zero_dupe']['strict'] ) { // strict mode is here a bit faster
-	if ( !$user->data['is_registered'] ) {
-		$phpbb_seo->seo_cond( isset($_GET['explain']) || $mark_read == 'topics' || $mark_read == 'forums', false, 'do' );
-		$phpbb_seo->seo_cond( (utf8_strpos($phpbb_seo->seo_path['uri'], 'watch=') !== FALSE), false, 'do');
-		$phpbb_seo->seo_cond( (utf8_strpos($phpbb_seo->seo_path['uri'], 'mark=') !== FALSE), false, 'do');
-	}
-}
-$phpbb_seo->seo_chk_dupe($phpbb_seo->seo_path['uri'], $phpbb_seo->page_url);
+$seo_watch = request_var('watch', '');
+$seo_unwatch = request_var('unwatch', '');
+$keep_watch = (boolean) ($seo_watch == 'forum' && $user->data['is_registered']);
+$keep_unwatch = (boolean) ($seo_unwatch == 'forum' && $user->data['is_registered']);
+$keep_mark = in_array($mark_read, array('topics', 'forums', 'all')) ? (boolean) ($user->data['is_registered'] || $config['load_anon_lastread']) : false;
+$phpbb_seo->seo_opt['zero_dupe']['redir_def'] = array(
+	'f' => array('val' => $forum_id, 'keep' => true, 'force' => true),
+	'st' => array('val' => $sort_days, 'keep' => true),
+	'sk' => array('val' => $sort_key, 'keep' => true),
+	'sd' => array('val' => $sort_dir, 'keep' => true),
+	'mark' => array('val' => $mark_read, 'keep' => $keep_mark),
+	'watch' => array('val' => $seo_watch, 'keep' => $keep_watch),
+	'unwatch' => array('val' => $seo_unwatch, 'keep' => $keep_unwatch),
+	'start' => array('val' => $phpbb_seo->seo_opt['zero_dupe']['start'], 'keep' => true),
+);
+$phpbb_seo->seo_chk_dupe();
 // www.phpBB-SEO.com SEO TOOLKIT END -> Zero dupe
 // Build navigation links
 generate_forum_nav($forum_data);
@@ -195,7 +199,7 @@ if (!$auth->acl_get('f_read', $forum_id))
 	$template->assign_vars(array(
 		'S_NO_READ_ACCESS'		=> true,
 		'S_AUTOLOGIN_ENABLED'	=> ($config['allow_autologin']) ? true : false,
-		'S_LOGIN_ACTION'		=> append_sid("{$phpbb_root_path}ucp.$phpEx", 'mode=login') . '&amp;redirect=' . urlencode(str_replace('&amp;', '&', build_url(array('_f_')))),
+		'S_LOGIN_ACTION'		=> append_sid("{$phpbb_root_path}ucp.$phpEx", 'mode=login') . '&amp;redirect=' . urlencode(str_replace('&amp;', '&', build_url())),
 	));
 
 	page_footer();
@@ -228,14 +232,16 @@ if ($forum_data['prune_next'] < time() && $forum_data['enable_prune'])
 }
 
 // Forum rules and subscription info
-$s_watching_forum = $s_watching_forum_img = array();
-$s_watching_forum['link'] = $s_watching_forum['title'] = '';
-$s_watching_forum['is_watching'] = false;
+$s_watching_forum = array(
+	'link'			=> '',
+	'title'			=> '',
+	'is_watching'	=> false,
+);
 
 if (($config['email_enable'] || $config['jab_enable']) && $config['allow_forum_notify'] && $auth->acl_get('f_subscribe', $forum_id))
 {
 	$notify_status = (isset($forum_data['notify_status'])) ? $forum_data['notify_status'] : NULL;
-	watch_topic_forum('forum', $s_watching_forum, $s_watching_forum_img, $user->data['user_id'], $forum_id, 0, $notify_status);
+	watch_topic_forum('forum', $s_watching_forum, $user->data['user_id'], $forum_id, 0, $notify_status);
 }
 
 $s_forum_rules = '';
@@ -289,7 +295,8 @@ if ($start < 0 || $start > $topics_count)
 }
 // www.phpBB-SEO.com SEO TOOLKIT BEGIN -> Zero dupe
 if ($start != $phpbb_seo->seo_opt['zero_dupe']['start']) {
-	$phpbb_seo->seo_redirect(str_replace('&amp;', '&', append_sid("viewforum.$phpEx", "f=$forum_id&amp;st=$sort_days&amp;sk=$sort_key&amp;sd=$sort_dir&amp;start=$start" . (!empty($_SID) ? '&amp;sid=' . $_SID : ''))));
+	$phpbb_seo->seo_opt['zero_dupe']['redir_def']['start'] = array('val' => $start, 'keep' => true);
+	$phpbb_seo->seo_chk_dupe();
 }
 // www.phpBB-SEO.com SEO TOOLKIT END -> Zero dupe
 // Basic pagewide vars
@@ -390,7 +397,7 @@ if ($forum_data['forum_type'] == FORUM_POST)
 		'SELECT'	=> $sql_array['SELECT'],
 		'FROM'		=> $sql_array['FROM'],
 		'LEFT_JOIN'	=> $sql_array['LEFT_JOIN'],
-	
+
 		'WHERE'		=> 't.forum_id IN (' . $forum_id . ', 0)
 			AND t.topic_type IN (' . POST_ANNOUNCE . ', ' . POST_GLOBAL . ')',
 
@@ -461,44 +468,59 @@ else
 	$sql_where = (sizeof($get_forum_ids)) ? $db->sql_in_set('t.forum_id', $get_forum_ids) : 't.forum_id = ' . $forum_id;
 }
 
-// SQL array for obtaining topics/stickies
-$sql_array = array(
-	'SELECT'		=> $sql_array['SELECT'],
-	'FROM'			=> $sql_array['FROM'],
-	'LEFT_JOIN'		=> $sql_array['LEFT_JOIN'],
-
-	'WHERE'			=> $sql_where . '
-		AND t.topic_type IN (' . POST_NORMAL . ', ' . POST_STICKY . ")
+// Grab just the sorted topic ids
+$sql = 'SELECT t.topic_id
+	FROM ' . TOPICS_TABLE . " t
+	WHERE $sql_where
+		AND t.topic_type IN (" . POST_NORMAL . ', ' . POST_STICKY . ")
 		$sql_approved
-		$sql_limit_time",
-
-	'ORDER_BY'		=> 't.topic_type ' . ((!$store_reverse) ? 'DESC' : 'ASC') . ', ' . $sql_sort_order,
-);
-
-// If store_reverse, then first obtain topics, then stickies, else the other way around...
-// Funnily enough you typically save one query if going from the last page to the middle (store_reverse) because
-// the number of stickies are not known
-$sql = $db->sql_build_query('SELECT', $sql_array);
+		$sql_limit_time
+	ORDER BY t.topic_type " . ((!$store_reverse) ? 'DESC' : 'ASC') . ', ' . $sql_sort_order;
 $result = $db->sql_query_limit($sql, $sql_limit, $sql_start);
 
-$shadow_topic_list = array();
 while ($row = $db->sql_fetchrow($result))
 {
-	if ($row['topic_status'] == ITEM_MOVED)
-	{
-		$shadow_topic_list[$row['topic_moved_id']] = $row['topic_id'];
-	}
-
-	$rowset[$row['topic_id']] = $row;
-	$topic_list[] = $row['topic_id'];
-	// www.phpBB-SEO.com SEO TOOLKIT BEGIN
-	if ( empty($phpbb_seo->seo_url['topic'][$row['topic_id']]) ) {
-		$phpbb_seo->seo_censored[$row['topic_id']] = censor_text($row['topic_title']);
-		$phpbb_seo->seo_url['topic'][$row['topic_id']] = $phpbb_seo->format_url($phpbb_seo->seo_censored[$row['topic_id']]);
-	}
-	// www.phpBB-SEO.com SEO TOOLKIT END
+	$topic_list[] = (int) $row['topic_id'];
 }
 $db->sql_freeresult($result);
+
+// For storing shadow topics
+$shadow_topic_list = array();
+
+if (sizeof($topic_list))
+{
+	// SQL array for obtaining topics/stickies
+	$sql_array = array(
+		'SELECT'		=> $sql_array['SELECT'],
+		'FROM'			=> $sql_array['FROM'],
+		'LEFT_JOIN'		=> $sql_array['LEFT_JOIN'],
+
+		'WHERE'			=> $db->sql_in_set('t.topic_id', $topic_list),
+	);
+
+	// If store_reverse, then first obtain topics, then stickies, else the other way around...
+	// Funnily enough you typically save one query if going from the last page to the middle (store_reverse) because
+	// the number of stickies are not known
+	$sql = $db->sql_build_query('SELECT', $sql_array);
+	$result = $db->sql_query($sql);
+
+	while ($row = $db->sql_fetchrow($result))
+	{
+		if ($row['topic_status'] == ITEM_MOVED)
+		{
+			$shadow_topic_list[$row['topic_moved_id']] = $row['topic_id'];
+		}
+
+		$rowset[$row['topic_id']] = $row;
+		// www.phpBB-SEO.com SEO TOOLKIT BEGIN
+		if ( empty($phpbb_seo->seo_url['topic'][$row['topic_id']]) ) {
+			$phpbb_seo->seo_censored[$row['topic_id']] = censor_text($row['topic_title']);
+			$phpbb_seo->seo_url['topic'][$row['topic_id']] = $phpbb_seo->format_url($phpbb_seo->seo_censored[$row['topic_id']]);
+		}
+		// www.phpBB-SEO.com SEO TOOLKIT END
+	}
+	$db->sql_freeresult($result);
+}
 
 // If we have some shadow topics, update the rowset to reflect their topic information
 if (sizeof($shadow_topic_list))
@@ -537,8 +559,9 @@ if (sizeof($shadow_topic_list))
 		// We want to retain some values
 		$row = array_merge($row, array(
 			'topic_moved_id'	=> $rowset[$orig_topic_id]['topic_moved_id'],
-			'topic_status'		=> $rowset[$orig_topic_id]['topic_status'])
-		);
+			'topic_status'		=> $rowset[$orig_topic_id]['topic_status'],
+			'topic_type'		=> $rowset[$orig_topic_id]['topic_type'],
+		));
 
 		$rowset[$orig_topic_id] = $row;
 		// www.phpBB-SEO.com SEO TOOLKIT BEGIN

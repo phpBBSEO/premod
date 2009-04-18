@@ -2,7 +2,7 @@
 /**
 *
 * @package dbal
-* @version $Id: mssql.php,v 1.51 2007/10/12 10:04:31 acydburn Exp $
+* @version $Id: mssql.php 8479 2008-03-29 00:22:48Z naderman $
 * @copyright (c) 2005 phpBB Group
 * @license http://opensource.org/licenses/gpl-license.php GNU Public License
 *

@@ -2,7 +2,7 @@
 /**
 *
 * @package acp
-* @version $Id: acp_ranks.php,v 1.18 2007/10/14 10:07:52 kellanved Exp $
+* @version $Id: acp_ranks.php 8479 2008-03-29 00:22:48Z naderman $
 * @copyright (c) 2005 phpBB Group
 * @license http://opensource.org/licenses/gpl-license.php GNU Public License
 *

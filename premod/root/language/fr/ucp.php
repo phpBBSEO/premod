@@ -2,10 +2,10 @@
 /** 
 *
 * ucp [Standard french]
-* translated by PhpBB-fr.com <http://www.phpbb-fr.com/> and phpBB.biz <http://www.phpbb.biz/>
+* translated originally by PhpBB-fr.com <http://www.phpbb-fr.com/> and phpBB.biz <http://www.phpBB.biz>
 *
 * @package language
-* @version $Id: ucp.php,v 1.19 2007/11/22 13:09:53 lolovoisin Exp $
+* @version $Id: ucp.php,v 1.21 2008/04/10 13:30:53 elglobo Exp $
 * @copyright (c) 2005 phpBB Group 
 * @license http://opensource.org/licenses/gpl-license.php GNU Public License 
 *
@@ -88,7 +88,7 @@ $lang = array_merge($lang, array(
 	'ATTACHMENTS_DELETED'   		=> 'Les fichiers joints ont été supprimés.',
 	'ATTACHMENT_DELETED'   			=> 'Le fichier joint a été supprimé.',
 	'AVATAR_CATEGORY'   			=> 'Catégorie',
-	'AVATAR_EXPLAIN'   				=> 'Dimensions maximales; largeur: %1$d pixels, hauteur: %2$d pixels, taille: %3$d Kb.',
+	'AVATAR_EXPLAIN'   				=> 'Dimensions maximales; largeur: %1$d pixels, hauteur: %2$d pixels, taille: %3$.2f Kio.',
 	'AVATAR_FEATURES_DISABLED'   	=> 'La fonctionnalité des avatars est actuellement désactivée.',
 	'AVATAR_GALLERY'   				=> 'Galerie locale',
 	'AVATAR_GENERAL_UPLOAD_ERROR'   => 'Impossible de transférer l’avatar vers %s',
@@ -131,7 +131,7 @@ $lang = array_merge($lang, array(
 	'CURRENT_IMAGE'   			=> 'Image actuelle',
 	'CURRENT_PASSWORD'   		=> 'Mot de passe actuel',
 	'CURRENT_PASSWORD_EXPLAIN'  => 'Vous ne devez confirmer votre mot de passe actuel que si vous désirez modifier votre mot de passe, e-mail ou nom d’utilisateur.',
-	'CUR_PASSWORD_ERROR'   		=> 'Le mot de passe actuel que vous avez indiqué est incorrect.',
+	'CUR_PASSWORD_ERROR'   		=> 'Le mot de passe actuel indiqué est incorrect.',
 	'CUSTOM_DATEFORMAT'   		=> 'Personnalisé…',
 
  	'DEFAULT_ACTION'   			=> 'Action par défaut',
@@ -223,9 +223,10 @@ $lang = array_merge($lang, array(
 
 	'IF_FOLDER_FULL'   			=> 'Si le dossier est plein',
 	'IMPORTANT_NEWS'   			=> 'Annonces importantes',
+	'INVALID_USER_BIRTHDAY'		=> 'La date anniversaire indiquée est incorrecte.',
 	'INVALID_CHARS_USERNAME'   	=> 'Le nom d’utilisateur contient des caractères interdits.',
 	'INVALID_CHARS_NEW_PASSWORD'=> 'Le mot de passe ne contient pas les caractères requis.',
-	'ITEMS_REQUIRED'   			=> 'Les éléments marqués d’une * sont des champs obligatoires du profil et doivent être remplis.',
+	'ITEMS_REQUIRED'   			=> 'Les éléments marqués par une * sont des champs obligatoires du profil et doivent être remplis.',
 
 	'JOIN_SELECTED'   => 'Rejoindre la sélection',
 
@@ -253,7 +254,7 @@ $lang = array_merge($lang, array(
 	'MESSAGES_DELETED'   			=> 'Les messages ont été supprimés',
 	'MOVE_DELETED_MESSAGES_TO'   	=> 'Déplacer les messages supprimés vers',
 	'MOVE_DOWN'   					=> 'Descendre',
-	'MOVE_MARKED_TO_FOLDER'   		=> 'Déplacer les messages marqués vers %s',
+	'MOVE_MARKED_TO_FOLDER'   		=> 'Déplacer la sélection vers %s',
 	'MOVE_PM_ERROR'   				=> 'Une erreur est survenue en déplaçant les messages vers le nouveau dossier, seuls %1d des %2d messages ont été déplacés.',
 	'MOVE_TO_FOLDER'   				=> 'Déplacer vers le dossier',
 	'MOVE_UP'   					=> 'Monter',

@@ -2,10 +2,10 @@
 /** 
 *
 * acp_email [Standard french]
-* translated by PhpBB-fr.com <http://www.phpbb-fr.com/> and phpBB.biz <http://www.phpbb.biz/>
+* translated originally by PhpBB-fr.com <http://www.phpbb-fr.com/> and phpBB.biz <http://www.phpBB.biz>
 *
 * @package language
-* @version $Id: email.php,v 1.19 2007/11/22 11:30:24 elglobo Exp $
+* @version $Id: email.php,v 1.21 2007/11/22 11:30:24 elglobo Exp $
 * @copyright (c) 2005 phpBB Group 
 * @license http://opensource.org/licenses/gpl-license.php GNU Public License 
 *

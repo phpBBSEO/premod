@@ -6,7 +6,7 @@
 ## 			Visitez http://www.phpbb-seo.com/forums/premod-phpbb-seo/premod-referencement-phpbb-vt1951.html
 ## 			pour obtenir du support et vérifier l'existence de mise à jour.
 ##
-## MOD Version: 	3.0.0
+## MOD Version: 	3.0.1
 ##
 ## Installation Level: 	Aussi facile que phpBB3
 ## Installation Time: 	10 Minutes
@@ -67,6 +67,38 @@
 ##############################################################
 ## MOD History:
 ##
+##	2008-04-12 - 3.0.1
+##		- Updated to comply with phpBB 3.0.1.
+##		- mod rewrite 0.4.2 :
+##			- Updated : User messages pages URLs structure,
+##			- Added : virtual folder option for user messages pages,
+##			- Added : copyright link formatting options,
+##			- Added : support for active_topics link,
+##			- Added : support for unanswered link,
+##			- Added : support for newposts link,
+##			- Added : support for egosearch link,
+##			- Added : support for most active topic link on profile view,
+##			- Fixed : group sort option links,
+##			- Fixed : unread link it topic view,
+##			- Fixed : Session tracking : Sessions tracking is now fully fixed for viewforum, 
+##			  but will only work with virtual folder trick in viewtopic,
+##			- Various optimizations in phpbb_seo_class.php and acp_phpbb_seo.php.
+##		- zero duplicate 0.4.2 :
+##			- Added : support for new URL rewritten pages,
+##			- Added : FF default iso encoding workaround, 
+##			- Fixed : ignored posts, 
+##			- Fixed : highlights, 
+##			- Fixed : jumpto post link in emails,
+##			- Fixed : style preview,
+##			- Fixed : viewpoll topic links.
+##		- no duplicate 0.4.2 :
+##			- Fixed : moved topic links on forum indexes.
+##		- Optimal titles 1.0.2 :
+##			- Updated : Minor additions.
+##		- Meta tags 0.2.2 :
+##			- Added : now filter code bbcode tag by default,
+##			- Fixed : reference misuse,
+##			- Fixed : use of sql_query_limit to grab keywords in topic view.
 ##	2007-12-21 - 3.0.0
 ##		- Added : Link to the last topic title above the last post link on forum listing view,
 ##		- Added : Group URL rewriting, with optional group name injection,
@@ -106,32 +138,53 @@ _____________________________________________
 >>>>   MISE A JOUR	                <<<<<
 _____________________________________________
 
-Mise à jour : 3.0.RC7 => 3.0.0 : 
-Tout d'abord, téléchargez le package phpBB_SEO_3.0RC7_to_3.0.0 : http://telecharger.phpbb-seo.com/premod-referencement-phpbb-10/
+Mise à jour : 3.0.0 => 3.0.1 : 
+Tout d'abord, rendez vous sur http://telecharger.phpbb-seo.com/premod-referencement-phpbb-10/
+poour télécharger un des pack de mise à jour.
 Vous pouvez mettre à jour en suivant deux méthodes :
-	1) Mise à jour automatique :
+	1) Mise à jour automatique : "3.0.0 vers 3.0.1 MAJ automatique"
 		- Uplodez le contenu du dossier auto_update/install/*.* vers install/*.*,
 		- Rendez vous à l'ACP => SYSTEM et suivez les instructions.
 		L'auto updateur prendra vos éventuelles modifications en compte et tentera
 		de merger les nouveaux fichiers avec ceux que vous auriez modifié.
 		C'est la methode la plus sûre dans la plupart des cas, l'updateur vous dira
 		s'il a des problème pour modifier certain fichiers.
-	2) Mise à jour manuelle :
+	2) Mise à jour manuelle : "3.0.0 vers 3.0.1 Fichiers modifiés"
 		Vous trouverez les fichiers modifiés dans le dossier modified/ de l'archive.
 		- Uploadez / mergez / écrasez tous les fichiers,
 		- Uploadez le dossier modified/install/*.* vers install/*.*,
 		- Lancez www.example.com/phpbb/install/database_update.php pour mettre à jour la base de données.
 
-Cette mise à jour va étendre la réécriture d'URL aux groupes en permettant de choisir d'injecter ou non leur titres dans leur urls.
-L'injection des pseudo est également possible et optionnelle.
-Vous devrez donc configurer ces nouvelles options dans l'ACP de phpBB et générer ensuite un nouveau .htaccess.
+Cette mise à jour implique une mise à jour de votre .htaccess.
+La procédure conservera les URLs de votre forum, mais va étendre la réécriture d'URL et modifier 
+celle des pages des messages des membres.
+Les URLs des pages des messages des membres vont changer :
+	Nous avons optés pour une amélioration de la structure de ces URLs et de prendre en charge l'option sr 
+	(shworesult, résultat de la recherche en liste de sujets ou de messages).
+	Ce n'est pas un changement crucial, mais si vous mettez à jour, vous devrez conserver la rewriterules 
+	précédement utilisée pour ce type d'URL.
+	Pour cela, faites une copie de votre ancien .htaccess, et générez en un nouveaux après mise à jour. 
+	Dans votre ancien .htaccess, copier la rewriterule situé juste après (la ligne est plus longue):
+
+		# USER MESSAGES
+
+	et copiez la dans le nouveau .htaccess, juste après :
+
+		# HERE IS A GOOD PLACE TO ADD OTHER PHPBB RELATED REWRITERULES
+
+	et le zéro duplicate fera le reste ;)
+
+Avant de faire cela, vous pouvez en profitter, si vous le désirez, pour modifier les urls des profils permis par 
+les nouvelles options. Si vous modifiez les urls des profils, vous devrez conserver l'ancienne rewriterule des 
+profils dans votre nouveau .htaccess de la même façon.
+
 Les autres réglages ne seront pas altérés par la MAJ.
-Notez bien que si vous modifier la façon de réécrire les url des profils de vos membres, vous devrez conserver 
-la rewriterule des profils actuelle dans votre nouveau .htaccess, afin de rediriger convenablement les anciennes vers les nouvelles. Placez là juste avant la nouvelle.
 
-Si vous rencontrez des difficultés lors de la mise à jour du fichier phpbb_seo_class.php, vous devrez procéder manuellement. Il vous suffit pour cela de prendre la nouvelle version du fichier et d'y ajouter vos éventuels réglages personnalisés comme s'il s'agissait d'une première installation.
-
-Enfin, une fois les nouveaux fichiers en place, il vous faudra vider le cache de phpBB et rafraîchir vos thèmes (ACP => STYLE => Thèmes => Rafraîchir).
+Si vous rencontrez des difficultés lors de la mise à jour du fichier phpbb_seo_class.php, vous devrez procéder 
+manuellement. Il vous suffit pour cela de prendre la nouvelle version du fichier et d'y ajouter vos éventuels 
+réglages personnalisés comme s'il s'agissait d'une première installation.
+Enfin, une fois les nouveaux fichiers en place, il vous faudra vider le cache de phpBB et rafraîchir vos thèmes 
+(ACP => STYLE => Thèmes => Rafraîchir).
 
 _____________________________________________
 >>>>   INSTALLATION POUR VOTRE FORUM    <<<<<
@@ -165,6 +218,10 @@ Trouver :
 
 'index' => ''
 
+dans cette ligne de code :
+
+		$this->seo_static = array( 'forum' => 'forum', 'topic' => 'topic', 'post' => 'post', 'user' => 'member', 'group' => 'group', 'index' => '', 'global_announce' => 'announces', 'leaders' => 'the-team', 'atopic' => 'active-topics', 'utopic' => 'unanswered', 'npost' => 'newposts', 'pagination' => 'page', 'gz_ext' => '.gz' );
+
 Remplacer par :
 
 'index' => 'forum'
@@ -175,18 +232,26 @@ C'est surtout pratique dans le cas ou vous utiliseriez un portail dans le même d
 => Les premiers réglages à faire sont le choix des parties statiques de vos URL, dont index.html fait parti.
 Vous pouvez modifier dans phpbb_seo/phpbb_seo_class.php :
 	=> equipe.html
-		$this->seo_static['leaders'] = 'equipe'
+		$this->seo_static['leaders'] = 'equipe';
 
 	=> annonces
-		$this->seo_static['global_announce'] = 'annonces'
+		$this->seo_static['global_announce'] = 'annonces';
+
+	=> Sujets actifs :
+		$this->seo_static['atopic'] = 'sujets-actifs';
+
+	=> Unaswered :
+		$this->seo_static['utopic'] = 'sans-reponses';
+
+	=> Newposts :
+		$this->seo_static['npost'] = 'nouveaux-messages';
 
 	=> Ainsi que forum ('forum' => 'forum'), topic ('topic' => 'topic'), post ('post' => 'post'), 
-	membre ($this->seo_static['user'] = 'membre';), groupes ($this->seo_static['group'] = 'groupe';),
-	page "message de membre" ('usermsg' => 'messages'),
+	membre ($this->seo_static['user'] = 'membre';), groupes ($this->seo_static['group'] = 'groupe';)
 	et le terme statique de la pagination avec dossiers virtuels ('pagination' => 'page')
 
 	=> et les extentions, si .html ne vous conviens pas :
-	$this->seo_ext = array( 'forum' => '.html', 'topic' => '.html', 'post' => '.html', 'user' => '.html', 'usermsg' => '.html', 'group' => '.html',  'index' => '', 'global_announce' => '/', 'leaders' => '.html', 'pagination' => '.html', 'gz_ext' => '');
+		$this->seo_ext = array( 'forum' => '.html', 'topic' => '.html', 'post' => '.html', 'user' => '.html', 'group' => '.html',  'index' => '', 'global_announce' => '/', 'leaders' => '.html', 'atopic' => '.html', 'utopic' => '.html', 'npost' => '.html', 'pagination' => '.html', 'gz_ext' => '');
 
 Ces changements seront pris en compte lors de la génération du .htaccess.
 
@@ -239,17 +304,22 @@ ____________
 
 Vous trouverez un exemple de robots.txt dans le dossier contrib/ de ce package.
 Le robots.txt doit être placé à la racine de votre domaine (qui peut être différent du dossier de phpBB).
-Il faut bien entendu remplacer dossierphpbb/ par votre vrai dossier d'installation (ou par rien pour une installation à la racine du domaine). 
+Il faut bien entendu remplacer dossierphpbb/ par votre vrai dossier d'installation (ou par rien pour une installation à la racine du domaine).
+
+IMPORTANT :
+	Si vous installez cette premod à partir d'un forum phpBB préalablement indexé avec des urls non réécrites, 
+	vous devrez attendre deux mois après l'activation du zéro duplicate avant de mettre le robots.txt en place. 
+	Dans ce cas, nous voulons rediriger avant d'interdire.
 
 _____________________________________________________
 NOTE: URL de profil et de messages de membre sans ID:
 _____________________________________________________
 
-phpBB/member/pseudo VS  phpBB/pseudo-uxx.html And phpBB/messages/pseudo VS dephpBB/pseudo-mxx.html
+phpBB/member/pseudo VS  phpBB/pseudo-uxx.html
 
 Si vous utilisez les URL de profil et de messages de membre sans ID, vous devez noter que de l'urlencodage 
-risque de rentrer en jeux. Firefox semble incapable de gérer les caractères spéciaux autrement dans les url.
-De plus, un bug du mod_rewrite requiert une gestion spéciale de certains cas particuliers, comme "&" dans un pseudo.
+va entrer en jeux pour prevenir un bug de mod_rewrite. 
+Ceci impleque que certains cas particuliers, comme "&", "/", "#" et les espaces seront doublement encodés dans un pseudo.
 Par exemple, un membre dont le pseudo serait rock&roll devrait être doublement urlencodé pour être utilisable : rock%2526roll
 ( http://www.php.net/urlencode => http://issues.apache.org/bugzilla/show_bug.cgi?id=34602 )
 
@@ -258,27 +328,10 @@ Ce n'est pas vraiment un problème pour les bots, ils comprennent l'urlencodage, 
 par faire d'assez longues URLs avec des caractères multy byte.
 Cela ne concerne pas les caractères a-zA-Z0-9 chars, underscore ("_"), tiret ("-") et point (".") inclus.
 
-Dans phpbb_seo/phpbb_seo_class.php, vous pouvez affiner la méthode d'urlencodage : 
-
-		$this->seo_opt['custom_url_endode'] = 1;
-
-Vous pouvez changer la valeur de $this->seo_opt['custom_url_endode'] à 1, 2 ou 3.
-	$this->seo_opt['custom_url_endode'] = 1, Le pseudo est injecté presque tel quel, après 
-	un décodage des caractères spéciaux html, et encodage en utf-8, et la prise en compte du double urlencodage de "&".
-	Cela veut dire que ce sera au navigateur de décider, Firefox va urlencoder tous les caractères 
-	non alphanumériques mais IE et Opera feront l'affaire, même en multy byte.
-
-	$this->seo_opt['custom_url_endode'] = 2, les pseudo sont urlencodés directement avec prise en compte du double urlencodage de "&".
-	Devrait satisfaire plus de cas exotiques, mais impose l'urlencodage à tous les navigateurs.
-
-	$this->seo_opt['custom_url_endode'] = 3, double urlencodage des pseudos, méthode de la dernière chance pour les cas désespérés :-D
-	Devrait satisfaire toutes les exceptions, mais impose le double encodage aux navigateurs.
+Dans phpbb_seo/phpbb_seo_class.php, un seul encodage est désormais disponible.
 
 Cela veut bien entendu dire que les URL de profil et de messages de membre sans ID est bien plus adapté 
 a des pseudo utilisant des caractères alphanumériques (sans accents). 
-Les autres cas seront plus lourds a gérer et sont pris en charge pour offrir une solution a de rares exceptions
-plus qu'en tant que solution générale et totalement satisfaisante.
-C'est ici Firefox qui nous restreint quelque peu.
 
 Si vous autorisez uniquement les caractères alphanumériques dans les pseudo de vos membres, vous pouvez accélérer 
 le processus de retrait des ID en ajoutant : 
@@ -289,7 +342,7 @@ juste après :
 
 	function seo_url_encode( $url, $type = 1 ) {
 
-Enfin, n'oubliez pas que vous pouvez obtenir de très bon résultats avec les ID.
+Enfin, n'oubliez pas que vous pouvez obtenir de très bon résultats avec les ID et que vous pouvez toujours simuler des dossier dans ces urls.
 
 #
 #-----[ COPY ]--------------------------------------------------

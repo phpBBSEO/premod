@@ -2,7 +2,7 @@
 /**
 *
 * @package phpBB3
-* @version $Id: swatch.php,v 1.15 2007/10/05 14:30:06 acydburn Exp $
+* @version $Id: swatch.php 8479 2008-03-29 00:22:48Z naderman $
 * @copyright (c) 2005 phpBB Group
 * @license http://opensource.org/licenses/gpl-license.php GNU Public License
 *

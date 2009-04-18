@@ -2,10 +2,10 @@
 /** 
 *
 * acp_permissions [Standard french]
-* translated by PhpBB-fr.com <http://www.phpbb-fr.com/> and phpBB.biz <http://www.phpbb.biz/>
+* translated originally by PhpBB-fr.com <http://www.phpbb-fr.com/> and phpBB.biz <http://www.phpBB.biz>
 *
 * @package language
-* @version $Id: permissions.php,,v 1.19 2007/11/22 12:09:35 elglobo Exp $
+* @version $Id: permissions.php,v 1.21 2008/03/28 09:41:35 elglobo Exp $
 * @copyright (c) 2005 phpBB Group 
 * @license http://opensource.org/licenses/gpl-license.php GNU Public License 
 *
@@ -37,7 +37,7 @@ if (empty($lang) || !is_array($lang))
 // in a url you again do not need to specify an order e.g., 'Click %sHERE%s' is fine
 
 $lang = array_merge($lang, array(
-	'ACP_PERMISSIONS_EXPLAIN'	=> '		<p>Les permissions sont très variées et groupées en quatre grandes sections, qui sont:
+	'ACP_PERMISSIONS_EXPLAIN'	=> '		<p>Les permissions sont très nombreuses et regroupées en quatre grandes sections qui sont:
 
 		</p><h2>Permissions globales</h2>
 		<p>Elles sont utilisées pour contrôler l’accès de façon globale et sont appliquées à l’ensemble du forum. Elles sont elles-mêmes divisées en permissions des utilisateurs, groupes, administrateurs et modérateurs globaux.</p>
@@ -57,7 +57,7 @@ $lang = array_merge($lang, array(
 	',
 	'ACL_NEVER'				=> 'Jamais',
 	'ACL_SET'				=> 'Configuration des Permissions',
-	'ACL_SET_EXPLAIN'		=> 'Les permissions sont basées sur un simple système <samp>OUI</samp>/<samp>NON</samp>. Régler une option sur <samp>JAMAIS</samp> pour un utilisateur ou groupe d’utilisateurs l’emporte sur toute autre valeur qui lui était assignée. Si vous ne souhaitez pas assigner de valeur à une option pour cet utilisateur ou ce groupe, sélectionnez <samp>NON</samp>. Si des valeurs sont assignées ailleurs pour cette option, elles seront utilisées de préférence, autrement <samp>JAMAIS</samp> est appliqué. Tous les objets marqués ( avec la case de choix devant eux ) copieront l’ensemble de permissions que vous aurez défini.',
+	'ACL_SET_EXPLAIN'		=> 'Les permissions sont basées sur un simple système <samp>OUI</samp>/<samp>NON</samp>. Régler une option sur <samp>JAMAIS</samp> pour un utilisateur ou groupe d’utilisateurs l’emporte sur toute autre valeur qui lui était assignée. Si vous ne souhaitez pas assigner de valeur à une option pour cet utilisateur ou ce groupe, sélectionnez <samp>NON</samp>. Si des valeurs sont assignées ailleurs pour cette option, elles seront utilisées de préférence, autrement <samp>JAMAIS</samp> est appliqué. Tous les objets sélectionnés (avec la case de choix devant eux) copieront l’ensemble de permissions que vous aurez défini.',
 	'ACL_SETTING'			=> 'Configuration',
 
 	'ACL_TYPE_A_'			=> 'Permissions d’administration',

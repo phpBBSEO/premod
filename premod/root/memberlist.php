@@ -2,7 +2,7 @@
 /**
 *
 * @package phpBB3
-* @version $Id: memberlist.php,v 1.254 2007/10/05 14:30:06 acydburn Exp $
+* @version $Id: memberlist.php 8479 2008-03-29 00:22:48Z naderman $
 * @copyright (c) 2005 phpBB Group
 * @license http://opensource.org/licenses/gpl-license.php GNU Public License
 *
@@ -21,7 +21,14 @@ include($phpbb_root_path . 'includes/functions_display.' . $phpEx);
 $user->session_begin();
 $auth->acl($user->data);
 $user->setup(array('memberlist', 'groups'));
-
+// www.phpBB-SEO.com SEO TOOLKIT BEGIN
+if (!empty($_REQUEST['un'])) {
+	$_REQUEST['un'] = rawurldecode($_REQUEST['un']);
+	if (!$phpbb_seo->is_utf8($_REQUEST['un']) && function_exists('utf8_encode')) {
+		$_REQUEST['un'] = utf8_normalize_nfc(utf8_encode($_REQUEST['un']));
+	}
+}
+// www.phpBB-SEO.com SEO TOOLKIT END
 // Grab data
 $mode		= request_var('mode', '');
 $action		= request_var('action', '');
@@ -141,10 +148,9 @@ switch ($mode)
 		unset($admin_memberships);
 
 		$sql = 'SELECT forum_id, forum_name
-			FROM ' . FORUMS_TABLE . '
-			WHERE forum_type = ' . FORUM_POST;
+			FROM ' . FORUMS_TABLE;
 		$result = $db->sql_query($sql);
-		
+
 		$forums = array();
 		while ($row = $db->sql_fetchrow($result))
 		{
@@ -434,16 +440,11 @@ switch ($mode)
 		$phpbb_seo->set_user_url( $member['username'], $user_id );
 		// www.phpBB-SEO.com SEO TOOLKIT END
 		// www.phpBB-SEO.com SEO TOOLKIT BEGIN - Zero dupe
-		if ( $user->data['is_registered'] ) {
-			$phpbb_seo->seo_cond( !isset($_GET['explain']) );
-		}
-		if ( !$phpbb_seo->seo_opt['zero_dupe']['strict'] ) { // strict mode is here a bit faster
-			if ( !$user->data['is_registered'] ) {
-				$phpbb_seo->seo_cond( isset($_GET['explain']), false, 'do' );
-			}
-		}
-		$phpbb_seo->page_url = str_replace('&amp;', '&', append_sid("memberlist.$phpEx?mode=viewprofile&u=$user_id" . (!empty($_SID) ? '&amp;sid=' . $_SID : '')));
-		$phpbb_seo->seo_chk_dupe(urldecode(urldecode($phpbb_seo->seo_path['uri'])), urldecode(urldecode($phpbb_seo->page_url)));
+		$phpbb_seo->seo_opt['zero_dupe']['redir_def'] = array(
+			'mode' => array('val' => 'viewprofile', 'keep' => true),
+			'u' => array('val' => $user_id, 'keep' => true, 'force' => true),
+		);
+		$phpbb_seo->seo_chk_dupe();
 		// www.phpBB-SEO.com SEO TOOLKIT END - Zero dupe
 		// Do the SQL thang
 		$sql = 'SELECT g.group_id, g.group_name, g.group_type
@@ -895,20 +896,22 @@ switch ($mode)
 		$template_html = 'memberlist_body.html';
 
 		// Sorting
-		$sort_key_text = array('a' => $user->lang['SORT_USERNAME'], 'b' => $user->lang['SORT_LOCATION'], 'c' => $user->lang['SORT_JOINED'], 'd' => $user->lang['SORT_POST_COUNT'], 'e' => $user->lang['SORT_EMAIL'], 'f' => $user->lang['WEBSITE'], 'g' => $user->lang['ICQ'], 'h' => $user->lang['AIM'], 'i' => $user->lang['MSNM'], 'j' => $user->lang['YIM'], 'k' => $user->lang['JABBER']);
+		$sort_key_text = array('a' => $user->lang['SORT_USERNAME'], 'b' => $user->lang['SORT_LOCATION'], 'c' => $user->lang['SORT_JOINED'], 'd' => $user->lang['SORT_POST_COUNT'], 'f' => $user->lang['WEBSITE'], 'g' => $user->lang['ICQ'], 'h' => $user->lang['AIM'], 'i' => $user->lang['MSNM'], 'j' => $user->lang['YIM'], 'k' => $user->lang['JABBER']);
+		$sort_key_sql = array('a' => 'u.username_clean', 'b' => 'u.user_from', 'c' => 'u.user_regdate', 'd' => 'u.user_posts', 'f' => 'u.user_website', 'g' => 'u.user_icq', 'h' => 'u.user_aim', 'i' => 'u.user_msnm', 'j' => 'u.user_yim', 'k' => 'u.user_jabber');
+
+		if ($auth->acl_get('a_user'))
+		{
+			$sort_key_text['e'] = $user->lang['SORT_EMAIL'];
+			$sort_key_sql['e'] = 'u.user_email';
+		}
 
 		if ($auth->acl_get('u_viewonline'))
 		{
 			$sort_key_text['l'] = $user->lang['SORT_LAST_ACTIVE'];
-		}
-		$sort_key_text['m'] = $user->lang['SORT_RANK'];
-
-		$sort_key_sql = array('a' => 'u.username_clean', 'b' => 'u.user_from', 'c' => 'u.user_regdate', 'd' => 'u.user_posts', 'e' => 'u.user_email', 'f' => 'u.user_website', 'g' => 'u.user_icq', 'h' => 'u.user_aim', 'i' => 'u.user_msnm', 'j' => 'u.user_yim', 'k' => 'u.user_jabber');
-
-		if ($auth->acl_get('u_viewonline'))
-		{
 			$sort_key_sql['l'] = 'u.user_lastvisit';
 		}
+
+		$sort_key_text['m'] = $user->lang['SORT_RANK'];
 		$sort_key_sql['m'] = 'u.user_rank DESC, u.user_posts';
 
 		$sort_dir_text = array('a' => $user->lang['ASCENDING'], 'd' => $user->lang['DESCENDING']);
@@ -984,7 +987,7 @@ switch ($mode)
 			}
 
 			$sql_where .= ($username) ? ' AND u.username_clean ' . $db->sql_like_expression(str_replace('*', $db->any_char, utf8_clean_string($username))) : '';
-			$sql_where .= ($email) ? ' AND u.user_email ' . $db->sql_like_expression(str_replace('*', $db->any_char, $email)) . ' ' : '';
+			$sql_where .= ($auth->acl_get('a_user') && $email) ? ' AND u.user_email ' . $db->sql_like_expression(str_replace('*', $db->any_char, $email)) . ' ' : '';
 			$sql_where .= ($icq) ? ' AND u.user_icq ' . $db->sql_like_expression(str_replace('*', $db->any_char, $icq)) . ' ' : '';
 			$sql_where .= ($aim) ? ' AND u.user_aim ' . $db->sql_like_expression(str_replace('*', $db->any_char, $aim)) . ' ' : '';
 			$sql_where .= ($yahoo) ? ' AND u.user_yim ' . $db->sql_like_expression(str_replace('*', $db->any_char, $yahoo)) . ' ' : '';
@@ -1090,19 +1093,16 @@ switch ($mode)
 				trigger_error('NO_GROUP');
 			}
 			// www.phpBB-SEO.com SEO TOOLKIT BEGIN - Zero dupe
-			if ( $user->data['is_registered'] ) {
-				$phpbb_seo->seo_cond( !isset($_GET['explain']) );
-			}
-			if ( !$phpbb_seo->seo_opt['zero_dupe']['strict'] ) { // strict mode is here a bit faster
-				if ( !$user->data['is_registered'] ) {
-					$phpbb_seo->seo_cond( isset($_GET['explain']), false, 'do' );
-				}
-			}
 			if ( empty($phpbb_seo->seo_url['group'][$group_row['group_id']]) ) {
 				$phpbb_seo->seo_url['group'][$group_row['group_id']] = $phpbb_seo->format_url($group_row['group_name'], $phpbb_seo->seo_static['group']);
 			}
-			$phpbb_seo->page_url = str_replace('&amp;', '&', append_sid("memberlist.$phpEx?mode=group&g=" . $group_row['group_id'] . '&amp;start=' . $start . (!empty($_SID) ? '&amp;sid=' . $_SID : '')));
-			$phpbb_seo->seo_chk_dupe($phpbb_seo->seo_path['uri'], $phpbb_seo->page_url);
+			$phpbb_seo->seo_opt['zero_dupe']['start'] = $phpbb_seo->seo_chk_start( $start, $config['topics_per_page'] );
+			$phpbb_seo->seo_opt['zero_dupe']['redir_def'] = array(
+				'mode' => array('val' => 'group', 'keep' => true),
+				'g' => array('val' => (int) $group_row['group_id'], 'keep' => true),
+				'start' => array('val' => $phpbb_seo->seo_opt['zero_dupe']['start'], 'keep' => true),
+			);
+			$phpbb_seo->seo_chk_dupe();
 			// www.phpBB-SEO.com SEO TOOLKIT END - Zero dupe
 			switch ($group_row['group_type'])
 			{
@@ -1216,7 +1216,7 @@ switch ($mode)
 			'sd'			=> array('sd', 'a'),
 			'form'			=> array('form', ''),
 			'field'			=> array('field', ''),
-			'select_single'	=> array('select_single', 0),
+			'select_single'	=> array('select_single', $select_single),
 			'username'		=> array('username', '', true),
 			'email'			=> array('email', ''),
 			'icq'			=> array('icq', ''),
@@ -1266,6 +1266,7 @@ switch ($mode)
 		{
 			$group_selected = request_var('search_group_id', 0);
 			$s_group_select = '<option value="0"' . ((!$group_selected) ? ' selected="selected"' : '') . '>&nbsp;</option>';
+			$group_ids = array();
 
 			if ($auth->acl_gets('a_group', 'a_groupadd', 'a_groupdel'))
 			{
@@ -1290,9 +1291,15 @@ switch ($mode)
 
 			while ($row = $db->sql_fetchrow($result))
 			{
+				$group_ids[] = $row['group_id'];
 				$s_group_select .= '<option value="' . $row['group_id'] . '"' . (($group_selected == $row['group_id']) ? ' selected="selected"' : '') . '>' . (($row['group_type'] == GROUP_SPECIAL) ? $user->lang['G_' . $row['group_name']] : $row['group_name']) . '</option>';
 			}
 			$db->sql_freeresult($result);
+
+			if ($group_selected !== 0 && !in_array($group_selected, $group_ids))
+			{
+				trigger_error('NO_GROUP');
+			}
 
 			$template->assign_vars(array(
 				'USERNAME'	=> $username,
@@ -1308,6 +1315,7 @@ switch ($mode)
 				'IP'		=> $ipdomain,
 
 				'S_IP_SEARCH_ALLOWED'	=> ($auth->acl_getf_global('m_info')) ? true : false,
+				'S_EMAIL_SEARCH_ALLOWED'=> ($auth->acl_get('a_user')) ? true : false,
 				'S_IN_SEARCH_POPUP'		=> ($form && $field) ? true : false,
 				'S_SEARCH_USER'			=> true,
 				'S_FORM_NAME'			=> $form,
@@ -1398,7 +1406,8 @@ switch ($mode)
 			if ($sort_key == 'l')
 			{
 				$lesser_than = ($sort_dir == 'a') ? -1 : 1;
-				uasort($id_cache, create_function('$first, $second', "return (\$first['last_visit'] == \$second['last_visit']) ? 0 : ((\$first['last_visit'] < \$second['last_visit']) ? $lesser_than : ($lesser_than * -1));"));
+//				uasort($id_cache, create_function('$first, $second', "return (\$first['last_visit'] == \$second['last_visit']) ? 0 : ((\$first['last_visit'] < \$second['last_visit']) ? $lesser_than : ($lesser_than * -1));"));
+				usort($user_list, create_function('$first, $second', "global \$id_cache; return (\$id_cache[\$first]['last_visit'] == \$id_cache[\$second]['last_visit']) ? 0 : ((\$id_cache[\$first]['last_visit'] < \$id_cache[\$second]['last_visit']) ? $lesser_than : ($lesser_than * -1));"));
 			}
 
 			for ($i = 0, $end = sizeof($user_list); $i < $end; ++$i)
@@ -1439,7 +1448,9 @@ switch ($mode)
 				unset($id_cache[$user_id]);
 			}
 		}
-
+		// www.phpBB-SEO.com SEO TOOLKIT BEGIN
+		$seo_sep = strpos($sort_url, '?') === false ? '?' : '&amp;';
+		// www.phpBB-SEO.com SEO TOOLKIT END
 		// Generate page
 		$template->assign_vars(array(
 			'PAGINATION'	=> generate_pagination($pagination_url, $total_users, $config['topics_per_page'], $start),
@@ -1459,20 +1470,22 @@ switch ($mode)
 
 			'U_FIND_MEMBER'			=> ($config['load_search'] || $auth->acl_get('a_')) ? append_sid("{$phpbb_root_path}memberlist.$phpEx", 'mode=searchuser') : '',
 			'U_HIDE_FIND_MEMBER'	=> ($mode == 'searchuser') ? $u_hide_find_member : '',
-			'U_SORT_USERNAME'		=> $sort_url . '&amp;sk=a&amp;sd=' . (($sort_key == 'a' && $sort_dir == 'a') ? 'd' : 'a'),
-			'U_SORT_FROM'			=> $sort_url . '&amp;sk=b&amp;sd=' . (($sort_key == 'b' && $sort_dir == 'a') ? 'd' : 'a'),
-			'U_SORT_JOINED'			=> $sort_url . '&amp;sk=c&amp;sd=' . (($sort_key == 'c' && $sort_dir == 'a') ? 'd' : 'a'),
-			'U_SORT_POSTS'			=> $sort_url . '&amp;sk=d&amp;sd=' . (($sort_key == 'd' && $sort_dir == 'a') ? 'd' : 'a'),
-			'U_SORT_EMAIL'			=> $sort_url . '&amp;sk=e&amp;sd=' . (($sort_key == 'e' && $sort_dir == 'a') ? 'd' : 'a'),
-			'U_SORT_WEBSITE'		=> $sort_url . '&amp;sk=f&amp;sd=' . (($sort_key == 'f' && $sort_dir == 'a') ? 'd' : 'a'),
-			'U_SORT_LOCATION'		=> $sort_url . '&amp;sk=b&amp;sd=' . (($sort_key == 'b' && $sort_dir == 'a') ? 'd' : 'a'),
-			'U_SORT_ICQ'			=> $sort_url . '&amp;sk=g&amp;sd=' . (($sort_key == 'g' && $sort_dir == 'a') ? 'd' : 'a'),
-			'U_SORT_AIM'			=> $sort_url . '&amp;sk=h&amp;sd=' . (($sort_key == 'h' && $sort_dir == 'a') ? 'd' : 'a'),
-			'U_SORT_MSN'			=> $sort_url . '&amp;sk=i&amp;sd=' . (($sort_key == 'i' && $sort_dir == 'a') ? 'd' : 'a'),
-			'U_SORT_YIM'			=> $sort_url . '&amp;sk=j&amp;sd=' . (($sort_key == 'j' && $sort_dir == 'a') ? 'd' : 'a'),
-			'U_SORT_ACTIVE'			=> ($auth->acl_get('u_viewonline')) ? $sort_url . '&amp;sk=l&amp;sd=' . (($sort_key == 'l' && $sort_dir == 'a') ? 'd' : 'a') : '',
-			'U_SORT_RANK'			=> $sort_url . '&amp;sk=m&amp;sd=' . (($sort_key == 'm' && $sort_dir == 'a') ? 'd' : 'a'),
-			'U_LIST_CHAR'			=> $sort_url . '&amp;sk=a&amp;sd=' . (($sort_key == 'l' && $sort_dir == 'a') ? 'd' : 'a'),
+			// www.phpBB-SEO.com SEO TOOLKIT BEGIN
+			'U_SORT_USERNAME'		=> $sort_url . $seo_sep . 'sk=a&amp;sd=' . (($sort_key == 'a' && $sort_dir == 'a') ? 'd' : 'a'),
+			'U_SORT_FROM'			=> $sort_url . $seo_sep . 'sk=b&amp;sd=' . (($sort_key == 'b' && $sort_dir == 'a') ? 'd' : 'a'),
+			'U_SORT_JOINED'			=> $sort_url . $seo_sep . 'sk=c&amp;sd=' . (($sort_key == 'c' && $sort_dir == 'a') ? 'd' : 'a'),
+			'U_SORT_POSTS'			=> $sort_url . $seo_sep . 'sk=d&amp;sd=' . (($sort_key == 'd' && $sort_dir == 'a') ? 'd' : 'a'),
+			'U_SORT_EMAIL'			=> $sort_url . $seo_sep . 'sk=e&amp;sd=' . (($sort_key == 'e' && $sort_dir == 'a') ? 'd' : 'a'),
+			'U_SORT_WEBSITE'		=> $sort_url . $seo_sep . 'sk=f&amp;sd=' . (($sort_key == 'f' && $sort_dir == 'a') ? 'd' : 'a'),
+			'U_SORT_LOCATION'		=> $sort_url . $seo_sep . 'sk=b&amp;sd=' . (($sort_key == 'b' && $sort_dir == 'a') ? 'd' : 'a'),
+			'U_SORT_ICQ'			=> $sort_url . $seo_sep . 'sk=g&amp;sd=' . (($sort_key == 'g' && $sort_dir == 'a') ? 'd' : 'a'),
+			'U_SORT_AIM'			=> $sort_url . $seo_sep . 'sk=h&amp;sd=' . (($sort_key == 'h' && $sort_dir == 'a') ? 'd' : 'a'),
+			'U_SORT_MSN'			=> $sort_url . $seo_sep . 'sk=i&amp;sd=' . (($sort_key == 'i' && $sort_dir == 'a') ? 'd' : 'a'),
+			'U_SORT_YIM'			=> $sort_url . $seo_sep . 'sk=j&amp;sd=' . (($sort_key == 'j' && $sort_dir == 'a') ? 'd' : 'a'),
+			'U_SORT_ACTIVE'			=> ($auth->acl_get('u_viewonline')) ? $sort_url . $seo_sep . 'sk=l&amp;sd=' . (($sort_key == 'l' && $sort_dir == 'a') ? 'd' : 'a') : '',
+			'U_SORT_RANK'			=> $sort_url . $seo_sep . 'sk=m&amp;sd=' . (($sort_key == 'm' && $sort_dir == 'a') ? 'd' : 'a'),
+			'U_LIST_CHAR'			=> $sort_url . $seo_sep . 'sk=a&amp;sd=' . (($sort_key == 'l' && $sort_dir == 'a') ? 'd' : 'a'),
+			// www.phpBB-SEO.com SEO TOOLKIT END
 
 			'S_SHOW_GROUP'		=> ($mode == 'group') ? true : false,
 			'S_VIEWONLINE'		=> $auth->acl_get('u_viewonline'),
@@ -1506,9 +1519,9 @@ function show_profile($data)
 	$rank_title = $rank_img = $rank_img_src = '';
 	get_user_rank($data['user_rank'], $data['user_posts'], $rank_title, $rank_img, $rank_img_src);
 
-	if (!empty($data['user_allow_viewemail']) || $auth->acl_get('a_email'))
+	if (!empty($data['user_allow_viewemail']) || $auth->acl_get('a_user'))
 	{
-		$email = ($config['board_email_form'] && $config['email_enable']) ? append_sid("{$phpbb_root_path}memberlist.$phpEx", 'mode=email&amp;u=' . $user_id) : (($config['board_hide_emails'] && !$auth->acl_get('a_email')) ? '' : 'mailto:' . $data['user_email']);
+		$email = ($config['board_email_form'] && $config['email_enable']) ? append_sid("{$phpbb_root_path}memberlist.$phpEx", 'mode=email&amp;u=' . $user_id) : (($config['board_hide_emails'] && !$auth->acl_get('a_user')) ? '' : 'mailto:' . $data['user_email']);
 	}
 	else
 	{

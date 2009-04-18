@@ -2,7 +2,7 @@
 /**
 *
 * @package diff
-* @version $Id: engine.php,v 1.7 2007/10/05 14:36:33 acydburn Exp $
+* @version $Id: engine.php 8479 2008-03-29 00:22:48Z naderman $
 * @copyright (c) 2006 phpBB Group
 * @license http://opensource.org/licenses/gpl-license.php GNU Public License
 *

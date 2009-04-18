@@ -2,10 +2,10 @@
 /** 
 *
 * search_ignore_words [Standard french]
-* translated by PhpBB-fr.com <http://www.phpbb-fr.com/> and phpBB.biz <http://www.phpbb.biz/>
+* translated originally by PhpBB-fr.com <http://www.phpbb-fr.com/> and phpBB.biz <http://www.phpBB.biz>
 *
 * @package language
-* @version $Id: search_ignore_words.php,v 1.19 2007/11/22 13:09:51 lolovoisin Exp $
+* @version $Id: search_ignore_words.php,v 1.21 2007/11/22 13:09:51 lolovoisin Exp $
 * @copyright (c) 2005 phpBB Group 
 * @license http://opensource.org/licenses/gpl-license.php GNU Public License 
 *

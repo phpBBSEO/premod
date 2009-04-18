@@ -2,10 +2,10 @@
 /** 
 *
 * acp_forums [Standard french]
-* translated by PhpBB-fr.com <http://www.phpbb-fr.com/> and phpBB.biz <http://www.phpbb.biz/>
+* translated originally by PhpBB-fr.com <http://www.phpbb-fr.com/> and phpBB.biz <http://www.phpBB.biz>
 *
 * @package language
-* @version $Id: forums.php,v 1.19 2007/11/27 17:18:44 elglobo Exp $
+* @version $Id: forums.php,v 1.21 2008/04/10 12:53:34 elglobo Exp $
 * @copyright (c) 2005 phpBB Group 
 * @license http://opensource.org/licenses/gpl-license.php GNU Public License 
 *
@@ -46,7 +46,7 @@ $lang = array_merge($lang, array(
 	'AUTO_PRUNE_VIEWED_EXPLAIN'	=> 'Nombre de jours entre la dernière consultation et la suppression du sujet.',
 
 	'COPY_PERMISSIONS'				=> 'Copier les permissions depuis',
-	'COPY_PERMISSIONS_ADD_EXPLAIN'	=> 'Une fois créé, le forum aura les mêmes permissions que celles sélectionnées ici. Si aucun forum n’est choisi, le nouveau forum ne sera pas visible tant que ses permissions n’ont pas définies.',
+	'COPY_PERMISSIONS_ADD_EXPLAIN'	=> 'Une fois créé, le forum aura les mêmes permissions que celles sélectionnées ici. Si aucun forum n’est choisi, le nouveau forum ne sera pas visible tant que ses permissions n’ont pas été définies.',
 	'COPY_PERMISSIONS_EDIT_EXPLAIN'	=> 'Si vous choisissez de copier les permissions, le forum aura les mêmes permissions que celles sélectionnées ici. Elles remplaceront toutes les permissions précédemment définies pour ce forum. Si aucun forum n’est choisi les permissions actuelles seront conservées.',
 	'CREATE_FORUM'					=> 'Créer un nouveau forum',
 
@@ -80,7 +80,7 @@ $lang = array_merge($lang, array(
 	'FORUM_DESC_TOO_LONG'				=> 'La description du forum est trop longue. Elle ne peut contenir plus de 4000 caractères.',
 	'FORUM_EDIT_EXPLAIN'				=> 'Le formulaire suivant vous permet de personnaliser ce forum. Notez que la modération et les paramètres de contrôle des messages sont définis via les permissions pour chaque utilisateur ou groupe.',
 	'FORUM_IMAGE'						=> 'Image du forum',
-	'FORUM_IMAGE_EXPLAIN'				=> 'Emplacement, relatif à la racine du dossier de phpBB, d’une image supplémentaire à associer à ce forum.',
+	'FORUM_IMAGE_EXPLAIN'				=> 'Emplacement relatif à la racine du dossier de phpBB, d’une image supplémentaire à associer à ce forum.',
 	'FORUM_LINK_EXPLAIN'				=> 'URL complète (incluant le protocole, exemple <samp>http://</samp> ) qui enverra l’utilisateur vers ce forum.',
 	'FORUM_LINK_TRACK'					=> 'Compter les redirections',
 	'FORUM_LINK_TRACK_EXPLAIN'			=> 'Enregistre le nombre de fois que le lien a été cliqué.',
@@ -114,10 +114,12 @@ $lang = array_merge($lang, array(
 	
 	'GENERAL_FORUM_SETTINGS'	=> 'Réglages généraux du forum',
 
-	'LINK'					=> 'Lien',
-	'LIST_INDEX'			=> 'Liste le sous-forum dans la légende du forum parent',
-	'LIST_INDEX_EXPLAIN'	=> 'Affiche ce forum sur l’index et ailleurs comme lien dans la légende de son forum parent.',
-	'LOCKED'				=> 'Verrouillé',
+	'LINK'						=> 'Lien',
+	'LIST_INDEX'				=> 'Liste le sous-forum dans la légende du forum parent',
+	'LIST_INDEX_EXPLAIN'		=> 'Affiche ce forum sur l’index et ailleurs comme lien dans la légende de son forum parent.',
+	'LIST_SUBFORUMS'			=> 'Lister les sous-forums dans la légende',
+	'LIST_SUBFORUMS_EXPLAIN'	=> 'Affiche ce forum de sous-forums sur l’index et ailleurs comme lien dans la légende de son forum parent.',
+	'LOCKED'					=> 'Verrouillé',
 
 	'MOVE_POSTS_NO_POSTABLE_FORUM'	=> 'Le forum que vous avez sélectionné pour y déplacer les messages n’est pas approprié. Sélectionnez un forum destiné à recevoir des messages.',
 	'MOVE_POSTS_TO'					=> 'Déplacer les messages',
