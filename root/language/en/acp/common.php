@@ -677,6 +677,9 @@ $lang = array_merge($lang, array(
 	'ACP_PHPBB_SEO_CLASS' => 'phpBB SEO Class settings',
 	'ACP_FORUM_URL' => 'Forum URL Management',
 	'ACP_HTACCESS' => '.htaccess',
+	'ACP_PREMOD_UPDATE' => '<h1>Release announcement</h1>
+	<p>This update does only concern the premod, not the phpBB core.</p>
+	<p>A new version of the phpBB SEO premod is thus available : %1$s<br/>Make sure you visit<a href="%2$s" title="The release thread"><b>the release thread</b></a> and update your installation.</p>',
 	'SEO_LOG_INSTALL_PHPBB_SEO' => '<strong>phpBB SEO mod rewrite installed</strong>',
 	'SEO_LOG_INSTALL_PHPBB_SEO_FAIL' => '<strong>phpBB SEO mod rewrite install attempt failed</strong>',
 	'SEO_LOG_UNINSTALL_PHPBB_SEO' => '<strong>phpBB SEO mod rewrite uninstalled</strong>',
