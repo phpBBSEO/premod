@@ -1,0 +1,12 @@
+User-agent: *
+Disallow: /phpbb/viewtopic.php
+Disallow: /phpbb/viewforum.php
+Disallow: /phpbb/index.php?
+Disallow: /phpbb/posting.php
+Disallow: /phpbb/search.php?
+Disallow: /phpbb/ucp.php
+Disallow: /phpbb/mcp.php
+Disallow: /phpbb/post
+Disallow: /phpbb/member
+Disallow: /phpbb/memberlist.php
+Disallow: /phpbb/faq.php
