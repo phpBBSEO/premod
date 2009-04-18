@@ -2,7 +2,7 @@
 /**
 *
 * @package phpBB3
-* @version $Id: functions_profile_fields.php,v 1.56 2007/10/05 12:40:23 acydburn Exp $
+* @version $Id: functions_profile_fields.php,v 1.57 2007/11/15 19:54:36 kellanved Exp $
 * @copyright (c) 2005 phpBB Group
 * @license http://opensource.org/licenses/gpl-license.php GNU Public License
 *
@@ -1062,8 +1062,15 @@ class custom_profile_admin extends custom_profile
 			'field_length'			=> $this->vars['field_length']
 		);
 
-		$always_now = request_var('always_now', 0);
-		$s_checked = ($always_now || $this->vars['field_default_value'] == 'now') ? true : false;
+		$always_now = request_var('always_now', -1);
+		if ($always_now == -1)
+		{
+			$s_checked = ($this->vars['field_default_value'] == 'now') ? true : false;
+		}
+		else
+		{
+			$s_checked = ($always_now) ? true : false;
+		}
 
 		$options = array(
 			0 => array('TITLE' => $user->lang['DEFAULT_VALUE'],	'FIELD' => $this->process_field_row('preview', $profile_row)),

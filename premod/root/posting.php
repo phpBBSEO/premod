@@ -2,7 +2,7 @@
 /**
 *
 * @package phpBB3
-* @version $Id: posting.php,v 1.488 2007/10/05 14:30:06 acydburn Exp $
+* @version $Id: posting.php,v 1.494 2007/12/12 11:07:07 acydburn Exp $
 * @copyright (c) 2005 phpBB Group
 * @license http://opensource.org/licenses/gpl-license.php GNU Public License
 *
@@ -520,7 +520,7 @@ if ($save && $user->data['is_registered'] && $auth->acl_get('u_savedrafts') && (
 	}
 	else
 	{
-		if (!$subject || !utf_clean_string($subject))
+		if (!$subject || !utf8_clean_string($subject))
 		{
 			$error[] = $user->lang['EMPTY_SUBJECT'];
 		}
@@ -530,7 +530,6 @@ if ($save && $user->data['is_registered'] && $auth->acl_get('u_savedrafts') && (
 			$error[] = $user->lang['TOO_FEW_CHARS'];
 		}
 	}
-
 	unset($subject, $message);
 }
 
@@ -612,7 +611,7 @@ if ($submit || $preview || $refresh)
 	if ($poll_delete && $mode == 'edit' && sizeof($post_data['poll_options']) &&
 		((!$post_data['poll_last_vote'] && $post_data['poster_id'] == $user->data['user_id'] && $auth->acl_get('f_delete', $forum_id)) || $auth->acl_get('m_delete', $forum_id)))
 	{
-		if ($submit && 	check_form_key('posting'))
+		if ($submit && check_form_key('posting'))
 		{
 			$sql = 'DELETE FROM ' . POLL_OPTIONS_TABLE . "
 				WHERE topic_id = $topic_id";
@@ -764,7 +763,7 @@ if ($submit || $preview || $refresh)
 	}
 
 	// check form
-	if (!check_form_key('posting', false, '', false, 2))
+	if (($submit || $preview) && !check_form_key('posting'))
 	{
 		$error[] = $user->lang['FORM_INVALID'];
 	}
@@ -1131,7 +1130,7 @@ $message_parser->decode_message($post_data['bbcode_uid']);
 
 if ($mode == 'quote' && !$submit && !$preview && !$refresh)
 {
-	$message_parser->message = '[quote="' . $post_data['quote_username'] . '"]' . censor_text(trim($message_parser->message)) . "[/quote]\n";
+	$message_parser->message = '[quote=&quot;' . $post_data['quote_username'] . '&quot;]' . censor_text(trim($message_parser->message)) . "[/quote]\n";
 }
 
 if (($mode == 'reply' || $mode == 'quote') && !$submit && !$preview && !$refresh)

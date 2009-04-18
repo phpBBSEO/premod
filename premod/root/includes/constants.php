@@ -2,7 +2,7 @@
 /**
 *
 * @package phpBB3
-* @version $Id: constants.php,v 1.83 2007/10/05 14:30:08 acydburn Exp $
+* @version $Id: constants.php,v 1.86 2007/11/19 17:00:13 acydburn Exp $
 * @copyright (c) 2005 phpBB Group
 * @license http://opensource.org/licenses/gpl-license.php GNU Public License
 *
@@ -19,9 +19,13 @@ if (!defined('IN_PHPBB'))
 /**
 * valid external constants:
 * PHPBB_MSG_HANDLER
+* PHPBB_DB_NEW_LINK
 * PHPBB_ROOT_PATH
 * PHPBB_ADMIN_PATH
 */
+
+// QA-related
+// define('PHPBB_QA', 1);
 
 // User related
 define('ANONYMOUS', 1);
@@ -169,7 +173,7 @@ define('FIELD_DATE', 6);
 
 
 // Additional constants
-
+define('VOTE_CONVERTED', 9999);
 
 // Table names
 define('ACL_GROUPS_TABLE',			$table_prefix . 'acl_groups');

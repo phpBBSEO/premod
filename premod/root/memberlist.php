@@ -430,7 +430,21 @@ switch ($mode)
 		}
 
 		$user_id = (int) $member['user_id'];
-
+		// www.phpBB-SEO.com SEO TOOLKIT BEGIN
+		$phpbb_seo->set_user_url( $member['username'], $user_id );
+		// www.phpBB-SEO.com SEO TOOLKIT END
+		// www.phpBB-SEO.com SEO TOOLKIT BEGIN - Zero dupe
+		if ( $user->data['is_registered'] ) {
+			$phpbb_seo->seo_cond( !isset($_GET['explain']) );
+		}
+		if ( !$phpbb_seo->seo_opt['zero_dupe']['strict'] ) { // strict mode is here a bit faster
+			if ( !$user->data['is_registered'] ) {
+				$phpbb_seo->seo_cond( isset($_GET['explain']), false, 'do' );
+			}
+		}
+		$phpbb_seo->page_url = str_replace('&amp;', '&', append_sid("memberlist.$phpEx?mode=viewprofile&u=$user_id" . (!empty($_SID) ? '&amp;sid=' . $_SID : '')));
+		$phpbb_seo->seo_chk_dupe(urldecode(urldecode($phpbb_seo->seo_path['uri'])), urldecode(urldecode($phpbb_seo->page_url)));
+		// www.phpBB-SEO.com SEO TOOLKIT END - Zero dupe
 		// Do the SQL thang
 		$sql = 'SELECT g.group_id, g.group_name, g.group_type
 			FROM ' . GROUPS_TABLE . ' g, ' . USER_GROUP_TABLE . " ug
@@ -1075,7 +1089,21 @@ switch ($mode)
 			{
 				trigger_error('NO_GROUP');
 			}
-
+			// www.phpBB-SEO.com SEO TOOLKIT BEGIN - Zero dupe
+			if ( $user->data['is_registered'] ) {
+				$phpbb_seo->seo_cond( !isset($_GET['explain']) );
+			}
+			if ( !$phpbb_seo->seo_opt['zero_dupe']['strict'] ) { // strict mode is here a bit faster
+				if ( !$user->data['is_registered'] ) {
+					$phpbb_seo->seo_cond( isset($_GET['explain']), false, 'do' );
+				}
+			}
+			if ( empty($phpbb_seo->seo_url['group'][$group_row['group_id']]) ) {
+				$phpbb_seo->seo_url['group'][$group_row['group_id']] = $phpbb_seo->format_url($group_row['group_name'], $phpbb_seo->seo_static['group']);
+			}
+			$phpbb_seo->page_url = str_replace('&amp;', '&', append_sid("memberlist.$phpEx?mode=group&g=" . $group_row['group_id'] . '&amp;start=' . $start . (!empty($_SID) ? '&amp;sid=' . $_SID : '')));
+			$phpbb_seo->seo_chk_dupe($phpbb_seo->seo_path['uri'], $phpbb_seo->page_url);
+			// www.phpBB-SEO.com SEO TOOLKIT END - Zero dupe
 			switch ($group_row['group_type'])
 			{
 				case GROUP_OPEN:

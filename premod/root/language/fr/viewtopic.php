@@ -2,19 +2,15 @@
 /** 
 *
 * viewtopic [Standard french]
+* translated by PhpBB-fr.com <http://www.phpbb-fr.com/> and phpBB.biz <http://www.phpbb.biz/>
 *
 * @package language
-* @version $Id: viewtopic.php,v 1.19 2007/10/04 15:07:24 acydburn Exp $
+* @version $Id: viewtopic.php,v 1.19 2007/11/22 13:10:40 lolovoisin Exp $
 * @copyright (c) 2005 phpBB Group 
 * @license http://opensource.org/licenses/gpl-license.php GNU Public License 
 *
 */
-/**
-* CONTRIBUTORS
-* Translation made by phpBB-fr.com and phpBB.biz Teams
-* http://www.phpbb-fr.com
-* http://www.phpbb.biz
-*/
+
 /**
 * DO NOT CHANGE
 */
@@ -54,14 +50,14 @@ $lang = array_merge($lang, array(
 	'CODE'					=> 'Code',
 
 	'DELETE_TOPIC'			=> 'Supprimer le sujet',
-	'DOWNLOAD_NOTICE'		=> 'Vous n\'avez pas les permissions nécessaires pour voir les fichiers joints à ce message.',
+	'DOWNLOAD_NOTICE'		=> 'Vous n’avez pas les permissions nécessaires pour voir les fichiers joints à ce message.',
 
 	'EDITED_TIMES_TOTAL'	=> 'Dernière édition par %1$s le %2$s, édité %3$d fois.',
 	'EDITED_TIME_TOTAL'		=> 'Dernière édition par %1$s le %2$s, édité %3$d fois.',
 	'EMAIL_TOPIC'			=> 'Envoyer par e-mail à un ami',
-	'ERROR_NO_ATTACHMENT'	=> 'Le fichier joint sélectionné n\'est plus disponible.',
+	'ERROR_NO_ATTACHMENT'	=> 'Le fichier joint sélectionné n’est plus disponible.',
 
-	'FILE_NOT_FOUND_404'	=> 'Le fichier <strong>%s</strong> n\'existe pas.',
+	'FILE_NOT_FOUND_404'	=> 'Le fichier <strong>%s</strong> n’existe pas.',
 	'FORK_TOPIC'			=> 'Copier le sujet',
 
 	'LINKAGE_FORBIDDEN'		=> 'Vous ne pouvez pas voir, télécharger ou joindre des fichiers à partir de ce site.',
@@ -72,20 +68,20 @@ $lang = array_merge($lang, array(
 	'MAKE_GLOBAL'				=> 'Mettre en “Annonce générale”',
 	'MAKE_NORMAL'				=> 'Mettre en “Sujet standard”',
 	'MAKE_STICKY'				=> 'Mettre en “Post-it”',
-	'MAX_OPTIONS_SELECT'		=> 'Vous devez sélectionner plus de <strong>%d</strong> options',
-	'MAX_OPTION_SELECT'			=> 'Vous devez sélectionner <strong>1</strong> option',
-	'MISSING_INLINE_ATTACHMENT'	=> 'Le fichier joint <strong>%s</strong> n\'est plus disponible.',
+	'MAX_OPTIONS_SELECT'		=> 'Vous pouvez sélectionner jusqu’à <strong>%d</strong> options',
+	'MAX_OPTION_SELECT'			=> 'Vous pouvez sélectionner <strong>1</strong> option',
+	'MISSING_INLINE_ATTACHMENT'	=> 'Le fichier joint <strong>%s</strong> n’est plus disponible.',
 	'MOVE_TOPIC'				=> 'Déplacer le sujet',
 
-	'NO_ATTACHMENT_SELECTED'=> 'Vous n\'avez pas sélectionné de fichier joint à voir ou à télécharger.',
+	'NO_ATTACHMENT_SELECTED'=> 'Vous n’avez pas sélectionné de fichier joint à voir ou à télécharger.',
 	'NO_NEWER_TOPICS'		=> 'Aucun nouveau sujet dans ce forum.',
 	'NO_OLDER_TOPICS'		=> 'Aucun ancien sujet dans ce forum.',
 	'NO_UNREAD_POSTS'		=> 'Aucun nouveau message non-lu dans ce sujet.',
 	'NO_VOTE_OPTION'		=> 'Vous devez choisir une option lorsque vous votez.',
 	'NO_VOTES'				=> 'Aucun vote',
 
-	'POLL_ENDED_AT'         => 'Le sondage s\'est terminé le %s',
-	'POLL_RUN_TILL'			=> 'Le sondage est actif jusqu\'au %s',
+	'POLL_ENDED_AT'         => 'Le sondage s’est terminé le %s',
+	'POLL_RUN_TILL'			=> 'Le sondage est actif jusqu’au %s',
 	'POLL_VOTED_OPTION'		=> 'Vous avez voté pour cette option',
 	'PRINT_TOPIC'			=> 'Imprimer le sujet',
 
@@ -108,8 +104,9 @@ $lang = array_merge($lang, array(
 	'VIEW_TOPIC_POST'		=> '1 message',
 	'VIEW_TOPIC_POSTS'		=> '%d messages',
 	'VIEW_UNREAD_POST'		=> 'Voir le premier message non lu',
-	'VISIT_WEBSITE'			=> 'Site Web',
+	'VISIT_WEBSITE'			=> 'Site Internet',
 	'VOTE_SUBMITTED'		=> 'Votre vote a été pris en compte.',
+	'VOTE_CONVERTED'      	=> 'La modification d’un vote n’est pas possible pour les sondages issus d’une conversion.',
 	
 ));
 

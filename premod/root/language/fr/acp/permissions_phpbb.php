@@ -1,18 +1,16 @@
 <?php
 /** 
+*
 * acp_permissions (phpBB Permission Set) [Standard french]
+* translated by PhpBB-fr.com <http://www.phpbb-fr.com/> and phpBB.biz <http://www.phpbb.biz/>
 *
 * @package language
-* @version $Id: permissions_phpbb.php,v 1.29 2007/10/04 15:07:24 acydburn Exp $
+* @version $Id: permissions_phpbb.php,v 1.19 2007/11/22 12:38:30 elglobo Exp $
 * @copyright (c) 2005 phpBB Group 
 * @license http://opensource.org/licenses/gpl-license.php GNU Public License 
+*
 */
-/**
-* CONTRIBUTORS
-* Translation made by phpBB-fr.com and phpBB.biz Teams
-* http://www.phpbb-fr.com
-* http://www.phpbb.biz
-*/
+
 /**
 * DO NOT CHANGE
 */
@@ -82,7 +80,7 @@ $lang = array_merge($lang, array(
 		'post'			=> 'Message',
 		'post_actions'	=> 'Actions sur les messages',
 		'posting'		=> 'Rédaction de message',
-		'profile'		=> 'Panneau de l\'utilisateur',
+		'profile'		=> 'Panneau de l’utilisateur',
 		'settings'		=> 'Configuration',
 		'topic_actions'	=> 'Actions sur les sujets',
 		'user_group'	=> 'Utilisateurs &amp; Groupes'
@@ -90,8 +88,8 @@ $lang = array_merge($lang, array(
 
 	// With defining 'global' here we are able to specify what is printed out if the permission is within the global scope.
 	'permission_type'	=> array(
-		'u_'			=> 'Permissions d\'utilisateur',
-		'a_'			=> 'Permissions d\'administrateur',
+		'u_'			=> 'Permissions d’utilisateur',
+		'a_'			=> 'Permissions d’administrateur',
 		'm_'			=> 'Permissions de modérateur',
 		'f_'			=> 'Permissions de forum',
 		'global'		=> array(
@@ -103,7 +101,7 @@ $lang = array_merge($lang, array(
 // User Permissions
 $lang = array_merge($lang, array(
 	'acl_u_viewprofile'	=> array('lang' => 'Peut voir un profil public, la liste des membres et les utilisateurs connectés', 'cat' => 'profile'),
-	'acl_u_chgname'		=> array('lang'	=> 'Peut modifier son pseudo', 'cat' => 'profile'),
+	'acl_u_chgname'		=> array('lang'	=> 'Peut modifier son nom d’utilisateur', 'cat' => 'profile'),
 	'acl_u_chgpasswd'	=> array('lang' => 'Peut modifier son mot de passe', 'cat' => 'profile'),
 	'acl_u_chgemail'	=> array('lang' => 'Peut modifier son e-mail', 'cat' => 'profile'),
 	'acl_u_chgavatar'	=> array('lang'	=> 'Peut modifier son avatar', 'cat' => 'profile'),
@@ -178,14 +176,14 @@ $lang = array_merge($lang, array(
 	'acl_m_delete'	=> array('lang'	=> 'Peut supprimer un message', 'cat' => 'post_actions'),
 	'acl_m_approve'	=> array('lang'	=> 'Peut approuver un message', 'cat' => 'post_actions'),
 	'acl_m_report'	=> array('lang'	=> 'Peut clôturer et supprimer les rapports', 'cat' => 'post_actions'),
-	'acl_m_chgposter'	=> array('lang'	=> 'Peut modifier l\'auteur d\'un message', 'cat' => 'post_actions'),
+	'acl_m_chgposter'	=> array('lang'	=> 'Peut modifier l’auteur d’un message', 'cat' => 'post_actions'),
 	'acl_m_move'	=> array('lang'	=> 'Peut déplacer un sujet', 'cat' => 'topic_actions'),
 	'acl_m_lock'	=> array('lang'	=> 'Peut verrouiller un sujet', 'cat' => 'topic_actions'),
 	'acl_m_split'	=> array('lang'	=> 'Peut diviser un sujet', 'cat' => 'topic_actions'),
 	'acl_m_merge'	=> array('lang'	=> 'Peut fusionner des sujets', 'cat' => 'topic_actions'),
 	'acl_m_info'	=> array('lang'	=> 'Peut voir les informations du message', 'cat' => 'misc'),
-	'acl_m_warn'	=> array('lang'	=> 'Peut avertir un membre<br /><em>Notez que ce réglage est assigné globalement. Il n\'est pas basé sur le forum.</em>', 'cat' => 'misc'), // This moderator setting is only global (and not local)
-	'acl_m_ban'		=> array('lang'	=> 'Peut gérer les bannissements<br /><em>Notez que ce réglage est assigné globalement. Il n\'est pas basé sur le forum.</em>', 'cat' => 'misc'), // This moderator setting is only global (and not local)
+	'acl_m_warn'	=> array('lang'	=> 'Peut avertir un membre<br /><em>Notez que ce réglage est assigné globalement. Il n’est pas basé sur le forum.</em>', 'cat' => 'misc'), // This moderator setting is only global (and not local)
+	'acl_m_ban'		=> array('lang'	=> 'Peut gérer les bannissements<br /><em>Notez que ce réglage est assigné globalement. Il n’est pas basé sur le forum.</em>', 'cat' => 'misc'), // This moderator setting is only global (and not local)
 ));
 
 // Admin Permissions
@@ -202,7 +200,7 @@ $lang = array_merge($lang, array(
 	'acl_a_words'	=> array('lang'	=> 'Peut modifier les mots censurés', 'cat' => 'posting'),
 	'acl_a_bbcode'	=> array('lang'	=> 'Peut créer des balises BBCodes', 'cat' => 'posting'),
 	'acl_a_attach'	=> array('lang'	=> 'Peut modifier la configuration des fichiers joints', 'cat' => 'posting'),
-	'acl_a_user'	=> array('lang'	=> 'Peut gérer les utilisateurs<br /><em>Ceci inclu également l\'affichage du navigateur des utilisateurs dans la liste des utilisateurs connectés.</em>', 'cat' => 'user_group'),
+	'acl_a_user'	=> array('lang'	=> 'Peut gérer les utilisateurs<br /><em>Ceci inclu également l’affichage du navigateur des utilisateurs dans la liste des utilisateurs connectés.</em>', 'cat' => 'user_group'),
 	'acl_a_userdel'	=> array('lang'	=> 'Peut supprimer/trier les utilisateurs', 'cat' => 'user_group'),
 	'acl_a_group'	=> array('lang'	=> 'Peut gérer les groupes', 'cat' => 'user_group'),
 	'acl_a_groupadd'	=> array('lang'	=> 'Peut ajouter un groupe', 'cat' => 'user_group'),
@@ -219,7 +217,7 @@ $lang = array_merge($lang, array(
 	'acl_a_authgroups'	=> array('lang'	=> 'Peut modifier les permissions des groupes', 'cat' => 'permissions'),
 	'acl_a_authusers'	=> array('lang'	=> 'Peut modifier les permissions des utilisateurs', 'cat' => 'permissions'),
 	'acl_a_roles'	=> array('lang'	=> 'Peut gérer les modèles', 'cat' => 'permissions'),
-	'acl_a_switchperm'	=> array('lang'	=> 'Peut utiliser les permissions d\'autrui', 'cat' => 'permissions'),
+	'acl_a_switchperm'	=> array('lang'	=> 'Peut utiliser les permissions d’autrui', 'cat' => 'permissions'),
 	'acl_a_styles'	=> array('lang'	=> 'Peut gérer les styles', 'cat' => 'misc'),
 	'acl_a_viewlogs'	=> array('lang'	=> 'Peut consulter les journaux', 'cat' => 'misc'),
 	'acl_a_clearlogs'	=> array('lang'	=> 'Peut effacer les journaux', 'cat' => 'misc'),
@@ -229,7 +227,7 @@ $lang = array_merge($lang, array(
 	'acl_a_bots'	=> array('lang'	=> 'Peut gérer les robots', 'cat' => 'misc'),
 	'acl_a_reasons'	=> array('lang'	=> 'Peut gérer les rapports/raisons', 'cat' => 'misc'),
 	'acl_a_backup'	=> array('lang'	=> 'Peut sauvegarder et restaurer la base de données', 'cat' => 'misc'),
-	'acl_a_search'	=> array('lang'	=> 'Peut gérer l\'indexation et les paramètres de recherche', 'cat' => 'misc'),
+	'acl_a_search'	=> array('lang'	=> 'Peut gérer l’indexation et les paramètres de recherche', 'cat' => 'misc'),
 ));
 
 ?>

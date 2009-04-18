@@ -2,7 +2,7 @@
 /**
 *
 * @package phpBB3
-* @version $Id: functions_display.php,v 1.167 2007/10/05 14:30:10 acydburn Exp $
+* @version $Id: functions_display.php,v 1.168 2007/10/20 10:12:54 acydburn Exp $
 * @copyright (c) 2005 phpBB Group
 * @license http://opensource.org/licenses/gpl-license.php GNU Public License
 *
@@ -91,7 +91,7 @@ function display_forums($root_data = '', $display_moderators = true, $return_mod
 	}
 	// www.phpBB-SEO.com SEO TOOLKIT BEGIN -> no dupe
 	if ($phpbb_seo->seo_opt['no_dupe']['on']) {
-		$sql_array['SELECT'] .= ', t.topic_id, t.forum_id as real_forum_id, t.topic_title, t.topic_replies, t.topic_replies_real';
+		$sql_array['SELECT'] .= ', t.topic_id, t.topic_title, t.topic_replies, t.topic_replies_real, t.topic_type';
 		$sql_array['LEFT_JOIN'][] = array(
 			'FROM'	=> array(TOPICS_TABLE => 't'),
 			'ON'	=> "t.topic_last_post_id = f.forum_last_post_id" 
@@ -167,8 +167,18 @@ function display_forums($root_data = '', $display_moderators = true, $return_mod
 			}
 			$forum_tracking_info[$forum_id] = (isset($tracking_topics['f'][$forum_id])) ? (int) (base_convert($tracking_topics['f'][$forum_id], 36, 10) + $config['board_startdate']) : $user->data['user_lastmark'];
 		}
+
 		// www.phpBB-SEO.com SEO TOOLKIT BEGIN -> no dupe
 		if ($phpbb_seo->seo_opt['no_dupe']['on']) {
+			if ( empty($phpbb_seo->seo_url['topic'][$row['topic_id']]) ) {
+				if ($row['topic_type'] == POST_GLOBAL) {
+					$phpbb_seo->seo_opt['topic_type'][$row['topic_id']] = POST_GLOBAL;
+				}
+				$phpbb_seo->seo_censored[$row['topic_id']] = censor_text($row['topic_title']);
+				$phpbb_seo->seo_url['topic'][$row['topic_id']] = $phpbb_seo->format_url($phpbb_seo->seo_censored[$row['topic_id']]);
+				$phpbb_seo->seo_opt['topic_forum_name'][$row['topic_id']] = $row['forum_name']; 
+
+			}
 			if ($auth->acl_get('m_approve', $forum_id)) {
 				$row['forum_topics'] = $row['forum_topics_real'];
 				$replies = $row['topic_replies_real'];
@@ -176,10 +186,6 @@ function display_forums($root_data = '', $display_moderators = true, $return_mod
 				$row['forum_topics'] = $row['forum_topics'];
 				$replies = $row['topic_replies'];
 			}
-			if ( empty($phpbb_seo->seo_url['topic'][$row['topic_id']]) ) {
-				$phpbb_seo->seo_url['topic'][$row['topic_id']] = $phpbb_seo->format_url($row['topic_title']);
-			}
-			$phpbb_seo->seo_opt['topic_forum_id'][$row['topic_id']] = $row['real_forum_id'];
 			if (($replies + 1) > $phpbb_seo->seo_opt['topic_per_page']) {
 				$phpbb_seo->seo_opt['topic_last_page'][$row['topic_id']] = floor($replies / $phpbb_seo->seo_opt['topic_per_page']) * $phpbb_seo->seo_opt['topic_per_page'];
 			}
@@ -187,6 +193,7 @@ function display_forums($root_data = '', $display_moderators = true, $return_mod
 			$row['forum_topics'] = ($auth->acl_get('m_approve', $forum_id)) ? $row['forum_topics_real'] : $row['forum_topics'];
 		}
 		// www.phpBB-SEO.com SEO TOOLKIT END -> no dupe
+
 		// Display active topics from this forum?
 		if ($show_active && $row['forum_type'] == FORUM_POST && $auth->acl_get('f_read', $forum_id) && ($row['forum_flags'] & FORUM_FLAG_ACTIVE_TOPICS))
 		{
@@ -254,6 +261,12 @@ function display_forums($root_data = '', $display_moderators = true, $return_mod
 				$forum_rows[$parent_id]['forum_last_poster_name'] = $row['forum_last_poster_name'];
 				$forum_rows[$parent_id]['forum_last_poster_colour'] = $row['forum_last_poster_colour'];
 				$forum_rows[$parent_id]['forum_id_last_post'] = $forum_id;
+				// www.phpBB-SEO.com SEO TOOLKIT BEGIN -> no dupe
+				if ($phpbb_seo->seo_opt['no_dupe']['on']) {
+					$forum_rows[$parent_id]['topic_id'] = $row['topic_id'];
+					$forum_rows[$parent_id]['forum_password'] = $row['forum_password'];
+				}
+				// www.phpBB-SEO.com SEO TOOLKIT END -> no dupe
 			}
 		}
 	}
@@ -382,12 +395,22 @@ function display_forums($root_data = '', $display_moderators = true, $return_mod
 			$last_post_subject = $row['forum_last_post_subject'];
 			$last_post_time = $user->format_date($row['forum_last_post_time']);
 			// www.phpBB-SEO.com SEO TOOLKIT BEGIN -> no dupe
-			$last_post_url = $phpbb_seo->seo_opt['no_dupe']['on'] ? append_sid("{$phpbb_root_path}viewtopic.$phpEx", 'f=' . $phpbb_seo->seo_opt['topic_forum_id'][$row['topic_id']] . '&amp;t=' . $row['topic_id'] . '&amp;start=' . @intval($phpbb_seo->seo_opt['topic_last_page'][$row['topic_id']]) ) . '#p' . $row['forum_last_post_id'] : append_sid("{$phpbb_root_path}viewtopic.$phpEx", 'f=' . $row['forum_id_last_post'] . '&amp;p=' . $row['forum_last_post_id']) . '#p' . $row['forum_last_post_id'];
-			// www.phpBB-SEO.com SEO TOOLKIT END -> no dupe
+			if ($phpbb_seo->seo_opt['no_dupe']['on'] && !$row['forum_password']) {
+				$last_post_url =  append_sid("{$phpbb_root_path}viewtopic.$phpEx", 'f=' . $row['forum_id_last_post'] . '&amp;t=' . $row['topic_id'] . '&amp;start=' . @intval($phpbb_seo->seo_opt['topic_last_page'][$row['topic_id']]) ) . '#p' . $row['forum_last_post_id'];
+				// Limit in chars for the last post link text.
+				$char_limit = 25;
+				// Limit topic text link to $char_limit, without breacking words
+				$topic_text_lilnk = $char_limit > 0 && ( ( $length = utf8_strlen($phpbb_seo->seo_censored[$row['topic_id']]) ) > $char_limit ) ? utf8_strlen($fragment = utf8_substr($phpbb_seo->seo_censored[$row['topic_id']], 0, $char_limit + 1 - 4)) < $length + 1 ? preg_replace('`\s*\S*$`', '', $fragment) . ' ...' : $phpbb_seo->seo_censored[$row['topic_id']] : $phpbb_seo->seo_censored[$row['topic_id']];
+				$last_post_link = '<a href="' . append_sid("{$phpbb_root_path}viewtopic.$phpEx", 'f=' . $row['forum_id_last_post'] . '&amp;t=' . $row['topic_id']) . '" title="' . $phpbb_seo->seo_censored[$row['topic_id']] . ' : ' . $phpbb_seo->seo_opt['topic_forum_name'][$row['topic_id']] . '">' . $topic_text_lilnk . '</a>';
+			} else {	
+				$last_post_url =  append_sid("{$phpbb_root_path}viewtopic.$phpEx", 'f=' . $row['forum_id_last_post'] . '&amp;p=' . $row['forum_last_post_id']) . '#p' . $row['forum_last_post_id'];
+				$last_post_link = '';
+			}
 		}
 		else
 		{
-			$last_post_subject = $last_post_time = $last_post_url = '';
+			$last_post_subject = $last_post_time = $last_post_url = $last_post_link = '';
+			// www.phpBB-SEO.com SEO TOOLKIT END -> no dupe
 		}
 
 		// Output moderator listing ... if applicable
@@ -458,6 +481,9 @@ function display_forums($root_data = '', $display_moderators = true, $return_mod
 
 			'U_VIEWFORUM'		=> $u_viewforum,
 			'U_LAST_POSTER'		=> get_username_string('profile', $row['forum_last_poster_id'], $row['forum_last_poster_name'], $row['forum_last_poster_colour']),
+			// www.phpBB-SEO.com SEO TOOLKIT BEGIN -> no dupe
+			'LAST_POST_LINK'	=> $last_post_link,
+			// www.phpBB-SEO.com SEO TOOLKIT END -> no dupe
 			'U_LAST_POST'		=> $last_post_url)
 		);
 
@@ -627,7 +653,7 @@ function topic_generate_pagination($replies, $url)
 {
 	global $config, $user;
 	// www.phpBB-SEO.com SEO TOOLKIT BEGIN
-	global $phpbb_seo;
+	global $phpbb_seo, $phpEx;
 	// www.phpBB-SEO.com SEO TOOLKIT END
 	// Make sure $per_page is a valid value
 	$per_page = ($config['posts_per_page'] <= 0) ? 1 : $config['posts_per_page'];
@@ -640,13 +666,7 @@ function topic_generate_pagination($replies, $url)
 		$times = 1;
 		for ($j = 0; $j < $replies + 1; $j += $per_page)
 		{
-			// www.phpBB-SEO.com SEO TOOLKIT BEGIN
-			if (!empty($phpbb_seo)) {
-				$pagination .= '<a href="' . str_replace($phpbb_seo->seo_ext['topic'], $phpbb_seo->seo_start($j) . $phpbb_seo->seo_ext['topic'], $url) . '">' . $times . '</a>';
-			} else {
-				$pagination .= '<a href="' . $url . '&amp;start=' . $j . '">' . $times . '</a>';
-			}
-			// www.phpBB-SEO.com SEO TOOLKIT END
+			$pagination .= '<a href="' . $url . '&amp;start=' . $j . '">' . $times . '</a>';
 			if ($times == 1 && $total_pages > 5)
 			{
 				$pagination .= ' ... ';
@@ -661,6 +681,18 @@ function topic_generate_pagination($replies, $url)
 			}
 			$times++;
 		}
+		// www.phpBB-SEO.com SEO TOOLKIT BEGIN
+		if (is_object($phpbb_seo) ) {
+			static $pagin_find = array();
+			static $pagin_replace = array();
+			if (empty($pagin_find)) {
+				$pagin_find = array( '`(\.(?!' . $phpEx . ')[a-z0-9]+)([\w\#$%&~\-;:=,?@+]*)&amp;start=([0-9]+)`i', '`/([\w\#$%&~\-;:=,?@+]*)&amp;start=([0-9]+)`i' );
+				$pagin_replace = array( $phpbb_seo->seo_delim['start'] . '\\3\\1\\2', '/' . $phpbb_seo->seo_static['pagination'] . '\\2' . $phpbb_seo->seo_ext['pagination'] .'\\1' );
+			}
+			$pagination = str_replace( '&amp;start=0', '', $pagination );
+			$pagination = preg_replace( $pagin_find, $pagin_replace, $pagination );
+		}
+		// www.phpBB-SEO.com SEO TOOLKIT END
 	}
 	else
 	{
@@ -676,7 +708,9 @@ function topic_generate_pagination($replies, $url)
 function get_moderators(&$forum_moderators, $forum_id = false)
 {
 	global $config, $template, $db, $phpbb_root_path, $phpEx;
-
+	// www.phpBB-SEO.com SEO TOOLKIT BEGIN
+	global $phpbb_seo;
+	// www.phpBB-SEO.com SEO TOOLKIT END
 	// Have we disabled the display of moderators? If so, then return
 	// from whence we came ...
 	if (!$config['load_moderators'])
@@ -734,6 +768,11 @@ function get_moderators(&$forum_moderators, $forum_id = false)
 		}
 		else
 		{
+			// www.phpBB-SEO.com SEO TOOLKIT BEGIN
+			if ( $phpbb_seo->seo_opt['profile_inj'] && empty($phpbb_seo->seo_url['group'][$row['group_id']]) ) {
+				$phpbb_seo->seo_url['group'][$row['group_id']] = $phpbb_seo->format_url($row['group_name'], $phpbb_seo->seo_static['group']);
+			}
+			// www.phpBB-SEO.com SEO TOOLKIT END
 			$forum_moderators[$row['forum_id']][] = '<a' . (($row['group_colour']) ? ' style="color:#' . $row['group_colour'] . ';"' : '') . ' href="' . append_sid("{$phpbb_root_path}memberlist.$phpEx", 'mode=group&amp;g=' . $row['group_id']) . '">' . (($row['group_type'] == GROUP_SPECIAL) ? $user->lang['G_' . $row['group_name']] : $row['group_name']) . '</a>';
 		}
 	}
@@ -873,8 +912,9 @@ function display_custom_bbcodes()
 			'BBCODE_NAME'		=> "'[{$row['bbcode_tag']}]', '[/" . str_replace('=', '', $row['bbcode_tag']) . "]'",
 			'BBCODE_ID'			=> $num_predefined_bbcodes + ($i * 2),
 			'BBCODE_TAG'		=> $row['bbcode_tag'],
-			'BBCODE_HELPLINE'	=> str_replace(array('&amp;', '&quot;', "'", '&lt;', '&gt;'), array('\&', '\"', '\\\'', '<', '>'), $row['bbcode_helpline']))
-		);
+			'BBCODE_HELPLINE'	=> $row['bbcode_helpline'],
+			'A_BBCODE_HELPLINE'	=> str_replace(array('&amp;', '&quot;', "'", '&lt;', '&gt;'), array('&', '"', "\'", '<', '>'), $row['bbcode_helpline']),
+		));
 
 		$i++;
 	}

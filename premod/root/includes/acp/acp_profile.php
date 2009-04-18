@@ -2,7 +2,7 @@
 /**
 *
 * @package acp
-* @version $Id: acp_profile.php,v 1.60 2007/10/05 14:36:32 acydburn Exp $
+* @version $Id: acp_profile.php,v 1.61 2007/11/15 19:54:37 kellanved Exp $
 * @copyright (c) 2005 phpBB Group
 * @license http://opensource.org/licenses/gpl-license.php GNU Public License
 *
@@ -480,9 +480,9 @@ class acp_profile
 					}
 					else if ($field_type == FIELD_DATE && $key == 'field_default_value')
 					{
-						$always_now = request_var('always_now', 0);
-
-						if ($always_now || $var == 'now')
+						$always_now = request_var('always_now', -1);
+						
+						if ($always_now == 1 || ($always_now === -1 && $var == 'now'))
 						{
 							$now = getdate();
 

@@ -2,7 +2,7 @@
 /**
 *
 * @package phpBB3
-* @version $Id: functions_posting.php,v 1.271 2007/10/05 14:30:10 acydburn Exp $
+* @version $Id: functions_posting.php,v 1.274 2007/11/27 15:13:49 kellanved Exp $
 * @copyright (c) 2005 phpBB Group
 * @license http://opensource.org/licenses/gpl-license.php GNU Public License
 *
@@ -34,7 +34,7 @@ function generate_smilies($mode, $forum_id)
 			$result = $db->sql_query_limit($sql, 1);
 			$row = $db->sql_fetchrow($result);
 			$db->sql_freeresult($result);
-		
+
 			$user->setup('posting', (int) $row['forum_style']);
 		}
 		else
@@ -1227,7 +1227,7 @@ function user_notification($mode, $subject, $topic_title, $forum_name, $forum_id
 	// Now, we are able to really send out notifications
 	if (sizeof($msg_users))
 	{
-		include_once($phpbb_root_path . 'includes/functions_messenger.'.$phpEx);
+		include_once($phpbb_root_path . 'includes/functions_messenger.' . $phpEx);
 		$messenger = new messenger();
 
 		$msg_list_ary = array();
@@ -1630,7 +1630,9 @@ function submit_post($mode, $subject, $username, $topic_type, &$poll, &$data, $u
 			// Display edit info if edit reason given or user is editing his post, which is not the last within the topic.
 			if ($data['post_edit_reason'] || (!$auth->acl_get('m_edit', $data['forum_id']) && ($post_mode == 'edit' || $post_mode == 'edit_first_post')))
 			{
-				$sql_data[POSTS_TABLE]['sql'] = array(
+				$data['post_edit_reason']		= truncate_string($data['post_edit_reason'], 255, false);
+
+				$sql_data[POSTS_TABLE]['sql']	= array(
 					'post_edit_time'	=> $current_time,
 					'post_edit_reason'	=> $data['post_edit_reason'],
 					'post_edit_user'	=> (int) $data['post_edit_user'],
@@ -2424,8 +2426,11 @@ function submit_post($mode, $subject, $username, $topic_type, &$poll, &$data, $u
 		$params .= '&amp;t=' . $data['topic_id'];
 	}
 	// www.phpBB-SEO.com SEO TOOLKIT BEGIN
+	if ($topic_type == POST_GLOBAL) {
+		$phpbb_seo->seo_opt['topic_type'][$data['topic_id']] = POST_GLOBAL;
+	}
 	if ( $params && empty($phpbb_seo->seo_url['topic'][$data['topic_id']]) ) {
-		$phpbb_seo->seo_url['topic'][$data['topic_id']] = $phpbb_seo->format_url($data['topic_title']);
+		$phpbb_seo->seo_url['topic'][$data['topic_id']] = $phpbb_seo->format_url(censor_text($data['topic_title']));
 	}
 	if ( empty($phpbb_seo->seo_url['forum'][$data['forum_id']]) ) {
 		$phpbb_seo->seo_url['forum'][$data['forum_id']] = $phpbb_seo->set_url($data['forum_name'], $data['forum_id'], $phpbb_seo->seo_static['forum']);

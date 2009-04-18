@@ -2,20 +2,18 @@
 /** 
 *
 * search_ignore_words [Standard french]
+* translated by PhpBB-fr.com <http://www.phpbb-fr.com/> and phpBB.biz <http://www.phpbb.biz/>
 *
 * @package language
-* @version $Id: search_ignore_words.php,v 1.0 2007/10/16 10:11:39 Elglobo Exp $
+* @version $Id: search_ignore_words.php,v 1.19 2007/11/22 13:09:51 lolovoisin Exp $
 * @copyright (c) 2005 phpBB Group 
 * @license http://opensource.org/licenses/gpl-license.php GNU Public License 
 *
 */
-/**
-* CONTRIBUTORS
-* Translation made by phpBB-fr.com and phpBB.biz Teams
-* http://www.phpbb-fr.com
-* http://www.phpbb.biz
-*/
 
+/**
+* DO NOT CHANGE
+*/
 if (!defined('IN_PHPBB'))
 {
 	exit;

@@ -1,6 +1,6 @@
 /*
 
- $Id: postgres_schema.sql,v 1.105 2007/10/14 15:46:44 acydburn Exp $
+ $Id: postgres_schema.sql,v 1.106 2007/12/05 15:18:21 acydburn Exp $
 
 */
 
@@ -1181,8 +1181,8 @@ CREATE TABLE phpbb_users (
 	user_style INT2 DEFAULT '0' NOT NULL CHECK (user_style >= 0),
 	user_rank INT4 DEFAULT '0' NOT NULL CHECK (user_rank >= 0),
 	user_colour varchar(6) DEFAULT '' NOT NULL,
-	user_new_privmsg INT2 DEFAULT '0' NOT NULL,
-	user_unread_privmsg INT2 DEFAULT '0' NOT NULL,
+	user_new_privmsg INT4 DEFAULT '0' NOT NULL,
+	user_unread_privmsg INT4 DEFAULT '0' NOT NULL,
 	user_last_privmsg INT4 DEFAULT '0' NOT NULL CHECK (user_last_privmsg >= 0),
 	user_message_rules INT2 DEFAULT '0' NOT NULL CHECK (user_message_rules >= 0),
 	user_full_folder INT4 DEFAULT '-3' NOT NULL,

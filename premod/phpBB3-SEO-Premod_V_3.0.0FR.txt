@@ -6,7 +6,7 @@
 ## 			Visitez http://www.phpbb-seo.com/forums/premod-phpbb-seo/premod-referencement-phpbb-vt1951.html
 ## 			pour obtenir du support et vérifier l'existence de mise à jour.
 ##
-## MOD Version: 	3.0.RC7
+## MOD Version: 	3.0.0
 ##
 ## Installation Level: 	Aussi facile que phpBB3
 ## Installation Time: 	10 Minutes
@@ -33,7 +33,7 @@
 ## ___________
 ##
 ## 	phpBB3 utilise l'UTF-8 comme encodage final, ce qui devrait être suffisant pour tous les types d'alphabets.
-## L'UTF-8 est totallement pris en charge par ce mod.
+## L'UTF-8 est totalement pris en charge par ce mod.
 ##
 ## Ce mod rewrite injectera uniquement les caractères ASCII, débarrassés de leurs accents, présents dans les titres.
 ## 
@@ -67,6 +67,20 @@
 ##############################################################
 ## MOD History:
 ##
+##	2007-12-21 - 3.0.0
+##		- Added : Link to the last topic title above the last post link on forum listing view,
+##		- Added : Group URL rewriting, with optional group name injection,
+##		- Added : profile URL can use nickname injection (optional),
+##		- Added : profile URL can use nickname injection without ID (optional),
+##		- Added : User messages URL can use nickname injection (optional),
+##		- Added : User messages URL can use nickname injection without ID (optional),
+##		- Added : 404 header is now returned for forums that do not exist (both rewritten and vanilla URLs),
+##		- Updated : zero duplicate handles the new rewriting for profiles, user messages and groups,
+##		- Fixed : Sub forum last post link from the no duplicate on forum listing view,
+##		- Fixed : Usage of a slash as a suffix is now fully supported for all rewritten URLs,
+##		- Fixed : Base href handling (bug with virtual root option),
+##		- Fixed : 100% XHTML valid output,
+##		- Updated to comply with phpBB3.0.0.
 ##	2007-10-16 - 3.0.RC7
 ##		- Updated the mod rewrites,
 ##		- Updated to phpbb3.0.RC7.
@@ -92,8 +106,8 @@ _____________________________________________
 >>>>   MISE A JOUR	                <<<<<
 _____________________________________________
 
-Mise à jour : 3.0.RC5a => 3.0.RC7 : 
-Tout d'abord, téléchargez le package phpBB_SEO_3.0RC5a_to_3.0.RC7.
+Mise à jour : 3.0.RC7 => 3.0.0 : 
+Tout d'abord, téléchargez le package phpBB_SEO_3.0RC7_to_3.0.0 : http://telecharger.phpbb-seo.com/premod-referencement-phpbb-10/
 Vous pouvez mettre à jour en suivant deux méthodes :
 	1) Mise à jour automatique :
 		- Uplodez le contenu du dossier auto_update/install/*.* vers install/*.*,
@@ -108,8 +122,16 @@ Vous pouvez mettre à jour en suivant deux méthodes :
 		- Uploadez le dossier modified/install/*.* vers install/*.*,
 		- Lancez www.example.com/phpbb/install/database_update.php pour mettre à jour la base de données.
 
-Dans tous les cas, la procédure d'installation qui suit conservera votre standard d'URL actuel, en fonction des réglages de la classe phpbb_seo_class.php.
-Auncune modification des réglages et du .htaccess.
+Cette mise à jour va étendre la réécriture d'URL aux groupes en permettant de choisir d'injecter ou non leur titres dans leur urls.
+L'injection des pseudo est également possible et optionnelle.
+Vous devrez donc configurer ces nouvelles options dans l'ACP de phpBB et générer ensuite un nouveau .htaccess.
+Les autres réglages ne seront pas altérés par la MAJ.
+Notez bien que si vous modifier la façon de réécrire les url des profils de vos membres, vous devrez conserver 
+la rewriterule des profils actuelle dans votre nouveau .htaccess, afin de rediriger convenablement les anciennes vers les nouvelles. Placez là juste avant la nouvelle.
+
+Si vous rencontrez des difficultés lors de la mise à jour du fichier phpbb_seo_class.php, vous devrez procéder manuellement. Il vous suffit pour cela de prendre la nouvelle version du fichier et d'y ajouter vos éventuels réglages personnalisés comme s'il s'agissait d'une première installation.
+
+Enfin, une fois les nouveaux fichiers en place, il vous faudra vider le cache de phpBB et rafraîchir vos thèmes (ACP => STYLE => Thèmes => Rafraîchir).
 
 _____________________________________________
 >>>>   INSTALLATION POUR VOTRE FORUM    <<<<<
@@ -126,6 +148,7 @@ Avant de commencer, lisez attentivement ce qui suit.
 	4) Générez votre .htaccess et uploadez le en suivant les instructions de l'interface;
 	5) Testez une URL réécrite, comme www.votresite.com/phpBB/post1.html, si vous obtenez une 404 (pas un message de phpBB), revenez à l'étape précédente;
 	6) Activez la réécriture d'URL et accordez vous une pointe d'autosatisfaction :D
+	7) Activez le zero duplicate est une bonne chose à ce stade.
 ______________________________________________________
 
 ___________
@@ -140,7 +163,7 @@ et pourront nécessiter des redirections personnalisées.
 Vous pouvez changer cela dans phpbb_seo/phpbb_seo_class.php.
 Trouver :
 
-'index' => ($this->seo_opt['virtual_root'] ? 'forum' : '')
+'index' => ''
 
 Remplacer par :
 
@@ -149,7 +172,7 @@ Remplacer par :
 Ou par ce que vous voulez.
 C'est surtout pratique dans le cas ou vous utiliseriez un portail dans le même dossier que phpBB.
 
-=> Les premiers réglages à faire sont le choix des parties statiques de vos URLs, dont index.html fait partie.
+=> Les premiers réglages à faire sont le choix des parties statiques de vos URL, dont index.html fait parti.
 Vous pouvez modifier dans phpbb_seo/phpbb_seo_class.php :
 	=> equipe.html
 		$this->seo_static['leaders'] = 'equipe'
@@ -157,41 +180,44 @@ Vous pouvez modifier dans phpbb_seo/phpbb_seo_class.php :
 	=> annonces
 		$this->seo_static['global_announce'] = 'annonces'
 
-	=> Ainsi que forum ('forum' => 'forum'), topic ('topic' => 'topic'), post ('post' => 'post') et membre ($this->seo_static['user'] = 'membre';)
+	=> Ainsi que forum ('forum' => 'forum'), topic ('topic' => 'topic'), post ('post' => 'post'), 
+	membre ($this->seo_static['user'] = 'membre';), groupes ($this->seo_static['group'] = 'groupe';),
+	page "message de membre" ('usermsg' => 'messages'),
+	et le terme statique de la pagination avec dossiers virtuels ('pagination' => 'page')
 
 	=> et les extentions, si .html ne vous conviens pas :
-		$this->seo_ext = array( 'forum' => '.html', 'topic' => '.html', 'post' => '.html', 'user' => '.html', 'index' => (!empty($this->seo_static['index']) ? '.html' : ''), 'global_announce' => '/', 'leaders' => '.html', 'gz_ext' => '');
+	$this->seo_ext = array( 'forum' => '.html', 'topic' => '.html', 'post' => '.html', 'user' => '.html', 'usermsg' => '.html', 'group' => '.html',  'index' => '', 'global_announce' => '/', 'leaders' => '.html', 'pagination' => '.html', 'gz_ext' => '');
 
 Ces changements seront pris en compte lors de la génération du .htaccess.
 
-=> Les autres options sont accessibles sur une page de réglages, stade 7 de l'installation.
-Rendez vous tout d'abord sur la page "Réglages de la classe phpBB SEO", et faites les réglages qui vous conviennent.
+=> Les autres options sont accessible sur une page de réglage, stade 7) de l'installation.
+Rendez vous tout d'abords sur la page "Réglages de la classe phpBB SEO", et faites les réglages qui vous conviennent.
 
-=> C'est le moment de jouer avec les URLs de vos forums (Mode Avancé et Intermédiaire).
+=> C'est le moment de jouer avec les URLs de vos forums.
 Pour cela, rendez vous sur la page "Gestion des URL des Forums", et commencez à choisir 
 de bon mots clés pour les URLs de vos forums.
 Prenez votre temps pour ce faire, et n'oubliez pas que d'utiliser l'option 
 "Retirer les IDs de forum" rendra les redirections un peu plus compliquées si vous modifiez
-des URLs de forum après avoir commencé à les utiliser.
-Si vous créez de nouveaux forums par la suite, vous devrez simplement vous rendre de nouveau 
+des URLs de forum après avoir commencer à les utiliser.
+Si vous créez de nouveaux forums par la suite, vous devrez simplement vous rendre de nouveaux 
 sur la page "Gestion des URL des Forums" pour personnaliser l'url de votre forum.
 Si non, l'url ne sera pas en cache, et celle par défaut sera utilisée pour ce forum (titre-forum-fxx).
 
 ___________
 NOTE: Cache
 ___________
-Les fichiers en cache se trouvent dans le dossier phpbb_seo_/cache/.
-phpbb_cache.php est le fichier contenant vos réglages ainsi que les URLs personalisées de vos forums.
+Les fichiers cachés se trouve dans le dossier phpbb_seo_/cache/.
+phpbb_cache.php est le fichier contenant vos réglages ainsi que les URL personalisés de vos forums.
 
-Le mod crée toujours une sauvegarde du fichier cache en cours : 
+Le mod crée toujours un backup du fichier cache en cours : 
 	=> phpbb_cache.php.current est une copie de phpbb_cache.php.
-	Elle sera utilisée automatiquement si jamais phpbb_cache.php venait à être effacé ou corrompu (ce qui ne devrait pas arriver, mais ...).
-	=> phpbb_cache.php.old est une copie de vos précédents réglages, avant la dernière modification que vous avez faite.
+	Elle sera utilisée automatiquement si jamais phpbb_cache.php venait à être effacé ou corrompu (ce qui e devrait pas arriver, mais ...).
+	=> phpbb_cache.php.old est une copie de vos précédent régalges, avant la dernière modification que vous avez faite.
 
-Vous devriez sauvegarder ces fichiers après les avoir modifiés, ils sont aussi importants que
-votre base de donnée pour vos forums, vu qu'il sont requis pour le fonctionnement de leurs URLs.
+Vous devriez sauvegarder ces fichiers après les avoir modifier, ils sont aussi important que
+votre base de donnée pour vos forums, vu qu'il sont requis pour le fonctionnement de leur URLs.
 Rassurez vous, ce n'est qu'une précaution standard, vous ne devriez pas avoir de soucis avec ces fichiers,
-mais on ne sait jamais, d'où la sauvegarde.
+mais jamais, c'est mieux, d'où la sauvegarde.
 
 ____________
  .htaccess :
@@ -207,7 +233,6 @@ Veuillez vous rendre sur : http://forums.phpbb-seo.com/principes-du-referencemen
 pour voir comment forcer l'utilisation ou l'absence du préfixe www dans l'URL de votre domaine.
 C'est une chose importante à faire pour une bonne optimisation de votre référencement.
 
-
 ____________
 robots.txt :
 ____________
@@ -215,6 +240,56 @@ ____________
 Vous trouverez un exemple de robots.txt dans le dossier contrib/ de ce package.
 Le robots.txt doit être placé à la racine de votre domaine (qui peut être différent du dossier de phpBB).
 Il faut bien entendu remplacer dossierphpbb/ par votre vrai dossier d'installation (ou par rien pour une installation à la racine du domaine). 
+
+_____________________________________________________
+NOTE: URL de profil et de messages de membre sans ID:
+_____________________________________________________
+
+phpBB/member/pseudo VS  phpBB/pseudo-uxx.html And phpBB/messages/pseudo VS dephpBB/pseudo-mxx.html
+
+Si vous utilisez les URL de profil et de messages de membre sans ID, vous devez noter que de l'urlencodage 
+risque de rentrer en jeux. Firefox semble incapable de gérer les caractères spéciaux autrement dans les url.
+De plus, un bug du mod_rewrite requiert une gestion spéciale de certains cas particuliers, comme "&" dans un pseudo.
+Par exemple, un membre dont le pseudo serait rock&roll devrait être doublement urlencodé pour être utilisable : rock%2526roll
+( http://www.php.net/urlencode => http://issues.apache.org/bugzilla/show_bug.cgi?id=34602 )
+
+Il y a d'autre cas ou des caractères seront urlencodés, comme les accents.
+Ce n'est pas vraiment un problème pour les bots, ils comprennent l'urlencodage, mais cela peu finir 
+par faire d'assez longues URLs avec des caractères multy byte.
+Cela ne concerne pas les caractères a-zA-Z0-9 chars, underscore ("_"), tiret ("-") et point (".") inclus.
+
+Dans phpbb_seo/phpbb_seo_class.php, vous pouvez affiner la méthode d'urlencodage : 
+
+		$this->seo_opt['custom_url_endode'] = 1;
+
+Vous pouvez changer la valeur de $this->seo_opt['custom_url_endode'] à 1, 2 ou 3.
+	$this->seo_opt['custom_url_endode'] = 1, Le pseudo est injecté presque tel quel, après 
+	un décodage des caractères spéciaux html, et encodage en utf-8, et la prise en compte du double urlencodage de "&".
+	Cela veut dire que ce sera au navigateur de décider, Firefox va urlencoder tous les caractères 
+	non alphanumériques mais IE et Opera feront l'affaire, même en multy byte.
+
+	$this->seo_opt['custom_url_endode'] = 2, les pseudo sont urlencodés directement avec prise en compte du double urlencodage de "&".
+	Devrait satisfaire plus de cas exotiques, mais impose l'urlencodage à tous les navigateurs.
+
+	$this->seo_opt['custom_url_endode'] = 3, double urlencodage des pseudos, méthode de la dernière chance pour les cas désespérés :-D
+	Devrait satisfaire toutes les exceptions, mais impose le double encodage aux navigateurs.
+
+Cela veut bien entendu dire que les URL de profil et de messages de membre sans ID est bien plus adapté 
+a des pseudo utilisant des caractères alphanumériques (sans accents). 
+Les autres cas seront plus lourds a gérer et sont pris en charge pour offrir une solution a de rares exceptions
+plus qu'en tant que solution générale et totalement satisfaisante.
+C'est ici Firefox qui nous restreint quelque peu.
+
+Si vous autorisez uniquement les caractères alphanumériques dans les pseudo de vos membres, vous pouvez accélérer 
+le processus de retrait des ID en ajoutant : 
+
+	return $url;
+
+juste après :
+
+	function seo_url_encode( $url, $type = 1 ) {
+
+Enfin, n'oubliez pas que vous pouvez obtenir de très bon résultats avec les ID.
 
 #
 #-----[ COPY ]--------------------------------------------------

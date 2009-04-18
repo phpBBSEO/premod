@@ -5,7 +5,7 @@ Subject: Bienvenue sur les forums de "{SITENAME}"
 Conservez cet e-mail pour mémoire. Les informations de votre compte sont les suivantes:
 
 ----------------------------
-Pseudo: {USERNAME}
+Nom d'utilisateur: {USERNAME}
 ----------------------------
 
 N'oubliez pas que votre mot de passe a été crypté dans notre base de données et nous ne pourrons pas vous le restituer. Cependant, si vous perdiez votre mot de passe, vous pouvez en demander un autre qui sera activé de la même façon que votre compte.

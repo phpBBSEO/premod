@@ -2,19 +2,15 @@
 /** 
 *
 * acp_database [Standard french]
+* translated by PhpBB-fr.com <http://www.phpbb-fr.com/> and phpBB.biz <http://www.phpbb.biz/>
 *
 * @package language
-* @version $Id: database.php,v 1.25 2007/10/04 15:07:24 acydburn Exp $
+* @version $Id: database.php,v 1.19 2007/11/22 11:28:44 elglobo Exp $
 * @copyright (c) 2005 phpBB Group 
 * @license http://opensource.org/licenses/gpl-license.php GNU Public License 
 *
 */
-/**
-* CONTRIBUTORS
-* Translation made by phpBB-fr.com and phpBB.biz Teams
-* http://www.phpbb-fr.com
-* http://www.phpbb.biz
-*/
+
 /**
 * DO NOT CHANGE
 */
@@ -42,8 +38,8 @@ if (empty($lang) || !is_array($lang))
 
 // Database Backup/Restore
 $lang = array_merge($lang, array(	
-	'ACP_BACKUP_EXPLAIN'	=> 'Ici, vous pouvez sauvegarder les données de votre forum. Vous pouvez stocker l\'archive de sauvegarde dans votre répertoire <samp>store/</samp> ou le télécharger. Suivant votre configuration, vous pouvez utiliser différents modes de compression.',
-	'ACP_RESTORE_EXPLAIN'	=> 'Vous pouvez procéder à une restauration de votre forum à partir d\'un fichier de sauvegarde. Si votre serveur le permet, vous pouvez utiliser la compression gzip ou bzip2, le fichier sera automatiquement décompressé. <strong><color=red>ATTENTION: </color></strong> Cette opération écrase toutes les données existantes. Le processus peut prendre du temps, ne quittez pas cette page avant la fin de la restauration. Les sauvegardes sont stockées dans le répertoire <samp>store/</samp> et sont supposées être générées par la fonctionnalité de sauvegarde de phpBB. La restauration de sauvegardes non créées par phpBB peut ne pas fonctionner.',
+	'ACP_BACKUP_EXPLAIN'	=> 'Vous pouvez sauvegarder les données de votre forum. Vous pouvez stocker l’archive de sauvegarde dans votre répertoire <samp>store/</samp> ou le télécharger. Suivant votre configuration, vous pouvez utiliser différents modes de compression.',
+	'ACP_RESTORE_EXPLAIN'	=> 'Vous pouvez procéder à une restauration de votre forum à partir d’un fichier de sauvegarde. Si votre serveur le permet, vous pouvez utiliser la compression gzip ou bzip2, le fichier sera automatiquement décompressé. <strong><color=red>ATTENTION: </color></strong> Cette opération écrase toutes les données existantes. Le processus peut prendre du temps, ne quittez pas cette page avant la fin de la restauration. Les sauvegardes sont stockées dans le répertoire <samp>store/</samp> et sont supposées être générées par la fonctionnalité de sauvegarde de phpBB. La restauration de sauvegardes non créées par phpBB peut ne pas fonctionner.',
 	
 	'BACKUP_DELETE'		=> 'Le fichier de sauvegarde a été effacé.',
 	'BACKUP_INVALID'	=> 'Fichier de sauvegarde invalide.',
@@ -63,7 +59,7 @@ $lang = array_merge($lang, array(
 
 	'RESTORE_FAILURE'		=> 'Le fichier de sauvegarde est peut-être corrompu.',
 	'RESTORE_OPTIONS'		=> 'Options de restauration',
-	'RESTORE_SUCCESS'		=> 'La base de données a été restaurée.<br /><br />Votre forum devrait être tel qu\'il l\'était avant la sauvegarde.',
+	'RESTORE_SUCCESS'		=> 'La base de données a été restaurée.<br /><br />Votre forum devrait être tel qu’il l’était avant la sauvegarde.',
 
 	'SELECT_ALL'			=> 'Tout sélectionner',
 	'SELECT_FILE'			=> 'Sélectionner un fichier',

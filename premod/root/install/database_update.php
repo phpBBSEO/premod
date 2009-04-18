@@ -2,13 +2,13 @@
 /**
 *
 * @package install
-* @version $Id: database_update.php,v 1.141 2007/10/14 15:45:26 acydburn Exp $
+* @version $Id: database_update.php,v 1.149 2007/12/12 10:54:50 acydburn Exp $
 * @copyright (c) 2006 phpBB Group
 * @license http://opensource.org/licenses/gpl-license.php GNU Public License
 *
 */
 
-$updates_to_version = '3.0.RC7';
+$updates_to_version = '3.0.0';
 
 // Return if we "just include it" to find out for which version the database update is responsuble for
 if (defined('IN_PHPBB') && defined('IN_INSTALL'))
@@ -463,6 +463,16 @@ $database_update_info = array(
 			),
 		),
 	),
+	// Changes from 3.0.RC8 to the next version
+	'3.0.RC8'			=> array(
+		// Change the following columns
+		'change_columns'		=> array(
+			USERS_TABLE			=> array(
+				'user_new_privmsg'			=> array('INT:4', 0),
+				'user_unread_privmsg'		=> array('INT:4', 0),
+			),
+		),
+	),
 );
 
 // Determine mapping database type
@@ -715,9 +725,13 @@ if (version_compare($current_version, '3.0.RC4', '<='))
 	// duplicates might be created. Since the column has to be unique such usernames
 	// must not exist. We need identify them and let the admin decide what to do
 	// about them.
+	// After RC8 this was changed again, but this time only usernames containing spaces
+	// are affected.
+	$sql_where = (version_compare($current_version, '3.0.RC4', '<=')) ? '' : "WHERE username_clean LIKE '% %'";
 	$sql = 'SELECT user_id, username, username_clean
-		FROM ' . USERS_TABLE . '
-		ORDER BY user_id ASC';
+		FROM ' . USERS_TABLE . "
+		$sql_where
+		ORDER BY user_id ASC";
 	$result = $db->sql_query($sql);
 
 	$colliding_users = $found_names = array();
@@ -1014,7 +1028,7 @@ if ($exit)
 	</div>
 
 	<div id="page-footer">
-		Powered by phpBB &copy; 2000, 2002, 2005, 2007 <a href="http://www.phpbb.com/">phpBB Group</a>
+		Powered by <a href="http://www.phpbb.com/">phpBB</a> &copy; 2000, 2002, 2005, 2007 phpBB Group
 	</div>
 </div>
 
@@ -1178,7 +1192,7 @@ if (version_compare($current_version, '3.0.RC2', '<='))
 	}
 	$db->sql_freeresult($result);
 	
-	foreach($smileys as $id => $code)
+	foreach ($smileys as $id => $code)
 	{
 		// 2.0 only entitized lt and gt; We need to do something about double quotes.
 		if (strchr($code, '"') === false)
@@ -1555,7 +1569,7 @@ $sql = "UPDATE " . CONFIG_TABLE . "
 	WHERE config_name = 'version'";
 _sql($sql, $errored, $error_ary);
 // SEO premod
-set_config('seo_premod_version', '3.0.RC7');
+set_config('seo_premod_version', '3.0.0');
 // Reset permissions
 $sql = 'UPDATE ' . USERS_TABLE . "
 	SET user_permissions = ''";
@@ -1635,6 +1649,8 @@ $cache->purge();
 </html>
 
 <?php
+
+garbage_collection();
 
 if (function_exists('exit_handler'))
 {
@@ -1760,7 +1776,7 @@ function column_exists($dbms, $table, $column_name)
 		case 'mssql':
 			$sql = "SELECT c.name
 				FROM syscolumns c
-				LEFT JOIN sysobjects o (ON c.id = o.id)
+				LEFT JOIN sysobjects o ON c.id = o.id
 				WHERE o.name = '{$table}'";
 			$result = $db->sql_query($sql);
 			while ($row = $db->sql_fetchrow($result))
@@ -1914,7 +1930,6 @@ function prepare_column_data($dbms, $column_data, $table_name, $column_name)
 	}
 
 	$sql = '';
-
 	$return_array = array();
 
 	switch ($dbms)
@@ -1939,22 +1954,26 @@ function prepare_column_data($dbms, $column_data, $table_name, $column_name)
 
 		case 'mssql':
 			$sql .= " {$column_type} ";
+			$sql_default = " {$column_type} ";
 
-			// we do not support MSSQL DEFAULTs for the near future
-			/*if (!is_null($column_data[1]))
+			// For adding columns we need the default definition
+			if (!is_null($column_data[1]))
 			{
 				// For hexadecimal values do not use single quotes
 				if (strpos($column_data[1], '0x') === 0)
 				{
-					$sql .= 'DEFAULT (' . $column_data[1] . ') ';
+					$sql_default .= 'DEFAULT (' . $column_data[1] . ') ';
 				}
 				else
 				{
-					$sql .= 'DEFAULT (' . ((is_numeric($column_data[1])) ? $column_data[1] : "'{$column_data[1]}'") . ') ';
+					$sql_default .= 'DEFAULT (' . ((is_numeric($column_data[1])) ? $column_data[1] : "'{$column_data[1]}'") . ') ';
 				}
-			}*/
+			}
 
 			$sql .= 'NOT NULL';
+			$sql_default .= 'NOT NULL';
+
+			$return_array['column_type_sql_default'] = $sql_default;
 		break;
 
 		case 'mysql_40':
@@ -2060,7 +2079,7 @@ function sql_column_add($dbms, $table_name, $column_name, $column_data)
 		break;
 
 		case 'mssql':
-			$sql = 'ALTER TABLE [' . $table_name . '] ADD [' . $column_name . '] ' . $column_data['column_type_sql'];
+			$sql = 'ALTER TABLE [' . $table_name . '] ADD [' . $column_name . '] ' . $column_data['column_type_sql_default'];
 			_sql($sql, $errored, $error_ary);
 		break;
 
@@ -2762,6 +2781,8 @@ function utf8_new_clean_string($text)
 	$text = strtr($text, $homographs);
 	// Other control characters
 	$text = preg_replace('#(?:[\x00-\x1F\x7F]+|(?:\xC2[\x80-\x9F])+)#', '', $text);
+
+	$text = preg_replace('# {2,}#', ' ', $text);
 
 	// we can use trim here as all the other space characters should have been turned
 	// into normal ASCII spaces by now

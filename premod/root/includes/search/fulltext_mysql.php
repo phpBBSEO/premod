@@ -2,7 +2,7 @@
 /**
 *
 * @package search
-* @version $Id: fulltext_mysql.php,v 1.50 2007/10/05 14:36:33 acydburn Exp $
+* @version $Id: fulltext_mysql.php,v 1.51 2007/11/29 18:26:20 davidmj Exp $
 * @copyright (c) 2005 phpBB Group
 * @license http://opensource.org/licenses/gpl-license.php GNU Public License
 *
@@ -54,6 +54,7 @@ class fulltext_mysql extends search_backend
 		if (function_exists('mb_ereg'))
 		{
 			$this->mbstring_regex = true;
+			mb_regex_encoding('UTF-8');
 		}
 
 		$error = false;
@@ -152,7 +153,6 @@ class fulltext_mysql extends search_backend
 		}
 		else if ($this->mbstring_regex)
 		{
-			mb_regex_encoding('UTF-8');
 			mb_ereg_search_init($split_keywords, '(?:[^\w*"()]|^)([+\-|]?(?:[\w*"()]+\'?)*[\w*"()])(?:[^\w*"()]|$)');
 
 			while (($word = mb_ereg_search_regs()))
@@ -285,7 +285,6 @@ class fulltext_mysql extends search_backend
 		}
 		else if ($this->mbstring_regex)
 		{
-			mb_regex_encoding('UTF-8');
 			mb_ereg_search_init($text, '(?:[^\w*]|^)([+\-|]?(?:[\w*]+\'?)*[\w*])(?:[^\w*]|$)');
 
 			$text = array();

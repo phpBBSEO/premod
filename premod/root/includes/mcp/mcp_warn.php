@@ -2,7 +2,7 @@
 /**
 *
 * @package mcp
-* @version $Id: mcp_warn.php,v 1.53 2007/10/05 14:36:33 acydburn Exp $
+* @version $Id: mcp_warn.php,v 1.54 2007/10/19 13:10:01 acydburn Exp $
 * @copyright (c) 2005 phpBB Group
 * @license http://opensource.org/licenses/gpl-license.php GNU Public License
 *
@@ -418,7 +418,7 @@ function add_warning($user_row, $warning, $send_pm = true, $post_id = 0)
 
 		$pm_data = array(
 			'from_user_id'			=> $user->data['user_id'],
-			'from_user_ip'			=> $user->data['user_ip'],
+			'from_user_ip'			=> $user->ip,
 			'from_username'			=> $user->data['username'],
 			'enable_sig'			=> false,
 			'enable_bbcode'			=> true,

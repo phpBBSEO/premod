@@ -2,7 +2,7 @@
 /**
 *
 * @package acp
-* @version $Id: acp_forums.php,v 1.79 2007/10/14 23:10:22 acydburn Exp $
+* @version $Id: acp_forums.php,v 1.81 2007/11/27 15:13:50 kellanved Exp $
 * @copyright (c) 2005 phpBB Group
 * @license http://opensource.org/licenses/gpl-license.php GNU Public License
 *
@@ -45,7 +45,7 @@ class acp_forums
 		if ($update && !check_form_key($form_key))
 		{
 			$update = false;
-			$error[] = $user->lang['FORM_INVALID'];
+			$errors[] = $user->lang['FORM_INVALID'];
 		}
 
 		// Check additional permissions
@@ -239,6 +239,7 @@ class acp_forums
 							// Now insert the data
 							$db->sql_multi_insert(ACL_USERS_TABLE, $users_sql_ary);
 							$db->sql_multi_insert(ACL_GROUPS_TABLE, $groups_sql_ary);
+							cache_moderators();
 						}
 
 						$auth->acl_clear_prefetch();

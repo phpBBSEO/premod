@@ -1,6 +1,6 @@
 /*
 
- $Id: oracle_schema.sql,v 1.102 2007/10/14 15:46:44 acydburn Exp $
+ $Id: oracle_schema.sql,v 1.103 2007/12/05 15:18:21 acydburn Exp $
 
 */
 

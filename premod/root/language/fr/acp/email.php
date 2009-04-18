@@ -2,19 +2,15 @@
 /** 
 *
 * acp_email [Standard french]
+* translated by PhpBB-fr.com <http://www.phpbb-fr.com/> and phpBB.biz <http://www.phpbb.biz/>
 *
 * @package language
-* @version $Id: email.php,v 1.16 2007/10/04 15:07:24 acydburn Exp $
+* @version $Id: email.php,v 1.19 2007/11/22 11:30:24 elglobo Exp $
 * @copyright (c) 2005 phpBB Group 
 * @license http://opensource.org/licenses/gpl-license.php GNU Public License 
 *
 */
-/**
-* CONTRIBUTORS
-* Translation made by phpBB-fr.com and phpBB.biz Teams
-* http://www.phpbb-fr.com
-* http://www.phpbb.biz
-*/
+
 /**
 * DO NOT CHANGE
 */
@@ -42,28 +38,28 @@ if (empty($lang) || !is_array($lang))
 
 $lang = array_merge($lang, array(
 
-	'ACP_MASS_EMAIL_EXPLAIN'		=> 'Ici, vous pouvez envoyer un e-mail à tous vos utilisateurs ou à tous les membres d\'un groupe spécifique. Pour cela, un e-mail sera envoyé via l\'adresse administrative, avec tous les destinataires en copie cachée. Si vous envoyez le message à un grand groupe de personnes, merci de patienter après avoir validé et de ne pas arrêter la page lors du traitement. Il est normal qu\'un envoi de masse prenne du temps, vous aurez une notification quand le script aura terminé.',
+	'ACP_MASS_EMAIL_EXPLAIN'		=> 'Vous pouvez envoyer un e-mail à tous vos utilisateurs ou à tous les membres d’un groupe spécifique. Pour cela, un e-mail sera envoyé via l’adresse administrative, avec tous les destinataires en copie cachée. Si vous envoyez le message à un grand groupe de personnes, merci de patienter après avoir validé et de ne pas arrêter la page lors du traitement. Il est normal qu’un envoi de masse prenne du temps, vous aurez une notification quand le script aura terminé.',
 	'ALL_USERS'						=> 'Tous les utilisateurs',
 	
 	'COMPOSE'				=> 'Ecrire',
 
-	'EMAIL_SEND_ERROR'		=> 'Il y a eu une erreur lors de l\'envoi de l\'e-mail. Merci de consulter le %sJournal d\'erreurs%s pour un message plus détaillé.',
+	'EMAIL_SEND_ERROR'		=> 'Il y a eu une erreur lors de l’envoi de l’e-mail. Merci de consulter le %sJournal d’erreurs%s pour un message plus détaillé.',
 	'EMAIL_SENT'			=> 'Votre message a été envoyé.',
-	'EMAIL_SENT_QUEUE'		=> 'Votre message a été mis en attente pour l\'envoi.',
+	'EMAIL_SENT_QUEUE'		=> 'Votre message a été mis en attente pour l’envoi.',
 
-	'LOG_SESSION'			=> 'Enregistre la session mail dans les journaux d\'erreurs critiques',
+	'LOG_SESSION'			=> 'Enregistre la session mail dans les journaux d’erreurs critiques',
 
 	'SEND_IMMEDIATELY'		=> 'Envoyer immédiatement',
 	'SEND_TO_GROUP'			=> 'Envoyer au groupe',
 	'SEND_TO_USERS'			=> 'Envoyer aux utilisateurs',
-	'SEND_TO_USERS_EXPLAIN'	=> 'Entrer des noms ici écrasera tout groupe sélectionné ci-dessus. Entrez chaque nom d\'utilisateur sur une ligne différente.',
+	'SEND_TO_USERS_EXPLAIN'	=> 'Entrer des noms ici écrasera tout groupe sélectionné ci-dessus. Entrez chaque nom d’utilisateur sur une ligne différente.',
 	
 	'MAIL_HIGH_PRIORITY'	=> 'Haute',
 	'MAIL_LOW_PRIORITY'		=> 'Basse',
 	'MAIL_NORMAL_PRIORITY'	=> 'Normale',
 	'MAIL_PRIORITY'			=> 'Priorité du mail',
 	'MASS_MESSAGE'			=> 'Votre message',
-	'MASS_MESSAGE_EXPLAIN'	=> 'Notez que vous ne pouvez mettre que du texte brut. Toutes les balises seront supprimées avant l\'envoi.',
+	'MASS_MESSAGE_EXPLAIN'	=> 'Notez que vous ne pouvez mettre que du texte brut. Toutes les balises seront supprimées avant l’envoi.',
 	
 	'NO_EMAIL_MESSAGE'		=> 'Vous devez entrer un message.',
 	'NO_EMAIL_SUBJECT'		=> 'Vous devez spécifier un sujet pour votre message.',

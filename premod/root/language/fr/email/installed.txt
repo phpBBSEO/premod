@@ -8,7 +8,7 @@ Cet e-mail contient d'importantes informations concernant votre installation que
 
 ----------------------------
 
-Pseudo: {USERNAME}
+Nom d'utilisateur: {USERNAME}
 
 Mot de passe: {PASSWORD}
 

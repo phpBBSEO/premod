@@ -2,7 +2,7 @@
 /**
 *
 * @package dbal
-* @version $Id: dbal.php,v 1.67 2007/10/05 14:36:32 acydburn Exp $
+* @version $Id: dbal.php,v 1.70 2007/12/06 12:27:53 acydburn Exp $
 * @copyright (c) 2005 phpBB Group
 * @license http://opensource.org/licenses/gpl-license.php GNU Public License
 *
@@ -124,7 +124,11 @@ class dbal
 
 		if ($this->transaction)
 		{
-			$this->sql_transaction('commit');
+			do
+			{
+				$this->sql_transaction('commit');
+			}
+			while ($this->transaction);
 		}
 
 		foreach ($this->open_queries as $query_id)
@@ -588,7 +592,12 @@ class dbal
 
 			trigger_error($message, E_USER_ERROR);
 		}
-		
+
+		if ($this->transaction)
+		{
+			$this->sql_transaction('rollback');
+		}
+
 		return $error;
 	}
 
@@ -789,6 +798,6 @@ class dbal
 /**
 * This variable holds the class name to use later
 */
-$sql_db = 'dbal_' . $dbms;
+$sql_db = (!empty($dbms)) ? 'dbal_' . basename($dbms) : 'dbal';
 
 ?>

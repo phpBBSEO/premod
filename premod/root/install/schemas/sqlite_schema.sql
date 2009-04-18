@@ -1,5 +1,5 @@
 #
-# $Id: sqlite_schema.sql,v 1.104 2007/10/14 15:46:44 acydburn Exp $
+# $Id: sqlite_schema.sql,v 1.105 2007/12/05 15:18:21 acydburn Exp $
 #
 
 BEGIN TRANSACTION;
@@ -888,8 +888,8 @@ CREATE TABLE phpbb_users (
 	user_style INTEGER UNSIGNED NOT NULL DEFAULT '0',
 	user_rank INTEGER UNSIGNED NOT NULL DEFAULT '0',
 	user_colour varchar(6) NOT NULL DEFAULT '',
-	user_new_privmsg tinyint(4) NOT NULL DEFAULT '0',
-	user_unread_privmsg tinyint(4) NOT NULL DEFAULT '0',
+	user_new_privmsg int(4) NOT NULL DEFAULT '0',
+	user_unread_privmsg int(4) NOT NULL DEFAULT '0',
 	user_last_privmsg INTEGER UNSIGNED NOT NULL DEFAULT '0',
 	user_message_rules INTEGER UNSIGNED NOT NULL DEFAULT '0',
 	user_full_folder int(11) NOT NULL DEFAULT '-3',

@@ -2,7 +2,7 @@
 /**
 *
 * @package acp
-* @version $Id: acp_inactive.php,v 1.14 2007/10/05 16:22:14 kellanved Exp $
+* @version $Id: acp_inactive.php,v 1.19 2007/12/05 13:55:14 acydburn Exp $
 * @copyright (c) 2006 phpBB Group
 * @license http://opensource.org/licenses/gpl-license.php GNU Public License
 *
@@ -135,6 +135,8 @@ class acp_inactive
 							{
 								user_delete('retain', $user_id, $user_affected[$user_id]);
 							}
+
+							add_log('admin', 'LOG_INACTIVE_' . strtoupper($action), implode(', ', $user_affected));
 						}
 						else
 						{
@@ -143,12 +145,11 @@ class acp_inactive
 								'action'		=> $action,
 								'mark'			=> $mark,
 								'submit'		=> 1,
+								'start'			=> $start,
 							);
 							confirm_box(false, $user->lang['CONFIRM_OPERATION'], build_hidden_fields($s_hidden_fields));
 						}
 					}
-
-					add_log('admin', 'LOG_INACTIVE_' . strtoupper($action), implode(', ', $user_affected));
 
 				break;
 
@@ -166,7 +167,7 @@ class acp_inactive
 					if ($row = $db->sql_fetchrow($result))
 					{
 						// Send the messages
-						include_once($phpbb_root_path . 'includes/functions_messenger.'.$phpEx);
+						include_once($phpbb_root_path . 'includes/functions_messenger.' . $phpEx);
 
 						$messenger = new messenger();
 						$usernames = array();
@@ -216,7 +217,7 @@ class acp_inactive
 		$inactive = array();
 		$inactive_count = 0;
 
-		view_inactive_users($inactive, $inactive_count, $config['topics_per_page'], $start, $sql_where, $sql_sort);
+		$start = view_inactive_users($inactive, $inactive_count, $config['topics_per_page'], $start, $sql_where, $sql_sort);
 
 		foreach ($inactive as $row)
 		{
@@ -246,6 +247,8 @@ class acp_inactive
 			'S_SORT_DIR'	=> $s_sort_dir,
 			'S_ON_PAGE'		=> on_page($inactive_count, $config['topics_per_page'], $start),
 			'PAGINATION'	=> generate_pagination($this->u_action . "&amp;$u_sort_param", $inactive_count, $config['topics_per_page'], $start, true),
+			
+			'U_ACTION'		=> $this->u_action . '&amp;start=' . $start,
 		));
 
 		$this->tpl_name = 'acp_inactive';

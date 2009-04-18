@@ -1,7 +1,7 @@
 <?php
 /**
 * @package ucp
-* @version $Id: ucp_pm.php,v 1.44 2007/10/05 14:36:33 acydburn Exp $
+* @version $Id: ucp_pm.php,v 1.47 2007/11/07 10:45:38 acydburn Exp $
 * @copyright (c) 2005 phpBB Group
 * @license http://opensource.org/licenses/gpl-license.php GNU Public License
 *
@@ -249,25 +249,13 @@ class ucp_pm
 
 				// If new messages arrived, place them into the appropriate folder
 				$num_not_moved = $num_removed = 0;
+				$release = request_var('release', 0);
 
 				if ($user->data['user_new_privmsg'] && $action == 'view_folder')
 				{
-					$return = place_pm_into_folder($global_privmsgs_rules, request_var('release', 0));
+					$return = place_pm_into_folder($global_privmsgs_rules, $release);
 					$num_not_moved = $return['not_moved'];
-
-					// Make sure num_not_moved is valid.
-					if ($user->data['user_new_privmsg'] < 0 || $num_not_moved < 0)
-					{
-						$sql = 'UPDATE ' . USERS_TABLE . '
-							SET user_new_privmsg = 0, user_unread_privmsg = 0
-							WHERE user_id = ' . $user->data['user_id'];
-						$db->sql_query($sql);
-
-						$num_not_moved = $user->data['user_new_privmsg'] = $user->data['user_unread_privmsg'] = 0;
-					}
-
-					// Assign the number of private messages being removed due to rules.
-					$num_removed = $return['deleted'];
+					$num_removed = $return['removed'];
 				}
 
 				if (!$msg_id && $folder_id == PRIVMSGS_NO_BOX)

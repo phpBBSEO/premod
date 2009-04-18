@@ -2,7 +2,7 @@
 /**
 *
 * @package acp
-* @version $Id: acp_icons.php,v 1.39 2007/10/05 14:36:32 acydburn Exp $
+* @version $Id: acp_icons.php,v 1.40 2007/10/21 11:26:24 acydburn Exp $
 * @copyright (c) 2005 phpBB Group
 * @license http://opensource.org/licenses/gpl-license.php GNU Public License
 *
@@ -89,15 +89,17 @@ class acp_icons
 			}
 			unset($imglist);
 
-			$dir = @opendir($phpbb_root_path . $img_path);
-			while (($file = @readdir($dir)) !== false)
+			if ($dir = @opendir($phpbb_root_path . $img_path))
 			{
-				if (is_file($phpbb_root_path . $img_path . '/' . $file) && preg_match('#\.pak$#i', $file))
+				while (($file = readdir($dir)) !== false)
 				{
-					$_paks[] = $file;
+					if (is_file($phpbb_root_path . $img_path . '/' . $file) && preg_match('#\.pak$#i', $file))
+					{
+						$_paks[] = $file;
+					}
 				}
+				closedir($dir);
 			}
-			@closedir($dir);
 		}
 
 		// What shall we do today? Oops, I believe that's trademarked ...

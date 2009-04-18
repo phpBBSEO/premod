@@ -1,10 +1,10 @@
 <?php
-/** 
+/**
 *
 * @package acp
-* @version $Id: index.php,v 1.70 2007/08/24 14:06:54 acydburn Exp $
-* @copyright (c) 2005 phpBB Group 
-* @license http://opensource.org/licenses/gpl-license.php GNU Public License 
+* @version $Id: index.php,v 1.74 2007/12/12 16:45:58 acydburn Exp $
+* @copyright (c) 2005 phpBB Group
+* @license http://opensource.org/licenses/gpl-license.php GNU Public License
 *
 */
 
@@ -42,7 +42,7 @@ if (!$auth->acl_get('a_'))
 
 // We define the admin variables now, because the user is now able to use the admin related features...
 define('IN_ADMIN', true);
-$phpbb_admin_path = './';
+$phpbb_admin_path = (defined('PHPBB_ADMIN_PATH')) ? PHPBB_ADMIN_PATH : './';
 
 // Some oft used variables
 $safe_mode		= (@ini_get('safe_mode') || @strtolower(ini_get('safe_mode')) == 'on') ? true : false;
@@ -77,8 +77,8 @@ $module->load_active();
 adm_page_header($module->get_page_title());
 
 $template->set_filenames(array(
-	'body' => $module->get_tpl_name())
-);
+	'body' => $module->get_tpl_name(),
+));
 
 adm_page_footer();
 
@@ -204,11 +204,7 @@ function adm_page_footer($copyright_html = true)
 	$template->display('body');
 
 	garbage_collection();
-
-	if (!defined('PHPBB_EMBEDDED'))
-	{
-		exit;
-	}
+	exit_handler();
 }
 
 /**
@@ -280,7 +276,7 @@ function build_cfg_template($tpl_type, $key, &$new, $config_key, $vars)
 			$size = (int) $tpl_type[1];
 			$maxlength = (int) $tpl_type[2];
 
-			$tpl = '<input id="' . $key . '" type="text"' . (($size) ? ' size="' . $size . '"' : '') . ' maxlength="' . (($maxlength) ? $maxlength : 255) . '" name="config[' . $config_key . '_height]" value="' . $new[$config_key . '_height'] . '" /> x <input type="text"' . (($size) ? ' size="' . $size . '"' : '') . ' maxlength="' . (($maxlength) ? $maxlength : 255) . '" name="config[' . $config_key . '_width]" value="' . $new[$config_key . '_width'] . '" />';
+			$tpl = '<input id="' . $key . '" type="text"' . (($size) ? ' size="' . $size . '"' : '') . ' maxlength="' . (($maxlength) ? $maxlength : 255) . '" name="config[' . $config_key . '_width]" value="' . $new[$config_key . '_width'] . '" /> x <input type="text"' . (($size) ? ' size="' . $size . '"' : '') . ' maxlength="' . (($maxlength) ? $maxlength : 255) . '" name="config[' . $config_key . '_height]" value="' . $new[$config_key . '_height'] . '" />';
 		break;
 
 		case 'textarea':

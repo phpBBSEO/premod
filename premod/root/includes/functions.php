@@ -2,7 +2,7 @@
 /**
 *
 * @package phpBB3
-* @version $Id: functions.php,v 1.640 2007/10/09 21:04:21 kellanved Exp $
+* @version $Id: functions.php,v 1.647 2007/12/10 18:35:28 kellanved Exp $
 * @copyright (c) 2005 phpBB Group
 * @license http://opensource.org/licenses/gpl-license.php GNU Public License
 *
@@ -89,7 +89,8 @@ function request_var($var_name, $default, $multibyte = false, $cookie = false)
 		if ($type == 'array')
 		{
 			reset($default);
-			list($sub_key_type, $sub_type) = each(current($default));
+			$default = current($default);
+			list($sub_key_type, $sub_type) = each($default);
 			$sub_type = gettype($sub_type);
 			$sub_type = ($sub_type == 'array') ? 'NULL' : $sub_type;
 			$sub_key_type = gettype($sub_key_type);
@@ -234,7 +235,7 @@ function still_on_time($extra_time = 15)
 
 /**
 *
-* @version Version 0.1 / $Id: functions.php,v 1.640 2007/10/09 21:04:21 kellanved Exp $
+* @version Version 0.1 / $Id: functions.php,v 1.647 2007/12/10 18:35:28 kellanved Exp $
 *
 * Portable PHP password hashing framework.
 *
@@ -286,7 +287,7 @@ function phpbb_hash($password)
 		}
 		$random = substr($random, 0, $count);
 	}
-
+	
 	$hash = _hash_crypt_private($password, _hash_gensalt_private($random, $itoa64), $itoa64);
 
 	if (strlen($hash) == 34)
@@ -683,6 +684,12 @@ if (!function_exists('realpath'))
 		// Put the slashes back to the native operating systems slashes
 		$resolved = str_replace('/', DIRECTORY_SEPARATOR, $resolved);
 
+		// Check for DIRECTORY_SEPARATOR at the end (and remove it!)
+		if (substr($resolved, -1) == DIRECTORY_SEPARATOR)
+		{
+			return substr($resolved, 0, -1);
+		}
+
 		return $resolved; // We got here, in the end!
 	}
 }
@@ -694,7 +701,15 @@ else
 	*/
 	function phpbb_realpath($path)
 	{
-		return realpath($path);
+		$path = realpath($path);
+
+		// Check for DIRECTORY_SEPARATOR at the end (and remove it!)
+		if (substr($path, -1) == DIRECTORY_SEPARATOR)
+		{
+			return substr($path, 0, -1);
+		}
+
+		return $path;
 	}
 }
 
@@ -1500,7 +1515,7 @@ function generate_pagination($base_url, $num_items, $per_page, $start_item, $add
 {
 	global $template, $user;
 	// www.phpBB-SEO.com SEO TOOLKIT BEGIN
-	global $phpbb_seo;
+	global $phpbb_seo, $phpEx;
 	// www.phpBB-SEO.com SEO TOOLKIT END
 	// Make sure $per_page is a valid value
 	$per_page = ($per_page <= 0) ? 1 : $per_page;
@@ -1569,11 +1584,19 @@ function generate_pagination($base_url, $num_items, $per_page, $start_item, $add
 	$prev =  ($on_page == 1) ? '' : $base_url . "{$url_delim}start=" . (($on_page - 2) * $per_page);
 	$next = ($on_page == $total_pages) ? '' : $base_url . "{$url_delim}start=" . ($on_page * $per_page);
 	if (is_object($phpbb_seo)) {
+		static $pagin_find = array();
+		static $pagin_replace = array();
+		static $prev_find = array();
+		if (empty($pagin_replace)) {
+			$pagin_find = array('`(\.(?!' . $phpEx . ')[a-z0-9]+)([\w\#$%&~\-;:=,?@+]*)(&amp;|\?)start=([0-9]+)`i', '`/([\w\#$%&~\-;:=,?@+]*)(&amp;|\?)start=([0-9]+)`i' );
+			$pagin_replace = array( $phpbb_seo->seo_delim['start'] . '\\4\\1\\2', '/' . $phpbb_seo->seo_static['pagination'] . '\\3' . $phpbb_seo->seo_ext['pagination'] . '\\1' );
+			$prev_find = array($phpbb_seo->seo_delim['start'] . '0', $phpbb_seo->seo_static['pagination'] . '0' . $phpbb_seo->seo_ext['pagination']);
+		}
 		$page_string = str_replace($url_delim . 'start=0', '', $page_string);
-		$page_string = preg_replace(array('`(\.[a-z0-9]+)(&amp;|\?)start=([0-9]+)`i', '`(/)(&amp;|\?)start=([0-9]+)`i'), array($phpbb_seo->seo_delim['start'] . '\\3\\1', '\\1' . $phpbb_seo->seo_static['pagination'] . '\\3' . $phpbb_seo->seo_ext['pagination']), $page_string);
-		$prev = preg_replace(array('`(\.[a-z0-9]+)(&amp;|\?)start=([0-9]+)`i', '`(/)(&amp;|\?)start=([0-9]+)`i'), array($phpbb_seo->seo_delim['start'] . '\\3\\1', '\\1' . $phpbb_seo->seo_static['pagination'] . '\\3' . $phpbb_seo->seo_ext['pagination']), $prev);
-		$prev = str_replace(array($phpbb_seo->seo_delim['start'] . '0', $phpbb_seo->seo_static['pagination'] . '0' . $phpbb_seo->seo_ext['pagination']), '', $prev);
-		$next = preg_replace(array('`(\.[a-z0-9]+)(&amp;|\?)start=([0-9]+)`i', '`(/)(&amp;|\?)start=([0-9]+)`i'), array($phpbb_seo->seo_delim['start'] . '\\3\\1', '\\1' . $phpbb_seo->seo_static['pagination'] . '\\3' . $phpbb_seo->seo_ext['pagination']), $next);
+		$page_string = preg_replace($pagin_find, $pagin_replace, $page_string);
+		$prev = preg_replace($pagin_find, $pagin_replace, $prev);
+		$prev = str_replace($prev_find, '', $prev);
+		$next = preg_replace( $pagin_find, $pagin_replace, $next);
 	}
 	$template->assign_vars(array(
 		$tpl_prefix . 'BASE_URL'	=> $base_url,
@@ -2059,11 +2082,12 @@ function check_form_key($form_name, $timespan = false, $return_page = '', $trigg
 
 	if ($timespan === false)
 	{
-		$timespan = $config['form_token_lifetime'];
+		// we enforce a minimum value of half a minute here.
+		$timespan = ($config['form_token_lifetime'] == -1) ? -1 : max(30, $config['form_token_lifetime']);
 	}
 	if ($minimum_time === false)
 	{
-		$minimum_time = $config['form_token_mintime'];
+		$minimum_time = (int) $config['form_token_mintime'];
 	}
 	
 	if (isset($_POST['creation_time']) && isset($_POST['form_token']))
@@ -2774,8 +2798,9 @@ function get_preg_expression($mode)
 		case 'url':
 		case 'url_inline':
 			$inline = ($mode == 'url') ? ')' : '';
+			$scheme = ($mode == 'url') ? '[a-z\d+\-.]' : '[a-z\d+]'; // avoid automatic parsing of "word" in "last word.http://..."
 			// generated with regex generation file in the develop folder
-			return "[a-z][a-z\d+\-.]*:/{2}(?:(?:[a-z0-9\-._~!$&'($inline*+,;=:@|]+|%[\dA-F]{2})+|[0-9.]+|\[[a-z0-9.]+:[a-z0-9.]+:[a-z0-9.:]+\])(?::\d*)?(?:/(?:[a-z0-9\-._~!$&'($inline*+,;=:@|]+|%[\dA-F]{2})*)*(?:\?(?:[a-z0-9\-._~!$&'($inline*+,;=:@/?|]+|%[\dA-F]{2})*)?(?:\#(?:[a-z0-9\-._~!$&'($inline*+,;=:@/?|]+|%[\dA-F]{2})*)?";
+			return "[a-z]$scheme*:/{2}(?:(?:[a-z0-9\-._~!$&'($inline*+,;=:@|]+|%[\dA-F]{2})+|[0-9.]+|\[[a-z0-9.]+:[a-z0-9.]+:[a-z0-9.:]+\])(?::\d*)?(?:/(?:[a-z0-9\-._~!$&'($inline*+,;=:@|]+|%[\dA-F]{2})*)*(?:\?(?:[a-z0-9\-._~!$&'($inline*+,;=:@/?|]+|%[\dA-F]{2})*)?(?:\#(?:[a-z0-9\-._~!$&'($inline*+,;=:@/?|]+|%[\dA-F]{2})*)?";
 		break;
 
 		case 'www_url':
@@ -2845,6 +2870,7 @@ function phpbb_checkdnsrr($host, $type = '')
 			return NULL;
 		}
 
+		// @exec('nslookup -retry=1 -timout=1 -type=' . escapeshellarg($type) . ' ' . escapeshellarg($host), $output);
 		@exec('nslookup -type=' . escapeshellarg($type) . ' ' . escapeshellarg($host), $output);
 
 		// If output is empty, the nslookup failed
@@ -2887,6 +2913,12 @@ function msg_handler($errno, $msg_text, $errfile, $errline)
 	global $cache, $db, $auth, $template, $config, $user;
 	global $phpEx, $phpbb_root_path, $msg_title, $msg_long_text;
 
+	// Do not display notices if we suppress them via @
+	if (error_reporting() == 0)
+	{
+		return;
+	}
+
 	// Message handler is stripping text. In case we need it, we are possible to define long text...
 	if (isset($msg_long_text) && $msg_long_text && !$msg_text)
 	{
@@ -2899,9 +2931,8 @@ function msg_handler($errno, $msg_text, $errfile, $errline)
 		case E_WARNING:
 
 			// Check the error reporting level and return if the error level does not match
-			// Additionally do not display notices if we suppress them via @
 			// If DEBUG is defined the default level is E_ALL
-			if (($errno & ((defined('DEBUG') && error_reporting()) ? E_ALL : error_reporting())) == 0)
+			if (($errno & ((defined('DEBUG')) ? E_ALL : error_reporting())) == 0)
 			{
 				return;
 			}
@@ -3422,7 +3453,9 @@ function page_footer($run_cron = true)
 	global $db, $config, $template, $user, $auth, $cache, $starttime, $phpbb_root_path, $phpEx;
 	// www.phpBB-SEO.com SEO TOOLKIT BEGIN
 	global $phpbb_seo;
-	$phpbb_seo->seo_end();
+	if (is_object($phpbb_seo)) {
+		$phpbb_seo->seo_end();
+	}
 	// www.phpBB-SEO.com SEO TOOLKIT END
 	// Output page creation time
 	if (defined('DEBUG'))
@@ -3616,11 +3649,13 @@ class seo_meta {
 		if ($bbcode) {
 			static $RegEx = array();
 			static $bbcode_strip = 'img|url|flash';
-			$RegEx = array('`<[^>]*>(.*<[^>]*>)?`Usi', // HTML code
-				'`\[(' . $bbcode_strip . ')[^\[\]]+\].*\[/(' . $bbcode_strip . ')[^\[\]]+\]`Usi', // bbcode to strip
-				'`\[/?[^\[\]]+\]`mi', // Strip all bbcode tags
-				'`[\s]+`' // Multiple spaces
-			);
+			if (empty($RegEx)) {
+				$RegEx = array('`<[^>]*>(.*<[^>]*>)?`Usi', // HTML code
+					'`\[(' . $bbcode_strip . ')[^\[\]]+\].*\[/(' . $bbcode_strip . ')[^\[\]]+\]`Usi', // bbcode to strip
+					'`\[/?[^\[\]]+\]`mi', // Strip all bbcode tags
+					'`[\s]+`' // Multiple spaces
+				);
+			}
 			return $this->word_limit( utf8_htmlspecialchars( preg_replace($RegEx, ' ', $text ) ) );
 		}
 		return $this->word_limit( utf8_htmlspecialchars( preg_replace('`<[^>]*>(.*<[^>]*>)?`mi', '`[\s]+`', ' ', $text ) ) );
@@ -3637,7 +3672,7 @@ class seo_meta {
 	*/
 	function seo_meta_tags() {
 		global $config;
-		$this->meta['meta_tpl'] =  '<meta name="title" content="%s">' . "\n" . '<meta name="description" lang="%s" content="%s">' . "\n" . '<meta name="keywords"    content="%s">' . "\n" . '<meta name="category"    content="%s">' . "\n" . '<meta name="robots"      content="%s">'. "\n" . '<meta name="distribution" content="%s">' . "\n" . '<meta name="resource-type" content="%s" />' . "\n" . '<meta name="copyright" content="%s">';
+		$this->meta['meta_tpl'] =  '<meta name="title" content="%s" />' . "\n" . '<meta name="description" lang="%s" content="%s" />' . "\n" . '<meta name="keywords"    content="%s" />' . "\n" . '<meta name="category"    content="%s" />' . "\n" . '<meta name="robots"      content="%s" />'. "\n" . '<meta name="distribution" content="%s" />' . "\n" . '<meta name="resource-type" content="%s" />' . "\n" . '<meta name="copyright" content="%s" />';
 		// Here you can hard code a static default title, description and keywords
 		// As is, the mod will return information based on the phpbb config
 		$this->meta['meta_title_def'] = $config['sitename'];
