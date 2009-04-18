@@ -5,7 +5,7 @@
 * translated originally by PhpBB-fr.com <http://www.phpbb-fr.com/> and phpBB.biz <http://www.phpBB.biz>
 *
 * @package language
-* @version $Id: permissions.php,v 1.21 2008/03/28 09:41:35 elglobo Exp $
+* @version $Id: permissions.php,v 1.22 2008/07/03 17:41:35 elglobo Exp $
 * @copyright (c) 2005 phpBB Group 
 * @license http://opensource.org/licenses/gpl-license.php GNU Public License 
 *
@@ -109,12 +109,12 @@ $lang = array_merge($lang, array(
 	'AUTH_UPDATED'				=> 'Les permissions ont été mises à jour.',
 
 	'CREATE_ROLE'				=> 'Créer un modèle',
-	'CREATE_ROLE_FROM'			=> 'Utiliser les réglages de…',
+	'CREATE_ROLE_FROM'			=> 'Utiliser les paramètres de…',
 	'CUSTOM'					=> 'Personnaliser…',
 
 	'DEFAULT'					=> 'Défaut',
 	'DELETE_ROLE'				=> 'Supprimer le modèle',
-	'DELETE_ROLE_CONFIRM'		=> 'Êtes-vous sûr(e) de vouloir supprimer ce modèle? Les éléments auxquels ce modèle est assigné <strong>ne</strong> perdront <strong>pas</strong> leurs réglages de permission.',
+	'DELETE_ROLE_CONFIRM'		=> 'Etes-vous sûr(e) de vouloir supprimer ce modèle? Les éléments auxquels ce modèle est assigné <strong>ne</strong> perdront <strong>pas</strong> leurs paramètres de permission.',
 	'DISPLAY_ROLE_ITEMS'		=> 'Voir les éléments utilisant ce modèle',
 
 	'EDIT_PERMISSIONS'			=> 'Editer les permissions',
@@ -128,7 +128,7 @@ $lang = array_merge($lang, array(
 	'MANAGE_GROUPS'		=> 'Gérer les groupes',
 	'MANAGE_USERS'		=> 'Gérer les utilisateurs',
 
-	'NO_AUTH_SETTING_FOUND'		=> 'Réglages de permission non définis.',
+	'NO_AUTH_SETTING_FOUND'		=> 'Paramètres de permission non définis.',
 	'NO_ROLE_ASSIGNED'			=> 'Aucun modèle assigné…',
 	'NO_ROLE_ASSIGNED_EXPLAIN'	=> 'La configuration de ce modèle ne modifie pas les permissions sur la droite. Si vous souhaitez supprimer toutes les permissions, vous devez utiliser le lien “Tous sur <samp>NON</samp>”.',
 	'NO_ROLE_AVAILABLE'			=> 'Aucun modèle disponible',
@@ -176,7 +176,7 @@ $lang = array_merge($lang, array(
 	'ROLE_DESCRIPTION_ADMIN_FORUM'			=> 'Peut accéder à la gestion et à la configuration des permissions du forum.',
 	'ROLE_DESCRIPTION_ADMIN_FULL'			=> 'A accès à toutes les fonctions administratives du forum.<br />Non recommandé.',
 	'ROLE_DESCRIPTION_ADMIN_STANDARD'		=> 'A accès à la plupart des fonctionnalités administratives mais ne peut pas utiliser le serveur ou les outils relatifs au système.',
-	'ROLE_DESCRIPTION_ADMIN_USERGROUP'		=> 'Peut gérer des groupes et des utilisateurs: est autorisé à modifier les permissions, les réglages, à gérer les bannissements et les rangs.',
+	'ROLE_DESCRIPTION_ADMIN_USERGROUP'		=> 'Peut gérer des groupes et des utilisateurs: est autorisé à modifier les permissions, les paramètres, à gérer les bannissements et les rangs.',
 	'ROLE_DESCRIPTION_FORUM_BOT'			=> 'Ce modèle est recommandé pour les robots et moteurs de recherche.',
 	'ROLE_DESCRIPTION_FORUM_FULL'			=> 'Peut utiliser toutes les fonctionnalités du forum, y compris les annonces et les post-it. N’est pas concerné(e) par la limite de flood.<br />Non recommandé pour les utilisateurs normaux.',
 	'ROLE_DESCRIPTION_FORUM_LIMITED'		=> 'Peut utiliser quelques fonctionnalités du forum, mais ne peut pas joindre de fichiers ou utiliser les icônes des messages.',
@@ -201,7 +201,7 @@ $lang = array_merge($lang, array(
 	'ROLE_DETAILS'					=> 'Détails du modèle',
 	'ROLE_EDIT_SUCCESS'				=> 'Le modèle a été édité.',
 	'ROLE_NAME'						=> 'Nom du modèle',
-	'ROLE_NAME_ALREADY_EXIST'		=> 'Un modèle nommé <strong>%s</strong> existe déjà pour le type de permission spécifié.',
+	'ROLE_NAME_ALREADY_EXIST'		=> 'Un modèle nommé <strong>%s</strong> existe déjà pour le type de permission indiqué.',
 	'ROLE_NOT_ASSIGNED'				=> 'Le modèle n’a pas encore été assigné.',
 
 	'SELECTED_FORUM_NOT_EXIST'		=> 'Le(s) forum(s) sélectionné(s) n’existe(nt) pas.',
@@ -215,21 +215,21 @@ $lang = array_merge($lang, array(
 	'SET_USERS_PERMISSIONS'			=> 'Régler les permissions des utilisateurs',
 	'SET_USERS_FORUM_PERMISSIONS'	=> 'Régler les permissions des utilisateurs du forum',
 
-	'TRACE_DEFAULT'					=> 'Par défaut, chaque permission est sur <samp>NON</samp> (Désactivée). Ainsi la permission peut être outrepassée par d’autres réglages.',
+	'TRACE_DEFAULT'					=> 'Par défaut, chaque permission est sur <samp>NON</samp> (Désactivée). Ainsi la permission peut être outrepassée par d’autres paramètres.',
 	'TRACE_FOR'						=> 'Tracer pour',
 	'TRACE_GLOBAL_SETTING'	=> '%s (global)',
 	'TRACE_GROUP_NEVER_TOTAL_NEVER'	=> 'Cette permission de groupe est réglée sur <samp>JAMAIS</samp> tout comme le résultat total, l’ancien résultat est donc conservé..',
 	'TRACE_GROUP_NEVER_TOTAL_NEVER_LOCAL'	=> 'Cette permission de groupe pour ce forum est réglée sur <samp>JAMAIS</samp> tout comme le résultat total, l’ancien résultat est donc conservé.',
-	'TRACE_GROUP_NEVER_TOTAL_NO'	=> 'Cette permission de groupe est réglée sur <samp>JAMAIS</samp> ce qui devient la nouvelle valeur globale car elle n’était pas encore réglée (Réglage sur <samp>NON</samp>).',
-	'TRACE_GROUP_NEVER_TOTAL_NO_LOCAL'	=> 'Cette permission de groupe pour ce forum est réglée sur <samp>JAMAIS</samp> ce qui devient la nouvelle valeur globale car elle n’était pas encore réglée (Réglage sur <samp>NON</samp>).',
+	'TRACE_GROUP_NEVER_TOTAL_NO'	=> 'Cette permission de groupe est réglée sur <samp>JAMAIS</samp> ce qui devient la nouvelle valeur globale car elle n’était pas encore réglée (Paramètre sur <samp>NON</samp>).',
+	'TRACE_GROUP_NEVER_TOTAL_NO_LOCAL'	=> 'Cette permission de groupe pour ce forum est réglée sur <samp>JAMAIS</samp> ce qui devient la nouvelle valeur globale car elle n’était pas encore réglée (Paramètre sur <samp>NON</samp>).',
 	'TRACE_GROUP_NEVER_TOTAL_YES'	=> 'Cette permission de groupe est réglée sur <samp>JAMAIS</samp> ce qui outrepasse le <samp>OUI</samp> pour appliquer <samp>JAMAIS</samp> pour cet utilisateur.',
 	'TRACE_GROUP_NEVER_TOTAL_YES_LOCAL'	=> 'Cette permission de groupe pour ce forum est réglée sur <samp>JAMAIS</samp> ce qui outrepasse le <samp>OUI</samp> pour appliquer <samp>JAMAIS</samp> pour cet utilisateur.',
 	'TRACE_GROUP_NO'				=> 'Cette permission de groupe est réglée sur <samp>NON</samp> pour ce groupe, ainsi l’ancienne valeur est conservée.',
 	'TRACE_GROUP_NO_LOCAL'			=> 'Cette permission de groupe est réglée sur <samp>NON</samp> pour ce groupe dans ce forum, ainsi l’ancienne valeur est conservée.',
 	'TRACE_GROUP_YES_TOTAL_NEVER'	=> 'Cette permission de groupe est réglée sur <samp>OUI</samp> mais la valeur globale <samp>JAMAIS</samp> ne peut pas être outrepassée.',
 	'TRACE_GROUP_YES_TOTAL_NEVER_LOCAL'	=> 'Cette permission de groupe pour ce forum est réglée sur <samp>OUI</samp> mais la valeur globale <samp>JAMAIS</samp> ne peut pas être outrepassée.',
-	'TRACE_GROUP_YES_TOTAL_NO'		=> 'Cette permission de groupe est réglée sur <samp>OUI</samp> ce qui devient la nouvelle valeur globale car elle n’était pas encore réglée (Réglage sur <samp>NON</samp>).',
-	'TRACE_GROUP_YES_TOTAL_NO_LOCAL'		=> 'Cette permission de groupe pour ce forum est réglée sur <samp>OUI</samp> ce qui devient la nouvelle valeur globale car elle n’était pas encore réglée (Réglage sur <samp>NON</samp>).',
+	'TRACE_GROUP_YES_TOTAL_NO'		=> 'Cette permission de groupe est réglée sur <samp>OUI</samp> ce qui devient la nouvelle valeur globale car elle n’était pas encore réglée (Paramètre sur <samp>NON</samp>).',
+	'TRACE_GROUP_YES_TOTAL_NO_LOCAL'		=> 'Cette permission de groupe pour ce forum est réglée sur <samp>OUI</samp> ce qui devient la nouvelle valeur globale car elle n’était pas encore réglée (Paramètre sur <samp>NON</samp>).',
 	'TRACE_GROUP_YES_TOTAL_YES'		=> 'Cette permission de groupe est réglée sur <samp>OUI</samp> et la permission totale est déjà réglée sur <samp>OUI</samp> , elle est donc conservée.',
 	'TRACE_GROUP_YES_TOTAL_YES_LOCAL'		=> 'Cette permission de groupe pour ce forum est réglée sur <samp>OUI</samp> et la permission totale est déjà réglée sur <samp>OUI</samp> , elle est donc conservée.',
 	'TRACE_PERMISSION'				=> 'Tracer la permission - %s',
@@ -270,7 +270,7 @@ $lang = array_merge($lang, array(
 	'VIEW_PERMISSIONS'		=> 'Voir les permissions',
 
 	'WRONG_PERMISSION_TYPE'	=> 'Mauvais type de permission sélectionné.',
-	'WRONG_PERMISSION_SETTING_FORMAT'	=> 'Les réglages des permissions sont enregistrés dans un mauvais format, phpBB est incapable de les traiter correctement.',
+	'WRONG_PERMISSION_SETTING_FORMAT'	=> 'Les paramètres des permissions sont enregistrés dans un mauvais format, phpBB est incapable de les traiter correctement.',
 ));
 
 ?>

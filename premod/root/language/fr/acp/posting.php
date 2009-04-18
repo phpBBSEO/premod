@@ -5,7 +5,7 @@
 * translated originally by PhpBB-fr.com <http://www.phpbb-fr.com/> and phpBB.biz <http://www.phpBB.biz>
 *
 * @package language
-* @version $Id: posting.php,v 1.21 2008/04/10 13:01:53 elglobo Exp $
+* @version $Id: posting.php,v 1.22 2008/07/03 17:01:53 elglobo Exp $
 * @copyright (c) 2005 phpBB Group 
 * @license http://opensource.org/licenses/gpl-license.php GNU Public License 
 *
@@ -164,7 +164,7 @@ $lang = array_merge($lang, array(
 	'SMILIES_DELETED'			=> 'Le smiley a été supprimé.',
 	'SMILIES_EDIT'				=> 'Editer le smiley',
 	'SMILIE_NO_CODE'			=> 'Le smiley “%s” a été ignoré car aucun code n’a été saisi.',
-	'SMILIE_NO_EMOTION'			=> 'Le smiley “%s” a été ignoré car aucun smiley n’a été spécifié.',
+	'SMILIE_NO_EMOTION'			=> 'Le smiley “%s” a été ignoré car aucun smiley n’a été indiqué.',
 	'SMILIES_NONE_EDITED'		=> 'Aucun smiley n’a été mis à jour.',
 	'SMILIES_ONE_EDITED'		=> 'Le smiley a été mis à jour.',
 	'SMILIES_EDITED'			=> 'Les smileys ont été mis à jour.',
@@ -179,7 +179,7 @@ $lang = array_merge($lang, array(
 	'SMILIES_URL'				=> 'Image du smiley',
 	'SMILIES_WIDTH'				=> 'Largeur du smiley',
 
-	'WRONG_PAK_TYPE'	=> 'Le pack spécifié ne contient pas les données appropriées.',
+	'WRONG_PAK_TYPE'	=> 'Le pack indiqué ne contient pas les données appropriées.',
 ));
 
 // Word censors
@@ -210,12 +210,12 @@ $lang = array_merge($lang, array(
 	'MUST_SELECT_RANK'		=> 'Vous devez sélectionner un rang.',
 
 	'NO_ASSIGNED_RANK'		=> 'Pas de rang spécial assigné.',
-	'NO_RANK_TITLE'			=> 'Vous n’avez pas spécifié de titre pour le rang.',
+	'NO_RANK_TITLE'			=> 'Vous n’avez pas indiqué de titre pour le rang.',
 	'NO_UPDATE_RANKS'		=> 'Le rang a été supprimé. Cependant les comptes d’utilisateurs utilisant ce rang n’ont pas été mis à jour. Vous devrez donc réinitialiser manuellement le rang de ces comptes.',
 
 	'RANK_ADDED'			=> 'Le rang a été ajouté.',
 	'RANK_IMAGE'			=> 'Image du rang',
-	'RANK_IMAGE_EXPLAIN'	=> 'Utilisez ceci pour définir une petite image à associer au rang. Le chemin est relatif par rapport à la racine de votre forum phpBB.',
+	'RANK_IMAGE_EXPLAIN'	=> 'Utilisez ceci pour définir une petite image à associer au rang. Le chemin est relatif par rapport au répertoire racine de phpBB.',
 	'RANK_MINIMUM'			=> 'Messages minimums',
 	'RANK_REMOVED'			=> 'Le rang a été supprimé.',
 	'RANK_SPECIAL'			=> 'Définir comme rang spécial',
@@ -225,7 +225,7 @@ $lang = array_merge($lang, array(
 
 // Disallow Usernames
 $lang = array_merge($lang, array(
-	'ACP_DISALLOW_EXPLAIN'	=> 'Vous pouvez contrôler les noms d’utilisateurs qui ne sont pas autorisés à être utilisés. Les noms d’utilisateurs interdits sont autorisés à contenir un joker *. Notez que vous ne serez pas autorisé à spécifier tout nom d’utilisateur étant déjà inscrit, vous devez d’abord supprimer ce nom, puis l’interdire.',
+	'ACP_DISALLOW_EXPLAIN'	=> 'Vous pouvez contrôler les noms d’utilisateurs qui ne sont pas autorisés à être utilisés. Les noms d’utilisateurs interdits sont autorisés à contenir un joker *. Notez que vous ne serez pas autorisé à indiquer tout nom d’utilisateur étant déjà inscrit, vous devez d’abord supprimer ce nom, puis l’interdire.',
 	'ADD_DISALLOW_EXPLAIN'	=> 'Vous pouvez utiliser le caractère * pour faire une correspondance avec n’importe quel caractère.',
 	'ADD_DISALLOW_TITLE'	=> 'Ajouter un nom interdit',
 
@@ -236,22 +236,22 @@ $lang = array_merge($lang, array(
 	'DISALLOW_SUCCESSFUL'		=> 'Le nom interdit a été ajouté.',
 
 	'NO_DISALLOWED'				=> 'Aucun nom interdit',
-	'NO_USERNAME_SPECIFIED'		=> 'Vous n’avez spécifié aucun nom.',
+	'NO_USERNAME_SPECIFIED'		=> 'Vous n’avez indiqué aucun nom.',
 ));
 
 // Reasons
 $lang = array_merge($lang, array(
-	'ACP_REASONS_EXPLAIN'	=> 'Vous pouvez gérer les raisons utilisées dans les rapports lors de la désapprobation de messages. Il y a une raison par défaut (marquée par une *) que vous ne pouvez pas supprimer, cette raison est utilisée normalement pour les messages personnalisés si aucune raison n’est spécifiée.',
+	'ACP_REASONS_EXPLAIN'	=> 'Vous pouvez gérer les raisons utilisées dans les rapports lors de la désapprobation de messages. Il y a une raison par défaut (marquée par une *) que vous ne pouvez pas supprimer, cette raison est utilisée normalement pour les messages personnalisés si aucune raison n’est indiquée.',
 	'ADD_NEW_REASON'		=> 'Ajouter une nouvelle raison',
 	'AVAILABLE_TITLES'		=> 'Titres des raisons traduits disponibles',
 
 	'IS_NOT_TRANSLATED'			=> 'La raison n’a <strong>pas</strong> été traduite.',
-	'IS_NOT_TRANSLATED_EXPLAIN'	=> 'La raison n’a <strong>pas</strong> été traduite. Si vous souhaitez renseigner le formulaire traduit, spécifiez la clé correcte des fichiers de langues dans la section des raisons de rapports/refus.',
+	'IS_NOT_TRANSLATED_EXPLAIN'	=> 'La raison n’a <strong>pas</strong> été traduite. Si vous souhaitez renseigner le formulaire traduit, indiquez la clé correcte des fichiers de langues dans la section des raisons de rapports/refus.',
 	'IS_TRANSLATED'				=> 'La raison a été traduite.',
-	'IS_TRANSLATED_EXPLAIN'		=> 'La raison a été traduite. Si le titre que vous avez entré est spécifié dans les fichiers de langues dans la section des raisons de rapports/refus, le formulaire traduit du titre et de la description sera utilisé.',
+	'IS_TRANSLATED_EXPLAIN'		=> 'La raison a été traduite. Si le titre que vous avez entré est indiqué dans les fichiers de langues dans la section des raisons de rapports/refus, le formulaire traduit du titre et de la description sera utilisé.',
 
 	'NO_REASON'					=> 'La raison est introuvable.',
-	'NO_REASON_INFO'			=> 'Vous devez spécifier un titre et une description pour cette raison.',
+	'NO_REASON_INFO'			=> 'Vous devez indiquer un titre et une description pour cette raison.',
 	'NO_REMOVE_DEFAULT_REASON'	=> 'Vous ne pouvez pas supprimer la raison par défaut “Autres”.',
 
 	'REASON_ADD'				=> 'Ajouter une raison au rapport',

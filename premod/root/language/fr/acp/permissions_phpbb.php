@@ -5,7 +5,7 @@
 * translated originally by PhpBB-fr.com <http://www.phpbb-fr.com/> and phpBB.biz <http://www.phpBB.biz>
 *
 * @package language
-* @version $Id: permissions_phpbb.php,v 1.21 2007/11/22 12:38:30 elglobo Exp $
+* @version $Id: permissions_phpbb.php,v 1.22 2007/11/22 12:38:30 elglobo Exp $
 * @copyright (c) 2005 phpBB Group 
 * @license http://opensource.org/licenses/gpl-license.php GNU Public License 
 *
@@ -182,8 +182,8 @@ $lang = array_merge($lang, array(
 	'acl_m_split'	=> array('lang'	=> 'Peut diviser un sujet', 'cat' => 'topic_actions'),
 	'acl_m_merge'	=> array('lang'	=> 'Peut fusionner des sujets', 'cat' => 'topic_actions'),
 	'acl_m_info'	=> array('lang'	=> 'Peut voir les informations du message', 'cat' => 'misc'),
-	'acl_m_warn'	=> array('lang'	=> 'Peut avertir un membre<br /><em>Notez que ce réglage est assigné globalement. Il n’est pas basé sur le forum.</em>', 'cat' => 'misc'), // This moderator setting is only global (and not local)
-	'acl_m_ban'		=> array('lang'	=> 'Peut gérer les bannissements<br /><em>Notez que ce réglage est assigné globalement. Il n’est pas basé sur le forum.</em>', 'cat' => 'misc'), // This moderator setting is only global (and not local)
+	'acl_m_warn'	=> array('lang'	=> 'Peut avertir un membre<br /><em>Notez que ce paramètre est assigné globalement. Il n’est pas basé sur le forum.</em>', 'cat' => 'misc'), // This moderator setting is only global (and not local)
+	'acl_m_ban'		=> array('lang'	=> 'Peut gérer les bannissements<br /><em>Notez que ce paramètre est assigné globalement. Il n’est pas basé sur le forum.</em>', 'cat' => 'misc'), // This moderator setting is only global (and not local)
 ));
 
 // Admin Permissions

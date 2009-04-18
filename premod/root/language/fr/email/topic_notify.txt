@@ -11,7 +11,7 @@ Pour voir le sujet dans son ensemble, cliquez sur le lien suivant:
 {U_TOPIC}
 
 Pour visiter le forum, cliquez sur le lien suivant:
-{U_TOPIC}
+{U_FORUM}
 
 Si vous ne voulez plus surveiller ce sujet, vous pouvez soit cliquer sur le lien "Arrêter de surveiller ce sujet" en bas du sujet ci-dessus, soit cliquer sur le lien suivant:
 {U_STOP_WATCHING_TOPIC}

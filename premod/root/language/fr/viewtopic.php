@@ -5,7 +5,7 @@
 * translated originally by PhpBB-fr.com <http://www.phpbb-fr.com/> and phpBB.biz <http://www.phpBB.biz>
 *
 * @package language
-* @version $Id: viewtopic.php,v 1.21 2007/11/22 13:10:40 lolovoisin Exp $
+* @version $Id: viewtopic.php,v 1.22 2008/07/03 12:41:26 elglobo Exp $
 * @copyright (c) 2005 phpBB Group 
 * @license http://opensource.org/licenses/gpl-license.php GNU Public License 
 *
@@ -65,7 +65,7 @@ $lang = array_merge($lang, array(
 	'LOGIN_VIEWTOPIC'		=> 'Vous devez être enregistré et connecté pour voir ce sujet.',
 
 	'MAKE_ANNOUNCE'				=> 'Mettre en “Annonce”',
-	'MAKE_GLOBAL'				=> 'Mettre en “Annonce générale”',
+	'MAKE_GLOBAL'				=> 'Mettre en “Annonce globale”',
 	'MAKE_NORMAL'				=> 'Mettre en “Sujet standard”',
 	'MAKE_STICKY'				=> 'Mettre en “Post-it”',
 	'MAX_OPTIONS_SELECT'		=> 'Vous pouvez sélectionner jusqu’à <strong>%d</strong> options',

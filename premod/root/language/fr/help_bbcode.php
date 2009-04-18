@@ -5,7 +5,7 @@
 * translated originally by PhpBB-fr.com <http://www.phpbb-fr.com/> and phpBB.biz <http://www.phpBB.biz>
 *
 * @package language
-* @version $Id: help_bbcode.php,v 1.21 2007/11/22 14:15:20 tonillo Exp $
+* @version $Id: help_bbcode.php,v 1.22 2008/07/03 17:36:20 elglobo Exp $
 * @copyright (c) 2005 phpBB Group 
 * @license http://opensource.org/licenses/gpl-license.php GNU Public License 
 *
@@ -50,7 +50,7 @@ $help = array(
 	),
 	array(
 		0 => 'Changer la couleur et la taille du texte',
-		1 => 'Pour modifier la couleur ou la taille de votre texte, vous pouvez utiliser les balises suivantes. Gardez à l’esprit que la façon dont votre message s’affichera dépendra du navigateur et du système:<ul><li>Vous pouvez changer la couleur d’un texte en l’encadrant entre les balises <strong>[color=][/color]</strong>. Vous pouvez spécifier un nom de couleur connu (comme: red, blue, yellow, etc.) ou bien indiquer un code hexadécimal, c.-à-d. #FFFFFF, #000000. Par exemple, pour du texte rouge:<br /><br /><strong>[color=red]</strong>Salut!<strong>[/color]</strong><br /><br />ou<br /><br /><strong>[color=#FF0000]</strong>Salut!<strong>[/color]</strong><br /><br />afficheront tous les deux <span style="color:red">Salut!</span></li><li>Vous pouvez changer la taille du texte de façon analogue avec les balises <strong>[size=][/size]</strong>. Cette balise dépend du thème utilisé mais le format recommandé est une valeur numérique représentant la hauteur du texte en pourcentage, à partir de 20 (tellement petit que vous ne pourrez pas le voir) jusqu’à 200 (très grand). Par exemple:<br /><br /><strong>[size=30]</strong>PETIT<strong>[/size]</strong><br /><br />sera affiché <span style="font-size:30%;">PETIT</span><br /><br />alors que<br /><br /><strong>[size=200]</strong>ENORME!<strong>[/size]</strong><br /><br />donnera <span style="font-size:200%;">ENORME!</span></li></ul>'
+		1 => 'Pour modifier la couleur ou la taille de votre texte, vous pouvez utiliser les balises suivantes. Gardez à l’esprit que la façon dont votre message s’affichera dépendra du navigateur et du système:<ul><li>Vous pouvez changer la couleur d’un texte en l’encadrant entre les balises <strong>[color=][/color]</strong>. Vous pouvez indiquer un nom de couleur connu (comme: red, blue, yellow, etc.) ou bien indiquer un code hexadécimal, c.-à-d. #FFFFFF, #000000. Par exemple, pour du texte rouge:<br /><br /><strong>[color=red]</strong>Salut!<strong>[/color]</strong><br /><br />ou<br /><br /><strong>[color=#FF0000]</strong>Salut!<strong>[/color]</strong><br /><br />afficheront tous les deux <span style="color:red">Salut!</span></li><li>Vous pouvez changer la taille du texte de façon analogue avec les balises <strong>[size=][/size]</strong>. Cette balise dépend du thème utilisé mais le format recommandé est une valeur numérique représentant la hauteur du texte en pourcentage, à partir de 20 (tellement petit que vous ne pourrez pas le voir) jusqu’à 200 (très grand). Par exemple:<br /><br /><strong>[size=30]</strong>PETIT<strong>[/size]</strong><br /><br />sera affiché <span style="font-size:30%;">PETIT</span><br /><br />alors que<br /><br /><strong>[size=200]</strong>ENORME!<strong>[/size]</strong><br /><br />donnera <span style="font-size:200%;">ENORME!</span></li></ul>'
 	),
 	array(
 		0 => 'Puis-je combiner des balises?',

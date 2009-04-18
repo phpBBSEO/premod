@@ -5,7 +5,7 @@
 * translated originally by PhpBB-fr.com <http://www.phpbb-fr.com/> and phpBB.biz <http://www.phpBB.biz>
 *
 * @package language
-* @version $Id: language.php,v 1.21 2007/11/22 11:52:46 elglobo Exp $
+* @version $Id: language.php,v 1.22 2008/07/03 17:20:46 elglobo Exp $
 * @copyright (c) 2005 phpBB Group
 * @license http://opensource.org/licenses/gpl-license.php GNU Public License
 *
@@ -75,8 +75,8 @@ $lang = array_merge($lang, array(
 	'MISSING_LANG_VARIABLES'	=> 'Variables de langue absentes',
 	'MODS_FILES'				=> 'Fichiers de langue des MODs',
 
-	'NO_FILE_SELECTED'				=> 'Vous n’avez pas spécifié de fichier.',
-	'NO_LANG_ID'					=> 'Vous n’avez pas spécifié de pack de langue',
+	'NO_FILE_SELECTED'				=> 'Vous n’avez pas indiqué de fichier.',
+	'NO_LANG_ID'					=> 'Vous n’avez pas indiqué de pack de langue',
 	'NO_REMOVE_DEFAULT_LANG'		=> 'Vous ne pouvez pas supprimer le pack de langue par défaut.<br />Si vous voulez supprimer ce pack, changez d’abord la langue par défaut du forum.',
 	'NO_UNINSTALLED_LANGUAGE_PACKS'	=> 'Aucun pack de langue installé',
 

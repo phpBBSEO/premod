@@ -387,10 +387,48 @@ class acp_phpbb_seo {
 	*  seo_htaccess The evil one ;-)
 	*/
 	function seo_htaccess($html = true) {
-		global $phpbb_seo, $user, $error, $phpEx;
+		global $phpbb_seo, $user, $error, $phpEx, $config, $phpbb_root_path;
 		static $htaccess_code = '';
 		$htaccess_tpl = '';
-		if ( empty($htaccess_code) ) { // Only generate one .htaccess per submit (saves 338 lines)
+		// GYM Sitemaps & RSS
+		$gym_installed = (boolean) (!empty($config['gym_installed']) && file_exists($phpbb_root_path . 'gym_sitemaps/includes/gym_sitemaps.' . $phpEx));
+		$rss_path = $google_path = '';
+		$google_comp_path = $rss_comp_path = false;
+		if ($gym_installed) {
+			require_once($phpbb_root_path . 'gym_sitemaps/includes/gym_common.' . $phpEx);
+			obtain_gym_config('main', $gym_config);
+			$google_url = trim($gym_config['google_url'], '/') . '/';
+			if (utf8_strlen($google_url) >= utf8_strlen($phpbb_seo->seo_path['phpbb_url'])) {
+				$google_path = trim(str_replace($phpbb_seo->seo_path['root_url'], '', $google_url), '/');
+				$google_comp_path = true;
+			}
+			$rss_url = trim($gym_config['rss_url'], '/') . '/';
+			if (utf8_strlen($rss_url) >= utf8_strlen($phpbb_seo->seo_path['phpbb_url'])) {
+				$rss_path = trim(str_replace($phpbb_seo->seo_path['root_url'], '', $rss_url), '/');
+				$rss_comp_path = true;
+			}
+		}	
+		if ( empty($htaccess_code) ) {
+			$default_slash = '/';
+			$wierd_slash = '';
+			$phpbb_path = trim($phpbb_seo->seo_path['phpbb_script'], '/');
+			$show_rewritebase_opt = false;
+			$rewritebase = '';
+			$wierd_slash = $this->new_config['wslash'] ? '<b style="color:red">/</b>' : '';
+			$default_slash = $this->new_config['slash'] ? '' : '/';
+			if (!empty($phpbb_path )) {
+				$phpbb_path = $phpbb_path . '/';
+				if ($this->new_config['rbase']) {
+					$rewritebase = $phpbb_path;
+					$default_slash = $this->new_config['slash'] ? '/' : '';
+				}
+				$rewritebase = $this->new_config['rbase'] ? $phpbb_path : '';
+				$show_rewritebase_opt = $phpbb_seo->seo_opt['virtual_root'] ? false : true;
+			}
+			if (!empty($rewritebase)) {
+				$rss_path = trim(str_replace(trim($phpbb_path, '/'), '', $rss_path), '/');
+				$google_path = trim(str_replace(trim($phpbb_path, '/'), '', $google_path), '/');
+			}
 			$colors = array( 'color' => '<b style="color:%1$s">%2$s</b>',
 				'static' => '#A020F0',
 				'ext' => '#6A5ACD',
@@ -431,7 +469,7 @@ class acp_phpbb_seo {
 				$htaccess_tpl .= '<b style="color:blue"># FORUM INDEX</b>' . "\n";
 				$htaccess_tpl .= '<b style="color:green">RewriteRule</b> ^{WIERD_SLASH}{PHPBB_LPATH}{STATIC_INDEX}{EXT_INDEX}$ {DEFAULT_SLASH}{PHPBB_RPATH}index.{PHP_EX} [QSA,L,NC]' . "\n";
 			} else {
-				$htaccess_tpl .= '<b style="color:blue"># FORUM INDEX REWRITERULE WOULD STAND HERE IF USED. \'forum\' REQUIRES TO BE SET AS FORUM INDEX' . "\n";
+				$htaccess_tpl .= '<b style="color:blue"># FORUM INDEX REWRITERULE WOULD STAND HERE IF USED. "forum" REQUIRES TO BE SET AS FORUM INDEX' . "\n";
 				$htaccess_tpl .= '# RewriteRule ^{WIERD_SLASH}{PHPBB_LPATH}<b style="color:#A020F0">forum</b>\.<b style="color:#6A5ACD">html</b>$ {DEFAULT_SLASH}{PHPBB_RPATH}index.{PHP_EX} [QSA,L,NC]</b>' . "\n";
 			}
 			$htaccess_common_tpl = '';
@@ -468,6 +506,27 @@ class acp_phpbb_seo {
 			$htaccess_common_tpl .= '<b style="color:green">RewriteRule</b> ^{WIERD_SLASH}{PHPBB_LPATH}{STATIC_NPOST}{NPOST_PAGINATION}$ {DEFAULT_SLASH}{PHPBB_RPATH}search.{PHP_EX}?search_id=newposts&start=$2&sr=topics [QSA,L,NC]' . "\n";
 			$htaccess_common_tpl .= '<b style="color:blue"># THE TEAM</b>' . "\n";
 			$htaccess_common_tpl .= '<b style="color:green">RewriteRule</b> ^{WIERD_SLASH}{PHPBB_LPATH}{STATIC_TEAM}{EXT_TEAM}$ {DEFAULT_SLASH}{PHPBB_RPATH}memberlist.{PHP_EX}?mode=leaders [QSA,L,NC]' . "\n";
+			$htaccess_common_tpl .= '<b style="color:blue"># HERE IS A GOOD PLACE TO ADD OTHER PHPBB RELATED REWRITERULES</b>' . "\n\n";
+			if ($gym_installed) {
+				if ($rss_comp_path) {
+					$htaccess_common_tpl .= '<b style="color:blue">#####################################################' . "\n";
+					$htaccess_common_tpl .= '# GYM Sitemaps & RSS' . "\n";
+					$htaccess_common_tpl .= '# Global channels</b>' . "\n";
+					$htaccess_common_tpl .= '<b style="color:green">RewriteRule</b> ^{WIERD_SLASH}{RSS_LPATH}rss(/(news)+)?(/(digest)+)?(/(short|long)+)?/?$ {DEFAULT_SLASH}{RSS_RPATH}gymrss.{PHP_EX}?channels&$2&$4&$6 [L,NC]' . "\n";
+					$htaccess_common_tpl .= '<b style="color:blue"># END GYM Sitemaps & RSS' . "\n";
+					$htaccess_common_tpl .= '#####################################################</b>' . "\n\n";
+				} else {
+					$htaccess_common_tpl .= '<b style="color:red">#####################################################' . "\n";
+					$htaccess_common_tpl .= '# NOTE : THIS REWRITERULE IS LEFT COMMENTED BECAUSE IT MUST' . "\n";
+					$htaccess_common_tpl .= '# BE IMPLEMENTED IN THE DOMAIN’S ROOT .HTACCESS' . "\n";
+					$htaccess_common_tpl .= '# WITH PROPER SLASHES AND PATHS</b>' . "\n";
+					$htaccess_common_tpl .= '<b style="color:blue"># GYM Sitemaps & RSS' . "\n";
+					$htaccess_common_tpl .= '# Global channels' . "\n";
+					$htaccess_common_tpl .= '# RewriteRule ^{WIERD_SLASH}rss(/(news)+)?(/(digest)+)?(/(short|long)+)?/?$ {DEFAULT_SLASH}gymrss.{PHP_EX}?channels&$2&$4&$6 [L,NC]' . "\n";
+					$htaccess_common_tpl .= '# END GYM Sitemaps & RSS' . "\n";
+					$htaccess_common_tpl .= '#####################################################</b>' . "\n\n";
+				}
+			}
 			if ($modrtype['type'] == 3) { // Advanced
 				$htaccess_tpl .= '<b style="color:blue"># FORUM</b>' . "\n";
 				$htaccess_tpl .= '<b style="color:green">RewriteRule</b> ^{WIERD_SLASH}{PHPBB_LPATH}[a-z0-9_-]*{DELIM_FORUM}([0-9]+){FORUM_PAGINATION}$ {DEFAULT_SLASH}{PHPBB_RPATH}viewforum.{PHP_EX}?f=$1&start=$3 [QSA,L,NC]' . "\n";
@@ -477,13 +536,21 @@ class acp_phpbb_seo {
 				$htaccess_tpl .= '<b style="color:green">RewriteRule</b> ^{WIERD_SLASH}{PHPBB_LPATH}{STATIC_ANNOUNCES}{EXT_ANNOUNCES}[a-z0-9_-]*{DELIM_TOPIC}([0-9]+){TOPIC_PAGINATION}$ {DEFAULT_SLASH}{PHPBB_RPATH}viewtopic.{PHP_EX}?t=$1&start=$3 [QSA,L,NC]' . "\n";
 				$htaccess_tpl .= '<b style="color:blue"># TOPIC WITHOUT FORUM ID & DELIM</b>' . "\n";
 				$htaccess_tpl .= '<b style="color:green">RewriteRule</b> ^{WIERD_SLASH}{PHPBB_LPATH}([a-z0-9_-]*)/?[a-z0-9_-]*{DELIM_TOPIC}([0-9]+){TOPIC_PAGINATION}$ {DEFAULT_SLASH}{PHPBB_RPATH}viewtopic.{PHP_EX}?forum_uri=$1&t=$2&start=$4 [QSA,L,NC]' . "\n";
-				$htaccess_tpl .= $htaccess_common_tpl . '<b style="color:blue"># HERE IS A GOOD PLACE TO ADD OTHER PHPBB RELATED REWRITERULES</b>' . "\n\n";
+				$htaccess_tpl .= $htaccess_common_tpl;
+
 				$htaccess_tpl .= '<b style="color:blue"># FORUM WITHOUT ID & DELIM</b>' . "\n";
-				$htaccess_tpl .= '<b style="color:blue"># THESE FOUR LINES MUST BE LOCATED AT THE END OF YOUR HTACCESS TO WORK PROPERLY</b>' . "\n";
-				$htaccess_tpl .= '<b style="color:green">RewriteCond</b> %{REQUEST_FILENAME} !-f' . "\n";
-				$htaccess_tpl .= '<b style="color:green">RewriteCond</b> %{REQUEST_FILENAME} !-d' . "\n";
-				$htaccess_tpl .= '<b style="color:green">RewriteCond</b> %{REQUEST_FILENAME} !-l' . "\n";
-				$htaccess_tpl .= '<b style="color:green">RewriteRule</b> ^{WIERD_SLASH}{PHPBB_LPATH}([a-z0-9_-]+){FORUM_PAGINATION}$ {DEFAULT_SLASH}{PHPBB_RPATH}viewforum.{PHP_EX}?forum_uri=$1&start=$3 [QSA,L,NC]' . "\n";
+				if ($phpbb_seo->seo_ext['forum'] != '/') {
+					$htaccess_tpl .= '<b style="color:blue"># THESE FOUR LINES MUST BE LOCATED AT THE END OF YOUR HTACCESS TO WORK PROPERLY</b>' . "\n";
+					$htaccess_tpl .= '<b style="color:green">RewriteCond</b> %{REQUEST_FILENAME} !-f' . "\n";
+					$htaccess_tpl .= '<b style="color:green">RewriteRule</b> ^{WIERD_SLASH}{PHPBB_LPATH}([a-z0-9_-]+)(-([0-9]+)){EXT_FORUM}$ {DEFAULT_SLASH}{PHPBB_RPATH}viewforum.{PHP_EX}?forum_uri=$1&start=$3 [QSA,L,NC]' . "\n";
+					$htaccess_tpl .= '<b style="color:green">RewriteCond</b> %{REQUEST_FILENAME} !-f' . "\n";
+					$htaccess_tpl .= '<b style="color:green">RewriteRule</b> ^{WIERD_SLASH}{PHPBB_LPATH}([a-z0-9_-]+){EXT_FORUM}$ {DEFAULT_SLASH}{PHPBB_RPATH}viewforum.{PHP_EX}?forum_uri=$1 [QSA,L,NC]' . "\n";
+				} else {
+					$htaccess_tpl .= '<b style="color:blue"># THESE THREE LINES MUST BE LOCATED AT THE END OF YOUR HTACCESS TO WORK PROPERLY</b>' . "\n";
+					$htaccess_tpl .= '<b style="color:green">RewriteCond</b> %{REQUEST_FILENAME} !-f' . "\n";
+					$htaccess_tpl .= '<b style="color:green">RewriteCond</b> %{REQUEST_FILENAME} !-d' . "\n";
+					$htaccess_tpl .= '<b style="color:green">RewriteRule</b> ^{WIERD_SLASH}{PHPBB_LPATH}([a-z0-9_-]+){FORUM_PAGINATION}$ {DEFAULT_SLASH}{PHPBB_RPATH}viewforum.{PHP_EX}?forum_uri=$1&start=$3 [QSA,L,NC]' . "\n";
+				}
 			} elseif ($modrtype['type'] == 2) { // Mixed
 				$htaccess_tpl .= '<b style="color:blue"># FORUM</b>' . "\n";
 				$htaccess_tpl .= '<b style="color:green">RewriteRule</b> ^{WIERD_SLASH}{PHPBB_LPATH}[a-z0-9_-]*{DELIM_FORUM}([0-9]+){FORUM_PAGINATION}$ {DEFAULT_SLASH}{PHPBB_RPATH}viewforum.{PHP_EX}?f=$1&start=$3 [QSA,L,NC]' . "\n";
@@ -493,13 +560,20 @@ class acp_phpbb_seo {
 				$htaccess_tpl .= '<b style="color:green">RewriteRule</b> ^{WIERD_SLASH}{PHPBB_LPATH}{STATIC_ANNOUNCES}{EXT_ANNOUNCES}{STATIC_TOPIC}([0-9]+){TOPIC_PAGINATION}$ {DEFAULT_SLASH}{PHPBB_RPATH}viewtopic.{PHP_EX}?t=$1&start=$3 [QSA,L,NC]' . "\n";
 				$htaccess_tpl .= '<b style="color:blue"># TOPIC WITHOUT FORUM ID & DELIM</b>' . "\n";
 				$htaccess_tpl .= '<b style="color:green">RewriteRule</b> ^{WIERD_SLASH}{PHPBB_LPATH}([a-z0-9_-]*)/?{STATIC_TOPIC}([0-9]+){TOPIC_PAGINATION}$ {DEFAULT_SLASH}{PHPBB_RPATH}viewtopic.{PHP_EX}?forum_uri=$1&t=$2&start=$4 [QSA,L,NC]' . "\n";
-				$htaccess_tpl .= $htaccess_common_tpl . '<b style="color:blue"># HERE IS A GOOD PLACE TO ADD OTHER PHPBB RELATED REWRITERULES</b>' . "\n\n";
+				$htaccess_tpl .= $htaccess_common_tpl;
 				$htaccess_tpl .= '<b style="color:blue"># FORUM WITHOUT ID & DELIM</b>' . "\n";
-				$htaccess_tpl .= '<b style="color:blue"># THESE FOUR LINES MUST BE LOCATED AT THE END OF YOUR HTACCESS TO WORK PROPERLY</b>' . "\n";
-				$htaccess_tpl .= '<b style="color:green">RewriteCond</b> %{REQUEST_FILENAME} !-f' . "\n";
-				$htaccess_tpl .= '<b style="color:green">RewriteCond</b> %{REQUEST_FILENAME} !-d' . "\n";
-				$htaccess_tpl .= '<b style="color:green">RewriteCond</b> %{REQUEST_FILENAME} !-l' . "\n";
-				$htaccess_tpl .= '<b style="color:green">RewriteRule</b> ^{WIERD_SLASH}{PHPBB_LPATH}([a-z0-9_-]+){FORUM_PAGINATION}$ {DEFAULT_SLASH}{PHPBB_RPATH}viewforum.{PHP_EX}?forum_uri=$1&start=$3 [QSA,L,NC]' . "\n";
+				if ($phpbb_seo->seo_ext['forum'] != '/') {
+					$htaccess_tpl .= '<b style="color:blue"># THESE FOUR LINES MUST BE LOCATED AT THE END OF YOUR HTACCESS TO WORK PROPERLY</b>' . "\n";
+					$htaccess_tpl .= '<b style="color:green">RewriteCond</b> %{REQUEST_FILENAME} !-f' . "\n";
+					$htaccess_tpl .= '<b style="color:green">RewriteRule</b> ^{WIERD_SLASH}{PHPBB_LPATH}([a-z0-9_-]+)(-([0-9]+)){EXT_FORUM}$ {DEFAULT_SLASH}{PHPBB_RPATH}viewforum.{PHP_EX}?forum_uri=$1&start=$3 [QSA,L,NC]' . "\n";
+					$htaccess_tpl .= '<b style="color:green">RewriteCond</b> %{REQUEST_FILENAME} !-f' . "\n";
+					$htaccess_tpl .= '<b style="color:green">RewriteRule</b> ^{WIERD_SLASH}{PHPBB_LPATH}([a-z0-9_-]+){EXT_FORUM}$ {DEFAULT_SLASH}{PHPBB_RPATH}viewforum.{PHP_EX}?forum_uri=$1 [QSA,L,NC]' . "\n";
+				} else {
+					$htaccess_tpl .= '<b style="color:blue"># THESE THREE LINES MUST BE LOCATED AT THE END OF YOUR HTACCESS TO WORK PROPERLY</b>' . "\n";
+					$htaccess_tpl .= '<b style="color:green">RewriteCond</b> %{REQUEST_FILENAME} !-f' . "\n";
+					$htaccess_tpl .= '<b style="color:green">RewriteCond</b> %{REQUEST_FILENAME} !-d' . "\n";
+					$htaccess_tpl .= '<b style="color:green">RewriteRule</b> ^{WIERD_SLASH}{PHPBB_LPATH}([a-z0-9_-]+){FORUM_PAGINATION}$ {DEFAULT_SLASH}{PHPBB_RPATH}viewforum.{PHP_EX}?forum_uri=$1&start=$3 [QSA,L,NC]' . "\n";
+				}
 			} elseif ($modrtype['type'] == 1) { // Simple
 				$htaccess_tpl .= '<b style="color:blue"># FORUM</b>' . "\n";
 				$htaccess_tpl .= '<b style="color:green">RewriteRule</b> ^{WIERD_SLASH}{PHPBB_LPATH}{STATIC_FORUM}([0-9]+){FORUM_PAGINATION}$ {DEFAULT_SLASH}{PHPBB_RPATH}viewforum.{PHP_EX}?f=$1&start=$3 [QSA,L,NC]' . "\n";
@@ -509,29 +583,59 @@ class acp_phpbb_seo {
 				$htaccess_tpl .= '<b style="color:green">RewriteRule</b> ^{WIERD_SLASH}{PHPBB_LPATH}{STATIC_ANNOUNCES}{EXT_ANNOUNCES}{STATIC_TOPIC}([0-9]+){TOPIC_PAGINATION}$ {DEFAULT_SLASH}{PHPBB_RPATH}viewtopic.{PHP_EX}?t=$1&start=$3 [QSA,L,NC]' . "\n";
 				$htaccess_tpl .= '<b style="color:blue"># TOPIC WITHOUT FORUM ID & DELIM</b>' . "\n";
 				$htaccess_tpl .= '<b style="color:green">RewriteRule</b> ^{WIERD_SLASH}{PHPBB_LPATH}[a-z0-9_-]*/?{STATIC_TOPIC}([0-9]+){TOPIC_PAGINATION}$ {DEFAULT_SLASH}{PHPBB_RPATH}viewtopic.{PHP_EX}?t=$1&start=$3 [QSA,L,NC]' . "\n";
-				$htaccess_tpl .= $htaccess_common_tpl . '<b style="color:blue"># HERE IS A GOOD PLACE TO ADD OTHER PHPBB RELATED REWRITERULES</b>' . "\n\n";
+				$htaccess_tpl .= $htaccess_common_tpl;
 			} else { // error
 				$error[] = $user->lang['SEO_MOD_TYPE_ER'];
 				return;
 			}
 			$htaccess_tpl .= '<b style="color:blue"># END PHPBB PAGES' . "\n";
-			$htaccess_tpl .= '#####################################################</b>' . "\n";
-			$default_slash = '/';
-			$wierd_slash = '';
-			$phpbb_path = trim($phpbb_seo->seo_path['phpbb_script'], '/');
-			$show_rewritebase_opt = false;
-			$rewritebase = '';
-			$wierd_slash = $this->new_config['wslash'] ? '<b style="color:red">/</b>' : '';
-			$default_slash = $this->new_config['slash'] ? '' : '/';
-			if (!empty($phpbb_path )) {
-				$phpbb_path = $phpbb_path . '/';
-				if ($this->new_config['rbase']) {
-					$rewritebase = $phpbb_path;
-					$default_slash = $this->new_config['slash'] ? '/' : '';
+			$htaccess_tpl .= '#####################################################</b>' . "\n\n";
+			if ($gym_installed) {
+				if ($rss_comp_path) {
+					$htaccess_tpl .= '<b style="color:blue">#####################################################' . "\n";
+					$htaccess_tpl .= '# GYM Sitemaps & RSS' . "\n";
+					$htaccess_tpl .= '# Main feeds & channels</b>' . "\n";
+					$htaccess_tpl .= '<b style="color:green">RewriteRule</b> ^{WIERD_SLASH}{RSS_LPATH}rss(/(news)+)?(/(digest)+)?(/(short|long)+)?(/([a-z0-9_-]+))?/([a-z0-9_]+)\.xml(\.gz)?$ {DEFAULT_SLASH}{RSS_RPATH}gymrss.{PHP_EX}?$9=$8&$2&$4&$6&gzip=$10 [L,NC]' . "\n";
+					$htaccess_tpl .= '<b style="color:blue"># Forum feeds</b>' . "\n";
+					$htaccess_tpl .= '<b style="color:green">RewriteRule</b> ^{WIERD_SLASH}{RSS_LPATH}[a-z0-9_-]*{DELIM_FORUM}([0-9]+)(/(news)+)?(/(digest)+)?(/(short|long)+)?/([a-z0-9_]+)\.xml(\.gz)?$ {DEFAULT_SLASH}{RSS_RPATH}gymrss.{PHP_EX}?$8=$1&$3&$5&$7&gzip=$9 [L,NC]' . "\n";
+					$htaccess_tpl .= '<b style="color:blue"># Module feeds without ids</b>' . "\n";
+					$htaccess_tpl .= '<b style="color:green">RewriteRule</b> ^{WIERD_SLASH}{RSS_LPATH}([a-z0-9_-]+)(/(news)+)?(/(digest)+)?(/(short|long)+)?/([a-z0-9_]+)\.xml(\.gz)?$ {DEFAULT_SLASH}{RSS_RPATH}gymrss.{PHP_EX}?nametoid=$1&$3&$5&$7&modulename=$8&gzip=$9 [L,NC]' . "\n";
+				} else {
+					$htaccess_tpl .= '<b style="color:red">#####################################################' . "\n";
+					$htaccess_tpl .= '# NOTE : THESE THREE REWRITERULE ARE LEFT COMMENTED BECAUSE THEY MUST' . "\n";
+					$htaccess_tpl .= '# BE IMPLEMENTED IN THE DOMAIN’S ROOT .HTACCESS' . "\n";
+					$htaccess_tpl .= '# WITH PROPER SLASHES AND PATHS</b>' . "\n";
+					$htaccess_tpl .= '<b style="color:blue"># GYM Sitemaps & RSS' . "\n";
+					$htaccess_tpl .= '# Main feeds & channels' . "\n";
+					$htaccess_tpl .= '# RewriteRule ^{WIERD_SLASH}rss(/(news)+)?(/(digest)+)?(/(short|long)+)?(/([a-z0-9_-]+))?/([a-z0-9_]+)\.xml(\.gz)?$ {DEFAULT_SLASH}gymrss.{PHP_EX}?$9=$8&$2&$4&$6&gzip=$10 [L,NC]' . "\n";
+					$htaccess_tpl .= '# Forum feeds' . "\n";
+					$htaccess_tpl .= '# RewriteRule ^{WIERD_SLASH}[a-z0-9_-]*{DELIM_FORUM}([0-9]+)(/(news)+)?(/(digest)+)?(/(short|long)+)?/([a-z0-9_]+)\.xml(\.gz)?$ {DEFAULT_SLASH}gymrss.{PHP_EX}?$8=$1&$3&$5&$7&gzip=$9 [L,NC]' . "\n";
+					$htaccess_tpl .= '# Module feeds without ids' . "\n";
+					$htaccess_tpl .= '# RewriteRule ^{WIERD_SLASH}([a-z0-9_-]+)(/(news)+)?(/(digest)+)?(/(short|long)+)?/([a-z0-9_]+)\.xml(\.gz)?$ {DEFAULT_SLASH}gymrss.{PHP_EX}?nametoid=$1&$3&$5&$7&modulename=$8&gzip=$9 [L,NC]</b>' . "\n";
 				}
-				$rewritebase = $this->new_config['rbase'] ? $phpbb_path : '';
-				$show_rewritebase_opt = $phpbb_seo->seo_opt['virtual_root'] ? false : true;
+				if ($google_comp_path) {
+					$htaccess_tpl .= '<b style="color:blue"># Google SitemapIndex</b>' . "\n";
+					$htaccess_tpl .= '<b style="color:green">RewriteRule</b> ^{WIERD_SLASH}{GOOGLE_LPATH}sitemapindex\.xml(\.gz)?$ {DEFAULT_SLASH}{GOOGLE_RPATH}sitemap.{PHP_EX}?gzip=$1 [L,NC]' . "\n";
+					$htaccess_tpl .= '<b style="color:blue"># Forum sitemaps</b>' . "\n";
+					$htaccess_tpl .= '<b style="color:green">RewriteRule</b> ^{WIERD_SLASH}{GOOGLE_LPATH}[a-z0-9_-]+{DELIM_FORUM}([0-9]+)\.xml(\.gz)?$ {DEFAULT_SLASH}{GOOGLE_RPATH}sitemap.{PHP_EX}?forum=$1&gzip=$2 [L,NC]' . "\n";
+					$htaccess_tpl .= '<b style="color:blue"># Module sitemaps</b>' . "\n";
+					$htaccess_tpl .= '<b style="color:green">RewriteRule</b> ^{WIERD_SLASH}{GOOGLE_LPATH}([a-z0-9_]+)-([a-z0-9_-]+)\.xml(\.gz)?$ {DEFAULT_SLASH}{GOOGLE_RPATH}sitemap.{PHP_EX}?$1=$2&gzip=$3 [L,NC]' . "\n";
+				} else {
+					$htaccess_tpl .= '<b style="color:red">#####################################################' . "\n";
+					$htaccess_tpl .= '# NOTE : THESE THREE REWRITERULE ARE LEFT COMMENTED BECAUSE THEY MUST' . "\n";
+					$htaccess_tpl .= '# BE IMPLEMENTED IN THE DOMAIN’S ROOT .HTACCESS' . "\n";
+					$htaccess_tpl .= '# WITH PROPER SLASHES AND PATHS</b>' . "\n";
+					$htaccess_tpl .= '<b style="color:blue"># Google SitemapIndex' . "\n";
+					$htaccess_tpl .= '# RewriteRule ^{WIERD_SLASH}sitemapindex\.xml(\.gz)?$ {DEFAULT_SLASH}sitemap.{PHP_EX}?gzip=$1 [L,NC]' . "\n";
+					$htaccess_tpl .= '# Forum sitemaps' . "\n";
+					$htaccess_tpl .= '# RewriteRule ^{WIERD_SLASH}[a-z0-9_-]+{DELIM_FORUM}([0-9]+)\.xml(\.gz)?$ {DEFAULT_SLASH}sitemap.{PHP_EX}?forum=$1&gzip=$2 [L,NC]' . "\n";
+					$htaccess_tpl .= '# Module sitemaps' . "\n";
+					$htaccess_tpl .= '# RewriteRule ^{WIERD_SLASH}([a-z0-9_]+)-([a-z0-9_-]+)\.xml(\.gz)?$ {DEFAULT_SLASH}sitemap.{PHP_EX}?$1=$2&gzip=$3 [L,NC]</b>' . "\n";
+				}
+				$htaccess_tpl .= '<b style="color:blue"># END GYM Sitemaps & RSS' . "\n";
+				$htaccess_tpl .= '#####################################################</b>' . "\n";
 			}
+
 			if (!empty($default_slash) && $this->new_config['more_options']) {
 				$default_slash = '<b style="color:red">' . $default_slash . '</b>';
 			}
@@ -582,6 +686,10 @@ class acp_phpbb_seo {
 				'{PHP_EX}' => $phpEx,
 				'{PHPBB_LPATH}' => ($this->new_config['rbase'] || $phpbb_seo->seo_opt['virtual_root']) ? '' : $phpbb_path, 
 				'{PHPBB_RPATH}' => $this->new_config['rbase'] ? '' : $phpbb_path, 
+				'{RSS_LPATH}' => $rss_path ? $rss_path . '/' : '',
+				'{RSS_RPATH}' => $rss_path ? $rss_path . '/' : '',
+				'{GOOGLE_LPATH}' => $google_path ? $google_path . '/' : '',
+				'{GOOGLE_RPATH}' => $google_path ? $google_path . '/' : '',
 				'{STATIC_INDEX}' => sprintf($tpl['static'] , $phpbb_seo->seo_static['index']),
 				'{STATIC_FORUM}' => sprintf($tpl['static'] , $phpbb_seo->seo_static['forum']),
 				'{STATIC_TOPIC}' => sprintf($tpl['static'] , $phpbb_seo->seo_static['topic']),

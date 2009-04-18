@@ -5,7 +5,7 @@
 * translated originally by PhpBB-fr.com <http://www.phpbb-fr.com/> and phpBB.biz <http://www.phpBB.biz>
 *
 * @package language
-* @version $Id: groups.php,v 1.21 2008/04/10 13:13:26 elglobo Exp $
+* @version $Id: groups.php,v 1.22 2008/07/03 12:58:20 elglobo Exp $
 * @copyright (c) 2005 phpBB Group 
 * @license http://opensource.org/licenses/gpl-license.php GNU Public License 
 *
@@ -73,7 +73,7 @@ $lang = array_merge($lang, array(
    'GROUP_RESIGN_PENDING_CONFIRM' => 'Etes-vous sûr de vouloir annuler votre demande d’adhésion au groupe sélectionné?',
    'GROUP_RESIGNED_MEMBERSHIP' => 'Vous avez été désinscrit du groupe sélectionné.',
    'GROUP_RESIGNED_PENDING' => 'Votre demande d’adhésion pour le groupe sélectionné a été annulée.',
-   'GROUP_TYPE' => 'Statut du groupe',
+   'GROUP_TYPE' => 'Type du groupe',
    'GROUP_UNDISCLOSED' => 'Groupe invisible',
    'FORUM_UNDISCLOSED'   => 'Modérateur des forums cachés',
 

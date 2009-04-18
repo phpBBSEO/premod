@@ -5,7 +5,7 @@
 * translated originally by PhpBB-fr.com <http://www.phpbb-fr.com/> and phpBB.biz <http://www.phpBB.biz>
 *
 * @package language
-* @version $Id: ucp.php,v 1.21 2008/04/10 13:30:53 elglobo Exp $
+* @version $Id: ucp.php,v 1.22 2008/07/04 09:48:25 elglobo Exp $
 * @copyright (c) 2005 phpBB Group 
 * @license http://opensource.org/licenses/gpl-license.php GNU Public License 
 *
@@ -97,7 +97,7 @@ $lang = array_merge($lang, array(
 	'BACK_TO_DRAFTS'   			=> 'Retour aux brouillons',
 	'BACK_TO_LOGIN'   			=> 'Retour à l’écran de connexion',
 	'BIRTHDAY'   				=> 'Anniversaire',
-	'BIRTHDAY_EXPLAIN'   		=> 'Spécifier une année permettra d’afficher votre âge lors de votre anniversaire.',
+	'BIRTHDAY_EXPLAIN'   		=> 'Indiquer une année permettra d’afficher votre âge lors de votre anniversaire.',
 	'BOARD_DATE_FORMAT'   		=> 'Format de la date',
 	'BOARD_DATE_FORMAT_EXPLAIN' => 'La syntaxe utilisée est identique à la fonction PHP <a href="http://www.php.net/date">date()</a>.',
 	'BOARD_DST'   				=> 'Heure d’été en vigueur',
@@ -120,7 +120,7 @@ $lang = array_merge($lang, array(
 	'CONFIRMATION'   			=> 'Confirmation d’inscription',
 	'CONFIRM_CHANGES'   		=> 'Confirmation des modifications',
 	'CONFIRM_EMAIL'   			=> 'Confirmation de l’adresse e-mail',
-	'CONFIRM_EMAIL_EXPLAIN'   	=> 'Vous devez la spécifier uniquement en cas de modification de votre adresse e-mail.',
+	'CONFIRM_EMAIL_EXPLAIN'   	=> 'Vous devez l’indiquer uniquement en cas de modification de votre adresse e-mail.',
 	'CONFIRM_EXPLAIN'   		=> 'Pour éviter les inscriptions automatisées, l’administrateur exige la saisie d’un code de confirmation. Ce code est inscrit dans l’image affichée ci-dessous. Si vous êtes déficient visuel ou si vous ne pouvez pas lire ce code, contactez %sl’administrateur de ce forum%s.',
 	'CONFIRM_PASSWORD'   		=> 'Confirmation du mot de passe',
 	'CONFIRM_PASSWORD_EXPLAIN'  => 'Vous devez confirmer le mot de passe uniquement si vous l’avez modifié ci-dessus.',
@@ -214,10 +214,10 @@ $lang = array_merge($lang, array(
 	'FWD_FROM'   				=> 'De: %s',
 	'FWD_TO'   					=> 'A: %s',
 
-	'GLOBAL_ANNOUNCEMENT'   => 'Annonce générale',
+	'GLOBAL_ANNOUNCEMENT'   => 'Annonce globale',
 
 	'HIDE_ONLINE'   			=> 'Cacher mon statut en ligne',
-	'HIDE_ONLINE_EXPLAIN'		=> 'Le changement de ce réglage ne sera effectif que lors de votre prochaine connexion au forum.',
+	'HIDE_ONLINE_EXPLAIN'		=> 'Le changement de ce paramètre ne sera effectif que lors de votre prochaine connexion au forum.',
 	'HOLD_NEW_MESSAGES'   		=> 'Refuser les nouveaux messages (dans l’attente d’espace disponible)',
 	'HOLD_NEW_MESSAGES_SHORT'   => 'Les nouveaux messages seront renvoyés plus tard',
 
@@ -234,7 +234,7 @@ $lang = array_merge($lang, array(
 	'LINK_REMOTE_AVATAR'   			=> 'Lien distant',
 	'LINK_REMOTE_AVATAR_EXPLAIN'  	=> 'Saisissez l’URL de l’image à utiliser pour votre avatar.',
 	'LINK_REMOTE_SIZE'   			=> 'Dimensions de l’avatar',
-	'LINK_REMOTE_SIZE_EXPLAIN'   	=> 'Précisez la hauteur et la largeur de l’avatar, laissez blanc pour une vérification automatique.',
+	'LINK_REMOTE_SIZE_EXPLAIN'   	=> 'Précisez la largeur et la hauteur de l’avatar, laissez blanc pour tenter une vérification automatique.',
 	'LOGIN_EXPLAIN_UCP'   			=> 'Connectez-vous pour accéder à votre panneau d’utilisateur.',
 	'LOGIN_REDIRECT'   				=> 'Vous êtes maintenant connecté au forum.',
 	'LOGOUT_FAILED'   				=> 'Vous n’avez pas été déconnecté car la requête ne correspondait pas à votre session. Si le problème persiste, contactez l’administrateur.',
@@ -302,10 +302,10 @@ $lang = array_merge($lang, array(
 	'NO_FRIENDS'   				=> 'Aucun ami actuellement',
 	'NO_FRIENDS_OFFLINE'   		=> 'Aucun ami hors ligne',
 	'NO_FRIENDS_ONLINE'   		=> 'Aucun ami en ligne',
-	'NO_GROUP_SELECTED'   		=> 'Aucun groupe spécifié.',
+	'NO_GROUP_SELECTED'   		=> 'Aucun groupe indiqué.',
 	'NO_IMPORTANT_NEWS'   		=> 'Aucune annonce importante.',
 	'NO_MESSAGE'   				=> 'Le message privé est introuvable.',
-	'NO_NEW_FOLDER_NAME'  		=> 'Vous devez spécifier un nouveau nom de dossier.',
+	'NO_NEW_FOLDER_NAME'  		=> 'Vous devez indiquer un nouveau nom de dossier.',
 	'NO_NEWER_PM'   			=> 'Aucun nouveau message.',
 	'NO_OLDER_PM'   			=> 'Aucun ancien message.',
 	'NO_PASSWORD_SUPPLIED'   	=> 'Vous ne pouvez pas vous connecter sans mot de passe.',
@@ -422,7 +422,7 @@ $lang = array_merge($lang, array(
 	'UCP_PM'   				=> 'Messages privés',
 	'UCP_PM_COMPOSE'   		=> 'Rédiger un message',
 	'UCP_PM_DRAFTS'   		=> 'Gestion des brouillons de MP',
-	'UCP_PM_OPTIONS'   		=> 'Réglage des options',
+	'UCP_PM_OPTIONS'   		=> 'Paramètre des options',
 	'UCP_PM_POPUP'   		=> 'Messages privés',
 	'UCP_PM_POPUP_TITLE'   	=> 'Messages privés pop-up',
 	'UCP_PM_UNREAD'   		=> 'Messages non lus',
@@ -440,7 +440,7 @@ $lang = array_merge($lang, array(
 
 	'UCP_REGISTER_DISABLE'   				=> 'L’enregistrement est temporairement désactivé.',
 	'UCP_REMIND'   							=> 'Envoyer le mot de passe',
-	'UCP_RESEND'   							=> 'Envoyer l’email d’activation',
+	'UCP_RESEND'   							=> 'Envoyer l’e-mail d’activation',
 	'UCP_WELCOME'   						=> 'Bienvenue dans le panneau de l’utilisateur. D’ici vous pouvez surveiller, voir et modifier votre profil, vos préférences, les surveillances de forums et de sujets. Vous pouvez également (si vous y êtes autorisé) envoyer des messages à d’autres membres. Assurez-vous d’avoir lu toutes les annonces avant de continuer.',
 	'UCP_YIM'   							=> 'Yahoo Messenger',
 	'UCP_ZEBRA'   							=> 'Amis &amp; Ignorés',
@@ -458,8 +458,8 @@ $lang = array_merge($lang, array(
 	'USERNAME_LETTER_NUM_SPACERS_EXPLAIN'	=> 'Le nom d’utilisateur doit contenir de %1$d à %2$d caractères et peut être composé de lettres, de chiffres, d’espaces ou des caractères -+_[].',
 	'USERNAME_CHARS_ANY_EXPLAIN'   			=> 'La longueur doit être comprise entre %1$d et %2$d caractères.',
 	'USERNAME_TAKEN_USERNAME'   			=> 'Le nom d’utilisateur choisi est déjà utilisé, choisissez-en un autre.',
-	'USERNAME_DISALLOWED_USERNAME'   		=> 'Le nom d’utilisateur spécifié à été banni ou bien contient un mot interdit. Choisissez-en un autre.',
-	'USER_NOT_FOUND_OR_INACTIVE'   			=> 'Les noms d’utilisateurs spécifiés sont introuvables ou sont des utilisateurs non activés.',
+	'USERNAME_DISALLOWED_USERNAME'   		=> 'Le nom d’utilisateur indiqué à été banni ou bien contient un mot interdit. Choisissez-en un autre.',
+	'USER_NOT_FOUND_OR_INACTIVE'   			=> 'Les noms d’utilisateurs indiqués sont introuvables ou sont des utilisateurs non activés.',
 
 	'VIEW_AVATARS'   		=> 'Afficher les avatars',
 	'VIEW_EDIT'   			=> 'Voir/modifier',
@@ -525,7 +525,7 @@ $lang = array_merge($lang, array(
    ),
 
 
-	'GROUPS_EXPLAIN'   	=> 'Les groupes d’utilisateurs permettent aux administrateurs de mieux gérer leurs utilisateurs. Par défaut vous serez placé dans un groupe spécifique, il s’agit de votre groupe par défaut. Ce groupe définit comment vous apparaissez sur le forum, par exemple la couleur de votre nom d’utilisateur, votre avatar, votre rang, etc. Si l’administrateur le permet, vous serez autorisé à changer votre groupe par défaut. Vous pouvez être placé ou rejoindre d’autres groupes. Certains groupes peuvent vous donner des permissions supplémentaires de lecture ou vous donner accès à d’autres fonctionnalités du forum.',
+	'GROUPS_EXPLAIN'   	=> 'Les groupes d’utilisateurs permettent aux administrateurs de mieux gérer leurs utilisateurs. Par défaut vous serez placé dans un groupe particulier, il s’agit de votre groupe par défaut. Ce groupe définit comment vous apparaissez sur le forum, par exemple la couleur de votre nom d’utilisateur, votre avatar, votre rang, etc. Si l’administrateur le permet, vous serez autorisé à changer votre groupe par défaut. Vous pouvez être placé ou rejoindre d’autres groupes. Certains groupes peuvent vous donner des permissions supplémentaires de lecture ou vous donner accès à d’autres fonctionnalités du forum.',
 	'GROUP_LEADER'   	=> 'Modérateurs',
 	'GROUP_MEMBER'   	=> 'Membres',
 	'GROUP_PENDING'  	=> 'Membres en attente',

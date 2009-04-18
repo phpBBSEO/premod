@@ -2,7 +2,7 @@
 /**
 *
 * @package mcp
-* @version $Id: mcp.php 8479 2008-03-29 00:22:48Z naderman $
+* @version $Id: mcp.php 8655 2008-06-13 19:39:01Z acydburn $
 * @copyright (c) 2005 phpBB Group
 * @license http://opensource.org/licenses/gpl-license.php GNU Public License
 *
@@ -166,7 +166,7 @@ if ($quickmod)
 		case 'delete_post':
 		case 'delete_topic':
 			$module->load('mcp', 'main', 'quickmod');
-			exit_handler();
+			exit;
 		break;
 
 		case 'topic_logs':
@@ -390,7 +390,7 @@ function get_topic_data($topic_ids, $acl_list = false, $read_tracking = false)
 
 		$sql = $db->sql_build_query('SELECT', $sql_array);
 		$result = $db->sql_query($sql);
-	
+
 		while ($row = $db->sql_fetchrow($result))
 		{
 			if (!$row['forum_id'])

@@ -16,7 +16,7 @@ class acp_phpbb_seo_info {
 		return array(
 			'filename'	=> 'phpbb_seo',
 			'title'		=> 'ACP_CAT_PHPBB_SEO',
-			'version'	=> '0.4.0RC2',
+			'version'	=> '0.4.4',
 			'modes'		=> array(
 				'settings'		=> array('title' => 'ACP_PHPBB_SEO_CLASS', 'auth' => 'acl_a_board', 'cat' => array('ACP_MOD_REWRITE')),
 				'forum_url'		=> array('title' => 'ACP_FORUM_URL', 'auth' => 'acl_a_board', 'cat' => array('ACP_MOD_REWRITE')),
