@@ -89,6 +89,11 @@ while ($row = $db->sql_fetchrow($result))
 	}
 	else
 	{
+		// www.phpBB-SEO.com SEO TOOLKIT BEGIN
+		if ( $phpbb_seo->seo_opt['profile_inj'] && empty($phpbb_seo->seo_url['group'][$row['group_id']]) ) {
+			$phpbb_seo->seo_url['group'][$row['group_id']] = $phpbb_seo->format_url($row['group_name'], $phpbb_seo->seo_static['group']);
+		}
+		// www.phpBB-SEO.com SEO TOOLKIT END
 		$legend .= (($legend != '') ? ', ' : '') . '<a' . $colour_text . ' href="' . append_sid("{$phpbb_root_path}memberlist.$phpEx", 'mode=group&amp;g=' . $row['group_id']) . '">' . (($row['group_type'] == GROUP_SPECIAL) ? $user->lang['G_' . $row['group_name']] : $row['group_name']) . '</a>';
 	}
 }

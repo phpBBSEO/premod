@@ -4,7 +4,7 @@
 * common [English]
 *
 * @package language
-* @version $Id: common.php,v 1.194 2007/10/04 15:07:24 acydburn Exp $
+* @version $Id: common.php,v 1.195 2007/11/06 14:55:07 acydburn Exp $
 * @copyright (c) 2005 phpBB Group
 * @license http://opensource.org/licenses/gpl-license.php GNU Public License
 *
@@ -575,6 +575,7 @@ $lang = array_merge($lang, array(
 	'TOPICS'			=> 'Topics',
 	'TOPIC_ICON'		=> 'Topic icon',
 	'TOPIC_LOCKED'		=> 'This topic is locked, you cannot edit posts or make further replies.',
+	'TOPIC_LOCKED_SHORT'=> 'Topic locked',
 	'TOPIC_MOVED'		=> 'Moved topic',
 	'TOPIC_REVIEW'		=> 'Topic review',
 	'TOPIC_TITLE'		=> 'Topic title',
@@ -819,6 +820,6 @@ $lang = array_merge($lang, array(
 
 ));
 // www.phpBB-SEO.com SEO TOOLKIT BEGIN - TITLE
- $lang['Page'] = 'Page ';
+$lang['Page'] = 'Page ';
 // www.phpBB-SEO.com SEO TOOLKIT END - TITLE
 ?>

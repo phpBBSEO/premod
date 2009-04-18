@@ -2,7 +2,7 @@
 /**
 *
 * @package phpBB3
-* @version $Id: functions.php,v 1.640 2007/10/09 21:04:21 kellanved Exp $
+* @version $Id: functions.php,v 1.647 2007/12/10 18:35:28 kellanved Exp $
 * @copyright (c) 2005 phpBB Group
 * @license http://opensource.org/licenses/gpl-license.php GNU Public License
 *
@@ -89,7 +89,8 @@ function request_var($var_name, $default, $multibyte = false, $cookie = false)
 		if ($type == 'array')
 		{
 			reset($default);
-			list($sub_key_type, $sub_type) = each(current($default));
+			$default = current($default);
+			list($sub_key_type, $sub_type) = each($default);
 			$sub_type = gettype($sub_type);
 			$sub_type = ($sub_type == 'array') ? 'NULL' : $sub_type;
 			$sub_key_type = gettype($sub_key_type);
@@ -234,7 +235,7 @@ function still_on_time($extra_time = 15)
 
 /**
 *
-* @version Version 0.1 / $Id: functions.php,v 1.640 2007/10/09 21:04:21 kellanved Exp $
+* @version Version 0.1 / $Id: functions.php,v 1.647 2007/12/10 18:35:28 kellanved Exp $
 *
 * Portable PHP password hashing framework.
 *
@@ -286,7 +287,7 @@ function phpbb_hash($password)
 		}
 		$random = substr($random, 0, $count);
 	}
-
+	
 	$hash = _hash_crypt_private($password, _hash_gensalt_private($random, $itoa64), $itoa64);
 
 	if (strlen($hash) == 34)
@@ -683,6 +684,12 @@ if (!function_exists('realpath'))
 		// Put the slashes back to the native operating systems slashes
 		$resolved = str_replace('/', DIRECTORY_SEPARATOR, $resolved);
 
+		// Check for DIRECTORY_SEPARATOR at the end (and remove it!)
+		if (substr($resolved, -1) == DIRECTORY_SEPARATOR)
+		{
+			return substr($resolved, 0, -1);
+		}
+
 		return $resolved; // We got here, in the end!
 	}
 }
@@ -694,7 +701,15 @@ else
 	*/
 	function phpbb_realpath($path)
 	{
-		return realpath($path);
+		$path = realpath($path);
+
+		// Check for DIRECTORY_SEPARATOR at the end (and remove it!)
+		if (substr($path, -1) == DIRECTORY_SEPARATOR)
+		{
+			return substr($path, 0, -1);
+		}
+
+		return $path;
 	}
 }
 
@@ -2034,11 +2049,12 @@ function check_form_key($form_name, $timespan = false, $return_page = '', $trigg
 
 	if ($timespan === false)
 	{
-		$timespan = $config['form_token_lifetime'];
+		// we enforce a minimum value of half a minute here.
+		$timespan = ($config['form_token_lifetime'] == -1) ? -1 : max(30, $config['form_token_lifetime']);
 	}
 	if ($minimum_time === false)
 	{
-		$minimum_time = $config['form_token_mintime'];
+		$minimum_time = (int) $config['form_token_mintime'];
 	}
 	
 	if (isset($_POST['creation_time']) && isset($_POST['form_token']))
@@ -2749,8 +2765,9 @@ function get_preg_expression($mode)
 		case 'url':
 		case 'url_inline':
 			$inline = ($mode == 'url') ? ')' : '';
+			$scheme = ($mode == 'url') ? '[a-z\d+\-.]' : '[a-z\d+]'; // avoid automatic parsing of "word" in "last word.http://..."
 			// generated with regex generation file in the develop folder
-			return "[a-z][a-z\d+\-.]*:/{2}(?:(?:[a-z0-9\-._~!$&'($inline*+,;=:@|]+|%[\dA-F]{2})+|[0-9.]+|\[[a-z0-9.]+:[a-z0-9.]+:[a-z0-9.:]+\])(?::\d*)?(?:/(?:[a-z0-9\-._~!$&'($inline*+,;=:@|]+|%[\dA-F]{2})*)*(?:\?(?:[a-z0-9\-._~!$&'($inline*+,;=:@/?|]+|%[\dA-F]{2})*)?(?:\#(?:[a-z0-9\-._~!$&'($inline*+,;=:@/?|]+|%[\dA-F]{2})*)?";
+			return "[a-z]$scheme*:/{2}(?:(?:[a-z0-9\-._~!$&'($inline*+,;=:@|]+|%[\dA-F]{2})+|[0-9.]+|\[[a-z0-9.]+:[a-z0-9.]+:[a-z0-9.:]+\])(?::\d*)?(?:/(?:[a-z0-9\-._~!$&'($inline*+,;=:@|]+|%[\dA-F]{2})*)*(?:\?(?:[a-z0-9\-._~!$&'($inline*+,;=:@/?|]+|%[\dA-F]{2})*)?(?:\#(?:[a-z0-9\-._~!$&'($inline*+,;=:@/?|]+|%[\dA-F]{2})*)?";
 		break;
 
 		case 'www_url':
@@ -2820,6 +2837,7 @@ function phpbb_checkdnsrr($host, $type = '')
 			return NULL;
 		}
 
+		// @exec('nslookup -retry=1 -timout=1 -type=' . escapeshellarg($type) . ' ' . escapeshellarg($host), $output);
 		@exec('nslookup -type=' . escapeshellarg($type) . ' ' . escapeshellarg($host), $output);
 
 		// If output is empty, the nslookup failed
@@ -2862,6 +2880,12 @@ function msg_handler($errno, $msg_text, $errfile, $errline)
 	global $cache, $db, $auth, $template, $config, $user;
 	global $phpEx, $phpbb_root_path, $msg_title, $msg_long_text;
 
+	// Do not display notices if we suppress them via @
+	if (error_reporting() == 0)
+	{
+		return;
+	}
+
 	// Message handler is stripping text. In case we need it, we are possible to define long text...
 	if (isset($msg_long_text) && $msg_long_text && !$msg_text)
 	{
@@ -2874,9 +2898,8 @@ function msg_handler($errno, $msg_text, $errfile, $errline)
 		case E_WARNING:
 
 			// Check the error reporting level and return if the error level does not match
-			// Additionally do not display notices if we suppress them via @
 			// If DEBUG is defined the default level is E_ALL
-			if (($errno & ((defined('DEBUG') && error_reporting()) ? E_ALL : error_reporting())) == 0)
+			if (($errno & ((defined('DEBUG')) ? E_ALL : error_reporting())) == 0)
 			{
 				return;
 			}

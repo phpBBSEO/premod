@@ -2,7 +2,7 @@
 /**
 *
 * @package phpBB3
-* @version $Id: viewforum.php,v 1.338 2007/10/05 14:30:07 acydburn Exp $
+* @version $Id: viewforum.php,v 1.342 2007/11/17 20:03:32 acydburn Exp $
 * @copyright (c) 2005 phpBB Group
 * @license http://opensource.org/licenses/gpl-license.php GNU Public License
 *
@@ -14,7 +14,7 @@
 define('IN_PHPBB', true);
 $phpbb_root_path = (defined('PHPBB_ROOT_PATH')) ? PHPBB_ROOT_PATH : './';
 $phpEx = substr(strrchr(__FILE__, '.'), 1);
-include($phpbb_root_path . 'common.'.$phpEx);
+include($phpbb_root_path . 'common.' . $phpEx);
 include($phpbb_root_path . 'includes/functions_display.' . $phpEx);
 
 // Start session
@@ -28,6 +28,9 @@ $start		= request_var('start', 0);
 // www.phpBB-SEO.com SEO TOOLKIT BEGIN
 if ($forum_id == 0) {
 	$phpbb_seo->get_forum_id($forum_id, $start);
+	if ($forum_id == 0) {
+		header('HTTP/1.1 404 Not Found');
+	}
 }
 // www.phpBB-SEO.com SEO TOOLKIT END
 $sort_days	= request_var('st', ((!empty($user->data['user_topic_show_days'])) ? $user->data['user_topic_show_days'] : 0));
@@ -160,8 +163,9 @@ else
 }
 
 // Dump out the page header and load viewforum template
-// www.phpBB-SEO.com SEO TOOLKIT BEGIN - META
+// www.phpBB-SEO.com SEO TOOLKIT BEGIN - TITLE
 $extra_title = ($start > 0) ? ' - ' . $user->lang['Page'] . ( floor( $start / $config['topics_per_page'] ) + 1 ) : '';
+// www.phpBB-SEO.com SEO TOOLKIT BEGIN - META
 $seo_meta->meta['meta_desc'] = $seo_meta->meta_filter_txt($forum_data['forum_name'] . ' : ' . (!empty($forum_data['forum_desc']) ? $forum_data['forum_desc'] : $config['site_desc']));
 $seo_meta->meta['keywords'] = $seo_meta->make_keywords($seo_meta->meta['meta_desc']);
 // www.phpBB-SEO.com SEO TOOLKIT END - META
@@ -247,6 +251,8 @@ $s_limit_days = $s_sort_key = $s_sort_dir = $u_sort_param = '';
 gen_sort_selects($limit_days, $sort_by_text, $sort_days, $sort_key, $sort_dir, $s_limit_days, $s_sort_key, $s_sort_dir, $u_sort_param);
 
 // Limit topics to certain time frame, obtain correct topic count
+// global announcements must not be counted, normal announcements have to
+// be counted, as forum_topics(_real) includes them
 if ($sort_days)
 {
 	$min_post_time = time() - ($sort_days * 86400);
@@ -254,8 +260,8 @@ if ($sort_days)
 	$sql = 'SELECT COUNT(topic_id) AS num_topics
 		FROM ' . TOPICS_TABLE . "
 		WHERE forum_id = $forum_id
-			AND topic_type NOT IN (" . POST_ANNOUNCE . ', ' . POST_GLOBAL . ")
-			AND topic_last_post_time >= $min_post_time
+			AND ((topic_type <> " . POST_GLOBAL . " AND topic_last_post_time >= $min_post_time)
+				OR topic_type = " . POST_ANNOUNCE . ")
 		" . (($auth->acl_get('m_approve', $forum_id)) ? '' : 'AND topic_approved = 1');
 	$result = $db->sql_query($sql);
 	$topics_count = (int) $db->sql_fetchfield('num_topics');
@@ -332,6 +338,7 @@ $template->assign_vars(array(
 	'S_SEARCHBOX_ACTION'	=> append_sid("{$phpbb_root_path}search.$phpEx", 'fid[]=' . $forum_id),
 	'S_SINGLE_MODERATOR'	=> (!empty($moderators[$forum_id]) && sizeof($moderators[$forum_id]) > 1) ? false : true,
 	'S_IS_LOCKED'			=> ($forum_data['forum_status'] == ITEM_LOCKED) ? true : false,
+	'S_VIEWFORUM'			=> true,
 
 	'U_MCP'				=> ($auth->acl_get('m_', $forum_id)) ? append_sid("{$phpbb_root_path}mcp.$phpEx", "f=$forum_id&amp;i=main&amp;mode=forum_view", true, $user->session_id) : '',
 	'U_POST_NEW_TOPIC'	=> ($auth->acl_get('f_post', $forum_id) || $user->data['user_id'] == ANONYMOUS) ? append_sid("{$phpbb_root_path}posting.$phpEx", 'mode=post&amp;f=' . $forum_id) : '',
@@ -539,7 +546,7 @@ if (sizeof($shadow_topic_list))
 			$phpbb_seo->seo_censored[$row['topic_moved_id']] = censor_text($row['topic_title']);
 			$phpbb_seo->seo_url['topic'][$row['topic_moved_id']] = $phpbb_seo->format_url($phpbb_seo->seo_censored[$row['topic_moved_id']]);
 		}
-		// www.phpBB-SEO.com SEO TOOLKIT END 
+		// www.phpBB-SEO.com SEO TOOLKIT END
 	}
 	$db->sql_freeresult($result);
 }

@@ -2,7 +2,7 @@
 /**
 *
 * @package phpBB3
-* @version $Id: functions_content.php,v 1.2 2007/10/12 18:13:17 acydburn Exp $
+* @version $Id: functions_content.php,v 1.3 2007/11/18 15:37:17 naderman Exp $
 * @copyright (c) 2005 phpBB Group
 * @license http://opensource.org/licenses/gpl-license.php GNU Public License
 *
@@ -622,11 +622,11 @@ function make_clickable($text, $server_url = false, $class = 'postlink')
 		// Be sure to not let the matches cross over. ;)
 
 		// relative urls for this board
-		$magic_url_match[] = '#(^|[\n\t (>])(' . preg_quote($server_url, '#') . ')/(' . get_preg_expression('relative_url_inline') . ')#ie';
+		$magic_url_match[] = '#(^|[\n\t (>.])(' . preg_quote($server_url, '#') . ')/(' . get_preg_expression('relative_url_inline') . ')#ie';
 		$magic_url_replace[] = "make_clickable_callback(MAGIC_URL_LOCAL, '\$1', '\$2', '\$3', '$local_class')";
 
 		// matches a xxxx://aaaaa.bbb.cccc. ...
-		$magic_url_match[] = '#(^|[\n\t (>])(' . get_preg_expression('url_inline') . ')#ie';
+		$magic_url_match[] = '#(^|[\n\t (>.])(' . get_preg_expression('url_inline') . ')#ie';
 		$magic_url_replace[] = "make_clickable_callback(MAGIC_URL_FULL, '\$1', '\$2', '', '$class')";
 
 		// matches a "www.xxxx.yyyy[/zzzz]" kinda lazy URL thing
@@ -1098,7 +1098,9 @@ function truncate_string($string, $max_length = 60, $allow_reply = true, $append
 function get_username_string($mode, $user_id, $username, $username_colour = '', $guest_username = false, $custom_profile_url = false)
 {
 	global $phpbb_root_path, $phpEx, $user, $auth;
-
+	// www.phpBB-SEO.com SEO TOOLKIT BEGIN
+	global $phpbb_seo;
+	// www.phpBB-SEO.com SEO TOOLKIT END
 	$profile_url = '';
 	$username_colour = ($username_colour) ? '#' . $username_colour : '';
 
@@ -1122,6 +1124,9 @@ function get_username_string($mode, $user_id, $username, $username_colour = '', 
 		}
 		else
 		{
+			// www.phpBB-SEO.com SEO TOOLKIT BEGIN
+			$phpbb_seo->set_user_url( strip_tags($username), $user_id );
+			// www.phpBB-SEO.com SEO TOOLKIT END
 			$profile_url = ($custom_profile_url !== false) ? $custom_profile_url . '&amp;u=' . (int) $user_id : append_sid("{$phpbb_root_path}memberlist.$phpEx", 'mode=viewprofile&amp;u=' . (int) $user_id);
 		}
 	}

@@ -2,7 +2,7 @@
 /**
 *
 * @package acm
-* @version $Id: cache.php,v 1.13 2007/10/05 14:30:07 acydburn Exp $
+* @version $Id: cache.php,v 1.14 2007/12/05 16:34:38 acydburn Exp $
 * @copyright (c) 2005 phpBB Group
 * @license http://opensource.org/licenses/gpl-license.php GNU Public License
 *
@@ -73,12 +73,7 @@ class cache extends acm
 	*/
 	function obtain_word_list()
 	{
-		global $config, $user, $db;
-
-		if (!$user->optionget('viewcensors') && $config['allow_nocensors'])
-		{
-			return array();
-		}
+		global $db;
 
 		if (($censors = $this->get('_word_censors')) === false)
 		{

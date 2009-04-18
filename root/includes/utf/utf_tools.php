@@ -2,7 +2,7 @@
 /**
 *
 * @package utf
-* @version $Id: utf_tools.php,v 1.70 2007/10/05 14:36:34 acydburn Exp $
+* @version $Id: utf_tools.php,v 1.72 2007/12/04 16:20:38 naderman Exp $
 * @copyright (c) 2006 phpBB Group
 * @license http://opensource.org/licenses/gpl-license.php GNU Public License
 *
@@ -768,7 +768,7 @@ function utf8_recode($string, $encoding)
 	}
 
 	// If nothing works, check if we have a custom transcoder available
-	if (!preg_match('#^[a-z0-9\\-]+$#', $encoding))
+	if (!preg_match('#^[a-z0-9_ \\-]+$#', $encoding))
 	{
 		// Make sure the encoding name is alphanumeric, we don't want it to be abused into loading arbitrary files
 		trigger_error('Unknown encoding: ' . $encoding, E_USER_ERROR);
@@ -1828,6 +1828,9 @@ function utf8_clean_string($text)
 	$text = strtr($text, $homographs);
 	// Other control characters
 	$text = preg_replace('#(?:[\x00-\x1F\x7F]+|(?:\xC2[\x80-\x9F])+)#', '', $text);
+
+	// we need to reduce multiple spaces to a single one
+	$text = preg_replace('# {2,}#', ' ', $text);
 
 	// we can use trim here as all the other space characters should have been turned
 	// into normal ASCII spaces by now

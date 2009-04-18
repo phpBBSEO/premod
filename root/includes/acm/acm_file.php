@@ -2,7 +2,7 @@
 /**
 *
 * @package acm
-* @version $Id: acm_file.php,v 1.54 2007/10/05 14:36:32 acydburn Exp $
+* @version $Id: acm_file.php,v 1.55 2007/11/17 12:14:27 acydburn Exp $
 * @copyright (c) 2005 phpBB Group
 * @license http://opensource.org/licenses/gpl-license.php GNU Public License
 *
@@ -67,6 +67,11 @@ class acm
 		unset($this->var_expires);
 		unset($this->sql_rowset);
 		unset($this->sql_row_pointer);
+
+		$this->vars = array();
+		$this->var_expires = array();
+		$this->sql_rowset = array();
+		$this->sql_row_pointer = array();
 	}
 
 	/**
@@ -231,6 +236,11 @@ class acm
 		unset($this->var_expires);
 		unset($this->sql_rowset);
 		unset($this->sql_row_pointer);
+
+		$this->vars = array();
+		$this->var_expires = array();
+		$this->sql_rowset = array();
+		$this->sql_row_pointer = array();
 
 		$this->is_modified = false;
 	}

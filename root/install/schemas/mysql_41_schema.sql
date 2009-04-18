@@ -1,5 +1,5 @@
 #
-# $Id: mysql_41_schema.sql,v 1.42 2007/10/14 15:46:44 acydburn Exp $
+# $Id: mysql_41_schema.sql,v 1.43 2007/12/05 15:18:21 acydburn Exp $
 #
 
 # Table: 'phpbb_attachments'
@@ -918,8 +918,8 @@ CREATE TABLE phpbb_users (
 	user_style smallint(4) UNSIGNED DEFAULT '0' NOT NULL,
 	user_rank mediumint(8) UNSIGNED DEFAULT '0' NOT NULL,
 	user_colour varchar(6) DEFAULT '' NOT NULL,
-	user_new_privmsg tinyint(4) DEFAULT '0' NOT NULL,
-	user_unread_privmsg tinyint(4) DEFAULT '0' NOT NULL,
+	user_new_privmsg int(4) DEFAULT '0' NOT NULL,
+	user_unread_privmsg int(4) DEFAULT '0' NOT NULL,
 	user_last_privmsg int(11) UNSIGNED DEFAULT '0' NOT NULL,
 	user_message_rules tinyint(1) UNSIGNED DEFAULT '0' NOT NULL,
 	user_full_folder int(11) DEFAULT '-3' NOT NULL,

@@ -2,7 +2,7 @@
 /**
 *
 * @package phpBB3
-* @version $Id: common.php,v 1.213 2007/10/04 18:50:25 acydburn Exp $
+* @version $Id: common.php,v 1.214 2007/11/18 15:37:17 naderman Exp $
 * @copyright (c) 2005 phpBB Group
 * @license http://opensource.org/licenses/gpl-license.php GNU Public License
 *
@@ -203,7 +203,7 @@ $cache		= new cache();
 $db			= new $sql_db();
 
 // Connect to DB
-$db->sql_connect($dbhost, $dbuser, $dbpasswd, $dbname, $dbport, false, false);
+$db->sql_connect($dbhost, $dbuser, $dbpasswd, $dbname, $dbport, false, defined('PHPBB_DB_NEW_LINK') ? PHPBB_DB_NEW_LINK : false);
 
 // We do not need this any longer, unset for safety purposes
 unset($dbpasswd);

@@ -2,7 +2,7 @@
 /**
 *
 * @package mcp
-* @version $Id: mcp_front.php,v 1.33 2007/10/12 18:13:50 acydburn Exp $
+* @version $Id: mcp_front.php,v 1.34 2007/11/03 11:09:11 acydburn Exp $
 * @copyright (c) 2005 phpBB Group
 * @license http://opensource.org/licenses/gpl-license.php GNU Public License
 *
@@ -73,6 +73,14 @@ function mcp_front_view($id, $mode, $action)
 				}
 				$db->sql_freeresult($result);
 
+				if (empty($post_list))
+				{
+					$total = 0;
+				}
+			}
+
+			if ($total)
+			{
 				$sql = 'SELECT p.post_id, p.post_subject, p.post_time, p.poster_id, p.post_username, u.username, u.username_clean, t.topic_id, t.topic_title, t.topic_first_post_id, p.forum_id
 					FROM ' . POSTS_TABLE . ' p, ' . TOPICS_TABLE . ' t, ' . USERS_TABLE . ' u
 					WHERE ' . $db->sql_in_set('p.post_id', $post_list) . '

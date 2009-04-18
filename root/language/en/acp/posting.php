@@ -4,7 +4,7 @@
 * posting [English]
 *
 * @package language
-* @version $Id: posting.php,v 1.47 2007/10/04 15:07:24 acydburn Exp $
+* @version $Id: posting.php,v 1.50 2007/11/28 20:09:01 kellanved Exp $
 * @copyright (c) 2005 phpBB Group
 * @license http://opensource.org/licenses/gpl-license.php GNU Public License
 *
@@ -115,14 +115,14 @@ $lang = array_merge($lang, array(
 	'FIRST'			=> 'First',
 
 	'ICONS_ADD'				=> 'Add a new icon',
-	'ICON_NONE_ADDED'		=> 'No icons were added.',
+	'ICONS_NONE_ADDED'		=> 'No icons were added.',
 	'ICONS_ONE_ADDED'		=> 'The icon has been added successfully.',
 	'ICONS_ADDED'			=> 'The icons have been added successfully.',
 	'ICONS_CONFIG'			=> 'Icon configuration',
 	'ICONS_DELETED'			=> 'The icon has been removed successfully.',
 	'ICONS_EDIT'			=> 'Edit icon',
 	'ICONS_ONE_EDITED'		=> 'The icon has been updated successfully.',
-	'ICON_NONE_EDITED'		=> 'No icons were updated.',
+	'ICONS_NONE_EDITED'		=> 'No icons were updated.',
 	'ICONS_EDITED'			=> 'The icons have been updated successfully.',
 	'ICONS_HEIGHT'			=> 'Icon height',
 	'ICONS_IMAGE'			=> 'Icon image',

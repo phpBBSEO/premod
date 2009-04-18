@@ -1,20 +1,16 @@
 <?php
-/**
+/** 
 *
 * search [Standard french]
+* translated by PhpBB-fr.com <http://www.phpbb-fr.com/> and phpBB.biz <http://www.phpbb.biz/>
 *
 * @package language
-* @version $Id: search.php,v 1.26 2007/10/04 15:07:24 acydburn Exp $
-* @copyright (c) 2005 phpBB Group
-* @license http://opensource.org/licenses/gpl-license.php GNU Public License
+* @version $Id: search.php,v 1.19 2007/11/22 13:09:33 lolovoisin Exp $
+* @copyright (c) 2005 phpBB Group 
+* @license http://opensource.org/licenses/gpl-license.php GNU Public License 
 *
 */
-/**
-* CONTRIBUTORS
-* Translation made by phpBB-fr.com and phpBB.biz Teams
-* http://www.phpbb-fr.com
-* http://www.phpbb.biz
-*/
+
 /**
 * DO NOT CHANGE
 */
@@ -53,15 +49,15 @@ $lang = array_merge($lang, array(
 	'GLOBAL'   => 'Annonce générale',
 
 	'IGNORED_TERMS'   => 'ignoré',
-	'IGNORED_TERMS_EXPLAIN'   => 'Les mots suivants de votre recherche ont été ignorés parce qu\'ils sont trop communs: <strong>%s</strong>.',
+	'IGNORED_TERMS_EXPLAIN'   => 'Les mots suivants de votre recherche ont été ignorés parce qu’ils sont trop communs: <strong>%s</strong>.',
 
 	'JUMP_TO_POST' => 'Aller au message',
 
 	'LOGIN_EXPLAIN_EGOSEARCH'	=> 'Vous devez être enregistré et connecté afin de voir vos propres messages.',
 
-	'NO_KEYWORDS'   => 'Vous devez indiquer au moins un mot pour effectuer une recherche. Chaque mot doit se composer d\'au moins %d caractères et ne doit pas en contenir plus de %d en excluant les jokers.',
-	'NO_RECENT_SEARCHES'   => 'Aucune recherche n\'a été effectuée récemment.',
-	'NO_SEARCH'   => 'Désolé mais vous n\'êtes pas autorisé à utiliser le système de recherche.',
+	'NO_KEYWORDS'   => 'Vous devez indiquer au moins un mot pour effectuer une recherche. Chaque mot doit se composer d’au moins %d caractères et ne doit pas en contenir plus de %d en excluant les jokers.',
+	'NO_RECENT_SEARCHES'   => 'Aucune recherche n’a été effectuée récemment.',
+	'NO_SEARCH'   => 'Désolé mais vous n’êtes pas autorisé à utiliser le système de recherche.',
 	'NO_SEARCH_RESULTS'   => 'Aucun sujet ou message ne correspond à vos critères de recherche.',
 	'NO_SEARCH_TIME'   => 'Désolé mais vous ne pouvez pas utiliser la fonction recherche actuellement. Merci de réessayer dans quelques instants.',
 	'WORD_IN_NO_POST'   => 'Aucun résultat trouvé pour le mot <strong>%s</strong>.',
@@ -78,12 +74,12 @@ $lang = array_merge($lang, array(
 	'SEARCHED_FOR'   => 'Rechercher les termes utilisés',
     'SEARCHED_TOPIC'   => 'Sujet recherché',
     'SEARCH_ALL_TERMS'   => 'Rechercher tous les termes',
-    'SEARCH_ANY_TERMS'   => 'Rechercher n\'importe lequel de ces termes',
+    'SEARCH_ANY_TERMS'   => 'Rechercher n’importe lequel de ces termes',
     'SEARCH_AUTHOR'   => 'Rechercher par auteur',
 	'SEARCH_AUTHOR_EXPLAIN'   => 'Utilisez un * comme joker pour des recherches partielles.',
     'SEARCH_FIRST_POST'   => 'Premier message des sujets uniquement',
     'SEARCH_FORUMS'   => 'Rechercher dans les forums',
-    'SEARCH_FORUMS_EXPLAIN'   => 'Choisissez le forum ou les forums dans le(s)quel(s) vous souhaitez effectuer une recherche. Les sous-forums sont automatiquement inclus si vous ne désactivez pas l\'option ci-dessous “Rechercher dans les sous-forums”.',
+    'SEARCH_FORUMS_EXPLAIN'   => 'Choisissez le forum ou les forums dans le(s)quel(s) vous souhaitez effectuer une recherche. Les sous-forums sont automatiquement inclus si vous ne désactivez pas l’option ci-dessous “Rechercher dans les sous-forums”.',
     'SEARCH_IN_RESULTS'   => 'Rechercher dans ces résultats',
     'SEARCH_KEYWORDS_EXPLAIN'   => 'Placez un <strong>+</strong> devant un mot qui doit être trouvé et un <strong>-</strong> devant un mot qui doit être exclu. Tapez une suite de mots séparés par des <strong>|</strong> entre crochets si uniquement un des mots doit être trouvé. Utilisez un * comme joker pour des recherches partielles.',
 	'SEARCH_MSG_ONLY'   => 'Messages uniquement',
@@ -100,7 +96,7 @@ $lang = array_merge($lang, array(
     'SORT_POST_SUBJECT'   => 'Sujet du message',
     'SORT_TIME'   => 'Date',
 
-	'TOO_FEW_AUTHOR_CHARS'   => 'Vous devez indiquer au moins %d caractères du nom de l\'auteur.',
+	'TOO_FEW_AUTHOR_CHARS'   => 'Vous devez indiquer au moins %d caractères du nom de l’auteur.',
 ));
 
 ?>

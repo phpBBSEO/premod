@@ -4,7 +4,7 @@
 * acp_board [English]
 *
 * @package language
-* @version $Id: board.php,v 1.100 2007/10/09 15:42:39 kellanved Exp $
+* @version $Id: board.php,v 1.101 2007/11/03 20:29:39 acydburn Exp $
 * @copyright (c) 2005 phpBB Group
 * @license http://opensource.org/licenses/gpl-license.php GNU Public License
 *
@@ -96,11 +96,11 @@ $lang = array_merge($lang, array(
 	'AVATAR_STORAGE_PATH'			=> 'Avatar storage path',
 	'AVATAR_STORAGE_PATH_EXPLAIN'	=> 'Path under your phpBB root directory, e.g. <samp>images/avatars/upload</samp>.',
 	'MAX_AVATAR_SIZE'				=> 'Maximum avatar dimensions',
-	'MAX_AVATAR_SIZE_EXPLAIN'		=> 'Height x Width in pixels.',
+	'MAX_AVATAR_SIZE_EXPLAIN'		=> 'Width x Height in pixels.',
 	'MAX_FILESIZE'					=> 'Maximum avatar file size',
 	'MAX_FILESIZE_EXPLAIN'			=> 'For uploaded avatar files.',
 	'MIN_AVATAR_SIZE'				=> 'Minimum avatar dimensions',
-	'MIN_AVATAR_SIZE_EXPLAIN'		=> 'Height x Width in pixels.',
+	'MIN_AVATAR_SIZE_EXPLAIN'		=> 'Width x Height in pixels.',
 ));
 
 // Message Settings

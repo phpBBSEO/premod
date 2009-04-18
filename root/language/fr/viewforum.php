@@ -1,20 +1,16 @@
 <?php
-/**
+/** 
 *
 * viewforum [Standard french]
+* translated by PhpBB-fr.com <http://www.phpbb-fr.com/> and phpBB.biz <http://www.phpbb.biz/>
 *
 * @package language
-* @version $Id: viewforum.php,v 1.18 2007/10/04 15:07:24 acydburn Exp $
-* @copyright (c) 2005 phpBB Group
-* @license http://opensource.org/licenses/gpl-license.php GNU Public License
+* @version $Id: viewforum.php,v 1.19 2007/11/22 13:10:24 lolovoisin Exp $
+* @copyright (c) 2005 phpBB Group 
+* @license http://opensource.org/licenses/gpl-license.php GNU Public License 
 *
 */
-/**
-* CONTRIBUTORS
-* Translation made by phpBB-fr.com and phpBB.biz Teams
-* http://www.phpbb-fr.com
-* http://www.phpbb.biz
-*/
+
 /**
 * DO NOT CHANGE
 */
@@ -49,7 +45,7 @@ $lang = array_merge($lang, array(
    'ICON_ANNOUNCEMENT'   => 'Annonce',
    'ICON_STICKY' => 'Post-it',
 
-   'LOGIN_NOTIFY_FORUM' => 'Vous avez été averti de la présence d\'un nouveau message dans ce forum, connectez-vous pour y accéder.',
+   'LOGIN_NOTIFY_FORUM' => 'Vous avez été averti de la présence d’un nouveau message dans ce forum, connectez-vous pour y accéder.',
 
    'MARK_TOPICS_READ' => 'Marquer tous les sujets comme lus',
 
@@ -57,7 +53,7 @@ $lang = array_merge($lang, array(
    'NEW_POSTS_LOCKED' => 'Nouveaux messages [ Verrouillés ]',
    'NO_NEW_POSTS_HOT' => 'Pas de nouveaux messages [ Populaires ]',
    'NO_NEW_POSTS_LOCKED' => 'Pas de nouveaux messages [ Verrouillés ]',
-   'NO_READ_ACCESS'      => 'Vous n\'avez pas les permissions requises pour lire les sujets de ce forum.',
+   'NO_READ_ACCESS'      => 'Vous n’avez pas les permissions requises pour lire les sujets de ce forum.',
 
 
    'POST_FORUM_LOCKED' => 'Le forum est verrouillé',

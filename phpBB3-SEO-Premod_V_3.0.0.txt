@@ -5,10 +5,10 @@
 ## 			Check http://www.phpbb-seo.com/boards/phpbb-seo-premod/seo-url-premod-vt1549.html
 ## 			for the latest version or to get help.
 ##
-## MOD Version: 	3.0.RC7
+## MOD Version: 	3.0.0
 ##
 ## Installation Level: 	As easy as phpBB3
-## Installation Time: 	10
+## Installation Time: 	10 Minutes
 ## Files To Edit: 	0
 ##
 ##############################################################
@@ -65,6 +65,20 @@
 ##############################################################
 ## MOD History:
 ##
+##	2007-12-21 - 3.0.0
+##		- Added : Link to the last topic title above the last post link on forum listing view,
+##		- Added : Group URL rewriting, with optional group name injection,
+##		- Added : profile URL can use nickname injection (optional),
+##		- Added : profile URL can use nickname injection without ID (optional),
+##		- Added : User messages URL can use nickname injection (optional),
+##		- Added : User messages URL can use nickname injection without ID (optional),
+##		- Added : 404 header is now returned for forums that do not exist (both rewritten and vanilla URLs),
+##		- Updated : zero duplicate handles the new rewriting for profiles, user messages and groups,
+##		- Fixed : Sub forum last post link from the no duplicate on forum listing view,
+##		- Fixed : Usage of a slash as a suffix is now fully supported for all rewritten URLs,
+##		- Fixed : Base href handling (bug with virtual root option),
+##		- Fixed : 100% XHTML valid output,
+##		- Updated to comply with phpBB3.0.0.
 ##	2007-10-16 - 3.0.RC7
 ##		- Updated the mod rewrites,
 ##		- Updated to phpbb3.0.RC7.
@@ -88,8 +102,8 @@ ________________________________________
 >>>>   UPDATE INSTRUCTION   	   <<<<<
 ________________________________________
 
-Update 3.0.RC5a => 3.0.RC7 :
-First, download the phpBB_SEO_3.0RC5a_to_3.0.RC7 package.
+Update 3.0.RC7 => 3.0.0 :
+First, download the phpBB_SEO_3.0RC7_to_3.0.0 package : http://downloads.phpbb-seo.com/seo-url-premod-12/
 You can update using two method :
 	1) Auto updating :
 		- Upload the auto_update/install/*.* folder of the update package to install/*.*
@@ -103,9 +117,13 @@ You can update using two method :
 		- Upload the modified/install/*.* to install/*.*,
 		- Run www.example.com/phpbb/install/database_update.php to update the DB.
 
-In all cases, his update procedure will keep the previous URL standard used depending on the phpbb_seo_class.php settings.
+This update adds support for members nicknames injection in profiles URLs as well as Group names injection in groups URLs. The title injection for both is optional, in all cases, after you will have set up the new option, you will need to update your .htaccess.
+If you change your member profiles URL with your new settings, you will have to keep the previous Profile rewriterule right before the new one in your .htaccess.
+All other settings and URLs will remain unchanged.
 
-No particular changes required in the .htaccess or the phpBB SEO class settings.
+If you encounter some difficulties to update the phpbb_seo_class.php file, for example if you modded it, you will just have to use the new file and edit it to re enter your previous customisations (static part & delimiters).
+
+Once you will have updated, you will have to refresh your theme's cache as well as phpBB's cache (ACP => STYLE, Themes => Refresh).
 
 ________________________________________
 >>>>   INSTALLATION INSTRUCTION    <<<<<
@@ -121,6 +139,7 @@ Before you start, read this with caution.
 	4) Generate your personalized .htaccess and upload or move it following the instructions;
 	5) Test a rewritten URL, such as www.yoursite.com/phpBB/post1.html, if you end up with a 404 (not a phpBB message), go back to step 5;
 	6) Activate URL rewriting in phpBB ACP and allow yourself some auto-congratulation :D
+	7) Activate the Zero duplicate is wise at this point.
 ________________________________________
 
 __________
@@ -135,13 +154,13 @@ Later modification will most likey require a new .htaccess as well as personaliz
 You can change this in phpbb_seo/phpbb_seo_class.php if you prefer.
 Look for :
 
-'index' => ($this->seo_opt['virtual_root'] ? 'forum' : '')
+'index' => ''
 
 And replace with  :
 
 'index' => 'forum'
 
-or whatever you prefer.
+or whatever you may prefer.
 This is mostly useful if you're running a portal in the folder where phpBB is installed. 
 
 => The first setting to do is to select which static part to use in your URLs. 
@@ -154,17 +173,19 @@ To do so, you can modify this in phpbb_seo/phpbb_seo_class.php :
 		'global_announce' => 'announces'
 
  
-	=> As well as forum ('forum' => 'forum'), topic ('topic' => 'topic'), post ('post' => 'post') and member ('user' = 'member')
+	=> As well as forum ('forum' => 'forum'), topic ('topic' => 'topic'), post ('post' => 'post'), 
+	member ('user' => 'member'), groups ('group' => 'group'), User message pages ('usermsg' => 'messages') 
+	and virtual folder pagination ('pagination' => 'page')
 
 	=> And the suffixes, if you don not like .html :
-		$this->seo_ext = array( 'forum' => '.html', 'topic' => '.html', 'post' => '.html', 'user' => '.html', 'index' => (!empty($this->seo_static['index']) ? '.html' : ''), 'global_announce' => '/', 'leaders' => '.html', 'gz_ext' => '');
+	$this->seo_ext = array( 'forum' => '.html', 'topic' => '.html', 'post' => '.html', 'user' => '.html', 'usermsg' => '.html', 'group' => '.html',  'index' => '', 'global_announce' => '/', 'leaders' => '.html', 'pagination' => '.html', 'gz_ext' => '');
 
 This settings will be taken into account while generating the .htaccess.
 
 => Other options are configurable on the setting page (step 7 of the above list).
-Go to the "phpBB SEO Class Settings" page, and take your time to set up the class as you whish.
+Go to the "phpBB SEO Class Settings" page, and take your time to set up the class as you wish.
 
-=> It is now time to play with your forum URLs (Mixed and Advanced mode). 
+=> It is now time to play with your forum URLs. 
 To do so, go to the "Forum URL management" page and start selecting good keywords for your forum URLs.
 Take your time to do it, and remember that using the remove IDs option in the settings makes it a bit harder to build appropriate redirection, in case you edit the forum URLs later.
 If you later create more forums, you'll just have to go to this page again an eventually update the 
@@ -187,9 +208,9 @@ since they are required for your forum URL to work properly.
 So relax, this is just a basic precaution, you should not have trouble with these, 
 but never is better, hence the backup.
 
-____________
- .htaccess :
-____________
+_________________
+NOTE: .htaccess :
+_________________
 
 On the phpBB SEO ACP module, go to the ".htaccess" page.
 A personalised .htaccess will be generated. It's the first one to consider trying.
@@ -198,17 +219,62 @@ You'll find an empty .htaccess file in this mod's archive contrib/ folder, you c
 
 
 Please take a look at : http://www.phpbb-seo.com/boards/seo-principles/locking-the-www-in-urls-vt30.html
-to find out how to lock the use (or un use) of the www prefix in your domain's url.
+to find out how to lock the use (or non use) of the www prefix in your domain's url.
 This is a major Search Engine Optimisation issue to take care of the www prefix issue.
 
-____________
-robots.txt :
-____________
+__________________
+NOTE: robots.txt :
+__________________
 
 You will find a sample robots.txt file in the contrib/ folder of this package.
 The robots.txt file must be uploaded in your domain's root folder (can be different from the phpBB one).
-You must obviously replace phpbb/ with your real phpBB installation folder (or with nothing if it's installed in the domain's root). 
+You must obviously replace phpbb/ with your real phpBB installation folder (or with nothing if it's installed in the domain's root).
 
+__________________________________________________
+NOTE: profile and user messages pages ID removing:
+__________________________________________________
+
+phpBB/member/nicknames VS  phpBB/nicknames-uxx.html And phpBB/messages/nicknames VS dephpBB/nicknames-mxx.html
+
+If you use profile and / or user messages pages ID removing, you should know that some urlencode 
+will be used by some browsers such as Firefox. 
+As well, a bug with mod_rewrite requires some custom url encoding to handle the "&" case proper in user names.
+For example a user named rock&roll will require rock%2526roll (double urlencoded &) to be usable.
+( http://www.php.net/urlencode => http://issues.apache.org/bugzilla/show_bug.cgi?id=34602 )
+
+There are other issues with custom characters, like accents, which will add some urlencoded chars in urls.
+It's not an SEO issue, since bots knows about urlencoding, but it can end up building pretty long url with multi byte characters.
+This does not concern the a-zA-Z0-9 chars, underscore ("_"), hyphen ("-") and dot (".") included.
+In phpbb_seo/phpbb_seo_class.php, you can decide to use different methods : 
+
+		$this->seo_opt['custom_url_endode'] = 1;
+
+You can change the value, to 1, 2 and 3.
+	$this->seo_opt['custom_url_endode'] = 1, nickname is pretty much injected as is, after it is 
+	htmlspecialchars_decoded, encoded in UTF-8 and filtered for the "&" case. 
+	This means you will let the browser decide, FF will most likely use urlencoded chars 
+	if your user are using more than alphanumeric chars, but IE and Opera should do the trick.
+
+	$this->seo_opt['custom_url_endode'] = 2, would mean to impose urlencoding on all links, with the double urlencoding trick on "&".
+	Should handle more special cases, but imposes urlencoding for all browsers.
+
+	$this->seo_opt['custom_url_endode'] = 3, double urlencode everything, most likely the safest way for desperate cases :-D
+	Should handle pretty much all cases, but imposes double urlencoding for all browsers.
+
+This of course means that the ID removing on profile and user messages pages is more comfy and universally efficient 
+to use with alphanumeric chars user names (without accents). 
+Other cases are heavier and are more meant to handle few exceptions than to do the trick with multi byte chars in general. 
+Here, it's mostly Firefox to limit us a bit.
+
+If you only allow alphanumeric chars for your user nicknames, then you can make the ID removing process faster by adding :
+
+	return $url;
+
+right after :
+
+	function seo_url_encode( $url, $type = 1 ) {
+
+Remember that keeping the ID here will always work.
 
 #
 #-----[ COPY ]--------------------------------------------------

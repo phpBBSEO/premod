@@ -2,15 +2,10 @@
 /**
 *
 * @package install
-* @version $Id: install_install.php,v 1.177 2007/10/12 16:11:41 kellanved Exp $
+* @version $Id: install_install.php,v 1.180 2007/11/19 16:44:30 acydburn Exp $
 * @copyright (c) 2005 phpBB Group
 * @license http://opensource.org/licenses/gpl-license.php GNU Public License
 *
-*/
-
-/**
-* @todo: check for those functions being 'available'? Though not able to check with function_exists, we need to create test cases
-* ini_get(), glob, getimagesize, fsockopen, readfile
 */
 
 /**
@@ -111,7 +106,7 @@ class install_install extends module
 				$this->add_bots($mode, $sub);
 				$this->email_admin($mode, $sub);
 				// SEO premod
-				set_config('seo_premod_version', '3.0.RC7');
+				set_config('seo_premod_version', '3.0.0');
 				// Remove the lock file
 				@unlink($phpbb_root_path . 'cache/install_lock');
 
@@ -488,7 +483,7 @@ class install_install extends module
 			'LEGEND_EXPLAIN'	=> $lang['FILES_OPTIONAL_EXPLAIN'],
 		));
 
-		$directories = array('config.'.$phpEx, 'images/avatars/upload/');
+		$directories = array('config.' . $phpEx, 'images/avatars/upload/');
 
 		foreach ($directories as $dir)
 		{
@@ -937,7 +932,7 @@ class install_install extends module
 			// Note that all we check is that the file has _something_ in it
 			// We don't compare the contents exactly - if they can't upload
 			// a single file correctly, it's likely they will have other problems....
-			if (filesize($phpbb_root_path . 'config.'.$phpEx) > 10)
+			if (filesize($phpbb_root_path . 'config.' . $phpEx) > 10)
 			{
 				$written = true;
 			}
@@ -1117,11 +1112,18 @@ class install_install extends module
 		// If we get here and the extension isn't loaded it should be safe to just go ahead and load it
 		$available_dbms = get_available_dbms($data['dbms']);
 
+		if (!isset($available_dbms[$data['dbms']]))
+		{
+			// Someone's been silly and tried providing a non-existant dbms
+			$this->p_master->redirect("index.$phpEx?mode=install");
+		}
+
+		$dbms = $available_dbms[$data['dbms']]['DRIVER'];
+
 		// Load the appropriate database class if not already loaded
-		include($phpbb_root_path . 'includes/db/' . $available_dbms[$data['dbms']]['DRIVER'] . '.' . $phpEx);
+		include($phpbb_root_path . 'includes/db/' . $dbms . '.' . $phpEx);
 
 		// Instantiate the database
-		$sql_db = 'dbal_' . $available_dbms[$data['dbms']]['DRIVER'];
 		$db = new $sql_db();
 		$db->sql_connect($data['dbhost'], $data['dbuser'], $data['dbpasswd'], $data['dbname'], $data['dbport'], false, false);
 
@@ -1394,11 +1396,18 @@ class install_install extends module
 		// If we get here and the extension isn't loaded it should be safe to just go ahead and load it
 		$available_dbms = get_available_dbms($data['dbms']);
 
+		if (!isset($available_dbms[$data['dbms']]))
+		{
+			// Someone's been silly and tried providing a non-existant dbms
+			$this->p_master->redirect("index.$phpEx?mode=install");
+		}
+
+		$dbms = $available_dbms[$data['dbms']]['DRIVER'];
+
 		// Load the appropriate database class if not already loaded
-		include($phpbb_root_path . 'includes/db/' . $available_dbms[$data['dbms']]['DRIVER'] . '.' . $phpEx);
+		include($phpbb_root_path . 'includes/db/' . $dbms . '.' . $phpEx);
 
 		// Instantiate the database
-		$sql_db = 'dbal_' . $available_dbms[$data['dbms']]['DRIVER'];
 		$db = new $sql_db();
 		$db->sql_connect($data['dbhost'], $data['dbuser'], $data['dbpasswd'], $data['dbname'], $data['dbport'], false, false);
 

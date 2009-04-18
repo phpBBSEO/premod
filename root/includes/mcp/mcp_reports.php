@@ -2,7 +2,7 @@
 /**
 *
 * @package mcp
-* @version $Id: mcp_reports.php,v 1.67 2007/10/05 14:36:33 acydburn Exp $
+* @version $Id: mcp_reports.php,v 1.68 2007/11/03 11:09:11 acydburn Exp $
 * @copyright (c) 2005 phpBB Group
 * @license http://opensource.org/licenses/gpl-license.php GNU Public License
 *
@@ -599,7 +599,7 @@ function close_report($report_id_list, $mode, $action)
 			}
 		}
 		
-		foreach($post_info as $post)
+		foreach ($post_info as $post)
 		{
 			$forum_ids[$post['forum_id']] = $post['forum_id'];
 			$topic_ids[$post['topic_id']] = $post['topic_id'];

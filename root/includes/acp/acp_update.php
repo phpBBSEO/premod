@@ -2,7 +2,7 @@
 /**
 *
 * @package acp
-* @version $Id: acp_update.php,v 1.8 2007/10/04 12:02:03 acydburn Exp $
+* @version $Id: acp_update.php,v 1.9 2007/11/19 17:00:13 acydburn Exp $
 * @copyright (c) 2005 phpBB Group
 * @license http://opensource.org/licenses/gpl-license.php GNU Public License
 *
@@ -36,6 +36,7 @@ class acp_update
 		// Get current and latest version
 		$errstr = '';
 		$errno = 0;
+
 		// PREMOD
 		$url = 'www.phpbb-seo.com';
 		$dir = (strpos($config['default_lang'], 'fr') !== false ? '/forums' : '/boards') . '/updatecheck';

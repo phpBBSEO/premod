@@ -4,7 +4,7 @@
 * viewtopic [English]
 *
 * @package language
-* @version $Id: viewtopic.php,v 1.19 2007/10/04 15:07:24 acydburn Exp $
+* @version $Id: viewtopic.php,v 1.20 2007/10/29 13:39:34 kellanved Exp $
 * @copyright (c) 2005 phpBB Group
 * @license http://opensource.org/licenses/gpl-license.php GNU Public License
 *
@@ -105,6 +105,7 @@ $lang = array_merge($lang, array(
 	'VIEW_UNREAD_POST'		=> 'First unread post',
 	'VISIT_WEBSITE'			=> 'WWW',
 	'VOTE_SUBMITTED'		=> 'Your vote has been cast.',
+	'VOTE_CONVERTED'		=> 'Changing votes is not supported for converted polls.',
 
 ));
 

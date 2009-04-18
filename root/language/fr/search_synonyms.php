@@ -1,13 +1,18 @@
 <?php
-/**
+/** 
 *
-* search_synonyms [English]
+* search_synonyms [Standard french]
+* translated by PhpBB-fr.com <http://www.phpbb-fr.com/> and phpBB.biz <http://www.phpbb.biz/>
 *
 * @package language
-* @version $Id: search_synonyms.php,v 1.3 2007/10/04 15:07:24 acydburn Exp $
-* @copyright (c) 2005 phpBB Group
-* @license http://opensource.org/licenses/gpl-license.php GNU Public License
+* @version $Id: search_synonyms.php,v 1.19 2007/11/22 13:09:51 lolovoisin Exp $
+* @copyright (c) 2005 phpBB Group 
+* @license http://opensource.org/licenses/gpl-license.php GNU Public License 
 *
+*/
+
+/**
+* DO NOT CHANGE
 */
 
 if (!defined('IN_PHPBB'))
