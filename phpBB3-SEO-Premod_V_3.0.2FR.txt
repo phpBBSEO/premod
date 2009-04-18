@@ -6,7 +6,7 @@
 ## 			Visitez http://www.phpbb-seo.com/forums/premod-phpbb-seo/premod-referencement-phpbb-vt1951.html
 ## 			pour obtenir du support et vérifier l'existence de mise à jour.
 ##
-## MOD Version: 	3.0.1
+## MOD Version: 	3.0.2
 ##
 ## Installation Level: 	Aussi facile que phpBB3
 ## Installation Time: 	10 Minutes
@@ -67,6 +67,22 @@
 ##############################################################
 ## MOD History:
 ##
+##	2008-07-14 - 3.0.2
+##		- Updated to comply with phpBB 3.0.2.
+##		- Added GYM sitemaps & RSS 2.0.B2
+##		- mod rewrite 0.4.4 :
+##			- Fixed the update bug caused by the empty phpbb_seo class,
+##			- Fixed pagination rewriterules for forum url without id and with a suffixe different that "/",
+##			- Fixed install script for no MYSQL DB,
+##			- Fixed search for word startting / ending with a,m or p,
+##			- Fixed various virtual root wrong links,
+##			- Various optimization in phpbb_seo_class.php
+##		- zero duplicate 0.4.4 :
+##			- Fixed : view=next/previous links, 
+##			- Fixed : post redirecting when post is not on first page, 
+##		- Meta tags 0.2.4 :
+##			- Fixed common words filtering in viewtopic,
+##			- Added noindex tag based on GET vars to exclude many annoying URLs
 ##	2008-04-12 - 3.0.1
 ##		- Updated to comply with phpBB 3.0.1.
 ##		- mod rewrite 0.4.2 :
@@ -138,53 +154,32 @@ _____________________________________________
 >>>>   MISE A JOUR	                <<<<<
 _____________________________________________
 
-Mise à jour : 3.0.0 => 3.0.1 : 
+Mise à jour : 3.0.1 => 3.0.2 : 
 Tout d'abord, rendez vous sur http://telecharger.phpbb-seo.com/premod-referencement-phpbb-10/
 poour télécharger un des pack de mise à jour.
 Vous pouvez mettre à jour en suivant deux méthodes :
-	1) Mise à jour automatique : "3.0.0 vers 3.0.1 MAJ automatique"
+	1) Mise à jour automatique : "3.0.1 vers 3.0.2 MAJ automatique"
 		- Uplodez le contenu du dossier auto_update/install/*.* vers install/*.*,
 		- Rendez vous à l'ACP => SYSTEM et suivez les instructions.
 		L'auto updateur prendra vos éventuelles modifications en compte et tentera
 		de merger les nouveaux fichiers avec ceux que vous auriez modifié.
 		C'est la methode la plus sûre dans la plupart des cas, l'updateur vous dira
 		s'il a des problème pour modifier certain fichiers.
-	2) Mise à jour manuelle : "3.0.0 vers 3.0.1 Fichiers modifiés"
+	2) Mise à jour manuelle : "3.0.1 vers 3.0.2 Fichiers modifiés"
 		Vous trouverez les fichiers modifiés dans le dossier modified/ de l'archive.
 		- Uploadez / mergez / écrasez tous les fichiers,
 		- Uploadez le dossier modified/install/*.* vers install/*.*,
 		- Lancez www.example.com/phpbb/install/database_update.php pour mettre à jour la base de données.
 
-Cette mise à jour implique une mise à jour de votre .htaccess.
-La procédure conservera les URLs de votre forum, mais va étendre la réécriture d'URL et modifier 
-celle des pages des messages des membres.
-Les URLs des pages des messages des membres vont changer :
-	Nous avons optés pour une amélioration de la structure de ces URLs et de prendre en charge l'option sr 
-	(shworesult, résultat de la recherche en liste de sujets ou de messages).
-	Ce n'est pas un changement crucial, mais si vous mettez à jour, vous devrez conserver la rewriterules 
-	précédement utilisée pour ce type d'URL.
-	Pour cela, faites une copie de votre ancien .htaccess, et générez en un nouveaux après mise à jour. 
-	Dans votre ancien .htaccess, copier la rewriterule situé juste après (la ligne est plus longue):
-
-		# USER MESSAGES
-
-	et copiez la dans le nouveau .htaccess, juste après :
-
-		# HERE IS A GOOD PLACE TO ADD OTHER PHPBB RELATED REWRITERULES
-
-	et le zéro duplicate fera le reste ;)
-
-Avant de faire cela, vous pouvez en profitter, si vous le désirez, pour modifier les urls des profils permis par 
-les nouvelles options. Si vous modifiez les urls des profils, vous devrez conserver l'ancienne rewriterule des 
-profils dans votre nouveau .htaccess de la même façon.
-
-Les autres réglages ne seront pas altérés par la MAJ.
-
 Si vous rencontrez des difficultés lors de la mise à jour du fichier phpbb_seo_class.php, vous devrez procéder 
 manuellement. Il vous suffit pour cela de prendre la nouvelle version du fichier et d'y ajouter vos éventuels 
 réglages personnalisés comme s'il s'agissait d'une première installation.
+
 Enfin, une fois les nouveaux fichiers en place, il vous faudra vider le cache de phpBB et rafraîchir vos thèmes 
 (ACP => STYLE => Thèmes => Rafraîchir).
+
+Nous avons inclus le mod GYM Sitemap & RSS, mais comme il est encore en phase bêta, nous avons séparé l'installation
+reportez vous aux instructions plus bas pour plus de détails.
 
 _____________________________________________
 >>>>   INSTALLATION POUR VOTRE FORUM    <<<<<
@@ -343,6 +338,93 @@ juste après :
 	function seo_url_encode( $url, $type = 1 ) {
 
 Enfin, n'oubliez pas que vous pouvez obtenir de très bon résultats avec les ID et que vous pouvez toujours simuler des dossier dans ces urls.
+
+__________________________
+NOTE: GYM Sitemaps & RSS :
+__________________________
+
+Le module GYM Sitemaps & RSS est désormais inclus dans la premod.
+Solution modulaire pour générer des plans Sitemaps Google et des flux RSS 2.0 pour phpBB
+Ce mod va créer un SitemapIndex Google établissant la liste des Sitemaps Google installés.
+Il génère également des flux RSS 2.0.
+Utilise un système de cache supportant pleinement la compression GZip,
+ainsi que de la mise en forme XSLTransform pour les plans de site Google et les flux RSS.
+Visitez http://www.phpbb-seo.com/forums/gym-sitemaps-rss/sitemaps-rss-google-yahoo-msn-vt3136.html
+pour obtenir du support et vérifier l'existence de mise à jour.
+
+NOTA BENE : 
+
+	GYM Sitemaps & RSS est en phase bêta, l'installation est donc séparée de celle de la premod.
+	C'est a vous de décider de l'utiliser ou non, vous devez juste savoir qu'à ce stade, certaines
+	fonctions peuvent ne pas être disponibles et que quelques bugs peuvent encore être découverts.
+
+
+POUR INSTALLER LE MODULE :
+
+Si phpBB est installé dans un sous-dossier, et que vous avez d'autres pages à la racine, 
+vous pouvez utiliser la modularité du système GYM pour ajouter tous vos plans de sites Google dans le même index.
+
+Pour ce faire, vous devrez déplacer le fichier sitemap.php à la racine de votre domaine, l'éditer et remplacer :
+
+	$phpbb_root_path = './';
+
+Par : 
+
+	$phpbb_root_path = './phpbb/';
+
+
+En remplaçant, bien entendu, 'phpbb' par le nom du dossier dans lequel phpBB est installé sur votre système.
+
+Vous devrez ensuite vous rendre dans le panneau d'administration et mettre à jour l'option "URL du Sitemap Google" de la catégorie 
+"Sitemaps Google", onglet "Paramètres des Sitemaps Google". Il faut utiliser l'URL complète du domaine au lieu 
+de celle du forum : http://www.example.com/ au lieu de http://www.example.com/phpbb/
+Les liens vers le forum resteront bien entendu valides.
+
+Notez que la même opération est également possible pour le fichier gymrss.php et qu'il peut être pratique 
+de les mettre tous au même endroit.
+
+___________
+Nota Bene :
+___________
+
+Si vous avez installé phpBB dans un sous dossier (example.com/phpbb/) et le fichier sitemap.php (et/ou gymrss.php) 
+à la racine du domaine (example.com/sitemap.php) en suivant les instructions ci-dessus, vous devrez adapter 
+les chemins dans les rewriterules liés à sitemap.php (et/ou gymrss.php) en conséquence.
+Et si le .htaccess de phpBB se trouvait dans le sous dossier (/phpbb), le déplacer dans le .htaccess de la racine du domaine.
+
+
+===> Pour installer <===
+
+	=> Connectez vous en admin sur votre forum et lancez le script gym_install.php pour finir l'installation
+	   (Appelez l'URL http://www.votredomaine.com/dossier_phpbb/gym_sitemaps/gym_install.php)
+	
+NOTE :
+Les requêtes d'installation ont été validés sur toutes les versions de mysql supportées par phpBB3,
+mais malheureusement pas sur les autres bases de données (oracle, sqlite, postgresql, etc.).
+Il y a cependant un certain espoir qu'elles fonctionnent sans autre modification !!!!!
+
+GYM Sitemaps & RSS devrait pour le reste fonctionner avec toutes les bases de données supportées par phpBB3.
+
+======> La seule URL à soumettre pour vos Sitemaps est http://www.votredomaine.com/dossier_phpbb/sitemap.php
+======> ou http://www.votredomaine.com/dossier_phpbb/sitemapindex.xml avec réécriture d'URL activée.
+======> Vous devez vous assurer que l'URL est valide et fonctionnelle avant de la soumettre,
+======> il suffit d'appeler l'URL en question dans votre navigateur et de regarder le bon déroulement du MOD.
+
+
+
+Pour désinstaller :
+
+	1) Connectez vous en admin sur votre forum et lancez le script gym_install.php pour lancer la désinstallation
+	   (Appelez l'URL http://www.votredomaine.com/dossier_phpbb/gym_sitemaps/gym_install.php)
+	   
+	2) Effacez tous les fichier ajoutés et les quelques ajouts de code du module dans les fichiers de phpBB.
+
+________________
+NOTE : .htaccess
+________________
+
+Si GYM Sitemaps & RSS est installé sur votre forum, le générateur de .htaccess générera automatiquement
+les RewriteRules nécessaires pour GYM sitemaps & RSS. Vous devrez alors simplement générer un nouveau .htaccess et le mettre en place.
 
 #
 #-----[ COPY ]--------------------------------------------------

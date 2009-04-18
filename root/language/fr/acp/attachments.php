@@ -5,7 +5,7 @@
 * translated originally by PhpBB-fr.com <http://www.phpbb-fr.com/> and phpBB.biz <http://www.phpBB.biz>
 *
 * @package language
-* @version $Id: attachments.php,v 1.21 2007/11/22 10:07:24 elglobo Exp $
+* @version $Id: attachments.php,v 1.22 2008/07/03 16:58:24 elglobo Exp $
 * @copyright (c) 2005 phpBB Group 
 * @license http://opensource.org/licenses/gpl-license.php GNU Public License 
 *
@@ -58,13 +58,13 @@ $lang = array_merge($lang, array(
 	'ATTACH_EXT_GROUPS_URL'				=> 'Groupes d’extensions',
 	'ATTACH_ID'							=> 'ID',
 	'ATTACH_MAX_FILESIZE'				=> 'Taille maximale du fichier',
-	'ATTACH_MAX_FILESIZE_EXPLAIN'		=> 'Taille maximale de chaque fichier, mettre “0” pour illimité.',
+	'ATTACH_MAX_FILESIZE_EXPLAIN'		=> 'Taille maximale de chaque fichier, mettre “0” pour ne pas imposer de limite.',
 	'ATTACH_MAX_PM_FILESIZE'			=> 'Taille maximale des fichiers dans la messagerie privée',
-	'ATTACH_MAX_PM_FILESIZE_EXPLAIN'	=> 'Espace disque maximum disponible par utilisateur pour les fichiers joints dans les messages privés, mettre “0” pour illimité.',
+	'ATTACH_MAX_PM_FILESIZE_EXPLAIN'	=> 'Espace disque maximum disponible par utilisateur pour les fichiers joints dans les messages privés, mettre “0” pour ne pas imposer de limite.',
 	'ATTACH_ORPHAN_URL'					=> 'Fichiers orphelins',
 	'ATTACH_POST_ID'					=> 'ID du message',
 	'ATTACH_QUOTA'						=> 'Quota total de fichiers joints',
-	'ATTACH_QUOTA_EXPLAIN'				=> 'Espace disque maximum disponible pour les fichiers joints de tout le forum, mettre “0” pour illimité.',
+	'ATTACH_QUOTA_EXPLAIN'				=> 'Espace disque maximum disponible pour les fichiers joints de tout le forum, mettre “0” pour ne pas imposer de limite.',
 	'ATTACH_TO_POST'					=> 'Joindre le fichier au message',
 
 	'CAT_FLASH_FILES'			=> 'Fichiers Flash',
@@ -72,16 +72,18 @@ $lang = array_merge($lang, array(
 	'CAT_QUICKTIME_FILES'		=> 'Fichiers Quicktime',
 	'CAT_RM_FILES'				=> 'Fichiers RealMedia',
 	'CAT_WM_FILES'				=> 'Fichier Windows Media',
+	'CHECK_CONTENT' 			=> 'Vérifier les fichiers joints',
+	'CHECK_CONTENT_EXPLAIN' 	=> 'Certains navigateurs peuvent se tromper en attribuant un type MIME incorrect aux fichiers envoyés. Cette option permet de rejeter les fichiers qui risquent d’entraîner ce problème.',
 	'CREATE_GROUP'				=> 'Créer un nouveau groupe',
 	'CREATE_THUMBNAIL'			=> 'Créer une miniature',
 	'CREATE_THUMBNAIL_EXPLAIN'	=> 'Créer une miniature dans tous les cas possibles.',
 
 	'DEFINE_ALLOWED_IPS'			=> 'Définir les IPs/noms d’hôtes autorisés',
 	'DEFINE_DISALLOWED_IPS'			=> 'Définir les IPs/noms d’hôtes interdits',
-	'DOWNLOAD_ADD_IPS_EXPLAIN'		=> 'Pour spécifier plusieurs adresses IPs ou noms d’hôtes différents, entrez chacun d’eux sur une nouvelle ligne. Pour spécifier un rang d’adresses IPs, séparez le début et la fin par un tiret, et utilisez * comme caractère joker.',
+	'DOWNLOAD_ADD_IPS_EXPLAIN'		=> 'Pour indiquer plusieurs adresses IPs ou noms d’hôtes différents, entrez chacun d’eux sur une nouvelle ligne. Pour indiquer une plage d’adresses IPs, séparez le début et la fin par un tiret, et utilisez * comme caractère joker.',
 	'DOWNLOAD_REMOVE_IPS_EXPLAIN'	=> 'Vous pouvez supprimer (ou ne plus exclure) plusieurs adresses IPs d’un coup en utilisant la combinaison de touches appropriée avec votre clavier et votre souris. Les adresses IPs exclues ont un fond bleu.',
 	'DISPLAY_INLINED'				=> 'Afficher les images',
-	'DISPLAY_INLINED_EXPLAIN'		=> 'Si “Non”, les images jointes seront affichées en tant que lien.',
+	'DISPLAY_INLINED_EXPLAIN'		=> 'Si “Non”, les images jointes seront affichées en tant que liens.',
 	'DISPLAY_ORDER'					=> 'Ordre d’affichage des fichiers joints',
 	'DISPLAY_ORDER_EXPLAIN'			=> 'Classer les fichiers joints par date.',
 	
@@ -107,7 +109,7 @@ $lang = array_merge($lang, array(
 	'MAX_ATTACHMENTS'				=> 'Maximum de fichiers joints par message',
 	'MAX_ATTACHMENTS_PM'			=> 'Maximum de fichiers joints par message privé',
 	'MAX_EXTGROUP_FILESIZE'			=> 'Taille maximale du fichier',
-	'MAX_IMAGE_SIZE'				=> 'Dimensions maximales des images',
+	'MAX_IMAGE_SIZE'				=> 'Dimensions maximales de l’image',
 	'MAX_IMAGE_SIZE_EXPLAIN'		=> 'Taille maximale des images jointes. Réglez les deux valeurs sur 0px par 0px pour désactiver le contrôle des dimensions.',
 	'MAX_THUMB_WIDTH'				=> 'Largeur maximale de la miniature générée',
 	'MAX_THUMB_WIDTH_EXPLAIN'		=> 'La miniature générée n’excédera pas la largeur indiquée.',
@@ -121,12 +123,12 @@ $lang = array_merge($lang, array(
 	'NOT_ASSIGNED'				=> 'Non assigné',
 	'NO_EXT_GROUP'				=> 'Aucun',
 	'NO_EXT_GROUP_NAME'			=> 'Vous n’avez indiqué aucun nom de groupe',
-	'NO_EXT_GROUP_SPECIFIED'	=> 'Vous n’avez spécifié aucun groupe d’extension.',
+	'NO_EXT_GROUP_SPECIFIED'	=> 'Vous n’avez indiqué aucun groupe d’extension.',
 	'NO_FILE_CAT'				=> 'Aucun',
 	'NO_IMAGE'					=> 'Aucune image',
 	'NO_THUMBNAIL_SUPPORT'		=> 'Le support des miniatures est désactivé. Pour que cela fonctionne correctement, la librairie GD doit être disponible ou Imagemagick doit être installé. Aucun des deux n’a été trouvé.',
 	'NO_UPLOAD_DIR'				=> 'Le répertoire d’envoi indiqué n’existe pas.',
-	'NO_WRITE_UPLOAD'			=> 'Vous ne possédez pas les droits en écriture sur le répertoire d’envoi spécifié. Modifiez les droits en écriture (CHMOD) de ce répertoire.',
+	'NO_WRITE_UPLOAD'			=> 'Vous ne possédez pas les droits en écriture sur le répertoire d’envoi indiqué. Modifiez les droits en écriture (CHMOD) de ce répertoire.',
 
 	'ONLY_ALLOWED_IN_PM'	=> 'Seulement autorisé dans les messages privés',
 	'ORDER_ALLOW_DENY'		=> 'Autorisé',
@@ -139,11 +141,11 @@ $lang = array_merge($lang, array(
 	'SECURE_ALLOW_DENY'				=> 'Liste des autorisations/refus',
 	'SECURE_ALLOW_DENY_EXPLAIN'		=> 'Lorsque les téléchargements sécurisés sont activés, modifiez le comportement par défaut de la liste d’autorisations/refus à celle d’une <strong>liste blanche</strong> (Autorisé) ou une <strong>liste noire</strong> (Refusé).',
 	'SECURE_DOWNLOADS'				=> 'Activer les téléchargements sécurisés',
-	'SECURE_DOWNLOADS_EXPLAIN'		=> 'Si cette option est activée, les téléchargements seront limités aux IPs/noms d’hôtes définis.',
+	'SECURE_DOWNLOADS_EXPLAIN'		=> 'Si cette option est activée, les téléchargements sont limités aux IPs/noms d’hôtes définis.',
 	'SECURE_DOWNLOAD_NOTICE'		=> 'Les téléchargements sécurisés ne sont pas activés. Les paramètres ci-dessus seront appliqués une fois les téléchargements sécurisés activés.',
 	'SECURE_DOWNLOAD_UPDATE_SUCCESS'=> 'La liste des IPs a été mise à jour.',
 	'SECURE_EMPTY_REFERRER'			=> 'Autoriser un référent vide',
-	'SECURE_EMPTY_REFERRER_EXPLAIN'	=> 'Les téléchargements sécurisés sont basés sur les référents. Voulez-vous autoriser les téléchargements pour les utilisateurs sans référent?',
+	'SECURE_EMPTY_REFERRER_EXPLAIN'	=> 'Les téléchargements sécurisés sont basés sur les référents. Voulez-vous autoriser les téléchargements pour ceux qui omettent le référant?',
 	'SETTINGS_CAT_IMAGES'			=> 'Paramètres des catégories d’image',
 	'SPECIAL_CATEGORY'				=> 'Catégorie spéciale',
 	'SPECIAL_CATEGORY_EXPLAIN'		=> 'Les catégories spéciales proposent un affichage particulier.',
@@ -157,7 +159,7 @@ $lang = array_merge($lang, array(
 	'UPLOAD_DIR'					=> 'Répertoire d’envoi',
 	'UPLOAD_DIR_EXPLAIN'			=> 'Chemin de stockage pour les fichiers joints. Notez que si vous modifiez ce répertoire tout en ayant déjà transféré des fichiers joints, vous devrez copier manuellement les fichiers au nouvel emplacement.',
 	'UPLOAD_ICON'					=> 'Icône d’envoi',
-	'UPLOAD_NOT_DIR'				=> 'L’emplacement d’envoi que vous avez spécifié ne semble pas être un répertoire.',
+	'UPLOAD_NOT_DIR'				=> 'L’emplacement d’envoi que vous avez indiqué ne semble pas être un répertoire.',
 ));
 
 ?>

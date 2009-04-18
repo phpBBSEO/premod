@@ -5,7 +5,7 @@
 * translated originally by PhpBB-fr.com <http://www.phpbb-fr.com/> and phpBB.biz <http://www.phpBB.biz>
 *
 * @package language
-* @version $Id: users.php,v 1.21 2008/04/10 13:04:26 elglobo Exp $
+* @version $Id: users.php,v 1.22 2008/07/03 17:19:32 elglobo Exp $
 * @copyright (c) 2005 phpBB Group
 * @license http://opensource.org/licenses/gpl-license.php GNU Public License
 *
@@ -105,7 +105,7 @@ $lang = array_merge($lang, array(
 	'USER_ADMIN_DEL_AVATAR'			=> 'Supprimer son avatar',
 	'USER_ADMIN_DEL_POSTS'			=> 'Supprimer ses messages',
 	'USER_ADMIN_DEL_SIG'			=> 'Supprimer sa signature',
-	'USER_ADMIN_EXPLAIN'			=> 'Vous pouvez modifier les informations d’un utilisateur et certaines options spécifiques.',
+	'USER_ADMIN_EXPLAIN'			=> 'Vous pouvez modifier les informations d’un utilisateur et certaines options particulières.',
 	'USER_ADMIN_FORCE'				=> 'Forcer la réactivation',
 	'USER_ADMIN_MOVE_POSTS'			=> 'Déplacer ses messages',
 	'USER_ADMIN_SIG_REMOVED'		=> 'La signature de cet utilisateur a été supprimée.',

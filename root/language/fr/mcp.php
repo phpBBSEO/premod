@@ -5,7 +5,7 @@
 * translated originally by PhpBB-fr.com <http://www.phpbb-fr.com/> and phpBB.biz <http://www.phpBB.biz>
 *
 * @package language
-* @version $Id: mcp.php,v 1.21 2008/04/10 13:21:36 elglobo Exp $
+* @version $Id: mcp.php,v 1.22 2008/07/03 17:16:00 elglobo Exp $
 * @copyright (c) 2005 phpBB Group 
 * @license http://opensource.org/licenses/gpl-license.php GNU Public License 
 *
@@ -100,7 +100,7 @@ $lang = array_merge($lang, array(
 	'FORUM_STATUS'			=> 'Statut du forum',
 	'FORUM_STYLE'			=> 'Style du forum',
 
-	'GLOBAL_ANNOUNCEMENT'	=> 'Annonce générale',
+	'GLOBAL_ANNOUNCEMENT'	=> 'Annonce globale',
 
 	'IP_INFO'				=> 'Information IP',
 	'IPS_POSTED_FROM'		=> 'Cet utilisateur a posté avec les adresses IP:',
@@ -152,10 +152,10 @@ $lang = array_merge($lang, array(
 	'MCP_MAKE_ANNOUNCEMENT_CONFIRM'	=> 'Etes-vous sûr de vouloir mettre ce sujet en “Annonce”?',
 	'MCP_MAKE_ANNOUNCEMENTS'		=> 'Mettre en “Annonces”',
 	'MCP_MAKE_ANNOUNCEMENTS_CONFIRM'=> 'Etes-vous sûr de vouloir mettre les sujets sélectionnés en “Annonces”?',
-	'MCP_MAKE_GLOBAL'				=> 'Mettre en “Annonce générale”',
-	'MCP_MAKE_GLOBAL_CONFIRM'		=> 'Etes-vous sûr de vouloir mettre ce sujet en “Annonce générale”?',
-	'MCP_MAKE_GLOBALS'				=> 'Mettre en “Annonces générales”',
-	'MCP_MAKE_GLOBALS_CONFIRM'		=> 'Etes-vous sûr de vouloir mettre les sujets sélectionnés en “Annonces générales”?',
+	'MCP_MAKE_GLOBAL'				=> 'Mettre en “Annonce globale”',
+	'MCP_MAKE_GLOBAL_CONFIRM'		=> 'Etes-vous sûr de vouloir mettre ce sujet en “Annonce globale”?',
+	'MCP_MAKE_GLOBALS'				=> 'Mettre en “Annonces globales”',
+	'MCP_MAKE_GLOBALS_CONFIRM'		=> 'Etes-vous sûr de vouloir mettre les sujets sélectionnés en “Annonces globales”?',
 	'MCP_MAKE_STICKY'				=> 'Mettre en “Post-it”',
 	'MCP_MAKE_STICKY_CONFIRM'		=> 'Etes-vous sûr de vouloir mettre ce sujet en “Post-it”?',
 	'MCP_MAKE_STICKIES'				=> 'Mettre en “Post-it”',
@@ -185,12 +185,12 @@ $lang = array_merge($lang, array(
 	'MCP_QUEUE_UNAPPROVED_TOPICS'			=> 'Sujets en attente',
 	'MCP_QUEUE_UNAPPROVED_TOPICS_EXPLAIN'	=> 'Liste de tous les sujets nécessitant une approbation avant publication.',
 
-	'MCP_VIEW_USER'			=> 'Consulter les avertissements pour un utilisateur spécifique',
+	'MCP_VIEW_USER'			=> 'Consulter les avertissements pour un utilisateur en particulier',
 
 	'MCP_WARN'				=> 'Avertissements',
 	'MCP_WARN_FRONT'		=> 'Première page',
 	'MCP_WARN_LIST'			=> 'Liste des avertissements',
-	'MCP_WARN_POST'			=> 'Avertir pour le message spécifique',
+	'MCP_WARN_POST'			=> 'Avertir pour un message en particulier',
 	'MCP_WARN_USER'			=> 'Avertir le membre',
 
 	'MERGE_POSTS'			=> 'Fusionner les messages',
@@ -283,8 +283,8 @@ $lang = array_merge($lang, array(
 
 	'SEARCH_POSTS_BY_USER'				=> 'Rechercher les messages de',
 	'SELECT_ACTION'						=> 'Sélectionner l’action désirée',
-	'SELECT_FORUM_GLOBAL_ANNOUNCEMENT'	=> 'Sélectionnez le forum dans lequel cette annonce générale doit être placée.',
-	'SELECT_FORUM_GLOBAL_ANNOUNCEMENTS'	=> 'Un ou plusieurs des sujets sélectionnés sont des annonces générales. Sélectionnez le forum dans lequel vous souhaitez que ces sujets soient placés.',
+	'SELECT_FORUM_GLOBAL_ANNOUNCEMENT'	=> 'Sélectionnez le forum dans lequel cette annonce globale doit être placée.',
+	'SELECT_FORUM_GLOBAL_ANNOUNCEMENTS'	=> 'Un ou plusieurs des sujets sélectionnés sont des annonces globales. Sélectionnez le forum dans lequel vous souhaitez que ces sujets soient placés.',
 	'SELECT_MERGE'						=> 'Sélectionner pour fusionner',
 	'SELECT_TOPICS_FROM'				=> 'Sélectionner les sujets de',
 	'SELECT_TOPIC'						=> 'Sélectionner le sujet',

@@ -651,9 +651,8 @@ class install_phpbb_seo extends module {
 		global $db, $user, $phpEx;
 		$sql = 'SELECT module_id
 			FROM ' . MODULES_TABLE . "
-			WHERE module_langname = '" . $db->sql_escape($title) . "'
-			LIMIT 1";
-		$result = $db->sql_query($sql);
+			WHERE module_langname = '" . $db->sql_escape($title) . "'";
+		$result = $db->sql_query_limit($sql, 1);
 		$row = $db->sql_fetchrow($result);
 		if ($row['module_id'] > 1) {
 			return intval($row['module_id']);
@@ -664,12 +663,14 @@ class install_phpbb_seo extends module {
 	* Sends an email to the board administrator with their password and some useful links
 	*/
 	function final_stage($mode, $sub) {
-		global $auth, $config, $db, $user, $template, $user, $phpbb_root_path, $phpEx, $phpbb_seo;
+		global $auth, $config, $db, $user, $template, $user, $phpbb_root_path, $phpEx, $phpbb_seo, $cache;
 		if (!sizeof($this->errors) ) {
 			add_log('admin', 'SEO_LOG_' . strtoupper($mode), $phpbb_seo->version );
+			$cache->purge();
 		} else {
 			add_log('admin', 'SEO_LOG_' . strtoupper($mode) . '_FAIL', $this->errors);
-			$this->p_master->error($user->lang['SEO_ERROR_INSTALL'] . '<br/><pre>' . implode('<br/>', $this->errors) . '</pre>', __LINE__, __FILE__);	
+			$this->p_master->error($user->lang['SEO_ERROR_INSTALL'] . '<br/><pre>' . implode('<br/>', $this->errors) . '</pre>', __LINE__, __FILE__);
+			$cache->purge();	
 		}
 		$this->page_title = $user->lang['STAGE_FINAL'];
 		if (  $mode == 'install_phpbb_seo' ) {

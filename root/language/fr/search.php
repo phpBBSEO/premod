@@ -5,7 +5,7 @@
 * translated originally by PhpBB-fr.com <http://www.phpbb-fr.com/> and phpBB.biz <http://www.phpBB.biz>
 *
 * @package language
-* @version $Id: search.php,v 1.21 2007/11/22 13:09:33 lolovoisin Exp $
+* @version $Id: search.php,v 1.22 2008/07/03 12:41:26 elglobo Exp $
 * @copyright (c) 2005 phpBB Group 
 * @license http://opensource.org/licenses/gpl-license.php GNU Public License 
 *
@@ -46,7 +46,7 @@ $lang = array_merge($lang, array(
     'FOUND_SEARCH_MATCHES'   => '%d résultats trouvés',
 	'FOUND_MORE_SEARCH_MATCHES'   => 'La recherche a trouvé plus de %d résultats',
 
-	'GLOBAL'   => 'Annonce générale',
+	'GLOBAL'   => 'Annonce globale',
 
 	'IGNORED_TERMS'   => 'ignoré',
 	'IGNORED_TERMS_EXPLAIN'   => 'Les mots suivants de votre recherche ont été ignorés parce qu’ils sont trop communs: <strong>%s</strong>.',

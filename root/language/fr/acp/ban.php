@@ -5,7 +5,7 @@
 * translated originally by PhpBB-fr.com <http://www.phpbb-fr.com/> and phpBB.biz <http://www.phpBB.biz>
 *
 * @package language
-* @version $Id: ban.php,v 1.21 2007/11/22 10:29:01 elglobo Exp $
+* @version $Id: ban.php,v 1.22 2008/07/03 17:16:01 elglobo Exp $
 * @copyright (c) 2005 phpBB Group 
 * @license http://opensource.org/licenses/gpl-license.php GNU Public License 
 *
@@ -42,7 +42,7 @@ $lang = array_merge($lang, array(
 	'30_MINS'		=> '30 minutes',
 	'6_HOURS'		=> '6 heures',
 
-	'ACP_BAN_EXPLAIN'	=> 'Vous pouvez contrôler le bannissement d’utilisateurs par nom, adresse IP ou adresse e-mail. Ces méthodes empêchent un utilisateur d’atteindre n’importe quelle partie du forum. Vous pouvez donner si vous le souhaitez une courte raison (3000 caractères maximum) au bannissement. Cela sera affiché dans l’historique de l’administration. La durée du bannissement peut également être spécifiée. Si vous voulez que le bannissement termine à une date spécifique plutôt qu’après une période de temps, sélectionnez <span style="text-decoration: underline;">Jusqu’à -&gt;</span> pour la durée du bannissement et entrez une date au format <kbd>AAAA-MM-JJ</kbd>.',
+	'ACP_BAN_EXPLAIN'	=> 'Vous pouvez contrôler le bannissement d’utilisateurs par nom, adresse IP ou adresse e-mail. Ces méthodes empêchent un utilisateur d’atteindre n’importe quelle partie du forum. Vous pouvez donner si vous le souhaitez une courte raison (3000 caractères maximum) au bannissement. Cela sera affiché dans l’historique de l’administration. La durée du bannissement peut également être indiquée. Si vous voulez que le bannissement termine à une date particulière plutôt qu’après une période de temps, sélectionnez <span style="text-decoration: underline;">Jusqu’à -&gt;</span> pour la durée du bannissement et entrez une date au format <kbd>AAAA-MM-JJ</kbd>.',
 
 	'BAN_EXCLUDE'			=> 'Exclure du bannissement',
 	'BAN_LENGTH'			=> 'Durée du bannissement',
@@ -52,14 +52,14 @@ $lang = array_merge($lang, array(
 
 	'EMAIL_BAN'					=> 'Bannir une ou plusieurs adresses e-mails',
 	'EMAIL_BAN_EXCLUDE_EXPLAIN'	=> 'Si activé, permet d’exclure de toutes les interdictions courantes les adresses e-mails renseignées.',
-	'EMAIL_BAN_EXPLAIN'			=> 'Pour spécifier plus d’une adresse e-mail, entrez chacune d’elles sur une nouvelle ligne. Pour effectuer une interdiction sur une partie du nom, utilisez * comme caractère joker, par exemple: *@hotmail.com, *@*.domain.tld, etc.',
+	'EMAIL_BAN_EXPLAIN'			=> 'Pour indiquer plus d’une adresse e-mail, entrez chacune d’elles sur une nouvelle ligne. Pour effectuer une interdiction sur une partie du nom, utilisez * comme caractère joker, par exemple: *@hotmail.com, *@*.domain.tld, etc.',
 	'EMAIL_NO_BANNED'			=> 'Aucune adresse e-mail bannie',
 	'EMAIL_UNBAN'				=> 'Débannir ou ne plus exclure des adresses e-mails',
 	'EMAIL_UNBAN_EXPLAIN'		=> 'Vous pouvez débannir (ou ne plus exclure) plusieurs adresses e-mails d’un coup en utilisant la combinaison de touches appropriée avec votre clavier et votre souris. Les adresses e-mails exclues sont grisées et en gras.',
 
 	'IP_BAN'					=> 'Bannir une ou plusieurs adresses IPs',
 	'IP_BAN_EXCLUDE_EXPLAIN'	=> 'Si activé, permet d’exclure de toutes les interdictions courantes les adresses IPs renseignées.',
-	'IP_BAN_EXPLAIN'			=> 'Pour spécifier plusieurs adresses IPs ou noms d’hôtes différents, entrez chacun d’eux sur une nouvelle ligne. Pour spécifier un rang d’adresses IP, séparez le début et la fin par un tiret, et utilisez * comme caractère joker.',
+	'IP_BAN_EXPLAIN'			=> 'Pour indiquer plusieurs adresses IPs ou noms d’hôtes différents, entrez chacun d’eux sur une nouvelle ligne. Pour indiquer une plage d’adresses IP, séparez le début et la fin par un tiret, et utilisez * comme caractère joker.',
 	'IP_HOSTNAME'				=> 'Adresses IPs ou noms d’hôtes',
 	'IP_NO_BANNED'				=> 'Aucune adresse IP bannie',
 	'IP_UNBAN'					=> 'Débannir ou ne plus exclure des adresses IPs',

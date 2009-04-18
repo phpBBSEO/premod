@@ -5,7 +5,7 @@
 * translated originally by PhpBB-fr.com <http://www.phpbb-fr.com/> and phpBB.biz <http://www.phpBB.biz>
 *
 * @package language
-* @version $Id: prune.php,v 1.21 2007/11/22 12:22:49 elglobo Exp $
+* @version $Id: prune.php,v 1.22 2008/07/03 17:32:49 elglobo Exp $
 * @copyright (c) 2005 phpBB Group 
 * @license http://opensource.org/licenses/gpl-license.php GNU Public License 
 *
@@ -67,7 +67,7 @@ $lang = array_merge($lang, array(
 
 // Forum Pruning
 $lang = array_merge($lang, array(	
-	'ACP_PRUNE_FORUMS_EXPLAIN'	=> 'Ceci supprimera les sujets n’ayant pas reçu de réponse ou n’ayant pas été visualisés depuis le nombre de jours que vous avez spécifié. Si vous ne spécifiez pas un nombre de jours, tous les sujets seront supprimés. Par défaut, cette action ne supprimera pas les sujets ayant des sondages actifs, ni les post-it et annonces.',
+	'ACP_PRUNE_FORUMS_EXPLAIN'	=> 'Ceci supprimera les sujets n’ayant pas reçu de réponse ou n’ayant pas été visualisés depuis le nombre de jours que vous avez indiqué. Si vous n’indiquez pas un nombre de jours, tous les sujets seront supprimés. Par défaut, cette action ne supprimera pas les sujets ayant des sondages actifs, ni les post-it et annonces.',
 
 	'FORUM_PRUNE'		=> 'Délestage',
 	

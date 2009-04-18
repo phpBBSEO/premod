@@ -5,7 +5,7 @@
 * translated originally by PhpBB-fr.com <http://www.phpbb-fr.com/> and phpBB.biz <http://www.phpBB.biz>
 *
 * @package language
-* @version $Id: modules.php,v 1.21 2007/11/22 11:54:10 elglobo Exp $
+* @version $Id: modules.php,v 1.22 2008/07/03 17:55:10 elglobo Exp $
 * @copyright (c) 2005 phpBB Group
 * @license http://opensource.org/licenses/gpl-license.php GNU Public License
 *
@@ -55,7 +55,7 @@ $lang = array_merge($lang, array(
 	'DELETE_MODULE_CONFIRM'	=> 'Etes-vous sûr de vouloir supprimer ce module?',
 
 	'EDIT_MODULE'			=> 'Editer le module',
-	'EDIT_MODULE_EXPLAIN'	=> 'Vous pouvez entrer une configuration spécifique au module.',
+	'EDIT_MODULE_EXPLAIN'	=> 'Vous pouvez entrer une configuration particulière au module.',
 
 	'HIDDEN_MODULE'			=> 'Cacher le module',
 
@@ -71,9 +71,9 @@ $lang = array_merge($lang, array(
 	'MODULE_TYPE'				=> 'Type de module',
 
 	'NO_CATEGORY_TO_MODULE'	=> 'Impossible de convertir la catégorie en module. Supprimez ou déplacer les modules enfants avant de tenter cette action.',
-	'NO_MODULE'				=> 'Aucun module trouvé.',
-	'NO_MODULE_ID'			=> 'id du module non spécifié.',
-	'NO_MODULE_LANGNAME'	=> 'Aucun nom de module n’a été spécifié.',
+	'NO_MODULE'				=> 'Aucun module n’a été trouvé.',
+	'NO_MODULE_ID'			=> 'Aucune identification du module n’a été indiquée.',
+	'NO_MODULE_LANGNAME'	=> 'Aucun nom de module n’a été indiqué.',
 	'NO_PARENT'				=> 'Aucun module parent',
 
 	'PARENT'				=> 'Module parent',

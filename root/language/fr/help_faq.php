@@ -5,7 +5,7 @@
 * translated originally by PhpBB-fr.com <http://www.phpbb-fr.com/> and phpBB.biz <http://www.phpBB.biz>
 *
 * @package language
-* @version $Id: help_faq.php,v 1.21 2007/11/22 14:21:20 tonillo Exp $
+* @version $Id: help_faq.php,v 1.22 2008/07/03 17:11:26 elglobo Exp $
 * @copyright (c) 2005 phpBB Group 
 * @license http://opensource.org/licenses/gpl-license.php GNU Public License 
 *
@@ -78,15 +78,15 @@ $help = array(
 	),
 	array(
 		0 => '--',
-		1 => 'Préférences et réglages de l’utilisateur'
+		1 => 'Préférences et paramètres de l’utilisateur'
 	),
 	array(
-		0 => 'Comment modifier mes réglages?',
-		1 => 'Tous vos réglages (si vous êtes inscrit) sont enregistrés dans notre base de données. Pour les modifier, visitez le lien <em>Panneau de l’utilisateur</em> (généralement affiché en haut de toutes les pages du forum). Cela vous permettra de modifier tous vos réglages et préférences.'
+		0 => 'Comment modifier mes paramètres?',
+		1 => 'Tous vos paramètres (si vous êtes inscrit) sont enregistrés dans notre base de données. Pour les modifier, visitez le lien <em>Panneau de l’utilisateur</em> (généralement affiché en haut de toutes les pages du forum). Cela vous permettra de modifier tous vos paramètres et préférences.'
 	),
 	array(
 		0 => 'Les heures ne sont pas correctes!',
-		1 => 'Il est possible que l’heure affichée soit sur un fuseau horaire différent de celui dans lequel vous êtes. Dans ce cas, vous devez modifier vos préférences pour le fuseau horaire de votre zone (Londres, Paris, New York, Sydney, etc.) dans le panneau de l’utilisateur. Notez que la modification du fuseau horaire, comme la plupart des réglages n’est accessible qu’aux utilisateurs enregistrés. Donc si vous n’êtes pas inscrit, c’est le bon moment pour le faire.'
+		1 => 'Il est possible que l’heure affichée soit sur un fuseau horaire différent de celui dans lequel vous êtes. Dans ce cas, vous devez modifier vos préférences pour le fuseau horaire de votre zone (Londres, Paris, New York, Sydney, etc.) dans le panneau de l’utilisateur. Notez que la modification du fuseau horaire, comme la plupart des paramètres n’est accessible qu’aux utilisateurs enregistrés. Donc si vous n’êtes pas inscrit, c’est le bon moment pour le faire.'
 	),
 	array(
 		0 => 'J’ai changé mon fuseau horaire et l’heure est encore incorrecte!',
@@ -130,7 +130,7 @@ $help = array(
 	),
 	array(
 		0 => 'Pourquoi ne puis-je pas ajouter plus d’options à mon sondage?',
-		1 => 'Le nombre d’options maximum par sondage est défini par l’administrateur. Si vous avez besoin de spécifier plus d’options, contactez-le.'
+		1 => 'Le nombre d’options maximum par sondage est défini par l’administrateur. Si vous avez besoin de indiquer plus d’options, contactez-le.'
 	),
 	array(
 		0 => 'Comment modifier ou supprimer un sondage?',
@@ -185,16 +185,16 @@ $help = array(
 		1 => 'Oui, vous pouvez afficher des images dans vos messages. Par ailleurs, si l’administrateur a autorisé les fichiers joints, vous pouvez transférer une image sur le forum. Autrement, vous devez lier une image placée sur un serveur Web public, exemple: http://www.exemple.com/mon-image.gif. Vous ne pouvez pas lier des images de votre ordinateur (sauf si c’est un serveur Web public) ni des images placées derrière des mécanismes d’authentification, exemple: Boîtes e-mail Hotmail ou Yahoo!, sites protégés par un mot de passe, etc. Pour afficher l’image, utilisez la balise BBCode [img].'
 	),
 	array(
-		0 => 'Que sont les annonces générales?',
-		1 => 'Les annonces générales contiennent des informations importantes que vous devez lire dès que possible. Elles apparaissent en haut de chaque forum et dans votre panneau de l’utilisateur. La possibilité de publier des annonces générales dépend des permissions définies par l’administrateur.'
+		0 => 'Que sont les annonces globales?',
+		1 => 'Les annonces globales contiennent des informations importantes que vous devez lire dès que possible. Elles apparaissent en haut de chaque forum et dans votre panneau de l’utilisateur. La possibilité de publier des annonces globales dépend des permissions définies par l’administrateur.'
 	),
 	array(
 		0 => 'Que sont les annonces?',
-		1 => 'Les annonces contiennent souvent des informations importantes concernant le forum que vous consultez et doivent être lues dès que possible. Les annonces apparaissent en haut de chaque page du forum dans lequel elles sont publiées. Comme pour les annonces générales, la possibilité de publier des annonces dépend des permissions définies par l’administrateur.'
+		1 => 'Les annonces contiennent souvent des informations importantes concernant le forum que vous consultez et doivent être lues dès que possible. Les annonces apparaissent en haut de chaque page du forum dans lequel elles sont publiées. Comme pour les annonces globales, la possibilité de publier des annonces dépend des permissions définies par l’administrateur.'
 	),
 	array(
 		0 => 'Que sont les post-it?',
-		1 => 'Un post-it apparaît en dessous des annonces sur la première page du forum dans lequel il a été publié. Il contient des informations relativement importantes et vous devez le consulter régulièrement. Comme pour les annonces et les annonces générales, la possibilité de publier des post-it dépend des permissions définies par l’administrateur.'
+		1 => 'Un post-it apparaît en dessous des annonces sur la première page du forum dans lequel il a été publié. Il contient des informations relativement importantes et vous devez le consulter régulièrement. Comme pour les annonces et les annonces globales, la possibilité de publier des post-it dépend des permissions définies par l’administrateur.'
 	),
 	array(
 		0 => 'Que sont les sujets verrouillés?',
@@ -250,7 +250,7 @@ $help = array(
 	),
 	array(
 		0 => 'Je reçois sans arrêt des messages indésirables!',
-		1 => 'Vous pouvez empêcher un utilisateur de vous envoyer des messages en utilisant les filtres de message dans les réglages de votre messagerie privée. Si vous recevez des messages privés abusifs d’un utilisateur en particulier, informez l’administrateur. Ce dernier a la possibilité d’empêcher complètement un utilisateur d’envoyer des messages privés.'
+		1 => 'Vous pouvez empêcher un utilisateur de vous envoyer des messages en utilisant les filtres de message dans les paramètres de votre messagerie privée. Si vous recevez des messages privés abusifs d’un utilisateur en particulier, informez l’administrateur. Ce dernier a la possibilité d’empêcher complètement un utilisateur d’envoyer des messages privés.'
 	),
 	array(
 		0 => 'J’ai reçu un e-mail ou un courrier abusif d’un utilisateur de ce forum!',
@@ -290,7 +290,7 @@ $help = array(
 	),
 	array(
 		0 => 'Comment puis-je trouver mes propres messages et sujets?',
-		1 => 'Vos messages peuvent être retrouvés en cliquant sur “Voir vos messages” dans le panneau de l’utilisateur ou via votre propre page de profil. Pour rechercher vos sujets, utilisez la page de recherche avancée et choisissez les réglages appropriés.'
+		1 => 'Vos messages peuvent être retrouvés en cliquant sur “Voir vos messages” dans le panneau de l’utilisateur ou via votre propre page de profil. Pour rechercher vos sujets, utilisez la page de recherche avancée et choisissez les paramètres appropriés.'
 	),
 	array(
 		0 => '--',
@@ -301,7 +301,7 @@ $help = array(
 		1 => 'Les favoris dans phpBB 3 sont comme les favoris de votre navigateur. Vous n’êtes pas nécessairement averti des mises à jour, mais vous pouvez revenir plus tard sur le sujet. A l’inverse, la surveillance vous préviendra lorsqu’un sujet ou un forum sera mis à jour via votre choix de préférence.'
 	),
 	array(
-		0 => 'Comment surveiller des forums ou sujets spécifiques?',
+		0 => 'Comment surveiller des forums ou sujets particuliers?',
 		1 => 'Pour surveiller un forum particulier, une fois entré sur celui-ci, cliquez sur le lien “Surveiller ce forum”. Pour surveiller un sujet, vous pouvez soit répondre à ce sujet et cocher la case du formulaire de rédaction de message pour le surveiller, soit cliquer sur le lien “Surveiller ce sujet” disponible en consultant le sujet lui-même.'
 	),
 	array(
@@ -313,7 +313,7 @@ $help = array(
 		1 => 'Fichiers joints'
 	),
 	array(
-		0 => 'Quelles fichiers joints sont autorisés sur ce forum?',
+		0 => 'Quels fichiers joints sont autorisés sur ce forum?',
 		1 => 'L’administrateur peut autoriser ou interdire certains types de fichiers joints. Si vous n’êtes pas sûr de ce qui est autorisé à être transféré, contactez l’administrateur pour plus d’informations.'
 	),
 	array(

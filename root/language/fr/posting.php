@@ -5,7 +5,7 @@
 * translated originally by PhpBB-fr.com <http://www.phpbb-fr.com/> and phpBB.biz <http://www.phpBB.biz>
 *
 * @package language
-* @version $Id: posting.php,v 1.21 2007/11/22 13:08:20 lolovoisn Exp $
+* @version $Id: posting.php,v 1.22 2008/07/03 17:17:26 Elglobo Exp $
 * @copyright (c) 2005 phpBB Group 
 * @license http://opensource.org/licenses/gpl-license.php GNU Public License 
 *
@@ -76,9 +76,10 @@ $lang = array_merge($lang, array(
 
 	'DELETE_FILE'				=> 'Supprimer le fichier',
 	'DELETE_MESSAGE'			=> 'Supprimer le message',
-	'DELETE_MESSAGE_CONFIRM'	=> 'Êtes-vous sûr de vouloir supprimer ce message?',
+	'DELETE_MESSAGE_CONFIRM'	=> 'Etes-vous sûr de vouloir supprimer ce message?',
 	'DELETE_OWN_POSTS'			=> 'Désolé, vous ne pouvez supprimer que vos propres messages.',
-	'DELETE_POST_CONFIRM'		=> 'Êtes-vous sûr de vouloir supprimer ce message?',
+	'DELETE_POST_CONFIRM'		=> 'Etes-vous sûr de vouloir supprimer ce message?',
+	'DISALLOWED_CONTENT' 		=> 'L’envoi a été rejeté car le fichier envoyé a été identifié comme un éventuel vecteur d’attaque.',
 	'DELETE_POST_WARN'			=> 'Une fois supprimé, le message ne pourra pas être récupéré',
 	'DISABLE_BBCODE'			=> 'Désactiver les BBCodes',
 	'DISABLE_MAGIC_URL'			=> 'Désactiver les liens',
@@ -137,11 +138,11 @@ $lang = array_merge($lang, array(
 	'NO_PM_ICON'				=> 'Aucune',
 	'NO_POLL_TITLE'				=> 'Vous devez entrer un titre de sondage.',
 	'NO_POST'					=> 'Le message demandé n’existe pas.',
-	'NO_POST_MODE'				=> 'Aucun type de message n’est spécifié.',
+	'NO_POST_MODE'				=> 'Aucun type de message n’est indiqué.',
 
 	'PARTIAL_UPLOAD'			=> 'Le fichier n’a été que partiellement transféré.',
 	'PHP_SIZE_NA'				=> 'La taille du fichier joint est trop grande.<br />Impossible de déterminer la taille maximale définie par PHP dans php.ini.',
-	'PHP_SIZE_OVERRUN'			=> 'La taille du fichier joint est trop grande, la taille maximale est de %d Mo.<br />Notez que ce réglage se trouve dans php.ini et ne peut pas être outrepassé.',
+	'PHP_SIZE_OVERRUN'			=> 'La taille du fichier joint est trop grande, la taille maximale est de %d Mo.<br />Notez que ce paramètre se trouve dans php.ini et ne peut pas être outrepassé.',
 	'PLACE_INLINE'				=> 'Mettre en ligne',
 	'POLL_DELETE'				=> 'Supprimer le sondage',
 	'POLL_FOR'					=> 'Durée du sondage',
@@ -163,7 +164,7 @@ $lang = array_merge($lang, array(
 	'POST_DELETED'				=> 'Le message a été supprimé.',
 	'POST_EDITED'				=> 'Votre message a été édité.',
 	'POST_EDITED_MOD'			=> 'Votre message a été édité, mais requiert l’approbation d’un modérateur avant d’être rendu visible publiquement.',
-	'POST_GLOBAL'				=> 'Annonce générale',
+	'POST_GLOBAL'				=> 'Annonce globale',
 	'POST_ICON'					=> 'Icône de message',
 	'POST_NORMAL'				=> 'Normal',
 	'POST_REVIEW'				=> 'Revue du sujet',
@@ -184,7 +185,7 @@ $lang = array_merge($lang, array(
 	'SMILIES_ARE_ON'			=> 'Les smileys sont <em>activés</em>',
 	'STICKY_ANNOUNCE_TIME_LIMIT'=> 'Durée du post-it ou de l’annonce',
 	'STICK_TOPIC_FOR'			=> 'Epingler pendant',
-	'STICK_TOPIC_FOR_EXPLAIN'	=> 'Mettre “0” ou laissez vide pour une durée illimitée des post-it/annonces.',
+	'STICK_TOPIC_FOR_EXPLAIN'	=> 'Mettre “0” ou laissez cette case vide pour une durée illimitée des post-it/annonces.',
 	'STYLES_TIP'				=> 'Astuce: les mises en forme peuvent être appliquées rapidement en sélectionnant le texte.',
 
 	'TOO_FEW_CHARS'				=> 'Votre message contient trop peu de caractères.',
@@ -200,10 +201,10 @@ $lang = array_merge($lang, array(
 	'TOPIC_BUMPED'				=> 'Le sujet a été remonté.',
 
 	'UNAUTHORISED_BBCODE'		=> 'Vous ne pouvez pas utiliser certains BBCodes: %s.',
-	'UNGLOBALISE_EXPLAIN'		=> 'Pour changer cette annonce générale en sujet normal, vous devez sélectionner le forum où vous souhaitez voir apparaître le sujet.',
+	'UNGLOBALISE_EXPLAIN'		=> 'Pour changer cette annonce globale en sujet normal, vous devez sélectionner le forum où vous souhaitez voir apparaître le sujet.',
 	'UPDATE_COMMENT'			=> 'Mettre à jour le commentaire',
-	'URL_INVALID'				=> 'Le lien spécifié est invalide.',
-	'URL_NOT_FOUND'				=> 'Le fichier spécifié n’a pas été trouvé.',
+	'URL_INVALID'				=> 'Le lien indiqué est invalide.',
+	'URL_NOT_FOUND'				=> 'Le fichier indiqué n’a pas été trouvé.',
 	'URL_IS_OFF'				=> '[url] est <em>désactivé</em>',
 	'URL_IS_ON'					=> '[url] est <em>activé</em>',
 	'USER_CANNOT_BUMP'			=> 'Vous ne pouvez pas remonter de sujets dans ce forum.',

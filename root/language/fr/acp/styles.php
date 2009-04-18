@@ -5,7 +5,7 @@
 * translated originally by PhpBB-fr.com <http://www.phpbb-fr.com/> and phpBB.biz <http://www.phpBB.biz>
 *
 * @package language
-* @version $Id: styles.php,v 1.21 2008/03/27 08:57:31 elglobo Exp $
+* @version $Id: styles.php,v 1.22 2008/07/03 17:27:26 elglobo Exp $
 * @copyright (c) 2005 phpBB Group 
 * @license http://opensource.org/licenses/gpl-license.php GNU Public License 
 *
@@ -50,7 +50,7 @@ $lang = array_merge($lang, array(
 	'ADD_THEME' => 'Créer un thème',
 	'ADD_THEME_EXPLAIN' => 'Vous pouvez ajouter un nouveau thème. Selon la configuration du serveur et vos accès aux permissions des fichiers, vous aurez plus ou moins d’options disponibles. Par exemple, vous pouvez baser un thème sur un thème existant, vous pouvez également télécharger ou envoyer un thème disponible dans le dossier de sauvegarde depuis une archive de thème. Si vous téléchargez ou importez un thème, il peut prendre le même nom que celui de l’archive dont il est extrait, pour cela, laissez le nom du thème vide.',
 	'ARCHIVE_FORMAT' => 'Type d’archive',
-	'AUTOMATIC_EXPLAIN'      => 'Laissez vide pour tenter une détection automatique.',
+	'AUTOMATIC_EXPLAIN'      => 'Laissez cette case vide pour tenter une détection automatique.',
 
 	'BACKGROUND' => 'Fond',
 	'BACKGROUND_COLOUR' => 'Couleur de fond',
@@ -63,8 +63,8 @@ $lang = array_merge($lang, array(
 	'CACHE_FILENAME' => 'Nom du fichier',
 	'CACHE_FILESIZE' => 'Taille du fichier',
 	'CACHE_MODIFIED' => 'Modifié',
-	'CONFIRM_IMAGESET_REFRESH'		=> 'Êtes-vous sûr de vouloir rafraîchir toutes les données des packs d’images? Les réglages du fichier de configuration du pack d’images écraseront toutes modifications des packs d’images qui ont été extraites de l’éditeur de packs d’images.',
-	'CONFIRM_TEMPLATE_CLEAR_CACHE'	=> 'Êtes-vous sûr de vouloir supprimer toutes les versions de vos fichiers de template mis en cache?',
+	'CONFIRM_IMAGESET_REFRESH'		=> 'Etes-vous sûr de vouloir rafraîchir toutes les données des packs d’images? Les paramètres du fichier de configuration du pack d’images écraseront toutes modifications des packs d’images qui ont été extraites de l’éditeur de packs d’images.',
+	'CONFIRM_TEMPLATE_CLEAR_CACHE'	=> 'Etes-vous sûr de vouloir supprimer toutes les versions de vos fichiers de template mis en cache?',
 	'CONFIRM_TEMPLATE_REFRESH' => 'Etes-vous sûr de vouloir rafraîchir toutes les données du template dans la base de données, avec le contenu des fichiers de template du système de fichiers? Cela écrasera toutes les modifications effectuées avec l’éditeur de template dont les templates étaient stockés dans la base de données.',
 	'CONFIRM_THEME_REFRESH' => 'Etes-vous sûr de vouloir rafraîchir les données du thème dans la base avec les thèmes du système de fichiers? Cela écrasera toutes les modifications effectuées avec l’éditeur de thèmes dont les thèmes étaient stockés dans la base de données.',
 	'COPYRIGHT' => 'Copyright',
@@ -96,7 +96,7 @@ $lang = array_merge($lang, array(
 	'EDIT_DETAILS_THEME' => 'Editer les paramètres du thème',
 	'EDIT_DETAILS_THEME_EXPLAIN' => 'Vous pouvez modifier les paramètres particuliers du thème, comme son nom par exemple. Vous pouvez également choisir de modifier le mode de sauvegarde du template de la base données au fichier de sauvegarde et vice-versa. Cette possibilité dépend de votre configuration de PHP et du CHMOD du répertoire de votre thème.',
 	'EDIT_IMAGESET' => 'Editer un pack d’images',
-	'EDIT_IMAGESET_EXPLAIN' => 'Vous pouvez modifier les images qui composent le pack d’images. Vous pouvez également spécifier les dimensions d’affichage de ces images. Si vous spécifiez ce paramètre, vous risquez de perturber l’affichage de certains navigateurs, si vous ne les spécifiez pas, vous baissez quelque peu la taille d’enregistrement dans la base de données.',
+	'EDIT_IMAGESET_EXPLAIN' => 'Vous pouvez modifier les images qui composent le pack d’images. Vous pouvez également indiquer les dimensions d’affichage de ces images. Si vous indiquez ce paramètre, vous risquez de perturber l’affichage de certains navigateurs, si vous ne les indiquez pas, vous baissez quelque peu la taille d’enregistrement dans la base de données.',
 	'EDIT_TEMPLATE' => 'Editer un template',
 	'EDIT_TEMPLATE_EXPLAIN' => 'Vous pouvez éditer votre template directement. Attention, ces modifications sont permanentes et irréversibles une fois validées. Si PHP peut modifier les fichiers templates directement dans votre répertoire, les modifications seront automatiquement répercutées sur les fichiers concernés. Si PHP ne peut modifier les fichiers, ils seront copiés dans la base de données et les changements ne pourront être effectués qu’à partir de celle-ci. Faites attention quand vous éditez votre template, n’oubliez pas de fermer correctement toutes les variables {XXXX} et tout ce qui y est rattaché.',
 	'EDIT_TEMPLATE_STORED_DB' => 'Le fichier template n’a pas pu être écrit, il a été stocké dans la base de données avec les modifications apportées.',
@@ -109,10 +109,10 @@ $lang = array_merge($lang, array(
 	'FOREGROUND' => 'Avant plan',
 	'FONT_COLOUR' => 'Couleur de la police',
 	'FONT_FACE' => 'Police',
-	'FONT_FACE_EXPLAIN' => 'Vous pouvez spécifier plusieurs polices en les séparant par une virgule. Si un utilisateur n’a pas la première police, la suivante sera utilisée.',
+	'FONT_FACE_EXPLAIN' => 'Vous pouvez indiquer plusieurs polices en les séparant par une virgule. Si un utilisateur n’a pas la première police, la suivante sera utilisée.',
 	'FONT_SIZE' => 'Taille',
 	
-	'GLOBAL_IMAGES' => 'Annonces générales',
+	'GLOBAL_IMAGES' => 'Annonces globales',
 
 	'HIDE_CSS' => 'Masquer le code CSS',
 
@@ -132,7 +132,7 @@ $lang = array_merge($lang, array(
 	'IMAGESET_ERR_NAME_CHARS' => 'Le nom du pack d’images ne peut contenir que des caractères alphanumériques, -, +, _ et espace.',
 	'IMAGESET_ERR_NAME_EXIST' => 'Ce nom est déjà utilisé par un pack d’images.',
 	'IMAGESET_ERR_NAME_LONG' => 'Le nom du pack d’images ne peut pas dépasser 30 caractères.',
-	'IMAGESET_ERR_NOT_IMAGESET' => 'L’archive spécifiée ne contient pas de pack d’images valide.',
+	'IMAGESET_ERR_NOT_IMAGESET' => 'L’archive indiquée ne contient pas de pack d’images valide.',
 	'IMAGESET_ERR_STYLE_NAME' => 'Vous devez choisir un nom pour ce pack d’images.',
 	'IMAGESET_EXPORT' => 'Exporter le pack d’images',
 	'IMAGESET_EXPORT_EXPLAIN' => 'Vous pouvez exporter un pack d’images sous la forme d’une archive. Cette archive contiendra tous les fichiers nécessaires pour l’installation du pack d’images sur un autre forum. Vous devez choisir entre télécharger le fichier directement ou le placer dans un répertoire de sauvegarde pour le télécharger ultérieurement ou à partir d’un FTP.',
@@ -204,14 +204,14 @@ $lang = array_merge($lang, array(
 	'IMG_ANNOUNCE_UNREAD_LOCKED' => 'Annonces verrouillées',
 	'IMG_ANNOUNCE_UNREAD_LOCKED_MINE' => 'Annonces verrouillées avec nouveaux messages',
 
-	'IMG_GLOBAL_READ' => 'Annonces générales',
-	'IMG_GLOBAL_READ_MINE' => 'Mes annonces générales',
-	'IMG_GLOBAL_READ_LOCKED' => 'Annonces générales verrouillées',
-	'IMG_GLOBAL_READ_LOCKED_MINE' => 'Mes annonces générales verrouillées',
-	'IMG_GLOBAL_UNREAD' => 'Annonces générales avec nouveaux messages',
-	'IMG_GLOBAL_UNREAD_MINE' => 'Mes annonces générales avec nouveaux messages',
-	'IMG_GLOBAL_UNREAD_LOCKED' => 'Annonces générales verrouillées avec nouveaux messages',
-	'IMG_GLOBAL_UNREAD_LOCKED_MINE' => 'Mes annonces générales verrouillées avec nouveaux messages',
+	'IMG_GLOBAL_READ' => 'Annonces globales',
+	'IMG_GLOBAL_READ_MINE' => 'Mes annonces globales',
+	'IMG_GLOBAL_READ_LOCKED' => 'Annonces globales verrouillées',
+	'IMG_GLOBAL_READ_LOCKED_MINE' => 'Mes annonces globales verrouillées',
+	'IMG_GLOBAL_UNREAD' => 'Annonces globales avec nouveaux messages',
+	'IMG_GLOBAL_UNREAD_MINE' => 'Mes annonces globales avec nouveaux messages',
+	'IMG_GLOBAL_UNREAD_LOCKED' => 'Annonces globales verrouillées avec nouveaux messages',
+	'IMG_GLOBAL_UNREAD_LOCKED_MINE' => 'Mes annonces globales verrouillées avec nouveaux messages',
 
 	'IMG_PM_READ' => 'Message privé lu',
 	'IMG_PM_UNREAD' => 'Message privé non lu',
@@ -403,7 +403,7 @@ $lang = array_merge($lang, array(
 	'THEME_ERR_NAME_LONG' => 'Le nom du thème ne peut excéder 30 caractères.',
 	'THEME_ERR_NOT_THEME' => 'L’archive que vous avez sélectionné ne contient pas de thème valide.',
 	'THEME_ERR_REFRESH_FS' => 'Ce thème est déjà présent sur le système, nul besoin de le rafraîchir.',
-	'THEME_ERR_STYLE_NAME' => 'Vous devez spécifier un nom pour ce thème.',
+	'THEME_ERR_STYLE_NAME' => 'Vous devez indiquer un nom pour ce thème.',
 	'THEME_EXPORT' => 'Exporter un thème',
 	'THEME_EXPORT_EXPLAIN' => 'Vous pouvez exporter un thème sous la forme d’une archive. Cette archive contiendra tous les fichiers nécessaires pour installer le thème sur un autre forum. Vous pouvez choisir entre télécharger le fichier directement ou le placer dans votre répertoire de stockage pour le télécharger plus tard par FTP.',
 	'THEME_EXPORTED' => 'Thème exporté avec succès et stocké dans %s.',

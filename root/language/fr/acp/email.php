@@ -5,7 +5,7 @@
 * translated originally by PhpBB-fr.com <http://www.phpbb-fr.com/> and phpBB.biz <http://www.phpBB.biz>
 *
 * @package language
-* @version $Id: email.php,v 1.21 2007/11/22 11:30:24 elglobo Exp $
+* @version $Id: email.php,v 1.22 2008/07/03 17:07:24 elglobo Exp $
 * @copyright (c) 2005 phpBB Group 
 * @license http://opensource.org/licenses/gpl-license.php GNU Public License 
 *
@@ -38,7 +38,7 @@ if (empty($lang) || !is_array($lang))
 
 $lang = array_merge($lang, array(
 
-	'ACP_MASS_EMAIL_EXPLAIN'		=> 'Vous pouvez envoyer un e-mail à tous vos utilisateurs ou à tous les membres d’un groupe spécifique. Pour cela, un e-mail sera envoyé via l’adresse administrative, avec tous les destinataires en copie cachée. Si vous envoyez le message à un grand groupe de personnes, merci de patienter après avoir validé et de ne pas arrêter la page lors du traitement. Il est normal qu’un envoi de masse prenne du temps, vous aurez une notification quand le script aura terminé.',
+	'ACP_MASS_EMAIL_EXPLAIN'		=> 'Vous pouvez envoyer un e-mail à tous vos utilisateurs ou à tous les membres d’un groupe particulier. Pour cela, un e-mail sera envoyé via l’adresse administrative, avec tous les destinataires en copie cachée. Si vous envoyez le message à un grand groupe de personnes, merci de patienter après avoir validé et de ne pas arrêter la page lors du traitement. Il est normal qu’un envoi de masse prenne du temps, vous aurez une notification quand le script aura terminé.',
 	'ALL_USERS'						=> 'Tous les utilisateurs',
 	
 	'COMPOSE'				=> 'Ecrire',
@@ -62,7 +62,7 @@ $lang = array_merge($lang, array(
 	'MASS_MESSAGE_EXPLAIN'	=> 'Notez que vous ne pouvez mettre que du texte brut. Toutes les balises seront supprimées avant l’envoi.',
 	
 	'NO_EMAIL_MESSAGE'		=> 'Vous devez entrer un message.',
-	'NO_EMAIL_SUBJECT'		=> 'Vous devez spécifier un sujet pour votre message.',
+	'NO_EMAIL_SUBJECT'		=> 'Vous devez indiquer un sujet pour votre message.',
 ));
 
 ?>

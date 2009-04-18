@@ -5,7 +5,7 @@
 * translated originally by PhpBB-fr.com <http://www.phpbb-fr.com/> and phpBB.biz <http://www.phpBB.biz>
 *
 * @package language
-* @version $Id: common.php,v 1.21 2008/04/10 12:47:26 elglobo Exp $
+* @version $Id: common.php,v 1.22 2008/07/03 17:21:02 elglobo Exp $
 * @copyright (c) 2005 phpBB Group 
 * @license http://opensource.org/licenses/gpl-license.php GNU Public License 
 *
@@ -43,7 +43,7 @@ $lang = array_merge($lang, array(
 	'ACP_ADMIN_ROLES'			=> 'Modèles d’administration',
 	'ACP_ATTACHMENTS'			=> 'Fichiers joints',
 	'ACP_ATTACHMENT_SETTINGS'	=> 'Paramètres des fichiers joints',
-	'ACP_AUTH_SETTINGS'			=> 'Identification',
+	'ACP_AUTH_SETTINGS'			=> 'Authentification',
 	'ACP_AUTOMATION'			=> 'Automatique',
 	'ACP_AVATAR_SETTINGS'		=> 'Paramètres des avatars',
 
@@ -54,7 +54,7 @@ $lang = array_merge($lang, array(
 	'ACP_BAN_USERNAMES'			=> 'Bannissement d’utilisateurs',
 	'ACP_BBCODES'				=> 'BBCodes',
 	'ACP_BOARD_CONFIGURATION'	=> 'Configuration générale',
-	'ACP_BOARD_FEATURES'		=> 'Options du forum',
+	'ACP_BOARD_FEATURES'		=> 'Fonctionnalités du forum',
 	'ACP_BOARD_MANAGEMENT'		=> 'Gestion du forum',
 	'ACP_BOARD_SETTINGS'		=> 'Configuration du forum',
 	'ACP_BOTS'					=> 'Robots',
@@ -201,6 +201,8 @@ $lang = array_merge($lang, array(
 	'ADMIN'					=> 'Administration',
 	'ADMIN_INDEX'			=> 'Index de l’administration',
 	'ADMIN_PANEL'			=> 'Panneau d’administration',
+	'ADM_LOGOUT' 			=> 'Déconnexion de l’ACP',
+	'ADM_LOGGED_OUT' 		=> 'Vous avez été déconnecté du panneau d’administration',
 
 	'BACK'					=> 'Retour',
 
@@ -265,10 +267,10 @@ $lang = array_merge($lang, array(
 	'SELECT_ANONYMOUS'		=> 'Sélectionner l’utilisateur invité',
 	'SELECT_OPTION'			=> 'Sélectionner une option',
 	
-	'SETTING_TOO_LOW'		=> 'La valeur indiquée pour le réglage “%1$s” est trop faible. La valeur minimale autorisée est de %2$d.',
-	'SETTING_TOO_BIG'		=> 'La valeur indiquée pour le réglage “%1$s” est trop élevée. La valeur maximale autorisée est de %2$d.',	
-	'SETTING_TOO_LONG'		=> 'La valeur indiquée pour le réglage “%1$s” est trop longue. La longueur maximale autorisée est de %2$d.',
-	'SETTING_TOO_SHORT'		=> 'La valeur indiquée pour le réglage “%1$s” est trop courte. La longueur minimale autorisée est de %2$d.',
+	'SETTING_TOO_LOW'		=> 'La valeur indiquée pour le paramètre “%1$s” est trop faible. La valeur minimale autorisée est de %2$d.',
+	'SETTING_TOO_BIG'		=> 'La valeur indiquée pour le paramètre “%1$s” est trop élevée. La valeur maximale autorisée est de %2$d.',	
+	'SETTING_TOO_LONG'		=> 'La valeur indiquée pour le paramètre “%1$s” est trop longue. La longueur maximale autorisée est de %2$d.',
+	'SETTING_TOO_SHORT'		=> 'La valeur indiquée pour le paramètre “%1$s” est trop courte. La longueur minimale autorisée est de %2$d.',
 
 	'UCP'					=> 'Panneau de l’utilisateur',
 	'USERNAMES_EXPLAIN'		=> 'Indiquez un nom d’utilisateur par ligne',
@@ -287,7 +289,7 @@ $lang = array_merge($lang, array(
 // Logs
 $lang = array_merge($lang, array(
 	'ACP_ADMIN_LOGS_EXPLAIN'	=> 'Liste des actions effectuées par les administrateurs. Vous pouvez trier par nom, date, IP ou par action. Si vous avez les permissions nécessaires vous pouvez aussi effacer individuellement les opérations ou le journal complet.',
-	'ACP_CRITICAL_LOGS_EXPLAIN'	=> 'Liste des actions effectuées par le système. Ce journal liste les informations que vous pouvez utiliser pour résoudre des problèmes spécifiques, comme le non-acheminement des e-mails. Vous pouvez trier par nom d’utilisateur, date, IP ou action. Si vous avez les permissions nécessaires vous pouvez aussi effacer individuellement les opérations ou le journal complet.',
+	'ACP_CRITICAL_LOGS_EXPLAIN'	=> 'Liste des actions effectuées par le système. Ce journal liste les informations que vous pouvez utiliser pour résoudre des problèmes particuliers, comme le non-acheminement des e-mails. Vous pouvez trier par nom d’utilisateur, date, IP ou action. Si vous avez les permissions nécessaires vous pouvez aussi effacer individuellement les opérations ou le journal complet.',
 	'ACP_MOD_LOGS_EXPLAIN'		=> 'Liste des actions effectuées par les modérateurs, sélectionnez un forum dans la liste ci-dessous. Vous pouvez trier par nom d’utilisateur, date, IP ou action. Si vous avez les permissions nécessaires vous pouvez aussi effacer individuellement les opérations ou le journal complet.',
 	'ACP_USERS_LOGS_EXPLAIN'	=> 'Liste des actions effectuées par les utilisateurs ou sur les utilisateurs.',
 	'ALL_ENTRIES'				=> 'Toutes les entrées',
@@ -336,15 +338,15 @@ $lang = array_merge($lang, array(
 	'RESET_DATE_CONFIRM'			=> 'Etes-vous sûr de vouloir réinitialiser la date d’ouverture du forum?',
 	'RESET_ONLINE'					=> 'Réinitialiser le record des utilisateurs connectés',
 	'RESET_ONLINE_CONFIRM'			=> 'Etes-vous sûr de vouloir réinitialiser le record des utilisateurs connectés?',
-	'RESYNC_POSTCOUNTS'				=> 'Resynchroniser les compteurs de message d’utilisateur',
+	'RESYNC_POSTCOUNTS'				=> 'Resynchroniser les compteurs de message',
 	'RESYNC_POSTCOUNTS_EXPLAIN'		=> 'Seuls les messages existants seront pris en compte. Les messages délestés ne seront pas pris en compte.',
 	'RESYNC_POSTCOUNTS_CONFIRM'		=> 'Etes-vous sûr de vouloir resynchroniser les compteurs de message d’utilisateur?',
 	'RESYNC_POST_MARKING'			=> 'Resynchroniser les sujets pointés',
 	'RESYNC_POST_MARKING_CONFIRM'	=> 'Etes-vous sûr de vouloir resynchroniser les sujets pointés?',
-	'RESYNC_POST_MARKING_EXPLAIN'	=> 'Décochez tous les sujets et cochez correctement les sujets ayant eus une activité durant les six derniers mois.',
+	'RESYNC_POST_MARKING_EXPLAIN'	=> 'Décoche tous les sujets et coche correctement les sujets ayant eus une activité durant les six derniers mois.',
 	'RESYNC_STATS'					=> 'Resynchroniser les statistiques',
 	'RESYNC_STATS_CONFIRM'			=> 'Etes-vous sûr de vouloir resynchroniser les statistiques?',
-	'RESYNC_STATS_EXPLAIN'			=> 'Recalculer le nombre total de messages, sujets, utilisateurs et fichiers joints.',
+	'RESYNC_STATS_EXPLAIN'			=> 'Recalcule le nombre total de messages, sujets, utilisateurs et fichiers joints.',
 	'RUN'							=> 'Exécuter maintenant',
 
 	'STATISTIC'					=> 'Statistiques',
@@ -534,7 +536,7 @@ $lang = array_merge($lang, array(
 	'LOG_USERS_ADDED'		=> '<strong>Ajout de nouveau membre au groupe</strong> %1$s<br />» %2$s',
 
 	'LOG_IMAGESET_ADD_DB'			=> '<strong>Ajout d’un pack d’images dans la base de données</strong><br />» %s',
-	'LOG_IMAGESET_ADD_FS'			=> '<strong>Ajout d’un pack d’images sur le système de fichiers</strong><br />» %s',
+	'LOG_IMAGESET_ADD_FS'			=> '<strong>Ajout d’un pack d’images dans le système de fichiers</strong><br />» %s',
 	'LOG_IMAGESET_DELETE'			=> '<strong>Suppression d’un pack d’images/b><br />» %s',
 	'LOG_IMAGESET_EDIT_DETAILS'		=> '<strong>Edition des informations d’un pack d’images</strong><br />» %s',
 	'LOG_IMAGESET_EDIT'				=> '<strong>Edition d’un pack d’images</strong><br />» %s',
@@ -608,6 +610,7 @@ $lang = array_merge($lang, array(
 	'LOG_REASON_ADDED'		=> '<strong>Ajout d’un rapport/raison</strong><br />» %s',
 	'LOG_REASON_REMOVED'	=> '<strong>Suppression d’un rapport/raison</strong><br />» %s',
 	'LOG_REASON_UPDATED'	=> '<strong>Mise à jour d’un rapport/raison</strong><br />» %s',
+	'LOG_REFERER_INVALID' 	=> '<strong>Echec de la validation du référant</strong><br />»Le référant était “<em>%1$s</em>”. La requête a été rejetée et la session terminée.',
 
 	'LOG_RESET_DATE'			=> '<strong>Réinitialisation de la date d’ouverture du forum</strong>',
 	'LOG_RESET_ONLINE'			=> '<strong>Réinitialisation du record des utilisateurs connectés</strong>',
@@ -686,7 +689,7 @@ $lang = array_merge($lang, array(
 // www.phpBB-SEO.com SEO TOOLKIT BEGIN
 $lang = array_merge($lang, array(
 	'ACP_CAT_PHPBB_SEO' => 'phpBB SEO',
-	'ACP_MOD_REWRITE' => 'Réécriture d\'url',
+	'ACP_MOD_REWRITE' => 'Réécriture d’url',
 	'ACP_PHPBB_SEO_CLASS' => 'Configuration de la classe phpBB SEO',
 	'ACP_FORUM_URL' => 'Configuration des URLs des forums',
 	'ACP_HTACCESS' => '.htaccess',
@@ -694,7 +697,7 @@ $lang = array_merge($lang, array(
 	<p>Cette mise à jour ne concerne que la premod, pas phpBB lui même.</p>
 	<p>Une nouvelle version de la premod phpBB SEO est donc disponible : %1$s<br/>Veuillez vous rendre sur <a href="%2$s" title="Le sujet de mise à disposition"><b>le sujet de mise à disposition</b></a> pour procéder à la mise à jour.</p>',
 	'SEO_LOG_INSTALL_PHPBB_SEO' => '<strong>Installation du mod rewrite phpBB SEO</strong>',
-	'SEO_LOG_INSTALL_PHPBB_SEO_FAIL' => '<strong>Echec de l\'installation du mod rewrite phpBB SEO</strong>',
+	'SEO_LOG_INSTALL_PHPBB_SEO_FAIL' => '<strong>Echec de l’installation du mod rewrite phpBB SEO</strong>',
 	'SEO_LOG_UNINSTALL_PHPBB_SEO' => '<strong>Désinstallation du mod rewrite phpBB SEO</strong>',
 	'SEO_LOG_UNINSTALL_PHPBB_SEO_FAIL' => '<strong>Echec de la désinstallation du mod rewrite phpBB SEO</strong>',
 	'SEO_LOG_CONFIG_SETTINGS' => '<strong>Modification des réglages de la classe phpBB SEO</strong>',
@@ -702,4 +705,19 @@ $lang = array_merge($lang, array(
 	'SEO_LOG_CONFIG_HTACCESS' => '<strong>Nouveau .htaccess généré</strong>',
 ));
 // www.phpBB-SEO.com SEO TOOLKIT END
+// www.phpBB-SEO.com SEO TOOLKIT BEGIN -> GYM Sitemaps
+$lang = array_merge($lang, array(
+	'ACP_GYM_SITEMAPS' => 'GYM Sitemaps &amp; RSS',
+	'ACP_GYM_MAIN' => 'Configuration générale',
+	'ACP_GYM_GOOGLE_MAIN' => 'Sitemaps Google',
+	'ACP_GYM_RSS_MAIN' => 'Flux RSS',
+	'ACP_GYM_YAHOO_MAIN' => 'Yahoo! urllist.txt',
+	'ACP_GYM_HTML_MAIN' => 'Plans de site HTML',
+	'GYM_LOG_CONFIG_MAIN' => '<strong>Modification des paramètres de GYM Sitemaps &amp; RSS</strong><br/>&raquo; Configuration générale',
+	'GYM_LOG_CONFIG_GOOGLE' => '<strong>Modification des paramètres de GYM Sitemaps &amp; RSS</strong><br/>&raquo; Sitemaps Google',
+	'GYM_LOG_CONFIG_RSS' => '<strong>Modification des paramètres de GYM Sitemaps &amp; RSS</strong><br/>&raquo; Flux RSS',
+	'GYM_LOG_CONFIG_HTML' => '<strong>Modification des paramètres de GYM Sitemaps &amp; RSS</strong><br/>&raquo; Plans de site HTML',
+	'GYM_LOG_CONFIG_YAHOO' => '<strong>Modification des paramètres de GYM Sitemaps &amp; RSS</strong><br/>&raquo; Liste d’URLs Yahoo!',
+));
+// www.phpBB-SEO.com SEO TOOLKIT END -> GYM Sitemaps
 ?>
