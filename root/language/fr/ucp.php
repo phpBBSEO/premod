@@ -5,7 +5,7 @@
 * translated originally by PhpBB-fr.com <http://www.phpbb-fr.com/> and phpBB.biz <http://www.phpBB.biz>
 *
 * @package language
-* @version $Id: ucp.php,v 1.22 2008/07/04 09:48:25 elglobo Exp $
+* @version $Id: ucp.php,v 1.22 2008/11/14 12:36:00 elglobo Exp $
 * @copyright (c) 2005 phpBB Group 
 * @license http://opensource.org/licenses/gpl-license.php GNU Public License 
 *
@@ -50,7 +50,7 @@ $lang = array_merge($lang, array(
 	<br />
 	Nous pouvons également créer des cookies externes au logiciel phpBB tout en naviguant sur “%1$s”, bien que ceux-ci soient hors de portée du document qui est prévu pour couvrir seulement les pages créées par le logiciel phpBB. La seconde manière est de récupérer l’information que vous nous envoyez et que nous collectons. Ceci peut être, et n’est pas limité à: la publication en tant qu’utilisateur invité (désignée ici par “messages invités”), l’inscription sur “%1$s” (désignée ici par “votre compte”) et les messages que vous envoyez après l’inscription et lors d’une connexion (désignés ici par “vos messages”).<br />
 	<br />
-	Votre compte contiendra au minimum un identifiant unique (désigné ici par “votre nom d’utilisateur”), un mot de passe personnel utilisé pour la connexion à votre compte (désigné ici par “votre mot de passe”), et une adresse e-mail personnelle valide (désignée ici par “votre e-mail”). Vos informations pour votre compte sur “%1$s” sont protégées par les lois de protection des données applicables dans le pays qui nous héberge. Il nous revient de juger si toute autre information du formulaire d’inscription est obligatoire ou non. Dans tous les cas, vous pouvez choisir quelle information de votre compte sera affichée publiquement. De plus, dans votre profil, vous pouvez souscrire ou non à l’envoi automatique d’e-mail par le logiciel phpBB.<br />
+	Votre compte contiendra au minimum un identifiant unique (désigné ici par “votre nom d’utilisateur”), un mot de passe personnel utilisé pour la connexion à votre compte (désigné ici par “votre mot de passe”), et une adresse e-mail personnelle valide (désignée ici par “votre e-mail”). Vos informations pour votre compte sur “%1$s” sont protégées par les lois de protection des données applicables dans le pays qui nous héberge. Toute information en-dehors de votre nom d’utilisateur, de votre mot de passe et de votre adresse e-mail requise par “%1$s” durant la procédure d’inscription, qu’elle soit obligatoire ou non, reste à la discrétion de “%1$s”. Dans tous les cas, vous pouvez choisir quelle information de votre compte sera affichée publiquement. De plus, dans votre profil, vous pouvez souscrire ou non à l’envoi automatique d’e-mail par le logiciel phpBB.<br />
 	<br />
 	Votre mot de passe est crypté (hashage à sens unique) afin qu’il soit sécurisé. Cependant, il est recommandé de ne pas utiliser le même mot de passe sur plusieurs sites internet différents. Votre mot de passe est le moyen d’accès à votre compte sur “%1$s”, conservez-le soigneusement et en aucun cas une personne affiliée de “%1$s”, de phpBB ou une d’une tierce partie ne peut vous demander légitimement votre mot de passe. Si vous oubliez votre mot de passe, vous pouvez utiliser la fonction “J’ai perdu mon mot de passe” fournie par le logiciel phpBB. Ce processus vous demandera de fournir votre nom d’utilisateur et votre e-mail, alors le logiciel phpBB générera un nouveau mot de passe qui vous permettra de vous reconnecter.<br />
 	',
@@ -219,7 +219,7 @@ $lang = array_merge($lang, array(
 	'HIDE_ONLINE'   			=> 'Cacher mon statut en ligne',
 	'HIDE_ONLINE_EXPLAIN'		=> 'Le changement de ce paramètre ne sera effectif que lors de votre prochaine connexion au forum.',
 	'HOLD_NEW_MESSAGES'   		=> 'Refuser les nouveaux messages (dans l’attente d’espace disponible)',
-	'HOLD_NEW_MESSAGES_SHORT'   => 'Les nouveaux messages seront renvoyés plus tard',
+	'HOLD_NEW_MESSAGES_SHORT'   => 'Renvoyer plus tard les nouveaux messages',
 
 	'IF_FOLDER_FULL'   			=> 'Si le dossier est plein',
 	'IMPORTANT_NEWS'   			=> 'Annonces importantes',
@@ -284,14 +284,16 @@ $lang = array_merge($lang, array(
 	'NO_AUTHOR'   					=> 'Aucun auteur n’est défini pour ce message',
 	'NO_AVATAR_CATEGORY'   			=> 'Aucune',
 
-	'NO_AUTH_DELETE_MESSAGE'   		=> 'Vous ne pouvez pas supprimer les messages privés.',
-	'NO_AUTH_EDIT_MESSAGE'   		=> 'Vous ne pouvez pas éditer les messages privés.',
-	'NO_AUTH_FORWARD_MESSAGE'   	=> 'Vous ne pouvez pas transférer les messages privés.',
-	'NO_AUTH_GROUP_MESSAGE'   		=> 'Vous ne pouvez pas envoyer de messages privés à des groupes.',
-	'NO_AUTH_READ_MESSAGE'   		=> 'Vous ne pouvez pas lire les messages privés.',
-	'NO_AUTH_READ_REMOVED_MESSAGE'  => 'Vous ne pouvez pas lire ce message privé car son auteur l’a supprimé.',
-	'NO_AUTH_SEND_MESSAGE'   		=> 'Vous ne pouvez pas envoyer de messages privés.',
-	'NO_AUTH_SIGNATURE'   			=> 'Vous ne pouvez pas créer de signature',
+	'NO_AUTH_DELETE_MESSAGE'   		=> 'Vous n’êtes pas autorisé à supprimer les messages privés.',
+	'NO_AUTH_EDIT_MESSAGE'   		=> 'Vous n’êtes pas autorisé à éditer les messages privés.',
+	'NO_AUTH_FORWARD_MESSAGE'   	=> 'Vous n’êtes pas autorisé à transférer les messages privés.',
+	'NO_AUTH_GROUP_MESSAGE'   		=> 'Vous n’êtes pas autorisé à envoyer de messages privés à des groupes.',
+	'NO_AUTH_PASSWORD_REMINDER' 	=> 'Vous n’êtes pas autorisé à demander un nouveau mot de passe.',
+	'NO_AUTH_READ_HOLD_MESSAGE' 	=> 'Vous n’êtes pas autorisé à lire les messages privés qui sont en attente.',
+	'NO_AUTH_READ_MESSAGE' 			=> 'Vous n’êtes pas autorisé à lire les messages privés.',
+	'NO_AUTH_READ_REMOVED_MESSAGE' 	=> 'Vous n’êtes pas autorisé à lire ce message privé car son auteur l’a supprimé.',
+	'NO_AUTH_SEND_MESSAGE' 			=> 'Vous n’êtes pas autorisé à envoyer de messages privés.',
+	'NO_AUTH_SIGNATURE'   			=> 'Vous n’êtes pas autorisé à créer de signature',
 
 	'NO_BCC_RECIPIENT'   		=> 'Aucun',
 	'NO_BOOKMARKS'   			=> 'Vous n’avez pas de favoris.',
@@ -314,6 +316,7 @@ $lang = array_merge($lang, array(
 	'NO_SAVED_DRAFTS'   		=> 'Aucun brouillon sauvegardé.',
 	'NO_TO_RECIPIENT'   		=> 'Aucun',
 	'NO_WATCHED_FORUMS'   		=> 'Vous ne surveillez aucun forum.',
+	'NO_WATCHED_SELECTED'		=> 'Vous n’avez sélectionné aucun forums ou sujets surveillés.',
 	'NO_WATCHED_TOPICS'   		=> 'Vous ne surveillez aucun sujet.',
 
 	'PASS_TYPE_ALPHA_EXPLAIN'   => 'Le mot de passe doit avoir une longueur comprise entre %1$d et %2$d caractères et doit contenir des lettres de casse mélangée et des chiffres.',
@@ -390,7 +393,7 @@ $lang = array_merge($lang, array(
 
 	'TIMEZONE'   			=> 'Fuseau horaire',
 	'TO'   					=> 'A',
-	'TOO_MANY_RECIPIENTS'   => 'Trop de destinataires.',
+	'TOO_MANY_RECIPIENTS' 	=> 'Vous avez essayé d’envoyer un message privé à trop de destinataires à la fois.',
 	'TOO_MANY_REGISTERS'   	=> 'Vous avez atteint le nombre maximum de tentatives d’inscription. Réessayez plus tard.',
 
 	'UCP'   				=> 'Panneau de l’utilisateur',
@@ -526,7 +529,7 @@ $lang = array_merge($lang, array(
 
 
 	'GROUPS_EXPLAIN'   	=> 'Les groupes d’utilisateurs permettent aux administrateurs de mieux gérer leurs utilisateurs. Par défaut vous serez placé dans un groupe particulier, il s’agit de votre groupe par défaut. Ce groupe définit comment vous apparaissez sur le forum, par exemple la couleur de votre nom d’utilisateur, votre avatar, votre rang, etc. Si l’administrateur le permet, vous serez autorisé à changer votre groupe par défaut. Vous pouvez être placé ou rejoindre d’autres groupes. Certains groupes peuvent vous donner des permissions supplémentaires de lecture ou vous donner accès à d’autres fonctionnalités du forum.',
-	'GROUP_LEADER'   	=> 'Modérateurs',
+	'GROUP_LEADER'   	=> 'Chef de groupe',
 	'GROUP_MEMBER'   	=> 'Membres',
 	'GROUP_PENDING'  	=> 'Membres en attente',
 	'GROUP_NONMEMBER'   => 'Non-membres',

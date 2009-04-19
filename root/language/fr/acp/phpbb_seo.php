@@ -52,8 +52,8 @@ $lang = array_merge($lang, array(
 	'SEO_MORE_OPTION_EXPLAIN'	=> 'Si le premier .htaccess suggéré ne fonctionne pas :<br/>Assurez vous tout d’abord que le mod_rewrite est bien activé sur votre serveur.<br/>Ensuite assurez vous d’avoir bien mis le .htaccess au bon endroit, et qu’il n’est pas perturbé par un autre se trouvant dans un autre dossier.<br/>Si ça ne suffit pas, activez cette option et validez pour découvrir plus d’options.',
 	'SEO_HTACCESS_SAVE' => 'Sauvegarder le .htaccess',
 	'SEO_HTACCESS_SAVE_EXPLAIN' => 'Si vous cochez l’option, un fichier .htaccess sera généré dans le dossier phpbb_seo/cache/. Il est prêt à l’emploi et prend en compte vos réglages actuels, mais vous devrez tout de même le déplacer au bon endroit.',
-	'SEO_HTACCESS_ROOT_MSG'	=> 'Une fois prêt, vous pouvez sélectionnez le code ci-dessous et le copiez dans un fichier .htaccess vide ou utiliser l’option "Sauvegarder le .htaccess" ci-dessous.<br/> Ce .htaccess est fait pour être utilisé à la racine du domaine (ie : où www.example.com est installé).',
-	'SEO_HTACCESS_FOLDER_MSG' => 'Une fois prêt, sélectionnez le code ci-dessous et copiez le dans un fichier .htaccess vide ou utiliser l’option "Sauvegarder le .htaccess" ci dessus.<br/> Ce .htaccess est fait pour être utilisé dans le dossier de phpBB (ie : www.example.com/phpbb/).',
+	'SEO_HTACCESS_ROOT_MSG'	=> 'Une fois prêt, vous pouvez sélectionnez le code ci-dessous et le copiez dans un fichier .htaccess vide ou utiliser l’option "Sauvegarder le .htaccess" ci-dessous.<br/> Ce .htaccess est fait pour être utilisé à la racine du domaine, ce qui dans votre cas signifie le dossier de votre ftp qui correspond à <u>%1$s</u>.<br/><br/>Vous pouvez générer un .htaccess fait pour être utiliser dans le sous-dossier eventuel de phpBB en utilisant l’option "Plus d’options" ci-dessous.',
+	'SEO_HTACCESS_FOLDER_MSG' => 'Une fois prêt, sélectionnez le code ci-dessous et copiez le dans un fichier .htaccess vide ou utiliser l’option "Sauvegarder le .htaccess" ci dessus.<br/> Ce .htaccess est fait pour être utilisé dans le dossier utilisé par phpBB, ce qui dans votre cas signifie le dossier de votre ftp qui correspond à <u>%1$s</u>.',
 	'SEO_HTACCESS_CAPTION' => 'Légende',
 	'SEO_HTACCESS_CAPTION_COMMENT' => 'Commentaires',
 	'SEO_HTACCESS_CAPTION_STATIC' => 'Parties statiques, modifiables dans phpbb_seo_class.php',
@@ -182,11 +182,11 @@ $lang = array_merge($lang, array(
 	// copytrights
 	'copyrights' => 'Copyrights',
 	'copyrights_img' => 'Lien Image',
-	'copyrights_img_explain' => 'Vous pouvez ou afficher le lien en retour phpBB SEO avec u une image ou en simple texte.',
+	'copyrights_img_explain' => 'Vous pouvez ou afficher le lien en retour phpBB SEO avec une image ou en simple texte.',
 	'copyrights_txt' => 'Texte du lien',
-	'copyrights_txt_explain' => 'Vous pouvez personaliser le text du lien en retour phpBB SEO, laissez vide pour les valeurs par défauts.',
+	'copyrights_txt_explain' => 'Vous pouvez personnaliser le texte du lien en retour phpBB SEO, laissez vide pour les valeurs par défauts.',
 	'copyrights_title' => 'Titre du lien',
-	'copyrights_title_explain' => 'Vous pouvez personaliser le text du titre du lien en retour phpBB SEO, laissez vide pour les valeurs par défauts.',
+	'copyrights_title_explain' => 'Vous pouvez personaliser le texte du titre du lien en retour phpBB SEO, laissez vide pour les valeurs par défauts.',
 	// Zero duplicate
 	// Options 
 	'ACP_ZERO_DUPE_OFF' => 'Inactif',
@@ -200,7 +200,7 @@ $lang = array_merge($lang, array(
 	'zero_dupe_strict' => 'Mode strict',
 	'zero_dupe_strict_explain' => 'Quand il est activé le Zéro Dupe vérifiera que l’URL entrante est exactement égale à l’URL attendue.<br/>Quand il ne l’est pas le Zéro Dupe vérifiera uniquement que l’URL entrante commence bien par l’URL attendue.<br/>L’intérêt de ce réglage est de rendre plus facile l’installation et l’utilisation de mod qui ajouterait de telles variables, tout en maintenant une réduction de duplicate proche de 100 %.',
 	'zero_dupe_post_redir' => 'Redirection des messages',
-	'zero_dupe_post_redir_explain' => 'L’option va déterminer la manière de prendre en charge les URLs des messages ; elle peut prendre quatre valeurs :<ul style="margin-left:20px"><li><b>&nbsp;Inactif</b>, Pour désactiver les redirections des URLs de messages,</li><li><b>&nbsp;Message</b>, Pour s’assurer seulement que postxx.html est utilisé pour une URL de message,</li><li><b>&nbsp;Invités</b>, Pour rediriger les invités si besoin sur l’URL du sujet correspondant, plutot que sur postxx.html, et seulement s’assurer que postxx.html est utilisé les utilisateurs enregistrés,<li><b>&nbsp;Tous</b>, Pour rediriger si besoin sur l’URL du sujet correspondant.</li></ul><br/><b style="color:red">Nota Bene :</b><br/><ul style="margin-left:20px">Conserver les URLs des messages en postxx.html est sans conséquences pour votre référencement dans la mesure ou vous avez bien mis en place l’interdiction de ces URLs dans votre robots.txt<br/>C’est certainement la redirection qui interviendrait le plus souvent sinon.<br/>De plus si vous choisissez de rediriger postxx.html dans tous les cas, cela implique qu’un message qui serait posté dans un sujet et qui serait ensuite déplacé dans un autre verra son URL changer.<br/>Ce n’est pas grave d’un point de vue du référencement, le Zéro Duplicate veille, mais l’URL initiale d’un message déplacé ne sera plus lié à celui ci dans ce cas là</ul>',
+	'zero_dupe_post_redir_explain' => 'L’option va déterminer la manière de prendre en charge les URLs des messages ; elle peut prendre quatre valeurs :<ul style="margin-left:20px"><li><b>&nbsp;Inactif</b>, Pour désactiver les redirections des URLs de messages,</li><li><b>&nbsp;Message</b>, Pour s’assurer seulement que postxx.html est utilisé pour une URL de message,</li><li><b>&nbsp;Invités</b>, Pour rediriger les invités si besoin sur l’URL du sujet correspondant, plutot que sur postxx.html, et seulement s’assurer que postxx.html est utilisé les utilisateurs enregistrés,<li><b>&nbsp;Tous</b>, Pour rediriger si besoin sur l’URL du sujet correspondant.</li></ul><br/><b style="color:red">Nota Bene :</b><br/><ul style="margin-left:20px">Conserver les URLs des messages en postxx.html est sans conséquence pour votre référencement dans la mesure ou vous avez bien mis en place l’interdiction de ces URLs dans votre robots.txt<br/>C’est certainement la redirection qui interviendrait le plus souvent sinon.<br/>De plus si vous choisissez de rediriger postxx.html dans tous les cas, cela implique qu’un message qui serait posté dans un sujet et qui serait ensuite déplacé dans un autre verra son URL changer.<br/>Ce n’est pas grave d’un point de vue du référencement, le Zéro Duplicate veille, mais l’URL initiale d’un message déplacé ne sera plus liée à celui ci dans ce cas là</ul>',
 	// no duplicate
 	'no_dupe' => 'No Duplicate',
 	'no_dupe_on' => 'Activer le No Duplicate',

@@ -1,9 +1,12 @@
 <?php
 /**
-* gym_install.php
-* www.phpBB-SEO.com
-* @package GYM Sitemaps & RSS - www.phpbb-seo.com
- */
+*
+* @package phpBB SEO GYM Sitemaps
+* @version $id: gym_install.php - 34939 11-20-2008 11:43:24 - 2.0.RC1 dcz $
+* @copyright (c) 2006 - 2008 www.phpbb-seo.com
+* @license http://opensource.org/osi3.0/licenses/lgpl-license.php GNU Lesser General Public License
+*
+*/
 /*
  * Based on the phpBB3 install package / www.phpBB.com
  */
@@ -11,7 +14,7 @@ define('IN_PHPBB', true);
 define('IN_INSTALL', true);
 $phpbb_root_path = (defined('PHPBB_ROOT_PATH')) ? PHPBB_ROOT_PATH : './../';
 $phpEx = substr(strrchr(__FILE__, '.'), 1);
-define('GYM_VERSION', '2.0.B2');
+define('GYM_VERSION', '2.0.RC1');
 // Try to override some limits - maybe it helps some...
 @set_time_limit(0);
 $mem_limit = @ini_get('memory_limit');
@@ -401,7 +404,7 @@ class install_gym_sitemaps extends module {
 		$this->version = GYM_VERSION;
 		require_once($phpbb_root_path . 'gym_sitemaps/includes/gym_common.' . $phpEx);
 		// For Compatibility with the phpBB SEO mod rewrites
-		if (!is_object($phpbb_seo)) {
+		if (empty($phpbb_seo)) {
 			require_once($phpbb_root_path . 'gym_sitemaps/includes/phpbb_seo_class_light.' . $phpEx);
 			$phpbb_seo = new phpbb_seo();
 			define('STARTED_LIGHT', true);
@@ -676,15 +679,18 @@ class install_gym_sitemaps extends module {
 						}
 					}
 				} // End sub categories
-		/*		if (!sizeof($this->errors)) {
-					$error = $_module->delete_module($cat_module_data[$cat_name]['module_id']);
+				if (!sizeof($this->errors)) {
+				 	$branch = $_module->get_module_branch($cat_module_data[$cat_name]['module_id'],'children', 'descending', false);
+					if (empty($branch)) {
+						$error = $_module->delete_module($cat_module_data[$cat_name]['module_id']);
+					}
 					if (!sizeof($error)) {
 						$_module->remove_cache_file();
 						$delete_module_data[$cat_module_data[$cat_name]['module_id']] = $cat_module_data[$cat_name]['module_langname'] . ' - id : ' . $cat_module_data[$cat_name]['module_id'];
 					} else {
 						$this->errors[] = implode(' ', $error);
 					}
-		}*/
+				}
 			} // End categories
 		} // End classes
 		return;

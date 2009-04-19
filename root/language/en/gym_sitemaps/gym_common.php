@@ -1,11 +1,15 @@
 <?php
-/** 
+/**
+*
+* @package phpBB SEO GYM Sitemaps
+* @version $id: gym_common.php - 5146 11-20-2008 14:38:27 - 2.0.RC1 dcz $
+* @copyright (c) 2006 - 2008 www.phpbb-seo.com
+* @license http://opensource.org/osi3.0/licenses/lgpl-license.php GNU Lesser General Public License
+*
+*/
+/**
 *
 * gym_common [English]
-*
-* @package phpbb_seo
-* @version $Id: gym_common.php, 2007/08/30 13:48:48 fds Exp $
-* @copyright (c) 2007 phpBB SEO
 *
 */
 /**
@@ -40,6 +44,7 @@ $lang = array_merge($lang, array(
 	'GYM_FIRST_POST_BY' => 'Post by ',
 	'GYM_LINK' => 'Link',
 	'GYM_SOURCE' => 'Source',
+	'GYM_RSS_SOURCE' => 'Source',
 	'RSS_MORE' => 'more',
 	'RSS_CHANNELS' => 'Channels',
 	'RSS_CONTENT' => 'Digest',
@@ -49,7 +54,6 @@ $lang = array_merge($lang, array(
 	'RSS_NEWS_DESC' => 'Latest news from',
 	'RSS_REPORTED_UNAPPROVED' => 'This item is currently waiting for approval.',
 
-
 	'GYM_HOME' => 'Home Page',
 	'GYM_FORUM_INDEX' => 'Forum Index',
 	'GYM_LASTMOD_DATE' => 'Last modification date',
@@ -57,10 +61,17 @@ $lang = array_merge($lang, array(
 	'GYM_MINUTES' => 'minute(s)',
 	'GYM_SQLEXPLAIN' => 'SQL Explain report',
 	'GYM_SQLEXPLAIN_MSG' => 'Logged in as admin, you can check the %s for this page.',
-
+	'GYM_BOOKMARK_THIS' => 'Bookmark this',
+	// Errors
+	'GYM_ERROR_404' => 'This page does not exist or is not activated',
+	'GYM_ERROR_404_EXPLAIN' => 'The server did not find any page corresponding to the URL you have used.',
+	'GYM_ERROR_401' => 'You are not allowed to view this page.',
+	'GYM_ERROR_401_EXPLAIN' => 'This page is only accessible to logged in users granted with the required authorisations.',
+	'GYM_LOGIN' => 'You must be registered and logged in to view this page.',
 
 	'GOOGLE_SITEMAP' => 'Sitemap',
-	'GOOGLE_SITEMAP_OF' => 'Sitemap of',
+	'GOOGLE_SITEMAP_OF' => 'Sitemap de',
+	'GOOGLE_MAP_OF' => 'Sitemap of %1$s',
 	'GOOGLE_SITEMAPINDEX' => 'SitemapIndex',
 	'GOOGLE_NUMBER_OF_SITEMAP' => 'Number of Sitemaps in this Google SitemapIndex',
 	'GOOGLE_NUMBER_OF_URL' => 'Number of URLs in this Google Sitemap',
@@ -69,6 +80,7 @@ $lang = array_merge($lang, array(
 	'GOOGLE_PRIORITY' => 'priority',
 
 	'RSS_FEED' => 'RSS Feed',
+	'RSS_FEED_OF' => 'RSS Feed of %1$s',
 	'RSS_2_LINK' => 'RSS 2.0 feed link',
 	'RSS_UPDATE' => 'Update',
 	'RSS_LAST_UPDATE' => 'Last Update',
@@ -79,8 +91,27 @@ $lang = array_merge($lang, array(
 	'RSS_VALID' => 'RSS 2.0 Valid feed',
 
 	// Old URL handling
-	'RSS_1XREDIR' => 'This RSS feed was moved',
-	'RSS_1XREDIR_MSG' => 'This RSS feed was moved, you will now find it using this URL',
-
+	'RSS_1XREDIR' => 'Ce flux RSS a été déplacé',
+	'RSS_1XREDIR_MSG' => 'Ce flux RSS a été déplacé, il se trouve désormais à cette adresse',
+	// HTML sitemaps
+	'HTML_MAP' => 'Site map',
+	'HTML_MAP_OF' => 'Site map of %1$s',
+	'HTML_MAP_NONE' => 'No site map',
+	'HTML_NO_ITEMS' => 'No item',
+	'HTML_NEWS' => 'News',
+	'HTML_NEWS_OF' => 'News of %1$s',
+	'HTML_NEWS_NONE' => 'No news',
+	'HTML_PAGE' => 'Page',
+	'HTML_MORE' => 'Read more',
+	// Forum
+	'HTML_FORUM_MAP' => 'Forum site map',
+	'HTML_FORUM_NEWS' => 'Forums news',
+	'HTML_FORUM_GLOBAL_MAP' => 'Global announcement list',
+	'HTML_FORUM_GLOBAL_NEWS' => 'Global announcements',
+	'HTML_FORUM_ANNOUNCE_MAP' => 'Announcements list',
+	'HTML_FORUM_ANNOUNCE_NEWS' => 'Announcements',
+	'HTML_FORUM_STICKY_MAP' => 'Sticky list',
+	'HTML_FORUM_STICKY_NEWS' => 'Stickies',
+	'HTML_LASTX_TOPICS_TITLE' => 'Last %1$s active topics',
 ));
 ?>

@@ -2,8 +2,8 @@
 /**
 *
 * @package phpBB SEO GYM Sitemaps
-* @version $Id: google_txt.php 2008
-* @copyright (c) 2008 www.phpbb-seo.com
+* @version $id: google_txt.php - 4641 11-20-2008 11:43:24 - 2.0.RC1 dcz $
+* @copyright (c) 2006 - 2008 www.phpbb-seo.com
 * @license http://opensource.org/osi3.0/licenses/lgpl-license.php GNU Lesser General Public License
 *
 */
@@ -72,7 +72,7 @@ class google_txt {
 					'title'	=> 'GYM_LIMIT',
 					'vars'	=> array(
 						'legend1'	=> 'GYM_LIMIT',
-						'google_txt_url_limit' => array('lang' => 'GYM_URL_LIMIT', 'validate' => 'int', 'type' => 'text:4:4', 'explain' => true, 'overriding' => true),
+						'google_txt_url_limit' => array('lang' => 'GYM_URL_LIMIT', 'validate' => 'int:0:5000', 'type' => 'text:4:4', 'explain' => true, 'overriding' => true),
 					),
 				),
 				'default' => array(

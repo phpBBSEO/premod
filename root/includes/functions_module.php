@@ -2,7 +2,7 @@
 /**
 *
 * @package phpBB3
-* @version $Id: functions_module.php 8479 2008-03-29 00:22:48Z naderman $
+* @version $Id: functions_module.php 8782 2008-08-23 17:20:55Z acydburn $
 * @copyright (c) 2005 phpBB Group
 * @license http://opensource.org/licenses/gpl-license.php GNU Public License
 *
@@ -818,11 +818,11 @@ class p_master
 	{
 		global $user, $phpEx;
 
-		if (file_exists($user->lang_path . 'mods'))
+		if (file_exists($user->lang_path . $user->lang_name . '/mods'))
 		{
 			$add_files = array();
 
-			$dir = @opendir($user->lang_path . 'mods');
+			$dir = @opendir($user->lang_path . $user->lang_name . '/mods');
 
 			if ($dir)
 			{

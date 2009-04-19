@@ -5,7 +5,7 @@
 * translated originally by PhpBB-fr.com <http://www.phpbb-fr.com/> and phpBB.biz <http://www.phpBB.biz>
 *
 * @package language
-* @version $Id: mcp.php,v 1.22 2008/07/03 17:16:00 elglobo Exp $
+* @version $Id: mcp.php,v 1.22 2008/11/14 12:22:00 EricSchreiner Exp $
 * @copyright (c) 2005 phpBB Group 
 * @license http://opensource.org/licenses/gpl-license.php GNU Public License 
 *
@@ -285,7 +285,7 @@ $lang = array_merge($lang, array(
 	'SELECT_ACTION'						=> 'Sélectionner l’action désirée',
 	'SELECT_FORUM_GLOBAL_ANNOUNCEMENT'	=> 'Sélectionnez le forum dans lequel cette annonce globale doit être placée.',
 	'SELECT_FORUM_GLOBAL_ANNOUNCEMENTS'	=> 'Un ou plusieurs des sujets sélectionnés sont des annonces globales. Sélectionnez le forum dans lequel vous souhaitez que ces sujets soient placés.',
-	'SELECT_MERGE'						=> 'Sélectionner pour fusionner',
+	'SELECT_MERGE'						=> 'Fusionner avec',
 	'SELECT_TOPICS_FROM'				=> 'Sélectionner les sujets de',
 	'SELECT_TOPIC'						=> 'Sélectionner le sujet',
 	'SELECT_USER'						=> 'Sélectionner l’utilisateur',
@@ -293,7 +293,7 @@ $lang = array_merge($lang, array(
 	'SORT_DATE'							=> 'Date',
 	'SORT_IP'							=> 'Adresse IP',
 	'SORT_WARNINGS'						=> 'Avertissements',
-	'SPLIT_AFTER'						=> 'Diviser à partir du message sélectionné',
+	'SPLIT_AFTER'						=> 'Diviser le sujet à partir du message sélectionné',
 	'SPLIT_FORUM'						=> 'Forum du nouveau sujet',
 	'SPLIT_POSTS'						=> 'Diviser les messages sélectionnés',
 	'SPLIT_SUBJECT'						=> 'Titre du nouveau sujet',
@@ -347,6 +347,7 @@ $lang = array_merge($lang, array(
 	'USER_WARNING_ADDED'			=> 'L’utilisateur a été averti.',
 
 	'VIEW_DETAILS'			=> 'Voir les détails',
+	'VIEW_POST' 			=> 'Voir le message',
 
 	'WARNED_USERS'			=> 'Utilisateurs avertis',
 	'WARNED_USERS_EXPLAIN'	=> 'Liste des utilisateurs dont les avertissements donnés sont encore valables.',

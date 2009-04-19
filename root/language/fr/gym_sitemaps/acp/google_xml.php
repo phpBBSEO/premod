@@ -1,12 +1,16 @@
 <?php
-/** 
+/**
+*
+* @package phpBB SEO GYM Sitemaps
+* @version $id: google_xml.php - 6438 11-20-2008 14:38:27 - 2.0.RC1 dcz $
+* @copyright (c) 2006 - 2008 www.phpbb-seo.com
+* @license http://opensource.org/osi3.0/licenses/lgpl-license.php GNU Lesser General Public License
+*
+*/
+/**
 *
 * google_xml [French]
 * Translated By: Mathieu M. & gowap [ www.phpbb-seo.com ]
-*
-* @package gym_sitemaps
-* @version $Id: google_xml.php, 2008
-* @copyright (c) 2007, 2008 phpBB SEO - www.phpbb-seo.com
 *
 */
 /**
@@ -29,7 +33,7 @@ if (empty($lang) || !is_array($lang))
 // in a url you again do not need to specify an order e.g., 'Click %sHERE%s' is fine
 $lang = array_merge($lang, array(
 	'GOOGLE_XML' => 'Sitemaps XML',
-	'GOOGLE_XML_EXPLAIN' => 'Il s’agit des paramètres du module XML des Sitemaps Google. Il permet d’incorporer dans GYM Sitemaps des listes d’URLs à partir de fichiers texte (une URL par ligne) et ainsi leur faire partager toutes les fonctionnalités du MOD comme la gestion des styles XSL et le cache.<br />Certains paramètres peuvent être écrasés en fonction de votre configuration des priorités des paramétrage pour le type de rendu Google Sitemaps et pour le niveau principal.<br /><br />Chaque fichier texte ajouté dans le dossier gym_sitemaps/sources/ sera pris en compte une fois que vous aurez vidé le cache de configuration du module, via le lien maintenance ci-dessus.<br />Chaque liste d’URLs devra être composée d’une URL complète par ligne et suivre une règle simple pour les noms de fichiers : <b>google_</b>nom_de_fichier<b>.xml</b>.<br />Une entrée sera alors crée dans le SitemapIndex avec comme URL : <b>example.com/sitemap.php?xml=nom_de_fichier</b> ou <b>example.com/xml-nom_de_fichier.xml</b> en version réécrite.<br />Le nom des fichiers source ne peut comporter que des caractères alphanumériques (chiffres et lettres non accentuées) ainsi que les séparateurs "_" et "-".<br /><u style="color:red;">Note</u> :<br /> Il est conseillé d’activer le cache pour ce module afin d’éviter des traitements inutiles sur des fichiers xml volumineux.',
+	'GOOGLE_XML_EXPLAIN' => 'Il s’agit des paramètres du module XML des Sitemaps Google. Il permet d’incorporer dans GYM Sitemaps des listes d’URLs à partir de fichiers texte (une URL par ligne) et ainsi leur faire partager toutes les fonctionnalités du MOD comme la gestion des styles XSL et le cache.<br />Certains paramètres peuvent être écrasés en fonction de votre configuration des priorités des paramétrage pour le type de rendu Google Sitemaps et pour le niveau principal.<br /><br />Chaque fichier texte ajouté dans le dossier gym_sitemaps/sources/ sera pris en compte une fois que vous aurez vidé le cache de configuration du module, via le lien maintenance ci-dessus.<br />Chaque liste d’URLs devra être composée d’une URL complète par ligne et suivre une règle simple pour les noms de fichiers : <b>google_</b>nom_de_fichier<b>.xml</b>.<br />Une entrée sera alors crée dans le SitemapIndex avec comme URL : <b>example.com/sitemap.php?xml=nom_de_fichier</b> ou <b>example.com/xml-nom_de_fichier.xml</b> en version réécrite.<br />Le nom des fichiers source ne peut comporter que des caractères alphanumériques (chiffres et lettres non accentuées) ainsi que les séparateurs "_" et "-".<p>Vous pouvez également utiliser l’url complète d’un sitemap qui serait généré par une autre application, en configurant le fichier gym_sitemaps/sources/xml_google_external.php (voir les commentaires du fichier pour plus de dètails).</p><u style="color:red;">Note</u> :<br /> Il est conseillé d’activer le cache pour ce module afin d’éviter des traitements inutiles sur des fichiers xml volumineux.',
 	// Main
 	'GOOGLE_XML_CONFIG' => 'Paramètres Sitemaps XML',
 	'GOOGLE_XML_CONFIG_EXPLAIN' => 'Certains paramètres peuvent être écrasés en fonction de votre configuration des priorités de paramétrage au niveau du type de rendu des Sitemaps Google et au niveau global.',

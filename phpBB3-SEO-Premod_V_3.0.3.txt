@@ -5,7 +5,7 @@
 ## 			Check http://www.phpbb-seo.com/boards/phpbb-seo-premod/seo-url-premod-vt1549.html
 ## 			for the latest version or to get help.
 ##
-## MOD Version: 	3.0.2
+## MOD Version: 	3.0.3
 ##
 ## Installation Level: 	As easy as phpBB3
 ## Installation Time: 	10 Minutes
@@ -65,6 +65,32 @@
 ##############################################################
 ## MOD History:
 ##
+##	2008-11-20 - 3.0.3
+##		- All mods Updated to comply with phpBB 3.0.3.
+##		- Re-enabled search_ignore_words.php for Fulltext Native indexing :
+##		  http://www.phpbb-seo.com/boards/phpbb3-seo-toolkit/meta-keyword-optimization-vt3472.html
+##		- GYM Sitemaps & RSS 2.0.RC1 :
+##			- Added html sitemaps and news pages,
+##			- Added dynamic linking to sitemaps, feeds, maps and news on the forum,
+##			- Fixed Google and Yahoo pinging (RSS & Google),
+##			- Improved bbcode handling and generally, message filtering,
+##			- Many minor bug fixes and enhancements.
+##		- mod rewrite 0.4.6 :
+##			- Complete rewrite of the phpbb_seo::url_rewrite method,
+##			  the phpbb_seo class is now path aware.
+##			- Fixed : global annoucement display when the lowest forum id is not public,
+##			- Fixed : possibly wrong forum id in active topic last posts links,
+##			- Many minor bug fixes and enhancements in phpbb_seo_class.php.
+##		- zero duplicate 0.4.6 :
+##			- Fixed : Viewpoll result redirect, 
+##			- Added support for the new hash _GET var.
+##		- no duplicate 0.4.6 :
+##			- Fixed : possibly wrong forum id in active topic last posts links.
+##		- Meta tags 0.2.6 :
+##			- Enabled search_ignore_words.php filtering (optional),
+##			- Added few yet useful options in the meta class.
+##		- Optimal titles 1.0.4 :
+##			- Fixed tiny glitch in overall_header.html.
 ##	2008-07-14 - 3.0.2
 ##		- Updated to comply with phpBB 3.0.2.
 ##		- Added GYM sitemaps & RSS 2.0.B2
@@ -150,17 +176,17 @@ ________________________________________
 >>>>   UPDATE INSTRUCTION   	   <<<<<
 ________________________________________
 
-Update 3.0.1 => 3.0.2 :
+Update 3.0.2 => 3.0.3 :
 First, go to http://downloads.phpbb-seo.com/seo-url-premod-12/
 where you'll be able to download the update packages
 You can update using two method :
-	1) Auto updating : "3.0.1 to 3.0.2 Auto update"
+	1) Auto updating : "3.0.2 to 3.0.3 Auto update"
 		- Upload the auto_update/install/*.* folder of the update package to install/*.*
 		- Go to ACP => SYSTEM and follow instructions.
 		The auto update method will take the eventual code change you have made into account, 
 		and will attempt to merge the new files with your online modified ones.
 		It's the safest method for most, the installer will tel you if it has trouble to update some files.
-	2) Manual updating : "3.0.1 to 3.0.2 Changed Files"
+	2) Manual updating : "3.0.2 to 3.0.3 Changed Files"
 		You'll find the modified file list in the modified/ folder of the update package.
 		- Upload / merge / overwrite all file,
 		- Upload the modified/install/*.* to install/*.*,
@@ -172,7 +198,7 @@ you will just have to use the new file and edit it to re enter your previous cus
 Once you will have updated, you will have to refresh your theme's cache as well as phpBB's cache 
 (ACP => STYLE, Themes => Refresh).
 
-We have included the mod GYM Sitemap & RSS, but since it is still at beta stage, we kept the install separated
+We have included the mod GYM Sitemap & RSS, but we kept the install separated
 see bellow to install.
 
 ________________________________________
@@ -339,16 +365,14 @@ NOTE: GYM Sitemaps & RSS :
 _________________________
 
 The GYM sitemap & RSS module is now included in the phpBB SEO premod. 
-Fully modular solution for generating Google Yahoo & MSN sitemaps for phpBB
-This mod will create a Google SitemapIndex and auto generated Google Sitemaps for phpBB
-It will as well create many different RSS 2.0 feeds.
-Uses a full support Gun-zip cache for all types of outputs and some XSL-Transform styling for Sitemaps and RSS feeds.
+This module will create United Sitemaps (Aka Google sitemaps), RSS 2.0 feeds, site maps and news pages for for phpBB3.
+It fully supports Gun-zip cache for all types of outputs and some XSL-Transform styling for Sitemaps and RSS feeds. 
 Please visit the relase thread for updates and further information : 
 http://www.phpbb-seo.com/forums/gym-sitemaps-rss/sitemaps-rss-google-yahoo-msn-vt3136.html
 
 PLEASE NOTE : 
 
-	GYM Sitemaps & RSS is released at a beta stage, the install is thus left separated from the regular install.
+	GYM Sitemaps & RSS is released at a RC stage, the install left separated from the regular install.
 	It's up to you to use it or not, but you should know that at this stage, some feature may not be implemented and bugs
 	may still be found.
 

@@ -1,5 +1,12 @@
 <xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
-<xsl:output method="html" version="1.0" encoding="utf-8" indent="yes"/>
+<xsl:output 
+	method="html" 
+	version="1.0" 
+	encoding="utf-8" 
+	omit-xml-declaration="yes"		
+	doctype-public="-//W3C//DTD XHTML 1.0 Strict//EN" 
+	doctype-system="http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"
+	indent="yes" />
 <xsl:template match="/rss" >
 
 <xsl:variable name="rss_link">
@@ -126,10 +133,21 @@
 						<xsl:sort select="substring(pubDate,12,string-length(pubDate))" order="{$sorting}" data-type="number"/> 
 					<div class="post bg2">
 						<div class="inner"><span class="corners-top"><span></span></span>
-							<div class="postbody"><div class="html">
+							<div class="postbody">
 								<div class="content"><p><h2><a href="{link}" title="{title}"><span class="html"><xsl:value-of select="title" disable-output-escaping="yes"/></span></a></h2></p>
-								<span class="html"><xsl:call-template name="nl2br"><xsl:with-param name="input" select="description" /></xsl:call-template></span></div>
-							</div></div>
+									<span class="html"><xsl:call-template name="nl2br"><xsl:with-param name="input" select="description" /></xsl:call-template></span>
+									<div class="signature">
+										<b>{L_BOOKMARK_THIS}</b>&#160;
+										<a href="http://www.scoopeo.com/scoop/new?newurl={link}&amp;title={title}" title="Scoopeo : {title}"><img src="{T_IMAGE_PATH}scoopeo.png" alt="Scoopeo" /></a>&#160;  
+										<a href="http://www.wikio.fr/publish?url={link}&amp;title={title}" title="Wikio : {title}"><img src="{T_IMAGE_PATH}wikio.gif" alt="Wikio" /></a>&#160;
+										<a href="http://digg.com/submit?phase=2&amp;url={link}&amp;title={title}" title="Digg : {title}"><img src="{T_IMAGE_PATH}digg.png" alt="Digg" /></a>&#160;
+										<a href="http://www.fuzz.fr/submit?url={link}&amp;title={title}" title="Fuzz : {title}"><img src="{T_IMAGE_PATH}fuzz.png" alt="Fuzz" /></a>&#160;
+										<a href="http://www.nuouz.com/addNews.aspx?url={link}&amp;title={title}" title="Nuouz : {title}"><img src="{T_IMAGE_PATH}nuouz.png" alt="Nuouz" /></a>&#160;
+										<a href="http://reddit.com/submit?url={link}&amp;title={title}" title="Reddit : {title}"><img src="{T_IMAGE_PATH}reddit.png" alt="Reddit" /></a>&#160;
+										<a href="http://www.addthis.com/bookmark.php" onclick="window.open('http://www.addthis.com/bookmark.php?wt=nw&amp;url={link}&amp;title={title}', 'addthis', 'scrollbars=yes,menubar=no,resizable=yes,toolbar=no,location=no,status=no,width=620,height=560,left=200,top=100'); return false;" title="addThis : {title}"><img src="{T_IMAGE_PATH}addthis.gif" alt="addThis" /></a>
+									</div>
+								</div>
+							</div>
 							<dl class="postprofile">
 								<dt><b>{L_LINK} :</b><br/> <a href="{link}" title="{title}" ><xsl:value-of select="title"/></a><br/>
 									<b>{L_SOURCE} :</b><br/> <a href="{source/@url}" title="{source}"><img src="{T_IMAGE_PATH}feed-icon.png" alt="{L_2_LINK}" align="middle"/>&#160;<span class="html"><xsl:value-of select="source" disable-output-escaping="yes"/></span></a><br/> 

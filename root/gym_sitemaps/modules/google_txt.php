@@ -2,8 +2,8 @@
 /**
 *
 * @package phpBB SEO GYM Sitemaps
-* @version $Id: google_txt.php 2008
-* @copyright (c) 2008 www.phpbb-seo.com
+* @version $id: google_txt.php - 6723 11-20-2008 11:43:24 - 2.0.RC1 dcz $
+* @copyright (c) 2006 - 2008 www.phpbb-seo.com
 * @license http://opensource.org/osi3.0/licenses/lgpl-license.php GNU Lesser General Public License
 *
 */
@@ -81,7 +81,7 @@ class google_txt {
 			}
 			$sitemap_txt_url = $this->module_config['google_url'] . $this->url_settings['google_txt_pre'] . $this->options['module_sub'] . $this->url_settings['google_txt_ext'];
 $this->gym_master->seo_kill_dupes($sitemap_txt_url);
-			$txt_file = $this->module_config['google_sources'] . 'google_' . $this->options['module_sub'] . '.txt';
+			$txt_file = $this->txt_files[$this->options['module_sub']];
 			// Grab data
 			if (($txt_data = @file($txt_file)) && is_array($txt_data)) {
 				$last_mod = (int) @filemtime($txt_file);
@@ -120,7 +120,7 @@ $this->gym_master->seo_kill_dupes($sitemap_txt_url);
 			} else {
 				// Clear the cache to make sure the guilty url is not shown in the sitemapIndex
 				$cache->remove_file($cache->cache_dir . "data_gym_config_google_txt.$phpEx");
-				$this->gym_error(500, '', __FILE__, __LINE__);
+				$this->gym_error(404, '', __FILE__, __LINE__);
 			}
 		} else {
 			$this->gym_error(404, '', __FILE__, __LINE__);
@@ -136,7 +136,7 @@ $this->gym_master->seo_kill_dupes($sitemap_txt_url);
 		// It's global list call, add module sitemaps
 		// Reset the local counting, since we are cycling through modules
 		$this->outputs['url_sofar'] = 0;
-		foreach ($this->txt_files as $txt_action) {
+		foreach ($this->txt_files as $txt_action => $source) {
 			$sitemap_txt_url = $this->module_config['google_url'] . $this->url_settings['google_txt_pre'] . $txt_action . $this->url_settings['google_txt_ext'];
 			$last_mod = (int) @filemtime($txt_file);
 			$last_mod = $last_mod > $config['board_startdate'] ? $last_mod : (time() - rand(500, 10000));
@@ -152,15 +152,14 @@ $this->gym_master->seo_kill_dupes($sitemap_txt_url);
 	*/
 	function get_source_list() {
 		global $cache;
-		if (($this->txt_files = $cache->get('_gym_config_google_txt')) === false) {
-			if (!is_array($this->txt_files)) {
-				$this->txt_files = array();
-			}
+		if (($this->txt_files = $cache->get('_gym_config_google_txt')) === false) {	
+			$this->txt_files = array();
+			$RegEx = '`^google_([a-z0-9_-]+)\.txt`i';
 			$txt_dir = @opendir( $this->module_config['google_sources'] );
 			while( ($txt_file = @readdir($txt_dir)) !== false ) {
-				if(preg_match('`^google_([a-z0-9_-]+)\.txt$`i', $txt_file, $matches)) {
+				if(preg_match($RegEx, $txt_file, $matches)) {
 					if (!empty($matches[1])) {
-						$this->txt_files[$matches[1]] = $matches[1];
+						$this->txt_files[$matches[1]] = $this->module_config['google_sources'] . 'google_' . $matches[1] . '.txt';
 					}
 				}
 			}

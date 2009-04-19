@@ -2,8 +2,8 @@
 /**
 *
 * @package phpBB SEO GYM Sitemaps
-* @version $Id: google_forum.php 2007/04/12 13:48:48 dcz Exp $
-* @copyright (c) 2006 dcz - www.phpbb-seo.com
+* @version $id: google_forum.php - 18774 11-20-2008 11:43:24 - 2.0.RC1 dcz $
+* @copyright (c) 2006 - 2008 www.phpbb-seo.com
 * @license http://opensource.org/osi3.0/licenses/lgpl-license.php GNU Lesser General Public License
 *
 */
@@ -34,8 +34,8 @@ class google_forum {
 			$this->gym_master->google_config,
 			// Other stuff required here
 			array(
-				'google_sticky_priority' => sprintf('%.1f', $this->gym_master->gym_config['google_forum_sticky_priority']),
-				'google_announce_priority' => sprintf('%.1f', $this->gym_master->gym_config['google_forum_announce_priority']),
+				'google_sticky_priority' => $this->gym_master->gym_config['google_forum_sticky_priority'],
+				'google_announce_priority' => $this->gym_master->gym_config['google_forum_announce_priority'],
 				'google_exclude' => trim($this->gym_master->gym_config['google_forum_exclude'], ','),
 			)
 		);
@@ -68,7 +68,7 @@ class google_forum {
 		// make sure virtual_folder uses the proper value
 		$phpbb_seo->seo_opt['virtual_folder'] = $this->url_settings['modrtype'] > 0 ? $phpbb_seo->seo_opt['virtual_folder'] : false;
 		$this->url_settings['google_forum_delim'] = !empty($phpbb_seo->seo_delim['forum']) ? $phpbb_seo->seo_delim['forum'] : '-f';
-		$this->url_settings['google_forum_static'] = !empty($phpbb_seo->seo_static['google_forum']) ? $phpbb_seo->seo_static['google_forum'] : 'forum';
+		$this->url_settings['google_forum_static'] = !empty($phpbb_seo->seo_static['forum']) ? $phpbb_seo->seo_static['forum'] : 'forum';
 		$this->url_settings['modrewrite'] = $this->module_config['google_modrewrite'];
 		if ($this->url_settings['modrewrite']) { // Module links
 			$this->url_settings['google_forum_pre'] = ($this->url_settings['modrtype'] >= 2) ? '' : $this->url_settings['google_forum_static'] . $this->url_settings['google_forum_delim'];
@@ -107,30 +107,31 @@ class google_forum {
 	function sitemap() {
 		global $config, $phpbb_seo, $db, $user, $auth;
 		if ($this->options['module_sub'] === 'announces') {
+			// Start with forums info
+			$forum_data = array();
+			$forum_data['replies_key'] = 'topic_replies';
+			$forum_data['forum_url'] = $phpbb_seo->seo_path['phpbb_urlR'] . ($phpbb_seo->seo_opt['virtual_folder'] ? $phpbb_seo->seo_static['global_announce'] . $phpbb_seo->seo_ext['global_announce'] : '' );
+			// Do we want to list all the global announces from the forum
+			// Count items
+			$sql = "SELECT COUNT(topic_id) AS topic
+				FROM " . TOPICS_TABLE . "
+				WHERE topic_type = " . POST_GLOBAL;
+			$result = $db->sql_query($sql);
+			$row = $db->sql_fetchrow($result);
+			$db->sql_freeresult($result);
+			if(empty($row['topic'])) {
+				$this->gym_master->gym_error(404, '',  __FILE__, __LINE__);
+				exit;
+			} else {
+				$forum_data['topic_count'] = (int) $row['topic'];
+				unset($row);
+			}
 			// it's the announces sitemap
 			$announces_sitemap_url = $this->module_config['google_url'] . $this->url_settings['google_annouces_default'];
 			$this->gym_master->seo_kill_dupes($announces_sitemap_url);
 			// Forum index location
 			$this->gym_master->parse_item($phpbb_seo->seo_path['phpbb_urlR'] . $this->url_settings['forum_index'], 1, 'always', time());
-			// We want to list all the global announces from the forum
 			$forum_sql = $this->gym_master->set_not_in_list($this->module_config['exclude_list']);
-			// Start with forums info
-			$forum_data = array();
-			$forum_data['replies_key'] = 'topic_replies';
-			$forum_data['forum_url'] = $phpbb_seo->seo_path['phpbb_urlR'] . ($phpbb_seo->seo_opt['virtual_folder'] ? $phpbb_seo->seo_static['global_announce'] . $phpbb_seo->seo_ext['global_announce'] : '' );
-			// Count items
-			$sql = "SELECT COUNT(topic_id) AS topic
-				FROM " . TOPICS_TABLE . " AS t
-				WHERE forum_id $forum_sql
-					AND topic_type = " . POST_GLOBAL . " 
-					AND topic_status <> " . ITEM_MOVED . "
-					AND topic_reported = 0
-				ORDER BY t.topic_last_post_id " . $this->module_config['google_sort'];
-			$result = $db->sql_query($sql);
-			$row = $db->sql_fetchrow($result);
-			$db->sql_freeresult($result);
-			$forum_data['topic_count'] = ( $row['topic'] ) ? $row['topic'] : 1;
-			unset($row);
 			$forum_sql = ' forum_id ' .  $forum_sql . ' AND topic_type = ' . POST_GLOBAL . ' AND ';
 			$this->list_topics($forum_sql, $forum_data, '');
 		} else {
@@ -149,16 +150,12 @@ class google_forum {
 					$this->gym_master->gym_error(404, '', __FILE__, __LINE__, $sql);
 				}
 				$forum_id = (int) $forum_data['forum_id'];
-				if ( $forum_data['forum_type'] !=  FORUM_POST || in_array($forum_id, $this->module_config['exclude_list']) ) {
+				if ( $forum_data['forum_type'] !=  FORUM_POST || isset($this->module_config['exclude_list'][$forum_id]) ) {
 					$this->gym_master->gym_error(401, '',  __FILE__, __LINE__);
 				}
 				// This forum is allowed, so let's start
 				$forum_url_title = $phpbb_seo->format_url($forum_data['forum_name'], $phpbb_seo->seo_static['forum']);
 				$forum_sitemap_url = $this->module_config['google_url'] . ( !empty($this->url_settings['google_forum_pre']) ? $this->url_settings['google_forum_pre'] . $forum_id . $this->url_settings['google_forum_ext'] : $forum_url_title . $this->url_settings['google_forum_delim'] .  $forum_id . $this->url_settings['google_forum_ext']);
-				$this->gym_master->seo_kill_dupes($forum_sitemap_url);
-				$forum_data['forum_url'] = $phpbb_seo->seo_path['phpbb_urlR'] . (!empty($this->url_settings['forum_pre']) ? $this->url_settings['forum_pre'] . $forum_id . $this->url_settings['forum_ext'] : $phpbb_seo->set_url($forum_data['forum_name'], $forum_id, $phpbb_seo->seo_static['forum']) . $this->url_settings['forum_ext']);
-				$this->gym_master->parse_item($forum_data['forum_url'], 1.0, 'always', $forum_data['forum_last_post_time']);
-
 				// Approval and pagination
 				$paginated = $config['posts_per_page'];
 				$approve = $auth->acl_get('m_approve', $forum_id);
@@ -173,6 +170,15 @@ class google_forum {
 					$approve_sql = '';
 					$forum_data['approve'] = 0;
 				}
+				// Do not serve content if there is no topic in the forum
+				if ( $forum_data['topic_count'] == 0 ) {
+					$this->gym_master->gym_error(404, '', __FILE__, __LINE__, $sql);
+				}
+				$this->gym_master->seo_kill_dupes($forum_sitemap_url);
+				$forum_data['forum_url'] = $phpbb_seo->seo_path['phpbb_urlR'] . (!empty($this->url_settings['forum_pre']) ? $this->url_settings['forum_pre'] . $forum_id . $this->url_settings['forum_ext'] : $phpbb_seo->set_url($forum_data['forum_name'], $forum_id, $phpbb_seo->seo_static['forum']) . $this->url_settings['forum_ext']);
+				$this->gym_master->parse_item($forum_data['forum_url'], 1.0, 'always', $forum_data['forum_last_post_time']);
+
+
 				$forum_sql = ' forum_id = ' .  $forum_id . ' AND topic_type <> ' . POST_GLOBAL . ' AND ';
 				$this->list_topics($forum_sql, $forum_data, $approve_sql);
 			} else {
@@ -189,8 +195,16 @@ class google_forum {
 				// Forums loop
 				while( $forum_data = $db->sql_fetchrow($result) ) {
 					$forum_id = (int) $forum_data['forum_id'];
+					// Make sure that the forum is auth
+					if (isset($this->module_config['exclude_list'][$forum_id])) {
+						continue;
+					}
 					// Approval and pagination
 					$topics_count = $auth->acl_get('m_approve', $forum_id) ? $forum_data['forum_topics_real'] : $forum_data['forum_topics'];
+					// No topics in this forum, skip
+					if ($topics_count == 0) {
+						continue;
+					}
 					$paginated = $forum_data['forum_topics_per_page'] ? $forum_data['forum_topics_per_page'] : $config['topics_per_page'];
 					$pages = ceil( ($topics_count + 1) / $paginated);
 					$forum_url = $phpbb_seo->seo_path['phpbb_urlR'] . ( !empty($this->url_settings['forum_pre'] ) ? $this->url_settings['forum_pre'] . $forum_id : $phpbb_seo->set_url($forum_data['forum_name'], $forum_id, $phpbb_seo->seo_static['forum']) );
@@ -226,17 +240,28 @@ class google_forum {
 	* @access private
 	*/
 	function sitemapindex() {
-		global $phpbb_seo, $db, $config;
+		global $phpbb_seo, $db, $config, $user, $auth;
 		// It's global list call, add module sitemaps
 		// Reset the local counting, since we are cycling through modules
 		$this->outputs['url_sofar'] = 0;
 		// Forum map locations
 		$forum_sitemap_url = $this->module_config['google_url'] . $this->url_settings['google_forum_default'];
-		$this->gym_master->parse_sitemap($forum_sitemap_url, time());
-		// Announces map location
-		$announces_sitemap_url = $this->module_config['google_url'] . $this->url_settings['google_annouces_default'];
-		$this->gym_master->parse_sitemap($announces_sitemap_url, time() - rand(1,150));
+		$this->gym_master->parse_sitemap($forum_sitemap_url, $user->time_now);
+		// Auth
 		$this->options['not_in_id_sql'] = $this->gym_master->set_not_in_list($this->module_config['exclude_list'], ' WHERE forum_id ');
+		// Announces map location ?
+		// Count items
+		$sql = "SELECT COUNT(topic_id) AS topic
+			FROM " . TOPICS_TABLE . "
+			WHERE topic_type = " . POST_GLOBAL;
+		$result = $db->sql_query($sql);
+		$row = $db->sql_fetchrow($result);
+		$db->sql_freeresult($result);
+		if (!empty($row['topic'])) {
+			unset($row);
+			$announces_sitemap_url = $this->module_config['google_url'] . $this->url_settings['google_annouces_default'];
+			$this->gym_master->parse_sitemap($announces_sitemap_url, $user->time_now - rand(1,150));
+		}
 		$sql = "SELECT *
 				FROM ". FORUMS_TABLE . $this->options['not_in_id_sql'] . "
 			ORDER BY forum_last_post_id " . $this->module_config['google_sort'];
@@ -248,6 +273,11 @@ class google_forum {
 			$forum_id = (int) $forum_data['forum_id'];
 			// Make sure that the forum is auth
 			if (isset($this->module_config['exclude_list'][$forum_id])) {
+				continue;
+			}
+			$topics_count = $auth->acl_get('m_approve', $forum_id) ? $forum_data['forum_topics_real'] : $forum_data['forum_topics'];
+			// No topics in this forum, skip
+			if ($topics_count == 0) {
 				continue;
 			}
 			// Set mod rewrite type
@@ -276,13 +306,11 @@ class google_forum {
 				WHERE $forum_sql
 					topic_status <> " . ITEM_MOVED . " 
 					$approve_sql
-					AND topic_reported = 0
 					ORDER BY topic_last_post_id " . $this->module_config['google_sort'];
 		//nice_print($sql_first);
 		$paginated = $config['posts_per_page'];
 		while( ( $topic_sofar <  $forum_data['topic_count'] ) && ($this->outputs['url_sofar'] < $this->module_config['google_url_limit']) ) {
-			$sql = $sql_first . " LIMIT $topic_sofar," . $this->module_config['google_sql_limit'];	
-			$result = $db->sql_query($sql);
+			$result = $db->sql_query_limit($sql_first, $this->module_config['google_sql_limit'], $topic_sofar);
 			while ($topic = $db->sql_fetchrow($result)) {
 				$forum_id = (int) $topic['forum_id'];
 				// Make sure that the forum is auth

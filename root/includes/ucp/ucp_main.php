@@ -2,7 +2,7 @@
 /**
 *
 * @package ucp
-* @version $Id: ucp_main.php 8479 2008-03-29 00:22:48Z naderman $
+* @version $Id: ucp_main.php 8997 2008-10-11 14:31:22Z toonarmy $
 * @copyright (c) 2005 phpBB Group
 * @license http://opensource.org/licenses/gpl-license.php GNU Public License
 *
@@ -237,7 +237,10 @@ class ucp_main
 								$l_unwatch .= '_TOPICS';
 							}
 							$msg = $user->lang['UNWATCHED' . $l_unwatch];
-
+						}
+						else
+						{
+							$msg = $user->lang['NO_WATCHED_SELECTED'];
 						}
 					}
 					else

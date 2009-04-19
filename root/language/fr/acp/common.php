@@ -5,7 +5,7 @@
 * translated originally by PhpBB-fr.com <http://www.phpbb-fr.com/> and phpBB.biz <http://www.phpBB.biz>
 *
 * @package language
-* @version $Id: common.php,v 1.22 2008/07/03 17:21:02 elglobo Exp $
+* @version $Id: common.php,v 1.22 2008/11/14 11:42:00 Elglobo Exp $
 * @copyright (c) 2005 phpBB Group 
 * @license http://opensource.org/licenses/gpl-license.php GNU Public License 
 *
@@ -362,6 +362,7 @@ $lang = array_merge($lang, array(
 	'VIEW_INACTIVE_USERS'	=> 'Voir les utilisateurs inactifs',
 
 	'WELCOME_PHPBB'			=> 'Bienvenue dans phpBB',
+	'WRITABLE_CONFIG' 		=> 'Votre fichier de configuration (config.php) est actuellement accessible en écriture par tout le monde. Nous vous recommandons fortement de modifier les permissions en 640, ou au moins 644 (par exemple <a href="http://en.wikipedia.org/wiki/Chmod" rel="external">chmod</a> 640 config.php).',
 ));
 
 // Inactive Users
@@ -473,12 +474,13 @@ $lang = array_merge($lang, array(
 	'LOG_APPROVE_TOPIC'			=> '<strong>Approbation d’un sujet</strong><br />» %s',
 	'LOG_BUMP_TOPIC'			=> '<strong>Sujet remonté par un utilisateur</strong><br />» %s',
 	'LOG_DELETE_POST'			=> '<strong>Suppression d’un message</strong><br />» %s',
+	'LOG_DELETE_SHADOW_TOPIC'	=> '<strong>Suppression d’un sujet-traceur</strong><br />» %s',
 	'LOG_DELETE_TOPIC'			=> '<strong>Suppression d’un sujet</strong><br />» %s',
-	'LOG_FORK'					=> '<strong>Copie d’un sujet</strong><br />» de %s',
-	'LOG_LOCK'					=> '<strong>Verrouillage d’un sujet</strong><br />» %s',
-	'LOG_LOCK_POST'				=> '<strong>Verrouillage d’un message</strong><br />» %s',
-	'LOG_MERGE'					=> '<strong>Fusion de messages</strong> dans le sujet <br />»%s',
-	'LOG_MOVE'					=> '<strong>Déplacement d’un sujet</strong><br />» de %s',
+	'LOG_FORK' 					=> '<strong>Copie d’un sujet</strong><br />» de %s',
+	'LOG_LOCK' 					=> '<strong>Verrouillage d’un sujet</strong><br />» %s',
+	'LOG_LOCK_POST' 			=> '<strong>Verrouillage d’un message</strong><br />» %s',
+	'LOG_MERGE' 				=> '<strong>Fusion de messages</strong> dans le sujet <br />»%s',
+	'LOG_MOVE' 					=> '<strong>Déplacement d’un sujet</strong><br />» de %s',
 	'LOG_POST_APPROVED'			=> '<strong>Approbation d’un message</strong><br />» %s',
 	'LOG_POST_DISAPPROVED'		=> '<strong>Refus d’un message “%1$s” pour la raison suivante</strong><br />» %2$s',
 	'LOG_POST_EDITED'			=> '<strong>Edition d’un message “%1$s” écrit par</strong><br />» %2$s',
@@ -487,13 +489,12 @@ $lang = array_merge($lang, array(
 	'LOG_SPLIT_DESTINATION'		=> '<strong>Déplacement de messages divisés</strong><br />» vers %s',
 	'LOG_SPLIT_SOURCE'			=> '<strong>Division de messages</strong><br />» depuis %s',
 
-	'LOG_TOPIC_DELETED'			=> '<strong>Sujet supprimé</strong><br />» %s',
-	'LOG_TOPIC_APPROVED'		=> '<strong>Sujet approuvé</strong><br />» %s',
-	'LOG_TOPIC_DISAPPROVED'		=> '<strong>Sujet refusé “%1$s” pour la raison suivante</strong><br />%2$s',
+	'LOG_TOPIC_APPROVED'		=> '<strong>Approbation d’un sujet</strong><br />» %s',
+	'LOG_TOPIC_DISAPPROVED'		=> '<strong>Refus d’un sujet “%1$s” pour la raison suivante</strong><br />%2$s',
 	'LOG_TOPIC_RESYNC'			=> '<strong>Compteurs de message synchronisés</strong><br />» %s',
 	'LOG_TOPIC_TYPE_CHANGED'	=> '<strong>Modification du type de sujet</strong><br />» %s',
-	'LOG_UNLOCK'				=> '<strong>Sujet déverrouillé</strong><br />» %s',
-	'LOG_UNLOCK_POST'			=> '<strong>Message déverrouillé</strong><br />» %s',
+	'LOG_UNLOCK'				=> '<strong>Déverrouillage d’un sujet</strong><br />» %s',
+	'LOG_UNLOCK_POST'			=> '<strong>Déverrouillage d’un message</strong><br />» %s',
 
 	'LOG_DISALLOW_ADD'		=> '<strong>Ajout d’un nom d’utilisateur interdit</strong><br />» %s',
 	'LOG_DISALLOW_DELETE'	=> '<strong>Suppression d’un nom d’utilisateur interdit</strong>',
@@ -696,10 +697,10 @@ $lang = array_merge($lang, array(
 	'ACP_PREMOD_UPDATE' => '<h1>Annonce de mise à jour</h1>
 	<p>Cette mise à jour ne concerne que la premod, pas phpBB lui même.</p>
 	<p>Une nouvelle version de la premod phpBB SEO est donc disponible : %1$s<br/>Veuillez vous rendre sur <a href="%2$s" title="Le sujet de mise à disposition"><b>le sujet de mise à disposition</b></a> pour procéder à la mise à jour.</p>',
-	'SEO_LOG_INSTALL_PHPBB_SEO' => '<strong>Installation du mod rewrite phpBB SEO</strong>',
-	'SEO_LOG_INSTALL_PHPBB_SEO_FAIL' => '<strong>Echec de l’installation du mod rewrite phpBB SEO</strong>',
-	'SEO_LOG_UNINSTALL_PHPBB_SEO' => '<strong>Désinstallation du mod rewrite phpBB SEO</strong>',
-	'SEO_LOG_UNINSTALL_PHPBB_SEO_FAIL' => '<strong>Echec de la désinstallation du mod rewrite phpBB SEO</strong>',
+	'SEO_LOG_INSTALL_PHPBB_SEO' => '<strong>Installation du mod rewrite phpBB SEO (v%s)</strong>',
+	'SEO_LOG_INSTALL_PHPBB_SEO_FAIL' => '<strong>Echec de l’installation du mod rewrite phpBB SEO</strong><br/>%s',
+	'SEO_LOG_UNINSTALL_PHPBB_SEO' => '<strong>Désinstallation du mod rewrite phpBB SEO (v%s)</strong>',
+	'SEO_LOG_UNINSTALL_PHPBB_SEO_FAIL' => '<strong>Echec de la désinstallation du mod rewrite phpBB SEO</strong><br/>%s',
 	'SEO_LOG_CONFIG_SETTINGS' => '<strong>Modification des réglages de la classe phpBB SEO</strong>',
 	'SEO_LOG_CONFIG_FORUM_URL' => '<strong>Modification des URLs des Forum</strong>',
 	'SEO_LOG_CONFIG_HTACCESS' => '<strong>Nouveau .htaccess généré</strong>',

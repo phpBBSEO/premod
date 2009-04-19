@@ -2,8 +2,8 @@
 /**
 *
 * @package phpBB SEO GYM Sitemaps
-* @version $Id: gym_sitemaps.php 2007/04/12 13:48:48 dcz Exp $
-* @copyright (c) 2006 dcz - www.phpbb-seo.com
+* @version $id: phpbb_seo_class_light.php - 6722 11-21-2008 08:46:02 - 2.0.RC1 dcz $
+* @copyright (c) 2006 - 2008 www.phpbb-seo.com
 * @license http://opensource.org/osi3.0/licenses/lgpl-license.php GNU Lesser General Public License
 *
 */
@@ -51,31 +51,30 @@ class phpbb_seo {
 		$this->seo_ext = array( 'forum' => '.html', 'topic' => '.html', 'post' => '.html', 'user' => '.html', 'usermsg' => '.html', 'group' => '.html',  'index' => '', 'global_announce' => '/', 'leaders' => '.html', 'pagination' => '.html', 'gz_ext' => '');
 		$this->seo_opt['url_pattern'] = array('`&(amp;)?#?[a-z0-9]+;`i', '`[^a-z0-9]`i'); // Do not remove : html/xml entities & non a-z chars
 		/*if ($this->seo_opt['rem_small_words']) {
-			$this->seo_opt['url_pattern'][] = '`-[a-z0-9]{1,2}(?=-)`i'; // Startig / Ending with hyphen (thx pvchat1)
-			$this->seo_opt['url_pattern'][] = '`^[a-z0-9]{1,2}-`i'; // Ending with hyphen
-			$this->seo_opt['url_pattern'][] = '`-[a-z0-9]{1,2}$`i'; // Starting with hyphen
-			$this->seo_opt['url_pattern'][] = '`^[a-z0-9]{1,2}$`i'; // Single word in title : z1-txx.html vs topic-txx.hmtl
+			$this->seo_opt['url_pattern'][] = '`(^|-)[a-z0-9]{1,2}(?=-|$)`i';
 		}*/
 		$this->seo_opt['url_pattern'][] ='`[-]+`'; // Do not remove : multi hyphen reduction
-		// Path Settings
+		// --> DOMAIN SETTING <-- //
+		// Path Settings, only rely on DB
 		$server_protocol = ($config['server_protocol']) ? $config['server_protocol'] : (($config['cookie_secure']) ? 'https://' : 'http://');
 		$server_name = trim($config['server_name'], '/') . '/';
 		$server_port = (int) $config['server_port'];
 		$server_port = ($server_port <> 80) ? ':' . $server_port : '';
 		$script_path = trim($config['script_path'], '/');
 		$script_path = (empty($script_path) ) ? '' : $script_path . '/';
-		$this->seo_path['root_url'] =  $server_protocol . $server_name; 
+		$this->seo_path['root_url'] =  $server_protocol . $server_name;
 		$this->seo_path['phpbb_urlR'] = $this->seo_path['phpbb_url'] =  $this->seo_path['root_url'] . $script_path;
 		$this->seo_path['phpbb_script'] =  $script_path;
 		// File setting
 		$this->seo_req_uri();
-		$parsed_url = @parse_url($this->seo_path['uri']);
-		$this->seo_path['file'] = basename($parsed_url['path']);
-		// Path from root to the file, including virtual folders.
-		$this->seo_path['current_path'] = trim(trim(str_replace('\\', '/', $parsed_url['path']), '/'),  '.');
-		$this->seo_opt['seo_base_href'] = '';
-		$this->seo_opt['req_file'] = @parse_url($_SERVER['PHP_SELF']);
-		$this->seo_opt['req_file'] = str_replace( '.' . $phpEx, '', basename($this->seo_opt['req_file']['path']));
+		$this->seo_opt['seo_base_href'] = $this->seo_opt['req_file'] = $this->seo_opt['req_self'] = '';
+		if ($script_name = (!empty($_SERVER['PHP_SELF'])) ? $_SERVER['PHP_SELF'] : getenv('PHP_SELF')) {
+			// From sessions.php
+			// Replace backslashes and doubled slashes (could happen on some proxy setups)
+			$this->seo_opt['req_self'] = str_replace(array('\\', '//'), '/', $script_name);
+			// basenamed page name (for example: index)
+			$this->seo_opt['req_file'] = urlencode(htmlspecialchars(str_replace('.' . $phpEx, '', basename($this->seo_opt['req_self']))));
+		}
 		return;
 	}
 	// --> Gen stats 
@@ -91,7 +90,7 @@ class phpbb_seo {
 	* Prepare Titles for URL injection
 	*/
 	function format_url( $url, $type = 'topic' ) {
-		$url = preg_replace('`\[.*\]`U','',$url);
+		$url = preg_replace('`\[.*\]`U','', 'utf-8');
 		$url = htmlentities($url, ENT_COMPAT, $this->encoding);
 		$url = preg_replace( '`&([a-z]+)(acute|uml|circ|grave|ring|cedil|slash|tilde|caron|lig);`i', "\\1", $url );
 		$url = preg_replace( $this->seo_opt['url_pattern'] , '-', $url);
@@ -105,18 +104,47 @@ class phpbb_seo {
 		return $this->format_url( $url, $type ) . $this->seo_delim[$type] . $id;
 	}
 	/**
+	* Prepare url first part
+	*/
+	function prepare_url( $type, $title, $id ) {
+		if ( empty($this->seo_url[$type][$id]) ) {
+			$this->seo_url[$type][$id] = $this->format_url($title, $this->seo_static[$type]) . $this->seo_delim[$type] . $id;
+		}
+	}
+	/**
+	* Set title
+	*/
+	function set_title( $type, $title, $id ) {
+		if ( empty($this->seo_url[$type][$id]) ) {
+			$this->seo_url[$type][$id] = $this->format_url($title, $this->seo_static[$type]);
+		}
+	}
+	/**
 	* Returns the full REQUEST_URI
 	*/
 	function seo_req_uri() {
-		if ( !empty($_SERVER['REQUEST_URI']) ) { // Apache mod_rewrite
-			$this->seo_path['uri'] = ltrim($_SERVER['REQUEST_URI'], '/');
-		} elseif ( !empty($_SERVER['HTTP_X_REWRITE_URL']) ) { // IIS  isapi_rewrite
+		if ( !empty($_SERVER['HTTP_X_REWRITE_URL']) ) { // IIS  isapi_rewrite
 			$this->seo_path['uri'] = ltrim($_SERVER['HTTP_X_REWRITE_URL'], '/');
+		} elseif ( !empty($_SERVER['REQUEST_URI']) ) { // Apache mod_rewrite
+			$this->seo_path['uri'] = ltrim($_SERVER['REQUEST_URI'], '/');
 		} else { // no mod rewrite
 			$this->seo_path['uri'] =  ltrim($_SERVER['SCRIPT_NAME'], '/') . ( ( !empty($_SERVER['QUERY_STRING']) ) ? '?'.$_SERVER['QUERY_STRING'] : '' );
 		}
-		$this->seo_path['uri'] = $this->seo_path['root_url'] . str_replace('&amp;', '&', $this->seo_path['uri']);
+		$this->seo_path['uri'] = str_replace( '%26', '&', rawurldecode($this->seo_path['uri']));
+		// workaround for FF default iso encoding
+		if (!$this->is_utf8($this->seo_path['uri']) && function_exists('utf8_encode')) {
+			$this->seo_path['uri'] = utf8_normalize_nfc(utf8_encode($this->seo_path['uri']));
+		}
+		$this->seo_path['uri'] = $this->seo_path['root_url'] . $this->seo_path['uri'];
 		return $this->seo_path['uri'];
+	}
+	/**
+	* is_utf8($string)
+	* Borrowed from php.net : http://www.php.net/mb_detect_encoding (detectUTF8)
+	*/
+	function is_utf8($string) {
+		// non-overlong 2-byte|excluding overlongs|straight 3-byte|excluding surrogates|planes 1-3|planes 4-15|plane 16
+		return preg_match('%(?:[\xC2-\xDF][\x80-\xBF]|\xE0[\xA0-\xBF][\x80-\xBF]|[\xE1-\xEC\xEE\xEF][\x80-\xBF]{2}|\xED[\x80-\x9F][\x80-\xBF] |\xF0[\x90-\xBF][\x80-\xBF]{2}|[\xF1-\xF3][\x80-\xBF]{3}|\xF4[\x80-\x8F][\x80-\xBF]{2})+%xs', $string);
 	}
 }
 ?>

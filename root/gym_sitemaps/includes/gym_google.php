@@ -2,8 +2,8 @@
 /**
 *
 * @package phpBB SEO GYM Sitemaps
-* @version $Id: gym_sitemaps.php 2007/04/12 13:48:48 dcz Exp $
-* @copyright (c) 2006 dcz - www.phpbb-seo.com
+* @version $id: gym_google.php - 13632 11-20-2008 11:43:24 - 2.0.RC1 dcz $
+* @copyright (c) 2006 - 2008 www.phpbb-seo.com
 * @license http://opensource.org/osi3.0/licenses/lgpl-license.php GNU Lesser General Public License
 *
 */
@@ -11,6 +11,7 @@
 if ( !defined('IN_PHPBB') ) {
 	exit;
 }
+require_once($phpbb_root_path . 'gym_sitemaps/includes/gym_sitemaps.' . $phpEx);
 /**
 * gym_google Class
 * www.phpBB-SEO.com
@@ -29,15 +30,16 @@ class gym_google extends gym_sitemaps {
 		$this->gym_sitemaps('google');
 		// init output
 		$this->output_data['showstats'] = $this->gym_config['gym_showstats'] && $this->gym_config['google_showstats'];
+		// Check the main vars
+		$this->init_get_vars();
 		// Set last mod time from DB, will only be used as his for sitempaindex
 		// put it into phpbb config for the dynamic property.
 		$config_name = $this->actions['action_type'] . '_' . (!empty($this->actions['module_main']) ? $this->actions['module_main'] . '_' : '') . 'last_mod_time';
 		if (@$config[$config_name] < $config['board_startdate']) {
-			set_config($config_name, $user->time_now, 1);
+			set_config($config_name, $this->output_data['time'], 1);
 		}
 		$this->output_data['last_mod_time'] = intval($config[$config_name]);
-		// Check the main vars
-		$this->init_get_vars();
+		// Init the output class
 		$this->gym_init_output();
 		// Setup the output
 		$this->cache_config = array_merge(
@@ -48,7 +50,7 @@ class gym_google extends gym_sitemaps {
 				'cache_enable' => (boolean) $this->set_module_option('cache_on', $this->override['cache']),
 				'cache_auto_regen' => (boolean) $this->set_module_option('cache_auto_regen', $this->override['cache']),
 				'cache_force_gzip' => (boolean) $this->set_module_option('cache_force_gzip', $this->override['cache']),
-				'cache_born' => intval($this->set_module_option('cache_born')),
+				'cache_born' => $this->output_data['last_mod_time'],
 				'cache_max_age' => round($this->set_module_option('cache_max_age', $this->override['cache']),2) * 3600,
 				'cache_file_ext' => ( $this->gym_output->gzip_config['gzip'] || $this->set_module_option('cache_force_gzip', $this->override['cache']) ) ? '.xml.gz' : '.xml',
 			)
@@ -58,17 +60,15 @@ class gym_google extends gym_sitemaps {
 			'SitmIndex_tpl' => "\n\t" . '<sitemap>' . "\n\t\t" . '<loc>%s</loc>%s' . "\n\t" . '</sitemap>',
 			'lastmod_tpl' => "\n\t\t" . '<lastmod>%s</lastmod>',
 			'changefreq_tpl' => "\n\t\t" . '<changefreq>%s</changefreq>',
-			'priority_tpl' => "\n\t\t" . '<priority>%.2f</priority>',
+			'priority_tpl' => "\n\t\t" . '<priority>%.1f</priority>',
 			'xslt_style' => '',
 			'stats_genlist'	=> "\n" . '<!-- URL list generated in  %s s %s - %s sql - %s URLs listed -->',
 			'stats_start' => "\n" . '<!--  Output started from cache after %s s - %s sql -->',
 			'stats_nocache'	=> "\n" . '<!--  Output ended after %s s %s -->',
 			'stats_end' => "\n" . '<!--  Output from cache ended up after %s s - %s sql -->',
 		);
-		// Check cache
-		$this->gym_output->setup_cache(); // Will exit if the cache is sent
 		$this->google_config = array(
-			'google_default_priority' =>  sprintf('%.1f', $this->set_module_option('default_priority', $this->gym_config['google_override'])),
+			'google_default_priority' => $this->set_module_option('default_priority', $this->gym_config['google_override']),
 			'google_url' => $this->gym_config['google_url'],
 			// module specific settings we should often need in module
 			'google_modrewrite' => intval($this->set_module_option('modrewrite', $this->override['modrewrite'])),
@@ -84,13 +84,23 @@ class gym_google extends gym_sitemaps {
 		if ($this->gym_config['google_xslt']) {
 			$this->style_config['xslt_style'] = "\n" . '<?xml-stylesheet type="text/xsl" href="' . $phpbb_seo->seo_path['phpbb_url'] . 'gym_sitemaps/gym_style.' . $phpEx . '?action-google,type-xsl,lang-' . $config['default_lang'] . ',theme_id-' . $config['default_style'] . '" ?>';
 		}
+		// Take care about module categorie urls, assuming that they are of the proper form 
+		// title-sepXX.xml
+		// assuming that phpbb_seo seo_delim array is properly set.
+		if (empty($this->actions['module_main']) && empty($this->actions['module_sub']) && !empty($_REQUEST['module_sep']) && !empty($_REQUEST['module_sub'])) {
+			if ($module = @array_search('-' . $_REQUEST['module_sep'], $phpbb_seo->seo_delim)) {
+				$this->actions['module_main'] = $module;
+				$this->actions['module_sub'] = (int) $_REQUEST['module_sub'];
+			}
+		}
+		// Check cache
+		$this->gym_output->setup_cache(); // Will exit if the cache is sent
 		if ( empty($this->actions['module_main']) ) { // SitemapIndex
 			$this->google_sitemapindex();
 		} else { // Sitemap
 			$this->google_sitemap();
 		}
-		if (!empty($_REQUEST['explain']) && $auth->acl_get('a_') && defined('DEBUG_EXTRA') && method_exists($db, 'sql_report'))
-		{
+		if (!empty($_REQUEST['explain']) && $auth->acl_get('a_') && defined('DEBUG_EXTRA') && method_exists($db, 'sql_report')) {
 			$db->sql_report('display');
 		}
 		$this->gym_output->do_output();
@@ -110,7 +120,13 @@ class gym_google extends gym_sitemaps {
 		$this->load_modules('sitemapindex');
 		// Grabb the total
 		$this->output_data['url_sofar'] = $this->output_data['url_sofar_total'];
+		if ( empty($this->output_data['url_sofar']) ) {
+			$this->gym_error(404, '', __FILE__, __LINE__);
+		}
 		$this->output_data['data'] .= "\n" . '</sitemapindex>';
+		if ( $this->google_config['google_ping'] && ($this->output_data['time'] >= ($this->cache_config['cache_born'] + $this->cache_config['cache_max_age'])) ) {
+			$this->google_ping($sitemapindex_url);
+		}
 		return;
 	}
 	/**
@@ -121,11 +137,17 @@ class gym_google extends gym_sitemaps {
 		global $phpEx, $phpbb_seo, $db;
 		// Initialize SQL cycling : do not query for more than required
 		$this->gym_config['google_sql_limit'] = ($this->gym_config['google_sql_limit'] > $this->gym_config['google_url_limit']) ? $this->gym_config['google_url_limit'] : $this->gym_config['google_sql_limit'];
-		$this->output_data['data'] = "<?xml version='1.0' encoding='UTF-8'?>" . $this->style_config['xslt_style'] . "\n" . '<urlset xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"' . "\n\t" . 'xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9' . "\n\t" . 'http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd"' . "\n\t" . 'xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">' . "\n" . '<!-- Generated by Google Yahoo MSN Sitemaps and RSS ' . $this->gym_config['gym_version'] . ' - © 2006, 2007 www.phpBB-SEO.com -->' . "\n";
+		$this->output_data['data'] = "<?xml version='1.0' encoding='UTF-8'?>" . $this->style_config['xslt_style'] . "\n" . '<urlset xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"' . "\n\t" . 'xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9' . "\n\t" . 'http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd"' . "\n\t" . 'xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">' . "\n" . '<!-- Generated by Google Yahoo MSN Sitemaps and RSS ' . $this->gym_config['gym_version'] . ' - © 2006, 2007, 2008 www.phpBB-SEO.com -->' . "\n";
 		// start the module
 		$module_class = $this->actions['action_type'] . '_' . $this->actions['module_main'];
 		$this->load_module($module_class, 'sitemap');
+		if ( empty($this->output_data['url_sofar']) ) {
+			$this->gym_error(404, '', __FILE__, __LINE__);
+		}
 		$this->output_data['data'] .= "\n" . '</urlset>';
+		if ( $this->google_config['google_ping'] && ($this->output_data['time'] >= ($this->cache_config['cache_born'] + $this->cache_config['cache_max_age'])) ) {
+			$this->google_ping();
+		}
 		return;
 	}
 	/**
@@ -134,8 +156,7 @@ class gym_google extends gym_sitemaps {
 	*/
 	function parse_sitemap($url, $lastmodtime = 0) {
 		global $config, $user;
-		if ($lastmodtime > $config['board_startdate']) {
-			$this->output_data['last_mod_time'] = $lastmodtime;
+		if ($lastmodtime > $config['board_startdate']) {	
 			$lastmodtime = sprintf($this->style_config['lastmod_tpl'], gmdate('Y-m-d\TH:i:s'.'+00:00', intval($lastmodtime)));
 		} else {
 			$lastmodtime = '';
@@ -149,7 +170,7 @@ class gym_google extends gym_sitemaps {
 	function parse_item($url, $priority = 1.0, $changefreq = 'always', $lastmodtime = 0) {
 		global $config, $user;
 		$changefreq = isset($this->freq_values[$changefreq]) ? sprintf($this->style_config['changefreq_tpl'], $changefreq) : '';
-		$priority = $priority <= 1 && $priority > 0 ? sprintf($this->style_config['priority_tpl'], $priority) : '';
+		$priority = $priority <= 1 && $priority > 0 ? str_replace(',', '.', sprintf($this->style_config['priority_tpl'], $priority)) : '';
 		$lastmodtime = $lastmodtime > $config['board_startdate'] ? sprintf($this->style_config['lastmod_tpl'], gmdate('Y-m-d\TH:i:s'.'+00:00', intval($lastmodtime))) : '';
 		$this->output_data['data'] .= sprintf($this->style_config['Sitemap_tpl'], $url, $lastmodtime, $changefreq, $priority);
 		$this->output_data['url_sofar']++;
@@ -165,22 +186,45 @@ class gym_google extends gym_sitemaps {
 	}
 	/**
 	* get_changefreq() computes the changefreq, based on lastmodtime
-	* 3628800 is 6 weeks
 	*/
 	function get_changefreq($lastmodtime) {
 		global $user;
-		$dt = ($user->time_now - $lastmodtime);
-		return $dt > 3628800 ? 'monthly' : ($dt > 864000 ? 'weekly' : 'daily');
+		$dt = $user->time_now - $lastmodtime;
+		// 	42 weeks ~ 10 month		| 6 weeks 			| 7 days			| 36 hours		| 4 hours
+		return $dt > 25401600 ? 'yearly' : ( $dt > 3628800 ? 'monthly' : ( $dt > 604800 ? 'weekly' : ( $dt > 129600 ? 'daily' : ( $dt > 14400 ? 'hourly' : 'almways' ) ) ) );
 	}
 	/**
 	* parse_sitemap($url, $lastmodtime = 0)
 	* adds the module sitemaps to the sitemapindex
 	*/
-	function google_ping($url) {
-		global $config, $user;
+	function google_ping($url = '') {
+		global $config;
+		$url = !empty($url) ? str_replace('&amp;', '&', $url) : (!empty($this->url_config['current']) ? $this->url_config['current'] : '');
+		$url = trim($url);
+		if (empty($url)) {
+			return;
+		}
+		// No more than 200 pings a day!
+		if (@$config['gym_pinged_today'] > 200) {
+			// @TODO add logs about this ?
+			return;
+		}
+		$skip = array('http://localhost', 'http://127.0.0.1', 'http://192.168.');
+		foreach ($skip as $_skip) {
+			if (utf8_strpos($url, $_skip) !== false) {
+				// @TODO add logs about this ?
+				return;
+			}
+		}
 		$se_urls = array('http://www.google.com/', 'http://www.yahoo.com/', 'http://www.live.com/');
 		$not_curl= true;
+		$timout = 3;
+		$time = time();
+		$pinged = 0;
 		foreach ($se_urls as $se_url) {
+			if (time() - $time >= $timout) {
+				return;
+			}
 			$request = $se_url . 'ping?sitemap=' . urlencode($url);
 			if (function_exists('curl_exec')) {
 				$not_curl= false;
@@ -188,6 +232,8 @@ class gym_google extends gym_sitemaps {
 				$session = curl_init($request);
 				// Set curl options
 				curl_setopt($session, CURLOPT_HEADER, false);
+				curl_setopt($session, CURLOPT_USERAGENT, 'GYM Sitemaps &amp; RSS / www.phpBB-SEO.com');
+				curl_setopt($session, CURLOPT_TIMEOUT, $timout);
 				curl_setopt($session, CURLOPT_RETURNTRANSFER, true);
 				// Make the request
 				$response = curl_exec($session);
@@ -200,19 +246,31 @@ class gym_google extends gym_sitemaps {
 				// Get the the response, bypassing the header
 				if ($status_code != 200) {
 					$not_curl= true;
+				} else {
+					$pinged++;
+					$this->style_config['stats_genlist'] .= "\n<!--  Pinged $se_url - $url -->";
 				}
 			} elseif ( $not_curl && function_exists('file_get_contents') ) {
 				// Make the request
+				ini_set('user_agent','GYM Sitemaps &amp; RSS / www.phpBB-SEO.com');
+				ini_set('default_socket_timeout', $timout);
+				$status_code = false;
 				if (file_get_contents($request)) {
 					// Retrieve HTTP status code
 					list($version,$status_code,$msg) = explode(' ',$http_response_header[0], 3);
 				}
 				if ($status_code != 200) {
-					$this->gym_error(500, 'GYM_ERROR_PING', __FILE__, __LINE__);
+					// @TODO add logs about this ?
+				} else {
+					$pinged++;
+					$this->style_config['stats_genlist'] .= "\n<!--  Pinged $se_url - $url -->";
 				}
 			} else {
-				$this->gym_error(500, 'GYM_ERROR_PING', __FILE__, __LINE__);
+				// @TODO add logs about this ?
 			}
+		}
+		if ($pinged) {
+			set_config('gym_pinged_today', @$config['gym_pinged_today'] + $pinged, 1);
 		}
 		return;
 	}

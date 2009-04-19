@@ -1,11 +1,15 @@
 <?php
-/** 
+/**
 *
-* gym_common [English]
+* @package phpBB SEO GYM Sitemaps
+* @version $id: gym_google.php - 3284 11-20-2008 14:38:27 - 2.0.RC1 dcz $
+* @copyright (c) 2006 - 2008 www.phpbb-seo.com
+* @license http://opensource.org/osi3.0/licenses/lgpl-license.php GNU Lesser General Public License
 *
-* @package phpbb_seo
-* @version $Id: gym_common.php, 2007/08/30 13:48:48 fds Exp $
-* @copyright (c) 2007 phpBB SEO
+*/
+/**
+*
+* gym_google [English]
 *
 */
 /**

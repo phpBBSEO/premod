@@ -1,11 +1,15 @@
 <?php
-/** 
+/**
+*
+* @package phpBB SEO GYM Sitemaps
+* @version $id: gym_common.php - 18560 11-20-2008 14:38:27 - 2.0.RC1 dcz $
+* @copyright (c) 2006 - 2008 www.phpbb-seo.com
+* @license http://opensource.org/osi3.0/licenses/lgpl-license.php GNU Lesser General Public License
+*
+*/
+/**
 *
 * gym_common [English]
-*
-* @package phpbb_seo
-* @version $Id: gym_common.php, 2007/08/30 13:48:48 fds Exp $
-* @copyright (c) 2007 phpBB SEO
 *
 */
 /**
@@ -44,9 +48,18 @@ $lang = array_merge($lang, array(
 	'RSS_MAIN_RESET' => 'RSS main options',
 	'RSS_MAIN_RESET_EXPLAIN' => 'Reset all the RSS main options to default values.',
 	'YAHOO' => 'Yahoo',
+	// HTML
+	'HTML_MAIN_RESET' => 'Global HTML options',
+	'HTML_MAIN_RESET_EXPLAIN' => 'Reset all the HTML maps and news main options to default values.',
 	'HTML' => 'Html',
-	// CSS
 
+	// GYM authorisation array
+	'GYM_AUTH_ADMIN' => 'Admin',
+	'GYM_AUTH_GLOBALMOD' => 'Global moderators',
+	'GYM_AUTH_REG' => 'Logged in',
+	'GYM_AUTH_GUEST' => 'Guests',
+	'GYM_AUTH_ALL' => 'All',
+	'GYM_AUTH_NONE' => 'None',
 	// XSLT
 	'GYM_STYLE' => 'Styling',
 
@@ -104,6 +117,8 @@ $lang = array_merge($lang, array(
 	'GYM_GOOGLE_EXPLAIN' => 'These are the setting common to all Google sitemaps modules (forum, custom etc ...).<br/> They can be applied to all Google sitemaps modules depending on your override settings for this type of outptut and the main ones.',
 	'GYM_RSS' => 'RSS feeds',
 	'GYM_RSS_EXPLAIN' => 'These are the setting common to all RSS feeds modules (forum, custom etc ...).<br/> They can be applied to all RSS feeds modules depending on your override settings for this type of outptut and the main ones.',
+	'GYM_HTML' => 'HTML Pages',
+	'GYM_HTML_EXPLAIN' => 'These are the setting common to all HTML modules (forum, custom etc ...).<br/> They can be applied to all HTML modules depending on your override settings for this type of outptut and the main ones.',
 	'GYM_MODULES_INSTALLED' => 'Active module(s)',
 	'GYM_MODULES_UNINSTALLED' => 'Non active module(s)',
 
@@ -212,7 +227,11 @@ $lang = array_merge($lang, array(
 
 	// Other
 	// robots.txt
-	'GYM_CHECK_ROBOTS' => 'Check robots.txt exclusions',
-	'GYM_CHECK_ROBOTS_EXPLAIN' => 'Check and apply robots.txt exclusions, if any. The mod will automatically take into account any change in the robots.txt file.<br/> This option is handy for the XML and TXT imports, when you would not be sure that no disallowed URL is inlcuded in the source list.<br/><u>Note :</u><br/>This option requires an heavier parsing of the source file, it is advised to use it when caching is activated.',
+	'GYM_CHECK_ROBOTS' => 'Vérifier les exclusions du fichier robots.txt',
+	'GYM_CHECK_ROBOTS_EXPLAIN' => 'Vérifier et appliquer aux listes d’URLs les exclusions du fichier robots.txt s’il existe. Le MOD prend en compte automatiquement les mises à jour du fichier robots.txt.<br />Cette option est particulièrement pratique pour les imports TXT et XML, quand on n’est pas certain que les listes d’URLs importées ne contiennent aucune URL interdite.<br/><br /><u>Note</u> :<br />Cette option impose plus de travail sur le fichier source, il est conseillé de l’utiliser avec le cache activé.',
+	// summarize method
+	'GYM_METHOD_CHARS' => 'By characters',
+	'GYM_METHOD_WORDS' => 'By words',
+	'GYM_METHOD_LINES' => 'By lines',
 ));
 ?>

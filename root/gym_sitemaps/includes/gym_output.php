@@ -2,8 +2,8 @@
 /**
 *
 * @package phpBB SEO GYM Sitemaps
-* @version $Id: gym_output.php 2008
-* @copyright (c) 2007, 2008 - www.phpbb-seo.com
+* @version $id: gym_output.php - 13433 11-20-2008 11:43:24 - 2.0.RC1 dcz $
+* @copyright (c) 2006 - 2008 www.phpbb-seo.com
 * @license http://opensource.org/osi3.0/licenses/lgpl-license.php GNU Lesser General Public License
 *
 */
@@ -178,8 +178,8 @@ class gym_output {
 		// Output, first check cache
 		if ($this->cache['do_cache'] && $this->check_cache($this->cache['file'])) {
 			// Check expiration
-			$this->cache['cache_born'] = @filemtime($this->cache['file']);
-			$this->cache['cache_too_old'] = ($this->cache['cache_born'] + $this->cache['cache_max_age']) < $this->outputs['time'] ? true : false;
+			$this->cache['cache_born'] = filemtime($this->cache['file']);
+			$this->cache['cache_too_old'] = ($this->cache['cache_born'] + $this->cache['cache_max_age']) <= $this->outputs['time'] ? true : false;
 			if ($this->cache['cache_too_old'] && $this->cache['cache_auto_regen']) {
 				@unlink($this->cache['file']);
 				$this->cache['cached'] = false;
@@ -215,7 +215,7 @@ class gym_output {
 	function update_lastmod() {
 		global $config;
 		$config_name = $this->options['action_type'] . '_' . (!empty($this->options['module_main']) ? $this->options['module_main'] . '_' : '') . 'last_mod_time';
-		$config_value = $this->outputs['last_mod_time'] > $config['board_startdate'] ? $this->outputs['last_mod_time'] : time();
+		$config_value = $this->outputs['last_mod_time'] > $config['board_startdate'] ? $this->outputs['last_mod_time'] : $this->outputs['time'];
 		set_config($config_name, $config_value, 1);
 
 		return;
@@ -297,7 +297,7 @@ class gym_output {
 		}
 		$this->update_lastmod();
 		@umask(0000);
-		@chmod($file,  0666);
+		@chmod($file, 0666);
 		return true;
 	}
 	// --> Gun-Zip handeling <--
@@ -350,17 +350,17 @@ class gym_output {
 	* @access private
 	*/
 	function check_requested_ext() {
-		global $phpbb_seo;
+		global $phpbb_seo, $phpEx;
 		return;
 		$uri = $phpbb_seo->seo_path['uri'];
-		if ( ( strpos($phpbb_seo->seo_path['uri'], '.gz') !== false ) && ($this->ext_config['gzip_ext_out'] == '') && !strpos($uri, '.php')) {
+		if ( ( strpos($phpbb_seo->seo_path['uri'], '.gz') !== false ) && ($this->ext_config['gzip_ext_out'] == '') && !strpos($uri, $phpEx)) {
 			$uri = str_replace ('.gz', "", $uri);
-			$url= $this->path_config['root_url'] . phpbb_ltrim($uri, "/");
-			$this->google_seo_redirect($url);
-		} elseif ( ( strpos($uri, '.gz') === FALSE ) && ($this->ext_config['gzip_ext_out'] != '') && !strpos($uri, '.php')) {
+			$url= $this->path_config['root_url'] . ltrim($uri, '/');
+			$this->gym_master->gym_redirect($url);
+		} elseif ( ( strpos($uri, '.gz') === false ) && ($this->ext_config['gzip_ext_out'] != '') && !strpos($uri, $phpEx)) {
 			$uri = $uri . '.gz';
-			$url= $this->path_config['root_url'] . phpbb_ltrim($uri, "/");
-			$this->google_seo_redirect($url);
+			$url= $this->path_config['root_url'] . ltrim($uri, '/');
+			$this->gym_master->gym_redirect($url);
 		}
 		return;
 	}

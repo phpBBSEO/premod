@@ -1,11 +1,15 @@
 <?php
-/** 
+/**
+*
+* @package phpBB SEO GYM Sitemaps
+* @version $id: gym_rss.php - 11039 11-20-2008 14:38:27 - 2.0.RC1 dcz $
+* @copyright (c) 2006 - 2008 www.phpbb-seo.com
+* @license http://opensource.org/osi3.0/licenses/lgpl-license.php GNU Lesser General Public License
+*
+*/
+/**
 *
 * gym_rss [English]
-*
-* @package gym_sitemaps
-* @version $Id: gym_rss.php, 2007/12/01 13:48:48 fds Exp $
-* @copyright (c) 2007 phpBB SEO - www.phpbb-seo.com
 *
 */
 /**
@@ -34,9 +38,6 @@ $lang = array_merge($lang, array(
 	// Limits
 	'RSS_LIMIT_GEN' => 'Main limits',
 	'RSS_LIMIT_SPEC' => 'RSS limits',
-	'RSS_METHOD_CHARS' => 'By characters',
-	'RSS_METHOD_WORDS' => 'By words',
-	'RSS_METHOD_SENTENCES' => 'By sentences',
 	'RSS_URL_LIMIT_LONG' => 'Long Feeds limit',
 	'RSS_URL_LIMIT_LONG_EXPLAIN' => 'Number of items displayed in a Long feed without content, requires Allow Long Feeds option activated.',
 	'RSS_SQL_LIMIT_LONG' => 'Long SQL cycle',
@@ -101,8 +102,8 @@ $lang = array_merge($lang, array(
 	'RSS_SUMARIZE' => 'Digest Items',
 	'RSS_SUMARIZE_EXPLAIN' => 'You can summarize the message content put in the feeds.<br/> The limit sets the maximum amount of sentences, words or characters, according to the method selected below. Enter 0 to output all of it.',
 	'RSS_SUMARIZE_METHOD' => 'Digest Method',
-	'RSS_SUMARIZE_METHOD_EXPLAIN' => 'You can select between three different methods to limit the message content in feeds.<br/> By number of sentences, by number of words and by number of characters. BBcode tags and words won’t be broken.',
-	'RSS_ALLOW_PROFILE' => 'Show author name',
+	'RSS_SUMARIZE_METHOD_EXPLAIN' => 'You can select between three different methods to limit the message content in feeds.<br/> By number of lines, by number of words and by number of characters. BBcode tags and words won’t be broken.',
+	'RSS_ALLOW_PROFILE' => 'Show Profiles',
 	'RSS_ALLOW_PROFILE_EXPLAIN' => 'Item author name can be added to the RSS feeds if desired.',
 	'RSS_ALLOW_PROFILE_LINKS' => 'Profile link',
 	'RSS_ALLOW_PROFILE_LINKS_EXPLAIN' => 'If author name is included in the output, you can decide to link it or not to the corresponding phpBB profile page.',

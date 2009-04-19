@@ -2,7 +2,7 @@
 /**
 *
 * @package install
-* @version $Id: convert_phpbb20.php 8619 2008-06-07 14:10:16Z acydburn $
+* @version $Id: convert_phpbb20.php 9036 2008-10-25 14:16:17Z acydburn $
 * @copyright (c) 2006 phpBB Group
 * @license http://opensource.org/licenses/gpl-license.php GNU Public License
 *
@@ -32,7 +32,7 @@ unset($dbpasswd);
 $convertor_data = array(
 	'forum_name'	=> 'phpBB 2.0.x',
 	'version'		=> '1.0.2',
-	'phpbb_version'	=> '3.0.2',
+	'phpbb_version'	=> '3.0.3',
 	'author'		=> '<a href="http://www.phpbb.com/">phpBB Group</a>',
 	'dbms'			=> $dbms,
 	'dbhost'		=> $dbhost,

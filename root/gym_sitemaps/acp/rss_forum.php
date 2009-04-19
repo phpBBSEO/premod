@@ -2,8 +2,8 @@
 /**
 *
 * @package phpBB SEO GYM Sitemaps
-* @version $Id: rss_forum.php 2007/04/12 13:48:48 dcz Exp $
-* @copyright (c) 2006 dcz - www.phpbb-seo.com
+* @version $id: rss_forum.php - 13244 11-20-2008 11:43:24 - 2.0.RC1 dcz $
+* @copyright (c) 2006 - 2008 www.phpbb-seo.com
 * @license http://opensource.org/osi3.0/licenses/lgpl-license.php GNU Lesser General Public License
 *
 */
@@ -26,7 +26,8 @@ class rss_forum {
 		global $user;
 		$this->gym_master = &$gym_master;
 		if (isset($this->gym_master->dyn_select) ) {
-			$this->dyn_select = $this->gym_master->dyn_select;
+			$this->dyn_select = & $this->gym_master->dyn_select;
+			$this->gym_master->forum_select();
 		}
 		// Load the language iso 639-1 code - http://www.loc.gov/standards/iso639-2/php/French_list.php
 		if ( !isset($user->lang['ISO_639_1'])) {
@@ -40,6 +41,8 @@ class rss_forum {
 	*/
 	function acp_module() {
 		global $config, $phpbb_seo, $user;
+		$config['sitename'] = utf8_normalize_nfc($config['sitename']);
+		$config['site_desc'] = utf8_normalize_nfc($config['site_desc']);
 		return array( 
 			'cache' => array(
  				'display_vars' => array(
@@ -140,8 +143,8 @@ class rss_forum {
 					'vars'	=> array(
 						'legend1'	=> 'GYM_PAGINATION',
 						'rss_forum_pagination' => array('lang' => 'GYM_PAGINATION_ON', 'validate' => 'bool', 'type' => 'radio:yes_no', 'explain' => true, 'overriding' => true),
-						'rss_forum_limitdown' => array('lang' => 'GYM_LIMITDOWN', 'validate' => 'int', 'type' => 'text:4:4', 'explain' => true, 'overriding' => true),
-						'rss_forum_limitup' => array('lang' => 'GYM_LIMITUP', 'validate' => 'int', 'type' => 'text:4:4', 'explain' => true, 'overriding' => true),
+						'rss_forum_limitdown' => array('lang' => 'GYM_LIMITDOWN', 'validate' => 'int:0', 'type' => 'text:4:4', 'explain' => true, 'overriding' => true),
+						'rss_forum_limitup' => array('lang' => 'GYM_LIMITUP', 'validate' => 'int:0', 'type' => 'text:4:4', 'explain' => true, 'overriding' => true),
 					),
 				),
 				'default' => array(
@@ -171,7 +174,7 @@ class rss_forum {
 						'rss_forum_yahoo_notify' => array('lang' => 'RSS_YAHOO_NOTIFY', 'validate' => 'bool', 'type' => 'radio:yes_no', 'explain' => true, 'overriding' => true),	
 						// Exclusions
 						'legend4' => 'RSS_FORUM_EXCLUDE',
-						'rss_forum_exclude' => array('lang' => 'RSS_FORUM_EXCLUDE', 'validate' => 'string', 'type' => 'text:25:200', 'explain' => true),
+						'rss_forum_exclude' => array('lang' => 'RSS_FORUM_EXCLUDE', 'multiple_validate' => 'int', 'type' => 'custom', 'method' => 'select_multiple_string', 'explain' => true),
 					),
 				),
 				'default' => array(
@@ -191,6 +194,7 @@ class rss_forum {
 				),
 				'select' => array( 
 					'rss_forum_lang' => $user->lang['ISO_639_1'],
+					'rss_forum_exclude' => @$this->dyn_select['forums'],
 
 				),
 			),
@@ -211,7 +215,7 @@ class rss_forum {
 						'rss_forum_allow_links' =>  array('lang' => 'RSS_ALLOW_LINKS', 'validate' => 'bool', 'type' => 'radio:yes_no', 'explain' => true, 'overriding' => true),
 						'rss_forum_allow_emails' => array('lang' => 'RSS_ALLOW_EMAILS', 'validate' => 'bool', 'type' => 'radio:yes_no', 'explain' => true, 'overriding' => true),
 						'rss_forum_allow_smilies' => array('lang' => 'RSS_ALLOW_SMILIES', 'validate' => 'bool', 'type' => 'radio:yes_no', 'explain' => true, 'overriding' => true),
-						'rss_forum_sumarize' => array('lang' => 'RSS_SUMARIZE', 'validate' => 'int', 'type' => 'text:4:4', 'explain' => true, 'overriding' => true),
+						'rss_forum_sumarize' => array('lang' => 'RSS_SUMARIZE', 'validate' => 'int:0:1000', 'type' => 'text:4:4', 'explain' => true, 'overriding' => true),
 						'rss_forum_sumarize_method' => array('lang' => 'RSS_SUMARIZE_METHOD', 'validate' => 'string', 'type' => 'select', 'method' => 'select_string', 'explain' => true, 'overriding' => true),
 						// form specific
 						'legend2'	=> 'RSS_FORUM_CONTENT',
@@ -234,7 +238,7 @@ class rss_forum {
 					'rss_forum_allow_emails' => 0,
 					'rss_forum_allow_smilies' => 1,
 					'rss_forum_sumarize' => 25,
-					'rss_forum_sumarize_method' => 'word',
+					'rss_forum_sumarize_method' => 'words',
 					'rss_forum_first' =>  0,
 					'rss_forum_last' => 1,
 					'rss_forum_rules' => 0,

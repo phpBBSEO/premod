@@ -5,7 +5,7 @@
 * translated originally by PhpBB-fr.com <http://www.phpbb-fr.com/> and phpBB.biz <http://www.phpBB.biz>
 *
 * @package language
-* @version $Id: attachments.php,v 1.22 2008/07/03 16:58:24 elglobo Exp $
+* @version $Id: attachments.php,v 1.22 2008/11/13 12:51:00 EricSchreiner Exp $
 * @copyright (c) 2005 phpBB Group 
 * @license http://opensource.org/licenses/gpl-license.php GNU Public License 
 *
@@ -58,13 +58,13 @@ $lang = array_merge($lang, array(
 	'ATTACH_EXT_GROUPS_URL'				=> 'Groupes d’extensions',
 	'ATTACH_ID'							=> 'ID',
 	'ATTACH_MAX_FILESIZE'				=> 'Taille maximale du fichier',
-	'ATTACH_MAX_FILESIZE_EXPLAIN'		=> 'Taille maximale de chaque fichier, mettre “0” pour ne pas imposer de limite.',
+	'ATTACH_MAX_FILESIZE_EXPLAIN'		=> 'Taille maximale de chaque fichier, mettre “0” pour illimité.',
 	'ATTACH_MAX_PM_FILESIZE'			=> 'Taille maximale des fichiers dans la messagerie privée',
-	'ATTACH_MAX_PM_FILESIZE_EXPLAIN'	=> 'Espace disque maximum disponible par utilisateur pour les fichiers joints dans les messages privés, mettre “0” pour ne pas imposer de limite.',
+	'ATTACH_MAX_PM_FILESIZE_EXPLAIN' 	=> 'Taille maximale de chaque fichier joint à un message privé, mettre “0” pour illimité.',
 	'ATTACH_ORPHAN_URL'					=> 'Fichiers orphelins',
 	'ATTACH_POST_ID'					=> 'ID du message',
 	'ATTACH_QUOTA'						=> 'Quota total de fichiers joints',
-	'ATTACH_QUOTA_EXPLAIN'				=> 'Espace disque maximum disponible pour les fichiers joints de tout le forum, mettre “0” pour ne pas imposer de limite.',
+	'ATTACH_QUOTA_EXPLAIN'				=> 'Espace disque maximum disponible pour les fichiers joints de tout le forum, mettre “0” pour illimité.',
 	'ATTACH_TO_POST'					=> 'Joindre le fichier au message',
 
 	'CAT_FLASH_FILES'			=> 'Fichiers Flash',
@@ -106,8 +106,8 @@ $lang = array_merge($lang, array(
 	'IMAGICK_PATH'				=> 'Chemin vers Imagemagick',
 	'IMAGICK_PATH_EXPLAIN'		=> 'Chemin complet vers l’application imagemagick, Par exemple: <samp>/usr/bin/</samp>.',
 
-	'MAX_ATTACHMENTS'				=> 'Maximum de fichiers joints par message',
-	'MAX_ATTACHMENTS_PM'			=> 'Maximum de fichiers joints par message privé',
+	'MAX_ATTACHMENTS'				=> 'Nombre maximum de fichiers joints par message',
+	'MAX_ATTACHMENTS_PM'			=> 'Nombre maximum de fichiers joints par message privé',
 	'MAX_EXTGROUP_FILESIZE'			=> 'Taille maximale du fichier',
 	'MAX_IMAGE_SIZE'				=> 'Dimensions maximales de l’image',
 	'MAX_IMAGE_SIZE_EXPLAIN'		=> 'Taille maximale des images jointes. Réglez les deux valeurs sur 0px par 0px pour désactiver le contrôle des dimensions.',

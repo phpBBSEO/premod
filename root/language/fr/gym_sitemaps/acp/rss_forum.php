@@ -1,12 +1,16 @@
 <?php
-/** 
+/**
+*
+* @package phpBB SEO GYM Sitemaps
+* @version $id: rss_forum.php - 4540 11-20-2008 14:38:27 - 2.0.RC1 dcz $
+* @copyright (c) 2006 - 2008 www.phpbb-seo.com
+* @license http://opensource.org/osi3.0/licenses/lgpl-license.php GNU Lesser General Public License
+*
+*/
+/**
 *
 * rss_forum [French]
 * Translated By: Mathieu M. & gowap [ www.phpbb-seo.com ]
-*
-* @package gym_sitemaps
-* @version $Id: rss_forum.php, 2007/12/01 13:48:48 fds Exp $
-* @copyright (c) 2007 phpBB SEO - www.phpbb-seo.com
 *
 */
 /**
@@ -31,7 +35,7 @@ $lang = array_merge($lang, array(
 	'RSS_FORUM' => 'Module RSS Forum',
 	'RSS_FORUM_EXPLAIN' => 'Il s’agit des paramètres du module Forum des flux RSS.<br /> Certains paramètres peuvent être écrasés en fonction de votre configuration des priorités de paramétrage au niveau du type de rendu des flux RSS et au niveau global.',
 	'RSS_FORUM_EXCLUDE' => 'Exclusion de forums',
-	'RSS_FORUM_EXCLUDE_EXPLAIN' => 'Vous pouvez exclure certains forums publics des flux RSS.<br />Entrez les IDs des forums à exclure en les séparant d’une virgule<br />ex : 1,5,8<br /><br /><u>Note</u> :<br />Si ce champ est laissé vide, tous les forums publics seront listés.',
+	'RSS_FORUM_EXCLUDE_EXPLAIN' => 'Sélécttionnez les forums pour lesquels vous ne souhaitez pas de flux RSS<br /><u>Note</u> :<br />Si ce champ est laissé vide, tous les forums accessibles seront pris en compte.',
 	// Content
 	'RSS_FORUM_CONTENT' => 'Paramètres du contenu module RSS Forum',
 	'RSS_FORUM_FIRST' => 'Premier message',

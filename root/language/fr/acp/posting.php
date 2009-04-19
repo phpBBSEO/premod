@@ -5,7 +5,7 @@
 * translated originally by PhpBB-fr.com <http://www.phpbb-fr.com/> and phpBB.biz <http://www.phpBB.biz>
 *
 * @package language
-* @version $Id: posting.php,v 1.22 2008/07/03 17:01:53 elglobo Exp $
+* @version $Id: posting.php,v 1.22 2008/11/14 11:53:00 EricSchreiner Exp $
 * @copyright (c) 2005 phpBB Group 
 * @license http://opensource.org/licenses/gpl-license.php GNU Public License 
 *
@@ -48,6 +48,7 @@ $lang = array_merge($lang, array(
 	'BBCODE_HELPLINE'			=> 'Ligne d’aide',
 	'BBCODE_HELPLINE_EXPLAIN'	=> 'Ce champ contient le texte du BBCode qui sera affiché lors du passage de la souris.',
 	'BBCODE_HELPLINE_TEXT'		=> 'Texte de la ligne d’aide',
+	'BBCODE_HELPLINE_TOO_LONG' 	=> 'Le texte saisi pour la ligne d’aide est trop long.',
 	'BBCODE_INVALID_TAG_NAME'	=> 'Le nom de la balise BBCode que vous avez sélectionné existe déjà.',
 	'BBCODE_INVALID'			=> 'Votre BBCode est construite dans une forme invalide.',
 	'BBCODE_OPEN_ENDED_TAG'		=> 'Votre BBCode personnalisé doit contenir une balise d’ouverture et de fermeture.',
@@ -73,7 +74,7 @@ $lang = array_merge($lang, array(
 
 	'tokens'	=>	array(
 		'TEXT'			=> 'Du texte, incluant des caractères étrangers, chiffres, etc. Vous ne devriez pas utiliser cette marque dans les tags HTML. Essayez d’utiliser à la place les marques IDENTIFIER ou SIMPLETEXT.',
-		'SIMPLETEXT'	=> 'Caractères alphabétiques latins (A-Z), chiffres, espaces, virgules, points, -, +, - et _',
+		'SIMPLETEXT'	=> 'Caractères alphabétiques latins (A-Z), chiffres, espaces, virgules, points, -, +, et _',
 		'IDENTIFIER'	=> 'Caractères alphabétiques latins (A-Z), chiffres, - et _',
 		'NUMBER'		=> 'Une série de chiffres',
 		'EMAIL'			=> 'Une adresse e-mail valide',

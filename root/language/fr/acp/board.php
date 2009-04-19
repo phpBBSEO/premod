@@ -5,7 +5,7 @@
 * translated originally by PhpBB-fr.com <http://www.phpbb-fr.com/> and phpBB.biz <http://www.phpBB.biz>
 *
 * @package language
-* @version $Id: board.php,v 1.22 2008/07/04 12:34:15 elglobo Exp $
+* @version $Id: board.php,v 1.22 2008/11/14 11:27:00 EricSchreiner Exp $
 * @copyright (c) 2005 phpBB Group
 * @license http://opensource.org/licenses/gpl-license.php GNU Public License
 *
@@ -114,6 +114,7 @@ $lang = array_merge($lang, array(
 	'ALLOW_FORWARD_PM'			=> 'Autoriser le transfert des messages privés',
 	'ALLOW_IMG_PM'				=> 'Autoriser l’utilisation du BBCode <code>[IMG]</code>',
 	'ALLOW_MASS_PM'				=> 'Autoriser l’envoi de messages privés à plusieurs utilisateurs et groupes',
+	'ALLOW_MASS_PM_EXPLAIN' 	=> 'L’envoi aux groupes peut être ajusté par groupe dans l’écran de réglage du groupe.',
 	'ALLOW_PRINT_PM'			=> 'Autoriser la visualisation de l’impression dans la messagerie privée',
 	'ALLOW_QUOTE_PM'			=> 'Autoriser les citations dans les messages privés',
 	'ALLOW_SIG_PM'				=> 'Autoriser les signatures dans les messages privés',
@@ -127,7 +128,9 @@ $lang = array_merge($lang, array(
 	'FULL_FOLDER_ACTION_EXPLAIN'=> 'Action par défaut à effectuer lorsque le dossier d’un utilisateur est plein, dans le cas où l’action indiquée par l’utilisateur n’est pas applicable. La seule exception s’applique au dossier des “Messages envoyés” où l’action par défaut est de toujours supprimer les anciens messages.',
 	'HOLD_NEW_MESSAGES'			=> 'Rejeter les nouveaux messages',
 	'PM_EDIT_TIME'				=> 'Temps limite d’édition',
-	'PM_EDIT_TIME_EXPLAIN'		=> 'Temps après lequel on ne peut plus éditer un message privé quand il n’a pas encore été délivré. Mettre “0” pour ne pas imposer de limite.',
+	'PM_EDIT_TIME_EXPLAIN'		=> 'Temps après lequel on ne peut plus éditer un message privé quand il n’a pas encore été délivré. Mettre “0” pour illimité.',
+	'PM_MAX_RECIPIENTS'			=> 'Nombre maximum autorisé de destinataires',
+	'PM_MAX_RECIPIENTS_EXPLAIN' => 'Le nombre maximum autorisé de destinataires d’un message privé. Une valeur à “0” indique un nombre illimité de destinataires. Ce paramètre peut être ajusté pour chaque groupe dans l’écran de réglage du groupe.',
 ));
 
 // Post Settings
@@ -137,11 +140,16 @@ $lang = array_merge($lang, array(
 	'ALLOW_POST_LINKS_EXPLAIN'			=> 'Si désactivé, le BBCode <code>[URL]</code> et la transformation automatique des textes en liens seront désactivés.',
 	'ALLOW_POST_FLASH'					=> 'Autoriser l’utilisation du BBCode <code>[FLASH]</code> dans les messages',
 	'ALLOW_POST_FLASH_EXPLAIN'			=> 'Si désactivé, le BBCode <code>[FLASH]</code> sera désactivé. Autrement, le système de permission déterminera les membres pouvant utiliser le BBCode <code>[FLASH]</code>.',
+	'ENABLE_QUEUE_TRIGGER' 				=> 'Activer la mise en attente des messages',
+	'ENABLE_QUEUE_TRIGGER_EXPLAIN'		=> 'Possibilité de mettre en attente chaque message d’un utilisateur enregistré, si son nombre de messages est plus petit que celui indiqué ci-dessous. Ce paramètre n’a pas d’effet sur le réglage de permission sur l’approbation de message et de sujet.',
+	'QUEUE_TRIGGER_POSTS' 				=> 'Compteur maximum de message pour les messages mis en attente',
+	'QUEUE_TRIGGER_POSTS_EXPLAIN' 		=> 'Si la mise en attente des messages est activée, il s’agit du seuil, en nombre de messages, que l’utilisateur doit atteindre afin de pouvoir envoyer un message sans passer par l’approbation. Si un utilisateur a un nombre de messages inférieur à ce seuil, tout message envoyé sera automatiquement mis en attente.',
+
 
 	'BUMP_INTERVAL'					=> 'Intervalle de remontée de sujet',
 	'BUMP_INTERVAL_EXPLAIN'			=> 'Nombre des minutes, d’heures, ou de jours entre la date du dernier message et la possibilité de remonter le sujet.',
 	'CHAR_LIMIT'					=> 'Nombre maximum de caractères par message',
-	'CHAR_LIMIT_EXPLAIN'			=> 'Le nombre de caractères autorisés dans un message. Mettre “0” pour ne pas imposer de limite.',
+	'CHAR_LIMIT_EXPLAIN'			=> 'Le nombre de caractères autorisés dans un message. Mettre “0” pour illimité.',
 	'DISPLAY_LAST_EDITED'			=> 'Afficher la raison de la dernière édition',
 	'DISPLAY_LAST_EDITED_EXPLAIN'	=> 'Choisissez si l’information sur la date de la dernière édition doit être affichée ou non dans les messages.',
 	'EDIT_TIME'						=> 'Temps limite d’édition',
@@ -152,19 +160,19 @@ $lang = array_merge($lang, array(
 	'HOT_THRESHOLD_EXPLAIN'			=> 'Nombre de messages requis afin qu’un sujet soit affiché comme étant populaire. Mettre “0” pour désactiver les sujets populaires.',
 	'MAX_POLL_OPTIONS'				=> 'Nombre maximum d’options de vote',
 	'MAX_POST_FONT_SIZE'			=> 'Taille maximale de la police',
-	'MAX_POST_FONT_SIZE_EXPLAIN'	=> 'Taille maximale de la police dans un message. Mettre “0” pour ne pas imposer de limite.',
+	'MAX_POST_FONT_SIZE_EXPLAIN'	=> 'Taille maximale de la police dans un message. Mettre “0” pour illimité.',
 	'MAX_POST_IMG_HEIGHT'			=> 'Hauteur maximale d’une image',
-	'MAX_POST_IMG_HEIGHT_EXPLAIN'	=> 'Hauteur maximale d’un fichier image ou flash dans un message. Mettre “0” pour ne pas imposer de limite.',
+	'MAX_POST_IMG_HEIGHT_EXPLAIN'	=> 'Hauteur maximale d’un fichier image ou flash dans un message. Mettre “0” pour illimité.',
 	'MAX_POST_IMG_WIDTH'			=> 'Largeur maximale d’une image',
-	'MAX_POST_IMG_WIDTH_EXPLAIN'	=> 'Largeur maximale d’un fichier image ou flash dans un message. Mettre “0” pour ne pas imposer de limite.',
+	'MAX_POST_IMG_WIDTH_EXPLAIN'	=> 'Largeur maximale d’un fichier image ou flash dans un message. Mettre “0” pour illimité.',
 	'MAX_POST_URLS'					=> 'Nombre maximum de liens',
-	'MAX_POST_URLS_EXPLAIN'			=> 'Nombre maximum de liens dans un message. Mettre “0” pour ne pas imposer de limite.',
+	'MAX_POST_URLS_EXPLAIN'			=> 'Nombre maximum de liens dans un message. Mettre “0” pour illimité.',
 	'POSTING'						=> 'Publication',
 	'POSTS_PER_PAGE'				=> 'Messages par page',
 	'QUOTE_DEPTH_LIMIT'				=> 'Nombre maximum de citations imbriquées',
-	'QUOTE_DEPTH_LIMIT_EXPLAIN'		=> 'Nombre maximum de citations imbriquées dans un message. Mettre “0” pour ne pas imposer de limite.',
+	'QUOTE_DEPTH_LIMIT_EXPLAIN'		=> 'Nombre maximum de citations imbriquées dans un message. Mettre “0” pour illimité.',
 	'SMILIES_LIMIT'					=> 'Nombre maximum de smileys par message',
-	'SMILIES_LIMIT_EXPLAIN'			=> 'Nombre maximum de smileys dans un message. Mettre “0” pour ne pas imposer de limite.',
+	'SMILIES_LIMIT_EXPLAIN'			=> 'Nombre maximum de smileys dans un message. Mettre “0” pour illimité.',
 	'TOPICS_PER_PAGE'				=> 'Sujets par page',
 ));
 
@@ -173,17 +181,17 @@ $lang = array_merge($lang, array(
 	'ACP_SIGNATURE_SETTINGS_EXPLAIN'	=> 'Vous pouvez modifier les paramètres pour les signatures.',
 
 	'MAX_SIG_FONT_SIZE'				=> 'Taille maximale de la police dans les signatures',
-	'MAX_SIG_FONT_SIZE_EXPLAIN'		=> 'Taille de police maximale autorisée dans les signatures d’utilisateur. Mettre “0” pour ne pas imposer de limite.',
+	'MAX_SIG_FONT_SIZE_EXPLAIN'		=> 'Taille de police maximale autorisée dans les signatures d’utilisateur. Mettre “0” pour illimité.',
 	'MAX_SIG_IMG_HEIGHT'			=> 'Hauteur maximale d’une image dans les signatures',
-	'MAX_SIG_IMG_HEIGHT_EXPLAIN'	=> 'Hauteur maximale d’un fichier image/flash dans les signatures d’utilisateur. Mettre “0” pour ne pas imposer de limite.',
+	'MAX_SIG_IMG_HEIGHT_EXPLAIN'	=> 'Hauteur maximale d’un fichier image/flash dans les signatures d’utilisateur. Mettre “0” pour illimité.',
 	'MAX_SIG_IMG_WIDTH'				=> 'Largeur maximale d’une image dans les signatures',
-	'MAX_SIG_IMG_WIDTH_EXPLAIN'		=> 'Largeur maximale d’un fichier image/flash dans les signatures d’utilisateur. Mettre “0” pour ne pas imposer de limite.',
+	'MAX_SIG_IMG_WIDTH_EXPLAIN'		=> 'Largeur maximale d’un fichier image/flash dans les signatures d’utilisateur. Mettre “0” pour illimité.',
 	'MAX_SIG_LENGTH'				=> 'Longueur maximale de la signature',
 	'MAX_SIG_LENGTH_EXPLAIN'		=> 'Nombre de caractères maximum dans les signatures d’utilisateur.',
 	'MAX_SIG_SMILIES'				=> 'Nombre maximum de smileys par signature',
-	'MAX_SIG_SMILIES_EXPLAIN'		=> 'Nombre maximum de smileys dans les signatures d’utilisateur. Mettre “0” pour ne pas imposer de limite.',
+	'MAX_SIG_SMILIES_EXPLAIN'		=> 'Nombre maximum de smileys dans les signatures d’utilisateur. Mettre “0” pour illimité.',
 	'MAX_SIG_URLS'					=> 'Nombre maximum de liens dans les signatures',
-	'MAX_SIG_URLS_EXPLAIN'			=> 'Nombre maximum de liens dans la signature d’utilisateur. Mettre “0” pour ne pas imposer de limite.',
+	'MAX_SIG_URLS_EXPLAIN'			=> 'Nombre maximum de liens dans la signature d’utilisateur. Mettre “0” pour illimité.',
 ));
 
 // Registration Settings
@@ -267,7 +275,7 @@ $lang = array_merge($lang, array(
 	'LIMIT_LOAD'					=> 'Limiter la charge système',
 	'LIMIT_LOAD_EXPLAIN'			=> 'Si la charge du système dépasse cette valeur durant une minute, le forum sera automatiquement indisponible. Une valeur à 1.0 équivaut à environ 100% d’utilisation d’un processeur. Cela ne fonctionne que sur les serveurs basés sous UNIX et où cette information est accessible. Cette valeur se réinitialise à 0 si phpBB n’arrive pas à obtenir la valeur de la charge du système.',
 	'LIMIT_SESSIONS'				=> 'Nombre de sessions',
-	'LIMIT_SESSIONS_EXPLAIN'		=> 'Si le nombre de sessions dépasse cette valeur durant une minute, le forum sera indisponible. Mettre “0” pour ne pas imposer de limite.',
+	'LIMIT_SESSIONS_EXPLAIN'		=> 'Si le nombre de sessions dépasse cette valeur durant une minute, le forum sera indisponible. Mettre “0” pour illimité.',
 	'LOAD_CPF_MEMBERLIST'			=> 'Autoriser les styles à afficher les champs personnalisés dans la liste des membres',
 	'LOAD_CPF_VIEWPROFILE'			=> 'Afficher les champs personnalisés dans les profils d’utilisateur',
 	'LOAD_CPF_VIEWTOPIC'			=> 'Afficher les champs personnalisés dans les pages de sujet',
@@ -276,7 +284,7 @@ $lang = array_merge($lang, array(
 	'RECOMPILE_STYLES'				=> 'Recompiler les différents éléments du style',
 	'RECOMPILE_STYLES_EXPLAIN'		=> 'Cherche les nouvelles mises à jour du style dans le système de fichiers et les recompile.',
 	'YES_ANON_READ_MARKING'			=> 'Activer l’indicateur de lecture pour les visiteurs',
-	'YES_ANON_READ_MARKING_EXPLAIN'	=> 'Enregistre l’état lu/non lu pour les visiteurs. Si désactivé, les messagess sont toujours considérés comme lus pour les visiteurs.',
+	'YES_ANON_READ_MARKING_EXPLAIN'	=> 'Enregistre l’état lu/non lu pour les visiteurs. Si désactivé, les messages sont toujours considérés comme lus pour les visiteurs.',
 	'YES_BIRTHDAYS'					=> 'Activer l’affichage de la liste des anniversaires',
 	'YES_BIRTHDAYS_EXPLAIN'			=> 'Si désactivé, la liste des anniversaires ne sera plus affichée. Ce paramètre n’est pris en compte que si la fonctionnalité des anniversaires est également activée.',
 	'YES_JUMPBOX'					=> 'Activer l’affichage de l’accès rapide aux forums',
@@ -361,7 +369,7 @@ $lang = array_merge($lang, array(
 	'BROWSER_VALID'					=> 'Valider le navigateur',
 	'BROWSER_VALID_EXPLAIN'			=> 'Active la validation du navigateur pour chaque session, ce qui améliore la sécurité.',
 	'CHECK_DNSBL'					=> 'Comparer l’IP avec la liste noire DNS',
-	'CHECK_DNSBL_EXPLAIN'			=> 'Si activé, l’adresse IP de l’utilisateur est vérifiée par les services DNSBL à l’inscription et à la publication de messages: <a href="http://spamcop.net">spamcop.net</a>, <a href="http://dsbl.org">dsbl.org</a> et <a href="http://wwww.spamhaus.org">www.spamhaus.org</a>. Cette vérification peut prendre un moment, selon la configuration du serveur. Si vous remarquez des ralentissements ou de mauvaises appréciations, il est recommandé de désactiver cette vérification.',
+	'CHECK_DNSBL_EXPLAIN'			=> 'Si activé, l’adresse IP de l’utilisateur est vérifiée par les services DNSBL à l’inscription et à la publication de messages: <a href="http://spamcop.net">spamcop.net</a> et <a href="http://www.spamhaus.org">www.spamhaus.org</a>. Cette vérification peut prendre un moment, selon la configuration du serveur. Si vous remarquez des ralentissements ou de mauvaises appréciations, il est recommandé de désactiver cette vérification.',
 	'CLASS_B'						=> 'A.B',
 	'CLASS_C'						=> 'A.B.C',
 	'EMAIL_CHECK_MX'				=> 'Vérifier l’e-mail pour un enregistrement MX valide',
@@ -450,8 +458,8 @@ $lang = array_merge($lang, array(
 	'JAB_SETTINGS_CHANGED'		=> 'Les paramètres Jabber ont été modifiés.',
 	'JAB_USE_SSL'				=> 'Utiliser SSL pour se connecter',
 	'JAB_USE_SSL_EXPLAIN'		=> 'Si activé, une connexion sécurisée tentera d’être établie. Le port de Jabber sera modifié en 5223, si le port 5222 est utilisé.',
-	'JAB_USERNAME'				=> 'Nom d’utilisateur Jabber',
-	'JAB_USERNAME_EXPLAIN'		=> 'Indiquez un nom d’utilisateur inscrit. La validité du nom d’utilisateur ne sera pas vérifiée.',
+	'JAB_USERNAME'				=> 'Nom d’utilisateur Jabber ou JID',
+	'JAB_USERNAME_EXPLAIN'		=> 'Indiquez un nom d’utilisateur inscrit ou un JID valide. La validité du nom d’utilisateur ne sera pas vérifiée. Si vous ne spécifiez qu’un nom d’utilisateur, votre JID sera calculé à partir de ce nom et de celui du serveur spécifié ci-dessus. Sinon, spécifiez un JID valide, par exemple utilisateur@jabber.org.',
 ));
 
 ?>

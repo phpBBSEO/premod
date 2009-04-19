@@ -2,8 +2,8 @@
 /**
 *
 * @package phpBB SEO GYM Sitemaps
-* @version $Id: rss_forum.php 2007/04/12 13:48:48 dcz Exp $
-* @copyright (c) 2008 dcz - www.phpbb-seo.com
+* @version $id: rss_forum.php - 39916 11-20-2008 11:43:24 - 2.0.RC1 dcz $
+* @copyright (c) 2006 - 2008 www.phpbb-seo.com
 * @license http://opensource.org/osi3.0/licenses/lgpl-license.php GNU Lesser General Public License
 *
 */
@@ -144,9 +144,19 @@ class rss_forum {
 				$chan_source = $this->module_config['rss_url'] . $this->url_settings['rss_vpath'] . $this->url_settings['rss_forum_default'] . ($this->options['rss_news_list'] ? '' : $this->url_settings['rss_forum_news']) . $this->url_settings['extra_paramsE'] . $this->url_settings['rss_forum_file'];
 				$this->gym_master->parse_item($item_tile . ' - ' . $user->lang['RSS_NEWS'], $user->lang['RSS_NEWS_DESC'] . ' ' . $item_tile . "\n\n" . $this->module_config['rss_site_desc'], $chan_link, $chan_source, $item_tile . ' - ' . $user->lang['RSS_NEWS'], $this->outputs['last_mod_time']);
 			}
-			// Add announces feed to the list
-			$forum_announces_url =  $this->module_config['rss_url'] . $this->url_settings['rss_vpath'] . $this->url_settings['rss_forum_announces_default'] . $this->url_settings['extra_paramsE'] . $this->url_settings['rss_forum_announces'] . $this->url_settings['rss_forum_file'];
-			$this->gym_master->parse_item(sprintf($user->lang['RSS_ANNOUNCES_TITLE'], $this->module_config['rss_sitename']), sprintf($user->lang['RSS_ANNOUCES_DESC'], $this->module_config['rss_sitename']) . "\n\n" . $this->module_config['rss_site_desc'], $chan_link, $forum_announces_url, '', $this->outputs['last_mod_time']);
+			// Add announces feed to the list ?
+			// Count items
+			$sql = "SELECT COUNT(topic_id) AS topic
+				FROM " . TOPICS_TABLE . "
+				WHERE topic_type = " . POST_GLOBAL;
+			$result = $db->sql_query($sql);
+			$row = $db->sql_fetchrow($result);
+			$db->sql_freeresult($result);
+			if (!empty($row['topic'])) {
+				unset($row);
+				$forum_announces_url =  $this->module_config['rss_url'] . $this->url_settings['rss_vpath'] . $this->url_settings['rss_forum_announces_default'] . $this->url_settings['extra_paramsE'] . $this->url_settings['rss_forum_announces'] . $this->url_settings['rss_forum_file'];
+				$this->gym_master->parse_item(sprintf($user->lang['RSS_ANNOUNCES_TITLE'], $this->module_config['rss_sitename']), sprintf($user->lang['RSS_ANNOUCES_DESC'], $this->module_config['rss_sitename']) . "\n\n" . $this->module_config['rss_site_desc'], $chan_link, $forum_announces_url, '', $this->outputs['last_mod_time']);
+			}
 			// add the main forum feed
 			$chan_source = $this->module_config['rss_url'] . $this->url_settings['rss_vpath'] . $this->url_settings['rss_forum_default'] . $this->url_settings['extra_paramsE'] . $this->url_settings['rss_forum_file'];
 
@@ -183,11 +193,10 @@ class rss_forum {
 			// Count topics
 			$sql = "SELECT COUNT(topic_id) AS topic
 				FROM " . TOPICS_TABLE . "
-				WHERE forum_id " . $this->options['not_in_id_sql'] . "
-					AND $time_limit_sql
-					topic_status <> " . ITEM_MOVED . "
+				WHERE $time_limit_sql
+					forum_id " . $this->options['not_in_id_sql'] . "
 					AND topic_type <> " . POST_GLOBAL . "
-					AND topic_reported = 0
+					AND topic_status <> " . ITEM_MOVED . "
 				ORDER BY topic_last_post_id " . $this->module_config['rss_sort'];
 			$result = $db->sql_query($sql);
 			$row = $db->sql_fetchrow($result);
@@ -226,7 +235,6 @@ class rss_forum {
 
 			$site_stats .= ($this->module_config['rss_allow_profile'] ? "\n" . sprintf($user->lang['NEWEST_USER'], $this->gym_master->username_string($config['newest_user_id'], $config['newest_username'], $config['newest_user_colour'], $this->module_config['rss_allow_profile_links']) ) : '') . "\n";
 			$chan_title_full = $chan_title . ' ' . $user->lang['RSS_CHAN_LIST_TITLE'];
-			
 			$this->gym_master->parse_channel($chan_title_full, $chan_desc, $chan_link,  $this->outputs['last_mod_time'], $this->module_config['rss_image_url'], $chan_source);
 			// Add main forum feed to the list only when not requesting a news channel list
 			if (!$this->options['rss_news_list']) {
@@ -238,15 +246,41 @@ class rss_forum {
 				$news_chan = $this->module_config['rss_url'] . $this->url_settings['rss_vpath'] . $this->url_settings['rss_forum_default'] . ($this->options['rss_news_list'] ? '' : $this->url_settings['rss_forum_news']) . $this->url_settings['extra_paramsE'] . $this->url_settings['rss_forum_file'];
 				$this->gym_master->parse_item($chan_title . ' - ' . $user->lang['RSS_NEWS'], $user->lang['RSS_NEWS_DESC'] . ' ' . $chan_title  . "\n\n" . $this->module_config['rss_site_desc'], $chan_link, $news_chan, $chan_title . ' - ' . $user->lang['RSS_NEWS'], $this->outputs['last_mod_time']);
 			}
-			// Add announces feed to the list
-			$forum_announces_url =  $this->module_config['rss_url'] . $this->url_settings['rss_vpath'] . $this->url_settings['rss_forum_announces_default'] . $this->url_settings['extra_paramsE'] . $this->url_settings['rss_forum_announces'] . $this->url_settings['rss_forum_file'];
-			$this->gym_master->parse_item(sprintf($user->lang['RSS_ANNOUNCES_TITLE'], $this->module_config['rss_sitename']), sprintf($user->lang['RSS_ANNOUCES_DESC'], $this->module_config['rss_sitename']) . "\n\n" . $this->module_config['rss_site_desc'], $chan_link, $forum_announces_url, '', $this->outputs['last_mod_time']);
+			// Add announces feed to the list ?
+			// Count items
+			$sql = "SELECT COUNT(topic_id) AS topic
+				FROM " . TOPICS_TABLE . "
+				WHERE topic_type = " . POST_GLOBAL;
+			$result = $db->sql_query($sql);
+			$row = $db->sql_fetchrow($result);
+			$db->sql_freeresult($result);
+			if (!empty($row['topic'])) {
+				unset($row);
+				$forum_announces_url =  $this->module_config['rss_url'] . $this->url_settings['rss_vpath'] . $this->url_settings['rss_forum_announces_default'] . $this->url_settings['extra_paramsE'] . $this->url_settings['rss_forum_announces'] . $this->url_settings['rss_forum_file'];
+				$this->gym_master->parse_item(sprintf($user->lang['RSS_ANNOUNCES_TITLE'], $this->module_config['rss_sitename']), sprintf($user->lang['RSS_ANNOUCES_DESC'], $this->module_config['rss_sitename']) . "\n\n" . $this->module_config['rss_site_desc'], $chan_link, $forum_announces_url, '', $this->outputs['last_mod_time']);
+			}
 			$this->list_forums();
 			return;
 
 		} elseif ($this->options['module_sub'] === 'announces') { // Global annnounces list
 
 			// it's the announces sitemap
+			// We want to list all the global announces from the forum
+			$forum_sql = $this->gym_master->set_not_in_list($this->module_config['exclude_list']);
+			// Count items
+			$sql = "SELECT COUNT(topic_id) AS topic
+				FROM " . TOPICS_TABLE . "
+				WHERE topic_type = " . POST_GLOBAL;
+			$result = $db->sql_query($sql);
+			$row = $db->sql_fetchrow($result);
+			$db->sql_freeresult($result);
+			if(empty($row['topic'])) {
+				$this->gym_master->gym_error(404, '',  __FILE__, __LINE__);
+				exit;
+			} else {
+				$forum_data['topic_count'] = (int) $row['topic'];
+				unset($row);
+			}
 			$chan_source = $this->module_config['rss_url'] . $this->url_settings['rss_vpath'] . $this->url_settings['rss_forum_announces_default'] . $this->url_settings['extra_paramsE'] . $this->url_settings['rss_forum_announces'] . $this->url_settings['rss_forum_file'];
 			// Kill dupes
 			$this->gym_master->seo_kill_dupes($chan_source);
@@ -255,23 +289,8 @@ class rss_forum {
 			$chan_desc =  sprintf($user->lang['RSS_ANNOUCES_DESC'], $this->module_config['rss_sitename']) . "\n\n" . $this->module_config['rss_site_desc'];
 			// Forum announces location
 			$this->gym_master->parse_channel($chan_title . $this->module_config['extra_title'], $chan_desc . "\n", $chan_link,  $this->outputs['last_mod_time'], $this->module_config['rss_image_url'], $chan_source);
-			// We want to list all the global announces from the forum
-			$forum_sql = $this->gym_master->set_not_in_list($this->module_config['exclude_list'], '', 'AND');
 			$forum_sql1 = !empty($forum_sql) ? 'forum_id ' . $forum_sql : '';
-			$forum_sql2 = !empty($forum_sql) ? 't.forum_id ' . $forum_sql : '';
-			// Count items
-			$sql = "SELECT COUNT(topic_id) AS topic
-				FROM " . TOPICS_TABLE . " AS t
-				WHERE $forum_sql1
-					topic_type = " . POST_GLOBAL . " 
-					AND topic_status <> " . ITEM_MOVED . "
-					AND topic_reported = 0
-				ORDER BY t.topic_last_post_id " . $this->module_config['rss_sort'];
-			$result = $db->sql_query($sql);
-			$row = $db->sql_fetchrow($result);
-			$db->sql_freeresult($result);
-			$forum_data['topic_count'] = ( $row['topic'] ) ? $row['topic'] : 1;
-			unset($row);
+			$forum_sql2 = !empty($forum_sql) ? 't.forum_id ' . $forum_sql . ' AND ' : '';
 			// Dirty but efficient workarround for annouces
 			$this->forum_cache[0]['forum_url'] = $phpbb_seo->seo_path['phpbb_urlR'] . ($phpbb_seo->seo_opt['virtual_folder'] ? $phpbb_seo->seo_static['global_announce'] . $phpbb_seo->seo_ext['global_announce'] : '' );
 			$this->forum_cache[0]['forum_url_full'] = $this->forum_cache[0]['forum_name'] = $chan_title;
@@ -309,9 +328,9 @@ class rss_forum {
 					// If the URL is not rewritten, we cannot use "&", get rid of options in such cases.
 					if ($this->module_config['rss_yahoo_notify']) {
 						if ( $this->url_settings['modrewrite'] ) {
-							$this->module_config['rss_yahoo_notify_url'] = $forum_rss_url . $this->url_settings['extra_paramsE'] . $this->url_settings['rss_forum_file'];
+							$this->url_settings['rss_yahoo_notify_url'] = $forum_rss_url . $this->url_settings['extra_paramsE'] . $this->url_settings['rss_forum_file'];
 						} else {
-							$this->module_config['rss_yahoo_notify_url'] = $forum_rss_url . $this->url_settings['rss_forum_file'];
+							$this->url_settings['rss_yahoo_notify_url'] = $forum_rss_url;
 						}
 					}
 					$forum_rss_url .= $this->url_settings['extra_paramsE'] . $this->url_settings['rss_forum_file'];
@@ -336,11 +355,10 @@ class rss_forum {
 						$sql = "SELECT COUNT(topic_id) AS forum_topics
 							FROM " . TOPICS_TABLE . "
 							WHERE forum_id = $forum_id
-							AND topic_last_post_time > $time_limit
-								AND topic_status <> " . ITEM_MOVED . " 
+								topic_last_post_time > $time_limit
 								AND topic_type <> " . POST_GLOBAL . " 
+								AND topic_status <> " . ITEM_MOVED . " 
 								$approve_sql
-								AND topic_reported = 0
 							ORDER BY topic_last_post_id " . $this->module_config['rss_sort'];
 						$result = $db->sql_query($sql);
 						$row = $db->sql_fetchrow($result);
@@ -371,8 +389,7 @@ class rss_forum {
 						$lastposter = "\n" . $user->lang['GYM_LAST_POST_BY'] . $this->gym_master->username_string($forum_data['forum_last_poster_id'], $forum_data['forum_last_poster_name'], $forum_data['forum_last_poster_colour'], $this->module_config['rss_allow_profile_links']);
 					}
 					$chan_desc = $forum_desc . $forum_rules . "\n" . $forum_stats . $lastposter;
-					$chan_image = !empty($forum_data['forum_image']) ? $forum_data['forum_image'] : $this->module_config['rss_image_url'];
-				//	nice_print($forum_data);
+					$chan_image = !empty($forum_data['forum_image']) ? $phpbb_seo->seo_path['phpbb_url'] . trim($forum_data['forum_image'], '/') : $this->module_config['rss_image_url'];
 					$this->gym_master->parse_channel($chan_title . $this->module_config['extra_title'], $chan_desc, $this->forum_cache[$forum_id]['forum_url'], $forum_data['forum_last_post_time'], $chan_image, $forum_rss_url);
 
 			} else { // module Rss
@@ -417,11 +434,10 @@ class rss_forum {
 				}
 				$sql = "SELECT COUNT(topic_id) AS topic
 					FROM " . TOPICS_TABLE . " AS t
-					WHERE forum_id " . $this->options['not_in_id_sql'] . "
-					AND $time_limit_sql
-						topic_status <> " . ITEM_MOVED . "
-						AND topic_type <> " . POST_GLOBAL . " 
-						AND topic_reported = 0
+					WHERE $time_limit_sql 
+						topic_type <> " . POST_GLOBAL . " 
+						AND topic_status <> " . ITEM_MOVED . "
+						AND forum_id " . $this->options['not_in_id_sql'] . "
 					ORDER BY t.topic_last_post_id " . $this->module_config['rss_sort'];
 				$result = $db->sql_query($sql);
 				$row = $db->sql_fetchrow($result);
@@ -507,7 +523,6 @@ class rss_forum {
 			WHERE $forum_sql $time_limit $topic_type_sql
 				t.topic_status <> " . ITEM_MOVED . " 
 				$approve_sql
-				AND topic_reported = 0
 				$msg_sql3
 				ORDER BY t.topic_last_post_id " . $this->module_config['rss_sort'];
 		// Absolute limit 
@@ -516,8 +531,7 @@ class rss_forum {
 		$paginated = $config['posts_per_page'];
 		// Do the loop
 		while( ( $topic_sofar <  $forum_data['topic_count'] ) && ($this->outputs['url_sofar'] < $this->module_config['rss_url_limit']) ) {
-			$sql = $sql_first . " LIMIT $topic_sofar," . $this->module_config['rss_sql_limit'];
-			$result = $db->sql_query($sql);
+			$result = $db->sql_query_limit($sql_first, $this->module_config['rss_sql_limit'], $topic_sofar);
 			while ($topic = $db->sql_fetchrow($result)) {
 				// In case we are looking for more than one forum
 				$forum_id = (int) $topic['forum_id'];

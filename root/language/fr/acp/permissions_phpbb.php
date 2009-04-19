@@ -5,7 +5,7 @@
 * translated originally by PhpBB-fr.com <http://www.phpbb-fr.com/> and phpBB.biz <http://www.phpBB.biz>
 *
 * @package language
-* @version $Id: permissions_phpbb.php,v 1.22 2007/11/22 12:38:30 elglobo Exp $
+* @version $Id: permissions_phpbb.php,v 1.22 2008/11/14 11:52:00 EricSchreiner Exp $
 * @copyright (c) 2005 phpBB Group 
 * @license http://opensource.org/licenses/gpl-license.php GNU Public License 
 *
@@ -114,10 +114,11 @@ $lang = array_merge($lang, array(
 	'acl_u_sig'			=> array('lang'	=> 'Peut utiliser une signature', 'cat' => 'post'),
 
 
-	'acl_u_sendpm'	=> array('lang'	=> 'Peut envoyer des messages privés', 'cat' => 'pm'),
-	'acl_u_masspm'	=> array('lang'	=> 'Peut procéder à des envois multiples', 'cat' => 'pm'),
-	'acl_u_readpm'	=> array('lang'	=> 'Peut lire ses messages privés', 'cat' => 'pm'),
-	'acl_u_pm_edit'	=> array('lang'	=> 'Peut modifier ses messages privés', 'cat' => 'pm'),
+	'acl_u_sendpm' 		=> array('lang'	=> 'Peut envoyer des messages privés', 'cat' => 'pm'),
+	'acl_u_masspm' 		=> array('lang' => 'Peut envoyer des messages à plusieurs utilisateurs', 'cat' => 'pm'),
+	'acl_u_masspm_group'=> array('lang' => 'Peut envoyer des messages à des groupes', 'cat' => 'pm'),
+	'acl_u_readpm' 		=> array('lang'	=> 'Peut lire ses messages privés', 'cat' => 'pm'),
+	'acl_u_pm_edit' 	=> array('lang'	=> 'Peut modifier ses messages privés', 'cat' => 'pm'),
 	'acl_u_pm_delete'	=> array('lang'	=> 'Peut supprimer des messages privés de son dossier', 'cat' => 'pm'),
 	'acl_u_pm_forward'	=> array('lang'	=> 'Peut transférer des messages privés', 'cat' => 'pm'),
 	'acl_u_pm_emailpm'	=> array('lang'	=> 'Peut envoyer des messages privés par e-mail', 'cat' => 'pm'),

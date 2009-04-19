@@ -1,11 +1,15 @@
 <?php
-/** 
+/**
+*
+* @package phpBB SEO GYM Sitemaps
+* @version $id: rss_forum.php - 3886 11-20-2008 14:38:27 - 2.0.RC1 dcz $
+* @copyright (c) 2006 - 2008 www.phpbb-seo.com
+* @license http://opensource.org/osi3.0/licenses/lgpl-license.php GNU Lesser General Public License
+*
+*/
+/**
 *
 * rss_forum [English]
-*
-* @package gym_sitemaps
-* @version $Id: rss_forum.php, 2007/12/01 13:48:48 fds Exp $
-* @copyright (c) 2007 phpBB SEO - www.phpbb-seo.com
 *
 */
 /**
@@ -30,7 +34,7 @@ $lang = array_merge($lang, array(
 	'RSS_FORUM' => 'Forum RSS module',
 	'RSS_FORUM_EXPLAIN' => 'These are the setting for the forum RSS feeds module.<br/> Some of them can be overridden depending on the RSS and Main override settings.',
 	'RSS_FORUM_EXCLUDE' => 'Forum Exclusions',
-	'RSS_FORUM_EXCLUDE_EXPLAIN' => 'You can exclude some public forums from the RSS feeds.<br />Enter the forum IDs to exclude, comma separated list : e.g 1,5,8.<br /><u>Note :</u> If this field is left empty, all forums will be listed.',
+	'RSS_FORUM_EXCLUDE_EXPLAIN' => 'You can here exclude one or several forum from the RSS listing.<br /><u>Note :</u> If this field is left empty, all readable forums will be listed.',
 	// Content
 	'RSS_FORUM_CONTENT' => 'Forum Content settings',
 	'RSS_FORUM_FIRST' => 'First message',

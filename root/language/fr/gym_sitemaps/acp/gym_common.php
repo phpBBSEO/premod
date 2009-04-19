@@ -1,12 +1,16 @@
 <?php
-/** 
+/**
+*
+* @package phpBB SEO GYM Sitemaps
+* @version $id: gym_common.php - 23057 11-20-2008 14:38:27 - 2.0.RC1 dcz $
+* @copyright (c) 2006 - 2008 www.phpbb-seo.com
+* @license http://opensource.org/osi3.0/licenses/lgpl-license.php GNU Lesser General Public License
+*
+*/
+/**
 *
 * gym_common [French]
 * Translated By: Mathieu M. & gowap [ www.phpbb-seo.com ]
-*
-* @package phpbb_seo
-* @version $Id: gym_common.php
-* @copyright (c) 2007, 2008 phpBB SEO
 *
 */
 /**
@@ -45,9 +49,18 @@ $lang = array_merge($lang, array(
 	'RSS_MAIN_RESET' => 'Options globales Flux RSS',
 	'RSS_MAIN_RESET_EXPLAIN' => 'Rétablir toutes les options par défaut des flux RSS.',
 	'YAHOO' => 'Yahoo',
+	// HTML
+	'HTML_MAIN_RESET' => 'Options globales HTML',
+	'HTML_MAIN_RESET_EXPLAIN' => 'Rétablir toutes les options par défaut des plan et news HTML',
 	'HTML' => 'Html',
-	// CSS
 
+	// GYM authorisation array
+	'GYM_AUTH_ADMIN' => 'Admin',
+	'GYM_AUTH_GLOBALMOD' => 'Modérateurs Globaux',
+	'GYM_AUTH_REG' => 'Connéctés',
+	'GYM_AUTH_GUEST' => 'Invités',
+	'GYM_AUTH_ALL' => 'Tous',
+	'GYM_AUTH_NONE' => 'Aucun',
 	// XSLT
 	'GYM_STYLE' => 'Style',
 
@@ -105,6 +118,8 @@ $lang = array_merge($lang, array(
 	'GYM_GOOGLE_EXPLAIN' => 'Il s’agit des paramètres communs à tous les modules de type Sitemaps Google (forum, personnalisé, etc.).<br /> Ils peuvent être appliqués à tous les modules de type Sitemaps Google en fonction de votre configuration des priorités de paramétrage pour ce type de rendu et pour le niveau principal.',
 	'GYM_RSS' => 'Flux RSS',
 	'GYM_RSS_EXPLAIN' => 'Il s’agit des paramètres communs à l’ensemble des modules de type flux RSS (forum, personnalisé, etc.).<br /> Ils peuvent être appliqués à tous les modules de type flux RSS en fonction de votre configuration des priorités des paramétrage pour ce type de rendu et pour le niveau principal.',
+	'GYM_HTML' => 'Pages HTML',
+	'GYM_HTML_EXPLAIN' => 'Il s’agit des paramètres communs à l’ensemble des modules de type HTML (forum, personnalisé, etc.).<br /> Ils peuvent être appliqués à tous les modules de type HTML en fonction de votre configuration des priorités des paramétrage pour ce type de rendu et pour le niveau principal.',
 	'GYM_MODULES_INSTALLED' => 'Module(s) actif(s)',
 	'GYM_MODULES_UNINSTALLED' => 'Module(s) inactif(s)',
 
@@ -215,5 +230,9 @@ $lang = array_merge($lang, array(
 	// robots.txt
 	'GYM_CHECK_ROBOTS' => 'Vérifier les exclusions du fichier robots.txt',
 	'GYM_CHECK_ROBOTS_EXPLAIN' => 'Vérifier et appliquer aux listes d’URLs les exclusions du fichier robots.txt s’il existe. Le MOD prend en compte automatiquement les mises à jour du fichier robots.txt.<br />Cette option est particulièrement pratique pour les imports TXT et XML, quand on n’est pas certain que les listes d’URLs importées ne contiennent aucune URL interdite.<br/><br /><u>Note</u> :<br />Cette option impose plus de travail sur le fichier source, il est conseillé de l’utiliser avec le cache activé.',
+	// summarize method
+	'GYM_METHOD_CHARS' => 'Par nombre de lettres',
+	'GYM_METHOD_WORDS' => 'Par nombre de mots',
+	'GYM_METHOD_LINES' => 'Par nombre de lignes',
 ));
 ?>

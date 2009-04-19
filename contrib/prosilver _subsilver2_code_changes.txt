@@ -1,0 +1,495 @@
+#
+#-----[ DIY INSTRUCTIONS ]--------------------------------------------------
+#
+
+Once you will have installed the mod, you will have to clear phpBB's cache.
+
+Code change for prosilver and subsilver templates with the phpBB SEO premod 3.0.0 :
+http://www.phpbb-seo.com/boards/phpbb-seo-premod/seo-url-premod-vt1549.html (en)
+http://www.phpbb-seo.com/forums/premod-phpbb-seo/premod-referencement-phpbb-vt1951.html (fr)
+
+#
+#-----[ OPEN ]------------------------------------------
+## MOD Title:		 Advanced phpBB3 SEO mod Rewrite
+#
+
+styles/prosilver/template/forum_fn.js
+
+#
+#-----[ FIND ]------------------------------------------
+#
+
+function jumpto()
+{
+	var page = prompt(jump_page, on_page);
+
+	if (page !== null && !isNaN(page) && page > 0)
+	{
+		document.location.href = base_url.replace(/&amp;/g, '&') + '&start=' + ((page - 1) * per_page);
+	}
+}
+
+#
+#-----[ REPLACE WITH ]------------------------------------------
+#
+
+// www.phpBB-SEO.com SEO TOOLKIT BEGIN
+function jumpto() {
+	var page = prompt(jump_page, on_page);
+	if (page !== null && !isNaN(page) && page > 0) {
+		var seo_page = (page - 1) * per_page;
+		if ( base_url.indexOf('?') >= 0 ) {
+			document.location.href = base_url.replace(/&amp;/g, '&') + '&start=' + seo_page;
+		} else if ( seo_page > 0 ) {
+			var seo_type1 = base_url.match(/\.[a-z0-9]+$/i);
+			if (seo_type1 !== null) {
+				document.location.href = base_url.replace(/\.[a-z0-9]+$/i, '') + seo_delim_start + seo_page + seo_type1;
+			}
+			var seo_type2 = base_url.match(/\/$/);
+			if (seo_type2 !== null) {
+				document.location.href = base_url + seo_static_pagination + seo_page + seo_ext_pagination;
+			}
+		} else {
+			document.location.href = base_url;
+		}
+	}
+}
+// www.phpBB-SEO.com SEO TOOLKIT END
+
+#
+#-----[ OPEN ]------------------------------------------
+## MOD Title:		 Advanced phpBB3 SEO mod Rewrite
+## MOD Title:		 phpBB3 SEO Dynamic Meta tags
+## MOD Title:		 phpBB3 SEO Optimal titles
+## MOD Title:		 GYM Sitempas & RSS
+#
+
+styles/prosilver/template/overall_header.html
+
+#
+#-----[ FIND ]------------------------------------------
+#
+
+<head>
+
+<meta http-equiv="content-type" content="text/html; charset={S_CONTENT_ENCODING}" />
+<meta http-equiv="content-style-type" content="text/css" />
+<meta http-equiv="content-language" content="{S_USER_LANG}" />
+<meta http-equiv="imagetoolbar" content="no" />
+<meta name="resource-type" content="document" />
+<meta name="distribution" content="global" />
+<meta name="copyright" content="2002-2006 phpBB Group" />
+<meta name="keywords" content="" />
+<meta name="description" content="" />
+{META}
+<title>{SITENAME} &bull; <!-- IF S_IN_MCP -->{L_MCP} &bull; <!-- ELSEIF S_IN_UCP -->{L_UCP} &bull; <!-- ENDIF -->{PAGE_TITLE}</title>
+
+#
+#-----[ REPLACE WITH ]------------------------------------------
+#
+
+<head>
+{SEO_BASE_HREF}
+<meta http-equiv="content-type" content="text/html; charset={S_CONTENT_ENCODING}" />
+<title>{PAGE_TITLE}<!-- IF S_IN_MCP --> &bull; {L_MCP}<!-- ELSEIF S_IN_UCP --> &bull; {L_UCP}<!-- ENDIF --></title>
+<meta http-equiv="content-style-type" content="text/css" />
+<meta http-equiv="content-language" content="{S_USER_LANG}" />
+<meta http-equiv="imagetoolbar" content="no" />
+{META_TAG}
+{META}
+<!-- BEGIN gym_rsslinks -->
+<link rel="alternate" type="application/rss+xml" title="{gym_rsslinks.TITLE}" href="{gym_rsslinks.URL}" />
+<!-- END gym_rsslinks -->
+
+#
+#-----[ FIND ]------------------------------------------
+## MOD Title:		 Advanced phpBB3 SEO mod Rewrite
+#
+
+	var onload_functions = new Array();
+	var onunload_functions = new Array();
+
+#
+#-----[ AFTER, ADD]------------------------------------------
+#
+
+	// www.phpBB-SEO.com SEO TOOLKIT BEGIN
+	var seo_delim_start = '{SEO_START_DELIM}';
+	var seo_static_pagination = '{SEO_SATIC_PAGE}';
+	var seo_ext_pagination = '{SEO_EXT_PAGE}';
+	// www.phpBB-SEO.com SEO TOOLKIT END
+
+#
+#-----[ OPEN ]------------------------------------------
+## MOD Title:		 GYM Sitempas & RSS
+#
+
+styles/prosilver/template/overall_footer.html
+
+#
+#-----[ FIND ]------------------------------------------
+#
+
+		<ul class="linklist">
+
+#
+#-----[ REPLACE WITH ]------------------------------------------
+#
+
+		<ul class="linklist<!-- IF GYM_LINKS --> navlinks<!-- ENDIF -->">
+
+#
+#-----[ FIND ]------------------------------------------
+#
+
+		</ul>
+
+#
+#-----[ AFTER, ADD ]------------------------------------------
+#
+#
+
+		<!-- IF GYM_LINKS -->
+		<ul class="linklist">
+			<!-- IF GYM_HTML_NEWS_URL --><li class="leftside">{GYM_HTML_NEWS_LINK}</li><!-- ENDIF -->
+			<!-- IF GYM_HTML_MAP_URL --><li class="leftside">{GYM_HTML_MAP_LINK}</li><!-- ENDIF -->
+			<li class="leftside">{GYM_GOOGLE_LINK}</li>
+			<li class="leftside">{GYM_RSS_LINK}</li>
+			<li class="leftside">{GYM_RSS_CHAN_LINK}</li>
+		</ul>
+		<!-- ENDIF -->
+
+#
+#-----[ OPEN ]------------------------------------------
+## MOD Title:		 phpBB3 SEO No Duplicate
+#
+
+styles/prosilver/template/forumlist_body.html
+
+#
+#-----[ FIND ]------------------------------------------
+#
+
+						<!-- IF forumrow.LAST_POST_TIME --><dfn>{L_LAST_POST}</dfn>
+
+#
+#-----[ AFTER, ADD ]------------------------------------------
+#
+
+<!-- IF forumrow.LAST_POST_LINK --><i>{forumrow.LAST_POST_LINK}</i><br/><!-- ENDIF -->
+
+#
+#-----[ OPEN ]------------------------------------------
+## MOD Title:		 GYM Sitempas & RSS
+#
+
+styles/prosilver/template/viewforum_body.html
+
+#
+#-----[ FIND ]------------------------------------------
+#
+
+<h2><a href="{U_VIEW_FORUM}">{FORUM_NAME}</a></h2>
+
+#
+#-----[ AFTER, ADD ]------------------------------------------
+#
+
+<!-- IF GYM_LINKS --><h3>{GYM_HTML_FORUM_NEWS_LINK} {GYM_HTML_FORUM_MAP_LINK} {GYM_RSS_FORUM_LINK} {GYM_GOOGLE_FORUM_LINK}</h3><!-- ENDIF -->
+
+#
+#-----[ OPEN ]------------------------------------------
+## MOD Title:		 Advanced phpBB3 SEO mod Rewrite
+#
+
+styles/prosilver/template/viewtopic_body.html
+
+#
+#-----[ FIND ]------------------------------------------
+#
+
+<a href="#p{postrow.POST_ID}">
+
+#
+#-----[ REPLACE WITH ]------------------------------------------
+#
+
+<a href="{U_VIEW_TOPIC}#p{postrow.POST_ID}">
+
+#
+#-----[ FIND ]------------------------------------------
+#
+
+<a href="#wrap" class="top" title="{L_BACK_TO_TOP}">
+
+#
+#-----[REPLACE WITH ]------------------------------------------
+#
+
+<a href="{U_VIEW_TOPIC}#wrap" class="top" title="{L_BACK_TO_TOP}">
+
+#
+#-----[ OPEN ]------------------------------------------
+## MOD Title:		 GYM Sitempas & RSS
+#
+
+styles/prosilver/theme/common.css
+
+#
+#-----[ FIND ]------------------------------------------
+#
+
+.clear {
+	display: block;
+	clear: both;
+	font-size: 1px;
+	line-height: 1px;
+	background: transparent;
+}
+
+#
+#-----[ AFTER, ADD ]------------------------------------------
+#
+
+/* GYM Sitemaps & RSS - www.phpbb-seo.com */
+div.gymsublist {
+	display:block;
+	position:relative;
+	padding-left:10px;
+	padding-top:5px;
+	padding-bottom:10px;
+	padding-right:0;
+	margin:0;
+}
+div.gymsublist ul {
+	display:block;
+	position:relative;
+	padding-left:30px;
+}
+div.gymsublist ul li {
+	display:block;
+	position:relative;
+	line-height:18px;
+	font-size:11px;
+}
+/* GYM Sitemaps & RSS - www.phpbb-seo.com */
+
+#
+#-----[ OPEN ]------------------------------------------
+## MOD Title:		 Advanced phpBB3 SEO mod Rewrite
+## MOD Title:		 phpBB3 SEO Dynamic Meta tags
+## MOD Title:		 phpBB3 SEO Optimal titles
+## MOD Title:		 GYM Sitempas & RSS
+#
+
+styles/subsilver2/template/overall_header.html
+
+#
+#-----[ FIND ]------------------------------------------
+#
+
+<head>
+
+<meta http-equiv="content-type" content="text/html; charset={S_CONTENT_ENCODING}" />
+<meta http-equiv="content-language" content="{S_USER_LANG}" />
+<meta http-equiv="content-style-type" content="text/css" />
+<meta http-equiv="imagetoolbar" content="no" />
+<meta name="resource-type" content="document" />
+<meta name="distribution" content="global" />
+<meta name="copyright" content="2002-2006 phpBB Group" />
+<meta name="keywords" content="" />
+<meta name="description" content="" />
+{META}
+<title>{SITENAME} &bull; <!-- IF S_IN_MCP -->{L_MCP} &bull; <!-- ELSEIF S_IN_UCP -->{L_UCP} &bull; <!-- ENDIF -->{PAGE_TITLE}</title>
+
+#
+#-----[REPLACE WITH ]------------------------------------------
+#
+
+<head>
+{SEO_BASE_HREF}
+<meta http-equiv="content-type" content="text/html; charset={S_CONTENT_ENCODING}" />
+<title>{PAGE_TITLE}<!-- IF S_IN_MCP --> &bull; {L_MCP}<!-- ELSEIF S_IN_UCP --> &bull; {L_UCP}<!-- ENDIF --></title>
+<meta http-equiv="content-style-type" content="text/css" />
+<meta http-equiv="content-language" content="{S_USER_LANG}" />
+<meta http-equiv="imagetoolbar" content="no" />
+{META_TAG}
+{META}
+<!-- BEGIN gym_rsslinks -->
+<link rel="alternate" type="application/rss+xml" title="{gym_rsslinks.TITLE}" href="{gym_rsslinks.URL}" />
+<!-- END gym_rsslinks -->
+
+#
+#-----[ FIND ]------------------------------------------
+## MOD Title:		 Advanced phpBB3 SEO mod Rewrite
+#
+
+function jumpto()
+{
+	var page = prompt('{LA_JUMP_PAGE}:', '{ON_PAGE}');
+	var perpage = '{PER_PAGE}';
+	var base_url = '{A_BASE_URL}';
+
+	if (page !== null && !isNaN(page) && page > 0)
+	{
+		document.location.href = base_url.replace(/&amp;/g, '&') + '&start=' + ((page - 1) * perpage);
+	}
+}
+
+#
+#-----[ REPLACE WITH ]------------------------------------------
+#
+
+// www.phpBB-SEO.com SEO TOOLKIT BEGIN
+function jumpto() {
+	var page = prompt('{LA_JUMP_PAGE}:', '{ON_PAGE}');
+	var perpage = '{PER_PAGE}';
+	var base_url = '{A_BASE_URL}';
+	var seo_delim_start = '{SEO_START_DELIM}';
+	var seo_static_pagination = '{SEO_SATIC_PAGE}';
+	var seo_ext_pagination = '{SEO_EXT_PAGE}';
+	if (page !== null && !isNaN(page) && page > 0) {
+		var seo_page = (page - 1) * perpage;
+		if ( base_url.indexOf('?') >= 0 ) {
+			document.location.href = base_url.replace(/&amp;/g, '&') + '&start=' + seo_page;
+		} else if ( seo_page > 0 ) {
+			var seo_type1 = base_url.match(/\.[a-z0-9]+$/i);
+			if (seo_type1 !== null) {
+				document.location.href = base_url.replace(/\.[a-z0-9]+$/i, '') + seo_delim_start + seo_page + seo_type1;
+			}
+			var seo_type2 = base_url.match(/\/$/);
+			if (seo_type2 !== null) {
+				document.location.href = base_url + seo_static_pagination + seo_page + seo_ext_pagination;
+			}
+		} else {
+			document.location.href = base_url;
+		}
+	}
+}
+// www.phpBB-SEO.com SEO TOOLKIT END
+
+#
+#-----[ OPEN ]------------------------------------------
+## MOD Title:		 GYM Sitempas & RSS
+#
+
+styles/subsilver2/template/overall_footer.html
+
+#
+#-----[ FIND ]------------------------------------------
+#
+
+<div id="wrapfooter">
+
+#
+#-----[ AFTER, ADD ]------------------------------------------
+#
+
+	<!-- IF GYM_LINKS --><span><!-- IF GYM_HTML_NEWS_URL -->{GYM_HTML_NEWS_LINK} <!-- ENDIF --><!-- IF GYM_HTML_MAP_URL -->{GYM_HTML_MAP_LINK} <!-- ENDIF -->{GYM_GOOGLE_LINK} {GYM_RSS_LINK} {GYM_RSS_CHAN_LINK}</span><br /><!-- ENDIF -->
+
+#
+#-----[ OPEN ]------------------------------------------
+## MOD Title:		 phpBB3 SEO No Duplicate
+#
+
+styles/subsilver2/template/forumlist_body.html
+
+#
+#-----[ FIND ]------------------------------------------
+#
+
+				<!-- IF forumrow.LAST_POST_TIME -->
+
+#
+#-----[ AFTER, ADD ]------------------------------------------
+#
+
+					<!-- IF forumrow.LAST_POST_LINK -->
+					<p class="topicdetails"><i>{forumrow.LAST_POST_LINK}</i></p>
+					<!-- ENDIF -->
+
+#
+#-----[ OPEN ]------------------------------------------
+## MOD Title:		 GYM Sitempas & RSS
+#
+
+styles/subsilver2/template/viewforum_body.html
+
+#
+#-----[ FIND ]------------------------------------------
+#
+
+		<h2><a class="titles" href="{U_VIEW_FORUM}">{FORUM_NAME}</a></h2>
+
+#
+#-----[ AFTER, ADD ]------------------------------------------
+#
+
+		<!-- IF GYM_LINKS --><br/><h3>{GYM_HTML_FORUM_NEWS_LINK} {GYM_HTML_FORUM_MAP_LINK} {GYM_RSS_FORUM_LINK} {GYM_GOOGLE_FORUM_LINK}</h3><!-- ENDIF -->
+
+#
+#-----[ OPEN ]------------------------------------------
+## MOD Title:		 Advanced phpBB3 SEO mod Rewrite
+#
+
+styles/subsilver2/template/viewtopic_body.html
+
+#
+#-----[ FIND ]------------------------------------------
+#
+
+<a href="#wrapheader">
+
+#
+#-----[ REPLACE WITH ]------------------------------------------
+#
+
+<a href="{U_VIEW_TOPIC}#wrapheader">
+
+#
+#-----[ OPEN ]------------------------------------------
+## MOD Title:		 GYM Sitempas & RSS
+#
+
+styles/subsilver2/theme/stylesheet.css
+
+#
+#-----[ FIND ]------------------------------------------
+#
+
+.username-coloured {
+	font-weight: bold;
+}
+
+#
+#-----[ AFTER, ADD ]------------------------------------------
+#
+
+/* GYM Sitemaps & RSS - www.phpbb-seo.com */
+div.gymsublist {
+	display:block;
+	position:relative;
+	padding-left:10px;
+	padding-top:5px;
+	padding-bottom:10px;
+	padding-right:0;
+	margin:0;
+}
+div.gymsublist ul {
+	display:block;
+	position:relative;
+	padding-left:30px;
+}
+div.gymsublist ul li {
+	display:block;
+	position:relative;
+	line-height:18px;
+	font-size:11px;
+}
+/* GYM Sitemaps & RSS - www.phpbb-seo.com */
+
+#
+#-----[ SAVE/CLOSE ALL FILES ]------------------------------------------
+#
+# EoM 
+
