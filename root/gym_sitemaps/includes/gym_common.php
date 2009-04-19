@@ -2,7 +2,7 @@
 /**
 *
 * @package phpBB SEO GYM Sitemaps
-* @version $id: gym_common.php - 14738 11-20-2008 11:43:24 - 2.0.RC1 dcz $
+* @version $id: gym_common.php - 15508 12-17-2008 16:27:59 - 2.0.RC3 dcz $
 * @copyright (c) 2006 - 2008 www.phpbb-seo.com
 * @license http://opensource.org/osi3.0/licenses/lgpl-license.php GNU Lesser General Public License
 *
@@ -42,6 +42,7 @@ function obtain_gym_config($mode, &$cfg_array) {
 		$cache_file .= '_main';
 	}
 	if (($cfg_array = $cache->get($cache_file)) === false) {
+		$cfg_array = array();
 		$sql = "SELECT *
 			FROM " . GYM_CONFIG_TABLE . "
 			$sql_config";
@@ -62,14 +63,14 @@ function obtain_gym_config($mode, &$cfg_array) {
 */
 function set_gym_config($config_name, $config_value, $mode, &$cfg_array) {
 	global $db, $_action_types;
+	if (!in_array($mode, $_action_types) ) {
+		trigger_error('GYM_ERROR_MODULE_TYPE', E_USER_ERROR);
+	}
 	$sql = 'UPDATE ' . GYM_CONFIG_TABLE . "
 		SET config_value = '" . $db->sql_escape($config_value) . "'
 		WHERE config_name = '" . $db->sql_escape($config_name) . "'";
 	$db->sql_query($sql);
 	if (!$db->sql_affectedrows() && !isset($cfg_array[$config_name])) {
-		if (!in_array($mode, $_action_types) ) {
-			trigger_error('GYM_ERROR_MODULE_TYPE', E_USER_ERROR);
-		}
 		$sql = 'INSERT INTO ' . GYM_CONFIG_TABLE . ' ';
 		$sql .= $db->sql_build_array('INSERT', array(
 			'config_name'	=> (string) $config_name,
@@ -126,15 +127,16 @@ function obtain_gym_links($gym_links = array()) {
 	$html_setup = & $links['setup']['html'];
 	$rss_setup = & $links['setup']['rss'];
 	$google_setup = & $links['setup']['google'];
-	if ($html_setup['forum_allow_cat_news'] || $html_setup['forum_allow_cat_map'] || $rss_setup['forum'] || $google_setup['forum']) {
+	if ($html_setup['forum_allow_cat_news'] || $html_setup['forum_allow_cat_map'] || $rss_setup['forum_rss'] || $google_setup['forum_google']) {
 		$_f_sep = $phpbb_seo->seo_delim['forum'];
-		if (!empty($template->_tpldata['forumrow'])) {	
+		if ($links['setup']['main']['link_index'] && !empty($template->_tpldata['forumrow'])) {	
 			foreach ($template->_tpldata['forumrow'] as $k => $v) {
-				if (empty($v['S_IS_LINK']) && empty($v['S_IS_CAT'])) {
+				$num_topics = !empty($v['TOPICS']) ? max(0, (int) $v['TOPICS']) : 0;
+				if ($num_topics && empty($v['S_IS_LINK']) && empty($v['S_IS_CAT'])) {
 					$link = '';
 					$forum_id = (int) $v['FORUM_ID'];
-					$forum_name = $v['FORUM_NAME'];
-					if (!isset($html_setup['forum_exclude'][$forum_id])) {
+					$forum_name = $v['FORUM_NAME'];	
+					if (isset($html_setup['auth_guest'][$forum_id]) || ($html_setup['forum_allow_auth'] && !isset($html_setup['forum_exclude'][$forum_id]))) {
 						if ($html_setup['forum_allow_cat_news']) {
 							$url = sprintf($html_setup['forum_cat_news'], $_phpbb_seo ? $phpbb_seo->seo_url['forum'][$forum_id] : '', $forum_id );
 							$link .= sprintf($gym_link_tpl, $url, 'html_news.gif', sprintf($html_setup['l_html_news_of'], $forum_name), $html_setup['l_html_news']);
@@ -144,11 +146,11 @@ function obtain_gym_links($gym_links = array()) {
 							$link .= ' ' . sprintf($gym_link_tpl, $url, 'maps-icon.gif', sprintf($html_setup['l_html_map_of'], $forum_name), $html_setup['l_html_map']);
 						}
 					}
-					if ($rss_setup['forum_rss'] && !isset($rss_setup['forum_exclude'][$forum_id])) {
+					if ($rss_setup['forum_rss'] && (isset($rss_setup['auth_guest'][$forum_id]) || ($rss_setup['forum_allow_auth'] && !isset($rss_setup['forum_exclude'][$forum_id])))) {
 						$url = sprintf($rss_setup['forum_cat_rss'], $_phpbb_seo ? $phpbb_seo->seo_url['forum'][$forum_id] : '', $forum_id );
 						$link .= ' ' . sprintf($gym_link_tpl, $url, 'feed-icon.png', sprintf($rss_setup['l_rss_feed_of'], $forum_name), $rss_setup['l_rss_feed']);
 					}
-					if ($google_setup['forum_google'] && !isset($google_setup['forum_exclude'][$forum_id])) {
+					if ($google_setup['forum_google'] && isset($google_setup['auth_guest'][$forum_id]) && ($num_topics > $google_setup['threshold'])) {
 							$url = sprintf($google_setup['forum_cat_google'], $_phpbb_seo ? str_replace($_f_sep . $forum_id, '', $phpbb_seo->seo_url['forum'][$forum_id]) . $_f_sep . $forum_id : '', $forum_id );
 							$link .= ' ' . sprintf($gym_link_tpl, $url, 'sitemap-icon.gif', sprintf($google_setup['l_google_sitemap_of'], $forum_name), $google_setup['l_google_sitemap']);
 					}
@@ -158,29 +160,34 @@ function obtain_gym_links($gym_links = array()) {
 				}
 			}
 		}
-		if (!empty($template->_rootref['FORUM_NAME']) && !empty($template->_rootref['FORUM_ID'])) {
+		if ($links['setup']['main']['link_cat'] && !empty($template->_rootref['FORUM_NAME']) && !empty($template->_rootref['FORUM_ID'])) {
 			$forum_id = (int) $template->_rootref['FORUM_ID'];
 			$forum_name = $template->_rootref['FORUM_NAME'];
+			$do_display = false;
 			if (!empty($template->_tpldata['navlinks'])) {
-				$forum_data = & $template->_tpldata['navlinks'][count($template->_tpldata['navlinks']) - 1];
+				$forum_data = $template->_tpldata['navlinks'][count($template->_tpldata['navlinks']) - 1];
 			}
-			if (!empty($forum_data) && !isset($html_setup['forum_exclude'][$forum_id])) {
+			if (!empty($forum_data) ) {
 				if ($_phpbb_seo && empty($phpbb_seo->seo_url['forum'][$forum_id])) {
 					$phpbb_seo->seo_url['forum'][$forum_id] = $phpbb_seo->set_url($forum_name, $forum_id, $phpbb_seo->seo_static['forum']);
 				}
-				if ($html_setup['forum_allow_cat_news']) {
-					$url = sprintf($html_setup['forum_cat_news'], $_phpbb_seo ? $phpbb_seo->seo_url['forum'][$forum_id] : '', $forum_id);
-					$title = sprintf($html_setup['l_html_news_of'], $forum_name);
-					$links['main']['GYM_HTML_FORUM_NEWS_LINK'] = sprintf($gym_link_tpl, $url, 'html_news.gif', $title, $html_setup['l_html_news']);
-				}
-				if ($html_setup['forum_allow_cat_map']) {
-					$url = sprintf($html_setup['forum_cat_map'], $_phpbb_seo ? $phpbb_seo->seo_url['forum'][$forum_id] : '', $forum_id );
-					$title = sprintf($html_setup['l_html_map_of'], $forum_name);
-					$links['main']['GYM_HTML_FORUM_MAP_LINK'] = sprintf($gym_link_tpl, $url, 'maps-icon.gif', $title, $html_setup['l_html_map']);
+				if (isset($html_setup['auth_guest'][$forum_id]) || ($html_setup['forum_allow_auth'] && !isset($html_setup['forum_exclude'][$forum_id])) ) {
+					if ($html_setup['forum_allow_cat_news']) {
+						$url = sprintf($html_setup['forum_cat_news'], $_phpbb_seo ? $phpbb_seo->seo_url['forum'][$forum_id] : '', $forum_id);
+						$title = sprintf($html_setup['l_html_news_of'], $forum_name);
+						$links['main']['GYM_HTML_FORUM_NEWS_LINK'] = sprintf($gym_link_tpl, $url, 'html_news.gif', $title, $html_setup['l_html_news']);
+						$do_display = true;
+					}
+					if ($html_setup['forum_allow_cat_map']) {
+						$url = sprintf($html_setup['forum_cat_map'], $_phpbb_seo ? $phpbb_seo->seo_url['forum'][$forum_id] : '', $forum_id );
+						$title = sprintf($html_setup['l_html_map_of'], $forum_name);
+						$links['main']['GYM_HTML_FORUM_MAP_LINK'] = sprintf($gym_link_tpl, $url, 'maps-icon.gif', $title, $html_setup['l_html_map']);
+						$do_display = true;
+					}
 				}
 			}
 			if (!empty($forum_data['S_IS_POST'])) {
-				if (!isset($rss_setup['forum_exclude'][$forum_id]) && $rss_setup['forum_rss']) {
+				if ($rss_setup['forum_rss'] && (isset($rss_setup['auth_guest'][$forum_id]) || ($rss_setup['forum_allow_auth'] && !isset($rss_setup['forum_exclude'][$forum_id])) )) {
 					$url = sprintf($rss_setup['forum_cat_rss'], $_phpbb_seo ? $phpbb_seo->seo_url['forum'][$forum_id] : '', $forum_id );
 					$title = sprintf($rss_setup['l_rss_feed_of'], $forum_name);
 					$links['main']['GYM_RSS_FORUM_LINK'] = sprintf($gym_link_tpl, $url, 'feed-icon.png', $title, $rss_setup['l_rss_feed']);
@@ -188,13 +195,16 @@ function obtain_gym_links($gym_links = array()) {
 						'TITLE' => $title, 
 						'URL' => $url
 					);
+					$do_display = true;
 				}
-				if ($google_setup['forum_google'] && !isset($google_setup['forum_exclude'][$forum_id])) {
+				if ($google_setup['forum_google'] && isset($google_setup['auth_guest'][$forum_id])) {
 					$url = sprintf($google_setup['forum_cat_google'], $_phpbb_seo ? str_replace($_f_sep . $forum_id, '', $phpbb_seo->seo_url['forum'][$forum_id]) . $_f_sep . $forum_id : '', $forum_id );
 					$title = sprintf($google_setup['l_google_sitemap_of'], $forum_name);
 					$links['main']['GYM_GOOGLE_FORUM_LINK'] = sprintf($gym_link_tpl, $url, 'sitemap-icon.gif', $title, $google_setup['l_google_sitemap']);
+					$do_display = true;
 				}
 			}
+			$links['main']['GYM_LINKS_CAT'] = $do_display;
 		}
 	}
 	if (!empty($links['main'])) {

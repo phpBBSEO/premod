@@ -2,7 +2,7 @@
 /**
 *
 * @package phpBB SEO GYM Sitemaps
-* @version $id: gym_common.php - 5434 11-20-2008 14:38:27 - 2.0.RC1 dcz $
+* @version $id: gym_common.php - 6077 12-17-2008 16:27:59 - 2.0.RC3 dcz $
 * @copyright (c) 2006 - 2008 www.phpbb-seo.com
 * @license http://opensource.org/osi3.0/licenses/lgpl-license.php GNU Lesser General Public License
 *
@@ -68,7 +68,11 @@ $lang = array_merge($lang, array(
 	'GYM_ERROR_404_EXPLAIN' => 'Le serveur n’a trouvé aucune page correspondant à l’url que vous avez utilisé.',
 	'GYM_ERROR_401' => 'Vous n’êtes pas autorisé à voir cette page.',
 	'GYM_ERROR_401_EXPLAIN' => 'Cette page est uniquement accessible aux utilisateurs enregistrés possédant les autorisations nécéssaires.',
-	'GYM_LOGIN' => 'Vous devez être enregistré et connecté pour voir cette page.',
+	'GYM_LOGIN' => 'Vous n’êtes pas autorisé à voir cette page.',
+	'GYM_LOGIN_EXPLAIN' => 'Vous devez être enregistré et connecté pour voir cette page.',
+	'GYM_TOO_FEW_ITEMS' => 'Page Indisponible',
+	'GYM_TOO_FEW_ITEMS_EXPLAIN' => 'Cette page ne contient pas assez d’éléments pour être affichée.',
+	'GYM_TOO_FEW_ITEMS_EXPLAIN_ADMIN' => 'La source de cette page ne contient aucun éléments ou un nombre d’éléments inférieur au seuil défini dans l’ACP pour être affichée.<br/> Un Header 404 Not Found est par ailleurs utilisé pour indiquer aux moteurs de recherche de ne pas utiliser ce lien.',
 
 	'GOOGLE_SITEMAP' => 'Sitemap',
 	'GOOGLE_SITEMAP_OF' => 'Sitemap de',

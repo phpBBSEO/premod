@@ -5,7 +5,7 @@
 * translated originally by PhpBB-fr.com <http://www.phpbb-fr.com/> and phpBB.biz <http://www.phpBB.biz>
 *
 * @package language
-* @version $Id: profile.php,v 1.22 2008/07/03 17:37:37 elglobo Exp $
+* @version $Id: profile.php,v 1.23 2008/12/14 10:44:00 elglobo Exp $
 * @copyright (c) 2005 phpBB Group
 * @license http://opensource.org/licenses/gpl-license.php GNU Public License
 */
@@ -64,7 +64,7 @@ $lang = array_merge($lang, array(
    'DISPLAY_AT_PROFILE'   				=> 'Afficher dans le panneau de l’utilisateur',
    'DISPLAY_AT_PROFILE_EXPLAIN'   		=> 'L’utilisateur peut modifier ce champ de profil dans le panneau de l’utilisateur.',
    'DISPLAY_AT_REGISTER'   				=> 'Afficher sur l’écran d’inscription',
-   'DISPLAY_AT_REGISTER_EXPLAIN'   		=> 'Si cette option est activée, le champ sera affiché à l’inscription et pourra être modifié dans le panneau de l’utilisateur.',
+   'DISPLAY_AT_REGISTER_EXPLAIN'   		=> 'Si cette option est activée, le champ sera affiché à l’inscription.',
    'DISPLAY_PROFILE_FIELD'   			=> 'Afficher le champ de profil',
    'DISPLAY_PROFILE_FIELD_EXPLAIN'   	=> 'Le champ de profil sera visible dans tous les endroits autorisés dans les paramètres de charge. Réglez cela sur “Non” masquera le champ des pages de sujets, des profils et de la liste des membres.',
    'DROPDOWN_ENTRIES_EXPLAIN'   		=> 'Saisissez vos options, chaque option doit être sur une ligne différente.',
@@ -94,7 +94,7 @@ $lang = array_merge($lang, array(
    'FIRST_OPTION'   			=> 'Première option',
    
    'HIDE_PROFILE_FIELD'   			=> 'Masquer le champ de profil',
-   'HIDE_PROFILE_FIELD_EXPLAIN'   	=> 'Seuls les administrateurs et les modérateurs peuvent voir/remplir ce champ de profil. Si l’option est activée, ce champ ne sera affiché que dans les profils des utilisateurs.',
+   'HIDE_PROFILE_FIELD_EXPLAIN'		=> 'Masque le champ de profil à tous les autres utilisateurs mis à part à l’utilisateur concerné, aux administrateurs et aux modérateurs qui pourront toujours voir ce champ. Si l’option d’affichage dans le panneau de l’utilisateur est désactivée, l’utilisateur ne pourra pas voir ou modifier ce champ, seuls les administrateurs le pourront.',
    
    'INVALID_CHARS_FIELD_IDENT'   	=> 'L’identification du champ ne peut contenir que des minuscules a-z et _',
    'INVALID_FIELD_IDENT_LEN'   		=> 'La longueur de l’identification du champ ne peut dépasser 17 caractères',
@@ -123,7 +123,7 @@ $lang = array_merge($lang, array(
    'RADIO_BUTTONS'   			=> 'Boutons radio',
    'REMOVED_PROFILE_FIELD'   	=> 'Le champ de profil a été supprimé.',
    'REQUIRED_FIELD'   			=> 'Champ obligatoire',
-   'REQUIRED_FIELD_EXPLAIN'   	=> 'Oblige l’utilisateur à remplir ou à préciser le champ. Cela affichera le champ à l’inscription et dans le panneau de l’utilisateur.',
+   'REQUIRED_FIELD_EXPLAIN'   	=> 'Oblige l’utilisateur ou les administrateurs à remplir ou à préciser le champ. Si l’option d’affichage sur l’écran d’inscription est désactivée, le champ sera seulement requis lorsque l’utilisateur éditera son profil.',
    'ROWS'   					=> 'Lignes',
    
    'SAVE'   						=> 'Sauvegarder',
@@ -147,7 +147,7 @@ $lang = array_merge($lang, array(
    
    'USER_FIELD_NAME'   	=> 'Nom/titre du champ affiché à l’utilisateur',
    
-   'VISIBILITY_OPTION'   => 'Option de visibilité',
+   'VISIBILITY_OPTION'   => 'Options de visibilité',
 ));
 
 ?>

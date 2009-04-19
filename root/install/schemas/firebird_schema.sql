@@ -1,5 +1,5 @@
 #
-# $Id: firebird_schema.sql 8911 2008-09-23 13:03:33Z acydburn $
+# $Id: firebird_schema.sql 9127 2008-11-26 19:58:35Z acydburn $
 #
 
 
@@ -786,6 +786,7 @@ CREATE TABLE phpbb_profile_fields (
 	field_validation VARCHAR(20) CHARACTER SET UTF8 DEFAULT '' NOT NULL COLLATE UNICODE,
 	field_required INTEGER DEFAULT 0 NOT NULL,
 	field_show_on_reg INTEGER DEFAULT 0 NOT NULL,
+	field_show_profile INTEGER DEFAULT 0 NOT NULL,
 	field_hide INTEGER DEFAULT 0 NOT NULL,
 	field_no_view INTEGER DEFAULT 0 NOT NULL,
 	field_active INTEGER DEFAULT 0 NOT NULL,

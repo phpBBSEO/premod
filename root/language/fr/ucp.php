@@ -5,7 +5,7 @@
 * translated originally by PhpBB-fr.com <http://www.phpbb-fr.com/> and phpBB.biz <http://www.phpBB.biz>
 *
 * @package language
-* @version $Id: ucp.php,v 1.22 2008/11/14 12:36:00 elglobo Exp $
+* @version $Id: ucp.php,v 1.23 2008/12/14 10:51:00 elglobo Exp $
 * @copyright (c) 2005 phpBB Group 
 * @license http://opensource.org/licenses/gpl-license.php GNU Public License 
 *
@@ -378,7 +378,7 @@ $lang = array_merge($lang, array(
 	'SAME_PASSWORD_ERROR'   	=> 'Le nouveau mot de passe saisi est identique à votre mot de passe actuel.',
 	'SEARCH_YOUR_POSTS'   		=> 'Voir vos messages',
 	'SEND_PASSWORD'   			=> 'Envoyer votre mot de passe',
-	'SENT_AT'   				=> 'Envoyé le',
+	'SENT_AT'   				=> 'Envoyé',	// Used before dates in private messages
 	'SHOW_EMAIL'   				=> 'Recevoir les e-mails des utilisateurs',
 	'SIGNATURE_EXPLAIN'   		=> 'Voici le texte qui peut être ajouté à vos messages. Il y a une limite de %d caractères.',
 	'SIGNATURE_PREVIEW'   		=> 'Votre signature apparaîtra ainsi dans vos messages',

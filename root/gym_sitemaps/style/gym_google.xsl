@@ -59,7 +59,7 @@
 				<div id="page-header">
 					<div class="headerbar">
 						<div class="inner"><span class="corners-top"><span></span></span>
-							<div id="site-description"><a href="{$home_link}" title="{L_HOME}" id="logo"><img src="{T_IMAGE_PATH}site_logo.gif" width="139" height="52" alt="{SITENAME}" /></a>
+							<div id="site-description"><a href="{$home_link}" title="{L_HOME}" id="logo"><img src="{T_IMAGE_PATH}site_logo.gif" alt="{SITENAME}" /></a>
 								<h1>{SITENAME}</h1>
 								<p>{SITE_DESCRIPTION}</p>
 								<p style="display: none;"><a href="#start_here">{L_SKIP}</a></p>

@@ -2,7 +2,7 @@
 /**
 *
 * @package phpBB SEO GYM Sitemaps
-* @version $id: gym_common.php - 5146 11-20-2008 14:38:27 - 2.0.RC1 dcz $
+* @version $id: gym_common.php - 5707 12-19-2008 15:55:58 - 2.0.RC3 dcz $
 * @copyright (c) 2006 - 2008 www.phpbb-seo.com
 * @license http://opensource.org/osi3.0/licenses/lgpl-license.php GNU Lesser General Public License
 *
@@ -67,7 +67,11 @@ $lang = array_merge($lang, array(
 	'GYM_ERROR_404_EXPLAIN' => 'The server did not find any page corresponding to the URL you have used.',
 	'GYM_ERROR_401' => 'You are not allowed to view this page.',
 	'GYM_ERROR_401_EXPLAIN' => 'This page is only accessible to logged in users granted with the required authorisations.',
-	'GYM_LOGIN' => 'You must be registered and logged in to view this page.',
+	'GYM_LOGIN' => 'You are not allowed to view this page.',
+	'GYM_LOGIN_EXPLAIN' => 'You must be registered and logged in to view this page.',
+	'GYM_TOO_FEW_ITEMS' => 'Page Unavailable',
+	'GYM_TOO_FEW_ITEMS_EXPLAIN' => 'This page does not contain enough item to be displayed.',
+	'GYM_TOO_FEW_ITEMS_EXPLAIN_ADMIN' => 'This page source is either empty or does not contain enough items (less than the configured threshold in ACP) to be displayed.<br/>A 404 Not Found header was sent to properly inform Search Engines to discard this link.',
 
 	'GOOGLE_SITEMAP' => 'Sitemap',
 	'GOOGLE_SITEMAP_OF' => 'Sitemap de',
@@ -91,8 +95,8 @@ $lang = array_merge($lang, array(
 	'RSS_VALID' => 'RSS 2.0 Valid feed',
 
 	// Old URL handling
-	'RSS_1XREDIR' => 'Ce flux RSS a été déplacé',
-	'RSS_1XREDIR_MSG' => 'Ce flux RSS a été déplacé, il se trouve désormais à cette adresse',
+	'RSS_1XREDIR' => 'This RSS Feed has been moved',
+	'RSS_1XREDIR_MSG' => 'This RSS Feed has been moved, you can now find it here ',
 	// HTML sitemaps
 	'HTML_MAP' => 'Site map',
 	'HTML_MAP_OF' => 'Site map of %1$s',

@@ -2,7 +2,7 @@
 /**
 *
 * @package phpBB SEO GYM Sitemaps
-* @version $id: acp_gym_sitemaps.php - 46072 11-20-2008 14:38:27 - 2.0.RC1 dcz $
+* @version $id: acp_gym_sitemaps.php - 45077 12-17-2008 16:27:59 - 2.0.RC3 dcz $
 * @copyright (c) 2006 - 2008 www.phpbb-seo.com
 * @license http://opensource.org/osi3.0/licenses/lgpl-license.php GNU Lesser General Public License
 *
@@ -224,7 +224,7 @@ $maction_param =
 			'MAINTENANCE_LINKS'	=> $maintenance_links,
 			'S_ERROR'		=> (sizeof($error)) ? true : false,
 			'ERROR_MSG'		=> implode('<br />', $error),
-			'S_SUBMIT_BUTTON'	=> ($mode === 'main' && $module === 'main' && $action === 'main' && empty($maction) ) ? false : true,
+			'S_SUBMIT_BUTTON'	=> !empty($this->gym_modules_acp[$mode][$module][$action]['default']),
 			'U_ACTION'		=> $this->u_action . '&amp;maction=' . $maction . '&amp;action=' . $action . '&amp;module=' . $module)
 		);
 

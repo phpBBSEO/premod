@@ -5,7 +5,7 @@
 * translated originally by PhpBB-fr.com <http://www.phpbb-fr.com/> and phpBB.biz <http://www.phpBB.biz>
 *
 * @package language
-* @version $Id: bots.php,v 1.22 2007/11/22 11:07:01 elglobo Exp $
+* @version $Id: bots.php,v 1.23 2007/11/22 11:07:01 elglobo Exp $
 * @copyright (c) 2005 phpBB Group
 * @license http://opensource.org/licenses/gpl-license.php GNU Public License
 *

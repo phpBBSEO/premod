@@ -2,7 +2,7 @@
 /**
 *
 * @package phpBB SEO GYM Sitemaps
-* @version $id: main_main.php - 8648 11-20-2008 11:43:24 - 2.0.RC1 dcz $
+* @version $id: main_main.php - 9166 12-17-2008 16:27:59 - 2.0.RC3 dcz $
 * @copyright (c) 2006 - 2008 www.phpbb-seo.com
 * @license http://opensource.org/osi3.0/licenses/lgpl-license.php GNU Lesser General Public License
 *
@@ -179,9 +179,18 @@ class main_main {
 			'main' => array(
 				'display_vars' => array(
 					'title'	=> 'MAIN_MAIN',
-					'vars'	=> array(),
+					'vars'	=> array(
+						'legend'	=> 'GYM_LINKS_ACTIVATION',
+						'gym_link_main'	=> array('lang' => 'GYM_LINKS_MAIN', 'validate' => 'bool', 'type' => 'radio:yes_no', 'explain' => true,),
+						'gym_link_index' => array('lang' => 'GYM_LINKS_INDEX', 'validate' => 'bool', 'type' => 'radio:yes_no', 'explain' => true,),
+						'gym_link_cat' => array('lang' => 'GYM_LINKS_CAT', 'validate' => 'bool', 'type' => 'radio:yes_no', 'explain' => true,),
+					),
 				),
-				'default' => array(),
+				'default' => array(
+					'gym_link_main' => 1,
+					'gym_link_index' => 1,
+					'gym_link_cat' => 1,					
+				),
 			),
 			'info' => array(
 				'title_lang' => 'GYM_MAIN',

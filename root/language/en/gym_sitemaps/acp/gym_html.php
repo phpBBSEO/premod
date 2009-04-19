@@ -2,7 +2,7 @@
 /**
 *
 * @package phpBB SEO GYM Sitemaps
-* @version $id: gym_html.php - 13369 11-20-2008 14:38:27 - 2.0.RC1 dcz $
+* @version $id: gym_html.php - 13228 12-19-2008 11:37:21 - 2.0.RC3 dcz $
 * @copyright (c) 2006 - 2008 www.phpbb-seo.com
 * @license http://opensource.org/osi3.0/licenses/lgpl-license.php GNU Lesser General Public License
 *
@@ -102,10 +102,10 @@ $lang = array_merge($lang, array(
 	'HTML_MAIN_CACHE_ON_EXPLAIN' => 'You can here activate / deactivate the site maps and news column caching.',
 	'HTML_OPT_CACHE_ON' => 'Activate optional column caching',
 	'HTML_OPT_CACHE_ON_EXPLAIN' => 'You can here activate / deactivate the optional column caching.',
-	'HTML_MAIN_CACHE_TTL' => 'Durée de vie du cache du contenu principal',
-	'HTML_MAIN_CACHE_TTL_EXPLAIN' => 'Nombre maximal d’heures pendant lesquelles un fichier en cache sera utilisé avant d’être mis à jour. Si cette durée est atteinte le fichier en cache sera rafraîchi lorsque quelqu’un y fera appel.',
-	'HTML_OPT_CACHE_TTL' => 'Cache duration',
-	'HTML_OPT_CACHE_TTL_EXPLAIN' => 'Maximum amount of hours a cached file will be used before it will be updated. Each cached file will be updated everytime someone will browse it after this duration was exeeded when auto regen is on. If not, the cache will only be updated upon demand in ACP.',
+	'HTML_MAIN_CACHE_TTL' => 'Main cache duration',
+	'HTML_MAIN_CACHE_TTL_EXPLAIN' => 'Maximum amount of hours the main column cached file will be used before it will be updated. Each cached file will be updated everytime someone will browse it after this duration was exeeded.',
+	'HTML_OPT_CACHE_TTL' => 'Optional column cache duration',
+	'HTML_OPT_CACHE_TTL_EXPLAIN' => 'Maximum amount of hours the optional column cached file will be used before it will be updated. Each cached file will be updated everytime someone will browse it after this duration was exeeded.',
 	// Auth settings
 	'HTML_AUTH_SETTINGS' => 'Authorization settings',
 	'HTML_ALLOW_AUTH' => 'Authorizations',

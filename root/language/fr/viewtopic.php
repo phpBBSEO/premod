@@ -5,7 +5,7 @@
 * translated originally by PhpBB-fr.com <http://www.phpbb-fr.com/> and phpBB.biz <http://www.phpBB.biz>
 *
 * @package language
-* @version $Id: viewtopic.php,v 1.22 2008/11/14 12:37:00 elglobo Exp $
+* @version $Id: viewtopic.php,v 1.23 2008/11/14 12:37:00 elglobo Exp $
 * @copyright (c) 2005 phpBB Group 
 * @license http://opensource.org/licenses/gpl-license.php GNU Public License 
 *

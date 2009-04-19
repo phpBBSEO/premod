@@ -2,7 +2,7 @@
 /**
 *
 * @package phpBB SEO GYM Sitemaps
-* @version $id: display_posts.php - 35674 11-20-2008 11:43:24 - 2.0.RC1 dcz $
+* @version $id: display_posts.php - 35563 11-26-2008 11:16:36 - 2.0.RC2 dcz $
 * @copyright (c) 2006 - 2008 www.phpbb-seo.com
 * @license http://opensource.org/osi3.0/licenses/lgpl-license.php GNU Lesser General Public License
 *
@@ -25,6 +25,7 @@ class display_posts {
 		// Usefull for multi bb topic & forum tracking
 		// Leave default for single forum eg : '_track'
 		$tracking_cookie_name = (defined('XLANG_AKEY') ? XLANG_AKEY : '') . '_track';
+		$forum_read_auth = & $master->actions['auth_view_read'];
 		// Specific options
 		$display_file = &$master->call['display_file'];
 		$display_user_info = &$master->call['display_user_info'];
@@ -59,6 +60,7 @@ class display_posts {
 		$bbcode_bitfield = '';
 		// Do some reset
 		$topic_datas = $topic_ids = $forum_ids = $user_cache = $id_cache = $post_datas = array();
+		$forum_id = $master->call['forum_id'];
 		// Build SQL
 		if ($s_global || $master->call['single_forum']) {
 			$sql_array = array(
@@ -101,11 +103,11 @@ class display_posts {
 		$sql_where .= $topic_sql ? ($sql_where ? ' AND ' : '') . $topic_sql : '';
 		$sql_where .= ($sql_where ? ' AND ' : '') . 't.topic_status <> ' . ITEM_MOVED;
 		if ($master->call['single_forum']) {
-			$sql_where .= $auth->acl_get('m_approve', $master->call['forum_ids']) ? '' : ' AND t.topic_approved = 1';
+			$sql_where .= $auth->acl_get('m_approve', $master->call['forum_id']) ? '' : ' AND t.topic_approved = 1';
 		} else {
 			// only admins and global moderators will see un-approved topics 
 			// in the forum they have access to.
-			$sql_where .= (!$auth->acl_gets('a_') && !$auth->acl_getf_global('m_')) ? ' AND t.topic_approved = 1' : '';
+			$sql_where .= ($auth->acl_gets('a_') || $auth->acl_getf_global('m_')) ? '' : ' AND t.topic_approved = 1';
 		}
 		// obtain correct topic count if we display pagination
 		if ($display_pagination) {
@@ -141,7 +143,6 @@ class display_posts {
 						'forum_last_post_time' => !empty($row['forum_last_post_time']) ? $row['forum_last_post_time'] : 0,
 						'enable_icons' => !empty($row['enable_icons']) ? $row['enable_icons'] : 0,
 						'forum_url' => '',
-						//'forum_read_auth' => $s_global ? true : (boolean) !isset($master->module_config['exclude_list'][$forum_id]),
 					)
 				);
 				if ($load_db_lastread) {
@@ -156,9 +157,6 @@ class display_posts {
 					$master->forum_datas[$forum_id]['forum_url'] = append_sid("{$phpbb_root_path}viewforum.$phpEx", "f=$forum_id");
 				}
 			}
-			/*if (!$master->forum_datas[$forum_id]['forum_read_auth']) {
-				continue;
-			}*/
 			if (empty($master->forum_tracking_info[$forum_id])) {
 				if ($load_db_lastread) {
 					$master->topic_tracking_info[$topic_id] = !empty($row['mark_time']) ? $row['mark_time'] : $user->data['user_lastmark'];

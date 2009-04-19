@@ -2,7 +2,7 @@
 /**
 *
 * @package phpBB SEO GYM Sitemaps
-* @version $id: gym_install.php - 34939 11-20-2008 11:43:24 - 2.0.RC1 dcz $
+* @version $id: gym_install.php - 37327 12-17-2008 16:27:59 - 2.0.RC3 dcz $
 * @copyright (c) 2006 - 2008 www.phpbb-seo.com
 * @license http://opensource.org/osi3.0/licenses/lgpl-license.php GNU Lesser General Public License
 *
@@ -14,7 +14,7 @@ define('IN_PHPBB', true);
 define('IN_INSTALL', true);
 $phpbb_root_path = (defined('PHPBB_ROOT_PATH')) ? PHPBB_ROOT_PATH : './../';
 $phpEx = substr(strrchr(__FILE__, '.'), 1);
-define('GYM_VERSION', '2.0.RC1');
+@define('GYM_VERSION', '2.0.RC3');
 // Try to override some limits - maybe it helps some...
 @set_time_limit(0);
 $mem_limit = @ini_get('memory_limit');
@@ -116,13 +116,19 @@ class module {
 				'module_stages'		=> array('INTRO', 'FINAL'),
 				'module_reqs'		=> ''
 			),
+			array(
+				'module_type'		=> 'update',
+				'module_title'		=> 'UPDATE_GYM_SITEMAPS',
+				'module_filename'	=> 'install_gym_sitemaps',
+				'module_order'		=> 3,
+				'module_subs'		=> '',
+				'module_stages'		=> array('INTRO', 'FINAL'),
+				'module_reqs'		=> ''
+			),
 		);
 		// Order to use and count further if modules get assigned to the same position or not having an order
 		$max_module_order = 1000;
 		foreach ($module as $row) {
-			// Check any module pre-reqs
-			if ($row['module_reqs'] != '') {
-			}
 			// Module order not specified or module already assigned at this position?
 			if (!isset($row['module_order']) || isset($this->module_ary[$row['module_order']])) {
 				$row['module_order'] = $max_module_order;
@@ -398,6 +404,8 @@ class install_gym_sitemaps extends module {
 	var $modrtype_lang = array();
 	var $action_types = array();
 	var $version = '(not set)';
+	var $old_config = array();
+	var $config_report = array();
 	function install_gym_sitemaps(&$p_master) {
 		global $user, $phpbb_seo, $config, $phpbb_root_path, $phpEx, $_action_types;
 		$this->p_master = &$p_master;
@@ -413,9 +421,24 @@ class install_gym_sitemaps extends module {
 		$this->modrtype_lang = set_phpbb_seo_links();
 	}
 	function main($mode, $sub) {
-		global $user, $template, $phpbb_root_path, $phpbb_seo, $phpEx, $cache;
-		$this->uninst_prefix = $mode == 'install_gym_sitemaps' ? '' : 'UN_';
-		$fake_config = array();
+		global $user, $template, $phpbb_root_path, $phpbb_seo, $phpEx, $cache, $db;
+		switch ($mode) {
+		case 'install_gym_sitemaps':
+			$this->uninst_prefix = '';
+			break;
+		case 'update_gym_sitemaps':
+			obtain_gym_config('main', $this->old_config);
+			if (!empty($this->old_config)) {
+				$this->uninst_prefix = 'UPDATE_';
+			} else {
+				$this->p_master->error($user->lang['SEO_ERROR_NOTINSTALLED']. '<br /><br />' . sprintf($user->lang['RETURN_PAGE'], '<a href="' . $this->p_master->module_url . '">', '</a>'), '', '', false, $user->lang['SEO_ERROR_INFO']);
+				exit;
+			}
+			break;
+		case 'uninstall_gym_sitemaps':
+			$this->uninst_prefix = 'UN_';
+			break;
+		}
 		switch ($sub) {
 			case 'intro':
 				$this->page_title = $user->lang['SUB_INTRO'];
@@ -428,9 +451,12 @@ class install_gym_sitemaps extends module {
 				));
 			break;
 			case 'final':
-				if ($mode == 'install_gym_sitemaps') {
-					$this->add_modules($mode, $sub);
-					$this->install_tables($mode);
+				if ($mode != 'uninstall_gym_sitemaps') {
+					$update = $mode == 'update_gym_sitemaps' ? true : false;
+					if(!$update) {
+						$this->add_modules($mode, $sub);
+						$this->install_tables($mode);
+					}
 					$gym_modules = $gym_modules_acp = array();
 					foreach ($this->action_types as $otype) { // List all output types (sitemaps, rss, html, yahoo ...)
 						$dir = opendir( $phpbb_root_path . 'gym_sitemaps/acp' );
@@ -455,12 +481,18 @@ class install_gym_sitemaps extends module {
 										$gym_modules_acp[$otype][$_module] = $gym_module->acp_module();
 										foreach ($gym_modules_acp[$otype][$_module]['info']['actions'] as $module_action) { // list the module's options sets
 											foreach ($gym_modules_acp[$otype][$_module][$module_action]['default'] as $module_config => $default_value ) { // In the end list possible options for this module for this module's options set
-												// Update config
-												set_gym_config($module_config, $default_value, $otype, $fake_config);
+												if (!isset($this->old_config[$module_config])) {
+													// Update config
+													set_gym_config($module_config, $default_value, $otype, $this->old_config);
+													$this->config_report[] = "SET <b>$module_config</b> to $default_value";
+												}
 											}
 										}
-										// Set the module as installed
-										set_gym_config($type_module . '_installed', 1, 'main', $fake_config);
+										if (!isset($this->old_config[$type_module . '_installed'])) {
+											// Set the module as installed
+											set_gym_config($type_module . '_installed', 1, 'main', $this->old_config);
+											$this->config_report[] = "ACTIVATED <b>$type_module module</b>";
+										}
 									}
 								}
 							}
@@ -812,9 +844,11 @@ class install_gym_sitemaps extends module {
 	*/
 	function final_stage($mode, $sub) {
 		global $auth, $config, $db, $user, $template, $user, $phpbb_root_path, $phpEx, $phpbb_seo, $cache;
+		$update_info = '';
 		if (!sizeof($this->errors) ) {
-			if ($mode == 'install_gym_sitemaps') {
-				set_gym_config('gym_version', $this->version, 'main', $fake_config);
+			if ($mode != 'uninstall_gym_sitemaps') {
+				set_gym_config('gym_version', $this->version, 'main', $this->old_config);
+				$this->config_report[] = "SET <b>gym_version</b> to $this->version";
 				set_config('gym_installed', 1);
 			} else {
 				set_config('gym_installed', 0);
@@ -828,10 +862,22 @@ class install_gym_sitemaps extends module {
 			$this->p_master->error($user->lang['SEO_ERROR_INSTALL'] . '<br/><pre>' . implode('<br/>', $this->errors) . '</pre>', __LINE__, __FILE__);	
 		}
 		$this->page_title = $user->lang['STAGE_FINAL'];
-		if (  $mode == 'install_gym_sitemaps' ) {
+		if (  $mode != 'uninstall_gym_sitemaps' ) {
+			if ($mode == 'update_gym_sitemaps') {
+				$key = 'UPDATE';
+				$lang_key = strpos($user->lang_name, 'fr') !== false ? 'FR' : '';
+				if ($update_infos = @file("./docs/update_from_last$lang_key.txt")) {
+					foreach ($update_infos as $line) {
+						$line = str_replace(array("\r", "\n"), '', utf8_htmlspecialchars(is_utf8($line) ? $line : utf8_recode($line, 'iso-8859-1')));
+						$update_info .= (preg_match('`^#`', $line) ? "<b style=\"color:blue;\">$line</b>" : $line) . '<br/>';
+					}
+				}
+			} else {
+				$key = 'INSTALL';
+			}
 			$submit_action = append_sid($phpbb_root_path . 'adm/index.' . $phpEx . '?sid=' . $user->session_id);
 			$title = $user->lang['SEO_INSTALL_CONGRATS'];
-			$body =  sprintf($user->lang['SEO_INSTALL_CONGRATS_EXPLAIN'], $this->modrtype_lang['link'], $this->version);
+			$body =  sprintf($user->lang["SEO_{$key}_CONGRATS_EXPLAIN"], $this->modrtype_lang['link'], $this->version) . '<br/>' . implode('<br/>', $this->config_report) . "<br/><br/><hr/><pre>$update_info</pre>";
 		} else {
 			$submit_action = append_sid($phpbb_root_path . 'index.' . $phpEx);
 			$title = $user->lang['UN_SEO_INSTALL_CONGRATS'];
@@ -840,7 +886,7 @@ class install_gym_sitemaps extends module {
 		$template->assign_vars(array(
 			'TITLE'		=> $title,
 			'BODY'		=> $body,
-			'L_SUBMIT'	=> @$user->lang['SEO_FINAL_' . strtoupper($mode)],
+			'L_SUBMIT'	=> $user->lang['SEO_FINAL_' . strtoupper($mode)],
 			'U_ACTION'	=> $submit_action,
 		));
 	}
@@ -851,6 +897,14 @@ class install_gym_sitemaps extends module {
 			),
 		),
 	);
+}
+/**
+* is_utf8($string)
+* Borrowed from php.net : http://www.php.net/mb_detect_encoding (detectUTF8)
+*/
+function is_utf8($string) {
+	// non-overlong 2-byte|excluding overlongs|straight 3-byte|excluding surrogates|planes 1-3|planes 4-15|plane 16
+	return preg_match('%(?:[\xC2-\xDF][\x80-\xBF]|\xE0[\xA0-\xBF][\x80-\xBF]|[\xE1-\xEC\xEE\xEF][\x80-\xBF]{2}|\xED[\x80-\x9F][\x80-\xBF] |\xF0[\x90-\xBF][\x80-\xBF]{2}|[\xF1-\xF3][\x80-\xBF]{3}|\xF4[\x80-\x8F][\x80-\xBF]{2})+%xs', $string);
 }
 function set_phpbb_seo_links() {
 	global $user, $config;

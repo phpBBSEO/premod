@@ -2,7 +2,7 @@
 /**
 *
 * @package phpBB SEO GYM Sitemaps
-* @version $id: gym_google.php - 13632 11-20-2008 11:43:24 - 2.0.RC1 dcz $
+* @version $id: gym_google.php - 13749 12-20-2008 14:40:10 - 2.0.RC3 dcz $
 * @copyright (c) 2006 - 2008 www.phpbb-seo.com
 * @license http://opensource.org/osi3.0/licenses/lgpl-license.php GNU Lesser General Public License
 *
@@ -71,15 +71,17 @@ class gym_google extends gym_sitemaps {
 			'google_default_priority' => $this->set_module_option('default_priority', $this->gym_config['google_override']),
 			'google_url' => $this->gym_config['google_url'],
 			// module specific settings we should often need in module
-			'google_modrewrite' => intval($this->set_module_option('modrewrite', $this->override['modrewrite'])),
-			'google_modrtype' => intval($this->set_module_option('modrtype', $this->override['modrewrite'])),
+			'google_modrewrite' => (int) $this->set_module_option('modrewrite', $this->override['modrewrite']),
+			'google_modrtype' => (int) $this->set_module_option('modrtype', $this->override['modrewrite']),
 			'google_pagination' => $this->set_module_option('pagination', $this->override['pagination']),
-			'google_limitdown' => intval($this->set_module_option('limitdown', $this->override['pagination'])),
-			'google_limitup'=> intval($this->set_module_option('limitup', $this->override['pagination'])),
-			'google_sql_limit' => intval($this->set_module_option('sql_limit', $this->override['limit'])),
-			'google_url_limit' => intval($this->set_module_option('url_limit', $this->override['limit'])),
+			'google_limitdown' => (int) $this->set_module_option('limitdown', $this->override['pagination']),
+			'google_limitup'=> (int) $this->set_module_option('limitup', $this->override['pagination']),
+			'google_sql_limit' => (int) $this->set_module_option('sql_limit', $this->override['limit']),
+			'google_url_limit' => (int) $this->set_module_option('url_limit', $this->override['limit']),
 			'google_sort' => ($this->set_module_option('sort', $this->override['sort']) === 'DESC') ? 'DESC' : 'ASC',
 			'google_ping' => $this->set_module_option('ping', $this->gym_config['google_override']),
+			// display threshold
+			'google_threshold' => max(1, (int) $this->gym_config['google_threshold']),
 		);
 		if ($this->gym_config['google_xslt']) {
 			$this->style_config['xslt_style'] = "\n" . '<?xml-stylesheet type="text/xsl" href="' . $phpbb_seo->seo_path['phpbb_url'] . 'gym_sitemaps/gym_style.' . $phpEx . '?action-google,type-xsl,lang-' . $config['default_lang'] . ',theme_id-' . $config['default_style'] . '" ?>';
@@ -121,7 +123,7 @@ class gym_google extends gym_sitemaps {
 		// Grabb the total
 		$this->output_data['url_sofar'] = $this->output_data['url_sofar_total'];
 		if ( empty($this->output_data['url_sofar']) ) {
-			$this->gym_error(404, '', __FILE__, __LINE__);
+			$this->gym_error(404, 'GYM_TOO_FEW_ITEMS', __FILE__, __LINE__);
 		}
 		$this->output_data['data'] .= "\n" . '</sitemapindex>';
 		if ( $this->google_config['google_ping'] && ($this->output_data['time'] >= ($this->cache_config['cache_born'] + $this->cache_config['cache_max_age'])) ) {
@@ -141,8 +143,8 @@ class gym_google extends gym_sitemaps {
 		// start the module
 		$module_class = $this->actions['action_type'] . '_' . $this->actions['module_main'];
 		$this->load_module($module_class, 'sitemap');
-		if ( empty($this->output_data['url_sofar']) ) {
-			$this->gym_error(404, '', __FILE__, __LINE__);
+		if ( $this->output_data['url_sofar'] < $this->google_config['google_threshold'] ) {
+			$this->gym_error(404, 'GYM_TOO_FEW_ITEMS', __FILE__, __LINE__);
 		}
 		$this->output_data['data'] .= "\n" . '</urlset>';
 		if ( $this->google_config['google_ping'] && ($this->output_data['time'] >= ($this->cache_config['cache_born'] + $this->cache_config['cache_max_age'])) ) {
@@ -190,8 +192,8 @@ class gym_google extends gym_sitemaps {
 	function get_changefreq($lastmodtime) {
 		global $user;
 		$dt = $user->time_now - $lastmodtime;
-		// 	42 weeks ~ 10 month		| 6 weeks 			| 7 days			| 36 hours		| 4 hours
-		return $dt > 25401600 ? 'yearly' : ( $dt > 3628800 ? 'monthly' : ( $dt > 604800 ? 'weekly' : ( $dt > 129600 ? 'daily' : ( $dt > 14400 ? 'hourly' : 'almways' ) ) ) );
+		// 	42 weeks ~ 10 month		| 8 weeks 			| 15 days			| 2 days		| 12 hours
+		return $dt > 25401600 ? 'yearly' : ( $dt > 4838400 ? 'monthly' : ( $dt > 1296000 ? 'weekly' : ( $dt > 172800 ? 'daily' : ( $dt > 43200 ? 'hourly' : 'always' ) ) ) );
 	}
 	/**
 	* parse_sitemap($url, $lastmodtime = 0)
@@ -217,7 +219,6 @@ class gym_google extends gym_sitemaps {
 			}
 		}
 		$se_urls = array('http://www.google.com/', 'http://www.yahoo.com/', 'http://www.live.com/');
-		$not_curl= true;
 		$timout = 3;
 		$time = time();
 		$pinged = 0;
@@ -226,8 +227,22 @@ class gym_google extends gym_sitemaps {
 				return;
 			}
 			$request = $se_url . 'ping?sitemap=' . urlencode($url);
-			if (function_exists('curl_exec')) {
-				$not_curl= false;
+			if ( function_exists('file_get_contents') ) {
+				// Make the request
+				ini_set('user_agent','GYM Sitemaps &amp; RSS / www.phpBB-SEO.com');
+				ini_set('default_socket_timeout', $timout);
+				$status_code = false;
+				if (file_get_contents($request)) {
+					// Retrieve HTTP status code
+					list($version,$status_code,$msg) = explode(' ',$http_response_header[0], 3);
+				}
+				if ($status_code != 200) {
+					// @TODO add logs about this ?
+				} else {
+					$pinged++;
+					$this->style_config['stats_genlist'] .= "\n<!--  Pinged $se_url - $url -->";
+				}
+			} else if (function_exists('curl_exec')) {
 				// Initialize the session
 				$session = curl_init($request);
 				// Set curl options
@@ -242,23 +257,8 @@ class gym_google extends gym_sitemaps {
 				// Get HTTP Status code from the response
 				$status_codes = array();
 				preg_match('/\d\d\d/', $response, $status_code);
-				$status_code = $status_codes[0];
+				$status_code = @$status_codes[0];
 				// Get the the response, bypassing the header
-				if ($status_code != 200) {
-					$not_curl= true;
-				} else {
-					$pinged++;
-					$this->style_config['stats_genlist'] .= "\n<!--  Pinged $se_url - $url -->";
-				}
-			} elseif ( $not_curl && function_exists('file_get_contents') ) {
-				// Make the request
-				ini_set('user_agent','GYM Sitemaps &amp; RSS / www.phpBB-SEO.com');
-				ini_set('default_socket_timeout', $timout);
-				$status_code = false;
-				if (file_get_contents($request)) {
-					// Retrieve HTTP status code
-					list($version,$status_code,$msg) = explode(' ',$http_response_header[0], 3);
-				}
 				if ($status_code != 200) {
 					// @TODO add logs about this ?
 				} else {

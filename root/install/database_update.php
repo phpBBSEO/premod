@@ -2,13 +2,13 @@
 /**
 *
 * @package install
-* @version $Id: database_update.php 9058 2008-11-12 20:26:36Z acydburn $
+* @version $Id: database_update.php 9187 2008-12-12 14:47:03Z acydburn $
 * @copyright (c) 2006 phpBB Group
 * @license http://opensource.org/licenses/gpl-license.php GNU Public License
 *
 */
 
-$updates_to_version = '3.0.3';
+$updates_to_version = '3.0.4';
 
 // Return if we "just include it" to find out for which version the database update is responsible for
 if (defined('IN_PHPBB') && defined('IN_INSTALL'))
@@ -548,6 +548,48 @@ $database_update_info = array(
 
 	// No changes from 3.0.3-RC1 to 3.0.3
 	'3.0.3-RC1'		=> array(),
+
+	// Changes from 3.0.3 to 3.0.4-RC1
+	'3.0.3'			=> array(
+		'add_columns'		=> array(
+			PROFILE_FIELDS_TABLE			=> array(
+				'field_show_profile'		=> array('BOOL', 0),
+			),
+		),
+		'change_columns'	=> array(
+			STYLES_TABLE				=> array(
+				'style_id'				=> array('UINT', NULL, 'auto_increment'),
+				'template_id'			=> array('UINT', 0),
+				'theme_id'				=> array('UINT', 0),
+				'imageset_id'			=> array('UINT', 0),
+			),
+			STYLES_IMAGESET_TABLE		=> array(
+				'imageset_id'				=> array('UINT', NULL, 'auto_increment'),
+			),
+			STYLES_IMAGESET_DATA_TABLE	=> array(
+				'image_id'				=> array('UINT', NULL, 'auto_increment'),
+				'imageset_id'			=> array('UINT', 0),
+			),
+			STYLES_THEME_TABLE			=> array(
+				'theme_id'				=> array('UINT', NULL, 'auto_increment'),
+			),
+			STYLES_TEMPLATE_TABLE		=> array(
+				'template_id'			=> array('UINT', NULL, 'auto_increment'),
+			),
+			STYLES_TEMPLATE_DATA_TABLE	=> array(
+				'template_id'			=> array('UINT', 0),
+			),
+			FORUMS_TABLE				=> array(
+				'forum_style'			=> array('USINT', 0),
+			),
+			USERS_TABLE					=> array(
+				'user_style'			=> array('UINT', 0),
+			),
+		),
+	),
+
+	// Changes from 3.0.4-RC1 to 3.0.4
+	'3.0.4-RC1'		=> array(),
 );
 
 // Determine mapping database type
@@ -1322,7 +1364,7 @@ $sql = "UPDATE " . CONFIG_TABLE . "
 	WHERE config_name = 'version'";
 _sql($sql, $errored, $error_ary);
 // SEO premod
-set_config('seo_premod_version', '3.0.3');
+set_config('seo_premod_version', '3.0.4');
 // Reset permissions
 $sql = 'UPDATE ' . USERS_TABLE . "
 	SET user_permissions = '',
@@ -1948,6 +1990,51 @@ function change_database_data(&$no_updates, $version)
 			_sql($sql, $errored, $error_ary);
 
 			$no_updates = false;
+		break;
+
+		// Changes from 3.0.3 to 3.0.4-RC1
+		case '3.0.3':
+			// Update the Custom Profile Fields based on previous settings to the new format
+			$sql = 'SELECT field_id, field_required, field_show_on_reg, field_hide
+					FROM ' . PROFILE_FIELDS_TABLE;
+			$result = _sql($sql, $errored, $error_ary);
+
+			while ($row = $db->sql_fetchrow($result))
+			{
+				$sql_ary = array(
+					'field_required'	=> 0,
+					'field_show_on_reg'	=> 0,
+					'field_hide'		=> 0,
+					'field_show_profile'=> 0,
+				);
+
+				if ($row['field_required'])
+				{
+					$sql_ary['field_required'] = $sql_ary['field_show_on_reg'] = $sql_ary['field_show_profile'] = 1;
+				}
+				else if ($row['field_show_on_reg'])
+				{
+					$sql_ary['field_show_on_reg'] = $sql_ary['field_show_profile'] = 1;
+				}
+				else if ($row['field_hide'])
+				{
+					// Only administrators and moderators can see this CPF, if the view is enabled, they can see it, otherwise just admins in the acp_users module
+					$sql_ary['field_hide'] = 1;
+				}
+				else
+				{
+					// equivelant to "none", which is the "Display in user control panel" option
+					$sql_ary['field_show_profile'] = 1;
+				}
+
+				_sql('UPDATE ' . PROFILE_FIELDS_TABLE . ' SET ' . $db->sql_build_array('UPDATE', $sql_ary) . ' WHERE field_id = ' . $row['field_id'], $errored, $error_ary);
+			}
+
+			$no_updates = false;
+		break;
+
+		// Changes from 3.0.4-RC1 to 3.0.4
+		case '3.0.4-RC1':
 		break;
 	}
 }

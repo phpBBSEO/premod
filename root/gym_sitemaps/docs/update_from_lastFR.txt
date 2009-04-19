@@ -1,0 +1,90 @@
+##############################################################
+## MOD Title: 		phpBB SEO GYM SItemaps & RSS MAJ 2.0.RC2 => 2.0.RC3
+## MOD Author: 		dcz <n/a> http://www.phpbb-seo.com/
+## MOD Description: 	Ceci est la procédure de mise à jour du MOD GYM SItemaps & RSS pour la transition version 2.0.RC2 => 2.0.RC3
+## 			Rendez-vous sur http://www.phpbb-seo.com/forums/gym-sitemaps-rss/sitemaps-rss-google-yahoo-msn-vt3136.html
+## 			pour toujours obtenir la dernière version ou de l'aide pour ce MOD.
+##
+## MOD Version: 	1.0
+##
+## Installation Level: 	(Eazy)
+## Installation Time: 	2 Minutes
+## Files To Edit: 	(2)
+##			styles/prosilver/template/viewforum_body.html,
+##			styles/subsilver2/template/viewforum_body.html.
+##
+## Included Files: n/a
+##############################################################
+## Author Notes:
+## _____________
+##
+## Voici les instructions de mise à jour : phpBB3 SEO GYM SItemaps & RSS 2.0.RC2 => 2.0.RC3
+##
+##############################################################
+## MOD History:
+##
+##	2008-11-21 - 1.0
+##		- First version released
+##
+##############################################################
+## Before Adding This MOD To Your Forum, You Should Back Up All Files Related To This MOD
+##############################################################
+
+
+#
+#-----[ DIY INSTRUCTIONS ]--------------------------------------------------
+#
+
+_____________________________________________
+>>>> INSTALLATION POUR VOTRE FORUM <<<<<
+_____________________________________________
+
+Pour mettre à jour depuis n'importe quelle version 2.0.x (phpBB3), vous devrez tout d'abord uploader tous les fichiers contenus dans le dossier root/ de l'archive dans le dossier ftp de phpBB, en prenant soin de conserver vos éventuelles modification des fichiers de template (dossier phpBB/styles/, .html, .js et .xsl) ajoutés par le module. 
+Une fois les fichiers en place, lancez simplement le script de mise à jour (example.com/phpBB/gym_sitemaps/gym_install.php).
+Vos réglages seront conservés lors de la mise à jour.
+
+Une fois les nouveaux fichiers en place, il vous faudra vider le cache de phpBB et rafraichir vos thèmes (ACP => STYLE => Thèmes => Rafraichir).
+
+Les modifications  de ce fichier concernent les fichier de phpBB3 qui ont été modifiés lors de l'installation du module.
+
+Il contient les modification pour les packs de langue Anglais et Français, ignorez simplement celui que vous n'utiliseriez pas du tout.
+
+#
+#-----[ OPEN ]------------------------------------------
+#
+
+styles/prosilver/template/viewforum_body.html
+
+#
+#-----[ FIND ]------------------------------------------
+#
+
+<!-- IF GYM_LINKS --><h3>{GYM_HTML_FORUM_NEWS_LINK} {GYM_HTML_FORUM_MAP_LINK} {GYM_RSS_FORUM_LINK}<!-- IF (TOTAL_PAGES * PER_PAGE) gt GYM_GOOGLE_THRESOLD --> {GYM_GOOGLE_FORUM_LINK}<!-- ENDIF --></h3><!-- ENDIF -->
+
+#
+#-----[ REPLACE WITH ]------------------------------------------
+#
+
+<!-- IF GYM_LINKS_CAT --><h3>{GYM_HTML_FORUM_NEWS_LINK} {GYM_HTML_FORUM_MAP_LINK} {GYM_RSS_FORUM_LINK} {GYM_GOOGLE_FORUM_LINK}</h3><!-- ENDIF -->
+
+#
+#-----[ OPEN ]------------------------------------------
+#
+
+styles/subsilver2/template/viewforum_body.html
+
+#
+#-----[ FIND ]------------------------------------------
+#
+
+		<!-- IF GYM_LINKS --><h3>{GYM_HTML_FORUM_NEWS_LINK} {GYM_HTML_FORUM_MAP_LINK} {GYM_RSS_FORUM_LINK}<!-- IF (TOTAL_PAGES * PER_PAGE) gt GYM_GOOGLE_THRESOLD --> {GYM_GOOGLE_FORUM_LINK}<!-- ENDIF --></h3><!-- ENDIF -->
+
+#
+#-----[ REPLACE WITH ]------------------------------------------
+#
+
+		<!-- IF GYM_LINKS_CAT --><h3>{GYM_HTML_FORUM_NEWS_LINK} {GYM_HTML_FORUM_MAP_LINK} {GYM_RSS_FORUM_LINK} {GYM_GOOGLE_FORUM_LINK}</h3><!-- ENDIF -->
+
+#-----[ SAVE/CLOSE ALL FILES ]------------------------------------------
+#
+# EoM

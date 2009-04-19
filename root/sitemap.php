@@ -2,7 +2,7 @@
 /**
 *
 * @package phpBB SEO GYM Sitemaps
-* @version $id: sitemap.php - 871 11-20-2008 15:05:11 - 2.0.RC1 dcz $
+* @version $id: sitemap.php - 895 11-26-2008 11:16:36 - 2.0.RC2 dcz $
 * @copyright (c) 2006 - 2008 www.phpbb-seo.com
 * @license http://opensource.org/osi3.0/licenses/lgpl-license.php GNU Lesser General Public License
 *
@@ -15,7 +15,7 @@ include($phpbb_root_path . 'common.' . $phpEx);
 $user->session_begin();
 $auth->acl($user->data);
 
-$user->setup();
+$user->setup('gym_sitemaps/gym_common');
 // Start the process
 require_once($phpbb_root_path . 'gym_sitemaps/includes/gym_google.' . $phpEx);
 

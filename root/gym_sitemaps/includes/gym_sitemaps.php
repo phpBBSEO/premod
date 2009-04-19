@@ -2,7 +2,7 @@
 /**
 *
 * @package phpBB SEO GYM Sitemaps
-* @version $id: gym_sitemaps.php - 26281 11-21-2008 09:24:02 - 2.0.RC1 dcz $
+* @version $id: gym_sitemaps.php - 26033 12-17-2008 16:27:59 - 2.0.RC3 dcz $
 * @copyright (c) 2006 - 2008 www.phpbb-seo.com
 * @license http://opensource.org/osi3.0/licenses/lgpl-license.php GNU Lesser General Public License
 *
@@ -38,6 +38,7 @@ class gym_sitemaps {
 	var $gzip_config = array();
 	var $style_config = array();
 	var $gym_auth = array();
+	var $module_auth = array();
 	/**
 	* constuctor
 	*/
@@ -50,7 +51,7 @@ class gym_sitemaps {
 		$this->actions['action_types'] = $_action_types;
 		$this->actions['action_type'] = in_array($action_type, $this->actions['action_types']) ? $action_type : '';
 		$this->actions['extra_params'] = $this->actions['extra_params_full'] = $this->actions['auth_param'] = $this->actions['sql_report_msg'] = '';
-		$this->actions['auth_guest_list'] = $this->actions['auth_view_list'] = array();
+		$this->actions['auth_guest_list'] = $this->actions['auth_guest_read'] = $this->actions['auth_view_list'] = $this->actions['auth_read_list'] = array();
 		$this->actions['robots_patterns'] = array();
 		if (empty($this->actions['action_type']) ) {
 			$this->gym_error(403, '', __FILE__, __LINE__);
@@ -294,32 +295,33 @@ class gym_sitemaps {
 	}
 	/**
 	* check_forum_auth() 
-	* Returns an array of unauthed forum ids
-	* Will only accept postable forums.
+	* Returns various forum auth and properties
 	*/
-	function check_forum_auth($exclude_list, $guest_auth = true) {
+	function check_forum_auth($guest_auth = true) {
 		global $auth, $db, $user, $cache;
+		$forum_auth_list = array('list' => array(), 'read' => array(), 'list_post' => array(), 'read_post' => array(), 'public_list' => array(), 'public_read' => array(), 'skip_pass' => array(), 'skip_cat' => array(), 'skip_all' => array(), 'skip_link' => array());
 		$need_cache = false;
-		if (!is_array($exclude_list)) {
-			$exclude_list = array();
-		}
 		$cache_file = '_gym_auth_forum_guest';
 		// First check the public forum list
 		if (($forum_auth_list = $cache->get($cache_file)) === false) {
-			$forum_auth_list = array('list' => array(), 'skip' => array());
+			$forum_auth_list = array('list' => array(), 'read' => array(), 'list_post' => array(), 'read_post' => array(), 'public_list' => array(), 'public_read' => array(), 'skip_pass' => array(), 'skip_cat' => array(), 'skip_all' => array(), 'skip_link' => array());
 			$guest_data = array('user_id' => ANONYMOUS,
 				'user_type' => USER_IGNORE,
 				'user_permissions' . (defined('XLANG_AKEY') ? XLANG_AKEY : '') => '',
 			);
 			$g_auth = new auth();
 			$g_auth->acl($guest_data);
-			// the unwanted forum id array
-			$forum_read_ary = $g_auth->acl_getf('!f_list', true);
-			foreach ($forum_read_ary as $forum_id => $null) {
+			// the forum id array
+			$forum_list_ary = $g_auth->acl_getf('f_list', true);
+			foreach ($forum_list_ary as $forum_id => $null) {
 				$forum_auth_list['list'][$forum_id] = (int) $forum_id;
 			}
+			$forum_read_ary = $g_auth->acl_getf('f_read', true);
+			foreach ($forum_read_ary as $forum_id => $null) {
+				$forum_auth_list['read'][$forum_id] = (int) $forum_id;
+			}
 			ksort($forum_auth_list['list']);
-			$skip = array('pass' => array(), 'cat' => array(), 'all' => array(), 'link' => array());
+			ksort($forum_auth_list['read']);
 			$sql = "SELECT forum_id, forum_type, forum_password
 				FROM " . FORUMS_TABLE . "
 				WHERE	forum_type <> " . FORUM_POST . " OR forum_password <> ''";
@@ -327,49 +329,60 @@ class gym_sitemaps {
 			while ( $row = $db->sql_fetchrow($result) ) {
 				$forum_id = (int) $row['forum_id'];
 				if ($row['forum_password']) {
-					$skip['pass'][$forum_id] = $forum_id;
+					$forum_auth_list['skip_pass'][$forum_id] = $forum_id;
 				}
 				if ($row['forum_type'] == FORUM_CAT) {
-					$skip['cat'][$forum_id] = $forum_id;
+					$forum_auth_list['skip_cat'][$forum_id] = $forum_id;
 				} else if ($row['forum_type'] == FORUM_LINK) {
-					$skip['link'][$forum_id] = $forum_id;
+					$forum_auth_list['skip_link'][$forum_id] = $forum_id;
 				}
-				$skip['all'][$forum_id] = $forum_id;
+				$forum_auth_list['skip_all'][$forum_id] = $forum_id;
 			}
 			$db->sql_freeresult($result);
-			ksort($skip['pass']);
-			ksort($skip['all']);
-			ksort($skip['link']);
-			ksort($skip['cat']);
-			$forum_auth_list['skip'] = & $skip;
-			$forum_auth_list['post'] = $forum_auth_list['list'] + $skip['all'];
-			ksort($forum_auth_list['post']);
+			ksort($forum_auth_list['skip_pass']);
+			ksort($forum_auth_list['skip_all']);
+			ksort($forum_auth_list['skip_link']);
+			ksort($forum_auth_list['skip_cat']);
+			// Never mind about fourm links
+			$forum_auth_list['read'] = array_diff_assoc($forum_auth_list['read'], $forum_auth_list['skip_link']);
+			$forum_auth_list['list'] = array_diff_assoc($forum_auth_list['list'], $forum_auth_list['skip_link']);
+			ksort($forum_auth_list['read']);
+			ksort($forum_auth_list['list']);
+			$forum_auth_list['list_post'] = array_diff_assoc($forum_auth_list['list'], $forum_auth_list['skip_all']);
+			$forum_auth_list['read_post'] = array_diff_assoc($forum_auth_list['read'], $forum_auth_list['skip_all']);
+			$forum_auth_list['public_list'] = array_diff_assoc($forum_auth_list['list'], $forum_auth_list['skip_pass']);
+			$forum_auth_list['public_read'] = array_diff_assoc($forum_auth_list['read'], $forum_auth_list['skip_pass']);
 			$cache->put($cache_file, $forum_auth_list);
 		}
-		$this->actions['auth_guest_full'] = & $forum_auth_list;
-		$this->actions['auth_guest_list'] = & $forum_auth_list['post'];
-		$this->actions['auth_view_list'] = $forum_auth_list['list'];
-		$this->actions['auth_password'] = & $forum_auth_list['skip']['pass'];
-		if ($guest_auth) { // sometime, we need to check guest auths, even if user is registered
-			$this->actions['auth_param'] = implode('-', $this->actions['auth_guest_list']);
-			return $this->actions['auth_guest_list'];
+
+		$this->module_auth['forum'] = & $forum_auth_list;
+		if ($guest_auth) { // sometime, we need to only check guest auths, even if user is registered
+			$this->actions['auth_param'] = implode('-', $forum_auth_list['read_post']);
+			return $forum_auth_list['read_post'];
 		}
 		// else handle the real auth
-		$forum_read_ary = $auth->acl_getf('!f_list', true);
-		foreach ($forum_read_ary as $forum_id => $null) {
-			$exclude_list[$forum_id] = (int) $forum_id;
+		$forum_auth_list['read'] = $forum_auth_list['list'] = $forum_auth_list['skip_link'];
+		$forum_list_ary = $auth->acl_getf('f_list', true);
+		foreach ($forum_list_ary as $forum_id => $null) {
+			$forum_auth_list['list'][$forum_id] = (int) $forum_id;
 		}
-		$this->actions['auth_view_list'] = $exclude_list;
+		$forum_read_ary = $auth->acl_getf('f_read', true);
+		foreach ($forum_read_ary as $forum_id => $null) {
+			$forum_auth_list['read'][$forum_id] = (int) $forum_id;
+		}
 		// And the non postable / password protected forums
-		if (!empty($forum_auth_list['skip']['all'])) {
-			foreach ($forum_auth_list['skip']['all'] as $forum_id) {
+		if (!empty($forum_auth_list['skip_all'])) {
+			foreach ($forum_auth_list['skip_all'] as $forum_id) {
 				$forum_id = (int) $forum_id;
-				$exclude_list[$forum_id] = $forum_id;
 			}
 		}
-		ksort($exclude_list);
-		$this->actions['auth_param'] = implode('-', $exclude_list);
-		return $exclude_list;
+		ksort($forum_auth_list['list']);
+		ksort($forum_auth_list['read']);
+		$forum_auth_list['list_post'] = array_diff_assoc($forum_auth_list['list'], $forum_auth_list['skip_all']);
+		$forum_auth_list['read_post'] = array_diff_assoc($forum_auth_list['read'], $forum_auth_list['skip_all']);
+
+		$this->actions['auth_param'] = implode('-', $forum_auth_list['read_post']);
+		return $forum_auth_list['read_post'];
 	}
 	/**
 	* Smiley processing, the phpBB3 function, but, with absolute linking
@@ -454,6 +467,7 @@ class gym_sitemaps {
 	}
 	/**
 	* set_exclude_list($id_list) will build up the public unauthed ids
+	* This method is deprecated since 2.0.RC2
 	* @access private
 	*/
 	function set_not_in_list($id_list = array(), $field = '', $and = '') {
@@ -465,11 +479,12 @@ class gym_sitemaps {
 		return $not_in_id_sql;
 	}
 	/**
-	* is_forum_public($forum_id) Will tell if a forum is publicly viewable (auth guest)
+	* is_forum_public($forum_id) Will tell if a forum is publicly viewable or listable (auth guest)
 	* @access private
 	*/
-	function is_forum_public($forum_id) {
-		return (isset($this->actions['auth_guest_list'][$forum_id]) ? false : true);
+	function is_forum_public($forum_id, $type = 'read') {
+		$type = $type === 'list' ? 'list' : 'read';
+		return (boolean) isset($this->actions["auth_guest_$type"][$forum_id]);
 	}
 
 	// --> Others <--
@@ -571,7 +586,7 @@ class gym_sitemaps {
 	* @access private
 	*/
 	function gym_error($errno = 0, $msg_key = '', $errfile = '', $errline = '', $sql = '') {
-		global $user, $phpbb_seo, $auth;
+		global $user, $phpbb_seo, $auth, $phpbb_root_path, $phpEx, $msg_title;
 		$http_codes = array (
 			204 => 'HTTP/1.1 204 No Content',
 			400 => 'HTTP/1.1 400 Bad Request',
@@ -584,68 +599,37 @@ class gym_sitemaps {
 			500 => 'HTTP/1.1 500 Internal Server Error',
 			503 => 'HTTP/1.1 503 Service Unavailable',
 		);
-		$header = array_key_exists ($errno, $http_codes) ? $http_codes[$errno] : '';
-		$l_notify = '';
+		$header = isset($http_codes[$errno]) ? $http_codes[$errno] : '';
 		if (!empty($user) && !empty($user->lang)) {
 			$msg_title = (empty($msg_key)) ? ( !empty($user->lang['GYM_ERROR_' . $errno]) ? $user->lang['GYM_ERROR_' . $errno] :  ( !empty($header) ? $header : $user->lang['GENERAL_ERROR'])  ) : ((!empty($user->lang[$msg_key])) ? $user->lang[$msg_key] : $msg_key);
-			$msg_text = !empty($user->lang[$msg_key]) ? $user->lang[$msg_key] : (!empty($user->lang['GYM_ERROR_' . $errno . '_EXPLAIN']) ?  $user->lang['GYM_ERROR_' . $errno . '_EXPLAIN'] : ( (!empty($msg_key) ? $msg_key : (!empty($header) ? $header : $msg_title) ) ) );
-			$l_return_index = sprintf($user->lang['RETURN_INDEX'], '<a href="' . $phpbb_seo->seo_path['phpbb_url'] . '">', '</a>');
+			$msg_text = !empty($user->lang[$msg_key . '_EXPLAIN']) ? $user->lang[$msg_key . '_EXPLAIN'] : (!empty($user->lang['GYM_ERROR_' . $errno . '_EXPLAIN']) ?  $user->lang['GYM_ERROR_' . $errno . '_EXPLAIN'] : ( (!empty($msg_key) ? $msg_key : (!empty($header) ? $header : $msg_title) ) ) );
+			$l_return_index = sprintf($user->lang['RETURN_INDEX'], '<a href="' . append_sid("{$phpbb_root_path}index.$phpEx") . '">', '</a>');
 			if ( ( $errno == 500 || $errno == 503 ) && !empty($config['board_contact'])) {
-				$l_notify = '<p>' . sprintf($user->lang['NOTIFY_ADMIN_EMAIL'], $config['board_contact']) . '</p>';
+				$msg_text .= '<p>' . sprintf($user->lang['NOTIFY_ADMIN_EMAIL'], $config['board_contact']) . '</p>';
 			}
 		} else {
 			$msg_title = 'GYM Sitemaps General Error';
 			$l_return_index = '<a href="' . $phpbb_seo->seo_path['phpbb_url'] . '">Return to index page</a>';
 			if ( ( $errno == 500 || $errno == 503 ) && !empty($config['board_contact'])) {
-				$l_notify = '<p>Please notify the board administrator or webmaster: <a href="mailto:' . $config['board_contact'] . '">' . $config['board_contact'] . '</a></p>';
+				$msg_text .= '<p>Please notify the board administrator or webmaster: <a href="mailto:' . $config['board_contact'] . '">' . $config['board_contact'] . '</a></p>';
 			}
 		}
+		$msg_text .= '<br/><br/>' . $l_return_index;
 		if (@$auth->acl_get('a_')) {
-			$msg_text .= '<br/>' . (!empty($errfile) ? "<br/><b>File :</b> $errfile<br/>" : '');
-			$msg_text .= !empty($errline) ? "<br/><b>Line :</b> $errline<br/>" : '';
-			$msg_text .= !empty($sql) ? "<br/><b>Sql :</b>  $sql<br/>" : '';
-			$msg_text .= get_backtrace();
+			if (!empty($user->lang[$msg_key . '_EXPLAIN_ADMIN'])) {
+				$msg_text .= '<br/><br/>' . $user->lang[$msg_key . '_EXPLAIN_ADMIN'];
+			}
+			if (defined('DEBUG')) {
+				$msg_text .= '</p><br/><h2>Debug :</h2><p>' . (!empty($errfile) ? "<br/><b>File :</b> " . utf8_htmlspecialchars($errfile) . "<br/>" : '');
+				$msg_text .= !empty($errline) ? "<br/><b>Line :</b> " . utf8_htmlspecialchars($errline) . "<br/>" : '';
+				$msg_text .= !empty($sql) ? "<br/><b>Sql :</b>  " . utf8_htmlspecialchars($sql) . "<br/>" : '';
+				$msg_text .= '</p><div style="font-size:12px">' . get_backtrace() . '</div><p>';
+			}
 		}
 		if ( !empty($header) ) {
 			header($header);
 		}
-		header ('Content-Type: text/html');
-		echo '<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">';
-		echo '<html xmlns="http://www.w3.org/1999/xhtml" dir="ltr">';
-		echo '<head>';
-		echo '<meta http-equiv="content-type" content="text/html; charset=utf-8" />';
-		echo '<title>' . $msg_title . '</title>';
-		echo '<style type="text/css">' . "\n" . '<!--' . "\n";
-		echo '* { margin: 0; padding: 0; } html { font-size: 100%; height: 100%; margin-bottom: 1px; background-color: #E4EDF0; } body { font-family: "Lucida Grande", Verdana, Helvetica, Arial, sans-serif; color: #536482; background: #E4EDF0; font-size: 62.5%; margin: 0; } ';
-		echo 'a:link, a:active, a:visited { color: #006699; text-decoration: none; } a:hover { color: #DD6900; text-decoration: underline; } ';
-		echo '#wrap { padding: 0 20px 15px 20px; min-width: 615px; } #page-header { text-align: right; height: 40px; } #page-footer { clear: both; font-size: 1em; text-align: center; } ';
-		echo '.panel { margin: 4px 0; background-color: #FFFFFF; border: solid 1px  #A9B8C2; } ';
-		echo '#errorpage #page-header a { font-weight: bold; line-height: 6em; } #errorpage #content { padding: 10px; } #errorpage #content h1 { line-height: 1.2em; margin-bottom: 0; color: #DF075C; } ';
-		echo '#errorpage #content div { margin-top: 20px; margin-bottom: 5px; border-bottom: 1px solid #CCCCCC; padding-bottom: 5px; color: #333333; font: bold 1.2em "Lucida Grande", Arial, Helvetica, sans-serif; text-decoration: none; line-height: 120%; text-align: left; } ';
-		echo "\n" . '//-->' . "\n";
-		echo '</style>';
-		echo '</head>';
-		echo '<body id="errorpage">';
-		echo '<div id="wrap">';
-		echo '	<div id="page-header">';
-		echo '		' . $l_return_index;
-		echo '	</div>';
-		echo '	<div id="acp">';
-		echo '	<div class="panel">';
-		echo '		<div id="content">';
-		echo '			<h1>' . $msg_title . '</h1>';	
-		echo '			<div>' . $msg_text . '</div>';
-		echo $l_notify;
-		echo '		</div>';
-		echo '	</div>';
-		echo '	</div>';
-		echo '	<div id="page-footer">';
-		echo '		Powered by phpBB &copy; 2000, 2002, 2005, 2007, 2008 <a href="http://www.phpbb.com/">phpBB Group</a><br/>';
-		echo '		GYM Sitemaps &amp; RSS &copy; 2006, 2007, 2008 <a href="http://www.phpbb-seo.com/">phpBB SEO</a>';
-		echo '	</div>';
-		echo '</div>';
-		echo '</body>';
-		echo '</html>';	
+		trigger_error($msg_text);
 		$this->safe_exit();
 		return;
 	}

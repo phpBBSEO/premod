@@ -2,7 +2,7 @@
 /**
 *
 * @package phpBB SEO GYM Sitemaps
-* @version $id: display_forums.php - 15725 11-21-2008 08:46:02 - 2.0.RC1 dcz $
+* @version $id: display_forums.php - 17229 12-17-2008 16:27:59 - 2.0.RC3 dcz $
 * @copyright (c) 2006 - 2008 www.phpbb-seo.com
 * @license http://opensource.org/osi3.0/licenses/lgpl-license.php GNU Lesser General Public License
 *
@@ -38,6 +38,8 @@ class display_forums {
 		$display_user_link_key = $display_user_link ? 'full' : 'no_profile';
 		$display_last_post = &$master->call['display_last_post'];
 		$forum_sql = &$master->call['forum_sql'];
+		$forum_read_auth = & $master->actions['auth_view_read'];
+		$forum_list_auth = & $master->actions['auth_view_list'];
 		if (!$display_tracking) {
 			$load_db_lastread = $load_anon_lastread = false;
 		} else {
@@ -77,24 +79,26 @@ class display_forums {
 				$user->data['user_lastmark'] = (isset($master->tracking_topics['l'])) ? (int) (base_convert($master->tracking_topics['l'], 36, 10) + $config['board_startdate']) : 0;
 			}
 		}
-		$sql = $db->sql_build_query('SELECT', $sql_array);
-		unset($sql_array);
-		$result = $db->sql_query($sql);
 		$right = 0;
 		$level_store = array(0 => 0);
 		$processed = array();
 		$level = $last_level = 0;
 		$html = $html_before = $html_after = '';
-		$separator = ' <strong>&raquo;</strong> ';
+		$separator = ' &nbsp; ';
 		$news_img = sprintf($tpl['img'], $master->gym_master->path_config['gym_img_url'] . 'html_news.gif', $user->lang['HTML_NEWS']);
+		$map_img = sprintf($tpl['img'], $master->gym_master->path_config['gym_img_url'] . 'maps-icon.gif', $user->lang['HTML_MAP']);
 		$subf_img = $user->img('subforum_read', 'NO_NEW_POSTS');
+		$sql = $db->sql_build_query('SELECT', $sql_array);
+		unset($sql_array);
+		$result = $db->sql_query_limit($sql, 600);
 		while ($row = $db->sql_fetchrow($result)) {	
 			$forum_id = (int) $row['forum_id'];
 			//@TODO Find why in hell the above query could return more than one row per forum
 			if (isset($processed[$forum_id])) {
 				continue;
 			}
-			$processed[$forum_id] = $forum_id; 
+			$processed[$forum_id] = $forum_id;
+			$is_cat = $row['parent_id'] == 0 ? true : false;
 			if (empty($master->forum_datas[$forum_id])) {
 				// www.phpBB-SEO.com SEO TOOLKIT BEGIN
 				$phpbb_seo->seo_url['forum'][$forum_id] = $phpbb_seo->set_url($row['forum_name'], $forum_id, $phpbb_seo->seo_static['forum']);
@@ -115,9 +119,7 @@ class display_forums {
 					$master->forum_tracking_info[$forum_id] = isset($master->tracking_topics['f'][$forum_id]) ? (int) (base_convert($master->tracking_topics['f'][$forum_id], 36, 10) + $config['board_startdate']) : $user->data['user_lastmark'];
 				}
 			}
-			// Generate the sitemap and news urls for this forum
-			$master->forum_datas[$forum_id]['forum_map_url'] = $master->module_config['html_allow_cat_map'] ? append_sid($master->gym_master->html_build_url('html_forum_cat_map', $phpbb_seo->seo_url['forum'][$forum_id], $forum_id)) : '';
-			$master->forum_datas[$forum_id]['forum_news_url'] = $master->module_config['html_allow_cat_news'] ? append_sid($master->gym_master->html_build_url('html_forum_cat_news', $phpbb_seo->seo_url['forum'][$forum_id], $forum_id)) : '';
+			$master->forum_datas[$forum_id]['forum_news_url'] = $master->forum_datas[$forum_id]['forum_map_url'] = '';
 			if (!isset($root_forum_id)) {
 				$root_forum_id = $forum_id;
 				$sub_forums[$root_forum_id] = '';
@@ -135,8 +137,9 @@ class display_forums {
 			}
 			$right = (int) $row['right_id'];
 			if ($level > 1) { // sub forums
-				if ($level > $last_level) { // going one level down
-					$html_before = "\n<ul><li>";
+				if ($level > $last_level) { // going one or several level down
+					$diff = $level - $last_level;
+					$html_before = str_repeat("\n<ul><li>", $diff );
 					$html_after = "";
 				} 
 				if ($level < $last_level) { // Going one or several level up
@@ -145,7 +148,7 @@ class display_forums {
 					$html_after = "";
 				}
 				if ($level == $last_level) { // Adding a link at the same level
-					$html_before = "</li>\n<li>";
+					$html_before = isset($forum_list_auth[$forum_id]) ? "</li>\n<li>" : '';
 					$html_after = "";
 				}
 				if ($display_tracking) {
@@ -160,13 +163,19 @@ class display_forums {
 					$subf_img = $user->img($folder_image, $folder_alt);
 				}
 				$link = '';
-				if (!empty($master->forum_datas[$forum_id]['forum_news_url'])) {
-					$title = sprintf($user->lang['HTML_NEWS_OF'], $row['forum_name']);
-					$link = sprintf($tpl['link'], append_sid($phpbb_root_path . $master->forum_datas[$forum_id]['forum_news_url']), $news_img . ' ' . $title, $title);
-				}
-				if (!empty($master->forum_datas[$forum_id]['forum_map_url'])) {
-					$title = sprintf($user->lang['HTML_MAP_OF'], $row['forum_name']);
-					$link .= $separator . sprintf($tpl['link'], append_sid($phpbb_root_path . $master->forum_datas[$forum_id]['forum_map_url']), $subf_img . ' ' . $title, $title);
+				if (isset($forum_list_auth[$forum_id])) {
+					if (!empty($row['forum_topics']) && (isset($forum_read_auth[$forum_id]) || $is_cat)) {
+						if ($master->module_config['html_allow_cat_news']) {
+							$title = sprintf($user->lang['HTML_NEWS_OF'], $row['forum_name']);
+							$link = isset($forum_read_auth[$forum_id]) ? sprintf($tpl['link'], append_sid($master->module_config['html_url'] . $master->gym_master->html_build_url('html_forum_cat_news', $phpbb_seo->seo_url['forum'][$forum_id], $forum_id)), $news_img . ' ' . $title, $title) : $title;
+						}
+						if ($master->module_config['html_allow_cat_map']) {
+							$title = sprintf($user->lang['HTML_MAP_OF'], $row['forum_name']);
+							$link .= $separator . (isset($forum_read_auth[$forum_id]) ? sprintf($tpl['link'], append_sid($master->module_config['html_url'] . $master->gym_master->html_build_url('html_forum_cat_map', $phpbb_seo->seo_url['forum'][$forum_id], $forum_id)), $map_img . ' ' . $title, $title) : $title);
+						}
+					} else {
+						$title = $link = '<b>' . $row['forum_name'] . '</b>';
+					}
 				}
 				$sub_forums[$root_forum_id] .= $html_before . $link . $html_after;
 
@@ -206,8 +215,28 @@ class display_forums {
 			$folder_image = 'forum_read';
 			$forum_folder_img = $user->img($folder_image, $folder_alt);
 			$forum_folder_img_src = $user->img($folder_image, $folder_alt, false, '', 'src');
+			// Let's go
 			foreach($forum_ids as $forum_id) {
 				$row = &$forum_datas[$forum_id];
+				$catless = $row['level'] == 0 ? true : false;
+				$is_cat = $row['parent_id'] == 0 ? true : false;
+				if (!isset($forum_list_auth[$forum_id]) || $row['forum_type'] == FORUM_LINK) {
+					continue;
+				}
+				$forum_map_link = $forum_news_link = $forum_map_title = $forum_news_title = '';
+				if (!empty($row['forum_topics']) && (isset($forum_read_auth[$forum_id]) || $is_cat)) {
+					if ($master->module_config['html_allow_cat_map']) {
+						$forum_map_title = sprintf($user->lang['HTML_MAP_OF'], $row['forum_name']);
+						$forum_map_link = sprintf($tpl['link'], append_sid($master->module_config['html_url'] . $master->gym_master->html_build_url('html_forum_cat_map', $phpbb_seo->seo_url['forum'][$forum_id], $forum_id)), $map_img . ' ' . $forum_map_title, $forum_map_title);
+					}
+					if ($master->module_config['html_allow_cat_news']) {
+						$forum_news_title = sprintf($user->lang['HTML_NEWS_OF'], $row['forum_name']);
+						$forum_news_link = sprintf($tpl['link'], append_sid($master->module_config['html_url'] . $master->gym_master->html_build_url('html_forum_cat_news', $phpbb_seo->seo_url['forum'][$forum_id], $forum_id)), $news_img . ' ' . $forum_news_title, $forum_news_title);
+					}
+				} else {
+					$forum_news_title = $forum_news_link = '<b>' . $row['forum_name'] . '</b>';
+					$forum_news_link .= '<br/>';
+				}
 				$forum_unread = (isset($this->forum_tracking_info[$forum_id]) && $this->forum_datas[$forum_id]['forum_last_post_time'] > $this->forum_tracking_info[$forum_id]) ? true : false;
 				if ($display_topic_status) {
 					// Which folder should we display?
@@ -228,16 +257,14 @@ class display_forums {
 					$forum_folder_img = $user->img($folder_image, $folder_alt);
 					$forum_folder_img_src = $user->img($folder_image, $folder_alt, false, '', 'src');
 				}
-				$catless = ($row['level'] == 0) ? true : false;
-				$is_cat = $row['parent_id'] == 0 ? true : false;
 				$tpl_data = array(
 					'S_IS_CAT' => $is_cat,
 					'S_NO_CAT' => $catless && !$last_catless ? true : false,
 					'FORUM_ID' => $forum_id,
-					'FORUM_NAME' => sprintf($user->lang['HTML_MAP_OF'], $row['forum_name']),
-					'FORUM_NEWS' => sprintf($user->lang['HTML_NEWS_OF'], $row['forum_name']),
-					'U_FORUM_MAP' => append_sid($phpbb_root_path . $master->forum_datas[$forum_id]['forum_map_url']),
-					'U_FORUM_NEWS' => append_sid($phpbb_root_path . $master->forum_datas[$forum_id]['forum_news_url']),
+					'FORUM_NAME' => $forum_map_title,
+					'FORUM_NEWS' => $forum_news_title,
+					'FORUM_MAP_LINK' => $forum_map_link,
+					'FORUM_NEWS_LINK' => $forum_news_link,
 				);
 				if (!$is_cat) {
 					$tpl_data += array(	

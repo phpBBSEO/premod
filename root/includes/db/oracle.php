@@ -2,7 +2,7 @@
 /**
 *
 * @package dbal
-* @version $Id: oracle.php 8967 2008-10-02 12:04:12Z acydburn $
+* @version $Id: oracle.php 9175 2008-12-05 11:18:59Z acydburn $
 * @copyright (c) 2005 phpBB Group
 * @license http://opensource.org/licenses/gpl-license.php GNU Public License
 *
@@ -189,7 +189,7 @@ class dbal_oracle extends dbal
 					$out .= ' ' . $val[1] . '(';
 					$in_array = array();
 
-					// constuct each IN() clause	
+					// constuct each IN() clause
 					foreach ($in_clause as $in_values)
 					{
 						$in_array[] = $val[2] . ' ' . (isset($val[6]) ? $val[6] : '') . 'IN(' . implode(', ', $in_values) . ')';

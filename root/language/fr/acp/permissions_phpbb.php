@@ -5,7 +5,7 @@
 * translated originally by PhpBB-fr.com <http://www.phpbb-fr.com/> and phpBB.biz <http://www.phpBB.biz>
 *
 * @package language
-* @version $Id: permissions_phpbb.php,v 1.22 2008/11/14 11:52:00 EricSchreiner Exp $
+* @version $Id: permissions_phpbb.php,v 1.23 2008/11/14 11:52:00 EricSchreiner Exp $
 * @copyright (c) 2005 phpBB Group 
 * @license http://opensource.org/licenses/gpl-license.php GNU Public License 
 *

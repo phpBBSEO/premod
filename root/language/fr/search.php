@@ -5,7 +5,7 @@
 * translated originally by PhpBB-fr.com <http://www.phpbb-fr.com/> and phpBB.biz <http://www.phpBB.biz>
 *
 * @package language
-* @version $Id: search.php,v 1.22 2008/07/03 12:41:26 elglobo Exp $
+* @version $Id: search.php,v 1.23 2008/07/03 12:41:26 elglobo Exp $
 * @copyright (c) 2005 phpBB Group 
 * @license http://opensource.org/licenses/gpl-license.php GNU Public License 
 *

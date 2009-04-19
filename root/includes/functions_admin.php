@@ -2,7 +2,7 @@
 /**
 *
 * @package acp
-* @version $Id: functions_admin.php 8908 2008-09-23 12:01:26Z toonarmy $
+* @version $Id: functions_admin.php 9065 2008-11-13 17:32:55Z toonarmy $
 * @copyright (c) 2005 phpBB Group
 * @license http://opensource.org/licenses/gpl-license.php GNU Public License
 *
@@ -2400,7 +2400,7 @@ function view_log($mode, &$log, &$log_count, $limit = 0, $offset = 0, $forum_id 
 			{
 				// Check if there are more occurrences of % than arguments, if there are we fill out the arguments array
 				// It doesn't matter if we add more arguments than placeholders
-				if (substr_count($log[$i]['action'], '%') - sizeof($log_data_ary))
+				if ((substr_count($log[$i]['action'], '%') - sizeof($log_data_ary)) > 0)
 				{
 					$log_data_ary = array_merge($log_data_ary, array_fill(0, substr_count($log[$i]['action'], '%') - sizeof($log_data_ary), ''));
 				}
