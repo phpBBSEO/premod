@@ -2,7 +2,7 @@
 /**
 *
 * @package ucp
-* @version $Id: ucp_activate.php 8881 2008-09-18 14:50:11Z acydburn $
+* @version $Id: ucp_activate.php 9067 2008-11-21 13:21:53Z Kellanved $
 * @copyright (c) 2005 phpBB Group
 * @license http://opensource.org/licenses/gpl-license.php GNU Public License
 *
@@ -51,7 +51,7 @@ class ucp_activate
 			trigger_error('ALREADY_ACTIVATED');
 		}
 
-		if ($user_row['user_actkey'] != $key)
+		if (($user_row['user_inactive_reason'] ==  INACTIVE_MANUAL) || $user_row['user_actkey'] != $key)
 		{
 			trigger_error('WRONG_ACTIVATION');
 		}

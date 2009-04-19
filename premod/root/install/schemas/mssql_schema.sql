@@ -1,6 +1,6 @@
 /*
 
- $Id: mssql_schema.sql 8911 2008-09-23 13:03:33Z acydburn $
+ $Id: mssql_schema.sql 9127 2008-11-26 19:58:35Z acydburn $
 
 */
 
@@ -942,6 +942,7 @@ CREATE TABLE [phpbb_profile_fields] (
 	[field_validation] [varchar] (20) DEFAULT ('') NOT NULL ,
 	[field_required] [int] DEFAULT (0) NOT NULL ,
 	[field_show_on_reg] [int] DEFAULT (0) NOT NULL ,
+	[field_show_profile] [int] DEFAULT (0) NOT NULL ,
 	[field_hide] [int] DEFAULT (0) NOT NULL ,
 	[field_no_view] [int] DEFAULT (0) NOT NULL ,
 	[field_active] [int] DEFAULT (0) NOT NULL ,

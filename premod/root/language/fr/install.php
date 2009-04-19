@@ -5,7 +5,7 @@
 * translated originally by PhpBB-fr.com <http://www.phpbb-fr.com/> and phpBB.biz <http://www.phpBB.biz>
 *
 * @package language
-* @version $Id: install.php,v 1.22 2008/11/14 13:41:00 elglobo Exp $
+* @version $Id: install.php,v 1.23 2008/12/14 10:50:00 elglobo Exp $
 * @copyright (c) 2005 phpBB Group 
 * @license http://opensource.org/licenses/gpl-license.php GNU Public License 
 *
@@ -338,7 +338,7 @@ $lang = array_merge($lang, array(
 	'SUB_SUPPORT'   			=> 'Support',
 	'SUCCESSFUL_CONNECT'   		=> 'Connexion réussie',
 
-	'SUPPORT_BODY'            	=> 'Un support complet et gratuit est fourni pour l’actuelle version stable de phpBB3. Ceci inclus les questions concernant:</p><ul><li>l’installation</li><li>la configuration</li><li>les questions techniques</li><li>les problèmes liés aux potentiels bugs du logiciel</li><li>la mise à jour depuis une version Release Candidate (RC) à la dernière version stable</li><li>la conversion depuis un forum phpBB2.0.x vers phpBB3</li><li>la conversion depuis un autre système de forum vers phpBB3 (consulter <a href="http://www.phpbb.com/community/viewforum.php?f=65">le forum des convertisseurs</a>)</li></ul><p>Nous encourageons les utilisateurs d’une des versions béta de phpBB3 à remplacer celle-ci par une installation propre de la dernière version stable.</p><h2>MODs / Styles</h2><p>Pour des problèmes liés au MODs, nous vous invitons à créer votre sujet dans le <a href="http://www.phpbb.com/community/viewforum.php?f=81">forum des MODs</a>.<br />Pour des problèmes liés aux styles, templates, et jeu d’images, nous vous invitons à créer votre sujet dans le <a href="http://www.phpbb.com/community/viewforum.php?f=80">forum des Styles</a>.<br /><br />Si votre question est en relation avec une archive précise, créez votre message directement dans le sujet dédié à l’archive.</p><h2>Obtention du support</h2><p><a href="http://www.phpbb.com/community/viewtopic.php?f=14&amp;t=571070">Le package de bienvenue de phpBB</a><br /><a href="http://www.phpbb.com/support/">Section de support</a><br /><a href="http://www.phpbb.com/support/documentation/3.0/quickstart/">Guide de démarrage rapide</a><br /><br />Pour vous assurer d’être à jour et au courant des dernières nouvelles, nous vous conseillons de souscrire à notre <a href="http://www.phpbb.com/support/">lettre d’informations</a>.<br /><br />',
+	'SUPPORT_BODY'            	=> 'Un support complet et gratuit est fourni pour l’actuelle version stable de phpBB3. Ceci inclut les questions concernant:</p><ul><li>l’installation</li><li>la configuration</li><li>les questions techniques</li><li>les problèmes liés aux potentiels bugs du logiciel</li><li>la mise à jour depuis une version Release Candidate (RC) à la dernière version stable</li><li>la conversion depuis un forum phpBB2.0.x vers phpBB3</li><li>la conversion depuis un autre système de forum vers phpBB3 (consulter <a href="http://www.phpbb.com/community/viewforum.php?f=65">le forum des convertisseurs</a>)</li></ul><p>Nous encourageons les utilisateurs d’une des versions béta de phpBB3 à remplacer celle-ci par une installation propre de la dernière version stable.</p><h2>MODs / Styles</h2><p>Pour des problèmes liés au MODs, nous vous invitons à créer votre sujet dans le <a href="http://www.phpbb.com/community/viewforum.php?f=81">forum des MODs</a>.<br />Pour des problèmes liés aux styles, templates, et jeu d’images, nous vous invitons à créer votre sujet dans le <a href="http://www.phpbb.com/community/viewforum.php?f=80">forum des Styles</a>.<br /><br />Si votre question est en relation avec une archive précise, créez votre message directement dans le sujet dédié à l’archive.</p><h2>Obtention du support</h2><p><a href="http://www.phpbb.com/community/viewtopic.php?f=14&amp;t=571070">Le package de bienvenue de phpBB</a><br /><a href="http://www.phpbb.com/support/">Section de support</a><br /><a href="http://www.phpbb.com/support/documentation/3.0/quickstart/">Guide de démarrage rapide</a><br /><br />Pour vous assurer d’être à jour et au courant des dernières nouvelles, nous vous conseillons de souscrire à notre <a href="http://www.phpbb.com/support/">lettre d’informations</a>.<br /><br />',
 	'SYNC_FORUMS'   			=> 'Synchronisation des forums',
 	'SYNC_POST_COUNT'			=> 'Synchronisation de post_counts',
 	'SYNC_POST_COUNT_ID'		=> 'Synchronisation de post_counts de <var>l’entrée</var> %1$s à %2$s.',
@@ -382,7 +382,9 @@ $lang = array_merge($lang, array(
 	'COLLECTED_INFORMATION_EXPLAIN' => 'La liste ci-dessous vous montre les informations sur les fichiers à mettre à jour. Lisez ces informations afin de mettre à jour correctement ces fichiers.',
 	'COLLECTING_FILE_DIFFS'			=> 'Collecte les différences entre les fichiers',
 	'COMPLETE_LOGIN_TO_BOARD'   	=> 'Vous pouvez maintenant vous <a href="../ucp.php?mode=login">connecter à votre forum</a> et vérifier si tout fonctionne correctement. N’oubliez pas de supprimer, renommer ou déplacer le dossier <em>install</em>!',
-	'CONTINUE_UPDATE_NOW'         	=> 'Continuer la mise à jour maintenant',
+	'CONTINUE_UPDATE_NOW'			=> 'Continuer la procédure de mise à jour maintenant',	// Shown within the database update script at the end if called from the updater
+	'CONTINUE_UPDATE'				=> 'Continuer la mise à jour maintenant',				// Shown after file upload to indicate the update process is not yet finished
+	
 	'CURRENT_FILE'   				=> 'Début du fichier original actuel',
 	'CURRENT_VERSION'   			=> 'Version actuelle',
 

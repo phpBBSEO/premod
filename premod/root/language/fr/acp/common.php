@@ -5,7 +5,7 @@
 * translated originally by PhpBB-fr.com <http://www.phpbb-fr.com/> and phpBB.biz <http://www.phpBB.biz>
 *
 * @package language
-* @version $Id: common.php,v 1.22 2008/11/14 11:42:00 Elglobo Exp $
+* @version $Id: common.php,v 1.23 2008/11/14 11:42:00 Elglobo Exp $
 * @copyright (c) 2005 phpBB Group 
 * @license http://opensource.org/licenses/gpl-license.php GNU Public License 
 *
@@ -713,12 +713,19 @@ $lang = array_merge($lang, array(
 	'ACP_GYM_GOOGLE_MAIN' => 'Sitemaps Google',
 	'ACP_GYM_RSS_MAIN' => 'Flux RSS',
 	'ACP_GYM_YAHOO_MAIN' => 'Yahoo! urllist.txt',
-	'ACP_GYM_HTML_MAIN' => 'Plans de site HTML',
+	'ACP_GYM_HTML_MAIN' => 'Pages HTML',
 	'GYM_LOG_CONFIG_MAIN' => '<strong>Modification des paramètres de GYM Sitemaps &amp; RSS</strong><br/>&raquo; Configuration générale',
 	'GYM_LOG_CONFIG_GOOGLE' => '<strong>Modification des paramètres de GYM Sitemaps &amp; RSS</strong><br/>&raquo; Sitemaps Google',
 	'GYM_LOG_CONFIG_RSS' => '<strong>Modification des paramètres de GYM Sitemaps &amp; RSS</strong><br/>&raquo; Flux RSS',
 	'GYM_LOG_CONFIG_HTML' => '<strong>Modification des paramètres de GYM Sitemaps &amp; RSS</strong><br/>&raquo; Plans de site HTML',
 	'GYM_LOG_CONFIG_YAHOO' => '<strong>Modification des paramètres de GYM Sitemaps &amp; RSS</strong><br/>&raquo; Liste d’URLs Yahoo!',
+	// Install Logs
+	'SEO_LOG_INSTALL_GYM_SITEMAPS' => '<strong>Installation de GYM Sitemaps &amp; RSS V%s</strong>',
+	'SEO_LOG_INSTALL_GYM_SITEMAPS_FAIL' => '<strong>Echec de l’installation de GYM Sitemaps &amp; RSS</strong><br/>%s',
+	'SEO_LOG_UNINSTALL_GYM_SITEMAPS' => '<strong>Désinstallation de GYM Sitemaps &amp; RSS V%s</strong>',
+	'SEO_LOG_UNINSTALL_GYM_SITEMAPS_FAIL' => '<strong>Echec de la désinstallation de GYM Sitemaps &amp; RSS</strong><br/>%s',
+	'SEO_LOG_UPDATE_GYM_SITEMAPS' => '<strong>Mise à jour de GYM Sitemaps &amp; RSS vers V%s</strong>',
+	'SEO_LOG_UPDATE_GYM_SITEMAPS_FAIL' => '<strong>Echec de la mise à jour de GYM Sitemaps &amp; RSS</strong><br/>%s',
 ));
 // www.phpBB-SEO.com SEO TOOLKIT END -> GYM Sitemaps
 ?>

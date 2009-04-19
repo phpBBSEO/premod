@@ -2,7 +2,7 @@
 /**
 *
 * @package phpBB SEO GYM Sitemaps
-* @version $id: install.php - 8424 11-20-2008 14:38:27 - 2.0.RC1 dcz $
+* @version $id: install.php - 10221 11-26-2008 16:07:48 - 2.0.RC2 dcz $
 * @copyright (c) 2006 - 2008 www.phpbb-seo.com
 * @license http://opensource.org/osi3.0/licenses/lgpl-license.php GNU Lesser General Public License
 *
@@ -32,17 +32,19 @@ if (empty($lang) || !is_array($lang))
 // equally where a string contains only two placeholders which are used to wrap text
 // in a url you again do not need to specify an order e.g., 'Click %sHERE%s' is fine
 $lang = array_merge($lang, array(
-	// Install	
+	// Install
 	'SEO_INSTALL_PANEL'	=> 'Installation GYM Sitemaps &amp; RSS',
+	'CAT_INSTALL_GYM_SITEMAPS' => 'Installer GYM Sitemaps',
+	'CAT_UNINSTALL_GYM_SITEMAPS' => 'Désinstaller GYM Sitemaps',
+	'CAT_UPDATE_GYM_SITEMAPS' => 'Mettre à jour GYM Sitemaps',
 	'SEO_ERROR_INSTALL'	=> 'Une erreur est survenue lors de l’installation. Si vous souhaitez relancer l’installation, désinstallez d’abord le module.',
 	'SEO_ERROR_INSTALLED'	=> 'Le module %s est déjà installé',
 	'SEO_ERROR_ID'	=> 'Le module %s n’a pas d’ID.',
 	'SEO_ERROR_UNINSTALLED'	=> 'Le module %s est déjà désinstallé',
 	'SEO_ERROR_INFO'	=> 'Informations :',
-	'SEO_FINAL_INSTALL_PHPBB_SEO'	=> 'Aller à l’ACP',
-	'SEO_FINAL_UNINSTALL_PHPBB_SEO'	=> 'Retour à l’index du forum',
-	'CAT_INSTALL_PHPBB_SEO'	=> 'Installation',
-	'CAT_UNINSTALL_PHPBB_SEO'=> 'Désinstallation',
+	'SEO_FINAL_INSTALL_GYM_SITEMAPS'	=> 'Aller à l’ACP',
+	'SEO_FINAL_UPDATE_GYM_SITEMAPS'	=> 'Aller à l’ACP',
+	'SEO_FINAL_UNINSTALL_GYM_SITEMAPS'	=> 'Retour à l’index du forum',
 	'SEO_OVERVIEW_TITLE'	=> 'Vue d’ensemble du MOD GYM Sitemaps de phpBB SEO',
 	'SEO_OVERVIEW_BODY'	=> 'Bienvenue dans le processus d’installation du MOD GYM Sitemaps &amp; RSS %1$s de phpBB SEO.</p><p>Veuillez lire <a href="%2$s" title="Voir le sujet de mise à disposition" target="_phpBBSEO"><b>le sujet de mise à disposition</b></a> pour plus de détails.</p><p><strong style="text-transform: uppercase;">Note:</strong> Vous devez avoir édité tous les fichiers nécessaires et uploadé tous les nouveaux fichiers avant de continuer avec cet assistant d’installation.</p><p>Cet assistant vous guidera pendant le processus d’installation du module d’administration du MOD GYM Sitemaps &amp; RSS. Ce module vous permettra de mettre en place facilement des Sitemaps Google ainsi que des flux RSS sur votre forum. Son architecture modulaire vous permettra de générer des Sitemaps Google et des flux RSS pour n’importe qu’elle application PHP/SQL installée sur votre site, via l’utilisation de plugins dédiés.<br/>Rendez vous sur le <a href="%3$s" title="Voir le forum de support" target="_phpBBSEO"><b>le forum de support</b></a> pour toute question concernant le MOD.</p>',
 	'CAT_SEO_PREMOD'	=> 'GYM Sitemaps &amp; RSS',
@@ -66,7 +68,7 @@ $lang = array_merge($lang, array(
 	<p>Les Sitemaps Google ainsi que les flux RSS supportent la mise en page par transformation XSLT, la feuille de style de votre forum sera même appliquée à ceux-ci sans éditer la moindre ligne de code.</p>
 	<p>Les Sitemaps Google ainsi que les flux RSS détectent automatiquement les MODs de réécriture phpBB SEO et leurs réglages, l’adaptation à d’autres solutions de réécriture est aisée.</p>
 	<h3>Générer un .htaccess personnalisé</h3>
-	<p>Une fois que vous aurez procédé aux réglages, vous pourrez générer un fichier .htaccess personnalisé et l’enregistrer directement sur le serveur.</p>',
+	<p>Avec les mod rewrite phpBB SEO et une fois que vous aurez procédé aux réglages, vous pourrez générer un fichier .htaccess personnalisé et l’enregistrer directement sur le serveur.</p><br/><h3>Rapport d’installation :</h3>',
 	'UN_SEO_INSTALL_CONGRATS'	=> 'Le module d’administration GYM Sitemaps &amp; RSS à été désinstallé.',
 	'UN_SEO_INSTALL_CONGRATS_EXPLAIN'	=> '<p>Vous avez désinstallé avec succès le MOD %1$s %2$s.<p>
 	<p> Vos Sitemaps et vos flux RSS ne sont donc plus disponibles.</p>',
@@ -94,5 +96,13 @@ $lang = array_merge($lang, array(
 	'SEO_CACHE_MSG_OK'	=> 'Le fichier du cache a bien été mis à jour.',
 	'SEO_CACHE_MSG_FAIL'	=> 'Un erreur s’est produite lors de la mise à jour du cache.',
 	'SEO_CACHE_UPDATE_FAIL'	=> 'L’URL que vous avez soumise ne peut être utilisée, le cache n’a pas été modifié.',
+	// Update
+	'UPDATE_SEO_INSTALL_INTRO'		=> 'Bienvenue dans le script de mise à jour de GYM Sitemaps &amp; RSS.',
+	'UPDATE_SEO_INSTALL_INTRO_BODY'	=> '<p>Vous êtes sur le point de mettre à jour le module %1$s vers la version %2$s. Cet script d’installation va mettre à jour la base de donnée de phpBB.<br/>Vos réglages actuels ne seront pas affectés</p>
+	<p><strong>Note:</strong> Ce script ne met pas à jour les fichiers de GYM Sitemaps &amp; RSS.<br/><br/>Pour mettre à jour depuis n’importe quelle version 2.0.x (phpBB3), vous <b>devez</b> tout d’abord uploader tous les fichiers contenus dans le dossier <b>root/</b> de l’archive dans le dossier ftp de phpBB, en prenant soin de conserver vos éventuelles modification des fichiers de template (dossier phpBB/styles/, .html, .js et .xsl) ajoutés par le module.<br/><br/>Vous <b>pouvez</b> à tout moment relancer cette mise à jour si par exemple vous aviez oublié d’uploader des fichiers ou simplement pour réafficher la liste des modifications des fichiers de phpBB3.</p>',
+	'UPDATE_SEO_INSTALL'		=> 'Mettre à jour',
+	'SEO_ERROR_NOTINSTALLED'	=> 'GYM Sitemaps &amp; RSS n’est pas installé!',
+	'SEO_UPDATE_CONGRATS_EXPLAIN'	=> '<p>Vous avez correctement mis à jour le MOD %1$s vers la version %2$s.<p>
+	<p><strong>Note:</strong> Ce script ne met pas à jour les fichiers de GYM Sitemaps &amp; RSS.<br/><b>Veuillez</b> appliquer les modifications ci-dessous.</p><br/><h3>Rapport de mise à jour :</h3>',
 ));
 ?>

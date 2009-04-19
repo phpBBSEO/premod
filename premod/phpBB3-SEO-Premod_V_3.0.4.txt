@@ -5,7 +5,7 @@
 ## 			Check http://www.phpbb-seo.com/boards/phpbb-seo-premod/seo-url-premod-vt1549.html
 ## 			for the latest version or to get help.
 ##
-## MOD Version: 	3.0.3
+## MOD Version: 	3.0.4
 ##
 ## Installation Level: 	As easy as phpBB3
 ## Installation Time: 	10 Minutes
@@ -65,6 +65,18 @@
 ##############################################################
 ## MOD History:
 ##
+##	2008-12-20 - 3.0.4
+##		- All mods Updated to comply with phpBB 3.0.4.
+##		- GYM Sitemaps & RSS 2.0.RC3 :
+##			- Added more option for displaying links on the forum,
+##			- Fixed Google ping again,
+##			- Various bug fixes and enhancement.
+##		- mod rewrite 0.4.8 :
+##			- Added : topic and forum url are now rewritten in notification emails,
+##			- Added : topic url in print view is now rewritten.
+##		- zero duplicate 0.4.8 :
+##			- Fixed : ' character in highlights, 
+##			- Fixed : No redirecting when marking / bookmarking / subscribing.
 ##	2008-11-20 - 3.0.3
 ##		- All mods Updated to comply with phpBB 3.0.3.
 ##		- Re-enabled search_ignore_words.php for Fulltext Native indexing :
@@ -176,17 +188,17 @@ ________________________________________
 >>>>   UPDATE INSTRUCTION   	   <<<<<
 ________________________________________
 
-Update 3.0.2 => 3.0.3 :
+Update 3.0.3 => 3.0.4 :
 First, go to http://downloads.phpbb-seo.com/seo-url-premod-12/
 where you'll be able to download the update packages
 You can update using two method :
-	1) Auto updating : "3.0.2 to 3.0.3 Auto update"
+	1) Auto updating : "3.0.3 to 3.0.4 Auto update"
 		- Upload the auto_update/install/*.* folder of the update package to install/*.*
 		- Go to ACP => SYSTEM and follow instructions.
 		The auto update method will take the eventual code change you have made into account, 
 		and will attempt to merge the new files with your online modified ones.
 		It's the safest method for most, the installer will tel you if it has trouble to update some files.
-	2) Manual updating : "3.0.2 to 3.0.3 Changed Files"
+	2) Manual updating : "3.0.3 to 3.0.4 Changed Files"
 		You'll find the modified file list in the modified/ folder of the update package.
 		- Upload / merge / overwrite all file,
 		- Upload the modified/install/*.* to install/*.*,
@@ -200,6 +212,15 @@ Once you will have updated, you will have to refresh your theme's cache as well 
 
 We have included the mod GYM Sitemap & RSS, but we kept the install separated
 see bellow to install.
+
+To update GYM from all 2.0.x (phpBB3) versions you will have to upload all files in the root/ directory of the archive to your phpBB/ ftp directory, after you will have taken care manually of the eventual code change you would have implemented in the template files (directory phpBB/styles/, .html, .js and .xsl) added by the module.
+Once done, just lunch the update script (example.com/phpBB/gym_sitemaps/gym_install.php).
+Your settings will be kept during the update porcess.
+
+IMPORTANT :
+GYM sitemaps and RSS is likely to be updated before the premod, it will be up to you to
+keep it up to date meanwhile, you can be notified about updates by subscribing to the release thread while logged in :
+http://www.phpbb-seo.com/boards/viewtopic.php?t=2734&watch=topic
 
 ________________________________________
 >>>>   INSTALLATION INSTRUCTION    <<<<<
@@ -375,6 +396,9 @@ PLEASE NOTE :
 	GYM Sitemaps & RSS is released at a RC stage, the install left separated from the regular install.
 	It's up to you to use it or not, but you should know that at this stage, some feature may not be implemented and bugs
 	may still be found.
+	And, even more important, GYM sitemaps and RSS is likely to be updated before the premod, it will be up to you to
+	keep it up to date meanwhile, you can be notified about updates by subscribing to the release thread while logged in :
+	http://www.phpbb-seo.com/boards/viewtopic.php?t=2734&watch=topic
 
 
 TO INSTALL THE MODULE :

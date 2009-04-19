@@ -624,7 +624,10 @@ class install_phpbb_seo extends module {
 					}
 				} // End sub categories
 				if (!sizeof($this->errors)) {
-					$error = $_module->delete_module($cat_module_data[$cat_name]['module_id']);
+					$branch = $_module->get_module_branch($cat_module_data[$cat_name]['module_id'],'children', 'descending', false);
+					if (empty($branch)) {
+						$error = $_module->delete_module($cat_module_data[$cat_name]['module_id']);
+					}
 					if (!sizeof($error)) {
 						$_module->remove_cache_file();
 						$delete_module_data[$cat_module_data[$cat_name]['module_id']] = $cat_module_data[$cat_name]['module_langname'] . ' - id : ' . $cat_module_data[$cat_name]['module_id'];

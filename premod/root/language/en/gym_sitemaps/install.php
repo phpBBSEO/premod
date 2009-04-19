@@ -2,7 +2,7 @@
 /**
 *
 * @package phpBB SEO GYM Sitemaps
-* @version $id: install.php - 7558 11-20-2008 14:38:27 - 2.0.RC1 dcz $
+* @version $id: install.php - 9151 11-26-2008 16:07:48 - 2.0.RC2 dcz $
 * @copyright (c) 2006 - 2008 www.phpbb-seo.com
 * @license http://opensource.org/osi3.0/licenses/lgpl-license.php GNU Lesser General Public License
 *
@@ -33,15 +33,17 @@ if (empty($lang) || !is_array($lang))
 $lang = array_merge($lang, array(
 	// Install
 	'SEO_INSTALL_PANEL'	=> 'Gym Sitemaps &amp; RSS Installation Panel',
+	'CAT_INSTALL_GYM_SITEMAPS' => 'Install GYM Sitemaps',
+	'CAT_UNINSTALL_GYM_SITEMAPS' => 'Un-install GYM Sitemaps',
+	'CAT_UPDATE_GYM_SITEMAPS' => 'Update GYM Sitemaps',
 	'SEO_ERROR_INSTALL'	=> 'An error occurred during the installation process. If you want to retry the installation, uninstall first.',
 	'SEO_ERROR_INSTALLED'	=> 'The %s module is already installed.',
 	'SEO_ERROR_ID'	=> 'The %1$ module had no ID.',
 	'SEO_ERROR_UNINSTALLED'	=> 'The %s module is already uninstalled.',
 	'SEO_ERROR_INFO'	=> 'Information :',
-	'SEO_FINAL_INSTALL_PHPBB_SEO'	=> 'Login to ACP',
-	'SEO_FINAL_UNINSTALL_PHPBB_SEO'	=> 'Return to forum index',
-	'CAT_INSTALL_PHPBB_SEO'	=> 'Installation',
-	'CAT_UNINSTALL_PHPBB_SEO'=> 'Uninstall',
+	'SEO_FINAL_INSTALL_GYM_SITEMAPS'	=> 'Login to ACP',
+	'SEO_FINAL_UPDATE_GYM_SITEMAPS'	=> 'Login to ACP',
+	'SEO_FINAL_UNINSTALL_GYM_SITEMAPS'	=> 'Return to forum index',
 	'SEO_OVERVIEW_TITLE'	=> 'GYM sitemaps &amp; RSS Overview',
 	'SEO_OVERVIEW_BODY'	=> '<p>Welcome to the phpBB SEO GYM sitemaps &amp; RSS %1$s installer.</p><p>Please read <a href="%3$s" title="Check the release thread" target="_phpBBSEO"><b>the release thread</b></a> for more information</p><p><strong style="text-transform: uppercase;">Note:</strong> You must have already perfomed the required code changes and uploaded all the new files before you can proceed with this install wizard.</p><p>This installation system will guide you through the process of installing the GYM sitemaps &amp; RSS admin control panel (ACP). It will allow you generate efficient and Search Engine Optimized Google Sitemaps and RSS feeds. Its modular design will allow you to generate Google Sitemaps and RSS feeds for any php/SQL application installed on your site, using dedicated plug-ins. Let’s meet in the <a href="%3$s" title="Support forum" target="_phpBBSEO"><b>support forum</b></a> for anything regarding the GYM Siteamps &amp; RSS module.</p> ',
 	'CAT_SEO_PREMOD'	=> 'GYM Sitemaps &amp; RSS',
@@ -64,8 +66,8 @@ $lang = array_merge($lang, array(
 	<h2>Accurately configure you Google Sitemaps and RSS feeds</h2>
 	<p>Google sitemaps and RSS feeds supports advanced XSLt styling, phpBB’s CSS will even be applied to these without editing a single line of code.</p>
 	<p>Google sitemaps and RSS feeds will auto detect the phpBB SEO mod rewrites and their settings; using other URL rewriting mod is made easy.</p>
-	<!--<h2>Generate a personalized .htaccess</h2>
-	<p>Once you will have set up the above options, you will be able to generate a personalized .htaccess quickly and save it directly on the server.</p> -->',
+	<h2>Generate a personalized .htaccess</h2>
+	<p>With the phpBB SEO mod rewrite and once you will have set up the above options, you will be able to generate a personalized .htaccess quickly and save it directly on the server.</p><br/><h3>Install Report :</h3>',
 	'UN_SEO_INSTALL_CONGRATS'	=> 'The GYM Sitemaps &amp; RSS ACP module was removed.',
 	'UN_SEO_INSTALL_CONGRATS_EXPLAIN'	=> '<p>You have now successfully uninstalled the %1$s %2$s mod.<p>
 	<p> You Google sitemaps and RSS feeds are not available any more.</p>',
@@ -93,5 +95,13 @@ $lang = array_merge($lang, array(
 	'SEO_CACHE_MSG_OK'	=> 'The cache file was updated successfully.',
 	'SEO_CACHE_MSG_FAIL'	=> 'An error occurred while updating the cache file.',
 	'SEO_CACHE_UPDATE_FAIL'	=> 'The URL you entered cannot be used, the cache was left untouched.',
+	// Update
+	'UPDATE_SEO_INSTALL_INTRO'		=> 'Welcome to the phpBB SEO GYM sitemaps &amp; RSS updater.',
+	'UPDATE_SEO_INSTALL_INTRO_BODY'	=> '<p>You are about to update the %1$s module to %2$s. This script will update the phpBB data base.<br/>Your current settings won’t be affected.</p>
+	<p><strong>Note:</strong> This script will not update GYM Sitemaps &amp; RSS physical files.<br/><br/>To update from all 2.0.x (phpBB3) versions you <b>must</b> upload all files in the <b>root/</b> directory of the archive to your phpBB/ ftp directory, after you will have taken care manually of the eventual code change you would have implemented in the template files (directory phpBB/styles/, .html, .js and .xsl) added by the module.<br/><br/>You <b>can</b> restart this update script when you want, for example if you did not upload the required files or simply to display the update code changes for phpBB3 files again.</p>',
+	'UPDATE_SEO_INSTALL'		=> 'Update',
+	'SEO_ERROR_NOTINSTALLED'	=> 'GYM Sitemaps &amp; RSS is not installed!',
+	'SEO_UPDATE_CONGRATS_EXPLAIN'	=> '<p>You have now successfully updated %1$s to %2$s.<p>
+	<p><strong>Note:</strong> This script does not update GYM Sitemaps &amp; RSS physical files.</p><br/><b>Please</b> implement the code changes listed bellow.<br/><h3>Update report :</h3>',
 ));
 ?>

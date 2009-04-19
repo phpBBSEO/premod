@@ -2,7 +2,7 @@
 /**
 *
 * @package phpBB SEO GYM Sitemaps
-* @version $id: google_main.php - 9013 11-20-2008 11:43:24 - 2.0.RC1 dcz $
+* @version $id: google_main.php - 9210 11-26-2008 11:16:36 - 2.0.RC2 dcz $
 * @copyright (c) 2006 - 2008 www.phpbb-seo.com
 * @license http://opensource.org/osi3.0/licenses/lgpl-license.php GNU Lesser General Public License
 *
@@ -181,7 +181,9 @@ class google_main {
 						'legend3' => 'GYM_STYLE',
 						'google_xslt'	=> array('lang' => 'GOOGLE_XSLT', 'validate' => 'bool', 'type' => 'radio:yes_no', 'explain' => true),
 						'google_load_phpbb_css' => array('lang' => 'GOOGLE_LOAD_PHPBB_CSS', 'validate' => 'bool', 'type' => 'radio:yes_no', 'explain' => true),
-						'legend4' => 'GOOGLE_PRIORITIES',
+						'legend4' => 'GOOGLE_THRESHOLD',
+						'google_threshold' => array('lang' => 'GOOGLE_THRESHOLD', 'validate' => 'int:1:100', 'type' => 'text:4:4', 'explain' => true),
+						'legend5' => 'GOOGLE_PRIORITIES',
 						'google_default_priority' => array('lang' => 'GOOGLE_DEFAULT_PRIORITY', 'type' => 'custom', 'validate' => 'string', 'method' => 'validate_num', 'params' => array('{CONFIG_VALUE}', '{KEY}', 2, 0, 1),  'explain' => true,),
 					)
 				),
@@ -190,6 +192,7 @@ class google_main {
 					'google_ping' => 0,
 					'google_xslt'	=> 1,
 					'google_load_phpbb_css'	=> 0,
+					'google_threshold' => 10,
 					'google_default_priority' => 1.0,
 				),
 			),

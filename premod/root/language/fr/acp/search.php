@@ -5,7 +5,7 @@
 * translated originally by PhpBB-fr.com <http://www.phpbb-fr.com/> and phpBB.biz <http://www.phpBB.biz>
 *
 * @package language
-* @version $Id: search.php,v 1.22 2008/07/04 12:34:01 elglobo Exp $
+* @version $Id: search.php,v 1.23 2008/12/14 10:46:00 elglobo Exp $
 * @copyright (c) 2005 phpBB Group 
 * @license http://opensource.org/licenses/gpl-license.php GNU Public License 
 *
@@ -41,7 +41,7 @@ $lang = array_merge($lang, array(
 	'ACP_SEARCH_SETTINGS_EXPLAIN'			=> 'Vous pouvez définir quelle méthode d’indexation de recherche sera utilisée pour l’indexation des messages et l’exécution des recherches. Vous pouvez définir différentes options qui peuvent influencer sur la puissance de calcul requise. Certains de ces paramètres sont les mêmes pour toutes les méthodes d’indexation du moteur de recherche.',
 	
 	'COMMON_WORD_THRESHOLD'					=> 'Seuil de mot commun',
-	'COMMON_WORD_THRESHOLD_EXPLAIN'			=> 'Si un mot est contenu dans un nombre de messages supérieur au pourcentage indiqué, ce mot sera défini comme commun. Ces mots seront par la suite ignorés lors des recherches. Mettre “0” pour désactiver cette option. Cette option ne fonctionne que s’il y a plus de 100 messages sur votre forum.',
+	'COMMON_WORD_THRESHOLD_EXPLAIN'			=> 'Si un mot est contenu dans un nombre de messages supérieur au pourcentage indiqué, ce mot sera défini comme commun. Ces mots seront par la suite ignorés lors des recherches. Mettre “0” pour désactiver cette option. Cette option ne fonctionne que s’il y a plus de 100 messages sur votre forum. Si vous voulez que les mots actuellement considérés comme communs soient reconsidérés, vous devez recréer l’index.',
 	'CONFIRM_SEARCH_BACKEND'				=> 'Voulez-vous réellement changer la méthode d’indexation? Vous devrez recréer un index de recherche pour la nouvelle méthode. Si vous ne prévoyez pas de réutiliser l’ancienne méthode d’indexation vous pouvez la supprimer pour libérer des ressources système.',
 	'CONTINUE_DELETING_INDEX'				=> 'Continuer le précédent processus de suppression de l’index',
 	'CONTINUE_DELETING_INDEX_EXPLAIN'		=> 'Une suppression d’index de recherche a été commencée. Celle-ci doit être terminée ou annulée pour pouvoir accéder à la page de recherche.',

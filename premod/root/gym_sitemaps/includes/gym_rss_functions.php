@@ -2,7 +2,7 @@
 /**
 *
 * @package phpBB SEO GYM Sitemaps
-* @version $id: gym_rss_functions.php - 16350 11-20-2008 11:43:24 - 2.0.RC1 dcz $
+* @version $id: gym_rss_functions.php - 19407 12-18-2008 15:09:34 - 2.0.RC3 dcz $
 * @copyright (c) 2006 - 2008 www.phpbb-seo.com
 * @license http://opensource.org/osi3.0/licenses/lgpl-license.php GNU Lesser General Public License
 *
@@ -22,23 +22,28 @@ function get_gym_links($gym_config) {
 	$_phpbb_seo = !empty($phpbb_seo);
 	$board_url = $_phpbb_seo ? $phpbb_seo->seo_path['phpbb_url'] : generate_board_url() . '/';
 	$gym_link_tpl = '<a href="%1$s" title="%3$s"><img src="' . $board_url . 'gym_sitemaps/images/%2$s" alt="%3$s"/>&nbsp;%3$s</a>';
+	$google_threshold = max(1, (int) $gym_config['google_threshold']);
 	//compute guest auth
-	$cache_file = '_gym_auth_forum_skip';
-	if (($skip = $cache->get($cache_file)) === false) {
-		$skip = array('pass' => array(), 'cat' => array(), 'all' => array(), 'link' => array(), 'guest' => array());
+	$cache_file = '_gym_auth_guests_forum';
+	if (($auth_guest_list = $cache->get($cache_file)) === false) {
+		$auth_guest_list = array('list' => array(), 'read' => array(), 'list_post' => array(), 'read_post' => array(), 'skip_pass' => array(), 'skip_cat' => array(), 'skip_all' => array(), 'skip_link' => array(), 'thresholded' => array(), 'empty' => array());
 		$guest_data = array('user_id' => ANONYMOUS,
 			'user_type' => USER_IGNORE,
 			'user_permissions' . (defined('XLANG_AKEY') ? XLANG_AKEY : '') => '',
 		);
-		global $auth;
 		$g_auth = new auth();
 		$g_auth->acl($guest_data);
-		// the unwanted forum id array
-		$forum_read_ary = $g_auth->acl_getf('!f_list', true);
-		foreach ($forum_read_ary as $forum_id => $null) {
-			$skip['guest'][$forum_id] = (int) $forum_id;
+		// the forum id array
+		$forum_list_ary = $g_auth->acl_getf('f_list', true);
+		foreach ($forum_list_ary as $forum_id => $null) {
+			$auth_guest_list['list'][$forum_id] = (int) $forum_id;
 		}
-		ksort($skip['guest']);
+		$forum_read_ary = $g_auth->acl_getf('f_read', true);
+		foreach ($forum_read_ary as $forum_id => $null) {
+			$auth_guest_list['read'][$forum_id] = (int) $forum_id;
+		}
+		ksort($auth_guest_list['list']);
+		ksort($auth_guest_list['read']);
 		$sql = "SELECT forum_id, forum_type, forum_password
 			FROM " . FORUMS_TABLE . "
 			WHERE	forum_type <> " . FORUM_POST . " OR forum_password <> ''";
@@ -46,63 +51,88 @@ function get_gym_links($gym_config) {
 		while ( $row = $db->sql_fetchrow($result) ) {
 			$forum_id = (int) $row['forum_id'];
 			if ($row['forum_password']) {
-				$skip['pass'][$forum_id] = $forum_id;
+				$auth_guest_list['skip_pass'][$forum_id] = $forum_id;
 			}
 			if ($row['forum_type'] == FORUM_CAT) {
-				$skip['cat'][$forum_id] = $forum_id;
+				$auth_guest_list['skip_cat'][$forum_id] = $forum_id;
 			} else if ($row['forum_type'] == FORUM_LINK) {
-				$skip['link'][$forum_id] = $forum_id;
+				$auth_guest_list['skip_link'][$forum_id] = $forum_id;
 			}
-			$skip['all'][$forum_id] = $forum_id;
+			$auth_guest_list['skip_all'][$forum_id] = $forum_id;
 		}
 		$db->sql_freeresult($result);
-		ksort($skip['pass']);
-		ksort($skip['all']);
-		ksort($skip['link']);
-		ksort($skip['cat']);
-		$cache->put($cache_file, $skip);
+		// Now let's grabb the list of forum with not enough topics to have a sitemap
+		// Only care about postable forum ;-)
+		$sql = "SELECT forum_id, forum_topics
+			FROM " . FORUMS_TABLE . "
+			WHERE	forum_type = " . FORUM_POST . "
+				AND forum_topics < $google_threshold";
+		$result = $db->sql_query($sql);
+		while ( $row = $db->sql_fetchrow($result) ) {
+			$forum_id = (int) $row['forum_id'];
+			$auth_guest_list['thresholded'][$forum_id] = $forum_id;
+			if (empty($row['forum_topics'])) {
+				$auth_guest_list['empty'][$forum_id] = $forum_id;
+			}
+		}
+		ksort($auth_guest_list['skip_pass']);
+		ksort($auth_guest_list['skip_all']);
+		ksort($auth_guest_list['skip_link']);
+		ksort($auth_guest_list['skip_cat']);
+		// Never mind about fourm links
+		$auth_guest_list['read'] = array_diff_assoc($auth_guest_list['read'], $auth_guest_list['skip_link']);
+		$auth_guest_list['list'] = array_diff_assoc($auth_guest_list['list'], $auth_guest_list['skip_link']);
+		ksort($auth_guest_list['read']);
+		ksort($auth_guest_list['list']);
+		$auth_guest_list['list_post'] = array_diff_assoc($auth_guest_list['list'], $auth_guest_list['skip_all']);
+		$auth_guest_list['read_post'] = array_diff_assoc($auth_guest_list['read'], $auth_guest_list['skip_all']);
+		$cache->put($cache_file, $auth_guest_list);
 	}
 	// Google sitemaps
 	$override_google_mod_rewrite = get_override('google', 'modrewrite', $gym_config);
-	$google_mod_rewrite = (boolean) get_gym_option('google', '', 'modrewrite', $override_google_mod_rewrite, $gym_config);
+	$google_mod_rewrite = (boolean) get_gym_option('google', 'forum', 'modrewrite', $override_google_mod_rewrite, $gym_config);
 	$override_google_gzip = get_override('google', 'gzip', $gym_config);
-	$google_gzip = (boolean) get_gym_option('google', '', 'gzip', $override_google_gzip, $gym_config);
-	$google_gzip_ext = ($google_gzip || $config['gzip_compress']) ? (get_gym_option('google', '', 'gzip_ext', $override_google_gzip, $gym_config) ? '.gz' : '') : '';
+	$google_gzip = (boolean) get_gym_option('google', 'forum', 'gzip', $override_google_gzip, $gym_config);
+	$google_gzip_ext = ($google_gzip || $config['gzip_compress']) ? (get_gym_option('google', 'forum', 'gzip_ext', $override_google_gzip, $gym_config) ? '.gz' : '') : '';
 	$sitemap_url = $gym_config['google_url'] . ($google_mod_rewrite ? 'sitemapindex.xml' . $google_gzip_ext : "sitemap.$phpEx");
-	$google_forum_exclude = set_exclude_list(@$gym_config['google_forum_exclude']) + $skip['all'] + $skip['guest'];
-
+	// only publicly readable and not thresholded forums can be listed
+	$google_auth_guest = array_diff_assoc($auth_guest_list['read_post'], set_exclude_list($gym_config['google_forum_exclude']), $auth_guest_list['thresholded']);
+	$google_forum_exclude = set_exclude_list($gym_config['google_forum_exclude']) + $auth_guest_list['skip_all'];
 	// RSS
 	$override_rss_mod_rewrite = get_override('rss', 'modrewrite', $gym_config);
-	$rss_mod_rewrite = (boolean) get_gym_option('rss', '', 'modrewrite', $override_rss_mod_rewrite, $gym_config);
+	$rss_mod_rewrite = (boolean) get_gym_option('rss', 'forum', 'modrewrite', $override_rss_mod_rewrite, $gym_config);
 	$override_rss_gzip = get_override('rss', 'gzip', $gym_config);
-	$rss_gzip = (boolean) get_gym_option('rss', '', 'gzip', $override_rss_gzip, $gym_config);
-	$rss_gzip_ext = ($rss_gzip || $config['gzip_compress']) ? (get_gym_option('rss', '', 'gzip_ext', $override_rss_gzip, $gym_config) ? '.gz' : '') : '';
+	$rss_gzip = (boolean) get_gym_option('rss', 'forum', 'gzip', $override_rss_gzip, $gym_config);
+	$rss_gzip_ext = ($rss_gzip || $config['gzip_compress']) ? (get_gym_option('rss', 'forum', 'gzip_ext', $override_rss_gzip, $gym_config) ? '.gz' : '') : '';
 	$rss_main_url = $gym_config['rss_url'] . ($rss_mod_rewrite ? 'rss/rss.xml' . $rss_gzip_ext : "gymrss.$phpEx");
 	$rss_chan_url = $gym_config['rss_url'] . ($rss_mod_rewrite ? 'rss/' : "gymrss.$phpEx?channels");
 	$rss_forum_allow_auth = (boolean) get_gym_option('rss', 'forum', 'allow_auth', $gym_config['rss_override'], $gym_config);
-	$rss_forum_exclude = set_exclude_list(@$gym_config['rss_forum_exclude']) + $skip['all'];
-	if (!$rss_forum_allow_auth) {
-		$rss_forum_exclude += $skip['guest'];
-	}
+	// only readable forums can be listed
+	$rss_auth_guest = array_diff_assoc($auth_guest_list['read_post'], set_exclude_list($gym_config['rss_forum_exclude']), $auth_guest_list['empty']);
+	$rss_forum_exclude = set_exclude_list($gym_config['rss_forum_exclude']) + $auth_guest_list['skip_all'] + $auth_guest_list['empty'];
 	// HTML
 	$override_html_mod_rewrite = get_override('html', 'modrewrite', $gym_config);
-	$html_mod_rewrite = (boolean) get_gym_option('html', '', 'modrewrite', $override_html_mod_rewrite, $gym_config);
+	$html_mod_rewrite = (boolean) get_gym_option('html', 'forum', 'modrewrite', $override_html_mod_rewrite, $gym_config);
 	$html_allow_map = (boolean) $gym_config['html_allow_map'];
-	$html_forum_allow_map = (boolean) get_gym_option('html', 'forum', 'allow_map', $gym_config['html_override'], $gym_config);
+	$html_forum_allow_map = (boolean) (!empty($gym_config['html_forum_installed']) && get_gym_option('html', 'forum', 'allow_map', $gym_config['html_override'], $gym_config));
 	$html_allow_cat_map = (boolean) $gym_config['html_allow_cat_map'];
-	$html_forum_allow_cat_map = (boolean) get_gym_option('html', 'forum', 'allow_cat_map', $gym_config['html_override'], $gym_config);
+	$html_forum_allow_cat_map = (boolean) (!empty($gym_config['html_forum_installed']) && get_gym_option('html', 'forum', 'allow_cat_map', $gym_config['html_override'], $gym_config));
 	$html_allow_news = (boolean) $gym_config['html_allow_news'];
-	$html_forum_allow_news = (boolean) get_gym_option('html', 'forum', 'allow_news', $gym_config['html_override'], $gym_config);
+	$html_allow_news = (boolean) $gym_config['html_allow_news'];
+	$html_forum_allow_news = (boolean) (!empty($gym_config['html_forum_installed']) && get_gym_option('html', 'forum', 'allow_news', $gym_config['html_override'], $gym_config));
 	$html_allow_cat_news = (boolean) $gym_config['html_allow_cat_news'];
-	$html_forum_allow_cat_news = (boolean) get_gym_option('html', 'forum', 'allow_cat_news', $gym_config['html_override'], $gym_config);
+	$html_forum_allow_cat_news = (boolean) (!empty($gym_config['html_forum_installed']) && get_gym_option('html', 'forum', 'allow_cat_news', $gym_config['html_override'], $gym_config));
 	$html_map_url = $gym_config['html_allow_map'] ? $gym_config['html_url'] . ($html_mod_rewrite ? 'maps/' : "map.$phpEx") : '';
 	$html_news_url = $gym_config['html_allow_news'] ? $gym_config['html_url'] . ($html_mod_rewrite ? 'news/' : "map.$phpEx?news") : '';
 	$html_forum_allow_auth = (boolean) get_gym_option('html', 'forum', 'allow_auth', $gym_config['html_override'], $gym_config);
-	$html_forum_exclude = set_exclude_list(@$gym_config['html_forum_exclude']);
-	if (!$html_forum_allow_auth) {
-		$html_forum_exclude += $skip['guest'];
-	}
+	$html_auth_guest = array_diff_assoc($auth_guest_list['list'], set_exclude_list($gym_config['html_forum_exclude']), $auth_guest_list['empty']);
+	$html_forum_exclude = set_exclude_list($gym_config['html_forum_exclude']) + $auth_guest_list['skip_link'] + $auth_guest_list['empty'];
 	$links = array();
+	$links['setup']['main'] = array(
+		'link_main' => (int) $gym_config['gym_link_main'],
+		'link_index' => (int) $gym_config['gym_link_index'],
+		'link_cat' => (int) $gym_config['gym_link_cat'],
+	);
 	$links['setup']['google'] = array(
 		'override_mod_rewrite' => $override_google_mod_rewrite,
 		'mod_rewrite' => $google_mod_rewrite,
@@ -111,8 +141,10 @@ function get_gym_links($gym_config) {
 		'gzip_ext' => $google_gzip_ext,
 		'google_url' => $gym_config['google_url'],
 		'forum_google' => !empty($gym_config['google_forum_installed']),
-		'forum_cat_google' => $gym_config['google_url'] . ($html_mod_rewrite && $_phpbb_seo ? "%1\$s.xml$google_gzip_ext" : "sitemap.$phpEx?forum=%2\$s"),
+		'forum_cat_google' => $gym_config['google_url'] . ($google_mod_rewrite && $_phpbb_seo ? "%1\$s.xml$google_gzip_ext" : "sitemap.$phpEx?forum=%2\$s"),
+		'auth_guest' => $google_auth_guest,
 		'forum_exclude' => $google_forum_exclude,
+		'threshold' => max(1, (int) $gym_config['google_threshold']),
 		'l_google_sitemap' => $user->lang['GOOGLE_SITEMAP'],
 		'l_google_sitemap_of' => $user->lang['GOOGLE_MAP_OF'],
 	);
@@ -125,7 +157,9 @@ function get_gym_links($gym_config) {
 		'rss_url' => $gym_config['rss_url'],
 		'forum_rss' => !empty($gym_config['rss_forum_installed']),
 		'forum_cat_rss' => $gym_config['rss_url'] . ($rss_mod_rewrite && $_phpbb_seo ? "%1\$s/forum.xml$rss_gzip_ext" : "gymrss.$phpEx?forum=%2\$s"),
+		'auth_guest' => $rss_auth_guest,
 		'forum_exclude' => $rss_forum_exclude,
+		'forum_allow_auth' => $rss_forum_allow_auth,
 		'l_rss_feed' => $user->lang['RSS_FEED'],
 		'l_rss_feed_of' => $user->lang['RSS_FEED_OF'],
 	);
@@ -145,16 +179,20 @@ function get_gym_links($gym_config) {
 		'allow_cat_news' => $html_allow_cat_news,
 		'forum_allow_cat_news' => $html_forum_allow_cat_news,
 		'forum_cat_news' => $gym_config['html_url'] . ($html_mod_rewrite && $_phpbb_seo ? 'news/forum/%1$s/' : "map.$phpEx?forum=%2\$s&amp;news"),
+		'auth_guest' => $html_auth_guest,
 		'forum_exclude' => $html_forum_exclude,
+		'forum_allow_auth' => $html_forum_allow_auth,
 		'l_html_news' => $user->lang['HTML_NEWS'],
 		'l_html_map' => $user->lang['HTML_MAP'],
 		'l_html_news_of' => $user->lang['HTML_NEWS_OF'],
 		'l_html_map_of' => $user->lang['HTML_MAP_OF'],
 	);
-	$links['main'] = array( 'GYM_LINKS' => true,
+	$links['main'] = array( 'GYM_LINKS' => (int) $gym_config['gym_link_main'],
+		'GYM_LINKS_CAT' => (int) $gym_config['gym_link_cat'],
 		'GYM_GOOGLE_TITLE' => $user->lang['GOOGLE_SITEMAPINDEX'], 
 		'GYM_GOOGLE_URL' => $sitemap_url, 
 		'GYM_GOOGLE_LINK' => sprintf($gym_link_tpl, $sitemap_url, 'sitemap-icon.gif', $user->lang['GOOGLE_SITEMAPINDEX']),
+		'GYM_GOOGLE_THRESOLD' => $links['setup']['google']['threshold'],
 		'GYM_RSS_TITLE' => $user->lang['RSS_FEED'], 
 		'GYM_RSS_URL' => $rss_main_url, 
 		'GYM_RSS_LINK' => sprintf($gym_link_tpl, $rss_main_url, 'feed-icon.png', $user->lang['RSS_FEED']),

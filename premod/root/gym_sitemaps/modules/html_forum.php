@@ -2,7 +2,7 @@
 /**
 *
 * @package phpBB SEO GYM Sitemaps
-* @version $id: html_forum.php - 34144 11-21-2008 09:24:03 - 2.0.RC1 dcz $
+* @version $id: html_forum.php - 34379 11-26-2008 11:16:36 - 2.0.RC2 dcz $
 * @copyright (c) 2006 - 2008 www.phpbb-seo.com
 * @license http://opensource.org/osi3.0/licenses/lgpl-license.php GNU Lesser General Public License
 *
@@ -30,18 +30,21 @@ class html_forum {
 	var $icons = array();
 	var $html_switch = array();
 	var $start = 0;
+	var $module_auth = array();
+	var $actions = array();
 	/**
 	* constuctor
 	*/
 	function html_forum(&$gym_master) {
 		global $phpbb_seo;
 		$this->gym_master = &$gym_master;
-		$this->options = &$this->gym_master->actions;
+		$this->actions = &$this->gym_master->actions;
 		$this->outputs = &$this->gym_master->output_data;
 		$this->module_config = &$this->gym_master->html_config;
 		$this->url_settings = &$this->gym_master->url_config;
 		$this->start = &$this->gym_master->start;
 		$this->html_switch = &$this->gym_master->html_switch;
+		$this->module_auth = &$this->gym_master->module_auth;
 		$this->module_config['html_last_topics_exclude_list'] = '';
 		$this->module_config = array_merge(
 			// Global
@@ -67,7 +70,11 @@ class html_forum {
 		// Build unauthed arrays
 		$this->module_config['exclude_list'] = $this->gym_master->set_exclude_list($this->module_config['html_exclude_list']);
 		// Wee need to check auth here
-		$this->module_config['global_exclude_list'] = $this->gym_master->check_forum_auth(array(), $this->module_config['html_auth_guest']);
+		$this->gym_master->check_forum_auth($this->module_config['html_auth_guest']);
+		$this->actions['auth_guest_list'] = array_diff_assoc($this->module_auth['forum']['public_list'], $this->module_config['exclude_list']);
+		$this->actions['auth_guest_read'] = array_diff_assoc($this->module_auth['forum']['public_read'], $this->module_config['exclude_list']);
+		$this->actions['auth_view_list'] = array_diff_assoc($this->module_auth['forum']['list'], $this->module_config['exclude_list']);
+		$this->actions['auth_view_read'] = array_diff_assoc($this->module_auth['forum']['read'], $this->module_config['exclude_list']);
 		// Mod rewrite type auto detection
 		$this->url_settings['modrtype'] = ($phpbb_seo->modrtype >= 0) ? intval($phpbb_seo->modrtype) : intval($this->gym_master->gym_config['rss_modrtype']);
 		// make sure virtual_folder uses the proper value
@@ -113,11 +120,11 @@ class html_forum {
 		$nav_url = $nav_title = false;
 		$this->url_settings['current'] = $this->module_config['html_url'];
 
-		$this->outputs['right_col_cache_file'] = $this->options['html_news_list'] ? 'forum_ltopics_news' : 'forum_ltopics_map';
+		$this->outputs['right_col_cache_file'] = $this->actions['html_news_list'] ? 'forum_ltopics_news' : 'forum_ltopics_map';
 		// will pass variables to the render class
 		$this->call = array(
-			'forum_ids' => 0,
-			'topic_ids' => 0,
+			'forum_id' => 0,
+			'topic_id' => 0,
 			'limit' => 0,
 			'limit_time' => 0,
 			'sort' => 'DESC',
@@ -149,35 +156,37 @@ class html_forum {
 			'display_last_topic' => 0,
 			'last_topic_pagination' => $this->module_config['html_forum_ltopic_pagination'],
 		);
-		$this->module_config['exclude_list'] = $this->module_config['exclude_list'] + $this->module_config['global_exclude_list'];
+		//$this->module_config['exclude_list'] = $this->module_config['exclude_list'] + $this->module_config['global_exclude_list'];
 		$pre_set = false;
 		$type_key = $_key = '';
-		switch ($this->options['module_sub']) {
+		switch ($this->actions['module_sub']) {
 		case 'global':
-			$this->call['s_global'] = true;
+			$this->call['s_global'] = $this->actions['is_public'] = true;
 			$this->call['forum_sql'] = "t.forum_id = 0 AND t.topic_type = " . POST_GLOBAL;
 			$type_key = 'forum_global';
 			$pre_set = true;
 		case 'announce':
 			if (!$pre_set) {
-				$this->call['forum_sql'] = sizeof($this->module_config['exclude_list']) > 1 ? $db->sql_in_set('t.forum_id', $this->module_config['exclude_list'], true) : ' t.forum_id <> ' . (int) current($this->module_config['exclude_list']);
+				$this->actions['is_public'] = $this->gym_master->gym_auth['reg'];
+				$this->call['forum_sql'] = $db->sql_in_set('t.forum_id', $this->module_auth['forum']['read_post'], false, true);
 				$this->call['forum_sql'] .= " AND t.topic_type = " . POST_ANNOUNCE;
 				$type_key = 'forum_announce';
 				$pre_set = true;
 			}
 		case 'sticky':
 			if (!$pre_set) {
-				$this->call['forum_sql'] = sizeof($this->module_config['exclude_list']) > 1 ? $db->sql_in_set('t.forum_id', $this->module_config['exclude_list'], true) : ' t.forum_id <> ' . (int) current($this->module_config['exclude_list']);
+				$this->actions['is_public'] = $this->gym_master->gym_auth['reg'];
+				$this->call['forum_sql'] = $db->sql_in_set('t.forum_id', $this->module_auth['forum']['read_post'], false, true);
 				$this->call['forum_sql'] .= " AND t.topic_type = " . POST_STICKY;
 				$type_key = 'forum_sticky';
 				$pre_set = true;
 			}
 			if ($this->module_config['html_allow_news'] || $this->module_config['html_allow_map']) {
-				if ($this->options['html_news_list'] && $this->module_config['html_allow_news']) {
+				if ($this->actions['html_news_list'] && $this->module_config['html_allow_news']) {
 					$_key = 'news';
 					$this->outputs['left_col_tpl'] = 'gym_sitemaps/display_posts_list.html';
 					$this->outputs['right_col'] = $this->call['display_last_topic'] = $this->module_config['html_forum_news_ltopic'];
-					$this->options['pagination_limit'] = $this->call['limit'] = $this->module_config['html_news_pagination_limit'];
+					$this->actions['pagination_limit'] = $this->call['limit'] = $this->module_config['html_news_pagination_limit'];
 					$this->call['method'] = 'display_posts';
 					$this->call['display_pagination'] = $this->module_config['html_news_pagination'];
 					$this->call['limit_time'] = $this->module_config['html_news_time_limit'];
@@ -185,11 +194,11 @@ class html_forum {
 					$this->call['display_pagination'] = $this->module_config['html_news_pagination'];
 					$this->call['display_order'] = $this->module_config['html_forum_news_first'];
 					$this->call['file'] = 'display_posts.' . $phpEx;
-				} else if ($this->options['html_map_list'] && $this->module_config['html_allow_map']) {
+				} else if ($this->actions['html_map_list'] && $this->module_config['html_allow_map']) {
 					$_key = 'map';
 					$this->outputs['left_col_tpl'] = 'gym_sitemaps/display_topics_list.html';
 					$this->outputs['right_col'] = $this->call['display_last_topic'] = $this->module_config['html_forum_ltopic'];
-					$this->options['pagination_limit'] = $this->call['limit'] = $this->module_config['html_pagination_limit'];
+					$this->actions['pagination_limit'] = $this->call['limit'] = $this->module_config['html_pagination_limit'];
 					$this->call['method'] = 'display_topics';
 					$this->call['display_pagination'] = $this->module_config['html_pagination'];
 					$this->call['limit_time'] = $this->module_config['html_map_time_limit'];
@@ -199,7 +208,7 @@ class html_forum {
 					$this->call['file'] = 'display_topics.' . $phpEx;
 				}
 				if (!empty($_key)) {
-					$this->options['is_auth'] = $this->options['is_active'] = true;
+					$this->actions['is_auth'] = $this->actions['is_active'] = true;
 					$this->outputs['page_title'] = $user->lang['HTML_' . strtoupper($type_key) . '_' . strtoupper($_key)];
 					$this->outputs['left_col_cache_file'] = $type_key . '_' . $_key;
 					$this->url_settings['current'] .= $this->gym_master->html_build_url('html_' . $type_key . '_' . $_key);
@@ -211,22 +220,22 @@ class html_forum {
 			$this->url_settings['current'] .= $this->gym_master->html_add_start($this->start);
 			break;
 		case 'news':
-			if ($this->options['html_news_list']) {
+			if ($this->actions['html_news_list']) {
 				$this->outputs['left_col_tpl'] = 'gym_sitemaps/display_posts_list.html';
 				$this->outputs['left_col_cache_file'] = "forum_news";
 				$this->outputs['page_title'] = sprintf($user->lang['HTML_NEWS_OF'], $this->module_config['html_sitename']);
 				// Auth and active switches
-				$this->options['is_auth'] = $this->options['is_active'] = $this->options['is_public'] = true;
+				$this->actions['is_auth'] = $this->actions['is_active'] = $this->actions['is_public'] = true;
 				$this->outputs['right_col'] = $this->call['display_last_topic'] = $this->module_config['html_forum_news_ltopic'];
-				$this->options['pagination_limit'] = $this->call['limit'] = $this->module_config['html_news_pagination_limit'];
+				$this->actions['pagination_limit'] = $this->call['limit'] = $this->module_config['html_news_pagination_limit'];
 				$this->module_config['html_forum_news_ids'] = $this->gym_master->set_exclude_list($this->module_config['html_forum_news_ids']);
 				if (empty($this->module_config['html_forum_news_ids'])) {
+					$this->actions['auth_view_read'] = array_diff_assoc($this->module_auth['forum']['read_post'], $this->module_config['exclude_list']);
 					// Output news from all authed forums
-					$this->call['forum_sql'] = sizeof($this->module_config['exclude_list']) > 1 ? $db->sql_in_set('t.forum_id', $this->module_config['exclude_list'], true) : ' t.forum_id <> ' . (int) current($this->module_config['exclude_list']);
+					$this->call['forum_sql'] = $db->sql_in_set('t.forum_id', $this->actions['auth_view_read'], false, true);
 				} else {
 					// No exclude list here !
-					$this->module_config['exclude_list'] = array();
-					$this->call['forum_sql'] = sizeof($this->module_config['html_forum_news_ids']) > 1 ? $db->sql_in_set('t.forum_id', $this->module_config['html_forum_news_ids'], false) : ' t.forum_id = ' . (int) current($this->module_config['html_forum_news_ids']);
+					$this->call['forum_sql'] = $db->sql_in_set('t.forum_id', $this->module_config['html_forum_news_ids'], false, true);
 				}
 				$this->call['method'] = 'display_posts';
 				$this->call['display_pagination'] = $this->module_config['html_news_pagination'];
@@ -243,35 +252,40 @@ class html_forum {
 			}
 			break;
 		default:
-			// Here we need to be able to list categories as well as forums
-			$this->module_config['exclude_list'] = $this->gym_master->set_exclude_list($this->module_config['html_exclude_list']) + $this->options['auth_view_list'] + $this->options['auth_guest_full']['skip']['link'];
-			if ($this->options['html_map_list'] && (empty($this->options['module_sub']) || $this->options['module_sub'] == 'map')) {
-				// Then we list all forums
+			if ($this->actions['html_map_list'] && (empty($this->actions['module_sub']) || $this->actions['module_sub'] == 'map')) {
 				// Expected URL
 				$this->url_settings['current'] .= $this->url_settings['html_forum_map'];
 				$this->call['display_file'] = $this->url_settings['current'];
 				$this->outputs['left_col_tpl'] = 'gym_sitemaps/display_forums_list.html';
 				$this->outputs['left_col_cache_file'] = "forum_map";
-				$this->options['is_public'] = $this->gym_master->gym_auth['reg'];
-				$this->options['is_auth'] = true;
-				$this->options['is_active'] = (boolean) ($this->module_config['html_allow_cat_news'] || $this->module_config['html_allow_cat_map'] );
+				$this->actions['is_public'] = $this->gym_master->gym_auth['reg'];
+				$this->actions['is_auth'] = true;
+				$this->actions['is_active'] = (boolean) ($this->module_config['html_allow_cat_news'] || $this->module_config['html_allow_cat_map'] );
 				$this->outputs['right_col'] = $this->call['display_last_topic'] = $this->module_config['html_forum_ltopic'];
 				$this->outputs['page_title'] = sprintf($user->lang['HTML_MAP_OF'], $this->module_config['html_sitename']);
 				$this->call['file'] = 'display_forums.' . $phpEx;
 				$this->call['method'] = 'display_forums';
-				$this->call['forum_sql'] = sizeof($this->module_config['exclude_list']) > 1 ? $db->sql_in_set('f.forum_id', $this->module_config['exclude_list'], true) : ' f.forum_id <> ' . (int) current($this->module_config['exclude_list']);
-			} else if ($this->options['html_news_list'] || $this->options['html_map_list']) {
-				// Filter $this->options['module_sub'] var type
-				$this->options['module_sub'] = (int) $this->options['module_sub'];
-				if ($this->options['module_sub'] > 0) { // Forum map or news
-					$forum_id = $this->call['forum_ids'] = $this->options['module_sub'];
-					$this->options['is_auth'] = (boolean) !isset($this->module_config['exclude_list'][$forum_id]);
-					$this->options['is_public'] = (boolean) !isset($this->options['auth_view_list'][$forum_id]);
+				// Here we need to be able to list categories as well as forums
+				// List all listable forums expect excluded
+				// $this->call['forum_sql'] = $db->sql_in_set('f.forum_id', $this->actions['auth_view_list'], false, true);
+				// List all, filter later !
+				$this->call['forum_sql'] = '';
+			} else if ($this->actions['html_news_list'] || $this->actions['html_map_list']) {
+				// Filter $this->actions['module_sub'] var type
+				$this->actions['module_sub'] = (int) $this->actions['module_sub'];
+				if ($this->actions['module_sub'] > 0) { // Forum map or news
+					$forum_id = $this->call['forum_id'] = $this->actions['module_sub'];
+
+					// Here we need to be able to list categories as well as forums
+					// A forum news or map is viewable when is a readable postable forum or a listable forum cat 
+					// (with authed children see below)
+					$this->actions['is_auth'] = (boolean) ( isset($this->actions['auth_view_read'][$forum_id]) || (isset($this->module_auth['forum']['skip_cat'][$forum_id]) && isset($this->actions['auth_view_list'][$forum_id])) );
+					$this->actions['is_public'] = (boolean) isset($this->actions['auth_guest_list'][$forum_id]);
 					$this->call['single_forum'] = true;
-					if ($this->options['html_news_list'] ) {
-						$this->options['is_active'] = true;
+					if ($this->actions['html_news_list'] ) {
+						$this->actions['is_active'] = true;
 						$key = 'news';
-						$this->options['pagination_limit'] = $this->call['limit'] = $this->module_config['html_news_pagination_limit'];
+						$this->actions['pagination_limit'] = $this->call['limit'] = $this->module_config['html_news_pagination_limit'];
 						$this->outputs['right_col'] = $this->call['display_last_topic'] = $this->module_config['html_forum_cat_news_ltopic'];
 						$this->outputs['left_col_tpl'] = 'gym_sitemaps/display_posts_list.html';
 						$this->call['file'] = 'display_posts.' . $phpEx;
@@ -280,10 +294,10 @@ class html_forum {
 						$this->call['display_order'] = $this->module_config['html_forum_news_first'];
 						$this->call['sort'] = $this->module_config['html_cat_news_sort'];
 						$this->call['method'] = 'display_posts';
-					} else if ($this->options['html_map_list']) {
-						$this->options['is_active'] = true;
+					} else if ($this->actions['html_map_list']) {
+						$this->actions['is_active'] = true;
 						$key = 'map';
-						$this->options['pagination_limit'] = $this->call['limit'] = $this->module_config['html_pagination_limit'];
+						$this->actions['pagination_limit'] = $this->call['limit'] = $this->module_config['html_pagination_limit'];
 						$this->outputs['right_col'] = $this->call['display_last_topic'] = $this->module_config['html_forum_cat_ltopic'];
 						$this->outputs['left_col_tpl'] = 'gym_sitemaps/display_topics_list.html';
 						$this->call['file'] = 'display_topics.' . $phpEx;
@@ -295,7 +309,7 @@ class html_forum {
 					}
 					// Upon single forum calls, grabb forum data separatelly to allow access to forum data when there is no topic to list
 					// As well prevent topic row from listing repeated forum data
-					if ($this->options['is_active'] && empty($this->forum_datas[$forum_id])) {
+					if ($this->actions['is_active']) {
 						$sql = "SELECT * 
 							FROM " . FORUMS_TABLE . "
 							WHERE forum_id = $forum_id";
@@ -312,17 +326,20 @@ class html_forum {
 								login_forum_box($row);
 							}
 						} else { // Forum does not exist
-							$this->options['is_active'] = false;
+							$this->actions['is_active'] = false;
 						}
 					}
-					if ($this->options['is_active']) {
+					if ($this->actions['is_active']) {
 						$this->call['forum_sql'] = "t.forum_id = $forum_id";
 						if ($this->forum_datas[$forum_id]['forum_type'] == FORUM_CAT) {
 							$this->call['cat_forum'] = $forum_id;
 							// lets check childrens
 							if ($f_ids = $this->gym_master->get_forum_children($forum_id)) {
-								$this->call['forum_sql'] = sizeof($f_ids) > 1 ? $db->sql_in_set('t.forum_id', array_keys($f_ids), false) : ' t.forum_id = ' . (int) current(array_keys($f_ids));
-								$this->call['single_forum'] = false;	
+								$this->call['forum_sql'] = $db->sql_in_set('t.forum_id', array_keys($f_ids), false, true);
+								$this->call['single_forum'] = false;
+							} else {
+								// Cat with no readable sub forums
+								$this->actions['is_active'] = false;
 							}
 						}
 						$this->start = $this->call['display_pagination'] ? $this->gym_master->chk_start($this->start, $this->call['limit']) : 0;
@@ -336,7 +353,7 @@ class html_forum {
 						}
 						$this->outputs['left_col_cache_file'] = "forum_$forum_id$key";
 						// Enable forum tracking
-						$_REQUEST['f'] = $this->call['forum_ids'];
+						$_REQUEST['f'] = $this->call['forum_id'];
 						// Track user viewing this forum
 						$this->outputs['single_traking'] = true;
 					}
@@ -425,8 +442,7 @@ class html_forum {
 		$this->outputs['right_col_tpl'] = 'gym_sitemaps/last_topics_list.html';
 		// Wee need to check auth here
 		$this->module_config['last_topics_exclude_list'] = $this->gym_master->set_exclude_list($this->module_config['html_ltopic_exclude']);
-		$this->module_config['last_topics_exclude_list'] = $this->module_config['last_topics_exclude_list'] +  $this->module_config['global_exclude_list'];
-		$sql_auth = $this->gym_master->set_not_in_list($this->module_config['last_topics_exclude_list']);
+		$sql_auth = $db->sql_in_set('t.forum_id', array_diff_assoc($this->module_auth['forum']['read_post'], $this->module_config['last_topics_exclude_list']), false, true);
 		if (!empty($sql_auth)) {
 			$display_tracking = &$this->call['display_tracking'];
 			$display_user_info = &$this->call['display_user_info'];
@@ -471,7 +487,7 @@ class html_forum {
 					$user->data['user_lastmark'] = (isset($this->tracking_topics['l'])) ? (int) (base_convert($this->tracking_topics['l'], 36, 10) + $config['board_startdate']) : 0;
 				}
 			}
-			$sql_array['WHERE'] = "t.forum_id $sql_auth
+			$sql_array['WHERE'] = "$sql_auth
 						AND f.forum_id = t.forum_id
 						AND t.topic_status <> " . ITEM_MOVED;
 			$sql_array['ORDER_BY'] = 'topic_last_post_time DESC';
@@ -505,7 +521,6 @@ class html_forum {
 							'forum_last_post_time' => !empty($row['forum_last_post_time']) ? $row['forum_last_post_time'] : 0,
 							'enable_icons' => !empty($row['enable_icons']) ? $row['enable_icons'] : 0,
 							'forum_url' => '',
-							//'forum_read_auth' => (boolean) !isset($this->module_config['last_topics_exclude_list'][$forum_id]),
 						)
 					);
 					if ($load_db_lastread) {

@@ -1,5 +1,5 @@
 #
-# $Id: schema_data.sql 9050 2008-11-08 20:02:22Z acydburn $
+# $Id: schema_data.sql 9187 2008-12-12 14:47:03Z acydburn $
 #
 
 # POSTGRES BEGIN #
@@ -218,7 +218,7 @@ INSERT INTO phpbb_config (config_name, config_value) VALUES ('topics_per_page', 
 INSERT INTO phpbb_config (config_name, config_value) VALUES ('tpl_allow_php', '0');
 INSERT INTO phpbb_config (config_name, config_value) VALUES ('upload_icons_path', 'images/upload_icons');
 INSERT INTO phpbb_config (config_name, config_value) VALUES ('upload_path', 'files');
-INSERT INTO phpbb_config (config_name, config_value) VALUES ('version', '3.0.3');
+INSERT INTO phpbb_config (config_name, config_value) VALUES ('version', '3.0.4');
 INSERT INTO phpbb_config (config_name, config_value) VALUES ('warnings_expire_days', '90');
 INSERT INTO phpbb_config (config_name, config_value) VALUES ('warnings_gc', '14400');
 

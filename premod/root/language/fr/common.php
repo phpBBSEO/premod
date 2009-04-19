@@ -5,7 +5,7 @@
 * translated originally by PhpBB-fr.com <http://www.phpbb-fr.com/> and phpBB.biz <http://www.phpBB.biz>
 *
 * @package language
-* @version $Id: common.php,v 1.22 2008/11/14 14:07:00 elglobo Exp $
+* @version $Id: common.php,v 1.23 2008/12/14 10:47:00 elglobo Exp $
 * @copyright (c) 2005 phpBB Group 
 * @license http://opensource.org/licenses/gpl-license.php GNU Public License 
 *
@@ -696,6 +696,12 @@ $lang = array_merge($lang, array(
 		'TODAY'		=> 'Aujourd’hui',
 		'TOMORROW'	=> 'Demain',
 		'YESTERDAY'	=> 'Hier',
+		'AGO'		=> array(
+			0		=> 'il y a moins d’une minute',
+			1		=> 'il y a %d minute',
+			2		=> 'il y a %d minutes',
+			60		=> 'il y a 1 heure',
+		),
 
 		'Sunday'	=> 'Dimanche',
 		'Monday'	=> 'Lundi',

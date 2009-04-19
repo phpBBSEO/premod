@@ -106,7 +106,7 @@ class install_install extends module
 				$this->add_bots($mode, $sub);
 				$this->email_admin($mode, $sub);
 				// SEO premod
-				set_config('seo_premod_version', '3.0.3');
+				set_config('seo_premod_version', '3.0.4');
 				// Remove the lock file
 				@unlink($phpbb_root_path . 'cache/install_lock');
 

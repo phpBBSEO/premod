@@ -2,7 +2,7 @@
 /**
 *
 * @package phpBB SEO GYM Sitemaps
-* @version $id: gym_google.php - 3874 11-20-2008 14:38:27 - 2.0.RC1 dcz $
+* @version $id: gym_google.php - 4146 11-26-2008 11:16:36 - 2.0.RC2 dcz $
 * @copyright (c) 2006 - 2008 www.phpbb-seo.com
 * @license http://opensource.org/osi3.0/licenses/lgpl-license.php GNU Lesser General Public License
 *
@@ -40,6 +40,8 @@ $lang = array_merge($lang, array(
 	'GOOGLE_URL_EXPLAIN' => 'Entrez l’URL complète de votre SitemapIndex, par exemple http://www.example.com/eventual_dir/ si le fichier sitemap.php est installé dans http://www.example.com/eventual_dir/.<br />Cette option est utile lorsque phpBB n’est pas installé à la racine de votre domaine et que vous désirez lister dans vos Sitemaps Google des URLs situées à la racine du domaine.',
 	'GOOGLE_PING' => 'Ping Google',
 	'GOOGLE_PING_EXPLAIN' => 'Prévient Google (ping) chaque fois qu’un Sitemap est rafraîchi.',
+	'GOOGLE_THRESHOLD' => 'Limite d’activation des sitemaps',
+	'GOOGLE_THRESHOLD_EXPLAIN' => 'Nombre d’éléments minimum contenu dans un sitemap. Dans le cas du forum, seul les forums ayant plus de sujets que cette limite auront un sitemap.',
 	'GOOGLE_PRIORITIES' => 'Priorité',
 	'GOOGLE_DEFAULT_PRIORITY' => 'Priorité par défaut',
 	'GOOGLE_DEFAULT_PRIORITY_EXPLAIN' => 'Cette priorité par défaut sera utilisée pour les URLs listées dans les Sitemaps Google sauf si des options supplémentaires sont disponibles au niveau des modules (le nombre doit être compris entre 0.0 &amp; 1.0 inclus)',

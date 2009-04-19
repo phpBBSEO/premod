@@ -2,7 +2,7 @@
 /**
 *
 * @package phpBB SEO GYM Sitemaps
-* @version $id: gym_rss.php - 38220 11-20-2008 11:43:24 - 2.0.RC1 dcz $
+* @version $id: gym_rss.php - 38265 11-26-2008 11:16:36 - 2.0.RC2 dcz $
 * @copyright (c) 2006 - 2008 www.phpbb-seo.com
 * @license http://opensource.org/osi3.0/licenses/lgpl-license.php GNU Lesser General Public License
 *
@@ -290,7 +290,7 @@ class gym_rss extends gym_sitemaps {
 			$module_class = $this->actions['action_type'] . '_' . $this->actions['module_main'];
 			$this->load_module($module_class, 'rss_module');
 			if ( empty($this->output_data['url_sofar']) ) {
-				$this->gym_error(404, '', __FILE__, __LINE__);
+				$this->gym_error(404, 'GYM_TOO_FEW_ITEMS', __FILE__, __LINE__);
 			}
 			$this->output_data['data'] = sprintf($this->style_config['rss_header'], $this->style_config['xslt_style'], $this->gym_config['gym_version'] ) . $this->output_data['data'] . $this->style_config['rss_footer'];
 		} else { // Add items from installed modules
@@ -311,14 +311,14 @@ class gym_rss extends gym_sitemaps {
 			// where xx is the URL limit divided by the number of feeds
 			$this->rss_config['rss_url_limit'] = !empty($this->actions['action_modules']) ? intval($this->rss_config['rss_url_limit'] / count($this->actions['action_modules'])) : 0;
 			if ( empty($this->rss_config['rss_url_limit']) ) {
-				$this->gym_error(404, '', __FILE__, __LINE__);
+				$this->gym_error(404, 'GYM_TOO_FEW_ITEMS', __FILE__, __LINE__);
 			}
 			// start the modules
 			// We are working on all available modules
 			$this->load_modules('rss_main');
 			$this->output_data['url_sofar'] = $this->output_data['url_sofar_total'];
 			if ( empty($this->output_data['url_sofar']) ) {
-				$this->gym_error(404, '', __FILE__, __LINE__);
+				$this->gym_error(404, 'GYM_TOO_FEW_ITEMS', __FILE__, __LINE__);
 			}
 			$this->output_data['data'] = sprintf($this->style_config['rss_header'], $this->style_config['xslt_style'], $this->gym_config['gym_version'] ) . $this->output_data['data'] . $this->style_config['rss_footer'];
 		}

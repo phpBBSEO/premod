@@ -6,7 +6,7 @@
 ## 			Visitez http://www.phpbb-seo.com/forums/premod-phpbb-seo/premod-referencement-phpbb-vt1951.html
 ## 			pour obtenir du support et vérifier l'existence de mise à jour.
 ##
-## MOD Version: 	3.0.3
+## MOD Version: 	3.0.4
 ##
 ## Installation Level: 	Aussi facile que phpBB3
 ## Installation Time: 	10 Minutes
@@ -67,6 +67,18 @@
 ##############################################################
 ## MOD History:
 ##
+##	2008-12-20 - 3.0.4
+##		- All mods Updated to comply with phpBB 3.0.4.
+##		- GYM Sitemaps & RSS 2.0.RC3 :
+##			- Added more option for displaying links on the forum,
+##			- Fixed Google ping again,
+##			- Various bug fixes and enhancement.
+##		- mod rewrite 0.4.8 :
+##			- Added : topic and forum url are now rewritten in notification emails,
+##			- Added : topic url in print view is now rewritten.
+##		- zero duplicate 0.4.8 :
+##			- Fixed : ' character in highlights, 
+##			- Fixed : No redirecting when marking / bookmarking / subscribing.
 ##	2008-11-20 - 3.0.3
 ##		- All mods Updated to comply with phpBB 3.0.3.
 ##		- Re-enabled search_ignore_words.php for Fulltext Native indexing :
@@ -180,18 +192,18 @@ _____________________________________________
 >>>>   MISE A JOUR	                <<<<<
 _____________________________________________
 
-Mise à jour : 3.0.2 => 3.0.3 : 
+Mise à jour : 3.0.3 => 3.0.4 : 
 Tout d'abord, rendez vous sur http://telecharger.phpbb-seo.com/premod-referencement-phpbb-10/
 poour télécharger un des pack de mise à jour.
 Vous pouvez mettre à jour en suivant deux méthodes :
-	1) Mise à jour automatique : "3.0.2 vers 3.0.3 MAJ automatique"
+	1) Mise à jour automatique : "3.0.3 vers 3.0.4 MAJ automatique"
 		- Uplodez le contenu du dossier auto_update/install/*.* vers install/*.*,
 		- Rendez vous à l'ACP => SYSTEM et suivez les instructions.
 		L'auto updateur prendra vos éventuelles modifications en compte et tentera
 		de merger les nouveaux fichiers avec ceux que vous auriez modifié.
 		C'est la methode la plus sûre dans la plupart des cas, l'updateur vous dira
 		s'il a des problème pour modifier certain fichiers.
-	2) Mise à jour manuelle : "3.0.2 vers 3.0.3 Fichiers modifiés"
+	2) Mise à jour manuelle : "3.0.3 vers 3.0.4 Fichiers modifiés"
 		Vous trouverez les fichiers modifiés dans le dossier modified/ de l'archive.
 		- Uploadez / mergez / écrasez tous les fichiers,
 		- Uploadez le dossier modified/install/*.* vers install/*.*,
@@ -206,6 +218,16 @@ Enfin, une fois les nouveaux fichiers en place, il vous faudra vider le cache de
 
 Nous avons inclus le mod GYM Sitemap & RSS, mais nous avons séparé l'installation
 reportez vous aux instructions plus bas pour plus de détails.
+
+Pour mettre à jour GYM depuis n'importe quelle version 2.0.x (phpBB3), vous devrez tout d'abord uploader tous les fichiers contenus dans le dossier root/ de l'archive dans le dossier ftp de phpBB, en prenant soin de conserver vos éventuelles modification des fichiers de template (dossier phpBB/styles/, .html, .js et .xsl) ajoutés par le module. 
+Une fois les fichiers en place, lancez simplement le script de mise à jour (example.com/phpBB/gym_sitemaps/gym_install.php).
+Vos réglages seront conservés lors de la mise à jour.
+
+IMPORTANT :
+GYM sitemaps and RSS a des chances d'être mis à jour avant la premod, vous devrez donc le maintenir à jour
+entre temps. 
+Vous pouvez être tenu au courant des mise a jour en souscrivant au sujet de mise à disposition en étant connecté :
+http://www.phpbb-seo.com/forums/viewtopic.php?t=3136&watch=topic
 
 _____________________________________________
 >>>>   INSTALLATION POUR VOTRE FORUM    <<<<<
@@ -380,6 +402,10 @@ NOTA BENE :
 	GYM Sitemaps & RSS est en phase RC, l'installation séparée de celle de la premod.
 	C'est a vous de décider de l'utiliser ou non, vous devez juste savoir qu'à ce stade, certaines
 	fonctions peuvent ne pas être disponibles et que quelques bugs peuvent encore être découverts.
+	GYM sitemaps and RSS a des chances d'être mis à jour avant la premod, vous devrez donc le maintenir à jour
+	entre temps. 
+	Vous pouvez être tenu au courant des mise a jour en souscrivant au sujet de mise à disposition en étant connecté :
+	http://www.phpbb-seo.com/forums/viewtopic.php?t=3136&watch=topic
 
 
 POUR INSTALLER LE MODULE :

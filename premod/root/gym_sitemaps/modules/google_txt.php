@@ -2,7 +2,7 @@
 /**
 *
 * @package phpBB SEO GYM Sitemaps
-* @version $id: google_txt.php - 6723 11-20-2008 11:43:24 - 2.0.RC1 dcz $
+* @version $id: google_txt.php - 6721 12-17-2008 16:27:59 - 2.0.RC3 dcz $
 * @copyright (c) 2006 - 2008 www.phpbb-seo.com
 * @license http://opensource.org/osi3.0/licenses/lgpl-license.php GNU Lesser General Public License
 *
@@ -80,7 +80,7 @@ class google_txt {
 				$this->gym_master->obtain_robots_disallows();
 			}
 			$sitemap_txt_url = $this->module_config['google_url'] . $this->url_settings['google_txt_pre'] . $this->options['module_sub'] . $this->url_settings['google_txt_ext'];
-$this->gym_master->seo_kill_dupes($sitemap_txt_url);
+			$this->gym_master->seo_kill_dupes($sitemap_txt_url);
 			$txt_file = $this->txt_files[$this->options['module_sub']];
 			// Grab data
 			if (($txt_data = @file($txt_file)) && is_array($txt_data)) {

@@ -195,7 +195,7 @@ styles/prosilver/template/viewforum_body.html
 #-----[ AFTER, ADD ]------------------------------------------
 #
 
-<!-- IF GYM_LINKS --><h3>{GYM_HTML_FORUM_NEWS_LINK} {GYM_HTML_FORUM_MAP_LINK} {GYM_RSS_FORUM_LINK} {GYM_GOOGLE_FORUM_LINK}</h3><!-- ENDIF -->
+<!-- IF GYM_LINKS_CAT --><h3>{GYM_HTML_FORUM_NEWS_LINK} {GYM_HTML_FORUM_MAP_LINK} {GYM_RSS_FORUM_LINK} {GYM_GOOGLE_FORUM_LINK}</h3><!-- ENDIF -->
 
 #
 #-----[ OPEN ]------------------------------------------
@@ -264,6 +264,7 @@ div.gymsublist {
 div.gymsublist ul {
 	display:block;
 	position:relative;
+	height:1%;
 	padding-left:30px;
 }
 div.gymsublist ul li {
@@ -425,7 +426,7 @@ styles/subsilver2/template/viewforum_body.html
 #-----[ AFTER, ADD ]------------------------------------------
 #
 
-		<!-- IF GYM_LINKS --><br/><h3>{GYM_HTML_FORUM_NEWS_LINK} {GYM_HTML_FORUM_MAP_LINK} {GYM_RSS_FORUM_LINK} {GYM_GOOGLE_FORUM_LINK}</h3><!-- ENDIF -->
+		<!-- IF GYM_LINKS_CAT --><h3>{GYM_HTML_FORUM_NEWS_LINK} {GYM_HTML_FORUM_MAP_LINK} {GYM_RSS_FORUM_LINK} {GYM_GOOGLE_FORUM_LINK}</h3><!-- ENDIF -->
 
 #
 #-----[ OPEN ]------------------------------------------
@@ -478,6 +479,7 @@ div.gymsublist {
 div.gymsublist ul {
 	display:block;
 	position:relative;
+	height:1%;
 	padding-left:30px;
 }
 div.gymsublist ul li {

@@ -14,8 +14,8 @@
 			<ul class="topiclist">
 				<li class="header">
 					<dl class="icon">
-						<dt <!-- IF DISPLAY_LAST_POST -->style="width:64%;"<!-- ENDIF -->><!-- IF forumrow.S_IS_CAT --><!-- IF forumrow.U_FORUM_NEWS --><a href="{forumrow.U_FORUM_NEWS}" title="{forumrow.FORUM_NEWS}">{forumrow.FORUM_NEWS}</a> <!-- ENDIF -->
-					<!-- IF forumrow.U_FORUM_MAP --> <strong>&raquo;</strong> <a href="{forumrow.U_FORUM_MAP}" title="{forumrow.FORUM_NAME}">{forumrow.FORUM_NAME}</a><br /><!-- ENDIF --><!-- ELSE -->{L_FORUM}<!-- ENDIF --></dt>
+						<dt <!-- IF DISPLAY_LAST_POST -->style="width:64%;"<!-- ENDIF -->><!-- IF forumrow.S_IS_CAT --><!-- IF forumrow.FORUM_NEWS_LINK -->{forumrow.FORUM_NEWS_LINK} <!-- ENDIF -->
+					<!-- IF forumrow.FORUM_MAP_LINK --> &nbsp; {forumrow.FORUM_MAP_LINK}<br /><!-- ENDIF --><!-- ELSE -->{L_FORUM}<!-- ENDIF --></dt>
 						<!-- IF DISPLAY_LAST_POST --><dd class="lastpost"><span>{L_LAST_POST}</span></dd><!-- ENDIF -->
 					</dl>
 				</li>
@@ -28,8 +28,8 @@
 			<dl class="icon" style="background-image: url({forumrow.FORUM_FOLDER_IMG_SRC}); background-repeat: no-repeat;">
 				<dt title="{forumrow.FORUM_FOLDER_IMG_ALT}" <!-- IF DISPLAY_LAST_POST -->style="width:64%;"<!-- ELSE -->style="width:92%;"<!-- ENDIF -->>
 					<!-- IF forumrow.FORUM_IMAGE --><span class="forum-image">{forumrow.FORUM_IMAGE}</span><!-- ENDIF -->
-					<!-- IF forumrow.U_FORUM_NEWS --><a href="{forumrow.U_FORUM_NEWS}" class="forumtitle" title="{forumrow.FORUM_NEWS}"><img src="{NEWS_IMG_SRC}" alt="{L_HTML_NEWS}"/> {forumrow.FORUM_NEWS}</a> <!-- ENDIF -->
-					<!-- IF forumrow.U_FORUM_MAP --> <strong>&raquo;</strong> <a href="{forumrow.U_FORUM_MAP}" class="forumtitle" title="{forumrow.FORUM_NAME}">{forumrow.FORUM_NAME}</a><br /><!-- ENDIF -->
+					<!-- IF forumrow.FORUM_NEWS_LINK -->{forumrow.FORUM_NEWS_LINK} <!-- ENDIF -->
+					<!-- IF forumrow.FORUM_MAP_LINK --> &nbsp; {forumrow.FORUM_MAP_LINK}<br /><!-- ENDIF -->
 					{forumrow.FORUM_DESC}
 					<!-- IF forumrow.MODERATORS -->
 						<br /><strong>{forumrow.L_MODERATOR_STR}:</strong> {forumrow.MODERATORS}

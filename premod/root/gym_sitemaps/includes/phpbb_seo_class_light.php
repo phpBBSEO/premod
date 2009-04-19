@@ -2,7 +2,7 @@
 /**
 *
 * @package phpBB SEO GYM Sitemaps
-* @version $id: phpbb_seo_class_light.php - 6722 11-21-2008 08:46:02 - 2.0.RC1 dcz $
+* @version $id: phpbb_seo_class_light.php - 6685 12-17-2008 16:27:59 - 2.0.RC3 dcz $
 * @copyright (c) 2006 - 2008 www.phpbb-seo.com
 * @license http://opensource.org/osi3.0/licenses/lgpl-license.php GNU Lesser General Public License
 *
@@ -28,7 +28,6 @@ class phpbb_seo {
 	var	$seo_ext = array();
 	var	$seo_static = array();
 	var	$modrtype = -1;
-	var	$encoding = 'UTF-8';
 	/**
 	* constuctor
 	*/
@@ -90,8 +89,8 @@ class phpbb_seo {
 	* Prepare Titles for URL injection
 	*/
 	function format_url( $url, $type = 'topic' ) {
-		$url = preg_replace('`\[.*\]`U','', 'utf-8');
-		$url = htmlentities($url, ENT_COMPAT, $this->encoding);
+		$url = preg_replace('`\[.*\]`U','', $url);
+		$url = htmlentities($url, ENT_COMPAT, 'utf-8');
 		$url = preg_replace( '`&([a-z]+)(acute|uml|circ|grave|ring|cedil|slash|tilde|caron|lig);`i', "\\1", $url );
 		$url = preg_replace( $this->seo_opt['url_pattern'] , '-', $url);
 		$url = strtolower(trim($url, '-'));

@@ -1,5 +1,5 @@
 #
-# $Id: sqlite_schema.sql 8911 2008-09-23 13:03:33Z acydburn $
+# $Id: sqlite_schema.sql 9129 2008-11-27 13:44:24Z acydburn $
 #
 
 BEGIN TRANSACTION;
@@ -533,6 +533,7 @@ CREATE TABLE phpbb_profile_fields (
 	field_validation varchar(20) NOT NULL DEFAULT '',
 	field_required INTEGER UNSIGNED NOT NULL DEFAULT '0',
 	field_show_on_reg INTEGER UNSIGNED NOT NULL DEFAULT '0',
+	field_show_profile INTEGER UNSIGNED NOT NULL DEFAULT '0',
 	field_hide INTEGER UNSIGNED NOT NULL DEFAULT '0',
 	field_no_view INTEGER UNSIGNED NOT NULL DEFAULT '0',
 	field_active INTEGER UNSIGNED NOT NULL DEFAULT '0',

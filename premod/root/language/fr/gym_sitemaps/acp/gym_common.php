@@ -2,7 +2,7 @@
 /**
 *
 * @package phpBB SEO GYM Sitemaps
-* @version $id: gym_common.php - 23057 11-20-2008 14:38:27 - 2.0.RC1 dcz $
+* @version $id: gym_common.php - 23684 12-17-2008 16:27:59 - 2.0.RC3 dcz $
 * @copyright (c) 2006 - 2008 www.phpbb-seo.com
 * @license http://opensource.org/osi3.0/licenses/lgpl-license.php GNU Lesser General Public License
 *
@@ -34,10 +34,17 @@ if (empty($lang) || !is_array($lang))
 $lang = array_merge($lang, array(
 	// Main
 	'ALL' => 'Tout',
-	// Main
 	'MAIN' => 'GYM Sitemaps',
 	'MAIN_MAIN_RESET' => 'Options globales GYM Sitemaps',
 	'MAIN_MAIN_RESET_EXPLAIN' => 'Rétablir toutes les options par défaut du module GYM Sitemaps.',
+	// Linking setup
+	'GYM_LINKS_ACTIVATION' => 'Affichage des liens sur le forum',
+	'GYM_LINKS_MAIN' => 'Liens principaux',
+	'GYM_LINKS_MAIN_EXPLAIN' => 'Afficher ou non les liens vers les pages principales de GYM en pied de page : SitemapIndex, Flux RSS principal et liste des flux, index des plans et pages de news principale.',
+	'GYM_LINKS_INDEX' => 'Liens sur l’index',
+	'GYM_LINKS_INDEX_EXPLAIN' => 'Afficher ou non les liens vers les différent plans, flux, news et sitemaps de chaque forum sur l’index du forum. Ces liens sont ajoutés sous la descriptions des forums.',
+	'GYM_LINKS_CAT' => 'Liens des forums',
+	'GYM_LINKS_CAT_EXPLAIN' => 'Afficher ou non les liens vers les différent plans, flux, news et sitemaps du forum en cours. Ces liens sont ajoutés sous le titre du forum.',
 	// Google sitemaps
 	'GOOGLE' => 'Sitemaps Google',
 	// Reset settings

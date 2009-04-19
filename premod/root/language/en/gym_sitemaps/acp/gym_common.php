@@ -2,7 +2,7 @@
 /**
 *
 * @package phpBB SEO GYM Sitemaps
-* @version $id: gym_common.php - 18560 11-20-2008 14:38:27 - 2.0.RC1 dcz $
+* @version $id: gym_common.php - 19332 12-17-2008 16:27:59 - 2.0.RC3 dcz $
 * @copyright (c) 2006 - 2008 www.phpbb-seo.com
 * @license http://opensource.org/osi3.0/licenses/lgpl-license.php GNU Lesser General Public License
 *
@@ -33,10 +33,17 @@ if (empty($lang) || !is_array($lang))
 $lang = array_merge($lang, array(
 	// Main
 	'ALL' => 'All',
-	// Main
 	'MAIN' => 'GYM Sitemaps',
 	'MAIN_MAIN_RESET' => 'GYM sitemaps main options',
 	'MAIN_MAIN_RESET_EXPLAIN' => 'Reset all the GYM main options to default values.',
+	// Linking setup
+	'GYM_LINKS_ACTIVATION' => 'Forum Linking',
+	'GYM_LINKS_MAIN' => 'Main links',
+	'GYM_LINKS_MAIN_EXPLAIN' => 'Display or not links to main GYM page in footer : SitemapIndex, main RSS feed and feed list page, main map and new page.',
+	'GYM_LINKS_INDEX' => 'Links on index',
+	'GYM_LINKS_INDEX_EXPLAIN' => 'Display or not links to the available GYM pages for each forum on the forum index. These links are added below the forum descritpions.',
+	'GYM_LINKS_CAT' => 'Links on forum page',
+	'GYM_LINKS_CAT_EXPLAIN' => 'Display or not links to the available GYM pages on a forum page. These links are added below the forum title.',
 	// Google sitemaps
 	'GOOGLE' => 'Google',
 	// Reset settings

@@ -2,7 +2,7 @@
 /**
 *
 * @package phpBB SEO GYM Sitemaps
-* @version $id: display_topics.php - 20107 11-20-2008 11:43:24 - 2.0.RC1 dcz $
+* @version $id: display_topics.php - 20139 11-26-2008 11:16:36 - 2.0.RC2 dcz $
 * @copyright (c) 2006 - 2008 www.phpbb-seo.com
 * @license http://opensource.org/osi3.0/licenses/lgpl-license.php GNU Lesser General Public License
 *
@@ -56,6 +56,7 @@ class display_topics {
 		$s_global = $master->call['s_global'];
 		// Do some reset
 		$topic_datas = $topic_ids = $forum_ids = $user_cache = $id_cache = $post_datas = array();
+		$forum_id = $master->call['forum_id'];
 		// Build SQL
 		if ($s_global || $master->call['single_forum']) {
 			$sql_array = array(
@@ -102,11 +103,11 @@ class display_topics {
 		$sql_where .= $topic_sql ? ($sql_where ? ' AND ' : '') . $topic_sql : '';
 		$sql_where .= ($sql_where ? ' AND ' : '') . 't.topic_status <> ' . ITEM_MOVED;
 		if ($master->call['single_forum']) {
-			$sql_where .= $auth->acl_get('m_approve', $master->call['forum_ids']) ? '' : ' AND t.topic_approved = 1';
+			$sql_where .= $auth->acl_get('m_approve', $master->call['forum_id']) ? '' : ' AND t.topic_approved = 1';
 		} else {
 			// only admins and global moderators will see un-approved topics 
 			// in the forum they have access to.
-			$sql_where .= (!$auth->acl_gets('a_') && !$auth->acl_getf_global('m_')) ? ' AND t.topic_approved = 1' : '';
+			$sql_where .= ($auth->acl_gets('a_') || $auth->acl_getf_global('m_')) ? '' : ' AND t.topic_approved = 1';
 		}
 		// obtain correct topic count if we display pagination
 		if ($display_pagination) {
