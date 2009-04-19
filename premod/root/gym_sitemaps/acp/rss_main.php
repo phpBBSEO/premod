@@ -2,8 +2,8 @@
 /**
 *
 * @package phpBB SEO GYM Sitemaps
-* @version $Id: google_forum.php 2007/04/12 13:48:48 dcz Exp $
-* @copyright (c) 2006 dcz - www.phpbb-seo.com
+* @version $id: rss_main.php - 14807 11-20-2008 11:43:24 - 2.0.RC1 dcz $
+* @copyright (c) 2006 - 2008 www.phpbb-seo.com
 * @license http://opensource.org/osi3.0/licenses/lgpl-license.php GNU Lesser General Public License
 *
 */
@@ -44,6 +44,8 @@ class rss_main {
 	*/
 	function acp_module() {
 		global $config, $phpbb_seo, $user;
+		$config['sitename'] = utf8_normalize_nfc($config['sitename']);
+		$config['site_desc'] = utf8_normalize_nfc($config['site_desc']);
 		return array( 
 			'cache' => array(
  				'display_vars' => array(
@@ -148,8 +150,8 @@ class rss_main {
 					'vars'	=> array(
 						'legend1'	=> 'GYM_PAGINATION',
 						'rss_pagination' => array('lang' => 'GYM_PAGINATION_ON', 'validate' => 'bool', 'type' => 'radio:yes_no', 'explain' => true, 'overriding' => true),
-						'rss_limitdown' => array('lang' => 'GYM_LIMITDOWN', 'validate' => 'int', 'type' => 'text:4:4', 'explain' => true, 'overriding' => true),
-						'rss_limitup' => array('lang' => 'GYM_LIMITUP', 'validate' => 'int', 'type' => 'text:4:4', 'explain' => true, 'overriding' => true),
+						'rss_limitdown' => array('lang' => 'GYM_LIMITDOWN', 'validate' => 'int:0', 'type' => 'text:4:4', 'explain' => true, 'overriding' => true),
+						'rss_limitup' => array('lang' => 'GYM_LIMITUP', 'validate' => 'int:0', 'type' => 'text:4:4', 'explain' => true, 'overriding' => true),
 					),
 				),
 				'default' => array(
@@ -260,7 +262,7 @@ class rss_main {
 						'rss_allow_links' =>  array('lang' => 'RSS_ALLOW_LINKS', 'validate' => 'bool', 'type' => 'radio:yes_no', 'explain' => true),
 						'rss_allow_emails' => array('lang' => 'RSS_ALLOW_EMAILS', 'validate' => 'bool', 'type' => 'radio:yes_no', 'explain' => true),
 						'rss_allow_smilies' => array('lang' => 'RSS_ALLOW_SMILIES', 'validate' => 'bool', 'type' => 'radio:yes_no', 'explain' => true),
-						'rss_sumarize' => array('lang' => 'RSS_SUMARIZE', 'validate' => 'int', 'type' => 'text:4:4', 'explain' => true,),
+						'rss_sumarize' => array('lang' => 'RSS_SUMARIZE', 'validate' => 'int:0:1000', 'type' => 'text:4:4', 'explain' => true,),
 						'rss_sumarize_method' => array('lang' => 'RSS_SUMARIZE_METHOD', 'validate' => 'string', 'type' => 'select', 'method' => 'select_string', 'explain' => true,),
 					),
 				),
@@ -279,7 +281,7 @@ class rss_main {
 					'rss_allow_emails' => 0,
 					'rss_allow_smilies' => 1,
 					'rss_sumarize' => 50,
-					'rss_sumarize_method' => 'word',
+					'rss_sumarize_method' => 'words',
 				),
 				'select' => array( 
 					'rss_sumarize_method' => @$this->dyn_select['sumarize_method'],

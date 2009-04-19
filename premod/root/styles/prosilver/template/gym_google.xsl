@@ -3,7 +3,14 @@
                 xmlns:sitemap="http://www.sitemaps.org/schemas/sitemap/0.9"
                 xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
   
-		<xsl:output method="html" version="1.0" encoding="utf-8" indent="yes"/>
+<xsl:output 
+	method="html" 
+	version="1.0" 
+	encoding="utf-8" 
+	omit-xml-declaration="yes"		
+	doctype-public="-//W3C//DTD XHTML 1.0 Strict//EN" 
+	doctype-system="http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"
+	indent="yes" />
 
   <!-- Root template -->    
   <xsl:template match="/">
@@ -180,9 +187,23 @@
 			<dl class="icon" style="background-image: url({T_IMAGE_PATH}forum_read.gif); background-repeat: no-repeat;">
 				<dt style="overflow:hidden"><xsl:variable name="sitemapURL"><xsl:value-of select="sitemap:loc"/></xsl:variable>  
 					<a href="{$sitemapURL}" class="topictitle"><span>
-							<xsl:choose><xsl:when test="$sitemapURL='{ROOT_URL}'"><xsl:value-of select="substring-after('{ROOT_URL}', 'http://')"></xsl:value-of></xsl:when>
-								<xsl:otherwise><xsl:value-of select="substring-after($sitemapURL, '{ROOT_URL}')"></xsl:value-of></xsl:otherwise>
-  							</xsl:choose></span></a></dt>
+					<xsl:choose>
+						<xsl:when test="$sitemapURL='{ROOT_URL}'">
+							<xsl:value-of select="substring-after('{ROOT_URL}', 'http://')"></xsl:value-of>
+						</xsl:when>
+						<xsl:otherwise>
+							<xsl:choose>
+								<xsl:when test="contains($sitemapURL,'{ROOT_URL}')">
+									<xsl:value-of select="substring-after($sitemapURL, '{ROOT_URL}')"></xsl:value-of>
+								</xsl:when>
+								<xsl:otherwise>
+									<xsl:value-of select="$sitemapURL"></xsl:value-of>
+								</xsl:otherwise>
+							</xsl:choose>
+						</xsl:otherwise>
+					</xsl:choose>
+					</span></a>
+				</dt>
 				<dd class="topics"><span><xsl:value-of select="sitemap:priority"/></span></dd>
 				<dd class="posts"><span><xsl:value-of select="sitemap:changefreq"/></span></dd>
 				<dd class="lastpost"><span><xsl:value-of select="sitemap:lastmod" /></span></dd>

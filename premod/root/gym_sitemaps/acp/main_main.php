@@ -2,8 +2,8 @@
 /**
 *
 * @package phpBB SEO GYM Sitemaps
-* @version $Id: google_forum.php 2007/04/12 13:48:48 dcz Exp $
-* @copyright (c) 2006 dcz - www.phpbb-seo.com
+* @version $id: main_main.php - 8648 11-20-2008 11:43:24 - 2.0.RC1 dcz $
+* @copyright (c) 2006 - 2008 www.phpbb-seo.com
 * @license http://opensource.org/osi3.0/licenses/lgpl-license.php GNU Lesser General Public License
 *
 */
@@ -84,7 +84,7 @@ class main_main {
 					'vars'	=> array(
 						'legend1'	=> 'GYM_GZIP',
 						'gym_gzip' => array('lang' => 'GYM_GZIP_ON', 'validate' => 'bool', 'type' => 'radio:yes_no', 'explain' => true),
-						'gym_gzip_level' => array('lang' => 'GYM_GZIP_LEVEL', 'validate' => 'int', 'type' => 'select', 'method' => 'select_string', 'explain' => true,),
+						'gym_gzip_level' => array('lang' => 'GYM_GZIP_LEVEL', 'validate' => 'int:1:9', 'type' => 'select', 'method' => 'select_string', 'explain' => true,),
 						'gym_gzip_ext' => array('lang' => 'GYM_GZIP_EXT', 'validate' => 'bool', 'type' => 'radio:yes_no', 'explain' => true),
 					),
 				),
@@ -134,8 +134,8 @@ class main_main {
 					'vars'	=> array(
 						'legend1'	=> 'GYM_PAGINATION',
 						'gym_pagination' => array('lang' => 'GYM_PAGINATION_ON', 'validate' => 'bool', 'type' => 'radio:yes_no', 'explain' => true),
-						'gym_limitdown' => array('lang' => 'GYM_LIMITDOWN', 'validate' => 'int', 'type' => 'text:4:4', 'explain' => true,),
-						'gym_limitup' => array('lang' => 'GYM_LIMITUP', 'validate' => 'int', 'type' => 'text:4:4', 'explain' => true,),
+						'gym_limitdown' => array('lang' => 'GYM_LIMITDOWN', 'validate' => 'int:0', 'type' => 'text:4:4', 'explain' => true,),
+						'gym_limitup' => array('lang' => 'GYM_LIMITUP', 'validate' => 'int:0', 'type' => 'text:4:4', 'explain' => true,),
 					),
 				),
 				'default' => array(

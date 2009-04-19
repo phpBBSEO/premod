@@ -2,8 +2,8 @@
 /**
 *
 * @package phpBB SEO GYM Sitemaps
-* @version $Id: gym_sitemaps.php 2008
-* @copyright (c) 2007, 2008 www.phpbb-seo.com
+* @version $id: gym_common.php - 14738 11-20-2008 11:43:24 - 2.0.RC1 dcz $
+* @copyright (c) 2006 - 2008 www.phpbb-seo.com
 * @license http://opensource.org/osi3.0/licenses/lgpl-license.php GNU Lesser General Public License
 *
 */
@@ -20,7 +20,7 @@ define('OVERRIDE_OTYPE', 2);
 define('OVERRIDE_MODULE', 1);
 
 // Some set up
-$_action_types = array('google' => 'google', 'rss' => 'rss', /*'html' => 'html', 'yahoo' => 'yahoo'*/);
+$_action_types = array('google' => 'google', 'rss' => 'rss', 'html' => 'html', /*'yahoo' => 'yahoo'*/);
 if (defined('ADMIN_START') || defined('IN_INSTALL')) {
 	$_action_types['main'] = 'main';
 }
@@ -45,7 +45,9 @@ function obtain_gym_config($mode, &$cfg_array) {
 		$sql = "SELECT *
 			FROM " . GYM_CONFIG_TABLE . "
 			$sql_config";
+		$db->sql_return_on_error(true);
 		$result = $db->sql_query($sql);
+		$db->sql_return_on_error(false);
 		while ($row = $db->sql_fetchrow($result)) {
 			$cfg_array[$row['config_name']] = $row['config_value'];
 		}
@@ -96,72 +98,169 @@ function rem_gym_config($config_name, &$cfg_array) {
 * obtain_gym_links().
 * Builds the rss and sitemaps links
 */
-function obtain_gym_links() {
-	global $phpbb_root_path, $gym_links, $template, $cache, $config, $phpEx, $user, $phpbb_seo;
-	$gym_config = array();
-	$cache_file = '_gym_links_' . $user->data['user_lang'];
+function obtain_gym_links($gym_links = array()) {
+	global $phpbb_root_path, $template, $cache, $config, $phpEx, $user, $phpbb_seo, $auth;	
 	if (empty($config['gym_installed'])) {
 		return;
 	}
+	$_phpbb_seo = !empty($phpbb_seo);
+	$board_url = $_phpbb_seo ? $phpbb_seo->seo_path['phpbb_url'] : generate_board_url() . '/';
+	$gym_config = array();
+	$cache_file = '_gym_links_' . $user->data['user_lang'];
+	$gym_link_tpl = '<a href="%1$s" title="%3$s"><img src="' . $board_url . 'gym_sitemaps/images/%2$s" alt="%3$s"/>&nbsp;%4$s</a>&nbsp;';
 	if (($links = $cache->get($cache_file)) === false) {
-		$gym_link_tpl = '<a href="%1$s" title="%3$s"><img src="' . generate_board_url() . '/gym_sitemaps/images/%2$s" alt="%3$s"/>&nbsp;%3$s</a>';
 		obtain_gym_config('main', $gym_config);
 		$user->add_lang('gym_sitemaps/gym_common');
-		// Google sitemaps
-		$override_google_mod_rewrite = get_override('google', 'modrewrite', $gym_config);
-		$google_mod_rewrite = (boolean) get_gym_option('google', '', 'modrewrite', $override_google_mod_rewrite, $gym_config);
-		$override_google_gzip = get_override('google', 'gzip', $gym_config);
-		$google_gzip = (boolean) get_gym_option('google', '', 'gzip', $override_google_gzip, $gym_config);
-		$google_gzip_ext = ($google_gzip || $config['gzip_compress']) ? (get_gym_option('google', '', 'gzip_ext', $override_google_gzip, $gym_config) ? '.gz' : '') : '';
-		$sitemap_url = $gym_config['google_url'] . ($google_mod_rewrite ? 'sitemapindex.xml' . $google_gzip_ext : "sitemap.$phpEx");
-		// RSS
-		$override_rss_mod_rewrite = get_override('rss', 'modrewrite', $gym_config);
-		$rss_mod_rewrite = (boolean) get_gym_option('rss', '', 'modrewrite', $override_rss_mod_rewrite, $gym_config);
-		$override_rss_gzip = get_override('rss', 'gzip', $gym_config);
-		$rss_gzip = (boolean) get_gym_option('rss', '', 'gzip', $override_rss_gzip, $gym_config);
-		$rss_gzip_ext = ($rss_gzip || $config['gzip_compress']) ? (get_gym_option('rss', '', 'gzip_ext', $override_rss_gzip, $gym_config) ? '.gz' : '') : '';
-		$rss_url = $gym_config['rss_url'] . ($rss_mod_rewrite ? 'rss/rss.xml' . $rss_gzip_ext : "gymrss.$phpEx");
-		$rss_chan_url = $gym_config['rss_url'] . ($rss_mod_rewrite ? 'rss/' : "gymrss.$phpEx?channels");
-		$links = array();
-		$links['main'] = array( 'GYM_LINKS' => true,
-			'GYM_GOOGLE_TITLE' => $user->lang['GOOGLE_SITEMAPINDEX'], 
-			'GYM_GOOGLE_URL' => $sitemap_url, 
-			'GYM_GOOGLE_LINK' => sprintf($gym_link_tpl, $sitemap_url, 'sitemap-icon.gif', $user->lang['GOOGLE_SITEMAPINDEX']),
-			'GYM_RSS_TITLE' => $user->lang['RSS_FEED'], 
-			'GYM_RSS_URL' => $rss_url, 
-			'GYM_RSS_LINK' => sprintf($gym_link_tpl, $rss_url, 'feed-icon.png', $user->lang['RSS_FEED']),
-			'GYM_RSS_CHAN_TITLE' => $user->lang['RSS_CHAN_LIST_TITLE'], 
-			'GYM_RSS_CHAN_URL' => $rss_chan_url, 
-			'GYM_RSS_CHAN_LINK' => sprintf($gym_link_tpl, $rss_chan_url, 'feed-icon.png', $user->lang['RSS_CHAN_LIST_TITLE']), 
-		);
-		$links['alternate'] = array( 
-			array( 'TITLE' => $user->lang['RSS_FEED'], 
-				'URL' => $rss_url ),
-			array( 'TITLE' => $user->lang['RSS_CHAN_LIST_TITLE'], 
-				'URL' => $rss_chan_url ),
-		);
-		/*if (!empty($gym_config['google_forum_installed'])) {
-			$override_mod_rewrite = get_override('google', 'modrewrite', $gym_config);
-			$mod_rewrite = (boolean) get_gym_option('google', 'forum', 'modrewrite', $override_mod_rewrite, $gym_config);
-			$override_gzip = get_override('google', 'gzip', $gym_config);
-			$gzip = (boolean) get_gym_option('google', 'forum', 'gzip', $override_gzip, $gym_config);
-			$gzip_ext = ($gzip || $config['gzip_compress'])? (get_gym_option('google', 'forum', 'gzip_ext', $override_gzip, $gym_config) ? '.gz' : '') : '';
-			$sitemap_url_tpl = $gym_config['google_url'] . ($mod_rewrite ? '%2$s.xml' . $gzip_ext : 'sitemap.' . $phpEx . '?forum=%1$s');
-			$links['GOOGLE']['FORUM'] = array( 'TITLE' => $user->lang['GOOGLE_SITEMAP'], 
-				'URLTPL' => '', 
-				'GZIPEXT' => (($gym_config['google_gzip'] || $config['gzip_compress']) && $gym_config['google_gzip_ext']) ? '.gz' : '', 
-				'LINK' => sprintf($gym_link_tpl, $sitemap_url, 'sitemap-icon.gif', $user->lang['GOOGLE_SITEMAP']),
-			);
+		if (!defined('GYM_RSS_FUNC_INC')) {
+			require($phpbb_root_path . 'gym_sitemaps/includes/gym_rss_functions.' . $phpEx);
 		}
-		$links['RSS']['FORUM'] = array( 'TITLE' => $rss_title, 
-			'URL' => $rss_url, 
-			'LINK' => sprintf($gym_link_tpl, $rss_url, 'feed-icon.png', $rss_title), 
-		);*/
+		$links = get_gym_links($gym_config);
 		$cache->put($cache_file, $links);
 	}
-	$template->assign_vars($links['main']);
-	foreach ($links['alternate'] as $alternate) {
-		$template->assign_block_vars('gym_rsslinks', $alternate);
+	// In case one would want to manually fil the array in some file, like viewforum
+	// Would be passed here from page_header() where $gym_links is global
+	if (!empty($gym_links['main'])) {
+		$links = array_merge($links['main'], $gym_links['main']);
+	}
+	// A bit dirty but lazy way to add forum maps and news pages everywhere ;-)
+	$html_setup = & $links['setup']['html'];
+	$rss_setup = & $links['setup']['rss'];
+	$google_setup = & $links['setup']['google'];
+	if ($html_setup['forum_allow_cat_news'] || $html_setup['forum_allow_cat_map'] || $rss_setup['forum'] || $google_setup['forum']) {
+		$_f_sep = $phpbb_seo->seo_delim['forum'];
+		if (!empty($template->_tpldata['forumrow'])) {	
+			foreach ($template->_tpldata['forumrow'] as $k => $v) {
+				if (empty($v['S_IS_LINK']) && empty($v['S_IS_CAT'])) {
+					$link = '';
+					$forum_id = (int) $v['FORUM_ID'];
+					$forum_name = $v['FORUM_NAME'];
+					if (!isset($html_setup['forum_exclude'][$forum_id])) {
+						if ($html_setup['forum_allow_cat_news']) {
+							$url = sprintf($html_setup['forum_cat_news'], $_phpbb_seo ? $phpbb_seo->seo_url['forum'][$forum_id] : '', $forum_id );
+							$link .= sprintf($gym_link_tpl, $url, 'html_news.gif', sprintf($html_setup['l_html_news_of'], $forum_name), $html_setup['l_html_news']);
+						}
+						if ($html_setup['forum_allow_cat_map']) {
+							$url = sprintf($html_setup['forum_cat_map'], $_phpbb_seo ? $phpbb_seo->seo_url['forum'][$forum_id] : '', $forum_id );
+							$link .= ' ' . sprintf($gym_link_tpl, $url, 'maps-icon.gif', sprintf($html_setup['l_html_map_of'], $forum_name), $html_setup['l_html_map']);
+						}
+					}
+					if ($rss_setup['forum_rss'] && !isset($rss_setup['forum_exclude'][$forum_id])) {
+						$url = sprintf($rss_setup['forum_cat_rss'], $_phpbb_seo ? $phpbb_seo->seo_url['forum'][$forum_id] : '', $forum_id );
+						$link .= ' ' . sprintf($gym_link_tpl, $url, 'feed-icon.png', sprintf($rss_setup['l_rss_feed_of'], $forum_name), $rss_setup['l_rss_feed']);
+					}
+					if ($google_setup['forum_google'] && !isset($google_setup['forum_exclude'][$forum_id])) {
+							$url = sprintf($google_setup['forum_cat_google'], $_phpbb_seo ? str_replace($_f_sep . $forum_id, '', $phpbb_seo->seo_url['forum'][$forum_id]) . $_f_sep . $forum_id : '', $forum_id );
+							$link .= ' ' . sprintf($gym_link_tpl, $url, 'sitemap-icon.gif', sprintf($google_setup['l_google_sitemap_of'], $forum_name), $google_setup['l_google_sitemap']);
+					}
+					if ($link) {
+						$template->_tpldata['forumrow'][$k]['FORUM_DESC'] .= "<br/>$link";
+					}
+				}
+			}
+		}
+		if (!empty($template->_rootref['FORUM_NAME']) && !empty($template->_rootref['FORUM_ID'])) {
+			$forum_id = (int) $template->_rootref['FORUM_ID'];
+			$forum_name = $template->_rootref['FORUM_NAME'];
+			if (!empty($template->_tpldata['navlinks'])) {
+				$forum_data = & $template->_tpldata['navlinks'][count($template->_tpldata['navlinks']) - 1];
+			}
+			if (!empty($forum_data) && !isset($html_setup['forum_exclude'][$forum_id])) {
+				if ($_phpbb_seo && empty($phpbb_seo->seo_url['forum'][$forum_id])) {
+					$phpbb_seo->seo_url['forum'][$forum_id] = $phpbb_seo->set_url($forum_name, $forum_id, $phpbb_seo->seo_static['forum']);
+				}
+				if ($html_setup['forum_allow_cat_news']) {
+					$url = sprintf($html_setup['forum_cat_news'], $_phpbb_seo ? $phpbb_seo->seo_url['forum'][$forum_id] : '', $forum_id);
+					$title = sprintf($html_setup['l_html_news_of'], $forum_name);
+					$links['main']['GYM_HTML_FORUM_NEWS_LINK'] = sprintf($gym_link_tpl, $url, 'html_news.gif', $title, $html_setup['l_html_news']);
+				}
+				if ($html_setup['forum_allow_cat_map']) {
+					$url = sprintf($html_setup['forum_cat_map'], $_phpbb_seo ? $phpbb_seo->seo_url['forum'][$forum_id] : '', $forum_id );
+					$title = sprintf($html_setup['l_html_map_of'], $forum_name);
+					$links['main']['GYM_HTML_FORUM_MAP_LINK'] = sprintf($gym_link_tpl, $url, 'maps-icon.gif', $title, $html_setup['l_html_map']);
+				}
+			}
+			if (!empty($forum_data['S_IS_POST'])) {
+				if (!isset($rss_setup['forum_exclude'][$forum_id]) && $rss_setup['forum_rss']) {
+					$url = sprintf($rss_setup['forum_cat_rss'], $_phpbb_seo ? $phpbb_seo->seo_url['forum'][$forum_id] : '', $forum_id );
+					$title = sprintf($rss_setup['l_rss_feed_of'], $forum_name);
+					$links['main']['GYM_RSS_FORUM_LINK'] = sprintf($gym_link_tpl, $url, 'feed-icon.png', $title, $rss_setup['l_rss_feed']);
+					$links['alternate'][] = array(
+						'TITLE' => $title, 
+						'URL' => $url
+					);
+				}
+				if ($google_setup['forum_google'] && !isset($google_setup['forum_exclude'][$forum_id])) {
+					$url = sprintf($google_setup['forum_cat_google'], $_phpbb_seo ? str_replace($_f_sep . $forum_id, '', $phpbb_seo->seo_url['forum'][$forum_id]) . $_f_sep . $forum_id : '', $forum_id );
+					$title = sprintf($google_setup['l_google_sitemap_of'], $forum_name);
+					$links['main']['GYM_GOOGLE_FORUM_LINK'] = sprintf($gym_link_tpl, $url, 'sitemap-icon.gif', $title, $google_setup['l_google_sitemap']);
+				}
+			}
+		}
+	}
+	if (!empty($links['main'])) {
+		$template->assign_vars($links['main']);
+		foreach ($links['alternate'] as $alternate) {
+			$template->assign_block_vars('gym_rsslinks', $alternate);
+		}
+		unset($links);
+	}
+}
+/**
+* display_feed($params, $tpl_prefix = '')
+* $params : array of params or string feed URL for defaults
+* tpl_prefix is for using different link blocks on one page
+* Use display_feed('http://www.example.com/rss/rss.xml') to use default settings.
+* */
+function display_feed($params, $tpl_prefix = '') {
+	global $cache, $user, $config, $template, $phpbb_root_path, $phpEx;
+	if (is_string($params)) {
+		$params = array('url' => $params);
+	}
+	$_params = array(
+		'url' => trim(str_replace('&amp;', '&', $params['url'])),
+		'slide' => !empty($params['slide']),
+		'speed' => !empty($params['speed']) ? max((int) $params['speed'], 1) : 30,
+		'ttl' => !empty($params['ttl']) ? max((int) $params['ttl'], 0) : 3600,
+		'limit' => !empty($params['limit']) ? max((int) $params['limit'], 1) : 5,
+		'desc' => !empty($params['desc']),
+		'html' => !empty($params['html']),
+		'striptags' => !empty($params['striptags']),
+	);
+	if (empty($_params['url'])) {
+		return;
+	}
+	$cache_file = '_gym_links_' . md5($user->data['user_lang'] . $_params['url']);
+	if (($feed_data = $cache->get($cache_file)) === false) {
+		if (!defined('GYM_RSS_FUNC_INC')) {
+			require($phpbb_root_path . 'gym_sitemaps/includes/gym_rss_functions.' . $phpEx);
+		}
+		$feed_data = get_feed_data($_params);
+		$cache->put($cache_file, $feed_data, $_params['ttl']);
+	}
+	if (!empty($feed_data['items'])) {
+		$template->assign_vars(array($tpl_prefix . 'GYM_RSS_AGREGATED' => true,
+			$tpl_prefix . 'GYM_CHAN_TITLE' => $feed_data['setup']['chantitle'],
+			$tpl_prefix . 'GYM_CHAN_LINK' => $feed_data['setup']['chanlink'],
+			$tpl_prefix . 'GYM_CHAN_SOURCE' => $_params['url'],
+			$tpl_prefix . 'GYM_RSS_AUTHOR' => false,
+			$tpl_prefix . 'GYM_RSS_DATE' => $feed_data['setup']['date'],
+			$tpl_prefix . 'GYM_RSS_DESC' => $_params['desc'],
+			$tpl_prefix . 'GYM_RSS_SLIDE' => $_params['slide'],
+			$tpl_prefix . 'GYM_RSS_SLIDE_SP' => 'height:' . ($_params['desc'] ? $_params['limit']*45: $_params['limit']*20) . 'px;',
+			$tpl_prefix . 'GYM_RSS_SLIDE_SP_JS' => $_params['desc'] ? $_params['limit']*45 : $_params['limit']*20,
+			$tpl_prefix . 'GYM_RSS_SLIDE_EP' => $_params['desc'] ? (int) ($_params['limit']*$feed_data['setup']['desclen']/(count($feed_data['items'])*2.67)) : $_params['limit']*45,
+			$tpl_prefix . 'GYM_RSS_CSSID' => $tpl_prefix . 'gnews',
+			$tpl_prefix . 'GYM_RSS_SCRSPEED' => $_params['speed'],
+		));
+		$i = 1;
+		foreach ($feed_data['items'] as $item) {
+			if ($i > $_params['limit']) {
+				break;
+			}
+			$template->assign_block_vars(strtolower($tpl_prefix) . 'gym_link_list', $item);
+			$i++;
+		}
+		unset($feed_data);
 	}
 }
 /**
@@ -173,11 +272,23 @@ function get_override($mode, $key, $gym_config) {
 }
 /**
 * get_gym_option($mode, $type, $gym_config)
-* Same effect as gym_sitemaps::set_module_option()
-* For faster use outside the class, it will assume the option is set at the main level
+* Same effect as gym_sitemaps::set_module_option() but with all params and usable outisde the class
 */
-function get_gym_option($mode, $module, $key, $override, $gym_config) {
-	return ($override == OVERRIDE_MODULE && @isset($gym_config[$mode . '_' . $module . '_' . $key])) ? $gym_config[$mode . '_' . $module . '_' . $key] : ( ($override != OVERRIDE_GLOBAL && @isset($gym_config[$mode . '_' . $key])) ? $gym_config[$mode . '_' . $key] : $gym_config['gym_' . $key]);
+function get_gym_option($mode, $module, $key, $override, &$gym_config) {
+	return ($override == OVERRIDE_MODULE && @isset($gym_config[$mode . '_' . $module . '_' . $key])) ? $gym_config[$mode . '_' . $module . '_' . $key] : ( ($override != OVERRIDE_GLOBAL && @isset($gym_config[$mode . '_' . $key])) ? $gym_config[$mode . '_' . $key] : ( isset($gym_config['gym_' . $key]) ? $gym_config['gym_' . $key] : ( @isset($gym_config[$mode . '_' . $key]) ? $gym_config[$mode . '_' . $key] : ( @isset($gym_config[$mode . '_' . $module . '_' . $key]) ? $gym_config[$mode . '_' . $module . '_' . $key] : null ) ) ) );
+}
+/**
+* get_date_from_header($response_header_array)
+*/
+function get_date_from_header($response_header_array) {
+	if (is_array($response_header_array)) {
+		foreach ($response_header_array as $header_line) {
+			if (preg_match('`Date:(.+)`i', $header_line, $match)) {
+				return (int) strtotime(trim($match[1]));
+			}
+		}
+	}
+	return 0;
 }
 /**
 * numeric_entify_utf8() 

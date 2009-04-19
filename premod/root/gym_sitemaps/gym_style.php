@@ -2,8 +2,8 @@
 /**
 *
 * @package phpBB SEO GYM Sitemaps
-* @version $Id: gym_style.php 2007/04/12 13:48:48 dcz Exp $
-* @copyright (c) 2006 dcz - www.phpbb-seo.com
+* @version $id: gym_style.php - 11747 11-20-2008 11:43:24 - 2.0.RC1 dcz $
+* @copyright (c) 2006 - 2008 www.phpbb-seo.com
 * @license http://opensource.org/osi3.0/licenses/lgpl-license.php GNU Lesser General Public License
 *
 */
@@ -13,8 +13,11 @@ define('IN_PHPBB', true);
 $phpbb_root_path = (defined('PHPBB_ROOT_PATH')) ? PHPBB_ROOT_PATH : './../';
 $phpEx = substr(strrchr(__FILE__, '.'), 1);
 
+// Report all errors, except notices
+error_reporting(E_ALL ^ E_NOTICE);
+
 if (version_compare(PHP_VERSION, '6.0.0-dev', '<')) {
-	set_magic_quotes_runtime(0);
+	@set_magic_quotes_runtime(0);
 }
 // Load Extensions
 if (!empty($load_extensions)) {
@@ -42,7 +45,7 @@ $theme_id = isset($_GET['theme_id']) ? intval($_GET['theme_id']) : '';
 if (empty($language) && empty($action) && empty($type) && empty($theme_id)) {
 	// grabb vars like this because browser are not aggreeing on how to handle & in xml. FF only accpet & where IE and opera only accept &amp;
 	$qs = !empty($_SERVER['QUERY_STRING']) ? '?'.$_SERVER['QUERY_STRING'] : '';
-	preg_match('`action-(rss|google),type-(xsl),lang-([a-z]+),theme_id-([0-9]+)`', $qs, $matches );
+	preg_match('`action-(rss|google),type-(xsl),lang-([a-z_]+),theme_id-([0-9]+)`i', $qs, $matches );
 	$language = !empty($matches[3])  ? htmlspecialchars($matches[3]) : '';
 	$action = !empty($matches[1]) && in_array($matches[1], $action_expected) ? trim($matches[1]) : '';
 	$type = !empty($matches[2]) && in_array($matches[2], $type_expected) ? trim($matches[2]) : '';
@@ -81,6 +84,7 @@ if (!empty($action) && !empty($type) && !empty($language) && !empty($theme_id)) 
 		require($phpbb_root_path . 'includes/cache.' . $phpEx);
 		require($phpbb_root_path . 'includes/db/' . $dbms . '.' . $phpEx);
 		require($phpbb_root_path . 'includes/constants.' . $phpEx);
+		require($phpbb_root_path . 'includes/functions.' . $phpEx);
 		require_once($phpbb_root_path . 'gym_sitemaps/includes/gym_common.' . $phpEx);
 		$db = new $sql_db();
 		$cache = new cache();
@@ -88,7 +92,7 @@ if (!empty($action) && !empty($type) && !empty($language) && !empty($theme_id)) 
 		if (!@$db->sql_connect($dbhost, $dbuser, $dbpasswd, $dbname, $dbport, false, false)) {
 			exit;
 		}
-		unset($dbpasswd);
+		unset($dbhost, $dbuser, $dbpasswd, $dbname, $dbport);
 		$config = $cache->obtain_config();
 		$gym_config = array();
 		obtain_gym_config($action, $gym_config);
@@ -149,7 +153,7 @@ if (!empty($action) && !empty($type) && !empty($language) && !empty($theme_id)) 
 		if (file_exists($file)) {
 			$cached_time = filemtime($file);
 			$expire_time = $cached_time + $cache_ttl;
-			$recache = $expire_time < time() ? TRUE : (filemtime($style_file) > $cached_time ? TRUE : FALSE);
+			$recache = $expire_time < time() ? true : (filemtime($style_file) > $cached_time ? true : false);
 		} else {
 			$recache = true;
 			$expire_time = time() + $cache_ttl;
@@ -189,13 +193,15 @@ if (!empty($action) && !empty($type) && !empty($language) && !empty($theme_id)) 
 				// Do not remove !
 				'{L_COPY}'		=>  '<a href="http://www.phpbb-seo.com/" title="GYM Sitemaps &amp; RSS &#169; 2006, 2007, 2008 phpBB SEO" class="copyright"><img src="' . $phpbb_url . 'gym_sitemaps/images/phpbb-seo.png" alt="' . $lang['GYM_SEO'] . '"/></a>',
 				'{L_SEARCH_ADV_EXPLAIN}' => $lang['SEARCH_ADV_EXPLAIN'],
-				'{L_CHANGE_FONT_SIZE}' => $lang['CHANGE_FONT_SIZE'],
+				'{L_CHANGE_FONT_SIZE}'  => $lang['CHANGE_FONT_SIZE'],
 				'{L_SEARCH_ADV}' 	=> $lang['SEARCH_ADV'],
 				'{L_SEARCH}' 		=> $lang['SEARCH'],
 				'{L_BACK_TO_TOP}' 	=> $lang['BACK_TO_TOP'],
 				'{L_FAQ}' 		=> $lang['FAQ'],
 				'{L_FAQ_EXPLAIN}' 	=> $lang['FAQ_EXPLAIN'],
 				'{L_REGISTER}' 		=> $lang['REGISTER'],
+				'{L_SKIP}' 		=> $lang['SKIP'],
+				'{L_BOOKMARK_THIS}' 	=> $lang['GYM_BOOKMARK_THIS'],
 				'{SITENAME}' 		=> htmlspecialchars($config['sitename']),
 				'{SITE_DESCRIPTION}' 	=> $config['site_desc'],
 

@@ -1,6 +1,6 @@
 /*
 
- $Id: oracle_schema.sql 8666 2008-06-21 16:04:13Z acydburn $
+ $Id: oracle_schema.sql 8911 2008-09-23 13:03:33Z acydburn $
 
 */
 
@@ -602,6 +602,7 @@ CREATE TABLE phpbb_groups (
 	group_sig_chars number(8) DEFAULT '0' NOT NULL,
 	group_receive_pm number(1) DEFAULT '0' NOT NULL,
 	group_message_limit number(8) DEFAULT '0' NOT NULL,
+	group_max_recipients number(8) DEFAULT '0' NOT NULL,
 	group_legend number(1) DEFAULT '1' NOT NULL,
 	CONSTRAINT pk_phpbb_groups PRIMARY KEY (group_id)
 )
@@ -1431,6 +1432,8 @@ CREATE TABLE phpbb_styles_template (
 	template_path varchar2(100) DEFAULT '' ,
 	bbcode_bitfield varchar2(255) DEFAULT 'kNg=' NOT NULL,
 	template_storedb number(1) DEFAULT '0' NOT NULL,
+	template_inherits_id number(4) DEFAULT '0' NOT NULL,
+	template_inherit_path varchar2(255) DEFAULT '' ,
 	CONSTRAINT pk_phpbb_styles_template PRIMARY KEY (template_id),
 	CONSTRAINT u_phpbb_tmplte_nm UNIQUE (template_name)
 )

@@ -2,7 +2,7 @@
 /**
 *
 * @package ucp
-* @version $Id: ucp_activate.php 8479 2008-03-29 00:22:48Z naderman $
+* @version $Id: ucp_activate.php 8881 2008-09-18 14:50:11Z acydburn $
 * @copyright (c) 2005 phpBB Group
 * @license http://opensource.org/licenses/gpl-license.php GNU Public License
 *
@@ -65,6 +65,7 @@ class ucp_activate
 				'user_password'		=> $user_row['user_newpasswd'],
 				'user_newpasswd'	=> '',
 				'user_pass_convert'	=> 0,
+				'user_login_attempts'	=> 0,
 			);
 
 			$sql = 'UPDATE ' . USERS_TABLE . '

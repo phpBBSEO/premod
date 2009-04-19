@@ -5,7 +5,7 @@
 * translated originally by PhpBB-fr.com <http://www.phpbb-fr.com/> and phpBB.biz <http://www.phpBB.biz>
 *
 * @package language
-* @version $Id: posting.php,v 1.22 2008/07/03 17:17:26 Elglobo Exp $
+* @version $Id: posting.php,v 1.22 2008/11/14 13:56:00 elglobo Exp $
 * @copyright (c) 2005 phpBB Group 
 * @license http://opensource.org/licenses/gpl-license.php GNU Public License 
 *
@@ -143,7 +143,7 @@ $lang = array_merge($lang, array(
 	'PARTIAL_UPLOAD'			=> 'Le fichier n’a été que partiellement transféré.',
 	'PHP_SIZE_NA'				=> 'La taille du fichier joint est trop grande.<br />Impossible de déterminer la taille maximale définie par PHP dans php.ini.',
 	'PHP_SIZE_OVERRUN'			=> 'La taille du fichier joint est trop grande, la taille maximale est de %d Mo.<br />Notez que ce paramètre se trouve dans php.ini et ne peut pas être outrepassé.',
-	'PLACE_INLINE'				=> 'Mettre en ligne',
+	'PLACE_INLINE'				=> 'Insérer dans le message',
 	'POLL_DELETE'				=> 'Supprimer le sondage',
 	'POLL_FOR'					=> 'Durée du sondage',
 	'POLL_FOR_EXPLAIN'			=> 'Mettre “0” ou laissez vide pour ne jamais terminer le sondage.',

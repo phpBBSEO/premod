@@ -1,11 +1,16 @@
 <?php
-/** 
+/**
 *
-* install.php [French]
+* @package phpBB SEO GYM Sitemaps
+* @version $id: install.php - 8424 11-20-2008 14:38:27 - 2.0.RC1 dcz $
+* @copyright (c) 2006 - 2008 www.phpbb-seo.com
+* @license http://opensource.org/osi3.0/licenses/lgpl-license.php GNU Lesser General Public License
 *
-* @package GYM sitemaps
-* @version $Id: phpbb_seo.php, 2008/06/05 13:48:48 fds Exp $
-* @copyright (c) 2008 phpBB SEO www.phpbb-seo.com
+*/
+/**
+*
+* gym_common [French]
+* Translated By: Mathieu M. & gowap [ www.phpbb-seo.com ]
 *
 */
 /**

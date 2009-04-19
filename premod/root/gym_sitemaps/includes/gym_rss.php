@@ -2,8 +2,8 @@
 /**
 *
 * @package phpBB SEO GYM Sitemaps
-* @version $Id: gym_sitemaps.php 2008
-* @copyright (c) 2008 www.phpbb-seo.com
+* @version $id: gym_rss.php - 38220 11-20-2008 11:43:24 - 2.0.RC1 dcz $
+* @copyright (c) 2006 - 2008 www.phpbb-seo.com
 * @license http://opensource.org/osi3.0/licenses/lgpl-license.php GNU Lesser General Public License
 *
 */
@@ -37,6 +37,7 @@ class gym_rss extends gym_sitemaps {
 			set_config($config_name, $user->time_now, 1);
 		}
 		$this->output_data['last_mod_time'] = intval($config[$config_name]);
+		// Init the output class
 		$this->gym_init_output();
 		// Setup the output
 		$this->cache_config = array_merge(
@@ -93,7 +94,7 @@ class gym_rss extends gym_sitemaps {
 			'rss_cache_auth' => $this->set_module_option('cache_auth', $this->gym_config['rss_override']),
 			'rss_allow_content' => $this->set_module_option('allow_content', $this->gym_config['rss_override']),
 			'rss_allow_news' => $this->set_module_option('allow_news', $this->gym_config['rss_override']),
-			'rss_news_update' => round($this->set_module_option('allow_news', $this->gym_config['rss_override']), 2) * 3600,
+			'rss_news_update' => round($this->set_module_option('news_update', $this->gym_config['rss_override']), 2) * 3600,
 			'rss_allow_profile' => $this->set_module_option('allow_profile', $this->gym_config['rss_override']),
 			'rss_allow_profile_links' => $this->set_module_option('allow_profile_links', $this->gym_config['rss_override']),
 			'rss_sumarize' => (int) $this->set_module_option('sumarize', $this->gym_config['rss_override']),
@@ -106,7 +107,6 @@ class gym_rss extends gym_sitemaps {
 			'rss_allow_emails' => $this->set_module_option('allow_emails', $this->gym_config['rss_override']),
 			'rss_allow_smilies' => $this->set_module_option('allow_smilies', $this->gym_config['rss_override']),
 			'rss_yahoo_notify' => $this->set_module_option('yahoo_notify', $this->gym_config['rss_override']),
-			'rss_yahoo_notify_long' => $this->set_module_option('yahoo_notify_long', $this->gym_config['rss_override']),
 			'rss_yahoo_notify_url' => '',
 			'rss_msg_filters' => array(),
 			'rss_auth_msg' => '',
@@ -289,6 +289,9 @@ class gym_rss extends gym_sitemaps {
 		if (in_array($this->actions['module_main'], $this->actions['action_modules'])) { // List item from the module
 			$module_class = $this->actions['action_type'] . '_' . $this->actions['module_main'];
 			$this->load_module($module_class, 'rss_module');
+			if ( empty($this->output_data['url_sofar']) ) {
+				$this->gym_error(404, '', __FILE__, __LINE__);
+			}
 			$this->output_data['data'] = sprintf($this->style_config['rss_header'], $this->style_config['xslt_style'], $this->gym_config['gym_version'] ) . $this->output_data['data'] . $this->style_config['rss_footer'];
 		} else { // Add items from installed modules
 			$site_title = $this->gym_config['rss_sitename'];
@@ -306,12 +309,21 @@ class gym_rss extends gym_sitemaps {
 			// Since we are going to cycle through modules, we need to ajust URL limit and counting a bit
 			// URL limit, we take the last xx items from each feed 
 			// where xx is the URL limit divided by the number of feeds
-			$this->rss_config['rss_url_limit'] = intval($this->rss_config['rss_url_limit'] / count($this->actions['action_modules']));
+			$this->rss_config['rss_url_limit'] = !empty($this->actions['action_modules']) ? intval($this->rss_config['rss_url_limit'] / count($this->actions['action_modules'])) : 0;
+			if ( empty($this->rss_config['rss_url_limit']) ) {
+				$this->gym_error(404, '', __FILE__, __LINE__);
+			}
 			// start the modules
 			// We are working on all available modules
 			$this->load_modules('rss_main');
 			$this->output_data['url_sofar'] = $this->output_data['url_sofar_total'];
+			if ( empty($this->output_data['url_sofar']) ) {
+				$this->gym_error(404, '', __FILE__, __LINE__);
+			}
 			$this->output_data['data'] = sprintf($this->style_config['rss_header'], $this->style_config['xslt_style'], $this->gym_config['gym_version'] ) . $this->output_data['data'] . $this->style_config['rss_footer'];
+		}
+		if ( $this->rss_config['rss_yahoo_notify'] && ($this->output_data['time'] >= ($this->cache_config['cache_born'] + $this->cache_config['cache_max_age'])) ) {
+			$this->rss_yahoo_notify();
 		}
 		return;
 	}
@@ -370,71 +382,99 @@ class gym_rss extends gym_sitemaps {
 	function prepare_for_output($topic, $key = '') {
 		global $config, $user, $phpbb_seo;
 		static $bbcode;
+		static $patterns;
+		static $replaces;
 		$message_title = ($topic['post_id' . $key] != $topic['topic_first_post_id'] ? $user->lang['REPLIES']  . ' : ' : ''); 
-		$message = '<u>' . $message_title . (!empty($topic['post_subject' . $key]) ? $user->lang['POST_SUBJECT'] . ' : ' . $topic['post_subject' . $key] : $topic['topic_title']) . '</u>' . "\n\n" . $topic['post_text' . $key];
+		$message = '<b>' . $message_title . (!empty($topic['post_subject' . $key]) ? $user->lang['POST_SUBJECT'] . ' : ' . $topic['post_subject' . $key] : $topic['topic_title']) . '</b>' . "\n\n" . $topic['post_text' . $key];
 		$bbcode_uid = $topic['bbcode_uid' . $key];
 		$bitfield = $topic['bbcode_bitfield' . $key];
-		if ( !empty($this->rss_config['rss_msg_filters']['pattern']) ) {
-			$patterns = $this->rss_config['rss_msg_filters']['pattern'];
-			$replaces = $this->rss_config['rss_msg_filters']['replace'];
-			$message = preg_replace($patterns, $replaces, $message);		
+		if (!isset($patterns)) {
+			if ( !empty($this->rss_config['rss_msg_filters']['pattern']) ) {
+				$patterns = $this->rss_config['rss_msg_filters']['pattern'];
+				$replaces = $this->rss_config['rss_msg_filters']['replace'];
+			} else {
+				$patterns = $replaces = array();
+			}
 		}
 		if ($this->rss_config['rss_sumarize'] > 0 ) {
 			$message = $this->summarize( $message, $this->rss_config['rss_sumarize'], $this->rss_config['rss_sumarize_method'] );
-			// Close broken bbcode tags requiring it, only quotes for now
-			$this->close_bbcode_tags($message, $bbcode_uid, 'quote' );
+			// Close broken bbcode tags requiring it
+			$this->close_bbcode_tags($message, $bbcode_uid);
+		}
+		if (!empty($patterns)) {
+			$message = preg_replace($patterns, $replaces, $message);
 		}
 		$message = censor_text($message);
-		if ($bitfield) {
-			if ($this->rss_config['rss_allow_bbcode']) {
-				if (!class_exists('bbcode')) {
-					global $phpbb_root_path, $phpEx;
-					include_once($phpbb_root_path . 'includes/bbcode.' . $phpEx);
-				}
-				if (empty($bbcode)) {
-					$bbcode = new bbcode($bitfield);
-				} else {
-					$bbcode->bbcode($bitfield);
-				}
-				if ( !$this->rss_config['rss_allow_links'] ) {
-					$message = preg_replace("`\[/?url(=.*)?\]`i", "", $message);
-				}
-				$bbcode->bbcode_second_pass($message, $bbcode_uid);
+		if ($bitfield && $this->rss_config['rss_allow_bbcode']) {
+			if (!class_exists('bbcode')) {
+				global $phpbb_root_path, $phpEx;
+				include_once($phpbb_root_path . 'includes/bbcode.' . $phpEx);
 			}
+			if (empty($bbcode)) {
+				$bbcode = new bbcode($bitfield);
+			} else {
+				$bbcode->bbcode($bitfield);
+			}
+			if ( !$this->rss_config['rss_allow_links'] ) {
+				$message = preg_replace("`\[/?url(=.*)?\]`i", "", $message);
+			}
+			$bbcode->bbcode_second_pass($message, $bbcode_uid);
 		}
-		if ( $this->rss_config['rss_allow_links'] ) {
-			//@TODO fix the clipped url case
-			//$message = make_clickable($message, $phpbb_seo->seo_path['root_url']);
-		}
-		// Clean all possible bbcode tags left
-		$message = preg_replace('`\[\/?[^\]\[]*\]`i', '', $message);
 		// Parse smilies
-		if ( $this->rss_config['rss_allow_smilies'] && $topic['enable_smilies' . $key] ) {
-				$message = $this->smiley_text($message);
-		}
+		$message = $this->smiley_text($message, !($this->rss_config['rss_allow_smilies'] && $topic['enable_smilies' . $key]));
 		if ($this->rss_config['rss_sumarize'] > 0 ) {
+			// last clean up
+			static $_find = array('`\<\!--[^\<\>]+--\>`Ui', '`\<[^\<\>]*$`i', '`\[\/?[^\]\[]*\]`Ui');
+			$message = preg_replace($_find, '', $message);
 			$message .= "\n\n" . '<a href="' . $topic['topic_url' . $key] . '" title="'. censor_text($topic['topic_title']) .'"><b>' . $user->lang['RSS_MORE'] . ' ...</b></a>'. "\n\n";
 		}
 		return "\n" . $message;
 	}
 	/**
 	* close_bbcode_tags(&$message, $uid, $bbcodelist)
-	* Will close the bbcode tags requiring it (quote mostly for now)
+	* will tend to do it nicely ;-)
+	* Will close the bbcode tags requiring it in the list (quote|b|u|i|color|*|list)
+	* Beware, bo not reduce $bbcodelist without knowing what you are doing
 	*/
-	function close_bbcode_tags(&$message, $uid, $bbcodelist = 'quote') {
+	function close_bbcode_tags(&$message, $uid, $bbcodelist = 'quote|b|u|i|color|*|list') {
 		global $config, $user, $phpbb_seo;
-		static $bbcodes;
-		if (!is_array($bbcodes)) {
-			$bbcodes = explode('|', $bbcodelist);
+		$open_lists = $close_lists = array();
+		$bbcodelist = str_replace('|*', '|\*', $bbcodelist);
+		$open_count = preg_match_all('`\[(' . $bbcodelist . ')(\=([a-z0-9]{1}))?[^\]\[]*\:' . $uid . '\]`i', $message, $open_matches);
+		$close_count = preg_match_all('`\[/(' . $bbcodelist . ')(\:([a-z]{1}))?[^\]\[]*\:' . $uid . '\]`i', $message, $close_matches);
+		if ($open_count == $close_count) { // No need to go further
+			return;
 		}
-		foreach ($bbcodes as $bbcode) {
-			$open_count = preg_match_all('`\[(' . $bbcode . ')[^\]\[]*\:' . $uid . '\]`i', $message, $open_matches);
-			$close_count = preg_match_all('`\[/(' . $bbcode . ')[^\]\[]*\:' . $uid . '\]`i', $message, $close_matches);
-			$tags_to_close = $open_count - $close_count;
-			if ($tags_to_close > 0 ) {
-				for ($i=1; $i<=$tags_to_close; $i++) {
-					$message .= "[/$bbcode:$uid]";
+		if (!empty($open_matches[1])) {
+			$open_list = array_count_values($open_matches[1]);
+			$close_list = !empty($close_matches[1]) ? array_count_values($close_matches[1]) : array();
+			$list_to_close = array();
+			if (isset($open_list['list'])) {
+				foreach ($open_matches[1] as $k => $v) {
+					if ($v == 'list') {
+						$open_lists[] = !empty($open_matches[3][$k]) ? 'o' : 'u';
+					}
 				}
+				if (!empty($close_matches[1])) {
+					foreach ($close_matches[1] as $k => $v) {
+						if ($v == 'list') {
+							$close_lists[] = !empty($close_matches[3][$k]) ? 'o' : 'u';
+						}
+					}
+				}
+				$list_to_close = array_reverse(array_diff_assoc($open_lists, $close_lists));
+			}
+			unset($open_list['*'], $open_list['list']);
+			foreach ($open_list as $bbcode => $total) {
+				if (empty($close_list[$bbcode]) || $close_list[$bbcode] < $total) {
+					// close the tags
+					$diff = empty($close_list[$bbcode]) ? $total : $total - $close_list[$bbcode];
+					$message .= str_repeat("[/$bbcode:$uid]", $diff);
+				}
+			}
+			// Close the lists if required
+			foreach ($list_to_close as $ltype) {
+				$message .= "[/*:m:$uid][/list:$ltype:$uid]";
 			}
 		}
 		return;
@@ -450,34 +490,8 @@ class gym_rss extends gym_sitemaps {
 	*/
 	function set_msg_strip($bbcode_list) {
 		$patterns = $replaces = array();
-		// Take care about links & emails
-		if ( !$this->rss_config['rss_allow_links'] ) {
-			if ( !$this->rss_config['rss_allow_emails'] ) { // Saves couple RegEx
-				$email_find = '[a-z0-9&\'\.\-_\+]+@[a-z0-9\-]+\.([a-z0-9\-]+\.)*[a-z]+';
-				$email_replace = 'str_replace(array("@", "."), array("  AT  ", " DOT "),"\\1")';
-				$email_option = 'e';
-			} else {
-				$email_find = '.*?';
-				$email_replace = "\\1";
-				$email_option = '';
-			}
-			$patterns = array ('`<!\-\- ([lmw]+) \-\-><a (?:class="[\w-]+" )?href="(.*?)">.*?</a><!\-\- \1 \-\->`i',
-				'`\[/?url[^\[\]]*\]`i',
-				'`<!\-\- e \-\-><a href="mailto:(' . $email_find . ')">.*?</a><!\-\- e \-\->`i' . $email_option,
-			);
-			$replaces = array("\\2", '', $email_replace);
-
-		}
-		if ( !$this->rss_config['rss_allow_emails'] && $this->rss_config['rss_allow_links'] ) {
-			$patterns[] = '`<!\-\- e \-\-><a href="mailto:([a-z0-9&\'\.\-_\+]+@[a-z0-9\-]+\.([a-z0-9\-]+\.)*[a-z]+)">.*?</a><!\-\- e \-\->`ei';
-			$replaces[] = 'str_replace(array("@", "."), array("  AT  ", " DOT "),"\\1")';
-		}
-		if ( !$this->rss_config['rss_allow_smilies'] ) {
-			$patterns[] = '`<!\-\- s(.*?) \-\-><img src="\{SMILIES_PATH\}\/.*? \/><!\-\- s\1 \-\->`i';
-			$replaces[] = "\\1";
-		}
 		// Now the bbcodes
-		if (preg_match('`all\:?([0-1]*)`i', $bbcode_list, $matches)) {
+		if (!$this->rss_config['rss_allow_bbcode'] || preg_match('`all\:?([0-1]*)`i', $bbcode_list, $matches)) {
 			if ( (@$matches[1] != 1 ) ) {
 				$patterns[] = '`\[\/?[a-z0-9\*\+\-]+(?:=(?:&quot;.*&quot;|[^\]]*))?(?::[a-z])?(\:[0-9a-z]{5,})\]`i';
 				$replaces[] = '';
@@ -488,12 +502,34 @@ class gym_rss extends gym_sitemaps {
 			$patterns[] = '`<[^>]*>(.*<[^>]*>)?`Usi'; // All html
 			$replaces[] = '';
 		} else {
+			// Take care about links & emails
+			if ( !$this->rss_config['rss_allow_links'] ) {
+				if ( !$this->rss_config['rss_allow_emails'] ) { // Saves couple RegEx
+					$email_find = '[a-z0-9&\'\.\-_\+]+@[a-z0-9\-]+\.([a-z0-9\-]+\.)*[a-z]+';
+					$email_replace = 'str_replace(array("@", "."), array("  AT  ", " DOT "),"\\1")';
+					$email_option = 'e';
+				} else {
+					$email_find = '.*?';
+					$email_replace = "\\1";
+					$email_option = '';
+				}
+				$patterns[] = '`<!\-\- ([lmw]+) \-\-><a (?:class="[\w-]+" )?href="(.*?)">.*?</a><!\-\- \1 \-\->`i';
+				$replaces[] = "\\2";
+				$patterns[] = '`\[/?url[^\]\[]*\]`i';
+				$replaces[] = '';
+				$patterns[] = '`<!\-\- e \-\-><a href="mailto:(' . $email_find . ')">.*?</a><!\-\- e \-\->`i' . $email_option;
+				$replaces[] = $email_replace;
+			}
+			if ( !$this->rss_config['rss_allow_emails'] && $this->rss_config['rss_allow_links'] ) {
+				$patterns[] = '`<!\-\- e \-\-><a href="mailto:([a-z0-9&\'\.\-_\+]+@[a-z0-9\-]+\.([a-z0-9\-]+\.)*[a-z]+)">.*?</a><!\-\- e \-\->`ei';
+				$replaces[] = 'str_replace(array("@", "."), array("  AT  ", " DOT "),"\\1")';
+			}
 			$exclude_list =  ( empty($bbcode_list) ? array() : explode(',', $bbcode_list) );
 			$RegEx_unset = $RegEx_remove = '';
 			foreach ($exclude_list as $key => $value ) { // Group the RegEx
 				$value = trim($value);
 				if (preg_match("`[a-z0-9]+(\:([0-1]*))?`i", $value, $matches) ) {
-					$values = (strpos($value, ':') !== FALSE) ?  explode(':', $value) : array($value);
+					$values = (strpos($value, ':') !== false) ?  explode(':', $value) : array($value);
 					if ( (@$matches[2] != 1 ) ) {
 						$RegEx_unset .= (!empty($RegEx_unset) ? '|' : '' ) . $values[0];
 					} else {
@@ -509,23 +545,8 @@ class gym_rss extends gym_sitemaps {
 				$patterns[] =  '`\[/?(' . $RegEx_unset . ')(?:=(?:&quot;.*&quot;|[^\]]*))?(?::[a-z])?(\:[0-9a-z]{5,})\]`i';
 				$replaces[] = '';
 			}
-			// Final cleanup
-			$patterns[] =  '`<!\-\- [a-z0-9]+ \-\->`i';
-			$replaces[] = '';
 		}
-
 		return  array('pattern' => $patterns, 'replace' => $replaces);
-	}
-	/**
-	* Smiley processing, the phpBB3 function, but, with obolute linking
-	*/
-	function smiley_text($text, $force_option = false) {
-		global $config, $user, $phpbb_seo;
-		if ($force_option || !$config['allow_smilies'] || !$user->optionget('viewsmilies')) {
-			return preg_replace('#<!\-\- s(.*?) \-\-><img src="\{SMILIES_PATH\}\/.*? \/><!\-\- s\1 \-\->#', '\1', $text);
-		} else {
-			return preg_replace('#<!\-\- s(.*?) \-\-><img src="\{SMILIES_PATH\}\/(.*?) \/><!\-\- s\1 \-\->#', '<img src="' . $phpbb_seo->seo_path['phpbb_url'] . $config['smilies_path'] . '/\2 />', $text);
-		}
 	}
 	/**
 	* Some text formating functions for text output
@@ -539,7 +560,7 @@ class gym_rss extends gym_sitemaps {
 	* Summarize method selector
 	* @access private
 	*/
-	function summarize($string, $limit, $method = 'setences') {
+	function summarize($string, $limit, $method = 'lines') {
 		switch ($method) {
 			case 'words':
 				return $this->word_limit($string, $limit);
@@ -547,117 +568,121 @@ class gym_rss extends gym_sitemaps {
 			case 'chars':
 				return $this->char_limit($string, $limit);
 				break;
-			case 'sentences':
+			case 'lines':
 			default:
-				return $this->sentence_limit($string, $limit);
+				return $this->line_limit($string, $limit);
 				break;
 		}
 	}
 	/**
-	* Cut the text by sentences, sort of.
-	* Borrowed from www.php.net http://www.php.net/strtok
+	* Cut the text by lines
 	* @access private
 	*/
-	function sentence_limit($paragraph, $limit = 10, $ellipsis = ' ...') {
-		$tok = strtok($paragraph, " ");
-		$text = "";
-		$sentences = 1;
-		while($tok){
-			$text .= " " . $tok;
-			if ( (substr($tok, -1) == '!') || (substr($tok, -1) == '.') || (substr($tok, -1) == '?') ) {
-				$sentences++;
-			}
-			if( $sentences > $limit ) {
-				break;
-			}
-			$tok = strtok(" ");
-		}
-		return trim($text) . ($tok ? $ellipsis : "");
+	function line_limit($string, $limit = 10, $ellipsis = ' ...') {
+		return count($lines = preg_split("`[\n\r]+`", ltrim($string), $limit + 1)) > $limit ? rtrim(utf8_substr($string, 0, utf8_strlen($string) - utf8_strlen(end($lines)))) . $ellipsis : $string;
 	}
 	/**
 	* Cut the text according to the number of words.
 	* Borrowed from www.php.net http://www.php.net/preg_replace
 	* @access private
 	*/
-	function word_limit($string, $length = 50, $ellipsis = ' ...') {
-		return count($words = preg_split('/\s+/', ltrim($string), $length + 1)) > $length ? rtrim(utf8_substr($string, 0, utf8_strlen($string) - utf8_strlen(end($words)))) . $ellipsis : $string;
+	function word_limit($string, $limit = 50, $ellipsis = ' ...') {
+		return count($words = preg_split('`\s+`', ltrim($string), $limit + 1)) > $limit ? rtrim(utf8_substr($string, 0, utf8_strlen($string) - utf8_strlen(end($words)))) . $ellipsis : $string;
 	}
 	/**
 	* Cut the text according to the number of characters.
 	* Borrowed from www.php.net http://www.php.net/preg_replace
 	* @access private
 	*/
-	function char_limit($string, $length = 100, $ellipsis = ' ...') {
-		return utf8_strlen($fragment = utf8_substr($string, 0, $length + 1 - utf8_strlen($ellipsis))) < utf8_strlen($string) + 1 ? preg_replace('/\s*\S*$/', '', $fragment) . $ellipsis : $string;
+	function char_limit($string, $limit = 100, $ellipsis = ' ...') {
+		return utf8_strlen($fragment = utf8_substr($string, 0, $limit + 1 - utf8_strlen($ellipsis))) < utf8_strlen($string) + 1 ? preg_replace('`\s*\S*$`', '', $fragment) . $ellipsis : $string;
 	}
 
 	// --> Yahoo! Notification functions <--
 	/**
-	* rss_yahoo_notify() will handle yahoo notification of new content
+	* rss_yahoo_notify($url) will handle yahoo notification of new content
 	* @access private
 	*/
-	function rss_yahoo_notify() {
-		global $user;
-		$not_curl= TRUE;
-		if ($this->rss_config['rss_yahoo_notify']) {
-			if ( $this->rss_config['yahoo_notify_url'] != '' && $this->rss_config['yahoo_appid'] != '') {
-				// The Yahoo! Web Services request
-				// Based on the Yahoo! developper hints : http://developer.yahoo.com/php/
-				$request = "http://search.yahooapis.com/SiteExplorerService/V1/updateNotification?appid=" . urlencode($this->rss_config['yahoo_appid']) . '&url=' . urlencode($url);
-				if (function_exists('curl_exec')) {
-					$not_curl= FALSE;
-					// Initialize the session
-					$session = curl_init($request);
-					// Set curl options
-					curl_setopt($session, CURLOPT_HEADER, false);
-					curl_setopt($session, CURLOPT_RETURNTRANSFER, true);
-					// Make the request
-					$response = curl_exec($session);
-					// Close the curl session
-					curl_close($session);
-					// Get HTTP Status code from the response
-					$status_codes = array();
-					preg_match('/\d\d\d/', $response, $status_code);
-					$status_code = $status_codes[0];
-					// Get the XML from the response, bypassing the header
-					if (!($xml = strstr($response, '<?xml'))) {
-						$xml = null;
-						$not_curl= TRUE;
-					}
-				} else if ( $not_curl && function_exists('file_get_contents') ) {
-					// Make the request
-					if ($xml = file_get_contents($request)) {
-						// Retrieve HTTP status code
-						list($version,$status_code,$msg) = explode(' ',$http_response_header[0], 3);
-					} else {
-					//	$user->lang['RSS_YAHOO_NO_METHOD'] = sprintf($user->lang['RSS_YAHOO_NO_METHOD'], $request, $xml);
-						$this->gym_error(503, '',  __FILE__, __LINE__);
-					}
-				}
-				// Check the XML return message
-				// Do it this way here in case curl actually returned no header 
-				// but did get the proper answer. 
-				if (!strpos($xml, 'success')) {
-					// Check the HTTP Status code
-					switch( $status_code ) {
-						case 200:
-							// Success
-							break;
-						case 503:
-							$this->gym_error(500, '', __FILE__, __LINE__);
-							break;
-						case 403:
-							$this->gym_error(500, '', __FILE__, __LINE__);
-							break;
-						case 400:
-						//	$user->lang['RSS_YAHOO_400_MSG'] = sprintf($user->lang['RSS_YAHOO_400_MSG'], $request, $xml);
-							$this->gym_error(500,'RSS_YAHOO_400',  __FILE__, __LINE__);
-							break;
-						default:
-						//	$user->lang['RSS_YAHOO_ERROR_MSG'] = sprintf($user->lang['RSS_YAHOO_400_MSG'], $status_code, $request, $xml);
-							$this->gym_error(500, '', __FILE__, __LINE__);
-					}
-				}
+	function rss_yahoo_notify($url = '') {
+		global $user, $config;
+		$url = !empty($url) ? str_replace('&amp;', '&', $url) : (!empty($this->url_config['rss_yahoo_notify_url']) ? $this->url_config['rss_yahoo_notify_url'] : '');
+		$url = trim($url);
+		if (empty($url) || !$this->rss_config['rss_yahoo_notify'] || empty($this->rss_config['yahoo_appid'])) {
+			return;
+		}
+		// No more than 200 pings a day!
+		if (@$config['gym_pinged_today'] > 200) {
+			// @TODO add logs about this ?
+			return;
+		}
+		$skip = array('http://localhost', 'http://127.0.0.1', 'http://192.168.');
+		foreach ($skip as $_skip) {
+			if (utf8_strpos($url, $_skip) !== false) {
+				// @TODO add logs about this ?
+				return;
+			}
+		}
+		$not_curl= true;
+		$timout = 3;
+		// The Yahoo! Web Services request
+		// Based on the Yahoo! developper hints : http://developer.yahoo.com/php/
+		$request = "http://search.yahooapis.com/SiteExplorerService/V1/updateNotification?appid=" . urlencode($this->rss_config['yahoo_appid']) . '&url=' . urlencode($url);
+		if (function_exists('curl_exec')) {
+			$not_curl= false;
+			// Initialize the session
+			$session = curl_init($request);
+			// Set curl options
+			curl_setopt($session, CURLOPT_HEADER, false);
+			curl_setopt($session, CURLOPT_USERAGENT, 'GYM Sitemaps &amp; RSS / www.phpBB-SEO.com');
+			curl_setopt($session, CURLOPT_TIMEOUT, $timout);
+			curl_setopt($session, CURLOPT_RETURNTRANSFER, true);
+			// Make the request
+			$response = curl_exec($session);
+			// Close the curl session
+			curl_close($session);
+			// Get HTTP Status code from the response
+			$status_codes = array();
+			preg_match('/\d\d\d/', $response, $status_code);
+			$status_code = $status_codes[0];
+			// Get the XML from the response, bypassing the header
+			if (!($xml = strstr($response, '<?xml'))) {
+				$xml = null;
+				$not_curl= true;
+			}
+		} else if ( $not_curl && function_exists('file_get_contents') ) {
+			ini_set('user_agent','GYM Sitemaps &amp; RSS / www.phpBB-SEO.com');
+			ini_set('default_socket_timeout', $timout);
+			// Make the request
+			if ($xml = file_get_contents($request)) {
+				// Retrieve HTTP status code
+				list($version,$status_code,$msg) = explode(' ',$http_response_header[0], 3);
+			} else {
+			//	$user->lang['RSS_YAHOO_NO_METHOD'] = sprintf($user->lang['RSS_YAHOO_NO_METHOD'], $request, $xml);
+				$this->gym_error(503, 'RSS_YAHOO_NO_METHOD',  __FILE__, __LINE__);
+			}
+		}
+		// Check the XML return message
+		// Do it this way here in case curl actually returned no header 
+		// but did get the proper answer. 
+		if (!strpos($xml, 'success')) {
+			// Check the HTTP Status code
+			switch( $status_code ) {
+				case 200: // Success
+					set_config('gym_pinged_today', @$config['gym_pinged_today'] + 1, 1);
+					break;
+				case 503:
+					$this->gym_error(500, 'RSS_YAHOO_503', __FILE__, __LINE__);
+					break;
+				case 403:
+					$this->gym_error(500, 'RSS_YAHOO_403', __FILE__, __LINE__);
+					break;
+				case 400:
+				//	$user->lang['RSS_YAHOO_400_MSG'] = sprintf($user->lang['RSS_YAHOO_400_MSG'], $request, $xml);
+					$this->gym_error(500,'RSS_YAHOO_400',  __FILE__, __LINE__);
+					break;
+				default:
+				//	$user->lang['RSS_YAHOO_ERROR_MSG'] = sprintf($user->lang['RSS_YAHOO_400_MSG'], $status_code, $request, $xml);
+					$this->gym_error(500, 'RSS_YAHOO_500', __FILE__, __LINE__);
 			}
 		}
 		return;

@@ -2,8 +2,8 @@
 /**
 *
 * @package phpBB SEO GYM Sitemaps
-* @version $Id: gym_sitemaps.php 2007/04/12 13:48:48 dcz Exp $
-* @copyright (c) 2006 dcz - www.phpbb-seo.com
+* @version $id: gym_sitemaps.php - 26281 11-21-2008 09:24:02 - 2.0.RC1 dcz $
+* @copyright (c) 2006 - 2008 www.phpbb-seo.com
 * @license http://opensource.org/osi3.0/licenses/lgpl-license.php GNU Lesser General Public License
 *
 */
@@ -37,11 +37,12 @@ class gym_sitemaps {
 	var $ext_config = array();
 	var $gzip_config = array();
 	var $style_config = array();
+	var $gym_auth = array();
 	/**
 	* constuctor
 	*/
 	function gym_sitemaps($action_type = '') {
-		global $phpEx, $phpbb_seo, $user, $config, $phpbb_root_path, $_action_types, $_override_types;
+		global $phpEx, $phpbb_seo, $user, $config, $phpbb_root_path, $_action_types, $_override_types, $auth;
 		$start_time = $phpbb_seo->microtime_float();
 		// Set default values
 		$this->gym_config = $this->actions = array();
@@ -49,13 +50,16 @@ class gym_sitemaps {
 		$this->actions['action_types'] = $_action_types;
 		$this->actions['action_type'] = in_array($action_type, $this->actions['action_types']) ? $action_type : '';
 		$this->actions['extra_params'] = $this->actions['extra_params_full'] = $this->actions['auth_param'] = $this->actions['sql_report_msg'] = '';
-		$this->actions['auth_guest_list'] = array();
+		$this->actions['auth_guest_list'] = $this->actions['auth_view_list'] = array();
 		$this->actions['robots_patterns'] = array();
 		if (empty($this->actions['action_type']) ) {
 			$this->gym_error(403, '', __FILE__, __LINE__);
 		}
 		// Grab required config
 		obtain_gym_config($this->actions['action_type'], $this->gym_config);
+		if (empty($this->gym_config) ) {
+			$this->gym_error(404, '', __FILE__, __LINE__);
+		}
 		// Set the overidding options
 		$this->set_override();
 		$this->path_config = array('gym_path' => $phpbb_root_path . 'gym_sitemaps/',
@@ -72,19 +76,34 @@ class gym_sitemaps {
 			'data' => '',
 			'expires_time' => 0,
 		);
+		// Ceck the day interval and reset pinged
+		if (@$config['gym_today'] < $this->output_data['time']) {
+			set_config('gym_today', $this->output_data['time'] + 3600*24, 1);
+			set_config('gym_pinged_today', 0, 1);
+		}
 		$this->url_config = array( 'start_default' => '&amp;start=',
 			'google_default' => "sitemap.$phpEx",
-			'html_default' => "sitemaps.$phpEx",
+			'html_default' => "map.$phpEx",
 			'rss_default' => "gymrss.$phpEx",
 			'gzip_ext_out' => '',
 			'zero_dupe' => (boolean) $this->gym_config['gym_zero_dupe'],
 			'uri' => $phpbb_seo->seo_path['uri'],
+			'current' => '',
 		);
 		$this->gzip_config = array('gzip_level' => (int) $this->gym_config['gym_gzip_level']);
 		$this->cache_config = array( 
 			'do_cache' => true, // this is used when preventing the caching of private content.
 			'cached' => 'false',
 			'mod_since' => (boolean) $this->gym_config['gym_mod_since'],
+		);
+		// init $gym_auth
+		$this->gym_auth = array(
+			'admin' => $auth->acl_gets('a_') ? true : false,
+			'globalmod' => $auth->acl_getf_global('m_') ? true : false,
+			'reg' => $user->data['is_registered'] ? true : false,
+			'guest' => $user->data['is_registered'] ? false : true,
+			'all' => true,
+			'none' => false,
 		);
 		// Clear buffer, just in case it was started elswhere
 		while (@ob_end_clean());
@@ -151,7 +170,7 @@ class gym_sitemaps {
 	* Optional, starts a method
 	* @access private
 	*/
-	function load_module( $module_class, $method = '' ) {
+	function load_module( $module_class, $method = '', $return = false ) {
 		global $phpEx;
 		$module_file = $this->path_config['gym_path'] . 'modules/' . $module_class . '.' . $phpEx;
 		if ( file_exists($module_file) && @$this->gym_config[$module_class . '_installed']) {
@@ -160,6 +179,9 @@ class gym_sitemaps {
 				$gym_module = new $module_class($this);
 				if ( !empty($method) && method_exists($gym_module, $method)) {
 					$gym_module->$method();
+				}
+				if ($return) {
+					return $gym_module;
 				}
 			}
 		} else {
@@ -175,6 +197,13 @@ class gym_sitemaps {
 		global $phpEx;
 		include_once($this->path_config['gym_path'] . 'includes/gym_output.' . $phpEx);
 		$this->gym_output = new gym_output($this);
+	}
+	/**
+	* gym_auth_value()
+	* @access private
+	*/
+	function gym_auth_value($value) {
+		return !empty($this->gym_auth[$value]);
 	}
 	/**
 	* username_string()
@@ -274,77 +303,66 @@ class gym_sitemaps {
 		if (!is_array($exclude_list)) {
 			$exclude_list = array();
 		}
+		$cache_file = '_gym_auth_forum_guest';
 		// First check the public forum list
-		if (($this->actions['auth_guest_list'] = $cache->get('_gym_config_' . $this->actions['action_type'] . '_forum_guest' )) === false) {
-			$this->actions['auth_guest_list'] = array();
+		if (($forum_auth_list = $cache->get($cache_file)) === false) {
+			$forum_auth_list = array('list' => array(), 'skip' => array());
 			$guest_data = array('user_id' => ANONYMOUS,
 				'user_type' => USER_IGNORE,
-				'user_permissions' => '',
+				'user_permissions' . (defined('XLANG_AKEY') ? XLANG_AKEY : '') => '',
 			);
-			$auth->acl($guest_data);
+			$g_auth = new auth();
+			$g_auth->acl($guest_data);
 			// the unwanted forum id array
-			$forum_read_ary = $auth->acl_getf('!f_read');
-			foreach ($forum_read_ary as $forum_id => $not_allowed) {
-				if ($not_allowed['f_read']) {
-					$forum_id = (int) $forum_id;
-					$this->actions['auth_guest_list'][$forum_id] = $forum_id;
-				}
+			$forum_read_ary = $g_auth->acl_getf('!f_list', true);
+			foreach ($forum_read_ary as $forum_id => $null) {
+				$forum_auth_list['list'][$forum_id] = (int) $forum_id;
 			}
-			if ($user->data['is_registered']) {
-				$auth->acl($user->data);
-			}
-			$need_cache = true;
-		}
-		// Filter non postable forum and forum with password
-		if (($not_to_list = $cache->get('_gym_config_' . $this->actions['action_type'] . '_forum_skip' )) === false) {
-			if (!$not_to_list) {
-				$not_to_list = array();
-			}
-			$not_in_id_sql = !empty($this->actions['auth_guest_list']) ?  ' WHERE ' . $db->sql_in_set('forum_id', $this->actions['auth_guest_list'], true) . ' AND ' : ' WHERE ';
-			$sql = "SELECT forum_id
-				FROM " . FORUMS_TABLE . $not_in_id_sql . " forum_type <> " . FORUM_POST . " OR forum_password <> ''";
+			ksort($forum_auth_list['list']);
+			$skip = array('pass' => array(), 'cat' => array(), 'all' => array(), 'link' => array());
+			$sql = "SELECT forum_id, forum_type, forum_password
+				FROM " . FORUMS_TABLE . "
+				WHERE	forum_type <> " . FORUM_POST . " OR forum_password <> ''";
 			$result = $db->sql_query($sql);
 			while ( $row = $db->sql_fetchrow($result) ) {
 				$forum_id = (int) $row['forum_id'];
-				$not_to_list[$forum_id] = $forum_id;
+				if ($row['forum_password']) {
+					$skip['pass'][$forum_id] = $forum_id;
+				}
+				if ($row['forum_type'] == FORUM_CAT) {
+					$skip['cat'][$forum_id] = $forum_id;
+				} else if ($row['forum_type'] == FORUM_LINK) {
+					$skip['link'][$forum_id] = $forum_id;
+				}
+				$skip['all'][$forum_id] = $forum_id;
 			}
 			$db->sql_freeresult($result);
-			ksort($not_to_list);
-			$cache->put('_gym_config_' . $this->actions['action_type'] . '_forum_skip' , $not_to_list);
+			ksort($skip['pass']);
+			ksort($skip['all']);
+			ksort($skip['link']);
+			ksort($skip['cat']);
+			$forum_auth_list['skip'] = & $skip;
+			$forum_auth_list['post'] = $forum_auth_list['list'] + $skip['all'];
+			ksort($forum_auth_list['post']);
+			$cache->put($cache_file, $forum_auth_list);
 		}
-		if ($need_cache) {
-			// add the exclude list ids
-			if (!empty($exclude_list)) {
-				foreach ($exclude_list as $forum_id) {
-					$forum_id = (int) $forum_id;
-					$this->actions['auth_guest_list'][$forum_id] = $forum_id;
-				}
-			}
-			// add the non postable forum and forum with password
-			if (!empty($not_to_list)) {
-				foreach ($not_to_list as $forum_id) {
-					$forum_id = (int) $forum_id;
-					$this->actions['auth_guest_list'][$forum_id] = $forum_id;
-				}
-			}
-			ksort($this->actions['auth_guest_list']);
-			$cache->put('_gym_config_' . $this->actions['action_type'] . '_forum_guest' , $this->actions['auth_guest_list']);
-		}
+		$this->actions['auth_guest_full'] = & $forum_auth_list;
+		$this->actions['auth_guest_list'] = & $forum_auth_list['post'];
+		$this->actions['auth_view_list'] = $forum_auth_list['list'];
+		$this->actions['auth_password'] = & $forum_auth_list['skip']['pass'];
 		if ($guest_auth) { // sometime, we need to check guest auths, even if user is registered
 			$this->actions['auth_param'] = implode('-', $this->actions['auth_guest_list']);
 			return $this->actions['auth_guest_list'];
 		}
 		// else handle the real auth
-		$forum_read_ary = $auth->acl_getf('!f_read');
-		foreach ($forum_read_ary as $forum_id => $not_allowed) {
-			if ($not_allowed['f_read']) {
-				$forum_id = (int) $forum_id;
-				$exclude_list[$forum_id] = $forum_id;
-			}
+		$forum_read_ary = $auth->acl_getf('!f_list', true);
+		foreach ($forum_read_ary as $forum_id => $null) {
+			$exclude_list[$forum_id] = (int) $forum_id;
 		}
-		// And the non postable forums
-		if (!empty($not_to_list)) {
-			foreach ($not_to_list as $forum_id) {
+		$this->actions['auth_view_list'] = $exclude_list;
+		// And the non postable / password protected forums
+		if (!empty($forum_auth_list['skip']['all'])) {
+			foreach ($forum_auth_list['skip']['all'] as $forum_id) {
 				$forum_id = (int) $forum_id;
 				$exclude_list[$forum_id] = $forum_id;
 			}
@@ -352,6 +370,22 @@ class gym_sitemaps {
 		ksort($exclude_list);
 		$this->actions['auth_param'] = implode('-', $exclude_list);
 		return $exclude_list;
+	}
+	/**
+	* Smiley processing, the phpBB3 function, but, with absolute linking
+	* a little optimization and regular config bypass.
+	*/
+	function smiley_text($text, $force_option = false) {
+		global $config, $user, $phpbb_seo;
+		static $viewsmilies;
+		if (!isset($viewsmilies)) { // Costs less than optionget ;-)
+			$viewsmilies = $user->optionget('viewsmilies');
+		}
+		if ($force_option || !$viewsmilies) {
+			return preg_replace('#<!\-\- s(.*?) \-\-><img src="\{SMILIES_PATH\}\/.*? \/><!\-\- s\1 \-\->#', '\1', $text);
+		} else {
+			return preg_replace('#<!\-\- s(.*?) \-\-><img src="\{SMILIES_PATH\}\/(.*?) \/><!\-\- s\1 \-\->#', '<img src="' . $phpbb_seo->seo_path['phpbb_url'] . $config['smilies_path'] . '/\2 />', $text);
+		}
 	}
 	/**
 	* obtain_robots_disallows()
@@ -408,10 +442,13 @@ class gym_sitemaps {
 	* @access private
 	*/
 	function set_exclude_list($id_list) {
-		$exclude_list = ( empty($id_list) ? array() : explode(',', $id_list) );
+		$exclude_list = empty($id_list) ? array() : explode(',', $id_list);
 		$ret = array();
-		foreach ($exclude_list as $key => $value ) {
-			$ret[intval($value)] = intval($value);
+		foreach ($exclude_list as $value ) {
+			$value = (int) trim($value);
+			if (!empty($value)) {
+				$ret[$value] = $value;
+			}
 		}
 		return $ret;
 	}
@@ -461,6 +498,18 @@ class gym_sitemaps {
 		return ( $start > 0  ? ($delim == '/' ? $phpbb_seo->seo_static['pagination'] . intval($start) . $phpbb_seo->seo_ext['pagination'] : $phpbb_seo->seo_delim['start'] . intval($start) ) : '' ) . $delim;
 	}
 	/**
+	* check start var consistency
+	* and return our best guess for $start, eg the first valid page 
+	* parameter according to pagination settings being lower
+	* than the one sent.
+	*/
+	function chk_start($start = 0, $limit = 0) {
+		if ($limit > 0) {
+			$start = is_int($start/$limit) ? $start : intval($start/$limit)*$limit;
+		}
+		return (int) $start; 
+	}
+	/**
 	* parse_link() builds an html link
 	*/
 	function parse_link($url, $title = '', $tag_arround = '') {
@@ -483,20 +532,30 @@ class gym_sitemaps {
 	* @access private
 	*/
 	function seo_kill_dupes($url) {
+		global $user;
+		$url = str_replace('&amp;', '&', $url);
 		if ($this->url_config['zero_dupe']) {
-			$requested_url = ltrim($this->url_config['uri'], '/');
-			$url = str_replace('&amp;', '&', $url);
-			if ( !($requested_url === $url) ) {
+			if (!empty($_REQUEST['sid']) && ($_REQUEST['sid'] != $user->session_id)) {
+				// Force redirect
+				$requested_url = '';
+			} else {
+				$requested_url = ltrim($this->url_config['uri'], '/');
+			}
+			if ( $requested_url !== $url ) {
 				$this->gym_redirect($url);
 			}
 		}
+		$this->url_config['current'] = $url;
 		return;
 	}
 	/**
 	* Custom HTTP 301 redirections.
 	* To kill duplicates
 	*/
-	function gym_redirect($url, $header = "301 Moved Permanently", $code = 301, $replace = TRUE) {
+	function gym_redirect($url, $header = "301 Moved Permanently", $code = 301, $replace = true) {
+		if (headers_sent()) {
+			return false;
+		}
 		if (strstr(urldecode($url), "\n") || strstr(urldecode($url), "\r") || strstr(urldecode($url), ';url')) {
 			$this->gym_error(400, '',  __FILE__, __LINE__);
 		}
@@ -514,7 +573,8 @@ class gym_sitemaps {
 	function gym_error($errno = 0, $msg_key = '', $errfile = '', $errline = '', $sql = '') {
 		global $user, $phpbb_seo, $auth;
 		$http_codes = array (
-			400 => 'TTP/1.1 400 Bad Request',
+			204 => 'HTTP/1.1 204 No Content',
+			400 => 'HTTP/1.1 400 Bad Request',
 			401 => 'HTTP/1.1 401 Unauthorized',
 			403 => 'HTTP/1.1 403 Forbidden',
 			404 => 'HTTP/1.1 404 Not Found',
@@ -527,8 +587,8 @@ class gym_sitemaps {
 		$header = array_key_exists ($errno, $http_codes) ? $http_codes[$errno] : '';
 		$l_notify = '';
 		if (!empty($user) && !empty($user->lang)) {
-			$msg_title = (empty($msg_key)) ? ( !empty($user->lang['GYM_ERROR_' . $errno]) ? $user->lang['GYM_ERROR_' . $errno] :  $user->lang['GENERAL_ERROR'] ) : ((!empty($user->lang[$msg_key])) ? $user->lang[$msg_key] : $msg_key);
-			$msg_text = (!empty($user->lang[$msg_key . '_MSG'])) ? $user->lang[$msg_key . '_MSG'] : (!empty($msg_key) ?  $msg_title : ( !empty($header) ? $header : $msg_title) );
+			$msg_title = (empty($msg_key)) ? ( !empty($user->lang['GYM_ERROR_' . $errno]) ? $user->lang['GYM_ERROR_' . $errno] :  ( !empty($header) ? $header : $user->lang['GENERAL_ERROR'])  ) : ((!empty($user->lang[$msg_key])) ? $user->lang[$msg_key] : $msg_key);
+			$msg_text = !empty($user->lang[$msg_key]) ? $user->lang[$msg_key] : (!empty($user->lang['GYM_ERROR_' . $errno . '_EXPLAIN']) ?  $user->lang['GYM_ERROR_' . $errno . '_EXPLAIN'] : ( (!empty($msg_key) ? $msg_key : (!empty($header) ? $header : $msg_title) ) ) );
 			$l_return_index = sprintf($user->lang['RETURN_INDEX'], '<a href="' . $phpbb_seo->seo_path['phpbb_url'] . '">', '</a>');
 			if ( ( $errno == 500 || $errno == 503 ) && !empty($config['board_contact'])) {
 				$l_notify = '<p>' . sprintf($user->lang['NOTIFY_ADMIN_EMAIL'], $config['board_contact']) . '</p>';
@@ -544,6 +604,7 @@ class gym_sitemaps {
 			$msg_text .= '<br/>' . (!empty($errfile) ? "<br/><b>File :</b> $errfile<br/>" : '');
 			$msg_text .= !empty($errline) ? "<br/><b>Line :</b> $errline<br/>" : '';
 			$msg_text .= !empty($sql) ? "<br/><b>Sql :</b>  $sql<br/>" : '';
+			$msg_text .= get_backtrace();
 		}
 		if ( !empty($header) ) {
 			header($header);

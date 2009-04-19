@@ -1,11 +1,15 @@
 <?php
-/** 
+/**
+*
+* @package phpBB SEO GYM Sitemaps
+* @version $id: google_txt.php - 4382 11-20-2008 14:38:27 - 2.0.RC1 dcz $
+* @copyright (c) 2006 - 2008 www.phpbb-seo.com
+* @license http://opensource.org/osi3.0/licenses/lgpl-license.php GNU Lesser General Public License
+*
+*/
+/**
 *
 * google_txt [English]
-*
-* @package gym_sitemaps
-* @version $Id: google_txt.php, 2008
-* @copyright (c) 2007, 2008 phpBB SEO - www.phpbb-seo.com
 *
 */
 /**

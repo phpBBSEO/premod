@@ -1,11 +1,15 @@
 <?php
-/** 
+/**
+*
+* @package phpBB SEO GYM Sitemaps
+* @version $id: google_forum.php - 3715 11-20-2008 14:38:27 - 2.0.RC1 dcz $
+* @copyright (c) 2006 - 2008 www.phpbb-seo.com
+* @license http://opensource.org/osi3.0/licenses/lgpl-license.php GNU Lesser General Public License
+*
+*/
+/**
 *
 * google_forum [English]
-*
-* @package gym_sitemaps
-* @version $Id: google_forum.php, 2007/12/01 13:48:48 fds Exp $
-* @copyright (c) 2007 phpBB SEO - www.phpbb-seo.com
 *
 */
 /**
@@ -38,7 +42,7 @@ $lang = array_merge($lang, array(
 	'GOOGLE_FORUM_GLOBAL_PRIORITY' => 'Global Announcement Priority',
 	'GOOGLE_FORUM_GLOBAL_PRIORITY_EXPLAIN' => 'Global Announcement Priority (must be a number between 0.0 &amp; 1.0 inclusive).',
 	'GOOGLE_FORUM_EXCLUDE' => 'Forum Exclusions',
-	'GOOGLE_FORUM_EXCLUDE_EXPLAIN' => 'You can exclude some public forums from the Google Sitemaps Listing.<br />Enter the forum IDs to exclude, comma separated list : e.g 1,5,8.<br /><u>Note :</u> If this field is left empty, all public forums will be listed.',
+	'GOOGLE_FORUM_EXCLUDE_EXPLAIN' => 'You can here exclude one or several forum from the sitemap listing.<br /><u>Note :</u> If this field is left empty, all public forums will be listed.',
 	// Reset settings
 	'GOOGLE_FORUM_RESET' => 'Forum sitemap module',
 	'GOOGLE_FORUM_RESET_EXPLAIN' => 'Reset all the forum sitemap module options to default values.',

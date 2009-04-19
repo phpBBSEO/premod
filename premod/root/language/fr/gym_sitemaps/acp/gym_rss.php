@@ -1,12 +1,16 @@
 <?php
-/** 
+/**
+*
+* @package phpBB SEO GYM Sitemaps
+* @version $id: gym_rss.php - 13270 11-20-2008 14:38:27 - 2.0.RC1 dcz $
+* @copyright (c) 2006 - 2008 www.phpbb-seo.com
+* @license http://opensource.org/osi3.0/licenses/lgpl-license.php GNU Lesser General Public License
+*
+*/
+/**
 *
 * gym_rss [French]
 * Translated By: Mathieu M. & gowap [ www.phpbb-seo.com ]
-*
-* @package gym_sitemaps
-* @version $Id: gym_rss.php, 2007/12/01 13:48:48 fds Exp $
-* @copyright (c) 2007 phpBB SEO - www.phpbb-seo.com
 *
 */
 /**
@@ -35,9 +39,6 @@ $lang = array_merge($lang, array(
 	// Limits
 	'RSS_LIMIT_GEN' => 'Limites principales',
 	'RSS_LIMIT_SPEC' => 'Limites RSS',
-	'RSS_METHOD_CHARS' => 'Par nombre de lettres',
-	'RSS_METHOD_WORDS' => 'Par mots',
-	'RSS_METHOD_SENTENCES' => 'Par phrases',
 	'RSS_URL_LIMIT_LONG' => 'Limites des flux longs',
 	'RSS_URL_LIMIT_LONG_EXPLAIN' => 'Nombre d’éléments affichés dans un flux long sans contenu, nécessite que l’option "Autoriser les flux longs" soit activée.',
 	'RSS_SQL_LIMIT_LONG' => 'Cycles SQL flux longs',

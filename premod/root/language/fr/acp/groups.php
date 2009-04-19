@@ -5,7 +5,7 @@
 * translated originally by PhpBB-fr.com <http://www.phpbb-fr.com/> and phpBB.biz <http://www.phpBB.biz>
 *
 * @package language
-* @version $Id: groups.php,v 1.22 2008/07/03 17:21:54 elglobo Exp $
+* @version $Id: groups.php,v 1.22 2008/11/14 11:50:00 EricSchreiner Exp $
 * @copyright (c) 2005 phpBB Group
 * @license http://opensource.org/licenses/gpl-license.php GNU Public License
 *
@@ -86,6 +86,8 @@ $lang = array_merge($lang, array(
 	'GROUP_NAME_TAKEN'				=> 'Le nom du groupe que vous avez entré est déjà utilisé, sélectionnez-en un autre.',
 	'GROUP_OPEN'					=> 'Ouvert',
 	'GROUP_PENDING'					=> 'Membres en attente',
+	'GROUP_MAX_RECIPIENTS' 			=> 'Nombre maximum autorisé de destinataires pour un message privé',
+	'GROUP_MAX_RECIPIENTS_EXPLAIN' 	=> 'Le nombre maximum autorisé de destinataires pour un message privé. Une valeur à “0” indique que le nombre utilisé sera celui spécifié dans la configuration du forum.',
 	'GROUP_PROMOTE'					=> 'Promouvoir en chef de groupe',
 	'GROUP_RANK'					=> 'Rang du groupe',
 	'GROUP_RECEIVE_PM'				=> 'Groupe autorisé à recevoir des messages privés',

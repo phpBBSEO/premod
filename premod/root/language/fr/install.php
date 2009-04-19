@@ -5,7 +5,7 @@
 * translated originally by PhpBB-fr.com <http://www.phpbb-fr.com/> and phpBB.biz <http://www.phpBB.biz>
 *
 * @package language
-* @version $Id: install.php,v 1.22 2008/07/04 11:43:20 elglobo Exp $
+* @version $Id: install.php,v 1.22 2008/11/14 13:41:00 elglobo Exp $
 * @copyright (c) 2005 phpBB Group 
 * @license http://opensource.org/licenses/gpl-license.php GNU Public License 
 *
@@ -279,7 +279,7 @@ $lang = array_merge($lang, array(
 	'NO_LOCATION'   			=> 'Impossible de déterminer l’emplacement. Si vous savez que Imagemagick est installé, vous pourrez indiquer son emplacement plus tard dans le panneau d’administration',
 	'NO_TABLES_FOUND'   		=> 'Aucune table trouvée.',
 
-	'OVERVIEW_BODY'				=> 'Bienvenue sur phpBB3!<br /><br />phpBB™ est la solution de forum libre la plus répandue dans le monde. phpBB3 est l’aboutissement de sept longues années d’expérience. Comme ces prédécesseurs, phpBB3 est riche en fonctionnalités, convivial, et complètement supporté par l’équipe phpBB. phpBB3 s’améliore considérablement sur ce qui a rendu phpBB2 populaire, et ajoute des fonctionnalités généralement demandées, qui étaient non présentes dans les versions précédentes. Nous espérons qu’il dépassera vos attentes.<br /><br />Cet outil vous guidera à travers l’installation de phpBB3, la mise à jour de votre forum phpBB3, ou la conversion depuis un autre système de forum (y compris phpBB2). Pour plus d’informations, nous vous invitons à prendre connaissance de <a href="../docs/INSTALL.html">notre guide d’installation</a>.<br /><br />Pour consulter la licence de phpBB3, ou vous renseigner sur l’obtention de support ainsi que notre position, choisissez l’option respective à partir du menu latéral. Pour continuer, choisissez l’option appropriée dans le menu ci-dessus.',
+	'OVERVIEW_BODY'				=> 'Bienvenue sur phpBB3!<br /><br />phpBB™ est la solution de forum libre la plus répandue dans le monde. phpBB3 est l’aboutissement d’un long processus débuté en 2000. Comme ces prédécesseurs, phpBB3 est riche en fonctionnalités, convivial, et complètement supporté par l’équipe phpBB. phpBB3 s’améliore considérablement sur ce qui a rendu phpBB2 populaire, et ajoute des fonctionnalités généralement demandées, qui étaient non présentes dans les versions précédentes. Nous espérons qu’il dépassera vos attentes.<br /><br />Cet outil vous guidera à travers l’installation de phpBB3, la mise à jour de votre forum phpBB3, ou la conversion depuis un autre système de forum (y compris phpBB2). Pour plus d’informations, nous vous invitons à prendre connaissance de <a href="../docs/INSTALL.html">notre guide d’installation</a>.<br /><br />Pour consulter la licence de phpBB3, ou vous renseigner sur l’obtention de support ainsi que notre position, choisissez l’option respective à partir du menu latéral. Pour continuer, choisissez l’option appropriée dans les onglets ci-dessus.',
 
 	'PCRE_UTF_SUPPORT'				=> 'Support de PCRE UTF-8',
 	'PCRE_UTF_SUPPORT_EXPLAIN'		=> 'phpBB <strong>ne fonctionnera que</strong> si votre installation PHP est compilée avec le support de l’extension PCRE UTF-8',
@@ -400,8 +400,9 @@ $lang = array_merge($lang, array(
 	'DONE'								=> 'Terminé',
 	'DOWNLOAD'							=> 'Télécharger',
 	'DOWNLOAD_AS'						=> 'Télécharger sous',
+	'DOWNLOAD_UPDATE_METHOD_BUTTON' 	=> 'Télécharger l’archive des fichiers modifiés (recommandé)',
 	'DOWNLOAD_UPDATE_METHOD'			=> 'Télécharger une archive de fichiers modifiés',
-	'DOWNLOAD_UPDATE_METHOD_EXPLAIN'	=> 'Une fois téléchargée, vous devez décompresser l’archive. Vous y trouverez les fichiers modifiés que vous devez transférer dans votre répertoire à la racine de phpBB. Transférez les fichiers sur leurs emplacements respectifs. Transférez les fichiers sur leurs emplacements respectifs, vérifiez à nouveau les fichiers avec l’autre bouton ci-dessous.',
+	'DOWNLOAD_UPDATE_METHOD_EXPLAIN'	=> 'Une fois téléchargée, vous devez décompresser l’archive. Vous y trouverez les fichiers modifiés que vous devez transférer dans votre répertoire à la racine de phpBB. Transférez les fichiers à leur emplacement respectif. Après avoir transféré tous les fichiers, vérifiez à nouveau les fichiers avec l’autre bouton ci-dessous.',
 
 	'ERROR'		=> 'Erreur',
 	'EDIT_USERNAME'	=> 'Editer le nom d’utilisateur',
@@ -500,6 +501,8 @@ $lang = array_merge($lang, array(
 	'STATUS_UP_TO_DATE'			=> 'Fichier déjà à jour',
 
 	'TOGGLE_DISPLAY'			=> 'Voir/Masquer la liste des fichiers',
+	'TRY_DOWNLOAD_METHOD' 		=> 'Vous pouvez vouloir essayer la méthode de téléchargement des fichiers modifiés.<br />Cette méthode fonctionne toujours et constitue aussi le moyen recommandé pour la mise à jour.',
+	'TRY_DOWNLOAD_METHOD_BUTTON'=> 'Essayer cette méthode maintenant',
 	
 	'UPDATE_COMPLETED'				=> 'La mise à jour est terminée',
 	'UPDATE_DATABASE'				=> 'Mettre à jour la base de données',

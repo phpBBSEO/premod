@@ -1,12 +1,12 @@
 <?php
-/** 
+/**
 *
-* @package Advanced phpBB SEO mod Rewrite
-* @version $Id: phpbb_seo_class.php 2007/08/30 13:48:48 dcz Exp $
-* @copyright (c) 2006, 2007 dcz - www.phpbb-seo.com
-* @license http://www.opensource.org/licenses/rpl.php RPL Public License 
+* @package phpBB SEO GYM Sitemaps
+* @version $id: acp_gym_sitemaps.php - 46072 11-20-2008 14:38:27 - 2.0.RC1 dcz $
+* @copyright (c) 2006 - 2008 www.phpbb-seo.com
+* @license http://opensource.org/osi3.0/licenses/lgpl-license.php GNU Lesser General Public License
 *
- */
+*/
 /**
 * phpBB_SEO Class
 * www.phpBB-SEO.com
@@ -77,7 +77,15 @@ class acp_gym_sitemaps {
 		$this->dyn_select['gzip_level'] =  array( 1 => 1, 2 => 2, 3 => 3, 4 => 4, 5 => 5, 6 => 6, 7 => 7, 8 => 8, 9 => 9);
 		$this->dyn_select['sort'] =  array( 'DESC' => 'GYM_DESC', 'ASC' => 'GYM_ASC');
 		$this->dyn_select['override'] =  array( OVERRIDE_GLOBAL => 'GYM_OVERRIDE_GLOBAL', OVERRIDE_OTYPE => 'GYM_OVERRIDE_OTYPE', OVERRIDE_MODULE => 'GYM_OVERRIDE_MODULE');
-		$this->dyn_select['sumarize_method'] =  array( 'chars' => 'RSS_METHOD_CHARS', 'word' => 'RSS_METHOD_WORDS', 'sentences' => 'RSS_METHOD_SENTENCES');
+		$this->dyn_select['sumarize_method'] =  array( 'chars' => 'GYM_METHOD_CHARS', 'words' => 'GYM_METHOD_WORDS', 'lines' => 'GYM_METHOD_LINES');
+		$this->dyn_select['gym_auth'] = array(
+			'admin' => 'GYM_AUTH_ADMIN',
+			'globalmod' => 'GYM_AUTH_GLOBALMOD',
+			'reg' => 'GYM_AUTH_REG',
+			'guest' => 'GYM_AUTH_GUEST',
+			'all' => 'GYM_AUTH_ALL',
+			'none' => 'GYM_AUTH_NONE',
+		);
 		// Get the module list
 		// Populate the $this->gym_modules[$mode][$module] array
 		$this->gym_get_modules($mode);
@@ -100,6 +108,9 @@ class acp_gym_sitemaps {
 			if ( !in_array($mode, $this->modes) || !in_array($module, $this->gym_modules[$mode])) {
 				trigger_error('NO_MODE', E_USER_ERROR);
 			} else {
+				if (empty($this->gym_modules_acp[$mode][$module][$action]['display_vars'])) {
+					$action = $this->action = 'main';
+				}
 				$display_vars = $this->gym_modules_acp[$mode][$module][$action]['display_vars'];
 				// Check if we do not have a new module needing a new config key
 				$clear_cache = false;
@@ -134,11 +145,44 @@ class acp_gym_sitemaps {
 			$submit = false;
 		}
 		// We go through the display_vars to make sure no one is trying to set variables he/she is not allowed to...
-		foreach ($display_vars['vars'] as $config_name => $null) {
-			if (!isset($cfg_array[$config_name]) || strpos($config_name, 'legend') !== false) {
+		foreach ($display_vars['vars'] as $config_name => $cfg_setup) {
+			if ( (!isset($cfg_array[$config_name]) && @$cfg_setup['method'] != 'select_multiple_string') || strpos($config_name, 'legend') !== false) {
 				continue;
 			}
-			$this->new_config[$config_name] = $config_value = $cfg_array[$config_name];
+			// Handle multiple select options
+			if (!empty($cfg_setup['method']) && $cfg_setup['method'] == 'select_multiple_string') {
+				if (isset($_POST['multiple_' . $config_name])) {
+					$m_values = utf8_normalize_nfc(request_var('multiple_' . $config_name, array('' => '')));
+					$validate_int = $cfg_setup['multiple_validate'] == 'int' ? true : false;
+					foreach($m_values as $k => $v) {
+						if ($validate_int) {
+							$v = (int) $v;
+						} 
+						if (empty($v)) {
+							unset($m_values[$k]);
+						} else {
+							$m_values[$k] = $v;
+						}
+					}
+					sort($m_values);
+					$this->new_config[$config_name] = $m_values;
+					$config_value = implode(',', $m_values);
+					if ( strlen($config_value) > 255 ) {
+						$error[] = sprintf($user->lang['SETTING_TOO_LONG'], $user->lang[$cfg_setup['lang']], 255);
+					}
+					$submit = empty($error);
+				} else {
+					if ($submit) {
+						$this->new_config[$config_name] = array();
+						$config_value = '';
+					} else {
+						$config_value = $this->new_config[$config_name];
+						$this->new_config[$config_name] = !empty($config_value) ? explode(',', $config_value) : array();
+					}
+				}
+			} else {
+				$this->new_config[$config_name] = $config_value = $cfg_array[$config_name];
+			}
 			if ($submit) {
 				set_gym_config($config_name, $config_value, $mode, $this->gym_config);
 			}
@@ -168,7 +212,7 @@ $maction_param =
 		$l_module_title_explain = $this->safe_lang($lang_key . '_EXPLAIN');
 		$l_title = $this->safe_lang($display_vars['title']);	
 		$l_title_explain = $this->safe_lang($display_vars['title'] . '_EXPLAIN');
-		$l_title_explain .= $action === 'cache' ? $this->check_cache_folder($phpbb_root_path . 'gym_sitemaps/cache') : '';
+		$l_title_explain .= ($action === 'cache' && $mode !== 'html') ? $this->check_cache_folder($phpbb_root_path . 'gym_sitemaps/cache') : '';
 		$template->assign_vars(array(
 			'L_MODE_TITLE'		=> $l_mode_title,
 			'L_MODE_ITLE_EXPLAIN'	=> $l_mode_title_explain,
@@ -317,7 +361,7 @@ $maction_param =
 				$template->assign_block_vars('menu_module', array(
 					'L_TITLE'		=> $this->safe_lang($modules['info']['title_lang']),
 					'S_SELECTED'	=> ($module == @$modules['info']['module'] && $this->maction !== 'install') ? true : false,
-					'U_TITLE'		=> $this->u_action . '&amp;module=' . @$modules['info']['module'],
+					'U_TITLE'		=> $this->u_action . '&amp;module=' . @$modules['info']['module'] . (!empty($action) ? "&amp;action=$action" : ''),
 				));
 		}
 		$template->assign_vars(array('S_MENU' => true));
@@ -787,6 +831,27 @@ $maction_param =
 		// Error
 	}
 	/**
+	*  select_multiple_string($value, $key) custom select string
+	*/
+	function select_multiple_string($value, $key) {
+		global $phpbb_seo;
+		$select_ary = $this->gym_modules_acp[$this->mode][$this->module][$this->action]['select'][$key];
+		$size = min(12,count($select_ary));
+		$html = '<select multiple="multiple" id="' . $key . '" name="multiple_' . $key . '[]" size="' . $size . '">';
+		foreach ($select_ary as $sel_key => $sel_data) {
+			if (empty($sel_data['disabled'])) {
+				$selected = @array_search($sel_key, @$this->new_config[$key]) !== false ? 'selected="selected"' : '';
+				$disabled = '';
+			} else {
+				$disabled = 'disabled="disabled" class="disabled-option"';
+				$selected = '';
+			}
+			$sel_title = $sel_data['title'];
+			$html .= "<option value=\"$sel_key\" $disabled $selected>$sel_title</option>";
+		}
+		return $html . '</select>';
+	}
+	/**
 	*  select_string($value, $key) custom select string
 	*/
 	function select_string($value, $key) {
@@ -810,6 +875,20 @@ $maction_param =
 		$value = ($value >= $min && $value <= $max) ? $value : ($max/2);
 		$value = $float > 0 ? sprintf('%.' . $float . 'f', $value) : (int) $value;
 		return '<input id="' . $key . '" type="text" size="' . (strlen($max) + $float + 1) . '" maxlength="' . (strlen($max) + $float + 1) . '" name="config[' . $key . ']" value="' . $value . '" />';
+	}
+	/**
+	*  forum_select() // custom forum select setup
+	*/
+	function forum_select() {
+		if (empty($this->dyn_select['forums'])) {
+			$this->dyn_select['forums'] = make_forum_select(false, false, true, true, true, false, true);
+			foreach($this->dyn_select['forums'] as $f_id => $f_data) {
+				$this->dyn_select['forums'][$f_id] = array( 
+					'title' => $f_data['padding'] . $f_data['forum_name'],
+					'disabled' => $f_data['disabled'],
+				);
+			}
+		}
 	}
 	/**
 	* clear_all_cache()
@@ -838,7 +917,7 @@ $maction_param =
 			$this->clear_all_cache();
 			return;
 		}
-		$RegEx = ($type === 'config') ? '(config)' : '(config|modules|acp)';
+		$RegEx = ($type === 'config') ? '(config|links|auth)' : '';
 		$RegEx .= (!empty($mode) && in_array($mode, $this->modes) ? "_$mode" : '');
 		$this->clear_all_cache($RegEx);
 		return;

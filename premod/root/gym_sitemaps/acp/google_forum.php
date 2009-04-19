@@ -2,8 +2,8 @@
 /**
 *
 * @package phpBB SEO GYM Sitemaps
-* @version $Id: google_forum.php 2007/04/12 13:48:48 dcz Exp $
-* @copyright (c) 2006 dcz - www.phpbb-seo.com
+* @version $id: google_forum.php - 7361 11-20-2008 11:43:24 - 2.0.RC1 dcz $
+* @copyright (c) 2006 - 2008 www.phpbb-seo.com
 * @license http://opensource.org/osi3.0/licenses/lgpl-license.php GNU Lesser General Public License
 *
 */
@@ -25,7 +25,8 @@ class google_forum {
 	function google_forum(&$gym_master) {
 		$this->gym_master = &$gym_master;
 		if (isset($this->gym_master->dyn_select) ) {
-			$this->dyn_select = $this->gym_master->dyn_select;
+			$this->dyn_select = & $this->gym_master->dyn_select;
+			$this->gym_master->forum_select();
 		}
 	}
 	/**
@@ -119,8 +120,8 @@ class google_forum {
 					'vars'	=> array(
 						'legend1'	=> 'GYM_PAGINATION',
 						'google_forum_pagination' => array('lang' => 'GYM_PAGINATION_ON', 'validate' => 'bool', 'type' => 'radio:yes_no', 'explain' => true, 'overriding' => true),
-						'google_forum_limitdown' => array('lang' => 'GYM_LIMITDOWN', 'validate' => 'int', 'type' => 'text:4:4', 'explain' => true, 'overriding' => true),
-						'google_forum_limitup' => array('lang' => 'GYM_LIMITUP', 'validate' => 'int', 'type' => 'text:4:4', 'explain' => true, 'overriding' => true),
+						'google_forum_limitdown' => array('lang' => 'GYM_LIMITDOWN', 'validate' => 'int:0', 'type' => 'text:4:4', 'explain' => true, 'overriding' => true),
+						'google_forum_limitup' => array('lang' => 'GYM_LIMITUP', 'validate' => 'int:0', 'type' => 'text:4:4', 'explain' => true, 'overriding' => true),
 					),
 				),
 				'default' => array(
@@ -139,7 +140,7 @@ class google_forum {
 						'google_forum_global_priority' => array('lang' => 'GOOGLE_FORUM_GLOBAL_PRIORITY', 'type' => 'custom', 'validate' => 'string', 'method' => 'validate_num', 'params' => array('{CONFIG_VALUE}', '{KEY}', 2, 0, 1),  'explain' => true,),
 						'google_forum_default_priority' => array('lang' => 'GOOGLE_DEFAULT_PRIORITY', 'type' => 'custom', 'validate' => 'string', 'method' => 'validate_num', 'params' => array('{CONFIG_VALUE}', '{KEY}', 2, 0, 1),  'explain' => true, 'overriding' => true),
 						'legend2' => 'GOOGLE_FORUM_EXCLUDE',
-						'google_forum_exclude' => array('lang' => 'GOOGLE_FORUM_EXCLUDE', 'validate' => 'string', 'type' => 'text:25:200', 'explain' => true),
+						'google_forum_exclude' => array('lang' => 'GOOGLE_FORUM_EXCLUDE', 'multiple_validate' => 'int', 'type' => 'custom', 'method' => 'select_multiple_string', 'explain' => true),
 						'legend3' => 'GOOGLE_PING',
 						'google_forum_ping' => array('lang' => 'GOOGLE_PING', 'validate' => 'bool', 'type' => 'radio:yes_no', 'explain' => true, 'overriding' => true),
 
@@ -152,6 +153,9 @@ class google_forum {
 					'google_forum_default_priority' => 1.0,
 					'google_forum_exclude' => '',
 					'google_forum_ping' => 0,
+				),
+				'select' => array(
+					'google_forum_exclude' => @$this->dyn_select['forums'],
 				),
 			),
 			'info' => array(

@@ -2,7 +2,7 @@
 /**
 *
 * @package install
-* @version $Id: index.php 8598 2008-06-04 15:37:06Z naderman $
+* @version $Id: index.php 8895 2008-09-19 16:54:03Z acydburn $
 * @copyright (c) 2005 phpBB Group
 * @license http://opensource.org/licenses/gpl-license.php GNU Public License
 *
@@ -108,7 +108,7 @@ if (version_compare(PHP_VERSION, '6.0.0-dev', '>='))
 }
 else
 {
-	set_magic_quotes_runtime(0);
+	@set_magic_quotes_runtime(0);
 
 	// Be paranoid with passed vars
 	if (@ini_get('register_globals') == '1' || strtolower(@ini_get('register_globals')) == 'on')
@@ -231,6 +231,14 @@ include($phpbb_root_path . 'language/' . $language . '/acp/phpbb_seo.' . $phpEx)
 include($phpbb_root_path . 'language/' . $language . '/install.' . $phpEx);
 include($phpbb_root_path . 'language/' . $language . '/posting.' . $phpEx);
 
+// usually we would need every single constant here - and it would be consistent. For 3.0.x, use a dirty hack... :(
+
+// Define needed constants
+define('CHMOD_ALL', 7);
+define('CHMOD_READ', 4);
+define('CHMOD_WRITE', 2);
+define('CHMOD_EXECUTE', 1);
+
 $mode = request_var('mode', 'seo_premod');
 $sub = request_var('sub', '');
 
@@ -337,11 +345,6 @@ class module
 
 		foreach ($module as $row)
 		{
-			// Check any module pre-reqs
-			if ($row['module_reqs'] != '')
-			{
-			}
-
 			// Module order not specified or module already assigned at this position?
 			if (!isset($row['module_order']) || isset($this->module_ary[$row['module_order']]))
 			{

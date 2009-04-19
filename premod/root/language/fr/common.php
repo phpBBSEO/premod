@@ -5,7 +5,7 @@
 * translated originally by PhpBB-fr.com <http://www.phpbb-fr.com/> and phpBB.biz <http://www.phpBB.biz>
 *
 * @package language
-* @version $Id: common.php,v 1.22 2008/07/03 17:18:36 elglobo Exp $
+* @version $Id: common.php,v 1.22 2008/11/14 14:07:00 elglobo Exp $
 * @copyright (c) 2005 phpBB Group 
 * @license http://opensource.org/licenses/gpl-license.php GNU Public License 
 *
@@ -44,7 +44,7 @@ $lang = array_merge($lang, array(
 	'TRANSLATION_INFO'	=> 'Traduction par: <a href="http://forums.phpbb-fr.com">phpBB-fr.com</a>',
 	'DIRECTION'			=> 'ltr',
 	'DATE_FORMAT'		=> '|d M Y|',	// 01 Jan 2007 (with Relative days enabled)
-	'USER_LANG'			=> 'fr-fr',
+	'USER_LANG'			=> 'fr',
 
 	'1_DAY'			=> '1 jour',
 	'1_MONTH'		=> '1 mois',
@@ -72,8 +72,8 @@ $lang = array_merge($lang, array(
 	'ALL_TIMES'						=> 'Heures au format %1$s %2$s',
 	'ALL_TOPICS'					=> 'Tous',
 	'AND'							=> 'et',
-	'ARE_WATCHING_FORUM'			=> 'Vous surveillez maintenant les nouveaux messages à ce forum.',
-	'ARE_WATCHING_TOPIC'			=> 'Vous surveillez maintenant les nouveaux messages à ce sujet.',
+	'ARE_WATCHING_FORUM'			=> 'Vous surveillez maintenant les nouveaux messages de ce forum.',
+	'ARE_WATCHING_TOPIC'			=> 'Vous surveillez maintenant les nouveaux messages de ce sujet.',
 	'ASCENDING'						=> 'Croissant',
 	'ATTACHMENTS'					=> 'Fichiers joints',
 	'ATTACHED_IMAGE_NOT_IMAGE'		=> 'Le fichier image que vous essayez de joindre n’est pas valide.',
@@ -114,7 +114,7 @@ $lang = array_merge($lang, array(
 	'BYTES'					=> 'Octets',
 
 	'CANCEL'				=> 'Annuler',
-	'CHANGE'				=> 'Changer',
+	'CHANGE'				=> 'Valider',
 	'CHANGE_FONT_SIZE'		=> 'Modifier la taille de la police',
 	'CHANGING_PREFERENCES'	=> 'Modifie les préférences du forum',
 	'CHANGING_PROFILE'		=> 'Modifie son profil',
@@ -171,6 +171,8 @@ $lang = array_merge($lang, array(
 	'ERR_JAB_AUTH'						=> 'Impossible de s’authentifier sur le serveur Jabber.',
 	'ERR_JAB_CONNECT'					=> 'Impossible de se connecter sur le serveur Jabber.',
 	'ERR_UNABLE_TO_LOGIN'				=> 'Le nom d’utilisateur ou le mot de passe indiqué est incorrect.',
+	'ERR_UNWATCHING' 					=> 'Une erreur est survenue pendant la tentative de désinscription.',
+	'ERR_WATCHING' 						=> 'Une erreur est survenue pendant la tentative d’inscription.',
 	'ERR_WRONG_PATH_TO_PHPBB'			=> 'Le chemin phpBB indiqué ne semble pas être valide.',
 	'EXPAND_VIEW'						=> 'Etendre la vue',
 	'EXTENSION'							=> 'Extension',
@@ -340,8 +342,8 @@ $lang = array_merge($lang, array(
 	'NEWEST_USER'				=> 'L’utilisateur enregistré le plus récent est <strong>%s</strong>',
 	'NEW_MESSAGE'				=> 'Nouveau message',
 	'NEW_MESSAGES'				=> 'Nouveaux messages',
-	'NEW_PM'					=> '<strong>%d</strong> nouveau message',
-	'NEW_PMS'					=> '<strong>%d</strong> nouveaux messages',
+	'NEW_PM'					=> '<strong>%d</strong> nouveau message privé',
+	'NEW_PMS'					=> '<strong>%d</strong> nouveaux messages privés',
 	'NEW_POST'					=> 'Nouveau message',
 	'NEW_POSTS'					=> 'Nouveaux messages',
 	'NEXT'						=> 'Suivante',		// Used in pagination
@@ -356,7 +358,7 @@ $lang = array_merge($lang, array(
 	'NOTIFY_ADMIN_EMAIL'		=> 'Contactez l’administrateur du forum ou le webmaster: <a href="mailto:%1$s">%1$s</a>',
 	'NO_ACCESS_ATTACHMENT'		=> 'Vous n’êtes pas autorisé à accéder à ce fichier.',
 	'NO_ACTION'					=> 'Aucune action indiquée.',
-	'NO_ADMINISTRATORS'			=> 'Aucun administrateur n’est assigné à ces forums.',
+	'NO_ADMINISTRATORS'			=> 'Il n’existe aucun administrateur.',
 	'NO_AUTH_ADMIN'				=> 'Vous n’avez pas les permissions d’administration et ne pouvez donc pas accéder au panneau d’administration.',
 	'NO_AUTH_ADMIN_USER_DIFFER'	=> 'Vous ne pouvez pas vous ré-authentifier avec un compte différent.',
 	'NO_AUTH_OPERATION'			=> 'Vous n’avez pas les permissions nécessaires pour accomplir cette opération.',
@@ -373,9 +375,9 @@ $lang = array_merge($lang, array(
 	'NO_MEMBERS'				=> 'Aucun membre trouvé pour ce critère de recherche.',
 	'NO_MESSAGES'				=> 'Pas de message',
 	'NO_MODE'					=> 'Pas de mode indiqué.',
-	'NO_MODERATORS'				=> 'Pas de modérateur assigné à ce forum.',
+	'NO_MODERATORS'				=> 'Il n’existe aucun modérateur.',
 	'NO_NEW_MESSAGES'			=> 'Pas de nouveau message',
-	'NO_NEW_PM'					=> '<strong>0</strong> nouveau message',
+	'NO_NEW_PM'					=> '<strong>0</strong> nouveau message privé',
 	'NO_NEW_POSTS'				=> 'Pas de nouveau message',
 	'NO_ONLINE_USERS'			=> 'Aucun utilisateur enregistré',
 	'NO_POSTS'					=> 'Pas de message',
@@ -392,6 +394,13 @@ $lang = array_merge($lang, array(
 	'NO_USER'					=> 'L’utilisateur demandé n’existe pas.',
 	'NO_USERS'					=> 'Les utilisateurs demandés n’existent pas.',
 	'NO_USER_SPECIFIED'			=> 'Aucun nom d’utilisateur indiqué.',
+	
+	// Nullar/Singular/Plural language entry. The key numbers define the number range in which a certain grammatical expression is valid.
+	'NUM_POSTS_IN_QUEUE' => array(
+		0 => 'Aucun message en attente', // 0
+		1 => '1 message en attente', // 1
+		2 => '%d messages en attente', // 2+
+	),
 
 	'OCCUPATION'				=> 'Emploi',
 	'OFFLINE'					=> 'Hors ligne',
@@ -431,7 +440,7 @@ $lang = array_merge($lang, array(
 	'POST_TOPIC'			=> 'Ecrire un nouveau sujet',
 	'POST_UNAPPROVED'		=> 'Ce message est en attente d’approbation',
 	'PREVIEW'				=> 'Aperçu',
-	'PREVIOUS'				=> 'Précédent',		// Used in pagination
+	'PREVIOUS'				=> 'Précédente',		// Used in pagination
 	'PREVIOUS_STEP'			=> 'Précédente',
 	'PRIVACY'				=> 'Politique de vie privée',
 	'PRIVATE_MESSAGE'		=> 'Message privé',
@@ -543,6 +552,7 @@ $lang = array_merge($lang, array(
 	'TEST_CONNECTION'	=> 'Test de connexion',
 	'THE_TEAM'			=> 'L’équipe du forum',
 	'TIME'				=> 'Date',
+	'TOO_LONG' 			=> 'La valeur saisie est trop longue.',
 
 	'TOO_LONG_AIM'					=> 'Le pseudonyme AIM indiqué est trop long.',
 	'TOO_LONG_CONFIRM_CODE'			=> 'Le code de confirmation indiqué est trop long.',
@@ -563,6 +573,7 @@ $lang = array_merge($lang, array(
 	'TOO_LONG_YIM'					=> 'Le nom Yahoo! Messenger indiqué est trop long.',
 
 	'TOO_MANY_VOTE_OPTIONS'			=> 'Vous avez sélectionné trop d’options de vote.',
+	'TOO_SHORT' 					=> 'La valeur saisie est trop courte.',
 
 	'TOO_SHORT_AIM'					=> 'Le pseudonyme AIM indiqué est trop court.',
 	'TOO_SHORT_CONFIRM_CODE'		=> 'Le code de confirmation indiqué est trop court.',
@@ -586,7 +597,7 @@ $lang = array_merge($lang, array(
 	'TOPICS'			=> 'Sujets',
 	'TOPIC_ICON'		=> 'Icône de sujet',
 	'TOPIC_LOCKED'		=> 'Ce sujet est verrouillé, vous ne pouvez pas éditer de messages ou poster d’autres réponses.',
-	'TOPIC_LOCKED_SHORT'=> 'Sujet verouillé',
+	'TOPIC_LOCKED_SHORT'=> 'Sujet verrouillé',
 	'TOPIC_MOVED'		=> 'Sujet déplacé',
 	'TOPIC_REVIEW'		=> 'Revue du sujet',
 	'TOPIC_TITLE'		=> 'Titre du sujet',
@@ -739,6 +750,7 @@ $lang = array_merge($lang, array(
 		'-7'	=> 'UTC - 7 heures',
 		'-6'	=> 'UTC - 6 heures',
 		'-5'	=> 'UTC - 5 heures',
+		'-4.5' 	=> 'UTC - 4:30 heures',
 		'-4'	=> 'UTC - 4 heures',
 		'-3.5'	=> 'UTC - 3:30 heures',
 		'-3'	=> 'UTC - 3 heures',
@@ -781,7 +793,8 @@ $lang = array_merge($lang, array(
 		'-8'	=> '[UTC - 8] Pacifique (Etats-unis et Canada), Tijuana',
 		'-7'	=> '[UTC - 7] Arizona, Chihuahua, La Paz, Montagnes Rocheuses',
 		'-6'	=> '[UTC - 6] Amérique Centrale',
-		'-5'	=> '[UTC - 5] Heure de l’est (Etats-Unis, Canada), Bogota, Lima, Quito',
+		'-5'	=> '[UTC - 5] Heure pacifique (Etats-Unis, Canada), Bogota, Lima, Quito',
+		'-4.5' 	=> '[UTC - 4:30] Vénézuéla',
 		'-4'	=> '[UTC - 4] Heure atlantique (Canada), Caracas, La Paz, Santiago',
 		'-3.5'	=> '[UTC - 3:30] Terre Neuve',
 		'-3'	=> '[UTC - 3] Amazonie, Groenland central',
@@ -833,4 +846,13 @@ $lang = array_merge($lang, array(
 // www.phpBB-SEO.com SEO TOOLKIT BEGIN - TITLE
 $lang['Page'] = 'Page ';
 // www.phpBB-SEO.com SEO TOOLKIT END - TITLE
+// www.phpBB-SEO.com SEO TOOLKIT BEGIN -> GYM Sitemaps
+$lang = array_merge($lang, array(
+	'GYM_LINKS' => 'Liens',
+	'GYM_LINK' => 'Lien',
+	'GYM_RSS_SLIDE_START' => 'Lancer',
+	'GYM_RSS_SLIDE_STOP' => 'Stopper',
+	'GYM_RSS_SOURCE' => 'Source',
+));
+// www.phpBB-SEO.com SEO TOOLKIT END -> GYM Sitemaps
 ?>
