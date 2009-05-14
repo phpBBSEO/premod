@@ -33,6 +33,8 @@ if (empty($lang) || !is_array($lang))
 $lang = array_merge($lang, array(
 	'RSS_FORUM' => 'Forum RSS module',
 	'RSS_FORUM_EXPLAIN' => 'These are the setting for the forum RSS feeds module.<br/> Some of them can be overridden depending on the RSS and Main override settings.',
+	'RSS_FORUM_ALTERNATE' => 'RSS alternate links',
+	'RSS_FORUM_ALTERNATE_EXPLAIN' => 'Display or not forum RSS alternate links in browsers navigation bar',
 	'RSS_FORUM_EXCLUDE' => 'Forum Exclusions',
 	'RSS_FORUM_EXCLUDE_EXPLAIN' => 'You can here exclude one or several forum from the RSS listing.<br /><u>Note :</u> If this field is left empty, all readable forums will be listed.',
 	// Content

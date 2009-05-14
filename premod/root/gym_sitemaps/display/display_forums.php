@@ -59,7 +59,7 @@ class display_forums {
 		);
 		// www.phpBB-SEO.com SEO TOOLKIT BEGIN -> no dupe
 		if (!empty($phpbb_seo->seo_opt['no_dupe']['on'])) {
-			$sql_array['SELECT'] .= ', t.topic_id, t.topic_title, t.topic_replies, t.topic_replies_real, t.topic_status, t.topic_type, t.topic_moved_id';
+			$sql_array['SELECT'] .= ', t.topic_id, t.topic_title, t.topic_replies, t.topic_replies_real, t.topic_status, t.topic_type, t.topic_moved_id' . (!empty($phpbb_seo->seo_opt['sql_rewrite']) ? ', t.topic_url ' : ' ');
 			$sql_array['LEFT_JOIN'][] = array(
 				'FROM'	=> array(TOPICS_TABLE => 't'),
 				'ON'	=> "t.topic_last_post_id = f.forum_last_post_id" 
@@ -70,7 +70,7 @@ class display_forums {
 			$sql_array['SELECT'] .= ', ft.mark_time as forum_mark_time';
 			$sql_array['LEFT_JOIN'][] = array(
 				'FROM'	=> array(FORUMS_TRACK_TABLE => 'ft'),
-				'ON'	=> 'ft.user_id = ' . $user->data['user_id'] . ' AND f.forum_id = ft.forum_id'
+				'ON'	=> 'ft.user_id = ' . $user->data['user_id'] . ' AND ft.forum_id = f.forum_id'
 			);
 		} elseif ($load_anon_lastread && empty($master->tracking_topics)) {
 			$master->tracking_topics = (isset($_COOKIE[$config['cookie_name'] . $tracking_cookie_name])) ? ((STRIP) ? stripslashes($_COOKIE[$config['cookie_name'] . $tracking_cookie_name]) : $_COOKIE[$config['cookie_name'] . $tracking_cookie_name]) : '';
@@ -91,7 +91,7 @@ class display_forums {
 		$sql = $db->sql_build_query('SELECT', $sql_array);
 		unset($sql_array);
 		$result = $db->sql_query_limit($sql, 600);
-		while ($row = $db->sql_fetchrow($result)) {	
+		while ($row = $db->sql_fetchrow($result)) {
 			$forum_id = (int) $row['forum_id'];
 			//@TODO Find why in hell the above query could return more than one row per forum
 			if (isset($processed[$forum_id])) {
@@ -152,7 +152,7 @@ class display_forums {
 					$html_after = "";
 				}
 				if ($display_tracking) {
-					$forum_unread = (isset($this->forum_tracking_info[$forum_id]) && $this->forum_datas[$forum_id]['forum_last_post_time'] > $this->forum_tracking_info[$forum_id]) ? true : false;
+					$forum_unread = (isset($master->forum_tracking_info[$forum_id]) && $master->forum_datas[$forum_id]['forum_last_post_time'] > $master->forum_tracking_info[$forum_id]) ? true : false;
 					if ($forum_unread) {
 						$folder_image = 'subforum_unread';
 						$folder_alt = 'NEW_POSTS';
@@ -237,7 +237,7 @@ class display_forums {
 					$forum_news_title = $forum_news_link = '<b>' . $row['forum_name'] . '</b>';
 					$forum_news_link .= '<br/>';
 				}
-				$forum_unread = (isset($this->forum_tracking_info[$forum_id]) && $this->forum_datas[$forum_id]['forum_last_post_time'] > $this->forum_tracking_info[$forum_id]) ? true : false;
+				$forum_unread = (isset($master->forum_tracking_info[$forum_id]) && $master->forum_datas[$forum_id]['forum_last_post_time'] > $master->forum_tracking_info[$forum_id]) ? true : false;
 				if ($display_topic_status) {
 					// Which folder should we display?
 					$folder_alt = ($forum_unread) ? 'NEW_POSTS' : 'NO_NEW_POSTS';
@@ -281,19 +281,17 @@ class display_forums {
 						if ($row['forum_last_post_id']) {
 							$last_post_subject = $row['forum_last_post_subject'];
 							$last_post_time = $user->format_date($row['forum_last_post_time']);
+							$row['topic_title'] = censor_text($row['topic_title']);
+							if ($row['topic_status'] == ITEM_MOVED) {
+								$row['topic_id'] = $row['topic_moved_id'];
+							}
 							if (!empty($row['topic_id']) && !$row['forum_password']) {
 								$topic_id = (int) $row['topic_id'];
 								// www.phpBB-SEO.com SEO TOOLKIT BEGIN
-								if ( empty($phpbb_seo->seo_url['topic'][$topic_id]) ) {
-									if ($row['topic_type'] == POST_GLOBAL) {
-										$phpbb_seo->seo_opt['topic_type'][$topic_id] = POST_GLOBAL;
-									}
-									$phpbb_seo->seo_censored[$topic_id] = censor_text($row['topic_title']);
-									$phpbb_seo->seo_url['topic'][$topic_id] = $phpbb_seo->format_url($phpbb_seo->seo_censored[$topic_id]);
-								}
+								$phpbb_seo->prepare_iurl($row, 'topic', $row['topic_type'] == POST_GLOBAL ? $phpbb_seo->seo_static['global_announce'] : $phpbb_seo->seo_url['forum'][$forum_id]);
 								// www.phpBB-SEO.com SEO TOOLKIT END
 								$last_post_url =  append_sid("{$phpbb_root_path}viewtopic.$phpEx", "f=$forum_id&amp;t=$topic_id&amp;start=" . @intval($phpbb_seo->seo_opt['topic_last_page'][$topic_id]) ) . '#p' . $row['forum_last_post_id'];
-								$last_post_link = '<a href="' . append_sid("{$phpbb_root_path}viewtopic.$phpEx", "f=$forum_id&amp;t=$topic_id") . '" title="' . $phpbb_seo->seo_censored[$topic_id] . ' : ' . $row['forum_name'] . '">' . $phpbb_seo->seo_censored[$topic_id] . '</a>';
+								$last_post_link = '<a href="' . append_sid("{$phpbb_root_path}viewtopic.$phpEx", "f=$forum_id&amp;t=$topic_id") . '" title="' . $row['topic_title'] . ' : ' . $row['forum_name'] . '">' . $row['topic_title'] . '</a>';
 							} else {	
 								$last_post_url =  append_sid("{$phpbb_root_path}viewtopic.$phpEx", "f=$forum_id&amp;p=" . $row['forum_last_post_id']) . '#p' . $row['forum_last_post_id'];
 								$last_post_link = '';

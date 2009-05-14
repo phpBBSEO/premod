@@ -3607,7 +3607,7 @@ function page_header($page_title = '', $display_online_list = true)
 		if (!function_exists('obtain_gym_links')) {
 			require_once($phpbb_root_path . 'gym_sitemaps/includes/gym_common.' . $phpEx);
 		}
-		obtain_gym_links();
+		$gym_setup = obtain_gym_links();
 	}
 	// www.phpBB-SEO.com SEO TOOLKIT END - GYM LINKS
 	define('HEADER_INC', true);
@@ -4029,7 +4029,7 @@ class seo_meta {
 	* Returns a coma separated keyword list
 	*/
 	function make_keywords($text) {
-		global $phpbb_root_path;
+		global $phpbb_root_path, $phpEx;
 		static $stop_words = array();
 		$keywords = '';
 		$num = 0;

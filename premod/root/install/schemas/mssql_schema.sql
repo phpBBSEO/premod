@@ -1470,9 +1470,7 @@ GO
 
 CREATE  INDEX [fid_time_moved] ON [phpbb_topics]([forum_id], [topic_last_post_time], [topic_moved_id]) ON [PRIMARY]
 GO
-/* Extra premod */
-CREATE  INDEX [topic_last_post_id] ON [phpbb_topics]([topic_last_post_id]) ON [PRIMARY]
-GO
+
 
 /*
 	Table: 'phpbb_topics_track'

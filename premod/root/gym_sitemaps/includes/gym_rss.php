@@ -30,6 +30,25 @@ class gym_rss extends gym_sitemaps {
 		$this->output_data['showstats'] = (boolean) ($this->gym_config['gym_showstats'] || $this->gym_config['rss_showstats']);
 		// Check the main vars
 		$this->init_get_vars();
+		// url without IDs like forum feed url in case the phpBB SEO mod are used and set so
+		// and basic parameter for url such as blabla/news/digest/long/module-rss.xml => gymrss.php?module=blabla&news&digest&long
+		if ( isset($_GET['nametoid']) && !empty($_GET['nametoid']) && isset($_GET['modulename']) && !empty($_GET['modulename']) &&  empty($this->actions['module_main']) && empty($this->actions['module_sub']) ) {
+			$module_name = trim(strtolower($_GET['modulename']));
+			// is the module available ?
+			if (in_array($module_name, $this->actions['action_modules'])) {
+				$this->actions['module_main'] = $module_name;
+				// Do we get an id (?module=id)
+				if ($id = @array_search(trim($_GET['nametoid']), $phpbb_seo->cache_config[$module_name]) ) {
+					$this->actions['module_sub'] = intval($id);
+				} else { // Pass the variable to the script ?module_name=$_GET['nametoid']
+					$this->actions['module_sub'] = trim(utf8_htmlspecialchars(str_replace(array("\n", "\r"), '', $_GET['nametoid'])));
+				}
+			}
+			
+		}
+		if (empty($this->actions['action_modules'])) {
+			$this->gym_error(404, '', __FILE__, __LINE__);
+		}
 		// Set last mod time from DB, will only be used as his for general feeds and channel lists
 		// put it into phpbb config for the dynamic property.
 		$config_name = $this->actions['action_type'] . '_' . (!empty($this->actions['module_main']) ? $this->actions['module_main'] . '_' : '') . 'last_mod_time';
@@ -72,10 +91,10 @@ class gym_rss extends gym_sitemaps {
 		);
 		$rss_limit_time = (int) $this->set_module_option('limit_time', $this->override['limit']);
 		$rss_lang = trim($this->set_module_option('lang', $this->gym_config['rss_override']));
-		$this->rss_config = array( 'rss_c_info' => ( !empty($this->gym_config['rss_c_info'])) ? "\n\t\t" . '<copyright>' . $this->utf8_htmlspecialchars($this->gym_config['rss_c_info']) . '</copyright>' : '',
+		$this->rss_config = array( 'rss_c_info' => ( !empty($this->gym_config['rss_c_info'])) ? "\n\t\t" . '<copyright>' . utf8_htmlspecialchars($this->gym_config['rss_c_info']) . '</copyright>' : '',
 			'rss_xslt' => ( $this->gym_config['rss_xslt'] ) ? true : false,
 			'rss_force_xslt' => ( $this->gym_config['rss_xslt'] && $this->gym_config['rss_force_xslt'] ) ? TRUE : FALSE,
-			'rss_lang' => ( !empty($rss_lang) ) ? "\n\t\t" . '<language>' . $this->utf8_htmlspecialchars($rss_lang) . '</language>' : '',
+			'rss_lang' => ( !empty($rss_lang) ) ? "\n\t\t" . '<language>' . utf8_htmlspecialchars($rss_lang) . '</language>' : '',
 			'rss_url' => $this->gym_config['rss_url'],
 			'rss_yahoo_appid' => ( !empty($this->gym_config['rss_yahoo_appid']) ) ? trim($this->gym_config['rss_yahoo_appid']) : '',
 			// module specific settings we should often need in module
@@ -85,8 +104,8 @@ class gym_rss extends gym_sitemaps {
 			'rss_limit_time' => ( $rss_limit_time >= 0 ) ? $rss_limit_time*3600*24 : 0,
 			'rss_modrewrite' => (int) $this->set_module_option('modrewrite', $this->override['modrewrite']),
 			'rss_modrtype' => (int) $this->set_module_option('modrtype', $this->override['modrewrite']),
-			'rss_sitename' => $this->utf8_htmlspecialchars($this->set_module_option('sitename')),
-			'rss_site_desc' => $this->utf8_htmlspecialchars($this->set_module_option('site_desc')),
+			'rss_sitename' => utf8_htmlspecialchars($this->set_module_option('sitename')),
+			'rss_site_desc' => utf8_htmlspecialchars($this->set_module_option('site_desc')),
 			'rss_logo_url' => $this->path_config['gym_img_url'] . trim($this->set_module_option('logo_url'), '/'),
 			'rss_image_url' => $this->path_config['gym_img_url'] . trim($this->set_module_option('image_url'), '/'),
 			'rss_sort' => $this->set_module_option('sort', $this->override['sort']),
@@ -101,7 +120,7 @@ class gym_rss extends gym_sitemaps {
 			'rss_sumarize_method' => trim($this->set_module_option('sumarize_method', $this->gym_config['rss_override'])),
 			'rss_allow_short' => $this->set_module_option('allow_short', $this->gym_config['rss_override']),
 			'rss_allow_long' => $this->set_module_option('allow_long', $this->gym_config['rss_override']),
-			'rss_allow_bbcode' => $this->set_module_option('allow_bbcode', $this->gym_config['rss_override']),
+			'rss_allow_bbcode' => (boolean) $this->set_module_option('allow_bbcode', $this->gym_config['rss_override']),
 			'rss_strip_bbcode' => trim($this->set_module_option('strip_bbcode', $this->gym_config['rss_override'])),
 			'rss_allow_links' => $this->set_module_option('allow_links', $this->gym_config['rss_override']),
 			'rss_allow_emails' => $this->set_module_option('allow_emails', $this->gym_config['rss_override']),
@@ -147,22 +166,6 @@ class gym_rss extends gym_sitemaps {
 			// nothing else needed for this
 			return;
 
-		}
-		// url without IDs like forum feed url in case the phpBB SEO mod are used and set so
-		// and basic parameter for url such as blabla/news/digest/long/module-rss.xml => gymrss.php?module=blabla&news&digest&long
-		if ( isset($_GET['nametoid']) && !empty($_GET['nametoid']) && isset($_GET['modulename']) && !empty($_GET['modulename']) &&  empty($this->actions['module_main']) && empty($this->actions['module_sub']) ) {
-			$module_name = trim(strtolower($_GET['modulename']));
-			// is the module available ?
-			if (in_array($module_name, $this->actions['action_modules'])) {
-				$this->actions['module_main'] = $module_name;
-				// Do we get an id (?module=id)
-				if ($id = @array_search(trim($_GET['nametoid']), $phpbb_seo->cache_config[$module_name]) ) {
-					$this->actions['module_sub'] = intval($id);
-				} else { // Pass the variable to the script ?module_name=$_GET['nametoid']
-					$this->actions['module_sub'] = trim(utf8_htmlspecialchars(str_replace(array("\n", "\r"), '', $_GET['nametoid'])));
-				}
-			}
-			
 		}
 		$this->actions['rss_content'] = $this->actions['rss_short_list'] = $this->actions['rss_long_list'] = $this->actions['rss_channel_list'] = $this->actions['rss_news_list'] = false;
 		$this->rss_config['extra_title'] = $this->url_config['extra_params_full'] = $this->url_config['extra_params'] = '';
@@ -384,10 +387,10 @@ class gym_rss extends gym_sitemaps {
 		static $bbcode;
 		static $patterns;
 		static $replaces;
-		$message_title = ($topic['post_id' . $key] != $topic['topic_first_post_id'] ? $user->lang['REPLIES']  . ' : ' : ''); 
-		$message = '<b>' . $message_title . (!empty($topic['post_subject' . $key]) ? $user->lang['POST_SUBJECT'] . ' : ' . $topic['post_subject' . $key] : $topic['topic_title']) . '</b>' . "\n\n" . $topic['post_text' . $key];
 		$bbcode_uid = $topic['bbcode_uid' . $key];
 		$bitfield = $topic['bbcode_bitfield' . $key];
+		$message_title = !empty($topic['post_subject' . $key]) ? $topic['post_subject' . $key] : $topic['topic_title']; 
+		$message = '<b>' . $message_title . '</b>' . "\n\n" . $topic['post_text' . $key];	
 		if (!isset($patterns)) {
 			if ( !empty($this->rss_config['rss_msg_filters']['pattern']) ) {
 				$patterns = $this->rss_config['rss_msg_filters']['pattern'];
@@ -396,13 +399,15 @@ class gym_rss extends gym_sitemaps {
 				$patterns = $replaces = array();
 			}
 		}
-		if ($this->rss_config['rss_sumarize'] > 0 ) {
-			$message = $this->summarize( $message, $this->rss_config['rss_sumarize'], $this->rss_config['rss_sumarize_method'] );
-			// Close broken bbcode tags requiring it
-			$this->close_bbcode_tags($message, $bbcode_uid);
-		}
 		if (!empty($patterns)) {
 			$message = preg_replace($patterns, $replaces, $message);
+		}
+		if ($this->rss_config['rss_sumarize'] > 0 ) {
+			$message = $this->summarize( $message, $this->rss_config['rss_sumarize'], $this->rss_config['rss_sumarize_method'] );
+			// Clean broken tag at the end of the message
+			$message = preg_replace('`\<[^\<\>]*$`i', ' ...', $message);
+			// Close broken bbcode tags requiring it
+			$this->close_bbcode_tags($message, $bbcode_uid);
 		}
 		$message = censor_text($message);
 		if ($bitfield && $this->rss_config['rss_allow_bbcode']) {
@@ -424,7 +429,7 @@ class gym_rss extends gym_sitemaps {
 		$message = $this->smiley_text($message, !($this->rss_config['rss_allow_smilies'] && $topic['enable_smilies' . $key]));
 		if ($this->rss_config['rss_sumarize'] > 0 ) {
 			// last clean up
-			static $_find = array('`\<\!--[^\<\>]+--\>`Ui', '`\<[^\<\>]*$`i', '`\[\/?[^\]\[]*\]`Ui');
+			static $_find = array('`\<\!--[^\<\>]+--\>`Ui', '`\[\/?[^\]\[]*\]`Ui');
 			$message = preg_replace($_find, '', $message);
 			$message .= "\n\n" . '<a href="' . $topic['topic_url' . $key] . '" title="'. censor_text($topic['topic_title']) .'"><b>' . $user->lang['RSS_MORE'] . ' ...</b></a>'. "\n\n";
 		}

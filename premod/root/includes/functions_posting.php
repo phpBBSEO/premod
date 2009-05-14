@@ -1265,12 +1265,8 @@ function user_notification($mode, $subject, $topic_title, $forum_name, $forum_id
 
 				// www.phpBB-SEO.com SEO TOOLKIT BEGIN
 				global $phpbb_seo;
-				if ( empty($phpbb_seo->seo_url['topic'][$topic_id]) ) {
-					$phpbb_seo->seo_url['topic'][$topic_id] = $phpbb_seo->format_url(htmlspecialchars_decode($topic_title));
-				}
-				if ( empty($phpbb_seo->seo_url['forum'][$forum_id]) ) {
-					$phpbb_seo->seo_url['forum'][$forum_id] = $phpbb_seo->set_url(htmlspecialchars_decode($forum_name), $forum_id, $phpbb_seo->seo_static['forum']);
-				}
+				$phpbb_seo->set_url(htmlspecialchars_decode($forum_name), $forum_id, $phpbb_seo->seo_static['forum']);
+				$phpbb_seo->prepare_iurl(array('topic_id' => $topic_id, 'topic_title' => htmlspecialchars_decode($topic_title)), 'topic', $phpbb_seo->seo_url['forum'][$forum_id]);
 				$messenger->assign_vars(array(
 					'USERNAME'		=> htmlspecialchars_decode($addr['name']),
 					'TOPIC_TITLE'	=> htmlspecialchars_decode($topic_title),
@@ -1740,6 +1736,9 @@ function submit_post($mode, $subject, $username, $topic_type, &$poll, &$data, $u
 				'icon_id'					=> $data['icon_id'],
 				'topic_approved'			=> $post_approval,
 				'topic_title'				=> $subject,
+				// www.phpBB-SEO.com SEO TOOLKIT BEGIN
+				'topic_url' => isset($data['topic_url']) ? $data['topic_url'] : '',
+				// www.phpBB-SEO.com SEO TOOLKIT END			
 				'topic_first_poster_name'	=> (!$user->data['is_registered'] && $username) ? $username : (($user->data['user_id'] != ANONYMOUS) ? $user->data['username'] : ''),
 				'topic_first_poster_colour'	=> $user->data['user_colour'],
 				'topic_type'				=> $topic_type,
@@ -1788,6 +1787,9 @@ function submit_post($mode, $subject, $username, $topic_type, &$poll, &$data, $u
 				'icon_id'					=> $data['icon_id'],
 				'topic_approved'			=> (!$post_approval) ? 0 : $data['topic_approved'],
 				'topic_title'				=> $subject,
+				// www.phpBB-SEO.com SEO TOOLKIT BEGIN
+				'topic_url' =>  isset($data['topic_url']) ? $data['topic_url'] : '',
+				// www.phpBB-SEO.com SEO TOOLKIT END
 				'topic_first_poster_name'	=> $username,
 				'topic_type'				=> $topic_type,
 				'topic_time_limit'			=> ($topic_type == POST_STICKY || $topic_type == POST_ANNOUNCE) ? ($data['topic_time_limit'] * 86400) : 0,
@@ -2493,14 +2495,9 @@ function submit_post($mode, $subject, $username, $topic_type, &$poll, &$data, $u
 		$params .= '&amp;t=' . $data['topic_id'];
 	}
 	// www.phpBB-SEO.com SEO TOOLKIT BEGIN
-	if ($topic_type == POST_GLOBAL) {
-		$phpbb_seo->seo_opt['topic_type'][$data['topic_id']] = POST_GLOBAL;
-	}
-	if ( $params && empty($phpbb_seo->seo_url['topic'][$data['topic_id']]) ) {
-		$phpbb_seo->seo_url['topic'][$data['topic_id']] = $phpbb_seo->format_url(censor_text($data['topic_title']));
-	}
-	if ( empty($phpbb_seo->seo_url['forum'][$data['forum_id']]) ) {
-		$phpbb_seo->seo_url['forum'][$data['forum_id']] = $phpbb_seo->set_url($data['forum_name'], $data['forum_id'], $phpbb_seo->seo_static['forum']);
+	$phpbb_seo->set_url($data['forum_name'], $data['forum_id'], $phpbb_seo->seo_static['forum']);
+	if ( $params ) {
+		$phpbb_seo->prepare_iurl($data, 'topic', $topic_type == POST_GLOBAL ? $phpbb_seo->seo_static['global_announce'] : $phpbb_seo->seo_url['forum'][$data['forum_id']]);
 	}
 	// www.phpBB-SEO.com SEO TOOLKIT END
 	$url = (!$params) ? "{$phpbb_root_path}viewforum.$phpEx" : "{$phpbb_root_path}viewtopic.$phpEx";

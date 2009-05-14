@@ -206,6 +206,7 @@ class rss_main {
 						'rss_image_url' => array('lang' => 'RSS_IMAGE_URL', 'validate' => 'string', 'type' => 'text:25:200', 'explain' => true),
 						'rss_lang' => array('lang' => 'RSS_LANG', 'validate' => 'string', 'type' => 'select', 'method' => 'select_string', 'explain' => true,),
 						'rss_url'	=> array('lang' => 'RSS_URL', 'validate' => 'string',	'type' => 'text:40:255', 'explain' => true),
+						'rss_alternate'	=> array('lang' => 'RSS_ALTERNATE', 'validate' => 'bool', 'type' => 'radio:yes_no', 'explain' => true),
 						// Auth settings
 						'legend2'	=> 'RSS_AUTH_SETTINGS',
 						'rss_allow_auth' => array('lang' => 'RSS_ALLOW_AUTH', 'validate' => 'bool', 'type' => 'radio:yes_no', 'explain' => true),
@@ -227,6 +228,7 @@ class rss_main {
 					'rss_site_desc' => $config['site_desc'],
 					'rss_logo_url' => 'logo.gif',
 					'rss_image_url' => 'rss_forum_big.gif',
+					'rss_alternate' => 1,
 					'rss_lang' => $config['default_lang'],
 					'rss_url' => $phpbb_seo->seo_path['phpbb_url'],
 					'rss_allow_auth' => 0,

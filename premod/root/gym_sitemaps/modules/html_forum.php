@@ -76,7 +76,7 @@ class html_forum {
 		$this->actions['auth_view_list'] = array_diff_assoc($this->module_auth['forum']['list'], $this->module_config['exclude_list']);
 		$this->actions['auth_view_read'] = array_diff_assoc($this->module_auth['forum']['read'], $this->module_config['exclude_list']);
 		// Mod rewrite type auto detection
-		$this->url_settings['modrtype'] = ($phpbb_seo->modrtype >= 0) ? intval($phpbb_seo->modrtype) : intval($this->gym_master->gym_config['rss_modrtype']);
+		$this->url_settings['modrtype'] = ($phpbb_seo->modrtype >= 0) ? intval($phpbb_seo->modrtype) : intval($this->module_config['html_modrtype']);
 		// make sure virtual_folder uses the proper value
 		// Set up urls
 		$html_def = $this->url_settings['html_default'];
@@ -161,23 +161,27 @@ class html_forum {
 		$type_key = $_key = '';
 		switch ($this->actions['module_sub']) {
 		case 'global':
+			$this->actions['is_auth'] = $this->actions['is_active'] = true;
 			$this->call['s_global'] = $this->actions['is_public'] = true;
-			$this->call['forum_sql'] = "t.forum_id = 0 AND t.topic_type = " . POST_GLOBAL;
+			$this->call['forum_sql'] = "t.forum_id = 0";
+			$this->call['topic_sql'] = "t.topic_type = " . POST_GLOBAL;
 			$type_key = 'forum_global';
 			$pre_set = true;
 		case 'announce':
 			if (!$pre_set) {
 				$this->actions['is_public'] = $this->gym_master->gym_auth['reg'];
+				$this->actions['is_auth'] = $this->actions['is_active'] = !empty($this->module_auth['forum']['read_post']);
 				$this->call['forum_sql'] = $db->sql_in_set('t.forum_id', $this->module_auth['forum']['read_post'], false, true);
-				$this->call['forum_sql'] .= " AND t.topic_type = " . POST_ANNOUNCE;
+				$this->call['topic_sql'] = "t.topic_type = " . POST_ANNOUNCE;
 				$type_key = 'forum_announce';
 				$pre_set = true;
 			}
 		case 'sticky':
 			if (!$pre_set) {
 				$this->actions['is_public'] = $this->gym_master->gym_auth['reg'];
+				$this->actions['is_auth'] = $this->actions['is_active'] = !empty($this->module_auth['forum']['read_post']);
 				$this->call['forum_sql'] = $db->sql_in_set('t.forum_id', $this->module_auth['forum']['read_post'], false, true);
-				$this->call['forum_sql'] .= " AND t.topic_type = " . POST_STICKY;
+				$this->call['topic_sql'] = "t.topic_type = " . POST_STICKY;
 				$type_key = 'forum_sticky';
 				$pre_set = true;
 			}
@@ -208,7 +212,6 @@ class html_forum {
 					$this->call['file'] = 'display_topics.' . $phpEx;
 				}
 				if (!empty($_key)) {
-					$this->actions['is_auth'] = $this->actions['is_active'] = true;
 					$this->outputs['page_title'] = $user->lang['HTML_' . strtoupper($type_key) . '_' . strtoupper($_key)];
 					$this->outputs['left_col_cache_file'] = $type_key . '_' . $_key;
 					$this->url_settings['current'] .= $this->gym_master->html_build_url('html_' . $type_key . '_' . $_key);
@@ -231,9 +234,12 @@ class html_forum {
 				$this->module_config['html_forum_news_ids'] = $this->gym_master->set_exclude_list($this->module_config['html_forum_news_ids']);
 				if (empty($this->module_config['html_forum_news_ids'])) {
 					$this->actions['auth_view_read'] = array_diff_assoc($this->module_auth['forum']['read_post'], $this->module_config['exclude_list']);
+					$this->actions['is_auth'] = $this->actions['is_active'] = !empty($this->actions['auth_view_read']);
+					$this->call['single_forum'] = sizeof($this->actions['auth_view_read']) > 1 ? false : true;
 					// Output news from all authed forums
 					$this->call['forum_sql'] = $db->sql_in_set('t.forum_id', $this->actions['auth_view_read'], false, true);
 				} else {
+					$this->call['single_forum'] = sizeof($this->module_config['html_forum_news_ids']) > 1 ? false : true;
 					// No exclude list here !
 					$this->call['forum_sql'] = $db->sql_in_set('t.forum_id', $this->module_config['html_forum_news_ids'], false, true);
 				}
@@ -316,7 +322,7 @@ class html_forum {
 						$result = $db->sql_query($sql);
 						if ($row = $db->sql_fetchrow($result)) {
 							// www.phpBB-SEO.com SEO TOOLKIT BEGIN
-							$phpbb_seo->seo_url['forum'][$forum_id] = $phpbb_seo->set_url($row['forum_name'], $forum_id, $phpbb_seo->seo_static['forum']);
+							$phpbb_seo->set_url($row['forum_name'], $forum_id, $phpbb_seo->seo_static['forum']);
 							// www.phpBB-SEO.com SEO TOOLKIT END
 							$this->forum_datas[$forum_id] = array_merge($row,  array(
 								'forum_url' => append_sid("{$phpbb_root_path}viewforum.$phpEx", "f=$forum_id"),
@@ -442,8 +448,13 @@ class html_forum {
 		$this->outputs['right_col_tpl'] = 'gym_sitemaps/last_topics_list.html';
 		// Wee need to check auth here
 		$this->module_config['last_topics_exclude_list'] = $this->gym_master->set_exclude_list($this->module_config['html_ltopic_exclude']);
-		$sql_auth = $db->sql_in_set('t.forum_id', array_diff_assoc($this->module_auth['forum']['read_post'], $this->module_config['last_topics_exclude_list']), false, true);
-		if (!empty($sql_auth)) {
+		$forum_auth_ids = array_diff_assoc($this->module_auth['forum']['read_post'], $this->module_config['last_topics_exclude_list']);
+		$topic_sql_auth = $db->sql_in_set('t.forum_id', $forum_auth_ids, false, true);
+		if ($topic_sql_auth{1} != 1) {
+			$template->assign_vars(array(
+				'NEWEST_POST_IMG' => $user->img('icon_topic_newest', 'VIEW_NEWEST_POST'),
+				'LAST_POST_IMG' => $user->img('icon_topic_latest', 'VIEW_LATEST_POST'),
+			));
 			$display_tracking = &$this->call['display_tracking'];
 			$display_user_info = &$this->call['display_user_info'];
 			$display_topic_status = &$this->call['display_topic_status'];
@@ -457,12 +468,46 @@ class html_forum {
 					'LASTX_TOPICS_TITLE' => sprintf($user->lang['HTML_LASTX_TOPICS_TITLE'], $limit)
 				)
 			);
-			// Get The Data
+			// Get The Data, first forums
+			unset($this->forum_datas[0]);
+			if (!empty($this->forum_datas)) {
+				$f_id_done = array_keys($this->forum_datas);
+				$f_id_done = array_combine($f_id_done, $f_id_done);
+				$forum_query_ids = array_diff_assoc($forum_auth_ids, $f_id_done);
+			} else {
+				$forum_query_ids = $forum_auth_ids;
+			}
+			// Only get the required forums data
+			if (!empty($forum_query_ids)) {
+				$forum_sql_auth = $db->sql_in_set('f.forum_id', $forum_query_ids, false, true);
+				$sql_array = array(
+					'SELECT'	=> 'f.*',
+					'FROM'		=> array(
+						FORUMS_TABLE	=> 'f',
+					),
+					'LEFT_JOIN' => array(),
+				);
+				if ($load_db_lastread) {
+					$sql_array['SELECT'] .= ', ft.mark_time as forum_mark_time';
+					$sql_array['LEFT_JOIN'][] = array(
+						'FROM'	=> array(FORUMS_TRACK_TABLE => 'ft'),
+						'ON'	=> 'ft.user_id = ' . $user->data['user_id'] . ' AND ft.forum_id = f.forum_id'
+					);
+				}
+				$sql_array['WHERE'] = $forum_sql_auth;
+				$result = $db->sql_query($db->sql_build_query('SELECT', $sql_array));
+				$all_forum_datas = $forum_datas = array();
+				while ($row = $db->sql_fetchrow($result)) {
+					$forum_id = (int) $row['forum_id'];
+					$forum_datas[$forum_id] = $row;
+				}
+				$db->sql_freeresult($result);
+			}
+			// Now the topics
 			$sql_array = array(
-				'SELECT'	=> 't.*, f.forum_id, f.forum_name, f.forum_status, f.forum_last_post_time, f.enable_icons',
+				'SELECT'	=> 't.*',
 				'FROM'		=> array(
 					TOPICS_TABLE	=> 't',
-					FORUMS_TABLE	=> 'f',
 				),
 				'LEFT_JOIN' => array(),
 			);
@@ -471,14 +516,10 @@ class html_forum {
 				$sql_array['SELECT'] .= ', tp.topic_posted';
 			}
 			if ($load_db_lastread) {
-				$sql_array['SELECT'] .= ', tt.mark_time, ft.mark_time as forum_mark_time';
+				$sql_array['SELECT'] .= ', tt.mark_time';
 				$sql_array['LEFT_JOIN'][] = array(
 					'FROM'	=> array(TOPICS_TRACK_TABLE => 'tt'),
-					'ON'	=> 'tt.user_id = ' . $user->data['user_id'] . ' AND t.topic_id = tt.topic_id'
-				);
-				$sql_array['LEFT_JOIN'][] = array(
-					'FROM'	=> array(FORUMS_TRACK_TABLE => 'ft'),
-					'ON'	=> 'ft.user_id = ' . $user->data['user_id'] . ' AND t.forum_id = ft.forum_id'
+					'ON'	=> 'tt.user_id = ' . $user->data['user_id'] . ' AND tt.topic_id = t.topic_id'
 				);
 			} elseif ($load_anon_lastread && empty($this->tracking_topics)) {
 				$this->tracking_topics = (isset($_COOKIE[$config['cookie_name'] . $tracking_cookie_name])) ? ((STRIP) ? stripslashes($_COOKIE[$config['cookie_name'] . $tracking_cookie_name]) : $_COOKIE[$config['cookie_name'] . $tracking_cookie_name]) : '';
@@ -487,12 +528,10 @@ class html_forum {
 					$user->data['user_lastmark'] = (isset($this->tracking_topics['l'])) ? (int) (base_convert($this->tracking_topics['l'], 36, 10) + $config['board_startdate']) : 0;
 				}
 			}
-			$sql_array['WHERE'] = "$sql_auth
-						AND f.forum_id = t.forum_id
+			$sql_array['WHERE'] = "$topic_sql_auth
 						AND t.topic_status <> " . ITEM_MOVED;
 			$sql_array['ORDER_BY'] = 'topic_last_post_time DESC';
 			$result = $db->sql_query_limit($db->sql_build_query('SELECT', $sql_array), $limit);
-			$all_forum_datas = array();
 			while ($row = $db->sql_fetchrow($result)) {
 				$topic_id = (int) $row['topic_id'];
 				$forum_id = (int) $row['forum_id'];
@@ -512,26 +551,19 @@ class html_forum {
 				// Start with the forum
 				$forum_id = (int) $forum_id;
 				if (empty($this->forum_datas[$forum_id])) {
-					$row = current($topic_datas);
-					$this->forum_datas[$forum_id] = array_merge($row, 
-						array(
-							'm_approve' => $auth->acl_get('m_approve', $forum_id),
-							'forum_name' => !empty($row['forum_name']) ? $row['forum_name'] : '',
-							'forum_status' => !empty($row['forum_status']) ? $row['forum_status'] : '',
-							'forum_last_post_time' => !empty($row['forum_last_post_time']) ? $row['forum_last_post_time'] : 0,
-							'enable_icons' => !empty($row['enable_icons']) ? $row['enable_icons'] : 0,
-							'forum_url' => '',
-						)
-					);
+					$row = & $forum_datas[$forum_id];
+					// www.phpBB-SEO.com SEO TOOLKIT BEGIN
+					$phpbb_seo->set_url($row['forum_name'], $forum_id, $phpbb_seo->seo_static['forum']);
+					// www.phpBB-SEO.com SEO TOOLKIT END
+					$this->forum_datas[$forum_id] = array_merge($row,  array(
+						'forum_url' => append_sid("{$phpbb_root_path}viewforum.$phpEx", "f=$forum_id"),
+						'm_approve' => $auth->acl_get('m_approve', $forum_id),
+					));
 					if ($load_db_lastread) {
 						$this->forum_tracking_info[$forum_id] = !empty($row['forum_mark_time']) ? $row['forum_mark_time'] : $user->data['user_lastmark'];
 					} elseif ($load_anon_lastread) {
 						$this->forum_tracking_info[$forum_id] = isset($this->tracking_topics['f'][$forum_id]) ? (int) (base_convert($this->tracking_topics['f'][$forum_id], 36, 10) + $config['board_startdate']) : $user->data['user_lastmark'];
 					}
-					// www.phpBB-SEO.com SEO TOOLKIT BEGIN
-					$phpbb_seo->seo_url['forum'][$forum_id] = $phpbb_seo->set_url($this->forum_datas[$forum_id]['forum_name'], $forum_id, $phpbb_seo->seo_static['forum']);
-					// www.phpBB-SEO.com SEO TOOLKIT END
-					$this->forum_datas[$forum_id]['forum_url'] = append_sid("{$phpbb_root_path}viewforum.$phpEx", "f=$forum_id");
 				}
 				$forum_unread = (isset($this->forum_tracking_info[$forum_id]) && $this->forum_datas[$forum_id]['forum_last_post_time'] > $this->forum_tracking_info[$forum_id]) ? true : false;
 				$folder_image = $folder_alt = '';
@@ -556,7 +588,7 @@ class html_forum {
 					$topic_id = (int) $topic_id;
 					if (empty($this->forum_tracking_info[$forum_id])) {
 						if ($load_db_lastread) {
-							$this->topic_tracking_info[$topic_id] = !empty($row['mark_time']) ? $row['mark_time'] : $user->data['user_lastmark'];
+							$this->topic_tracking_info[$topic_id] = !empty($this->forum_datas[$forum_id]['mark_time']) ? $this->forum_datas[$forum_id]['mark_time'] : $user->data['user_lastmark'];
 						} else if ($load_anon_lastread) {
 							$topic_id36 = base_convert($topic_id, 10, 36);
 							if (isset($this->tracking_topics['t'][$topic_id36])) {
@@ -567,27 +599,22 @@ class html_forum {
 					} else {
 						$this->topic_tracking_info[$topic_id] = $this->forum_tracking_info[$forum_id];
 					}
+					$topic_data['topic_title'] = censor_text($topic_data['topic_title']);
 					// www.phpBB-SEO.com SEO TOOLKIT BEGIN
-					if ( empty($phpbb_seo->seo_url['topic'][$topic_id]) ) {
-						if ($topic_data['topic_type'] == POST_GLOBAL) {
-							$phpbb_seo->seo_opt['topic_type'][$topic_id] = POST_GLOBAL;
-						}
-						$phpbb_seo->seo_censored[$topic_id] = censor_text($topic_data['topic_title']);
-						$phpbb_seo->seo_url['topic'][$topic_id] = $phpbb_seo->format_url($phpbb_seo->seo_censored[$topic_id]);
-					}
+					$phpbb_seo->prepare_iurl($topic_data, 'topic', $topic_data['topic_type'] == POST_GLOBAL ? $this->seo_static['global_announce'] : $phpbb_seo->seo_url['forum'][$forum_id]);
 					// www.phpBB-SEO.com SEO TOOLKIT END
 					// Replies
 					$replies = $this->forum_datas[$forum_id]['m_approve'] ? $topic_data['topic_replies_real'] : $topic_data['topic_replies'];
 					$unread_topic = (isset($this->topic_tracking_info[$topic_id]) && $topic_data['topic_last_post_time'] > $this->topic_tracking_info[$topic_id]) ? true : false;
 					// Get folder img, topic status/type related information
 					if ($display_topic_status) {
-						$this->gym_master->topic_status($row, $replies, $unread_topic, $folder_img, $folder_alt, $topic_type);
+						$this->gym_master->topic_status($topic_data, $replies, $unread_topic, $folder_img, $folder_alt, $topic_type);
 						$topic_folder_img = $user->img($folder_img, $folder_alt);
 						$topic_folder_img_src = $user->img($folder_img, $folder_alt, false, '', 'src');
 					}
 					$view_topic_url = append_sid("{$phpbb_root_path}viewtopic.$phpEx", "f=$forum_id&amp;t=$topic_id");
 					$template->assign_block_vars('last_forums.last_topics', array(
-							'TOPIC_TITLE' => $phpbb_seo->seo_censored[$topic_id],
+							'TOPIC_TITLE' => $topic_data['topic_title'],
 							'PAGINATION' => $this->call['last_topic_pagination'] ? $this->gym_master->topic_generate_pagination($replies, $view_topic_url) : '',
 							'TOPIC_TYPE' => $topic_type,
 							'TOPIC_FOLDER_IMG' => $topic_folder_img,
@@ -603,6 +630,7 @@ class html_forum {
 					);
 				}
 			}
+			unset($forum_datas, $all_forum_datas);
 		}
 	}
 	/**

@@ -56,15 +56,14 @@ class google_txt {
 	function init_url_settings() {
 		global $phpbb_seo;
 		// vars will fell like rain in the code ;)
-		$this->url_settings['google_txt_pre'] = $this->url_settings['google_default'] . '?txt=';
-		$this->url_settings['google_txt_ext'] = '';
-
 		$this->url_settings['google_txt_delim'] = !empty($phpbb_seo->seo_delim['google_txt']) ? $phpbb_seo->seo_delim['google_txt'] : '-';
 		$this->url_settings['google_txt_static'] = !empty($phpbb_seo->seo_static['google_txt']) ? $phpbb_seo->seo_static['google_txt'] : 'txt';
 		$this->url_settings['modrewrite'] = $this->module_config['google_modrewrite'];
+
 		if ($this->url_settings['modrewrite']) { // Module links
-			$this->url_settings['google_txt_pre'] = 'txt' . $this->url_settings['google_txt_delim'];
-			$this->url_settings['google_txt_ext'] = '.xml' . $this->url_settings['gzip_ext_out'];
+			$this->url_settings['google_txt_tpl'] = $this->module_config['google_url'] . 'txt' . $this->url_settings['google_txt_delim'] . '%1$s.xml' . $this->url_settings['gzip_ext_out'];
+		} else {
+			$this->url_settings['google_txt_tpl'] = $this->module_config['google_url'] . $this->url_settings['google_default'] . '?txt=%1$s';
 		}
 		return;
 	}
@@ -79,42 +78,48 @@ class google_txt {
 			if ($this->module_config['google_check_robots']) {
 				$this->gym_master->obtain_robots_disallows();
 			}
-			$sitemap_txt_url = $this->module_config['google_url'] . $this->url_settings['google_txt_pre'] . $this->options['module_sub'] . $this->url_settings['google_txt_ext'];
+			$sitemap_txt_url = sprintf( $this->url_settings['google_txt_tpl'], $this->options['module_sub'] );
 			$this->gym_master->seo_kill_dupes($sitemap_txt_url);
 			$txt_file = $this->txt_files[$this->options['module_sub']];
 			// Grab data
 			if (($txt_data = @file($txt_file)) && is_array($txt_data)) {
 				$last_mod = (int) @filemtime($txt_file);
+				$url_count = count($txt_data);
 				$this->outputs['last_mod_time'] = $last_mod > $config['board_startdate'] ? $last_mod : (time() - rand(500, 10000));
 				// Randomize ?
 				if ($this->module_config['google_randomize']) {
 					shuffle($txt_data);
 				}
 				// Limit ?
-				if ($this->module_config['google_url_limit'] > 0) {
+				if ($this->module_config['google_url_limit'] > 0 && $this->module_config['google_url_limit'] < $url_count) {
 					$txt_data = array_slice($txt_data, 0, $this->module_config['google_url_limit']);
-				}
-				// Check unique  ?
-				if ($this->module_config['google_unique']) {
-					array_unique($txt_data);
 				}
 				// Force last mod  ?
 				$last_mod = $this->module_config['google_force_lastmod'] ? $this->outputs['last_mod_time'] : 0;
 				// Parse URLs
-				$dt = 3600;
+				$dt = rand(0, 3600);
+				$url_check = array();
 				foreach ($txt_data as $key => $url) {
-					if ($this->module_config['google_check_robots'] && $this->gym_master->is_robots_disallowed($url)) {
+					$url = trim($url);
+					if (empty($url) || ($this->module_config['google_check_robots'] && $this->gym_master->is_robots_disallowed($url))) {
 						continue;
 					}
+					// Check unique ?
+					if ($this->module_config['google_unique']) {
+						if (isset($url_check[$loc])) {
+							continue;
+						}
+						$url_check[$loc] = 1;
+					}
 					if ($this->module_config['google_force_lastmod']) {
-						$_last_mod = $last_mod - $dt - rand(3600, 3600*24*7);
+						$_last_mod = $last_mod - $dt;
 						$priority = $this->gym_master->get_priority($_last_mod);
 						$changefreq = $this->gym_master->get_changefreq($_last_mod);
 					} else {
 						$_last_mod = $priority = $changefreq = 0;
 					}
-					$this->gym_master->parse_item(trim($url), $priority, $changefreq, $_last_mod);
-					$dt += rand(3600, 3600*12);
+					$this->gym_master->parse_item($url, $priority, $changefreq, $_last_mod);
+					$dt += rand(30, 3600*12);
 					unset($txt_data[$key]);
 				}
 			} else {
@@ -137,9 +142,9 @@ class google_txt {
 		// Reset the local counting, since we are cycling through modules
 		$this->outputs['url_sofar'] = 0;
 		foreach ($this->txt_files as $txt_action => $source) {
-			$sitemap_txt_url = $this->module_config['google_url'] . $this->url_settings['google_txt_pre'] . $txt_action . $this->url_settings['google_txt_ext'];
+			$sitemap_txt_url = sprintf( $this->url_settings['google_txt_tpl'], $txt_action );;
 			$last_mod = (int) @filemtime($txt_file);
-			$last_mod = $last_mod > $config['board_startdate'] ? $last_mod : (time() - rand(500, 10000));
+			$last_mod = ($last_mod > $config['board_startdate'] && !$this->module_config['google_force_lastmod']) ? $last_mod : (time() - rand(500, 10000));
 			$this->gym_master->parse_sitemap($sitemap_txt_url, $last_mod);
 		}
 		// Add the local counting, since we are cycling through modules

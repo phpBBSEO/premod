@@ -116,9 +116,6 @@ class module {
 		// Order to use and count further if modules get assigned to the same position or not having an order
 		$max_module_order = 1000;
 		foreach ($module as $row) {
-			// Check any module pre-reqs
-			if ($row['module_reqs'] != '') {
-			}
 			// Module order not specified or module already assigned at this position?
 			if (!isset($row['module_order']) || isset($this->module_ary[$row['module_order']])) {
 				$row['module_order'] = $max_module_order;
@@ -515,43 +512,6 @@ class install_phpbb_seo extends module {
 					}
 				}
 			}
-			// Move some of the modules around since the code above will put them in the wrong place
-			if ($module_class == 'acp') {
-				// Move main module 4 up...
-				$sql = 'SELECT *
-					FROM ' . MODULES_TABLE . "
-					WHERE module_basename = 'main'
-						AND module_class = 'acp'
-						AND module_mode = 'main'";
-				$result = $db->sql_query($sql);
-				$row = $db->sql_fetchrow($result);
-				$db->sql_freeresult($result);
-				$_module->move_module_by($row, 'move_up', 4);
-				// Move permissions intro screen module 4 up...
-				$sql = 'SELECT *
-					FROM ' . MODULES_TABLE . "
-					WHERE module_basename = 'permissions'
-						AND module_class = 'acp'
-						AND module_mode = 'intro'";
-				$result = $db->sql_query($sql);
-				$row = $db->sql_fetchrow($result);
-				$db->sql_freeresult($result);
-				$_module->move_module_by($row, 'move_up', 4);
-				// Move manage users screen module 5 up...
-				$sql = 'SELECT *
-					FROM ' . MODULES_TABLE . "
-					WHERE module_basename = 'users'
-						AND module_class = 'acp'
-						AND module_mode = 'overview'";
-				$result = $db->sql_query($sql);
-				$row = $db->sql_fetchrow($result);
-				$db->sql_freeresult($result);
-				$_module->move_module_by($row, 'move_up', 5);
-			}
-			// And now for the special ones
-			// (these are modules which appear in multiple categories and thus get added manually to some for more control)
-			//if (isset($this->module_extras[$module_class])) {
-			//}
 			$_module->remove_cache_file();
 		}
 	}
@@ -673,22 +633,53 @@ class install_phpbb_seo extends module {
 		global $auth, $config, $db, $user, $template, $user, $phpbb_root_path, $phpEx, $phpbb_seo, $cache;
 		if (!sizeof($this->errors) ) {
 			add_log('admin', 'SEO_LOG_' . strtoupper($mode), $phpbb_seo->version );
-			$cache->purge();
 		} else {
 			add_log('admin', 'SEO_LOG_' . strtoupper($mode) . '_FAIL', $this->errors);
+			$cache->purge();
 			$this->p_master->error($user->lang['SEO_ERROR_INSTALL'] . '<br/><pre>' . implode('<br/>', $this->errors) . '</pre>', __LINE__, __FILE__);
-			$cache->purge();	
 		}
 		$this->page_title = $user->lang['STAGE_FINAL'];
+		if (!class_exists('phpbb_db_tools')) {
+			include($phpbb_root_path . 'includes/db/db_tools.' . $phpEx);
+		}
+		$db_tools = new phpbb_db_tools($db);
+		$indexes = $db_tools->sql_list_index(TOPICS_TABLE);
+		$drop_index_name = 'topic_last_post_id';
+		$add_index_name = 'topic_lpid';
 		if (  $mode == 'install_phpbb_seo' ) {
+			if (!$db_tools->sql_column_exists(TOPICS_TABLE, 'topic_url')) {
+				$db_tools->sql_column_add(TOPICS_TABLE, 'topic_url', array('VCHAR', ''));
+			}
+			if (in_array($drop_index_name, $indexes)) {
+				$db_tools->sql_index_drop(TOPICS_TABLE, $drop_index_name);
+			}
+			if (!in_array($add_index_name, $indexes)) {
+				$db_tools->sql_create_index(TOPICS_TABLE, $add_index_name, array('topic_last_post_id'));
+			}
 			$submit_action = append_sid($phpbb_root_path . 'adm/index.' . $phpEx . '?sid=' . $user->session_id);
 			$title = $user->lang['SEO_INSTALL_CONGRATS'];
 			$body =  sprintf($user->lang['SEO_INSTALL_CONGRATS_EXPLAIN'], $this->modrtype_lang['link'], $phpbb_seo->version);
 		} else {
+			$purge_topic_table = false;
+			if ($purge_topic_table) {
+				if ($db_tools->sql_column_exists(TOPICS_TABLE, 'topic_url')) {
+					$db_tools->sql_column_remove(TOPICS_TABLE, 'topic_url');
+				}
+				if ($db_tools->sql_column_exists(DRAFTS_TABLE, 'draft_url')) {
+					$db_tools->sql_column_remove(DRAFTS_TABLE, 'draft_url');
+				}
+			}
+			if (in_array($drop_index_name, $indexes)) {
+				$db_tools->sql_index_drop(TOPICS_TABLE, $drop_index_name);
+			}
+			if (in_array($add_index_name, $indexes)) {
+				$db_tools->sql_index_drop(TOPICS_TABLE, $add_index_name);
+			}
 			$submit_action = append_sid($phpbb_root_path . 'index.' . $phpEx);
 			$title = $user->lang['UN_SEO_INSTALL_CONGRATS'];
 			$body = sprintf($user->lang['UN_SEO_INSTALL_CONGRATS_EXPLAIN'], $this->modrtype_lang['link'], $phpbb_seo->version);
 		}
+		$cache->purge();
 		$template->assign_vars(array(
 			'TITLE'		=> $title,
 			'BODY'		=> $body,

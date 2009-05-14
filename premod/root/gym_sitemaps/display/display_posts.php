@@ -59,39 +59,49 @@ class display_posts {
 		$s_global = $master->call['s_global'];
 		$bbcode_bitfield = '';
 		// Do some reset
-		$topic_datas = $topic_ids = $forum_ids = $user_cache = $id_cache = $post_datas = array();
+		$topic_datas = $topic_ids = $forum_ids = $user_cache = $id_cache = $post_datas = $forum_datas = array();
 		$forum_id = $master->call['forum_id'];
-		// Build SQL
-		if ($s_global || $master->call['single_forum']) {
+		$now = getdate(time() + $user->timezone + $user->dst - date('Z'));
+		// Get The Data, first forums
+		if ((!$s_global && !$master->call['single_forum']) || ($master->call['single_forum'] && empty($master->forum_datas[$master->call['forum_id']])) ) {
 			$sql_array = array(
-				'SELECT'	=> 't.*',
+				'SELECT'	=> 'f.*',
 				'FROM'		=> array(
-					TOPICS_TABLE	=> 't',
-				)
-			);
-		} else {
-			$sql_array = array(
-				'SELECT'	=> 't.*, f.*',
-				'FROM'		=> array(
-					TOPICS_TABLE	=> 't',
 					FORUMS_TABLE	=> 'f',
-				)
+				),
+				'LEFT_JOIN' => array(),
 			);
+			if ($load_db_lastread) {
+				$sql_array['SELECT'] .= ', ft.mark_time as forum_mark_time';
+				$sql_array['LEFT_JOIN'][] = array(
+					'FROM'	=> array(FORUMS_TRACK_TABLE => 'ft'),
+					'ON'	=> 'ft.user_id = ' . $user->data['user_id'] . ' AND ft.forum_id = f.forum_id'
+				);
+			}
+			$sql_array['WHERE'] = $forum_sql ? str_replace('t.forum_id', 'f.forum_id', $forum_sql) : '';
+			$sql = $db->sql_build_query('SELECT', $sql_array);
+			unset($sql_array);
+			$result = $db->sql_query($sql);
+			while ($row = $db->sql_fetchrow($result)) {
+				$forum_id = (int) $row['forum_id'];
+				$forum_datas[$forum_id] = $row;
+			}
+			$db->sql_freeresult($result);
 		}
-		$sql_array['LEFT_JOIN'] = array();
+		// Now the topics
+		$sql_array = array(
+			'SELECT'	=> 't.*',
+			'FROM'		=> array(
+				TOPICS_TABLE	=> 't',
+			),
+			'LEFT_JOIN' => array(),
+		);
 		if ($load_db_lastread) {
 			$sql_array['SELECT'] .= ', tt.mark_time';
 			$sql_array['LEFT_JOIN'][] = array(
 				'FROM'	=> array(TOPICS_TRACK_TABLE => 'tt'),
-				'ON'	=> 'tt.user_id = ' . $user->data['user_id'] . ' AND t.topic_id = tt.topic_id'
+				'ON'	=> 'tt.user_id = ' . $user->data['user_id'] . ' AND tt.topic_id = t.topic_id'
 			);
-			if (!$s_global && !$master->call['single_forum']) {
-				$sql_array['SELECT'] .= ', ft.mark_time as forum_mark_time';
-				$sql_array['LEFT_JOIN'][] = array(
-					'FROM'	=> array(FORUMS_TRACK_TABLE => 'ft'),
-					'ON'	=> 'ft.user_id = ' . $user->data['user_id'] . ' AND t.forum_id = ft.forum_id'
-				);
-			}
 		} elseif ($load_anon_lastread && empty($master->tracking_topics)) {
 			$master->tracking_topics = (isset($_COOKIE[$config['cookie_name'] . $tracking_cookie_name])) ? ((STRIP) ? stripslashes($_COOKIE[$config['cookie_name'] . $tracking_cookie_name]) : $_COOKIE[$config['cookie_name'] . $tracking_cookie_name]) : '';
 			$master->tracking_topics = ($master->tracking_topics) ? tracking_unserialize($master->tracking_topics) : array();
@@ -112,7 +122,7 @@ class display_posts {
 		// obtain correct topic count if we display pagination
 		if ($display_pagination) {
 			$sql = "SELECT COUNT(t.topic_id) AS num_topics
-				FROM " . TOPICS_TABLE . " AS t
+				FROM " . TOPICS_TABLE . " t
 				WHERE $sql_where";
 			$result = $db->sql_query($sql);
 			$total_topics = (int) $db->sql_fetchfield('num_topics');
@@ -125,7 +135,7 @@ class display_posts {
 				$master->gym_master->seo_kill_dupes($url);
 			}
 		}
-		$sql_array['WHERE'] = $sql_where . (($s_global || $master->call['single_forum']) ? '' : ' AND f.forum_id = t.forum_id');
+		$sql_array['WHERE'] = $sql_where;
 		$sql_array['ORDER_BY'] = $display_order . $order_sql;
 		$sql = $db->sql_build_query('SELECT', $sql_array);
 		unset($sql_array);
@@ -134,27 +144,19 @@ class display_posts {
 		while ($row = $db->sql_fetchrow($result)) {
 			$forum_id = (int) $row['forum_id'];
 			$topic_id = (int) $row['topic_id'];
-			if (empty($master->forum_datas[$forum_id])) {
-				$master->forum_datas[$forum_id] = array_merge($row,
-					array(
-						'm_approve' => $auth->acl_get('m_approve', $forum_id),
-						'forum_name' => !empty($row['forum_name']) ? $row['forum_name'] : '',
-						'forum_status' => !empty($row['forum_status']) ? $row['forum_status'] : '',
-						'forum_last_post_time' => !empty($row['forum_last_post_time']) ? $row['forum_last_post_time'] : 0,
-						'enable_icons' => !empty($row['enable_icons']) ? $row['enable_icons'] : 0,
-						'forum_url' => '',
-					)
-				);
+			// Start with the forum
+			if (!$s_global && empty($master->forum_datas[$forum_id])) {
+				// www.phpBB-SEO.com SEO TOOLKIT BEGIN
+				$phpbb_seo->set_url($forum_datas[$forum_id]['forum_name'], $forum_id, $phpbb_seo->seo_static['forum']);
+				// www.phpBB-SEO.com SEO TOOLKIT END
+				$master->forum_datas[$forum_id] = array_merge($forum_datas[$forum_id],  array(
+					'forum_url' => append_sid("{$phpbb_root_path}viewforum.$phpEx", "f=$forum_id"),
+					'm_approve' => $auth->acl_get('m_approve', $forum_id),
+				));
 				if ($load_db_lastread) {
-					$master->forum_tracking_info[$forum_id] = !empty($row['forum_mark_time']) ? $row['forum_mark_time'] : $user->data['user_lastmark'];
+					$master->forum_tracking_info[$forum_id] = !empty($forum_datas[$forum_id]['forum_mark_time']) ? $forum_datas[$forum_id]['forum_mark_time'] : $user->data['user_lastmark'];
 				} elseif ($load_anon_lastread) {
 					$master->forum_tracking_info[$forum_id] = isset($master->tracking_topics['f'][$forum_id]) ? (int) (base_convert($master->tracking_topics['f'][$forum_id], 36, 10) + $config['board_startdate']) : $user->data['user_lastmark'];
-				}
-				if (!$s_global) {
-					// www.phpBB-SEO.com SEO TOOLKIT BEGIN
-					$phpbb_seo->seo_url['forum'][$forum_id] = $phpbb_seo->set_url($master->forum_datas[$forum_id]['forum_name'], $forum_id, $phpbb_seo->seo_static['forum']);
-					// www.phpBB-SEO.com SEO TOOLKIT END
-					$master->forum_datas[$forum_id]['forum_url'] = append_sid("{$phpbb_root_path}viewforum.$phpEx", "f=$forum_id");
 				}
 			}
 			if (empty($master->forum_tracking_info[$forum_id])) {
@@ -171,16 +173,10 @@ class display_posts {
 				$master->topic_tracking_info[$topic_id] = $master->forum_tracking_info[$forum_id];
 			}
 			// Topic post count
-			$row['replies'] = $master->forum_datas[$forum_id]['m_approve'] ? $row['topic_replies_real'] : $row['topic_replies'];
-			$row['enable_icons'] = $master->forum_datas[$forum_id]['enable_icons'];
+			$row['replies'] = !empty($master->forum_datas[$forum_id]['m_approve']) ? $row['topic_replies_real'] : $row['topic_replies'];
+			$row['enable_icons'] = !empty($master->forum_datas[$forum_id]['enable_icons']);
 			// www.phpBB-SEO.com SEO TOOLKIT BEGIN
-			if ( empty($phpbb_seo->seo_url['topic'][$topic_id]) ) {
-				if ($row['topic_type'] == POST_GLOBAL) {
-					$phpbb_seo->seo_opt['topic_type'][$topic_id] = POST_GLOBAL;
-				}
-				$phpbb_seo->seo_censored[$topic_id] = censor_text($row['topic_title']);
-				$phpbb_seo->seo_url['topic'][$topic_id] = $phpbb_seo->format_url($phpbb_seo->seo_censored[$topic_id]);
-			}
+			$phpbb_seo->prepare_iurl($row, 'topic', $row['topic_type'] == POST_GLOBAL ? $phpbb_seo->seo_static['global_announce'] : $phpbb_seo->seo_url['forum'][$forum_id]);
 			// www.phpBB-SEO.com SEO TOOLKIT END
 			$topic_datas[$forum_id][$topic_id] = $row;
 			// @TODO deal with last post case ?
@@ -188,6 +184,7 @@ class display_posts {
 			$forum_ids[$topic_id] = $forum_id;
 		}
 		$db->sql_freeresult($result);
+		unset($forum_datas);
 		// Let's go
 		$has_result = false;
 		if (!empty($topic_datas)) {
@@ -203,7 +200,6 @@ class display_posts {
 				$replaces = $master->module_config['html_msg_filters']['replace'];
 				$bbcode_filter = true;		
 			}
-			
 			// Grab ranks
 			$ranks = $cache->obtain_ranks();
 			// Grab icons
@@ -424,6 +420,8 @@ class display_posts {
 					$user_cache[$poster_id]['sig'] = bbcode_nl2br($user_cache[$poster_id]['sig']);
 					$user_cache[$poster_id]['sig'] = $master->gym_master->smiley_text($user_cache[$poster_id]['sig'], !$master->module_config['html_allow_smilies']);
 					$user_cache[$poster_id]['sig_parsed'] = true;
+				} else { // Remove sig
+					$user_cache[$poster_id]['sig'] = '';
 				}
 				// Parse the message and subject
 				$message = &$row['post_text'];
@@ -432,6 +430,8 @@ class display_posts {
 				}
 				if ($display_sumarize > 0 ) {
 					$message = $master->gym_master->summarize( $message, $display_sumarize, $master->call['display_sumarize_method'] );
+					// Clean broken tag at the end of the message
+					$message = preg_replace('`\<[^\<\>]*$`i', ' ...', $message);
 					// Close broken bbcode tags requiring it, only quotes for now
 					$master->gym_master->close_bbcode_tags($message, $row['bbcode_uid']);
 				}
@@ -444,7 +444,7 @@ class display_posts {
 				$message = bbcode_nl2br($message);
 				$message = $master->gym_master->smiley_text($message, !$master->module_config['html_allow_smilies']);
 				if ($display_sumarize > 0 ) { // Clean up
-					static $find = array('`\<\!--[^\<\>]+--\>`Ui', '`\<[^\<\>]*$`i', '`\[\/?[^\]\[]*\]`Ui');
+					static $find = array('`\<\!--[^\<\>]+--\>`Ui', '`\[\/?[^\]\[]*\]`Ui');
 					$message = preg_replace($find, '', $message);
 				}
 				// Replace naughty words such as farty pants
@@ -456,14 +456,14 @@ class display_posts {
 				}
 				$post_unread = (isset($topic_tracking_info[$topic_id]) && $row['post_time'] > $topic_tracking_info[$topic_id]) ? true : false;
 				// Generate all the URIs ...
-				if (!isset($master->module_config['global_exclude_list'][$forum_id])) {
+				if (!$s_global && !isset($master->module_config['global_exclude_list'][$forum_id])) {
 					$view_topic_url = append_sid("{$phpbb_root_path}viewtopic.$phpEx", "f=$forum_id&amp;t=$topic_id") . '#p' . $row['post_id'];
 					$view_forum_url = $master->forum_datas[$forum_id]['forum_url'];
 				} else {
 					$view_topic_url = $view_forum_url = '';
 				}
 				$postrow = array(
-					'FORUM_NAME' => $master->forum_datas[$forum_id]['forum_name'],
+					'FORUM_NAME' => !$s_global ? $master->forum_datas[$forum_id]['forum_name'] : '',
 					'U_VIEW_FORUM' => $view_forum_url,
 					'VIEWS' => $topic_data['topic_views'],
 					'POST_DATE' => $user->format_date($row['post_time']),

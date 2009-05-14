@@ -721,11 +721,11 @@ $lang = array_merge($lang, array(
 	'GYM_LOG_CONFIG_YAHOO' => '<strong>Altered GYM sitemaps &amp; RSS settings</strong><br/>&raquo; Yahoo! URL lists',
 	// Install Logs
 	'SEO_LOG_INSTALL_GYM_SITEMAPS' => '<strong>GYM Sitemaps &amp; RSS V%s Installed</strong>',
-	'SEO_LOG_INSTALL_GYM_SITEMAPS_FAIL' => '<strong>GYM Sitemaps &amp; RSS Un-install attemps failed</strong><br/>%s',
+	'SEO_LOG_INSTALL_GYM_SITEMAPS_FAIL' => '<strong>GYM Sitemaps &amp; RSS install attempt failed</strong><br/>%s',
 	'SEO_LOG_UNINSTALL_GYM_SITEMAPS' => '<strong>GYM Sitemaps &amp; RSS V%s Un-installed</strong>',
-	'SEO_LOG_UNINSTALL_GYM_SITEMAPS_FAIL' => '<strong>GYM Sitemaps &amp; RSS Un-install attemps failed</strong><br/>%s',
+	'SEO_LOG_UNINSTALL_GYM_SITEMAPS_FAIL' => '<strong>GYM Sitemaps &amp; RSS Un-install attempt failed</strong><br/>%s',
 	'SEO_LOG_UPDATE_GYM_SITEMAPS' => '<strong>Updated GYM Sitemaps &amp; RSS to V%s</strong>',
-	'SEO_LOG_UPDATE_GYM_SITEMAPS_FAIL' => '<strong>GYM Sitemaps &amp; RSS Update attemps failed</strong><br/>%s',
+	'SEO_LOG_UPDATE_GYM_SITEMAPS_FAIL' => '<strong>GYM Sitemaps &amp; RSS Update attempt failed</strong><br/>%s',
 ));
 // www.phpBB-SEO.com SEO TOOLKIT END -> GYM Sitemaps
 ?>

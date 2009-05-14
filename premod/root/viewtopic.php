@@ -319,18 +319,38 @@ if ($post_id)
 $forum_id = (int) $topic_data['forum_id'];
 $topic_id = (int) $topic_data['topic_id'];
 // www.phpBB-SEO.com SEO TOOLKIT BEGIN
-if ( empty($phpbb_seo->seo_url['topic'][$topic_id]) ) {
-	if ($topic_data['topic_type'] == POST_GLOBAL) {
-		$phpbb_seo->seo_opt['topic_type'][$topic_id] = POST_GLOBAL;
-		// Let's make sure user will see global annoucements
-		$auth->cache[$forum_id]['f_read'] = 1;
+$phpbb_seo->set_url($topic_data['forum_name'], $forum_id, $phpbb_seo->seo_static['forum']);
+if ($topic_data['topic_type'] == POST_GLOBAL) {
+	// Let's make sure user will see global annoucements
+	$auth->cache[$forum_id]['f_read'] = 1;
+	$_parent = $phpbb_seo->seo_static['global_announce'];
+} else {
+	$_parent = $phpbb_seo->seo_url['forum'][$forum_id];
+}
+if (!empty($phpbb_seo->seo_opt['sql_rewrite'])) {
+	if ( !$phpbb_seo->check_url('topic', $topic_data['topic_url'], $_parent)) {
+		if (!empty($topic_data['topic_url'])) {
+			// Here we get rid of the seo delim (-t) and put it back even in simple mod 
+			// to be able to handle all cases at once
+			$_url = preg_replace('`' . $phpbb_seo->seo_delim['topic'] . '$`i', '', $topic_data['topic_url']);
+			$_title = $phpbb_seo->get_url_info('topic', $_url . $phpbb_seo->seo_delim['topic'] . $topic_id, 'title');
+		} else {
+			$_title = $phpbb_seo->modrtype > 2 ? censor_text($topic_data['topic_title']) : '';
+		}
+		unset($phpbb_seo->seo_url['topic'][$topic_id]);
+		$topic_data['topic_url'] = $phpbb_seo->get_url_info('topic', $phpbb_seo->prepare_url( 'topic', $_title, $topic_id, $_parent, (( empty($_title) || ($_title == $phpbb_seo->seo_static['topic']) ) ? true : false) ), 'url');
+		unset($phpbb_seo->seo_url['topic'][$topic_id]);
+		if ($topic_data['topic_url']) {
+			// Update the topic_url field for later re-use
+			$sql = "UPDATE " . TOPICS_TABLE . " SET topic_url = '" . $db->sql_escape($topic_data['topic_url']) . "'
+				WHERE topic_id = $topic_id";
+			$db->sql_query($sql);
+		}
 	}
-	$phpbb_seo->seo_censored[$topic_id] = censor_text($topic_data['topic_title']);
-	$phpbb_seo->seo_url['topic'][$topic_id] = $phpbb_seo->format_url($phpbb_seo->seo_censored[$topic_id]);
+} else {
+	$topic_data['topic_url'] = '';
 }
-if ( empty($phpbb_seo->seo_url['forum'][$topic_data['forum_id']]) ) {
-	$phpbb_seo->seo_url['forum'][$topic_data['forum_id']] = $phpbb_seo->set_url($topic_data['forum_name'], $topic_data['forum_id'], $phpbb_seo->seo_static['forum']);
-}
+$phpbb_seo->prepare_iurl($topic_data, 'topic', $_parent);
 // www.phpBB-SEO.com SEO TOOLKIT END
 //
 $topic_replies = ($auth->acl_get('m_approve', $forum_id)) ? $topic_data['topic_replies_real'] : $topic_data['topic_replies'];
@@ -1382,7 +1402,7 @@ for ($i = 0, $end = sizeof($post_list); $i < $end; ++$i)
 			}
 			$db->sql_freeresult($result);
 		}
-		$seo_meta->meta['keywords'] = !empty($m_kewrd) ? $seo_meta->make_keywords($m_kewrd) : $seo_meta->make_keywords($seo_meta->meta['meta_desc']);
+		$seo_meta->meta['keywords'] = $seo_meta->make_keywords($row['post_subject'] . (!empty($m_kewrd) ? $m_kewrd : $seo_meta->meta['meta_desc']));
 	}
 	// www.phpBB-SEO.com SEO TOOLKIT END  - META
 	// Second parse bbcode here

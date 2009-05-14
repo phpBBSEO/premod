@@ -1095,8 +1095,7 @@ CREATE INDEX phpbb_topics_last_post_time ON phpbb_topics (topic_last_post_time);
 CREATE INDEX phpbb_topics_topic_approved ON phpbb_topics (topic_approved);
 CREATE INDEX phpbb_topics_forum_appr_last ON phpbb_topics (forum_id, topic_approved, topic_last_post_id);
 CREATE INDEX phpbb_topics_fid_time_moved ON phpbb_topics (forum_id, topic_last_post_time, topic_moved_id);
-/* Extra premod */
-CREATE INDEX phpbb_topic_last_post_id ON phpbb_topics (topic_last_post_id);
+
 /*
 	Table: 'phpbb_topics_track'
 */

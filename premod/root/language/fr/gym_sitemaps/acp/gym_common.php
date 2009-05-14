@@ -52,6 +52,8 @@ $lang = array_merge($lang, array(
 	'GOOGLE_MAIN_RESET_EXPLAIN' => 'Rétablir toutes les options par défaut des Sitemaps Google.',
 	// RSS feeds
 	'RSS' => 'Flux RSS',
+	'RSS_ALTERNATE' => 'Liens alternate RSS',
+	'RSS_ALTERNATE_EXPLAIN' => 'Afficher ou nons les liens alternate RSS dans la barre de navigation des navigateurs',
 	// Reset settings
 	'RSS_MAIN_RESET' => 'Options globales Flux RSS',
 	'RSS_MAIN_RESET_EXPLAIN' => 'Rétablir toutes les options par défaut des flux RSS.',
