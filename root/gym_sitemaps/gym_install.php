@@ -353,7 +353,6 @@ class module {
 		echo '	<div id="page-footer">';
 		echo '		Powered by phpBB &copy; 2000, 2002, 2005, 2007, 2008 <a href="http://www.phpbb.com/">phpBB Group</a>';
 		echo '	</div>';
-		echo $phpbb_seo->seo_end(true);
 		echo '</div>';
 		echo '</body>';
 		echo '</html>';
@@ -602,45 +601,7 @@ class install_gym_sitemaps extends module {
 						}
 					}
 				}
-			}
-			// Move some of the modules around since the code above will put them in the wrong place
-			if ($module_class == 'acp') {
-				// Move main module 4 up...
-				$sql = 'SELECT *
-					FROM ' . MODULES_TABLE . "
-					WHERE module_basename = 'main'
-						AND module_class = 'acp'
-						AND module_mode = 'main'";
-				$result = $db->sql_query($sql);
-				$row = $db->sql_fetchrow($result);
-				$db->sql_freeresult($result);
-				$_module->move_module_by($row, 'move_up', 4);
-				// Move permissions intro screen module 4 up...
-				$sql = 'SELECT *
-					FROM ' . MODULES_TABLE . "
-					WHERE module_basename = 'permissions'
-						AND module_class = 'acp'
-						AND module_mode = 'intro'";
-				$result = $db->sql_query($sql);
-				$row = $db->sql_fetchrow($result);
-				$db->sql_freeresult($result);
-				$_module->move_module_by($row, 'move_up', 4);
-				// Move manage users screen module 5 up...
-				$sql = 'SELECT *
-					FROM ' . MODULES_TABLE . "
-					WHERE module_basename = 'users'
-						AND module_class = 'acp'
-						AND module_mode = 'overview'";
-				$result = $db->sql_query($sql);
-				$row = $db->sql_fetchrow($result);
-				$db->sql_freeresult($result);
-				$_module->move_module_by($row, 'move_up', 5);
-			}
-			// And now for the special ones
-			// (these are modules which appear in multiple categories and thus get added manually to some for more control)
-			//if (isset($this->module_extras[$module_class])) {
-			//}
-			$_module->remove_cache_file();
+			}	
 		}
 	}
 	/**
@@ -798,7 +759,7 @@ class install_gym_sitemaps extends module {
 						PRIMARY KEY (config_name),
 						KEY config_type (config_type)
 					)";
-					if ($db->sql_layer == 'mysqli' || version_compare($db->mysql_version, '4.1.3', '>=')) {
+					if ($db->sql_layer == 'mysqli' || version_compare($db->sql_server_info(true), '4.1.3', '>=')) {
 						$sqlt .= ' CHARACTER SET `utf8` COLLATE `utf8_bin`';
 					}
 					$sql[] = $sqlt;
@@ -853,14 +814,14 @@ class install_gym_sitemaps extends module {
 			} else {
 				set_config('gym_installed', 0);
 			}
-			add_log('admin', 'SEO_LOG_' . strtoupper($mode), $this->version );
-			$cache->purge();
+			add_log('admin', 'SEO_LOG_' . strtoupper($mode), $this->version );	
 		} else {
 			set_config('gym_installed', 0);
 			add_log('admin', 'SEO_LOG_' . strtoupper($mode) . '_FAIL', $this->errors);
 			$cache->purge();
 			$this->p_master->error($user->lang['SEO_ERROR_INSTALL'] . '<br/><pre>' . implode('<br/>', $this->errors) . '</pre>', __LINE__, __FILE__);	
 		}
+		$cache->purge();
 		$this->page_title = $user->lang['STAGE_FINAL'];
 		if (  $mode != 'uninstall_gym_sitemaps' ) {
 			if ($mode == 'update_gym_sitemaps') {

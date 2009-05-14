@@ -842,15 +842,8 @@ if ($keywords || $author || $author_id || $search_id || $submit)
 				$u_forum_id = $forum_id;
 			}
 			// www.phpBB-SEO.com SEO TOOLKIT BEGIN
-			if ($row['topic_type'] == POST_GLOBAL) {
-				$phpbb_seo->seo_opt['topic_type'][$result_topic_id] = POST_GLOBAL;
-			}
-			if ( empty($phpbb_seo->seo_url['topic'][$result_topic_id]) ) {
-				$phpbb_seo->seo_url['topic'][$result_topic_id] = $phpbb_seo->format_url($topic_title);
-			}
-			if ( empty($phpbb_seo->seo_url['forum'][$u_forum_id]) ) {
-				$phpbb_seo->seo_url['forum'][$u_forum_id] = $phpbb_seo->set_url($row['forum_name'], $u_forum_id, $phpbb_seo->seo_static['forum']);
-			}
+			$phpbb_seo->set_url($row['forum_name'], $u_forum_id, $phpbb_seo->seo_static['forum']);
+			$phpbb_seo->prepare_iurl($row, 'topic', $row['topic_type'] == POST_GLOBAL ? $phpbb_seo->seo_static['global_announce'] : $phpbb_seo->seo_url['forum'][$u_forum_id]);
 			// www.phpBB-SEO.com SEO TOOLKIT END
 			$view_topic_url = append_sid("{$phpbb_root_path}viewtopic.$phpEx", "f=$u_forum_id&amp;t=$result_topic_id" . (($u_hilit) ? "&amp;hilit=$u_hilit" : ''));
 

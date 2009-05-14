@@ -55,43 +55,48 @@ class display_topics {
 		$forum_sql = $master->call['forum_sql'];
 		$s_global = $master->call['s_global'];
 		// Do some reset
-		$topic_datas = $topic_ids = $forum_ids = $user_cache = $id_cache = $post_datas = array();
+		$topic_datas = $topic_ids = $forum_ids = $user_cache = $id_cache = $post_datas = $forum_datas = array();
 		$forum_id = $master->call['forum_id'];
-		// Build SQL
-		if ($s_global || $master->call['single_forum']) {
+		// Get The Data, first forums
+		if ((!$s_global && !$master->call['single_forum']) || ($master->call['single_forum'] && empty($master->forum_datas[$master->call['forum_id']])) ) {
 			$sql_array = array(
-				'SELECT'	=> 't.*',
+				'SELECT'	=> 'f.*',
 				'FROM'		=> array(
-					TOPICS_TABLE	=> 't',
-				)
-			);
-		} else {
-			$sql_array = array(
-				'SELECT'	=> 't.*, f.*',
-				'FROM'		=> array(
-					TOPICS_TABLE	=> 't',
 					FORUMS_TABLE	=> 'f',
-				)
+				),
+				'LEFT_JOIN' => array(),
 			);
+			if ($load_db_lastread) {
+				$sql_array['SELECT'] .= ', ft.mark_time as forum_mark_time';
+				$sql_array['LEFT_JOIN'][] = array(
+					'FROM'	=> array(FORUMS_TRACK_TABLE => 'ft'),
+					'ON'	=> 'ft.user_id = ' . $user->data['user_id'] . ' AND ft.forum_id = f.forum_id'
+				);
+			}
+			$sql_array['WHERE'] = $forum_sql ? str_replace('t.forum_id', 'f.forum_id', $forum_sql) : '';
+			$sql = $db->sql_build_query('SELECT', $sql_array);
+			unset($sql_array);
+			$result = $db->sql_query($sql);
+			while ($row = $db->sql_fetchrow($result)) {
+				$forum_id = (int) $row['forum_id'];
+				$forum_datas[$forum_id] = $row;
+			}
+			$db->sql_freeresult($result);
 		}
-		$sql_array['LEFT_JOIN'] = array();
-		if ($display_user_info && $display_topic_status && $user->data['is_registered']) {
-			$sql_array['LEFT_JOIN'][] = array('FROM' => array(TOPICS_POSTED_TABLE => 'tp'), 'ON' => 'tp.topic_id = t.topic_id AND tp.user_id = ' . $user->data['user_id']);
-			$sql_array['SELECT'] .= ', tp.topic_posted';
-		}
+		// Now the topics
+		$sql_array = array(
+			'SELECT'	=> 't.*',
+			'FROM'		=> array(
+				TOPICS_TABLE	=> 't',
+			),
+			'LEFT_JOIN' => array(),
+		);
 		if ($load_db_lastread) {
 			$sql_array['SELECT'] .= ', tt.mark_time';
 			$sql_array['LEFT_JOIN'][] = array(
 				'FROM'	=> array(TOPICS_TRACK_TABLE => 'tt'),
-				'ON'	=> 'tt.user_id = ' . $user->data['user_id'] . ' AND t.topic_id = tt.topic_id'
+				'ON'	=> 'tt.user_id = ' . $user->data['user_id'] . ' AND tt.topic_id = t.topic_id'
 			);
-			if (!$s_global && !$master->call['single_forum']) {
-				$sql_array['SELECT'] .= ', ft.mark_time as forum_mark_time';
-				$sql_array['LEFT_JOIN'][] = array(
-					'FROM'	=> array(FORUMS_TRACK_TABLE => 'ft'),
-					'ON'	=> 'ft.user_id = ' . $user->data['user_id'] . ' AND t.forum_id = ft.forum_id'
-				);
-			}
 		} elseif ($load_anon_lastread && empty($master->tracking_topics)) {
 			$master->tracking_topics = (isset($_COOKIE[$config['cookie_name'] . $tracking_cookie_name])) ? ((STRIP) ? stripslashes($_COOKIE[$config['cookie_name'] . $tracking_cookie_name]) : $_COOKIE[$config['cookie_name'] . $tracking_cookie_name]) : '';
 			$master->tracking_topics = ($master->tracking_topics) ? tracking_unserialize($master->tracking_topics) : array();
@@ -125,7 +130,7 @@ class display_topics {
 				$master->gym_master->seo_kill_dupes($url);
 			}
 		}
-		$sql_array['WHERE'] = $sql_where . (($s_global || $master->call['single_forum']) ? '' : ' AND f.forum_id = t.forum_id');
+		$sql_array['WHERE'] = $sql_where;
 		$sql_array['ORDER_BY'] = $display_order . $order_sql;
 		$sql = $db->sql_build_query('SELECT', $sql_array);
 		unset($sql_array);
@@ -133,6 +138,21 @@ class display_topics {
 		while ($row = $db->sql_fetchrow($result)) {
 			$topic_id = (int) $row['topic_id'];
 			$forum_id = (int) $row['forum_id'];
+			// Start with the forum
+			if (!$s_global && empty($master->forum_datas[$forum_id])) {
+				// www.phpBB-SEO.com SEO TOOLKIT BEGIN
+				$phpbb_seo->set_url($forum_datas[$forum_id]['forum_name'], $forum_id, $phpbb_seo->seo_static['forum']);
+				// www.phpBB-SEO.com SEO TOOLKIT END
+				$master->forum_datas[$forum_id] = array_merge($forum_datas[$forum_id],  array(
+					'forum_url' => append_sid("{$phpbb_root_path}viewforum.$phpEx", "f=$forum_id"),
+					'm_approve' => $auth->acl_get('m_approve', $forum_id),
+				));
+				if ($load_db_lastread) {
+					$master->forum_tracking_info[$forum_id] = !empty($forum_datas[$forum_id]['forum_mark_time']) ? $forum_datas[$forum_id]['forum_mark_time'] : $user->data['user_lastmark'];
+				} elseif ($load_anon_lastread) {
+					$master->forum_tracking_info[$forum_id] = isset($master->tracking_topics['f'][$forum_id]) ? (int) (base_convert($master->tracking_topics['f'][$forum_id], 36, 10) + $config['board_startdate']) : $user->data['user_lastmark'];
+				}
+			}
 			$topic_datas[$topic_id] = $row;
 			$topic_ids[$topic_id] = $topic_id;
 		}
@@ -155,33 +175,6 @@ class display_topics {
 				$topic_id = (int) $topic_id;
 				$row = &$topic_datas[$topic_id];
 				$forum_id = (int) $row['forum_id'];
-				if (empty($master->forum_datas[$forum_id])) {
-					$master->forum_datas[$forum_id] = array_merge($row, 
-						array(
-							'm_approve' => $auth->acl_get('m_approve', $forum_id),
-							'forum_name' => !empty($row['forum_name']) ? $row['forum_name'] : '',
-							'forum_status' => !empty($row['forum_status']) ? $row['forum_status'] : '',
-							'forum_last_post_time' => !empty($row['forum_last_post_time']) ? $row['forum_last_post_time'] : 0,
-							'enable_icons' => !empty($row['enable_icons']) ? $row['enable_icons'] : 0,
-							'forum_url' => '',
-							//'forum_read_auth' => $s_global ? true : (boolean) !isset($master->module_config['exclude_list'][$forum_id]),
-						)
-					);
-					if ($load_db_lastread) {
-						$master->forum_tracking_info[$forum_id] = !empty($row['forum_mark_time']) ? $row['forum_mark_time'] : $user->data['user_lastmark'];
-					} elseif ($load_anon_lastread) {
-						$master->forum_tracking_info[$forum_id] = isset($master->tracking_topics['f'][$forum_id]) ? (int) (base_convert($master->tracking_topics['f'][$forum_id], 36, 10) + $config['board_startdate']) : $user->data['user_lastmark'];
-					}
-					if (!$s_global) {
-						// www.phpBB-SEO.com SEO TOOLKIT BEGIN
-						$phpbb_seo->seo_url['forum'][$forum_id] = $phpbb_seo->set_url($master->forum_datas[$forum_id]['forum_name'], $forum_id, $phpbb_seo->seo_static['forum']);
-						// www.phpBB-SEO.com SEO TOOLKIT END
-						$master->forum_datas[$forum_id]['forum_url'] = append_sid("{$phpbb_root_path}viewforum.$phpEx", "f=$forum_id");
-					}
-				}
-				/*if (!$master->forum_datas[$forum_id]['forum_read_auth']) {
-					continue;
-				}*/
 				if (empty($master->forum_tracking_info[$forum_id])) {
 					if ($load_db_lastread) {
 						$master->topic_tracking_info[$topic_id] = !empty($row['mark_time']) ? $row['mark_time'] : $user->data['user_lastmark'];
@@ -195,20 +188,15 @@ class display_topics {
 				} else {
 					$master->topic_tracking_info[$topic_id] = $master->forum_tracking_info[$forum_id];
 				}
+				$row['topic_title'] = censor_text($row['topic_title']);
 				// www.phpBB-SEO.com SEO TOOLKIT BEGIN
-				if ( empty($phpbb_seo->seo_url['topic'][$topic_id]) ) {
-					if ($row['topic_type'] == POST_GLOBAL) {
-						$phpbb_seo->seo_opt['topic_type'][$topic_id] = POST_GLOBAL;
-					}
-					$phpbb_seo->seo_censored[$topic_id] = censor_text($row['topic_title']);
-					$phpbb_seo->seo_url['topic'][$topic_id] = $phpbb_seo->format_url($phpbb_seo->seo_censored[$topic_id]);
-				}
+				$phpbb_seo->prepare_iurl($row, 'topic', $row['topic_type'] == POST_GLOBAL ? $phpbb_seo->seo_static['global_announce'] : $phpbb_seo->seo_url['forum'][$forum_id]);
 				// www.phpBB-SEO.com SEO TOOLKIT END
 				// This will allow the style designer to output a different header
 				// or even separate the list of announcements from sticky and normal topics
 				$s_type_switch_test = /*($row['topic_type'] == POST_ANNOUNCE || $row['topic_type'] == POST_GLOBAL) ? 1 :*/ 0;
 				// Replies
-				$replies = $master->forum_datas[$forum_id]['m_approve'] ? $row['topic_replies_real'] : $row['topic_replies'];
+				$replies = !empty($master->forum_datas[$forum_id]['m_approve']) ? $row['topic_replies_real'] : $row['topic_replies'];
 				$unread_topic = (isset($master->topic_tracking_info[$topic_id]) && $row['topic_last_post_time'] > $master->topic_tracking_info[$topic_id]) ? true : false;
 				// Get folder img, topic status/type related information
 				if ($display_topic_status) {
@@ -218,7 +206,7 @@ class display_topics {
 				}
 				// Generate all the URIs ...
 				$view_topic_url = append_sid("{$phpbb_root_path}viewtopic.$phpEx", "f=$forum_id&amp;t=$topic_id");
-				$view_forum_url = $master->forum_datas[$forum_id]['forum_url'];
+				$view_forum_url = !$s_global ? $master->forum_datas[$forum_id]['forum_url'] : '';
 				$topic_unapproved = (!$row['topic_approved'] && $auth->acl_get('m_approve', $forum_id)) ? true : false;
 				$posts_unapproved = ($row['topic_approved'] && $row['topic_replies'] < $row['topic_replies_real'] && $auth->acl_get('m_approve', $forum_id)) ? true : false;
 				$u_mcp_queue = ($topic_unapproved || $posts_unapproved) ? append_sid("{$phpbb_root_path}mcp.$phpEx", 'i=queue&amp;mode=' . (($topic_unapproved) ? 'approve_details' : 'unapproved_posts') . "&amp;t=$topic_id", true, $user->session_id) : '';
@@ -233,10 +221,10 @@ class display_topics {
 					'FORUM_ID' => $forum_id,
 					'TOPIC_ID' => $topic_id,
 					'PAGINATION' => $master->call['display_topic_pagination'] ? $master->gym_master->topic_generate_pagination($replies, $view_topic_url) : '',
-					//'REPLIES' => $replies,
-					//'VIEWS' => $row['topic_views'],
-					'TOPIC_TITLE' => $phpbb_seo->seo_censored[$topic_id],
-					'FORUM_NAME' => $master->forum_datas[$forum_id]['forum_name'],
+					'REPLIES' => $replies,
+					'VIEWS' => $row['topic_views'],
+					'TOPIC_TITLE' => $row['topic_title'],
+					'FORUM_NAME' => !$s_global ? $master->forum_datas[$forum_id]['forum_name'] : '',
 					'TOPIC_TYPE' => $topic_type,
 					'TOPIC_FOLDER_IMG' => $topic_folder_img,
 					'TOPIC_FOLDER_IMG_SRC' => $topic_folder_img_src,
@@ -271,7 +259,7 @@ class display_topics {
 				);
 				if ($display_last_post) {
 					$tpl_data += array(
-						'TOPIC_LAST_POST_TITLE' => !empty($row['topic_last_post_subject']) ? censor_text($row['topic_last_post_subject']) : $phpbb_seo->seo_censored[$topic_id],
+						'TOPIC_LAST_POST_TITLE' => !empty($row['topic_last_post_subject']) ? censor_text($row['topic_last_post_subject']) :  $row['topic_title'],
 						// www.phpBB-SEO.com SEO TOOLKIT BEGIN
 						'U_MINI_POST' => !empty($phpbb_seo->seo_opt['no_dupe']['on']) ? append_sid("{$phpbb_root_path}viewtopic.$phpEx", "f=$forum_id&amp;t=$topic_id&amp;start=" . @intval($phpbb_seo->seo_opt['topic_last_page'][$topic_id]) ) . '#p' . $row['topic_last_post_id'] : append_sid("{$phpbb_root_path}viewtopic.$phpEx", 'p=' . $row['topic_last_post_id'] . (($row['topic_type'] == POST_GLOBAL) ? '&amp;f=' . $forum_id : '')) . '#p' . $row['topic_last_post_id'],
 						// www.phpBB-SEO.com SEO TOOLKIT END
@@ -282,7 +270,7 @@ class display_topics {
 						'TOPIC_AUTHOR_FULL' => get_username_string($display_user_link_key, $row['topic_poster'], $row['topic_first_poster_name'], $row['topic_first_poster_colour']),
 						'LAST_POST_SUBJECT' => censor_text($row['topic_last_post_subject']),
 						'LAST_POST_AUTHOR' => get_username_string('username', $row['topic_last_poster_id'], $row['topic_last_poster_name'], $row['topic_last_poster_colour']),
-						//'LAST_POST_AUTHOR_COLOUR' => get_username_string('colour', $row['topic_last_poster_id'], $row['topic_last_poster_name'], $row['topic_last_poster_colour']),
+						'LAST_POST_AUTHOR_COLOUR' => get_username_string('colour', $row['topic_last_poster_id'], $row['topic_last_poster_name'], $row['topic_last_poster_colour']),
 						'LAST_POST_AUTHOR_FULL' => get_username_string($display_user_link_key, $row['topic_last_poster_id'], $row['topic_last_poster_name'], $row['topic_last_poster_colour']),
 						'U_LAST_POST_AUTHOR' => $display_user_link ? get_username_string('profile', $row['topic_last_poster_id'], $row['topic_last_poster_name'], $row['topic_last_poster_colour']) : '',
 						'U_TOPIC_AUTHOR' => $display_user_link ? get_username_string('profile', $row['topic_poster'], $row['topic_first_poster_name'], $row['topic_first_poster_colour']) : '',

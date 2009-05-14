@@ -74,7 +74,7 @@ $lang = array_merge($lang, array(
 	'GYM_TOO_FEW_ITEMS_EXPLAIN_ADMIN' => 'This page source is either empty or does not contain enough items (less than the configured threshold in ACP) to be displayed.<br/>A 404 Not Found header was sent to properly inform Search Engines to discard this link.',
 
 	'GOOGLE_SITEMAP' => 'Sitemap',
-	'GOOGLE_SITEMAP_OF' => 'Sitemap de',
+	'GOOGLE_SITEMAP_OF' => 'Sitemap of',
 	'GOOGLE_MAP_OF' => 'Sitemap of %1$s',
 	'GOOGLE_SITEMAPINDEX' => 'SitemapIndex',
 	'GOOGLE_NUMBER_OF_SITEMAP' => 'Number of Sitemaps in this Google SitemapIndex',

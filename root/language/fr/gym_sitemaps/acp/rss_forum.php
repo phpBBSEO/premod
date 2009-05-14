@@ -34,6 +34,8 @@ if (empty($lang) || !is_array($lang))
 $lang = array_merge($lang, array(
 	'RSS_FORUM' => 'Module RSS Forum',
 	'RSS_FORUM_EXPLAIN' => 'Il s’agit des paramètres du module Forum des flux RSS.<br /> Certains paramètres peuvent être écrasés en fonction de votre configuration des priorités de paramétrage au niveau du type de rendu des flux RSS et au niveau global.',
+	'RSS_FORUM_ALTERNATE' => 'Liens alternate RSS',
+	'RSS_FORUM_ALTERNATE_EXPLAIN' => 'Afficher ou nons les liens alternate RSS des forums dans la barre de navigation des navigateurs',
 	'RSS_FORUM_EXCLUDE' => 'Exclusion de forums',
 	'RSS_FORUM_EXCLUDE_EXPLAIN' => 'Sélécttionnez les forums pour lesquels vous ne souhaitez pas de flux RSS<br /><u>Note</u> :<br />Si ce champ est laissé vide, tous les forums accessibles seront pris en compte.',
 	// Content

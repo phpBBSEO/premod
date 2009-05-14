@@ -235,8 +235,8 @@ if (!empty($action) && !empty($type) && !empty($language) && !empty($theme_id)) 
 		}
 		// Load the required stylsheet template
 		if ( $load_phpbb_css && $type == 'css' ) {
-			ini_set('user_agent','GYM Sitemaps &amp; RSS / www.phpBB-SEO.com');
-			ini_set('default_socket_timeout', 10);
+			@ini_set('user_agent','GYM Sitemaps &amp; RSS / www.phpBB-SEO.com');
+			@ini_set('default_socket_timeout', 10);
 			$phpbb_css = @file_get_contents("{$phpbb_url}style.php?id={$theme_id}&lang={$language}");
 			if ($phpbb_css) {
 				$output = str_replace('./styles/', "{$phpbb_url}styles/", $phpbb_css);
@@ -244,6 +244,7 @@ if (!empty($action) && !empty($type) && !empty($language) && !empty($theme_id)) 
 				$style_tpl = @file_get_contents($style_file);
 				$output = str_replace(array_keys($replace), array_values($replace), $style_tpl);
 			}
+			unset($phpbb_css);
 		} else {
 			$style_tpl = @file_get_contents($style_file);
 			$output = str_replace(array_keys($replace), array_map('numeric_entify_utf8', array_values($replace)), $style_tpl);

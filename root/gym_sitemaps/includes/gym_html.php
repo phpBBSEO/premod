@@ -28,6 +28,9 @@ class gym_html extends gym_sitemaps {
 		$this->gym_sitemaps('html');
 		// Check the main vars
 		$this->init_get_vars();
+		if (empty($this->actions['action_modules'])) {
+			$this->gym_error(404, '', __FILE__, __LINE__);
+		}
 		$this->output_data['tpl'] = $this->output_data['page_title'] = '';
 		// Used to store module data upon index calls
 		$this->output_data['module_data'] = array();
@@ -118,7 +121,7 @@ class gym_html extends gym_sitemaps {
 		// assuming that the cat urls will be of the following form title-sepXX (forum-title-fxx.html or /)
 		// or without ID, if the phpbb_seo cache array is properly set.
 		if (!empty($this->actions['module_main']) && !empty($this->actions['module_sub']) && $this->actions['module_sub'] != 'map' && $this->actions['module_sub'] != 'news') {
-			if (preg_match('`^[a-z0-9_-]*-[a-z]+([0-9]+)`', $this->actions['module_sub'], $match)) {
+			if (preg_match('`^[a-z0-9_-]*-[a-z]{1}+([0-9]+)`', $this->actions['module_sub'], $match)) {
 				$this->actions['module_sub'] = $match[1];
 			} else if ($id = @array_search($this->actions['module_sub'], $phpbb_seo->cache_config[$this->actions['module_main']]) ) {
 				$this->actions['module_sub'] = (int) $id;
@@ -192,7 +195,14 @@ class gym_html extends gym_sitemaps {
 		// Set up the base href tag, could be done better but saves a file edit this way ( and works too ;-) )
 		// Assuming that map.php is either in phpBB's dir or above (not under).
 		$bhref_ulr = ($phpbb_root_path === './') ? $phpbb_seo->seo_path['phpbb_url'] : str_replace(ltrim($phpbb_root_path, './'), '', $phpbb_seo->seo_path['phpbb_url']);
-		$template->assign_vars(array('META' => '<base href="' . $bhref_ulr . '"/>' . "\n",));
+		$template->assign_vars(array(
+			'META' => '<base href="' . $bhref_ulr . '"/>' . "\n",
+			'S_CONTENT_DIRECTION'	=> $user->lang['DIRECTION'],
+			'S_CONTENT_FLOW_BEGIN'	=> ($user->lang['DIRECTION'] == 'ltr') ? 'left' : 'right',
+			'S_CONTENT_FLOW_END'	=> ($user->lang['DIRECTION'] == 'ltr') ? 'right' : 'left',
+			'NEWEST_POST_IMG' => $user->img('icon_topic_newest', 'VIEW_NEWEST_POST'),
+			'LAST_POST_IMG' => $user->img('icon_topic_latest', 'VIEW_LATEST_POST'),
+		));
 		// module action
 		if (in_array($this->actions['module_main'], $this->actions['action_modules'])) { // List item from the module
 			// Add index page in navigation links
@@ -315,7 +325,7 @@ class gym_html extends gym_sitemaps {
 		$template->assign_vars($tpl_data + array(
 				'S_SINGLE_TRAKING' => !empty($this->output_data['single_traking']) ? true : false,
 				'S_LOGIN_ACTION' => append_sid("{$phpbb_root_path}ucp.$phpEx", 'mode=login'),
-				'S_SEO_FORUM' => strpos($config['default_lang'], 'fr') !== false ? 'forums/' : 'boards/',
+				'S_SEO_FORUM' => strpos($config['default_lang'], 'fr') !== false ? 'fr/' : 'en/',
 				'LEFT_COL' => $left_col,
 				'RIGHT_COL' => $right_col,
 			)
@@ -415,14 +425,16 @@ class gym_html extends gym_sitemaps {
 	*/
 	function prepare_message(&$message, $bbcode_uid, $bitfield, $patterns = array(), $replaces = array()) {
 		global $config, $user, $phpbb_root_path;
-		static $bbcode;
-		if ($this->html_config['html_sumarize'] > 0 ) {
-			$message = $this->summarize( $message, $this->html_config['html_sumarize'], $this->html_config['html_sumarize_method'] );
-			// Close broken bbcode tags requiring it, only quotes for now
-			$this->close_bbcode_tags($message, $bbcode_uid);
-		}
+		static $bbcode;	
 		if (!empty($patterns)) {
 			$message = preg_replace($patterns, $replaces, $message);
+		}
+		if ($this->html_config['html_sumarize'] > 0 ) {
+			$message = $this->summarize( $message, $this->html_config['html_sumarize'], $this->html_config['html_sumarize_method'] );
+			// Clean broken tag at the end of the message
+			$message = preg_replace('`\<[^\<\>]*$`i', ' ...', $message);
+			// Close broken bbcode tags requiring it, only quotes for now
+			$this->close_bbcode_tags($message, $bbcode_uid);
 		}
 		$message = censor_text($message);
 		if ($bitfield && $this->html_config['html_allow_bbcode']) {
@@ -442,7 +454,7 @@ class gym_html extends gym_sitemaps {
 		$message = $this->smiley_text($message, !$this->html_config['html_allow_smilies']);
 		if ($this->html_config['html_sumarize'] > 0 ) {
 			// last clean up
-			static $_find = array('`\<\!--[^\<\>]+--\>`Ui', '`\<[^\<\>]*$`i', '`\[\/?[^\]\[]*\]`Ui');
+			static $_find = array('`\<\!--[^\<\>]+--\>`Ui', '`\[\/?[^\]\[]*\]`Ui');
 			$message = preg_replace($_find, '', $message);
 		}
 		return true;
@@ -541,10 +553,10 @@ class gym_html extends gym_sitemaps {
 				$patterns[] = '`<!\-\- e \-\-><a href="mailto:([a-z0-9&\'\.\-_\+]+@[a-z0-9\-]+\.([a-z0-9\-]+\.)*[a-z]+)">.*?</a><!\-\- e \-\->`ei';
 				$replaces[] = 'str_replace(array("@", "."), array("  AT  ", " DOT "),"\\1")';
 			}
-			$exclude_list =  ( empty($bbcode_list) ? array() : explode(',', $bbcode_list) );
+			$exclude_list =  ( empty($bbcode_list) ? array() : explode(',', trim($bbcode_list, ', ')) );
 			$RegEx_unset = $RegEx_remove = '';
 			foreach ($exclude_list as $key => $value ) { // Group the RegEx
-				$value = trim($value);
+				$value = trim($value, ', ');
 				if (preg_match("`[a-z0-9]+(\:([0-1]*))?`i", $value, $matches) ) {
 					$values = (strpos($value, ':') !== false) ?  explode(':', $value) : array($value);
 					if ( (@$matches[2] != 1 ) ) {
@@ -559,7 +571,7 @@ class gym_html extends gym_sitemaps {
 				$replaces[] = "{ \\1 }";
 			}
 			if (!empty($RegEx_unset) ) {
-				$patterns[] =  '`\[/?(' . $RegEx_unset . ')(?:=(?:&quot;.*&quot;|[^\]]*))?(?::[a-z])?(\:[0-9a-z]{5,})\]`i';
+				$patterns[] =  '`\[/?(' . $RegEx_unset . ')(?:=(?:&quot;.*&quot;|[^\]]*))?(?::[a-z])?(\:[0-9a-z]{5,})?\]`i';
 				$replaces[] = '';
 			}
 		}
@@ -759,7 +771,7 @@ class gym_html extends gym_sitemaps {
 	*
 	*/
 	function get_user_rank($user_rank, $user_posts, &$rank_title, &$rank_img, &$rank_img_src) {
-	global $ranks, $config, $phpbb_root_path;
+		global $ranks, $config, $phpbb_root_path;
 		if (empty($ranks)) {
 			global $cache;
 			$ranks = $cache->obtain_ranks();

@@ -90,6 +90,7 @@ class gym_sitemaps {
 			'zero_dupe' => (boolean) $this->gym_config['gym_zero_dupe'],
 			'uri' => $phpbb_seo->seo_path['uri'],
 			'current' => '',
+			'modrewrite' => false,
 		);
 		$this->gzip_config = array('gzip_level' => (int) $this->gym_config['gym_gzip_level']);
 		$this->cache_config = array( 
@@ -123,7 +124,7 @@ class gym_sitemaps {
 		foreach ($this->actions['action_modules'] as $module) {
 			if (isset($_GET[$module])) {
 				$this->actions['module_main'] = $module;
-				$this->actions['module_sub'] = !empty($_GET[$module]) ? trim(utf8_htmlspecialchars(str_replace(array("\n", "\r"), '', $_GET[$module]))) : '';
+				$this->actions['module_sub'] = !empty($_GET[$module]) ? trim(utf8_htmlspecialchars(str_replace(array("\n", "\r", "\0"), '', $_GET[$module]))) : '';
 				unset($_GET[$module]);
 			}
 		}
@@ -137,6 +138,7 @@ class gym_sitemaps {
 	function init_action_modules() {
 		global $cache, $phpEx;
 		if (($this->actions['action_modules'] = $cache->get('_gym_action_' . $this->actions['action_type'])) === false) {
+			$this->actions['action_modules'] = array();
 			$dir = @opendir( $this->path_config['gym_path'] . 'modules' );
 			$action_from_file = '';
 			while( ($file = @readdir($dir)) !== FALSE ) {
@@ -148,9 +150,6 @@ class gym_sitemaps {
 				}
 			}
 			@closedir($dir);
-			if (empty($this->actions['action_modules'])) {
-				$this->actions['action_modules'] = array ();
-			}
 			$cache->put('_gym_action_' . $this->actions['action_type'], $this->actions['action_modules']);
 		}
 	}
@@ -174,7 +173,7 @@ class gym_sitemaps {
 	function load_module( $module_class, $method = '', $return = false ) {
 		global $phpEx;
 		$module_file = $this->path_config['gym_path'] . 'modules/' . $module_class . '.' . $phpEx;
-		if ( file_exists($module_file) && @$this->gym_config[$module_class . '_installed']) {
+		if ( !empty($this->gym_config[$module_class . '_installed']) && file_exists($module_file) ) {
 			include_once($module_file);
 			if (class_exists($module_class)) {
 				$gym_module = new $module_class($this);
@@ -281,17 +280,11 @@ class gym_sitemaps {
 		}
 	}
 	/**
-	* A wrapper for htmlspecialchars($value, ENT_COMPAT, 'UTF-8')
-	*/
-	function utf8_htmlspecialchars($value) {
-		return htmlspecialchars($value, ENT_COMPAT, 'UTF-8');
-	}
-	/**
 	 * xml_encode() 
 	 * helper
 	 */
 	function xml_encode($utf8_string) {
-		return numeric_entify_utf8($this->utf8_htmlspecialchars($utf8_string));
+		return numeric_entify_utf8(utf8_htmlspecialchars($utf8_string));
 	}
 	/**
 	* check_forum_auth() 
@@ -489,28 +482,78 @@ class gym_sitemaps {
 
 	// --> Others <--
 	/**
+	* init_url_rewrite()
+	*/
+	function init_url_rewrite($modr = false, $type = 0) {
+		global $phpbb_seo, $phpEx;
+		$this->url_config['modrewrite'] = $modr ? true : false;
+		// Mod rewrite type auto detection
+		$this->url_config['modrtype'] = !empty($phpbb_seo->modrtype) ? max(0, (int) $phpbb_seo->modrtype) : max(0, (int) $type);
+		if (!@isset($phpbb_seo->seo_opt['url_rewrite'])) {
+			$phpbb_seo->seo_opt['url_rewrite'] = $this->url_config['modrtype'] > 0 ? true : false;
+		}
+		// make sure virtual_folder uses the proper value
+		$phpbb_seo->seo_opt['virtual_folder'] = $this->url_config['modrtype'] ? $phpbb_seo->seo_opt['virtual_folder'] : false;
+		$this->url_config['forum_start_tpl'] = $this->url_config['start_default'] . '%1$d';
+		$this->url_config['topic_start_tpl'] = $this->url_config['start_default'] . '%1$d';
+		$this->url_config['forum_tpl'] = "viewforum.$phpEx?f=%1\$d";
+		$this->url_config['topic_tpl'] = "viewtopic.$phpEx?f=%1\$d&amp;t=%2\$d";
+		if (!$phpbb_seo->seo_opt['url_rewrite']) {	
+			$this->url_config['forum_index'] = "index.$phpEx";
+			$phpbb_seo->seo_opt['virtual_folder'] = false;
+			$this->url_config['forum_ext'] = '';
+			$this->url_config['topic_ext'] = '';
+		} else {
+			$this->url_config['forum_index'] = !empty($phpbb_seo->seo_static['index']) ? $phpbb_seo->seo_static['index'] . $phpbb_seo->seo_ext['index'] : '';
+			if ($this->url_config['modrtype'] >= 1) { // Simple mod rewrite, default is none (0)
+				$this->url_config['forum_ext'] = $phpbb_seo->seo_ext['forum'];
+				$this->url_config['topic_ext'] = $phpbb_seo->seo_ext['topic'];
+				$this->url_config['forum_start_tpl'] = $phpbb_seo->seo_opt['virtual_folder'] ? '/' . $phpbb_seo->seo_static['pagination'] . '%1$d' . $phpbb_seo->seo_ext['pagination'] : $phpbb_seo->seo_delim['start'] . '%1$d' . $this->url_config['forum_ext'];
+				$this->url_config['topic_start_tpl'] = $this->url_config['topic_ext'] == '/' ? '/' . $phpbb_seo->seo_static['pagination'] . '%1$d' . $phpbb_seo->seo_ext['pagination'] : $phpbb_seo->seo_delim['start'] . '%1$d' . $this->url_config['topic_ext'];
+			}
+			if ($this->url_config['modrtype'] >= 2) { // +Mixed
+			} 
+			if ($this->url_config['modrtype'] >= 3) { // +Advanced
+			}
+		}
+	}
+	/**
 	* forum_url() builds forum url with proper options
 	* Suffixe is not added here, to properly deal with pagination
 	*/
 	function forum_url($forum_name, $forum_id) {
 		global $phpbb_seo;
-		return $phpbb_seo->seo_path['phpbb_urlR'] . (!empty($this->url_config['forum_pre']) ? $this->url_config['forum_pre'] .  $forum_id : $phpbb_seo->set_url($forum_name, $forum_id, $phpbb_seo->seo_static['forum']) );
+		return $phpbb_seo->seo_opt['url_rewrite'] ? $phpbb_seo->set_url($forum_name, $forum_id, $phpbb_seo->seo_static['forum']) : sprintf($this->url_config['forum_tpl'], $forum_id);
 	}
 	/**
 	* topic_url($topic_title, $topic_id, $forum_url, $forum_id) builds forum url with proper options
 	* Suffixe is not added here, to properly deal with pagination
 	*/
-	function topic_url($topic_title, $topic_id, $forum_url, $forum_id) {
+	function topic_url($topic_data, $forum_id, $forum_url = '') {
 		global $phpbb_seo;
-		return ( $phpbb_seo->seo_opt['virtual_folder'] ? $forum_url : $phpbb_seo->seo_path['phpbb_urlR'] ) . ( !empty($this->url_config['topic_pre']) ? sprintf($this->url_config['topic_pre'], $forum_id, $topic_id) : $phpbb_seo->format_url($topic_title) . $phpbb_seo->seo_delim['topic'] .  $topic_id );
+		return $phpbb_seo->seo_opt['url_rewrite'] ? $this->prepare_iurl($topic_data, 'topic', trim($forum_url, '/')) : sprintf($this->url_config['topic_tpl'], $forum_id, (int) $topic['topic_id']);
 	}
 	/**
 	* Returns usable start param
-	* -xx
+	* -xx | /pagexx.html
 	*/
-	function set_start($start, $delim) {
+	function set_start($type, $start) {
 		global $phpbb_seo;
-		return ( $start > 0  ? ($delim == '/' ? $phpbb_seo->seo_static['pagination'] . intval($start) . $phpbb_seo->seo_ext['pagination'] : $phpbb_seo->seo_delim['start'] . intval($start) ) : '' ) . $delim;
+		return $start > 0 ? sprintf($this->url_config[$type . '_start_tpl'], (int) $start) : $this->url_config[$type . '_ext'];
+	}
+	/**
+	* prepare_iurl( $data, $type, $parent = '' )
+	* Prepare url first part with SQL based URL rewriting
+	* Same as phpbb_seo::prepare_iurl but without url caching
+	*/
+	function prepare_iurl( $data, $type, $parent = '' ) {
+		global $phpbb_seo;
+		$id = max(0, (int) $data[$type . '_id']);
+		if (!empty($data[$type . '_url'])) {
+			return $data[$type . '_url'] . $phpbb_seo->seo_delim[$type] . $id;
+		} else {
+			return sprintf($phpbb_seo->sftpl[$type], $parent, $phpbb_seo->modrtype == 3 ? $phpbb_seo->format_url($data[$type . '_title'], $phpbb_seo->seo_static[$type]) : '', $id);
+		}
 	}
 	/**
 	* check start var consistency
@@ -547,14 +590,18 @@ class gym_sitemaps {
 	* @access private
 	*/
 	function seo_kill_dupes($url) {
-		global $user;
+		global $user, $auth, $_SID, $phpbb_seo;
 		$url = str_replace('&amp;', '&', $url);
 		if ($this->url_config['zero_dupe']) {
-			if (!empty($_REQUEST['sid']) && ($_REQUEST['sid'] != $user->session_id)) {
-				// Force redirect
-				$requested_url = '';
-			} else {
-				$requested_url = ltrim($this->url_config['uri'], '/');
+			$requested_url = $this->url_config['uri'];
+			if (!empty($_REQUEST['explain']) && (boolean) ($auth->acl_get('a_') && defined('DEBUG_EXTRA'))) {
+				if ($_REQUEST['explain'] == 1) {
+					return;
+				}
+			}
+			$url = $phpbb_seo->drop_sid($url);
+			if (!empty($_GET['sid']) && !empty($_SID)) {
+				$url .=  (utf8_strpos( $url, '?' ) !== false ? '&' : '?') . 'sid=' . $user->session_id;
 			}
 			if ( $requested_url !== $url ) {
 				$this->gym_redirect($url);
@@ -600,16 +647,17 @@ class gym_sitemaps {
 			503 => 'HTTP/1.1 503 Service Unavailable',
 		);
 		$header = isset($http_codes[$errno]) ? $http_codes[$errno] : '';
+		$return_url = append_sid("{$phpbb_root_path}index.$phpEx");
 		if (!empty($user) && !empty($user->lang)) {
 			$msg_title = (empty($msg_key)) ? ( !empty($user->lang['GYM_ERROR_' . $errno]) ? $user->lang['GYM_ERROR_' . $errno] :  ( !empty($header) ? $header : $user->lang['GENERAL_ERROR'])  ) : ((!empty($user->lang[$msg_key])) ? $user->lang[$msg_key] : $msg_key);
 			$msg_text = !empty($user->lang[$msg_key . '_EXPLAIN']) ? $user->lang[$msg_key . '_EXPLAIN'] : (!empty($user->lang['GYM_ERROR_' . $errno . '_EXPLAIN']) ?  $user->lang['GYM_ERROR_' . $errno . '_EXPLAIN'] : ( (!empty($msg_key) ? $msg_key : (!empty($header) ? $header : $msg_title) ) ) );
-			$l_return_index = sprintf($user->lang['RETURN_INDEX'], '<a href="' . append_sid("{$phpbb_root_path}index.$phpEx") . '">', '</a>');
+			$l_return_index = sprintf($user->lang['RETURN_INDEX'], '<a href="' . $return_url . '">', '</a>');
 			if ( ( $errno == 500 || $errno == 503 ) && !empty($config['board_contact'])) {
 				$msg_text .= '<p>' . sprintf($user->lang['NOTIFY_ADMIN_EMAIL'], $config['board_contact']) . '</p>';
 			}
 		} else {
 			$msg_title = 'GYM Sitemaps General Error';
-			$l_return_index = '<a href="' . $phpbb_seo->seo_path['phpbb_url'] . '">Return to index page</a>';
+			$l_return_index = '<a href="' . $return_url . '">Return to index page</a>';
 			if ( ( $errno == 500 || $errno == 503 ) && !empty($config['board_contact'])) {
 				$msg_text .= '<p>Please notify the board administrator or webmaster: <a href="mailto:' . $config['board_contact'] . '">' . $config['board_contact'] . '</a></p>';
 			}
@@ -629,6 +677,7 @@ class gym_sitemaps {
 		if ( !empty($header) ) {
 			header($header);
 		}
+		meta_refresh(5, $return_url);
 		trigger_error($msg_text);
 		$this->safe_exit();
 		return;

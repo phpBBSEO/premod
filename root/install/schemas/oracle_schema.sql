@@ -1625,9 +1625,7 @@ CREATE INDEX phpbb_topics_forum_appr_last ON phpbb_topics (forum_id, topic_appro
 /
 CREATE INDEX phpbb_topics_fid_time_moved ON phpbb_topics (forum_id, topic_last_post_time, topic_moved_id)
 /
-/* Extra premod */
-CREATE INDEX phpbb_topic_last_post_id ON phpbb_topics (topic_last_post_id)
-/
+
 CREATE SEQUENCE phpbb_topics_seq
 /
 

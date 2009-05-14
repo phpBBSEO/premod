@@ -49,6 +49,7 @@ class rss_forum {
 		if ($this->actions['rss_news_list'] || $this->actions['module_sub'] === 'announces' ) {
 			$this->module_config['rss_first'] = true;
 			$this->module_config['rss_last'] = false;
+			$this->module_config['rss_sort'] = 'DESC';
 		} else {
 			$this->module_config['rss_last'] = ($this->module_config['rss_first']) ? $this->module_config['rss_last'] : true;
 		}
@@ -72,11 +73,8 @@ class rss_forum {
 	function init_url_settings() {
 		global $phpbb_seo, $phpEx;
 		// vars will fell like rain in the code ;)
-		$this->url_config['forum_pre'] = "viewforum.$phpEx?f=";
-		$this->url_config['topic_pre'] = 'viewtopic.' . $phpEx . '?f=%1$d&amp;t=%2$d';
-		$this->url_config['forum_ext'] = '';
-		$this->url_config['topic_ext'] = '';
-		$this->url_config['start_delim'] = $this->url_config['start_default'];
+		$this->gym_master->init_url_rewrite($this->module_config['rss_modrewrite'], $this->module_config['rss_modrtype']);
+
 		$this->url_config['rss_forum_pre'] = $this->url_config['rss_default'] . '?forum=';
 		$this->url_config['rss_forum_default'] = $this->url_config['rss_default'] . '?forum';
 		$this->url_config['rss_forum_news_default'] = $this->url_config['rss_forum_default'] . '&amp;news';
@@ -86,43 +84,17 @@ class rss_forum {
 		$this->url_config['rss_forum_announces_default'] = $this->url_config['rss_forum_pre'] . 'announces';
 		$this->url_config['rss_forum_announces'] = '';
 		$this->url_config['rss_forum_file'] = '';
-		// Mod rewrite type auto detection
-		$this->url_config['modrtype'] = ($phpbb_seo->modrtype >= 0) ? intval($phpbb_seo->modrtype) : intval($this->gym_master->gym_config['rss_modrtype']);
-		// make sure virtual_folder uses the proper value
-		$phpbb_seo->seo_opt['virtual_folder'] = $this->url_config['modrtype'] > 0 ? $phpbb_seo->seo_opt['virtual_folder'] : false;
 		$this->url_config['rss_forum_delim'] = !empty($phpbb_seo->seo_delim['forum']) ? $phpbb_seo->seo_delim['forum'] : '-f';
 		$this->url_config['rss_forum_static'] = 'forum';
-		$this->url_config['modrewrite'] = $this->gym_master->gym_config['rss_modrewrite'];
+
 		if ($this->module_config['rss_modrewrite']) { // Module links
 			$this->url_config['rss_forum_pre'] = ($this->url_config['modrtype'] >= 2) ? '' : $this->url_config['rss_forum_static'] . $this->url_config['rss_forum_delim'];
-			$this->url_config['rss_forum_file'] = 'forum.xml' . $this->url_config['gzip_ext_out'];
+			$this->url_config['rss_forum_file'] = ($this->url_config['modrtype'] > 0 ? '' : '/' ) . 'forum.xml' . $this->url_config['gzip_ext_out'];
 			$this->url_config['rss_forum_default'] = '';
 			$this->url_config['rss_forum_announces_default'] = $this->url_config['rss_forum_news_default'] = $this->url_config['rss_forum_channel_default'] = '';
 			$this->url_config['rss_forum_news'] = 'news/';
 			$this->url_config['rss_forum_channel'] =  'channels/';
 			$this->url_config['rss_forum_announces'] = 'announces/';
-		}
-		if (!@isset($phpbb_seo->seo_opt['url_rewrite'])) {
-			$phpbb_seo->seo_opt['url_rewrite'] = $this->url_config['modrtype'] > 0 ? true : false;
-		}
-		if ($phpbb_seo->seo_opt['url_rewrite']) {
-			$this->url_config['forum_index'] = !empty($phpbb_seo->seo_static['index']) ? $phpbb_seo->seo_static['index'] . $phpbb_seo->seo_ext['index'] : '';
-			if ($this->url_config['modrtype'] >= 1) { // Simple mod rewrite, default is none (0)
-				$this->url_config['start_delim'] = $phpbb_seo->seo_delim['start'];
-				$this->url_config['forum_pre'] = $phpbb_seo->seo_static['forum'];
-				$this->url_config['topic_pre'] = $phpbb_seo->seo_static['topic'] . '%2$d';
-				$this->url_config['forum_ext'] = $phpbb_seo->seo_ext['forum'];
-				$this->url_config['topic_ext'] = $phpbb_seo->seo_ext['topic'];
-			}
-			if ($this->url_config['modrtype'] >= 2) { // +Mixed
-				$this->url_config['forum_pre'] = '';
-			} 
-			if ($this->url_config['modrtype'] >= 3) { // +Advanced
-				$this->url_config['topic_pre'] = '';
-			}
-		} else {
-			$this->url_config['forum_index'] = 'index.php';
-			$phpbb_seo->seo_opt['virtual_folder'] = false;
 		}
 		return;
 	}
@@ -201,8 +173,7 @@ class rss_forum {
 				WHERE $time_limit_sql
 					forum_id " . $this->actions['in_id_sql'] . "
 					AND topic_type <> " . POST_GLOBAL . "
-					AND topic_status <> " . ITEM_MOVED . "
-				ORDER BY topic_last_post_id " . $this->module_config['rss_sort'];
+					AND topic_status <> " . ITEM_MOVED;
 			$result = $db->sql_query($sql);
 			$row = $db->sql_fetchrow($result);
 			$forum_data['topic_count'] = ( $row['topic'] ) ? $row['topic'] : 1;
@@ -296,7 +267,7 @@ class rss_forum {
 			// Forum announces location
 			$this->gym_master->parse_channel($chan_title . $this->module_config['extra_title'], $chan_desc . "\n", $chan_link,  $this->output_data['last_mod_time'], $this->module_config['rss_image_url'], $chan_source);
 			// Dirty but efficient workarround for annouces
-			$this->forum_cache[0]['forum_url'] = $phpbb_seo->seo_path['phpbb_urlR'] . ($phpbb_seo->seo_opt['virtual_folder'] ? $phpbb_seo->seo_static['global_announce'] . $phpbb_seo->seo_ext['global_announce'] : '' );
+			$this->forum_cache[0]['forum_url'] = $phpbb_seo->seo_opt['virtual_folder'] ? $phpbb_seo->seo_static['global_announce'] . $phpbb_seo->seo_ext['global_announce'] : '';
 			$this->forum_cache[0]['forum_url_full'] = $this->forum_cache[0]['forum_name'] = $chan_title;
 			$this->forum_cache[0]['replies_key'] = 'topic_replies';
 			$this->forum_cache[0]['approve'] = 0;
@@ -324,10 +295,7 @@ class rss_forum {
 						$this->gym_master->gym_error(401, '', __FILE__, __LINE__);
 					}
 					// This forum is allowed, so let's start
-					$this->forum_cache[$forum_id]['forum_name_ok'] =  $phpbb_seo->format_url($forum_data['forum_name'], $phpbb_seo->seo_static['forum']);
-					// Build the forum's RSS feed's URL
-					// Do it in two steps to allow yahoo Notifications
-					$forum_rss_url =   $this->module_config['rss_url'] .  ( !empty($this->url_config['rss_forum_pre']) ? $this->url_config['rss_forum_pre'] . $forum_id : $this->gym_master->forum_rss_url( $forum_data['forum_name'] , $forum_id, 'rss_forum_delim') . '/');
+					$forum_rss_url = $this->module_config['rss_url'] . ($this->module_config['rss_modrewrite'] ? $phpbb_seo->set_url($forum_data['forum_name'], $forum_id)  . '/' : $this->url_config['rss_forum_pre'] . $forum_id);
 					// Build Yahoo notify URL
 					// If the URL is not rewritten, we cannot use "&", get rid of options in such cases.
 					if ($this->module_config['rss_yahoo_notify']) {
@@ -356,8 +324,7 @@ class rss_forum {
 								topic_last_post_time > $time_limit
 								AND topic_type <> " . POST_GLOBAL . " 
 								AND topic_status <> " . ITEM_MOVED . " 
-								$approve_sql
-							ORDER BY topic_last_post_id " . $this->module_config['rss_sort'];
+								$approve_sql";
 						$result = $db->sql_query($sql);
 						$row = $db->sql_fetchrow($result);
 						$forum_data['topic_count'] = ( $row['forum_topics'] ) ? $row['forum_topics'] : 1;
@@ -370,8 +337,8 @@ class rss_forum {
 					}
 					$this->forum_cache[$forum_id]['forum_rss_url'] = $forum_rss_url;
 					$chan_title = $this->forum_cache[$forum_id]['forum_name'] = $forum_data['forum_name'];
-					$this->forum_cache[$forum_id]['forum_url'] = $this->gym_master->forum_url($forum_data['forum_name'], $forum_id) . $this->url_config['forum_ext'];
-					$this->forum_cache[$forum_id]['forum_url_full'] = $this->gym_master->parse_link($this->forum_cache[$forum_id]['forum_url'], $this->forum_cache[$forum_id]['forum_name'], 'h5');
+					$this->forum_cache[$forum_id]['forum_url'] = $this->gym_master->forum_url($forum_data['forum_name'], $forum_id);
+					$this->forum_cache[$forum_id]['forum_url_full'] = $this->gym_master->parse_link($phpbb_seo->seo_path['phpbb_urlR'] . $this->forum_cache[$forum_id]['forum_url'] . $this->url_config['forum_ext'], $this->forum_cache[$forum_id]['forum_name'], 'h5');
 					// Build Chan info
 					// Forum stats
 					$forum_stats = "\n" . '<b>' . $user->lang['STATISTICS'] . '</b> : ' . $forum_data['topic_count'] . ' ' . (($forum_data['forum_topics'] >= 0) ? $user->lang['TOPICS'] : $user->lang['TOPIC'] );
@@ -388,7 +355,7 @@ class rss_forum {
 					}
 					$chan_desc = $forum_desc . $forum_rules . "\n" . $forum_stats . $lastposter;
 					$chan_image = !empty($forum_data['forum_image']) ? $phpbb_seo->seo_path['phpbb_url'] . trim($forum_data['forum_image'], '/') : $this->module_config['rss_image_url'];
-					$this->gym_master->parse_channel($chan_title . $this->module_config['extra_title'], $chan_desc, $this->forum_cache[$forum_id]['forum_url'], $forum_data['forum_last_post_time'], $chan_image, $forum_rss_url);
+					$this->gym_master->parse_channel($chan_title . $this->module_config['extra_title'], $chan_desc, $phpbb_seo->seo_path['phpbb_urlR'] . $this->forum_cache[$forum_id]['forum_url'] . $this->url_config['forum_ext'], $forum_data['forum_last_post_time'], $chan_image, $forum_rss_url);
 
 			} else { // module Rss
 
@@ -435,8 +402,7 @@ class rss_forum {
 					WHERE $time_limit_sql 
 						topic_type <> " . POST_GLOBAL . " 
 						AND topic_status <> " . ITEM_MOVED . "
-						AND forum_id " . $this->actions['in_id_sql'] . "
-					ORDER BY t.topic_last_post_id " . $this->module_config['rss_sort'];
+						AND forum_id " . $this->actions['in_id_sql'];
 				$result = $db->sql_query($sql);
 				$row = $db->sql_fetchrow($result);
 				$forum_data['topic_count'] = !empty( $row['topic'] ) ? $row['topic'] : 1;
@@ -482,9 +448,8 @@ class rss_forum {
 				$lastposter =  "\n" . $user->lang['GYM_LAST_POST_BY'] . $this->gym_master->username_string($forum_data['forum_last_poster_id'], $forum_data['forum_last_poster_name'], $forum_data['forum_last_poster_colour'], $this->module_config['rss_allow_profile_links']) . "\n";
 			}
 			// Build URLs
-			$forum_name_ok =  $phpbb_seo->format_url($forum_data['forum_name'], $phpbb_seo->seo_static['forum']);
 			$forum_rss_url = $this->module_config['rss_url'] .  ( !empty($this->url_config['rss_forum_pre']) ? $this->url_config['rss_forum_pre'] . $forum_id : $this->gym_master->forum_rss_url( $forum_data['forum_name'] , $forum_id)  . '/' ) . $this->url_config['extra_paramsE'] . $this->url_config['rss_forum_file'];
-			$forum_url = $this->gym_master->forum_url($forum_name_ok, $forum_id) . $this->url_config['forum_ext'];
+			$forum_url = $phpbb_seo->seo_path['phpbb_urlR'] . $this->gym_master->forum_url($forum_data['forum_name'], $forum_id, $phpbb_seo->seo_static['forum']) . $this->url_config['forum_ext'];
 			$item_desc = $forum_desc . $forum_rules . $forum_stats . $lastposter;
 			$this->gym_master->parse_item($item_title, $item_desc, $forum_url, $forum_rss_url, $item_title . $this->module_config['extra_title'], $forum_data['forum_last_post_time']);
 		} // End forum list loop
@@ -501,9 +466,9 @@ class rss_forum {
 		// Build sql components all remaining cases
 		$msg_sql1 = $msg_sql2 = $msg_sql3 = '';
 		// DBK if news list, use topic start time
-		$time_key = $this->actions['rss_news_list'] ? 't.topic_time' : 't.topic_last_post_time';      
+		$time_key = $this->actions['rss_news_list'] ? 't.topic_time' : 't.topic_last_post_time';
+		$order_key = $this->actions['rss_news_list'] ? 't.topic_id' : 't.topic_last_post_id';
 		$time_limit = $time_limit > 0 ? "$time_key > $time_limit AND " : '';
-
 		if ( $this->actions['rss_content'] ) {
 			if($this->module_config['rss_last'] || !$this->module_config['rss_first']) { // Go for last post content
 				$msg_sql1 = ", p.post_id, p.post_approved, p.post_reported, p.enable_bbcode, p.enable_smilies, p.enable_magic_url, p.enable_sig, p.post_subject, p.post_text, p.post_attachment, p.bbcode_bitfield, p.bbcode_uid, p.post_edit_time";
@@ -522,7 +487,7 @@ class rss_forum {
 				t.topic_status <> " . ITEM_MOVED . " 
 				$approve_sql
 				$msg_sql3
-				ORDER BY t.topic_last_post_id " . $this->module_config['rss_sort'];
+				ORDER BY $order_key " . $this->module_config['rss_sort'];
 		// Absolute limit 
 		$topic_sofar = 0;
 		$topics = array();
@@ -540,13 +505,12 @@ class rss_forum {
 				// In case we are going to output forum data many times, let's build this once
 				if (empty($this->forum_cache[$forum_id])) {
 					// Set mod rewrite & type
-					$this->forum_cache[$forum_id]['forum_name_ok'] =  $phpbb_seo->format_url($forum_data[$forum_id]['forum_name'], $phpbb_seo->seo_static['forum']) ;
-					$this->forum_cache[$forum_id]['forum_rss_url'] = $this->module_config['rss_url'] .  ( !empty($this->url_config['rss_forum_pre']) ? $this->url_config['rss_forum_pre'] . $forum_id : $this->gym_master->forum_rss_url( $forum_data[$forum_id]['forum_name'] , $forum_id) . '/') . $this->url_config['extra_paramsE'] . $this->url_config['rss_forum_file'];
-					$this->forum_cache[$forum_id]['forum_url'] = $this->gym_master->forum_url($forum_data[$forum_id]['forum_name'], $forum_id)  . $this->url_config['forum_ext'];
+					$this->forum_cache[$forum_id]['forum_rss_url'] =  $this->module_config['rss_url'] . ($this->module_config['rss_modrewrite'] ? $phpbb_seo->set_url($forum_data[$forum_id]['forum_name'], $forum_id)  . '/' : $this->url_config['rss_forum_pre'] . $forum_id) . $this->url_config['extra_paramsE'] . $this->url_config['rss_forum_file'];
+					$this->forum_cache[$forum_id]['forum_url'] = $this->gym_master->forum_url($forum_data[$forum_id]['forum_name'], $forum_id);
 					$this->forum_cache[$forum_id]['forum_name'] = $forum_data[$forum_id]['forum_name'];
 					$this->forum_cache[$forum_id]['approve'] = 0;
 					$this->forum_cache[$forum_id]['replies_key'] = 'topic_replies';
-					$this->forum_cache[$forum_id]['forum_url_full'] = $this->gym_master->parse_link($this->forum_cache[$forum_id]['forum_url'], $this->forum_cache[$forum_id]['forum_name'], 'h5');
+					$this->forum_cache[$forum_id]['forum_url_full'] = $this->gym_master->parse_link($phpbb_seo->seo_path['phpbb_urlR'] . $this->forum_cache[$forum_id]['forum_url'] . $this->url_config['forum_ext'], $this->forum_cache[$forum_id]['forum_name'], 'h5');
 				}
 				if ( $topic['topic_reported'] == 1 || !$topic['topic_approved'] ) { // Skip for now if reported or unapproved
 					continue;
@@ -556,8 +520,8 @@ class rss_forum {
 				$topic['topic_replies'] = $topic[$this->forum_cache[$forum_id]['replies_key']];
 				$topic_stats = '<b>' . $user->lang['STATISTICS'] . '</b> : ' . ($topic['topic_replies'] + 1) . ' ' . (($topic['topic_replies'] > 1) ? $user->lang['REPLIES'] : $user->lang['POST'] );
 				$topic_stats .= ' || ' . ($topic['topic_views'] + 1) . ' ' . $user->lang['VIEWS'];
-				$topic['topic_url'] = $this->gym_master->topic_url($topic['topic_title'], $topic['topic_id'], $this->forum_cache[$forum_id]['forum_url'], $forum_id);
-				$has_reply = ($topic['topic_last_post_id'] > $topic['topic_first_post_id']) ? TRUE : FALSE;
+				$topic['topic_url'] = $phpbb_seo->seo_path['phpbb_urlR'] . $this->gym_master->topic_url($topic, $forum_id, $this->forum_cache[$forum_id]['forum_url']);
+				$has_reply = ($topic['topic_last_post_id'] > $topic['topic_first_post_id']) ? true : false;
 				
 				// Is this item public ?
 				$this->module_config['rss_auth_msg'] = ($this->gym_master->is_forum_public($forum_id) ? '' :  "\n\n" . $user->lang['RSS_AUTH_THIS'] ) . "\n\n";
@@ -601,7 +565,7 @@ class rss_forum {
 						$user_id_key = 'topic_last_poster_id';
 					}
 					$topic['topic_url' . $first_last] = $topic['topic_url'];
-					$topic['topic_url' . $first_last] .= $this->gym_master->set_start($start, $this->url_config['topic_ext']) . $post_num;
+					$topic['topic_url' . $first_last] .= $this->gym_master->set_start('topic', $start) . $post_num;
 					// With the msg content
 					$last_message = '';
 					if ($this->actions['rss_content'] && @$topic['post_id' . $first_last]) {

@@ -79,9 +79,7 @@ if (!$forum_data)
 	trigger_error('NO_FORUM');
 }
 // www.phpBB-SEO.com SEO TOOLKIT BEGIN
-if ( empty($phpbb_seo->seo_url['forum'][$forum_data['forum_id']]) ) {
-	$phpbb_seo->seo_url['forum'][$forum_data['forum_id']] = $phpbb_seo->set_url($forum_data['forum_name'], $forum_data['forum_id'], $phpbb_seo->seo_static['forum']);
-}
+$phpbb_seo->set_url($forum_data['forum_name'], $forum_data['forum_id'], $phpbb_seo->seo_static['forum']);
 // www.phpBB-SEO.com SEO TOOLKIT END
 
 // Configure style, language, etc.
@@ -435,20 +433,11 @@ if ($forum_data['forum_type'] == FORUM_POST)
 		if ($row['topic_type'] == POST_GLOBAL)
 		{
 			$global_announce_list[$row['topic_id']] = true;
-			// www.phpBB-SEO.com SEO TOOLKIT BEGIN
-			$phpbb_seo->seo_opt['topic_type'][$row['topic_id']] = POST_GLOBAL;
-			// www.phpBB-SEO.com SEO TOOLKIT END
 		}
 		else
 		{
 			$topics_count--;
 		}
-		// www.phpBB-SEO.com SEO TOOLKIT BEGIN
-		if ( empty($phpbb_seo->seo_url['topic'][$row['topic_id']]) ) {
-			$phpbb_seo->seo_censored[$row['topic_id']] = censor_text($row['topic_title']);
-			$phpbb_seo->seo_url['topic'][$row['topic_id']] = $phpbb_seo->format_url($phpbb_seo->seo_censored[$row['topic_id']]);
-		}
-		// www.phpBB-SEO.com SEO TOOLKIT END
 	}
 	$db->sql_freeresult($result);
 }
@@ -534,12 +523,6 @@ if (sizeof($topic_list))
 		}
 
 		$rowset[$row['topic_id']] = $row;
-		// www.phpBB-SEO.com SEO TOOLKIT BEGIN
-		if ( empty($phpbb_seo->seo_url['topic'][$row['topic_id']]) ) {
-			$phpbb_seo->seo_censored[$row['topic_id']] = censor_text($row['topic_title']);
-			$phpbb_seo->seo_url['topic'][$row['topic_id']] = $phpbb_seo->format_url($phpbb_seo->seo_censored[$row['topic_id']]);
-		}
-		// www.phpBB-SEO.com SEO TOOLKIT END
 	}
 	$db->sql_freeresult($result);
 }
@@ -589,12 +572,6 @@ if (sizeof($shadow_topic_list))
 		$row['topic_reported'] = 0;
 
 		$rowset[$orig_topic_id] = $row;
-		// www.phpBB-SEO.com SEO TOOLKIT BEGIN
-		if ( empty($phpbb_seo->seo_url['topic'][$row['topic_moved_id']]) ) {
-			$phpbb_seo->seo_censored[$row['topic_moved_id']] = censor_text($row['topic_title']);
-			$phpbb_seo->seo_url['topic'][$row['topic_moved_id']] = $phpbb_seo->format_url($phpbb_seo->seo_censored[$row['topic_moved_id']]);
-		}
-		// www.phpBB-SEO.com SEO TOOLKIT END
 	}
 	$db->sql_freeresult($result);
 }
@@ -672,7 +649,10 @@ if (sizeof($topic_list))
 	foreach ($topic_list as $topic_id)
 	{
 		$row = &$rowset[$topic_id];
-
+		// www.phpBB-SEO.com SEO TOOLKIT BEGIN
+		$cur_forum_id = ($row['forum_id']) ? (int) $row['forum_id'] : $forum_id;
+		$phpbb_seo->prepare_iurl($row, 'topic', $row['topic_type'] == POST_GLOBAL ? $phpbb_seo->seo_static['global_announce'] : $phpbb_seo->seo_url['forum'][$cur_forum_id]);
+		// www.phpBB-SEO.com SEO TOOLKIT BEGIN
 		// This will allow the style designer to output a different header
 		// or even separate the list of announcements from sticky and normal topics
 		$s_type_switch_test = ($row['topic_type'] == POST_ANNOUNCE || $row['topic_type'] == POST_GLOBAL) ? 1 : 0;

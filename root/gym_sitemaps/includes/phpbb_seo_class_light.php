@@ -27,7 +27,9 @@ class phpbb_seo {
 	var	$seo_cache = array();
 	var	$seo_ext = array();
 	var	$seo_static = array();
+	var	$seo_opt = array();
 	var	$modrtype = -1;
+	var	$sftpl = array();
 	/**
 	* constuctor
 	*/
@@ -48,11 +50,21 @@ class phpbb_seo {
 		// URL suffixes, for the phpBB URLs
 		// can be edited, requires .htaccess update.
 		$this->seo_ext = array( 'forum' => '.html', 'topic' => '.html', 'post' => '.html', 'user' => '.html', 'usermsg' => '.html', 'group' => '.html',  'index' => '', 'global_announce' => '/', 'leaders' => '.html', 'pagination' => '.html', 'gz_ext' => '');
+		$this->seo_opt = array(
+			'profile_inj' => false,
+			'rem_small_words' => false,
+			'virtual_folder' => false,
+			'virtual_root' => false,
+		);
 		$this->seo_opt['url_pattern'] = array('`&(amp;)?#?[a-z0-9]+;`i', '`[^a-z0-9]`i'); // Do not remove : html/xml entities & non a-z chars
-		/*if ($this->seo_opt['rem_small_words']) {
+		if ($this->seo_opt['rem_small_words']) {
 			$this->seo_opt['url_pattern'][] = '`(^|-)[a-z0-9]{1,2}(?=-|$)`i';
-		}*/
+		}
 		$this->seo_opt['url_pattern'][] ='`[-]+`'; // Do not remove : multi hyphen reduction
+		$this->sftpl = array(
+			'topic' => ($this->seo_opt['virtual_folder'] ? '%1$s/' : '') . ($this->modrtype >= 2 ? '%2$s' . $this->seo_delim['topic'] . '%3$s' : $this->seo_static['topic'] . '%3$s'), 
+			'forum' => $this->modrtype >= 2 ? '%2$s' : $this->seo_static['forum'] . '%3$s',
+		);
 		// --> DOMAIN SETTING <-- //
 		// Path Settings, only rely on DB
 		$server_protocol = ($config['server_protocol']) ? $config['server_protocol'] : (($config['cookie_secure']) ? 'https://' : 'http://');
@@ -97,26 +109,53 @@ class phpbb_seo {
 		return empty($url) ? $type : $url;
 	}
 	/**
+	* set_url( $url, $id = 0, $type = 'forum' )
 	* Prepare url first part and checks cache
 	*/
 	function set_url( $url, $id = 0, $type = 'forum' ) {
-		return $this->format_url( $url, $type ) . $this->seo_delim[$type] . $id;
+		if ( empty($this->seo_url[$type][$id]) ) {
+			return ( $this->seo_url[$type][$id] = !empty($this->cache_config[$type][$id]) ? $this->cache_config[$type][$id] : $this->format_url( $url, $type ) . $this->seo_delim[$type] . $id );
+		}
+		return $this->seo_url[$type][$id];
 	}
 	/**
+	* prepare_url( $type, $title, $id, $parent = '' )
 	* Prepare url first part
 	*/
-	function prepare_url( $type, $title, $id ) {
-		if ( empty($this->seo_url[$type][$id]) ) {
-			$this->seo_url[$type][$id] = $this->format_url($title, $this->seo_static[$type]) . $this->seo_delim[$type] . $id;
-		}
+	function prepare_url( $type, $title, $id, $parent = '' ) {
+		return empty($this->seo_url[$type][$id]) ? ($this->seo_url[$type][$id] = sprintf($this->sftpl[$type], $parent, $this->format_url($title, $this->seo_static[$type]), $id)) : $this->seo_url[$type][$id];
 	}
 	/**
-	* Set title
+	* set_title( $type, $title, $id, $parent = '' )
+	* Set title for url injection
 	*/
-	function set_title( $type, $title, $id ) {
+	function set_title( $type, $title, $id, $parent = '' ) {
+		return empty($this->seo_url[$type][$id]) ? ($this->seo_url[$type][$id] = $parent . $this->format_url($title, $this->seo_static[$type])) : $this->seo_url[$type][$id];
+	}
+	/**
+	* prepare_iurl( $data, $type, $parent = '' )
+	* Prepare url first part with SQL based URL rewriting
+	*/
+	function prepare_iurl( $data, $type, $parent = '' ) {
+		static $titles_key = array( 'topic' => 'topic_title', 'forum' => 'forum_name');
+		$id = max(0, (int) @$data[$type . '_id']);
 		if ( empty($this->seo_url[$type][$id]) ) {
-			$this->seo_url[$type][$id] = $this->format_url($title, $this->seo_static[$type]);
+			if (!empty($data[$type . '_url'])) {
+				return ($this->seo_url[$type][$id] = $data[$type . '_url'] . $this->seo_delim[$type] . $id);
+			} elseif (isset($data[$type . '_id']) && isset($data[$titles_key[$type]])) {
+				return ($this->seo_url[$type][$id] = sprintf($this->sftpl[$type], $parent, $this->format_url($data[$titles_key[$type]], $this->seo_static[$type]), $id));
+			}
+			return false;
 		}
+		return $this->seo_url[$type][$id];
+		
+	}
+	/**
+	* drop_sid( $url )
+	* drop the sid's in url
+	*/
+	function drop_sid( $url ) {
+		return (strpos($url, 'sid=') !== false) ? trim(preg_replace(array('`&(amp;)?sid=[a-z0-9]*(&amp;|&)?`', '`(\?)sid=[a-z0-9]*`'), array('\2', '\1'), $url), '?') : $url;
 	}
 	/**
 	* Returns the full REQUEST_URI
@@ -131,8 +170,8 @@ class phpbb_seo {
 		}
 		$this->seo_path['uri'] = str_replace( '%26', '&', rawurldecode($this->seo_path['uri']));
 		// workaround for FF default iso encoding
-		if (!$this->is_utf8($this->seo_path['uri']) && function_exists('utf8_encode')) {
-			$this->seo_path['uri'] = utf8_normalize_nfc(utf8_encode($this->seo_path['uri']));
+		if (!$this->is_utf8($this->seo_path['uri'])) {
+			$this->seo_path['uri'] = utf8_normalize_nfc(utf8_recode($this->seo_path['uri'], 'iso-8859-1'));
 		}
 		$this->seo_path['uri'] = $this->seo_path['root_url'] . $this->seo_path['uri'];
 		return $this->seo_path['uri'];

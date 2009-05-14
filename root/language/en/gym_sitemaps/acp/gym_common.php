@@ -51,6 +51,8 @@ $lang = array_merge($lang, array(
 	'GOOGLE_MAIN_RESET_EXPLAIN' => 'Reset all the Google Sitemap main options to default values.',
 	// RSS feeds
 	'RSS' => 'RSS',
+	'RSS_ALTERNATE' => 'RSS alternate links',
+	'RSS_ALTERNATE_EXPLAIN' => 'Display or not RSS alternate links in browsers navigation bar',
 	// Reset settings
 	'RSS_MAIN_RESET' => 'RSS main options',
 	'RSS_MAIN_RESET_EXPLAIN' => 'Reset all the RSS main options to default values.',
@@ -234,8 +236,8 @@ $lang = array_merge($lang, array(
 
 	// Other
 	// robots.txt
-	'GYM_CHECK_ROBOTS' => 'Vérifier les exclusions du fichier robots.txt',
-	'GYM_CHECK_ROBOTS_EXPLAIN' => 'Vérifier et appliquer aux listes d’URLs les exclusions du fichier robots.txt s’il existe. Le MOD prend en compte automatiquement les mises à jour du fichier robots.txt.<br />Cette option est particulièrement pratique pour les imports TXT et XML, quand on n’est pas certain que les listes d’URLs importées ne contiennent aucune URL interdite.<br/><br /><u>Note</u> :<br />Cette option impose plus de travail sur le fichier source, il est conseillé de l’utiliser avec le cache activé.',
+	'GYM_CHECK_ROBOTS' => 'CHeck robots.txt disallows',
+	'GYM_CHECK_ROBOTS_EXPLAIN' => 'Check and apply robots.txt rules (if any) to the URL list. The module will automatically acknowledge the robots.txt updates.<br />This option is very handy for XML and TXT import, when we cannot be sure about the URL list consistency.<br/><br /><u>Note</u> :<br />This option will imply more work on the source file, it is recommended to use it when caching is activated.',
 	// summarize method
 	'GYM_METHOD_CHARS' => 'By characters',
 	'GYM_METHOD_WORDS' => 'By words',
