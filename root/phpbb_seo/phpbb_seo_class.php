@@ -3,7 +3,7 @@
 *
 * @package Advanced phpBB3 SEO mod Rewrite
 * @version $Id: phpbb_seo_class.php dcz Exp $
-* @copyright (c) 2006, 2007, 2008 dcz - www.phpbb-seo.com
+* @copyright (c) 2006, 2007, 2008, 2009 dcz - www.phpbb-seo.com
 * @license http://www.opensource.org/licenses/rpl.php RPL Public License 
 *
 */
