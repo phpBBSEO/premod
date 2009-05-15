@@ -152,6 +152,16 @@ $lang = array_merge($lang, array(
 	'ACP_SEO_SIMPLE'	=> 'Simple',
 	'ACP_SEO_MIXED'		=> 'Intermédiaire',
 	'ACP_SEO_ADVANCED'	=> 'Avancé',
+	// URL Sync
+	'SYNC_REQ_SQL_REW' => 'Vous devez activer le stockage d’URLs dans la base de données pour utiliser ce script!',
+	'SYNC_TITLE' => 'Synchronisation des URLs',
+	'SYNC_WARN' => 'Attention, veuillez ne pas interrompre le script avant qu’il ait finit, et faites une sauvegarde de votre base de données avant de l’utiliser!',
+	'SYNC_COMPLETE' => 'Synchronisation effectuée !',
+	'SYNC_RESET_COMPLETE' => 'Réinitialisation effectuée !',
+	'SYNC_PROCESSING' => '<b>Synchronisation en cours, veuillez patienter ...</b><br/><br/><b>%1$s%%</b> ont été traité. <br/><b>%2$s</b> éléments on été traités.<br/><b>%3$s</b> éléments en tout, <b>%4$s</b> sont traités à la fois.<br/>Vitesse : <b>%5$s éléments/s.</b><br/>Temps écoulé pour ce cycle : <b>%6$ss</b><br/>Temps restant estimé : <b>%7$s minute(s)</b>',
+	'SYNC_ITEM_UPDATED' => '<b>%1$s</b> éléments on été mise à jour',
+	'SYNC_TOPIC_URLS' => 'Lancer la synchronisation des URL des sujets',
+	'SYNC_RESET_TOPIC_URLS' => 'Réinitialiser toutes les URL de sujets',
 	// phpBB SEO Class option
 	'url_rewrite' => 'Activer la réécriture d’URLs',
 	'url_rewrite_explain' => 'Une fois que vous aurez configuré les options ci-dessous, et généré votre .htaccess personnalisé, vous pouvez activer la réécriture d’URLs et vérifier que vos nouvelles URLs fonctionnent correctement. Si vous rencontrez des erreurs 404, c’est pratiquement à coup sûr lié au .htaccess, essayez alors les options du générateur de .htaccess pour en tester un nouveau.',

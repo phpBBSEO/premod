@@ -152,6 +152,16 @@ $lang = array_merge($lang, array(
 	'ACP_SEO_SIMPLE'	=> 'Simple',
 	'ACP_SEO_MIXED'		=> 'Mixed',
 	'ACP_SEO_ADVANCED'	=> 'Advanced',
+	// URL Sync
+	'SYNC_REQ_SQL_REW' => 'You must activate SQL Rewriting to use this script !',
+	'SYNC_TITLE' => 'URL Synchronization',
+	'SYNC_WARN' => 'Attention, do not stop the script until it ends, and back up your db before you use it!',
+	'SYNC_COMPLETE' => 'Synchronization completed !',
+	'SYNC_RESET_COMPLETE' => 'Reset completed !',
+	'SYNC_PROCESSING' => '<b>Processing, please wait ...</b><br/><br/><b>%1$s%%</b> have been processed. <br/>So far, <b>%2$s</b> items have been processed.<br/><b>%3$s</b> items in total, <b>%4$s</b> are processed at a time.<br/>Speed : <b>%5$s item/s.</b><br/>Time spent for this cycle : <b>%6$ss</b><br/>Estimated time left : <b>%7$s minute(s)</b>',
+	'SYNC_ITEM_UPDATED' => '<b>%1$s</b> items have been updated',
+	'SYNC_TOPIC_URLS' => 'Start topic URLs synchronization',
+	'SYNC_RESET_TOPIC_URLS' => 'Reset all topic URLs',
 	// phpBB SEO Class option
 	'url_rewrite' => 'Activate URL rewriting',
 	'url_rewrite_explain' => 'Once you will have set up the below options, and generated your personalized .htaccess, you can activate URL rewriting and check if your rewritten URLs do work properly. If you get 404 errors, it’s most likely an .htaccess issue, try some of the .htaccess tool option to generate a new one.',
