@@ -47,7 +47,6 @@ class phpbb_seo {
 	var	$seo_stop_dirs = array();
 	var	$RegEx = array();
 	var	$sftpl = array();
-
 	/**
 	* constuctor
 	*/
@@ -215,9 +214,6 @@ class phpbb_seo {
 		$this->RegEx = array(
 			'topic' => array(
 				'check' => '`^' . ($this->seo_opt['virtual_folder'] ? '%1$s/' : '') . '(' . $this->seo_static['topic'] . '|[a-z0-9_-]+' . $this->seo_delim['topic'] . ')$`i',
-				//'match' => '`^((([a-z0-9_-]+)(' . $this->seo_delim['forum'] . '([0-9]+))?/)?(' . $this->seo_static['topic'] . '|.+))(' . $this->seo_delim['topic'] . ')([0-9]+)$`i',
-				//'match' => '`^((([a-z0-9_-]+)(' . $this->seo_delim['forum'] . '([0-9]+))?/)?(?(?=' . $this->seo_static['topic'] . ')' . $this->seo_static['topic'] . '|.+' . $this->seo_delim['topic'] . '))([0-9]+)$`i',
-				//'match' => '`^((([a-z0-9_-]+)(' . $this->seo_delim['forum'] . '([0-9]+))?/)?(' . $this->seo_static['topic'] . '(?!=' . $this->seo_delim['topic'] . '[0-9]+)|.+(?=' . $this->seo_delim['topic'] . '[0-9]+)))(' . $this->seo_delim['topic'] . ')?([0-9]+)$`i',
 				'match' => '`^((([a-z0-9_-]+)(' . $this->seo_delim['forum'] . '([0-9]+))?/)?(' . $this->seo_static['topic'] . '(?!=' . $this->seo_delim['topic'] . ')|.+(?=' . $this->seo_delim['topic'] . '))(' . $this->seo_delim['topic'] . ')?)([0-9]+)$`i',
 				'parent' => 2,
 				'parent_id' => 5,
@@ -256,9 +252,9 @@ class phpbb_seo {
 		$server_name = trim($config['server_name'], '/') . '/';
 		$server_port = (int) $config['server_port'];
 		$server_port = ($server_port <> 80) ? ':' . $server_port : '';
-		$script_path = trim($config['script_path'], '/');
+		$script_path = trim($config['script_path'], '/ ');
 		$script_path = (empty($script_path) ) ? '' : $script_path . '/';
-		$this->seo_path['root_url'] =  $server_protocol . $server_name . $server_port;
+		$this->seo_path['root_url'] =  strtolower($server_protocol . $server_name . $server_port);
 		$this->seo_path['phpbb_urlR'] = $this->seo_path['phpbb_url'] =  $this->seo_path['root_url'] . $script_path;
 		$this->seo_path['phpbb_script'] =  $script_path;
 		$this->seo_path['phpbb_filesR'] = $this->seo_path['phpbb_url'] . $this->seo_static['file_index'] . $this->seo_delim['file'];
@@ -276,7 +272,7 @@ class phpbb_seo {
 		$this->seo_req_uri();
 		$this->seo_opt['seo_base_href'] = $this->seo_opt['req_file'] = $this->seo_opt['req_self'] = '';
 		if ($script_name = (!empty($_SERVER['PHP_SELF'])) ? $_SERVER['PHP_SELF'] : getenv('PHP_SELF')) {
-			// From sessions.php
+			// From session.php
 			// Replace backslashes and doubled slashes (could happen on some proxy setups)
 			$this->seo_opt['req_self'] = str_replace(array('\\', '//'), '/', $script_name);
 			// basenamed page name (for example: index)
@@ -294,8 +290,8 @@ class phpbb_seo {
 	*/
 	function format_url( $url, $type = 'topic' ) {
 		$url = preg_replace('`\[.*\]`U','',$url);
-		$url = htmlentities($url, ENT_COMPAT, 'utf-8');
-		$url = preg_replace( $this->RegEx['url_find'] , $this->RegEx['url_replace'], $url);
+		$url = htmlentities($url, ENT_COMPAT, 'UTF-8');
+		$url = preg_replace($this->RegEx['url_find'] , $this->RegEx['url_replace'], $url);
 		$url = strtolower(trim($url, '-'));
 		return empty($url) ? $type : $url;
 	}
@@ -662,6 +658,28 @@ class phpbb_seo {
 		}
 		$this->path = $this->seo_path['phpbb_url'];
 		return;
+	}
+	/**
+	* Returns true if the user can edit urls
+	* @access public
+	*/
+	function url_can_edit($forum_id = 0) {
+		global $user, $auth;
+		if (empty($this->seo_opt['sql_rewrite']) || empty($user->data['is_registered'])) {
+			return false;
+		}
+		if ($auth->acl_get('a_')) {
+			return true;
+		}
+		// un comment to grant url edit perm to moderators in at least a forums
+		/*if ($auth->acl_getf_global('m_')) {
+			return true;
+		}*/
+		$forum_id = max(0, (int) $forum_id);
+		if ($forum_id && $auth->acl_get('m_', $forum_id)) {
+			return true;
+		}
+		return false;
 	}
 	/**
 	* Will break if a $filter pattern is foundin $url.

@@ -588,10 +588,10 @@ if ($submit || $preview || $refresh)
 	// www.phpBB-SEO.com SEO TOOLKIT BEGIN
 	if (!empty($phpbb_seo->seo_opt['sql_rewrite'])) {
 		if ($mode == 'post' || ($mode == 'edit' && $post_data['topic_first_post_id'] == $post_id)) {
-			$phpbb_seo->set_url($post_data['forum_name'], $post_data['forum_id'], $phpbb_seo->seo_static['forum']);
-			$_parent = $post_data['topic_type'] == POST_GLOBAL ? $phpbb_seo->seo_static['global_announce'] : $phpbb_seo->seo_url['forum'][$post_data['forum_id']];
+			$phpbb_seo->set_url($post_data['forum_name'], $forum_id, $phpbb_seo->seo_static['forum']);
+			$_parent = $post_data['topic_type'] == POST_GLOBAL ? $phpbb_seo->seo_static['global_announce'] : $phpbb_seo->seo_url['forum'][$forum_id];
 			$_t = !empty($post_data['topic_id']) ? max(0, (int) $post_data['topic_id'] ) : 0;		
-			$_url = $auth->acl_get('a_') ? utf8_normalize_nfc(request_var('url', '', true)) : ( isset($post_data['topic_url']) ? $post_data['topic_url'] : '' );
+			$_url = $phpbb_seo->url_can_edit($forum_id) ? utf8_normalize_nfc(request_var('url', '', true)) : ( isset($post_data['topic_url']) ? $post_data['topic_url'] : '' );
 			if (!$phpbb_seo->check_url('topic', $_url, $_parent)) {
 				if (!empty($_url)) {
 					// Here we get rid of the seo delim (-t) and put it back even in simple mod 
@@ -1306,7 +1306,7 @@ $template->assign_vars(array(
 	'TOPIC_TITLE'			=> censor_text($post_data['topic_title']),
 	// www.phpBB-SEO.com SEO TOOLKIT BEGIN
 	'TOPIC_URL'		=> isset($post_data['topic_url']) ? preg_replace('`' . $phpbb_seo->seo_delim['topic'] . '$`i', '', $post_data['topic_url']) : '',
-	'S_URL'			=> ($mode == 'post' || ($mode == 'edit' && $post_id == $post_data['topic_first_post_id'])) ? (boolean) ($auth->acl_get('a_') && !empty($phpbb_seo->seo_opt['sql_rewrite'])) : false,
+	'S_URL'			=> ($mode == 'post' || ($mode == 'edit' && $post_id == $post_data['topic_first_post_id'])) ? $phpbb_seo->url_can_edit($forum_id) : false,
 	// www.phpBB-SEO.com SEO TOOLKIT END
 	'MODERATORS'			=> (sizeof($moderators)) ? implode(', ', $moderators[$forum_id]) : '',
 	'USERNAME'				=> ((!$preview && $mode != 'quote') || $preview) ? $post_data['username'] : '',
