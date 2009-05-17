@@ -235,7 +235,7 @@ class gym_google extends gym_sitemaps {
 				@ini_set('user_agent','GYM Sitemaps &amp; RSS / www.phpBB-SEO.com');
 				@ini_set('default_socket_timeout', $timout);
 				$status_code = false;
-				if (file_get_contents($request)) {
+				if (@file_get_contents($request)) {
 					// Retrieve HTTP status code
 					@list($version,$status_code,$msg) = @explode(' ',$http_response_header[0], 3);
 				}

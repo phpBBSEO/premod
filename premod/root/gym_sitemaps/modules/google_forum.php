@@ -179,6 +179,7 @@ class google_forum {
 						$i=1;
 						while ( ($i < $pages) ) {
 							if ( ( $i <= $pag_limit1 ) || ( $i > ($pages - $pag_limit2 ) ) ) {
+								$forum_priority *= 0.95;
 								$url = $forum_url . sprintf($this->url_config['forum_start_tpl'], $paginated * $i);
 								$this->gym_master->parse_item( $url, $forum_priority, $forum_change, $forum_data['forum_last_post_time']);
 								$i++;
@@ -314,6 +315,7 @@ class google_forum {
 					$i=1;
 					while ( ($i < $pages) ) {
 						if ( ( $i <= $pag_limit1 ) || ( $i > ($pages - $pag_limit2 ) ) ) {
+							$topic_priority *= 0.95;
 							$url = $topic_url . sprintf($this->url_config['topic_start_tpl'], $paginated * $i);
 							$this->gym_master->parse_item($url, $topic_priority, $topic_change, $topic['topic_last_post_time']);
 							$i++;
