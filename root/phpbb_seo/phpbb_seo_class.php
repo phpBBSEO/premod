@@ -194,11 +194,11 @@ class phpbb_seo {
 		// Warning, this way of doing things is path aware, this implies path to be properly sent to append_sid()
 		// Allow to add options without slowing down the URL rewriting process
 		$this->rewrite_method[$phpbb_root_path] = array(
-			'viewtopic' => 'viewtopic_uadv',
-			'viewforum' => 'viewforum_adv',
+			'viewtopic' => 'viewtopic',
+			'viewforum' => 'viewforum',
 			'index' => 'index',
-			'memberlist' => $this->seo_opt['profile_inj'] ? 'memberlist_adv' : 'memberlist_smpl',
-			'search' => $this->seo_opt['rewrite_usermsg'] ? ($this->seo_opt['profile_inj'] ? 'search_adv' : 'search_smpl') : '',
+			'memberlist' => 'memberlist',
+			'search' => $this->seo_opt['rewrite_usermsg'] ? 'search' : '',
 		);
 		$this->rewrite_method[$phpbb_root_path . 'download/']['file'] = 'phpbb_files';
 		$this->paginate_method = array( 
@@ -245,6 +245,7 @@ class phpbb_seo {
 			'topic' => ($this->seo_opt['virtual_folder'] ? '%1$s/' : '') . '%2$s' . $this->seo_delim['topic'] . '%3$s',
 			'topic_smpl' => ($this->seo_opt['virtual_folder'] ? '%1$s/' : '') . $this->seo_static['topic'] . '%3$s',
 			'forum' => $this->modrtype >= 2 ? '%2$s' : $this->seo_static['forum'] . '%3$s',
+			'group' => $this->seo_opt['profile_inj'] ? '%2$s' . $this->seo_delim['group'] . '%3$s' : $this->seo_static['group'] . '%3$s',
 		);
 		// --> DOMAIN SETTING <-- //
 		// Path Settings, only rely on DB
@@ -376,6 +377,8 @@ class phpbb_seo {
 				} else {
 					$this->seo_url['user'][$user_id] = $this->format_url($username,  $this->seo_delim['user']) . $this->seo_delim['user'] . $user_id;
 				}
+			} else {
+				$this->seo_url['user'][$user_id] = $this->seo_static['user'] . $user_id;
 			}
 		}
 	}
@@ -483,7 +486,7 @@ class phpbb_seo {
 	* With Virtual Folder Injection
 	* @access private
 	*/
-	function viewtopic_uadv() {
+	function viewtopic() {
 		global $phpbb_root_path;
 		$this->filter_url($this->seo_stop_vars);
 		$this->path = $this->seo_path['phpbb_urlR'];
@@ -514,7 +517,7 @@ class phpbb_seo {
 	* URL rewritting for viewforum.php
 	* @access private
 	*/
-	function viewforum_adv() {
+	function viewforum() {
 		global $phpbb_root_path;
 		$this->path = $this->seo_path['phpbb_urlR'];
 		$this->filter_url($this->seo_stop_vars);
@@ -541,7 +544,7 @@ class phpbb_seo {
 	* with nicknames and group name injection
 	* @access private
 	*/
-	function memberlist_adv() {
+	function memberlist() {
 		global $phpbb_root_path;
 		$this->path = $this->seo_path['phpbb_urlR'];
 		if ( @$this->get_vars['mode'] === 'viewprofile' && !@empty($this->seo_url['user'][$this->get_vars['u']]) ) {
@@ -550,7 +553,7 @@ class phpbb_seo {
 			return;
 		} elseif ( @$this->get_vars['mode'] === 'group' && !@empty($this->seo_url['group'][$this->get_vars['g']]) ) {
 			$this->{$this->paginate_method['group']}($this->seo_ext['group']);
-			$this->url =  $this->seo_url['group'][$this->get_vars['g']] . $this->seo_delim['group'] . $this->get_vars['g'] . $this->start;
+			$this->url =  $this->seo_url['group'][$this->get_vars['g']] . $this->start;
 			unset($this->get_vars['mode'], $this->get_vars['g']);
 			return;
 		} elseif (@$this->get_vars['mode'] === 'leaders') {
@@ -565,7 +568,7 @@ class phpbb_seo {
 	* URL rewritting for search.php
 	* @access private
 	*/
-	function search_adv() {
+	function search() {
 		global $phpbb_root_path;
 		$this->path = $this->seo_path['phpbb_urlR'];
 		$user_id = !empty($this->get_vars['author_id']) ? $this->get_vars['author_id'] : ( isset($this->seo_url['username'][rawurldecode(@$this->get_vars['author'])]) ? $this->seo_url['username'][rawurldecode($this->get_vars['author'])] : 0);
