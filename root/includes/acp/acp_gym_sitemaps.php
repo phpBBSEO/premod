@@ -927,8 +927,8 @@ $maction_param =
 	*/
 	function set_phpbb_seo_links() {
 		global $config, $user, $template;
-		$this->support_link['links_en'] = array( 'release' =>  'http://www.phpbb-seo.com/boards/gym-sitemaps-rss/google-yahoo-msn-sitemaps-rss-vt2734.html', 'support' =>  'http://www.phpbb-seo.com/boards/gym-sitemaps-rss-vf62/', 'seo_forum' =>  'http://www.phpbb-seo.com/boards/', 'subscribe' => 'http://www.phpbb-seo.com/boards/viewtopic.php?t=2734&watch=topic' );
-		$this->support_link['links_fr'] = array( 'release' =>  'http://www.phpbb-seo.com/forums/gym-sitemaps-rss/sitemaps-rss-google-yahoo-msn-vt3136.html', 'support' =>  'http://www.phpbb-seo.com/forums/gym-sitemaps-rss-vf65/', 'seo_forum' =>  'http://www.phpbb-seo.com/forums/', 'subscribe' => 'http://www.phpbb-seo.com/forums/viewtopic.php?t=3136&watch=topic' );
+		$this->support_link['links_en'] = array( 'release' =>  'http://www.phpbb-seo.com/en/gym-sitemaps-rss/google-yahoo-msn-sitemaps-rss-t2734.html', 'support' =>  'http://www.phpbb-seo.com/en/gym-sitemaps-rss/', 'seo_forum' =>  'http://www.phpbb-seo.com/en/', 'subscribe' => 'http://www.phpbb-seo.com/boards/viewtopic.php?t=2734&watch=topic' );
+		$this->support_link['links_fr'] = array( 'release' =>  'http://www.phpbb-seo.com/fr/gym-sitemaps-rss/sitemaps-rss-google-yahoo-msn-t3136.html', 'support' =>  'http://www.phpbb-seo.com/fr/gym-sitemaps-rss/', 'seo_forum' =>  'http://www.phpbb-seo.com/fr/', 'subscribe' => 'http://www.phpbb-seo.com/forums/viewtopic.php?t=3136&watch=topic' );
 		if (strpos($config['default_lang'], 'fr') !== false ) {
 			$this->support_link['release'] = $this->support_link['links_fr']['release'];
 			$this->support_link['support'] = $this->support_link['links_fr']['support'];

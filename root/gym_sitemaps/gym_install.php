@@ -871,10 +871,10 @@ function set_phpbb_seo_links() {
 	global $user, $config;
 	$modinfo_lang = array();
 	$modinfo_lang['title'] = $user->lang['CAT_SEO_PREMOD'];
-	$modinfo_lang['modlinks_en'] = 'http://www.phpbb-seo.com/boards/gym-sitemaps-rss/google-yahoo-msn-sitemaps-rss-vt2734.html';
-	$modinfo_lang['modlinks_fr'] = 'http://www.phpbb-seo.com/forums/gym-sitemaps-rss/sitemaps-rss-google-yahoo-msn-vt3136.html';
-	$modinfo_lang['modforumlinks_en'] = 'http://www.phpbb-seo.com/boards/gym-sitemaps-rss-vf62/';
-	$modinfo_lang['modforumlinks_fr'] = 'http://www.phpbb-seo.com/forums/gym-sitemaps-rss-vf65/';
+	$modinfo_lang['modlinks_en'] = 'http://www.phpbb-seo.com/en/gym-sitemaps-rss/google-yahoo-msn-sitemaps-rss-t2734.html';
+	$modinfo_lang['modlinks_fr'] = 'http://www.phpbb-seo.com/fr/gym-sitemaps-rss/sitemaps-rss-google-yahoo-msn-t3136.html';
+	$modinfo_lang['modforumlinks_en'] = 'http://www.phpbb-seo.com/en/gym-sitemaps-rss/';
+	$modinfo_lang['modforumlinks_fr'] = 'http://www.phpbb-seo.com/fr/gym-sitemaps-rss/';
 	if (strpos($config['default_lang'], 'fr') !== false ) {
 		$modinfo_lang['linkurl'] = $modinfo_lang['modlinks_fr'];
 		$modinfo_lang['link'] = '<a href="' . $modinfo_lang['modlinks_fr'] . '" title="' . $modinfo_lang['title'] . '" target="_phpBBSEO"><b>' . $modinfo_lang['title'] . '</b></a>';

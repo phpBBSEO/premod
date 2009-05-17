@@ -39,7 +39,7 @@ class acp_update
 
 		// PREMOD
 		$url = 'www.phpbb-seo.com';
-		$dir = (strpos($config['default_lang'], 'fr') !== false ? '/forums' : '/boards') . '/updatecheck';
+		$dir = (strpos($config['default_lang'], 'fr') !== false ? '/fr' : '/en') . '/updatecheck';
 		$info = get_remote_file($url, $dir, ((defined('PHPBB_SEO_QA')) ? 'test_30x.txt' : 'premod_30x.txt'), $errstr, $errno);
 
 		if ($info === false)

@@ -259,6 +259,40 @@ class acp_phpbb_seo {
 							$phpbb_seo->cache_config['settings'][$config_name] = $config_value;
 						}
 					}
+					// Let's make sure that the proper field was added to the topic table
+					if ($config_name === 'sql_rewrite' && $config_value == 1 && !$phpbb_seo->seo_opt['sql_rewrite']) {
+						if (!class_exists('phpbb_db_tools')) {
+							include($phpbb_root_path . 'includes/db/db_tools.' . $phpEx);
+						}
+						$db_tools = new phpbb_db_tools($db);
+						if (!$db_tools->sql_column_exists(TOPICS_TABLE, 'topic_url')) {
+							$db_tools->sql_column_add(TOPICS_TABLE, 'topic_url', array('VCHAR', ''));
+						}
+					}
+					// Let's make sure the proper index is added for the no dupe (in case it is installed and activated)
+					if ($config_name === 'no_dupe_on' && $config_value == 1 && !$phpbb_seo->seo_opt['no_dupe']['on']) {
+						if (!class_exists('phpbb_db_tools')) {
+							include($phpbb_root_path . 'includes/db/db_tools.' . $phpEx);
+						}
+						// in case we already started the phpbb_db_tools class above
+						if (empty($db_tools)) {
+							$db_tools = new phpbb_db_tools($db);
+						}
+						$indexes = $db_tools->sql_list_index(TOPICS_TABLE);
+						$drop_index_name = 'topic_last_post_id';
+						$add_index_name = 'topic_lpid';
+						if (in_array($drop_index_name, $indexes)) {
+							// we won't rename the index here, people can live with it
+							// $db_tools->sql_index_drop(TOPICS_TABLE, $drop_index_name);
+							continue;
+						}
+						if (!in_array($add_index_name, $indexes)) {
+							// Try to override some limits - maybe it helps some...
+							@set_time_limit(0);
+							@ini_set('memory_limit', '128M');
+							$db_tools->sql_create_index(TOPICS_TABLE, $add_index_name, array('topic_last_post_id'));
+						}
+					}
 				}
 			}
 		}

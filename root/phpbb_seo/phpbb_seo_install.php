@@ -664,10 +664,7 @@ class install_phpbb_seo extends module {
 			if ($purge_topic_table) {
 				if ($db_tools->sql_column_exists(TOPICS_TABLE, 'topic_url')) {
 					$db_tools->sql_column_remove(TOPICS_TABLE, 'topic_url');
-				}
-				if ($db_tools->sql_column_exists(DRAFTS_TABLE, 'draft_url')) {
-					$db_tools->sql_column_remove(DRAFTS_TABLE, 'draft_url');
-				}
+				}		
 			}
 			if (in_array($drop_index_name, $indexes)) {
 				$db_tools->sql_index_drop(TOPICS_TABLE, $drop_index_name);
