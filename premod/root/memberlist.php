@@ -25,7 +25,7 @@ $user->setup(array('memberlist', 'groups'));
 if (!empty($_REQUEST['un'])) {
 	$_REQUEST['un'] = rawurldecode($_REQUEST['un']);
 	if (!$phpbb_seo->is_utf8($_REQUEST['un'])) {
-		$_REQUEST['un'] = utf8_normalize_nfc(utf8_recode($_REQUEST['un'], 'iso-8859-1'));
+		$_REQUEST['un'] = utf8_normalize_nfc(utf8_recode($_REQUEST['un'], 'ISO-8859-1'));
 	}
 }
 // www.phpBB-SEO.com SEO TOOLKIT END
@@ -249,9 +249,7 @@ switch ($mode)
 				$group_name = ($row['group_type'] == GROUP_SPECIAL) ? $user->lang['G_' . $row['group_name']] : $row['group_name'];
 				
 				// www.phpBB-SEO.com SEO TOOLKIT BEGIN
-				if ( $phpbb_seo->seo_opt['profile_inj'] && empty($phpbb_seo->seo_url['group'][$row['group_id']]) ) {
-					$phpbb_seo->seo_url['group'][$row['group_id']] = $phpbb_seo->format_url($row['group_name'], $phpbb_seo->seo_static['group']);
-				}
+				$phpbb_seo->prepare_url('group', $row['group_name'], $row['group_id']);
 				// www.phpBB-SEO.com SEO TOOLKIT END
 				$u_group = append_sid("{$phpbb_root_path}memberlist.$phpEx", 'mode=group&amp;g=' . $row['group_id']);
 			}
@@ -1297,9 +1295,7 @@ switch ($mode)
 
 		// www.phpBB-SEO.com SEO TOOLKIT BEGIN - Zero dupe
 		if ($mode == 'group') {
-			if ( empty($phpbb_seo->seo_url['group'][$group_row['group_id']]) ) {
-				$phpbb_seo->seo_url['group'][$group_row['group_id']] = $phpbb_seo->format_url($group_row['group_name'], $phpbb_seo->seo_static['group']);
-			}
+			$phpbb_seo->prepare_url('group', $group_row['group_name'], $group_row['group_id']);
 			$phpbb_seo->seo_opt['zero_dupe']['start'] = $phpbb_seo->seo_chk_start( $start, $config['topics_per_page'] );
 
 			$phpbb_seo->seo_chk_dupe("{$phpbb_root_path}memberlist.$phpEx?" . implode('&amp;', $params) . '&amp;start=' . $phpbb_seo->seo_opt['zero_dupe']['start']);
