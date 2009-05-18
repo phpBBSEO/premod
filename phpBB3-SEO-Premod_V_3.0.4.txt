@@ -2,7 +2,7 @@
 ## MOD Title: 		phpBB3 SEO Premod
 ## MOD Author: 		dcz / www.phpbb-seo.com
 ## MOD Description: 	This Package is a fully SEOed phpBB3 Premod
-## 			Check http://www.phpbb-seo.com/boards/phpbb-seo-premod/seo-url-premod-vt1549.html
+## 			Check http://www.phpbb-seo.com/en/phpbb-seo-premod/seo-url-premod-t1549.html
 ## 			for the latest version or to get help.
 ##
 ## MOD Version: 	3.0.4
@@ -19,7 +19,7 @@
 ##
 ## WARNING : Topic title injection in URL can be hard to deal with depending on the type of subjects your
 ## forum is about. In most cases phpBB SEO recommend the use of the phpBB SEO mixed mod Rewrite instead.
-## Please read : http://boards.phpbb-seo.com/phpbb-seo-toolkit/phpbb-seo-mod-rewrites-vt66.html
+## Please read : http://www.phpbb-seo.com/en/phpbb2-toolkit/phpbb-seo-mod-rewrites-t66.html
 ##
 ## This Premod is and will be compatible to all phpBB SEO modules, specific install instructions may apply.
 ## phpBB SEO will provide patches to allow for other URL standards support upon request, 
@@ -33,7 +33,7 @@
 ## UTF-8 is fully supported by this mod.
 ## The mod rewrite will only inject the ASCII Chars ( after removing all accents ) available in the titles.
 ## 
-## For example : "[non ASCII chars] Software niño" will be formated this way prior to injection : "software-nino".
+## For example : "[non ASCII chars] Software niÃ±o" will be formated this way prior to injection : "software-nino".
 ## It is still possible that some characters only having a decimal HTML/XML entity won't be handled properly at first.
 ## The method to filter these is simple, please ask for help in our forums.
 ##
@@ -44,7 +44,7 @@
 ## you'll have to use another robots.txt and install the zero duplicate. 
 ## The migrating procedure will allow you to migrate and keep your previously indexed pages.
 ## Older links will be HTTP 301 redirected to the new ones. It is rather simple, but the solution depends on cases. 
-## Let's meet in the Premod forum ( http://www.phpbb-seo.com/boards/phpbb-seo-premod-vf61/ ).
+## Let's meet in the Premod forum ( http://www.phpbb-seo.com/en/phpbb-seo-premod/ ).
 ## 
 ##
 ## LICENSE:
@@ -220,7 +220,7 @@ Your settings will be kept during the update porcess.
 IMPORTANT :
 GYM sitemaps and RSS is likely to be updated before the premod, it will be up to you to
 keep it up to date meanwhile, you can be notified about updates by subscribing to the release thread while logged in :
-http://www.phpbb-seo.com/boards/viewtopic.php?t=2734&watch=topic
+http://www.phpbb-seo.com/en/gym-sitemaps-rss/google-yahoo-msn-sitemaps-rss-t2734.html
 
 ________________________________________
 >>>>   INSTALLATION INSTRUCTION    <<<<<
@@ -230,13 +230,16 @@ IMPORTANT :
 ________________________________________
 Before you start, read this with caution.
 => For a smooth install :
-	1) Upload all files and lunch www.yoursite.com/phpBB/ in your browser;
+	1) Upload all files from the root/ directory of the package to where you would like to see phpBB installed 
+	(phpBB/ or in domain's root) and lunch yoursite.com/phpBB/ (or yoursite.com/) in your browser;
 	2) Follow the installation / conversion / upgrade steps;
 	3) Go to phpBB ACP : It's now time to play with settings described bellow;
 	4) Generate your personalized .htaccess and upload or move it following the instructions;
-	5) Test a rewritten URL, such as www.yoursite.com/phpBB/post1.html, if you end up with a 404 (not a phpBB message), go back to step 5;
+	5) Test a rewritten URL, such as www.yoursite.com/phpBB/post1.html, if you end up with a 404 (not a phpBB message), 
+	go back to step 5;
 	6) Activate URL rewriting in phpBB ACP and allow yourself some auto-congratulation :D
-	7) Activate the Zero duplicate is wise at this point.
+	7) Activating the Zero duplicate is wise at this point. 
+	We advise to set the post redirection option to at least "Guest" unless you know what you are doing.
 ________________________________________
 
 __________
@@ -246,56 +249,88 @@ __________
 The settings must be done before step 4 above for the generated .htaccess to be up to date.
 Later modification will most likey require a new .htaccess as well as personalized redirections.
 
+IMPORTANT :
+	A new option was added staring from 3.0.5 : SQL rewriting.
+
+	This option will allow you to choose url for each topic. You will be able to accurately set topic url when posting new 
+	topic or when editing an existing one. This functionality is though limited to forum admins and moderators.
+	Turning on this option will not change topic urls. Existing urls will be stored as they are displayed in the data 
+	base. 	
+	But it may not be the case if you turn it off after you started to use it. In such case, personalized URLs may be 
+	treated as if they weren't.
+	The feature also has the great advantage to fasten the url rewriting by a lot, especially when using the virtual folder 
+	option in advanced mode, and to make it a lot easier to retrieve rewritten urls from any page.
+	
+	If you start using this option after you updated from prior to 3.0.5, or if you are installing the premod over a 
+	pre-existing phpBB install, you should run the phpbb_seo/sync_url.php script to update the data base (with topic urls).
+	Doing this will not change your URLs. If you do not run the script, topic urls will be updated in the data base each time 
+	topics will be first visited.
+
 
 => By Default, this mod will get rid of index.php for phpBB's index.
-You can change this in phpbb_seo/phpbb_seo_class.php if you prefer.
-Look for :
 
-'index' => ''
+You can change this in phpbb_seo/includes/phpbb_seo_modules.php if you prefer.
+To do this, you can for example add :
 
-In this line of code :
+		$this->seo_static['index'] = 'forum';
 
-		$this->seo_static = array( 'forum' => 'forum', 'topic' => 'topic', 'post' => 'post', 'user' => 'member', 'group' => 'group', 'index' => '', 'global_announce' => 'announces', 'leaders' => 'the-team', 'atopic' => 'active-topics', 'utopic' => 'unanswered', 'npost' => 'newposts', 'pagination' => 'page', 'gz_ext' => '.gz' );
+before :
+
+		// Let's make sure that settings are consistent
+		$this->check_config();
 
 
-And replace with  :
-
-'index' => 'forum'
-
-or whatever you may prefer.
 This is mostly useful if you're running a portal in the folder where phpBB is installed. 
 
 => The first setting to do is to select which static part to use in your URLs. 
 
-To do so, you can modify this line in phpbb_seo/phpbb_seo_class.php :
+To do so, you can override default values in phpbb_seo/includes/phpbb_seo_modules.php, still before :
 
-		$this->seo_static = array( 'forum' => 'forum', 'topic' => 'topic', 'post' => 'post', 'user' => 'member', 'group' => 'group', 'index' => '', 'global_announce' => 'announces', 'leaders' => 'the-team', 'atopic' => 'active-topics', 'utopic' => 'unanswered', 'npost' => 'newposts', 'pagination' => 'page', 'gz_ext' => '.gz' );
+		// Let's make sure that settings are consistent
+		$this->check_config();
 
-	=> the-team :	
-		'leaders' => 'the-team'
+EXAMPLES :
+__________
 
-	=> announces :
-		'global_announce' => 'announces'
+// => the-team :	
+		$this->seo_static['leaders'] = 'my-team'; // instead of the default "the-team"
 
-	=> Active topics :
-		'atopic' => 'active-topics'
+// => announces :
+		$this->seo_static['global_announce'] = 'announcements'; // instead of the default "announces"
 
-	=> Unaswered :
-		'utopic' => 'unanswered'
+// => Active topics :
+		$this->seo_static['atopic'] = 'important-topics'; // instead of the default "active-topics"
 
-	=> Newposts :
-		'npost' => 'newposts'
+// => Unaswered :
+		$this->seo_static['utopic'] = 'not-answered'; // instead of the default "unanswered"
+
+// => Newposts :
+		$this->seo_static['npost'] = 'new-messages'; // instead of the default "newposts"
  
-	=> As well as forum ('forum' => 'forum'), topic ('topic' => 'topic'), post ('post' => 'post'), 
-	member ('user' => 'member'), groups ('group' => 'group') and virtual folder pagination ('pagination' => 'page')
+=> As well as for (and the same way) :
+forum ($this->seo_static['forum']), topic ($this->seo_static['topic']), post ($this->seo_static['post']), member ($this->seo_static['member']), groups ($this->seo_static['group']), attachments virtual directory ($this->seo_static['file_index'], read the comments in the file for more attachments customizing) and virtual folder pagination ($this->seo_static['page'])
 
-	=> And the suffixes, if you do not like .html :
-		$this->seo_ext = array( 'forum' => '.html', 'topic' => '.html', 'post' => '.html', 'user' => '.html', 'group' => '.html',  'index' => '', 'global_announce' => '/', 'leaders' => '.html', 'atopic' => '.html', 'utopic' => '.html', 'npost' => '.html', 'pagination' => '.html', 'gz_ext' => '');
+________________________________________________________________________________________________________
 
-	Please note that suffixes may not be ".php" or empty, if you set a suffix to "/", 
-	it will automatically activate the pagexx.html pagination.
+
+=> And the suffixes too, if you do not like .html, using the phpbb_seo::seo_ext array ($this->seo_ext) still before :
+
+		// Let's make sure that settings are consistent
+		$this->check_config();
+
+EXAMPLES :
+__________
+		$this->seo_ext['forum'] = '.htm'; 
+		$this->seo_ext['topic' => '/';
+
+	PLEASE NOTE :
+	_____________
+	Suffixes may not be ".php" or empty, if you set a suffix to "/", it will automatically activate the pagexx.html pagination.
 
 Once set, these settings will be taken into account while generating the .htaccess.
+
+________________________________________________________________________________________________________
+
 
 => Other options are configurable on the setting page (step 7 of the above list).
 Go to the "phpBB SEO Class Settings" page, and take your time to set up the class as you wish.
@@ -310,7 +345,8 @@ If not, the new forum URL will not be cached and the default one will be used (f
 ___________
 NOTE: Cache
 ___________
-The cache files are in the phpbb_seo_/cache/ folder.
+
+The cache files are in the phpbb_seo/cache/ folder.
 phpbb_cache.php is the cached file containing both your settings and forum URLs.
 
 The mod always creates a backups of the current cached file : 
@@ -329,11 +365,14 @@ _________________
 
 On the phpBB SEO ACP module, go to the ".htaccess" page.
 A personalised .htaccess will be generated. It's the first one to consider trying.
+You will have too put it where the red bolded messages of the .htaccess generator tells you to.
+If you cannot find the location mentionned, it means that you did not properly set you phpBB server settings in the ACP.
 If the default suggestion does not work, you will be to try more options, and generate several alternative.
 You'll find an empty .htaccess file in this mod's archive contrib/ folder, you can use it to paste the .htaccess content generated on the htaccess page or save it directly on the server.
 
-
-Please take a look at : http://www.phpbb-seo.com/boards/seo-principles/locking-the-www-in-urls-vt30.html
+The .htaccess generator will add the required rewriterules to make your domain canonical, but they will be
+left commented (un-active) at first, as this is the kind of thing that require human attention.
+Please take a look at : http://www.phpbb-seo.com/en/seo-techniques/locking-the-www-in-urls-t30.html
 to find out how to lock the use (or non use) of the www prefix in your domain's url.
 This is a major Search Engine Optimisation issue to take care of the www prefix issue.
 
@@ -347,9 +386,9 @@ You must obviously replace phpbb/ with your real phpBB installation folder (or w
 
 IMPORTANT :
 	If your forum previously was indexed with the natural urls (viewtopic.php etc...), then you must make sure
-	that the robots.txt advised for our mod rewrite is not installed, if so delete it from the server.
-	This because we want to redirect old urls before we disallow them, it's crucial!
-	In such case, a month or two after you activated the zero duplicate, you can safely implement the robots.txt.
+	that the robots.txt advised for our mod rewrite is not installed, if so DELETE it from the server.
+	This because we want to redirect old urls before we disallow them, it's CRUCIAL!
+	In such case, at least two after you activated the zero duplicate, you can safely implement the robots.txt.
 
 __________________________________________________
 NOTE: profile and user messages pages ID removing:
@@ -364,9 +403,8 @@ For example a user named rock&roll will require rock%2526roll (double urlencoded
 ( http://www.php.net/urlencode => http://issues.apache.org/bugzilla/show_bug.cgi?id=34602 )
 
 There are other issues with custom characters, like accents, which will add some urlencoded chars in urls.
-It's not an SEO issue, since bots knows about urlencoding, but it can end up building pretty long url with multi byte characters.
+It's not an SEO issue, since bots knows how to deal with urlencoding, but it can end up building pretty long url with multi byte characters.
 This does not concern the a-zA-Z0-9 chars, underscore ("_"), hyphen ("-") and dot (".") included.
-In phpbb_seo/phpbb_seo_class.php, you will no longer see different methods.
 
 This of course means that the ID removing on profile and user messages pages is more comfy and universally efficient 
 to use with alphanumeric chars user names (without accents). 
@@ -389,7 +427,7 @@ The GYM sitemap & RSS module is now included in the phpBB SEO premod.
 This module will create United Sitemaps (Aka Google sitemaps), RSS 2.0 feeds, site maps and news pages for for phpBB3.
 It fully supports Gun-zip cache for all types of outputs and some XSL-Transform styling for Sitemaps and RSS feeds. 
 Please visit the relase thread for updates and further information : 
-http://www.phpbb-seo.com/forums/gym-sitemaps-rss/sitemaps-rss-google-yahoo-msn-vt3136.html
+http://www.phpbb-seo.com/en/gym-sitemaps-rss/google-yahoo-msn-sitemaps-rss-t2734.html
 
 PLEASE NOTE : 
 
@@ -398,7 +436,7 @@ PLEASE NOTE :
 	may still be found.
 	And, even more important, GYM sitemaps and RSS is likely to be updated before the premod, it will be up to you to
 	keep it up to date meanwhile, you can be notified about updates by subscribing to the release thread while logged in :
-	http://www.phpbb-seo.com/boards/viewtopic.php?t=2734&watch=topic
+	http://www.phpbb-seo.com/en/gym-sitemaps-rss/google-yahoo-msn-sitemaps-rss-t2734.html
 
 
 TO INSTALL THE MODULE :
@@ -418,9 +456,9 @@ $phpbb_root_path = './phpbb/';
 
 Obviously replacing phpbb/ with the real folder name where phpBB would be installed.
 Then you would need to go ACP and update the "Google Sitemaps URL" paramter, in the Google sitemaps main panel, to match your
-domain's root location instead of the phpBB url : http://www.example.com/ instead of http://www.example.com/phpbb/
+domain's root location instead of the phpBB url : "http://www.example.com/" instead of "http://www.example.com/phpbb/"
 Links to the forum will of course stay valid.
-You can do the same with gymrss.php if you wish.
+You can do the same with gymrss.php and map.php if you wish.
 
 _____________
 Please note :
@@ -434,7 +472,7 @@ And if your phpBB's .htaccess was in the phpBB/ directory, to move them to the d
 
 ===> To Install <===
 
-	=> Connect yourself as admin and go to http://www.yourdomain.com/phpbb_folder/gym_sitemaps/gym_install.php to install
+	=> Connect yourself as admin and go to yourdomain.com/phpbb_folder/gym_sitemaps/gym_install.php to install
 
 !!!!! The SQL involved in the install script where tested for all mysql versions, but unfrotunately 
 not with the other possible DBAL (oracle, sqlite, postgresql etc ...), 
@@ -442,15 +480,15 @@ chances are great that it will work though !!!!!
 
 GYM sitemaps & RSS should work with all DBAL supported by phpBB.
 
-======> The only url to submit for all your sitemaps is http://www.yourdomain.com/phpbb/sitemap.php 
-======> or http://www.yourdomain.com/phpbb/sitemapindex.xml with URL rewritting. 
+======> The ONLY url to submit for all your sitemaps is "http://www.yourdomain.com/phpbb/sitemap.php" 
+======> or "http://www.yourdomain.com/phpbb/sitemapindex.xml" with URL rewritting. 
 ======> You should make sure that the url is valid before you submit, just load the url in your browser to see the mod in action.
 
 
 
-To uninstall :
+===> To uninstall  <===
 
-	1) Connect yourself as admin and go to http://www.yourdomain.com/phpbb_folder/gym_sitemaps/gym_install.php to un-install
+	1) Connect yourself as admin and go to yourdomain.com/phpbb_folder/gym_sitemaps/gym_install.php to un-install
 
 	2) remove all files and code changes added
 
@@ -465,7 +503,7 @@ for GYM sitemaps & RSS. Just generate a new .htaccess once you have installed th
 #-----[ COPY ]--------------------------------------------------
 #
 
-copy root/*.* to root/*.*
+copy root/*.* to *.*
 
 #
 #-----[ SAVE/CLOSE ALL FILES ]------------------------------------------
