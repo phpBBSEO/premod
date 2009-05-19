@@ -506,7 +506,7 @@ if ($start < 0 || $start >= $total_posts)
 $phpbb_seo->seo_opt['zero_dupe']['start'] = $phpbb_seo->seo_chk_start( $start, $config['posts_per_page'] );
 if ( $post_id && !$view && !$phpbb_seo->set_do_redir_post()) {
 	$phpbb_seo->seo_opt['zero_dupe']['redir_def'] = array(
-		'p' => array('val' => $post_id, 'keep' => true, 'force' => true),
+		'p' => array('val' => $post_id, 'keep' => true, 'force' => true, 'hash' => "p$post_id"),
 		'hilit' => array('val' => (($highlight_match) ? $highlight : ''), 'keep' => !empty($highlight)),
 	);
 } else {
@@ -520,8 +520,8 @@ if ( $post_id && !$view && !$phpbb_seo->set_do_redir_post()) {
 	$phpbb_seo->seo_opt['zero_dupe']['redir_def'] = array(
 		'uid' => array('val' => $seo_uid, 'keep' => (boolean) ($keep_hash && $seo_uid)),
 		'f' => array('val' => $forum_id, 'keep' => true, 'force' => true),
-		't' => array('val' => $topic_id, 'keep' => true, 'force' => true),
-		'p' => array('val' => $post_id, 'keep' =>  ($view == 'show' ? true : false)),
+		't' => array('val' => $topic_id, 'keep' => true, 'force' => true, 'hash' => $post_id ? "p$post_id" : ''),
+		'p' => array('val' => $post_id, 'keep' =>  ($post_id && $view == 'show' ? true : false), 'hash' => "p$post_id"),
 		'watch' => array('val' => $seo_watch, 'keep' => $keep_watch),
 		'unwatch' => array('val' => $seo_unwatch, 'keep' => $keep_unwatch),
 		'bookmark' => array('val' => $seo_bookmark, 'keep' => (boolean) ($user->data['is_registered'] && $config['allow_bookmarks'] && $seo_bookmark)),

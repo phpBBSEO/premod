@@ -250,7 +250,7 @@ The settings must be done before step 4 above for the generated .htaccess to be 
 Later modification will most likey require a new .htaccess as well as personalized redirections.
 
 IMPORTANT :
-	A new option was added staring from 3.0.5 : SQL rewriting.
+	A new option was added staring from v0.6.0 : SQL rewriting.
 
 	This option will allow you to choose url for each topic. You will be able to accurately set topic url when posting new 
 	topic or when editing an existing one. This functionality is though limited to forum admins and moderators.
@@ -269,7 +269,7 @@ IMPORTANT :
 
 => By Default, this mod will get rid of index.php for phpBB's index.
 
-You can change this in phpbb_seo/includes/phpbb_seo_modules.php if you prefer.
+You can change this in phpbb_seo/includes/setup_phpbb_seo.php if you prefer.
 To do this, you can for example add :
 
 		$this->seo_static['index'] = 'forum';
@@ -284,7 +284,7 @@ This is mostly useful if you're running a portal in the folder where phpBB is in
 
 => The first setting to do is to select which static part to use in your URLs. 
 
-To do so, you can override default values in phpbb_seo/includes/phpbb_seo_modules.php, still before :
+To do so, you can override default values in phpbb_seo/includes/setup_phpbb_seo.php, still before :
 
 		// Let's make sure that settings are consistent
 		$this->check_config();
@@ -341,6 +341,43 @@ Take your time to do it, and remember that using the remove IDs option in the se
 If you later create more forums, you'll just have to go to this page again an eventually update the 
 new forum URL.
 If not, the new forum URL will not be cached and the default one will be used (forum-title-fxx).
+
+________________________________________
+Custom replacement for title injection :
+________________________________________
+
+The phpbb_seo class handles de-accentuation for most of the occidental characters, but you could need to handle more cases for your project.
+Starting from v0.6.0, we introduced a simple way to set up custom replacements. 
+This is useful for special characters not properly handled by default, such as Russian ones (Г => G), or to implement custom replacements such as $ => dollar.
+It works with any string, but you MUST perform the edits with an UTF-8 (without BOM) capable text editor. 
+This is still done in phpbb_seo/includes/setup_phpbb_seo.php, and still before :
+
+		// Let's make sure that settings are consistent
+		$this->check_config();
+
+The principle is simple, you can set up your custom replacement by filling the phpbb_seo::url_replace array ($this->url_replace).
+The pattern to use is :
+
+		$this->url_replace = array(
+			'character(s) to find' => 'replacement to apply',
+		);
+
+EXAMPLE :
+_________
+
+		$this->url_replace = array(
+			// Purelly cosmetic replace
+			'$' => 'dollar', '€' => 'euro',
+			'\'s' => 's', // it's => its / mary's => marys ...
+			// Language specific replace (German example)
+			'ß' => 'ss',
+			'Ä' => 'Ae', 'ä' => 'ae',
+			'Ö' => 'Oe', 'ö' => 'oe',
+			'Ü' => 'Ue', 'ü' => 'ue',
+		);
+
+Just make sure that the characters you may add are not already handled properly but the default replacements before you add some more.
+Please note that English characters are already properly handled.
 
 ___________
 NOTE: Cache

@@ -15,13 +15,13 @@ if (!defined('IN_PHPBB'))
 	exit;
 }
 /**
-* phpbb_seo_modules Class
+* setup_phpbb_seo Class
 * www.phpBB-SEO.com
 * @package Advanced phpBB3 SEO mod Rewrite
 */
-class phpbb_seo_modules {
+class setup_phpbb_seo {
 	/**
-	* constuctor
+	* Do the init
 	*/
 	function init_phpbb_seo() {
 		global $phpEx, $config, $phpbb_root_path;
@@ -54,14 +54,30 @@ class phpbb_seo_modules {
 				$this->seo_url['forum'] = $this->cache_config['forum'];
 			}
 		}
-		// --> here starts the add-on and custom set up --<
-		// Here you may set up custom values for Delimiters, Static parts and Suffixes.
-		// => Delimiters : can be overridden, requires .htaccess update.
+		// ====> here starts the add-on and custom set up <====
+
+		// ===> Custom url replacements <===
+		// Here you can set up custom replacements to be used in title injection.
+		// Example : array( 'find' => 'replace')
+		//	$this->url_replace = array(
+		//		// Purelly cosmetic replace
+		//		'$' => 'dollar', '€' => 'euro',
+		//		'\'s' => 's', // it's => its / mary's => marys ...
+		//		// Language specific replace (German example)
+		//		'ß' => 'ss',
+		//		'Ä' => 'Ae', 'ä' => 'ae',
+		//		'Ö' => 'Oe', 'ö' => 'oe',
+		//		'Ü' => 'Ue', 'ü' => 'ue',
+		//	);
+
+		// ===> Custom values Delimiters, Static parts and Suffixes <===
+		// ==> Delimiters <==
+		// Can be overridden, requires .htaccess update <=
 		// Example :
 		//	$this->seo_delim['forum'] = '-mydelim'; // instead of the default "-f"
 
-		// => Static parts : Used in URL when format_url would return nothing or with simple URLs
-		// can be overridden, requires .htaccess update.
+		// ==> Static parts <== 
+		// Can be overridden, requires .htaccess update.
 		// Example :
 		//	$this->seo_static['post'] = 'message'; // instead of the default "post"
 		// !! phpBB files must be treated a bit differently !!
@@ -69,9 +85,23 @@ class phpbb_seo_modules {
 		//	$this->seo_static['file'][ATTACHMENT_CATEGORY_QUICKTIME] = 'quicktime'; // instead of the default "qt"
 		//	$this->seo_static['file_index'] = 'my_files_virtual_dir'; // instead of the default "resources"
 
-		// => Suffixes : can be overridden, requires .htaccess update.
+		// ==> Suffixes <==
+		// Can be overridden, requires .htaccess update <=
 		// Example :
 		// 	$this->seo_ext['topic'] = '/'; // instead of the default ".html"
+
+		// ==> Special for lazy French, others may delete this part
+		if ( strpos($config['default_lang'], 'fr') !== false ) {
+			$this->seo_static['user'] = 'membre';
+			$this->seo_static['group'] = 'groupe';
+			$this->seo_static['global_announce'] = 'annonces';
+			$this->seo_static['leaders'] = 'equipe';
+			$this->seo_static['atopic'] = 'sujets-actifs';
+			$this->seo_static['utopic'] = 'sans-reponses';
+			$this->seo_static['npost'] = 'nouveaux-messages';
+			$this->seo_static['file_index'] = 'ressources';
+		}
+		// <== Special for lazy French, others may delete this part
 
 		// Let's make sure that settings are consistent
 		$this->check_config();
@@ -172,6 +202,9 @@ class phpbb_seo_modules {
 		foreach ($this->seo_opt['zero_dupe']['redir_def'] as $get => $def) {
 			if ((isset($_GET[$get]) && $def['keep']) || !empty($def['force'])) {
 				$params[$get] = $def['val'];
+				if (!empty($def['hash'])) {
+					$params['#'] = $def['hash'];
+				}
 			}
 		}
 		$this->page_url = append_sid($path . $this->seo_opt['req_file'] . ".$phpEx", $params, false, 0);
