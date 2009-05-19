@@ -258,7 +258,7 @@ des modification tardives entraîneront probablement des changement dans le .hta
 et pourront nécessiter des redirections personnalisées.
 
 IMPORTANT :
-	Une nouvelle option a été introduite depuis la version 3.0.5 : Le stockage des URL de sujets dans la base de donnée.
+	Une nouvelle option a été introduite depuis la version 0.6.0 : Le stockage des URL de sujets dans la base de donnée.
 	
 	Cette opiton permet d’activer les url personnalisées pour les sujets. Vous pourrez alors choisir une url précise pour 	
 	chaque sujet, soit au moment de le créer, soit en éditant simplement celui-ci. Cette possibilité est toutefois réservée 
@@ -278,7 +278,7 @@ IMPORTANT :
 
 => Par défaut, ce mod va retirer index.php de l'URL de l'index de phpBB.
 
-Vous pouvez changer cela dans phpbb_seo/includes/phpbb_seo_modules.php.
+Vous pouvez changer cela dans phpbb_seo/includes/setup_phpbb_seo.php.
 Pour ce faire vous pouvez par exemple ajouter :
 
 		$this->seo_static['index'] = 'forum';
@@ -292,7 +292,7 @@ avant :
 C'est surtout pratique dans le cas ou vous utiliseriez un portail dans le même dossier que phpBB.
 
 => Les premiers réglages à faire sont le choix des parties statiques de vos URL, dont forum.html fait parti.
-Pour ce faire, vous pouvez écraser les valeurs par défaut dans phpbb_seo/includes/phpbb_seo_modules.php, toujours avant :
+Pour ce faire, vous pouvez écraser les valeurs par défaut dans phpbb_seo/includes/setup_phpbb_seo.php, toujours avant :
 
 		// Let's make sure that settings are consistent
 		$this->check_config();
@@ -354,6 +354,43 @@ des URLs de forum après avoir commencer à les utiliser.
 Si vous créez de nouveaux forums par la suite, vous devrez simplement vous rendre de nouveaux 
 sur la page "Gestion des URL des Forums" pour personnaliser l'url de votre forum.
 Si non, l'url ne sera pas en cache, et celle par défaut sera utilisée pour ce forum (titre-forum-fxx).
+
+_______________________________________
+Customisation des injections de titre :
+_______________________________________
+
+La classe phpbb_seo prend en charge la dés-accentuation de la plupart des caractères occidentaux, mais il se peut que cela ne suffise pas pour votre projet.
+A partir de la version 0.6.0, nous avons introduit une méthode simple pour mettre en place des remplacements spéciaux.
+C'est utile pour les caractères spéciaux qui ne seraient pas ou mal pris en charge par défaut, comme les caractères Russes (Г => G), ou pour mettre en place des remplacement spéciaux comme € => euro.
+Cela fonctionne avec n'importe quelle chaîne de caractères pourvu que vous utilisez un éditeur de texte supportant l'UTF-8 sans BOM.
+Cela se met en place dans phpbb_seo/includes/setup_phpbb_seo.php, toujours avant :
+
+		// Let's make sure that settings are consistent
+		$this->check_config();
+
+Le principe est simple, vous devez juste remplir le tableau phpbb_seo::url_replace ($this->url_replace).
+De cette manière :
+
+		$this->url_replace = array(
+			'caractère(s) à trouver' => 'remplacement à appliquer',
+		);
+
+EXEMPLE :
+_________
+
+		$this->url_replace = array(
+			// Remplacements spéciaux
+			'$' => 'dollar', '€' => 'euro',
+			// Remplacements pour une langue (exemple pour l'allemand)
+			'ß' => 'ss',
+			'Ä' => 'Ae', 'ä' => 'ae',
+			'Ö' => 'Oe', 'ö' => 'oe',
+			'Ü' => 'Ue', 'ü' => 'ue',
+		);
+
+
+Assurez vous simplement que les caractères que vous ajoutez ne sont pas déjà pris en charge par défaut.
+Notez que tous les caractères de la langue française sont déjà pris en charge correctement.
 
 ___________
 NOTE: Cache

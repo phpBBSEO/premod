@@ -14,13 +14,13 @@ if (!defined('IN_PHPBB'))
 {
 	exit;
 }
-require($phpbb_root_path . "phpbb_seo/includes/phpbb_seo_modules.$phpEx");
+require($phpbb_root_path . "phpbb_seo/includes/setup_phpbb_seo.$phpEx");
 /**
 * phpBB_SEO Class
 * www.phpBB-SEO.com
 * @package Advanced phpBB3 SEO mod Rewrite
 */
-class phpbb_seo extends phpbb_seo_modules {
+class phpbb_seo extends setup_phpbb_seo {
 	var	$version = '0.6.0';
 	var	$modrtype = 2; // We set it to mixed as a default value
 	var	$seo_path = array();
@@ -67,6 +67,7 @@ class phpbb_seo extends phpbb_seo_modules {
 	var	$cache_config = array();
 	var	$RegEx = array();
 	var	$sftpl = array();
+	var	$url_replace = array();
 	/**
 	* constuctor
 	*/
@@ -80,19 +81,6 @@ class phpbb_seo extends phpbb_seo_modules {
 		$this->seo_static['file'] = array(ATTACHMENT_CATEGORY_NONE => 'file', ATTACHMENT_CATEGORY_IMAGE => 'image', ATTACHMENT_CATEGORY_WM => 'wm', ATTACHMENT_CATEGORY_RM => 'rm',  ATTACHMENT_CATEGORY_THUMB => 'image', ATTACHMENT_CATEGORY_FLASH => 'flash', ATTACHMENT_CATEGORY_QUICKTIME => 'qt');
 		$this->seo_static['file_index'] = 'resources';
 		$this->seo_static['thumb'] = 'thumb';
-		// Special for lazy French
-		if ( strpos($config['default_lang'], 'fr') !== false ) { 
-			// Si vous voulez modifier ces valeurs, faites le dans phpbb_seo/includes/phpbb_seo_modules.php
-			// pour vous faciliter les mise à jour.
-			$this->seo_static['user'] = 'membre';
-			$this->seo_static['group'] = 'groupe';
-			$this->seo_static['global_announce'] = 'annonces';
-			$this->seo_static['leaders'] = 'equipe';
-			$this->seo_static['atopic'] = 'sujets-actifs';
-			$this->seo_static['utopic'] = 'sans-reponses';
-			$this->seo_static['npost'] = 'nouveaux-messages';
-			$this->seo_static['file_index'] = 'ressources';
-		}
 		// Options that may be bypassed by the cached settings.
 		$this->cache_config['dynamic_options'] = array_keys($this->seo_opt); // Do not change
 		// copyright notice, do not change
@@ -124,6 +112,13 @@ class phpbb_seo extends phpbb_seo_modules {
 		$this->seo_path['phpbb_files'] = $this->seo_path['phpbb_url'] . 'download/';
 		// Load settings from phpbb_seo/includes/phpbb_seo_modules.php
 		$this->init_phpbb_seo();
+		// see if we have some custom replacement
+		if (!empty($this->url_replace)) {
+			$this->url_replace = array( 
+				'find' => array_keys($this->url_replace),
+				'replace' => array_values($this->url_replace)
+			);
+		}
 		$this->seo_opt['topic_per_page'] = ($config['posts_per_page'] <= 0) ? 1 : $config['posts_per_page']; // do not change
 		// Array of the filenames that require the use of a base href tag.
 		$this->file_hbase = array_merge(array('viewtopic' => $this->seo_path['phpbb_url'], 'viewforum' => $this->seo_path['phpbb_url'], 'memberlist' => $this->seo_path['phpbb_url'], 'search' => $this->seo_path['phpbb_url']), $this->file_hbase);
@@ -176,7 +171,8 @@ class phpbb_seo extends phpbb_seo_modules {
 			$this->RegEx
 		);
 		// preg_replace() patterns for format_url()
-		$this->RegEx['url_find'] = array('`&([a-z]+)(acute|uml|circ|grave|ring|cedil|slash|tilde|caron|lig);`i', '`&(amp;|#)?[a-z0-9]+;`i', '`[^a-z0-9]`i'); // Do not remove : deaccentuation, html/xml entities & non a-z chars
+		// One could want to add |th|horn after |slash, but I'm not sure that Þ should be replaced with t and Ð with e
+		$this->RegEx['url_find'] = array('`&([a-z]+)(acute|grave|circ|cedil|tilde|uml|lig|ring|caron|slash);`i', '`&[^;]+;`i', '`[^a-z0-9]`i'); // Do not remove : deaccentuation, html/xml entities & non a-z chars
 		$this->RegEx['url_replace'] = array('\1', '-', '-');
 		if ($this->seo_opt['rem_small_words']) {
 			$this->RegEx['url_find'][] = '`(^|-)[a-z0-9]{1,2}(?=-|$)`i';
@@ -196,13 +192,6 @@ class phpbb_seo extends phpbb_seo_modules {
 			),
 			$this->sftpl
 		);
-		// virtual root option
-		if ($this->seo_opt['virtual_root']) {
-			$this->seo_path['phpbb_urlR'] = $this->seo_path['root_url'];
-			$this->file_hbase['index'] = $this->seo_path['phpbb_url'];
-			$this->seo_static['index'] = empty($this->seo_static['index']) ? 'forum' : $this->seo_static['index'];
-		}
-		$this->seo_ext['index'] = empty($this->seo_static['index']) ? '' : ( empty($this->seo_ext['index']) ? '.html' : $this->seo_ext['index']);
 		// File setting
 		$this->seo_req_uri();
 		$this->seo_opt['seo_base_href'] = $this->seo_opt['req_file'] = $this->seo_opt['req_self'] = '';
@@ -243,6 +232,13 @@ class phpbb_seo extends phpbb_seo_modules {
 		if (!$this->seo_opt['cache_layer']) {
 			$this->seo_opt['rem_ids'] = false;
 		}
+		// virtual root option
+		if ($this->seo_opt['virtual_root']) {
+			$this->seo_path['phpbb_urlR'] = $this->seo_path['root_url'];
+			$this->file_hbase['index'] = $this->seo_path['phpbb_url'];
+			$this->seo_static['index'] = empty($this->seo_static['index']) ? 'forum' : $this->seo_static['index'];
+		}
+		$this->seo_ext['index'] = empty($this->seo_static['index']) ? '' : ( empty($this->seo_ext['index']) ? '.html' : $this->seo_ext['index']);
 		// In case url rewriting is deactivated
 		if (!$this->seo_opt['url_rewrite'] || $this->modrtype == 0) {
 			$phpbb_seo->seo_opt['sql_rewrite'] = false;
@@ -256,6 +252,9 @@ class phpbb_seo extends phpbb_seo_modules {
 	*/
 	function format_url( $url, $type = 'topic' ) {
 		$url = preg_replace('`\[.*\]`U','',$url);
+		if (isset($this->url_replace['find'])) {
+			$url = str_replace($this->url_replace['find'], $this->url_replace['replace'], $url);
+		}
 		$url = htmlentities($url, ENT_COMPAT, 'UTF-8');
 		$url = preg_replace($this->RegEx['url_find'] , $this->RegEx['url_replace'], $url);
 		$url = strtolower(trim($url, '-'));
