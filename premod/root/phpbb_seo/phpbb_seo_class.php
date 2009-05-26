@@ -172,7 +172,7 @@ class phpbb_seo extends setup_phpbb_seo {
 		);
 		// preg_replace() patterns for format_url()
 		// One could want to add |th|horn after |slash, but I'm not sure that Þ should be replaced with t and Ð with e
-		$this->RegEx['url_find'] = array('`&([a-z]+)(acute|grave|circ|cedil|tilde|uml|lig|ring|caron|slash);`i', '`&[^;]+;`i', '`[^a-z0-9]`i'); // Do not remove : deaccentuation, html/xml entities & non a-z chars
+		$this->RegEx['url_find'] = array('`&([a-z]+)(acute|grave|circ|cedil|tilde|uml|lig|ring|caron|slash);`i', '`&(amp;)?[^;]+;`i', '`[^a-z0-9]`i'); // Do not remove : deaccentuation, html/xml entities & non a-z chars
 		$this->RegEx['url_replace'] = array('\1', '-', '-');
 		if ($this->seo_opt['rem_small_words']) {
 			$this->RegEx['url_find'][] = '`(^|-)[a-z0-9]{1,2}(?=-|$)`i';

@@ -113,7 +113,7 @@ if (!empty($action) && !empty($type) && !empty($language) && !empty($theme_id)) 
 		// Grabb the default one data instead
 		if (!$theme) {
 			// grabb the first available one
-			$theme_id = $config['default_style'];
+			$theme_id = (int) $config['default_style'];
 			$sql = 'SELECT s.style_id, c.theme_path, c.theme_name, t.template_path
 				FROM ' . STYLES_TABLE . ' s, ' . STYLES_TEMPLATE_TABLE . ' t, ' . STYLES_THEME_TABLE . ' c
 				WHERE s.style_id = ' . $theme_id . '
@@ -124,7 +124,7 @@ if (!empty($action) && !empty($type) && !empty($language) && !empty($theme_id)) 
 			$db->sql_freeresult($result);
 		}
 		// Determine style file name
-		$tpath = $type == 'xsl' ? $theme['template_path'] . '/template/' : $theme['theme_path'] . '/theme/';
+		$tpath = $type == 'xsl' ? $theme['template_path'] . '/template/gym_sitemaps' : $theme['theme_path'] . '/theme';
 		$style_file = $phpbb_root_path . "styles/$tpath/gym_{$action}.$type";
 		if (!file_exists($style_file)) {
 			// Degrade to default styling
@@ -167,11 +167,11 @@ if (!empty($action) && !empty($type) && !empty($language) && !empty($theme_id)) 
 		// Path Settings
 		$server_protocol = ($config['server_protocol']) ? $config['server_protocol'] : (($config['cookie_secure']) ? 'https://' : 'http://');
 		$server_name = trim($config['server_name'], '/') . '/';
-		$server_port = (int) $config['server_port'];
-		$server_port = ($server_port <> 80) ? ':' . $server_port : '';
-		$script_path = trim($config['script_path'], '/');
+		$server_port = max(0, (int) $config['server_port']);
+		$server_port = ($server_port && $server_port <> 80) ? ':' . $server_port : '';
+		$script_path = trim($config['script_path'], '/ ');
 		$script_path = (empty($script_path) ) ? '' : $script_path . '/';
-		$root_url = $server_protocol . $server_name;
+		$root_url = strtolower($server_protocol . $server_name . $server_port);
 		// First grabb the online style
 		$phpbb_url = $root_url . $script_path;
 		// Parse Theme Data
@@ -251,7 +251,7 @@ if (!empty($action) && !empty($type) && !empty($language) && !empty($theme_id)) 
 		}
 		if ($strip_spaces) {
 			if ($type === 'xsl') {
-				$output = preg_replace(array('`<\!--.*-->`Us', '`[' . "\t\f" . ']+`'), '', $output);
+				$output = preg_replace(array('`<\!--.*-->`Us', '`[\s]+`'), ' ', $output);
 			} else {
 				$output = preg_replace(array('`/\*.*\*/`Us', '`[\s]+`'), ' ', $output);
 			}

@@ -60,7 +60,7 @@ class setup_phpbb_seo {
 		// Here you can set up custom replacements to be used in title injection.
 		// Example : array( 'find' => 'replace')
 		//	$this->url_replace = array(
-		//		// Purelly cosmetic replace
+		//		// Purely cosmetic replace
 		//		'$' => 'dollar', '€' => 'euro',
 		//		'\'s' => 's', // it's => its / mary's => marys ...
 		//		// Language specific replace (German example)

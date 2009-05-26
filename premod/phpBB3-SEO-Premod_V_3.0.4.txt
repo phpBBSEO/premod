@@ -366,7 +366,7 @@ EXAMPLE :
 _________
 
 		$this->url_replace = array(
-			// Purelly cosmetic replace
+			// Purely cosmetic replace
 			'$' => 'dollar', '€' => 'euro',
 			'\'s' => 's', // it's => its / mary's => marys ...
 			// Language specific replace (German example)
