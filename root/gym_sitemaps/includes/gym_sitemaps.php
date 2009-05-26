@@ -284,7 +284,9 @@ class gym_sitemaps {
 	 * helper
 	 */
 	function xml_encode($utf8_string) {
-		return numeric_entify_utf8(utf8_htmlspecialchars($utf8_string));
+		static $find = array('&', '<', '>');
+		static $replace = array('&#x26;', '&#x3C;', '&#x3E;');
+		return numeric_entify_utf8(str_replace($find, $replace, $utf8_string));
 	}
 	/**
 	* check_forum_auth() 

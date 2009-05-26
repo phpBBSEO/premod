@@ -9,8 +9,8 @@ var dn_interval = 0;
 /* Initialise scroller when window loads */
 // check for DOM
 if(document.getElementById && document.createTextNode) {
-	onload_functions.push('initDOMnews()');
-	onunload_functions.push('clearInterval(dn_interval)');
+	window.onload = initDOMnews();
+	window.onunload = clearInterval(dn_interval);
 }
 var dn_scrollpos=dn_startpos;
 var dn_paused=false;
@@ -43,6 +43,7 @@ function initDOMnews(reinit) {
 		dn_els.parentNode.removeChild(dn_els.nextSibling);
 		clearInterval(dn_interval);
 	}
+	dn_els.height = dn_startpos;
 	dn_els.style.cssText = 'width:100%;height:'+dn_startpos+'px;overflow:hidden;position:relative;';
 	dn_inels.style.cssText = 'width:100%; position:relative; top:'+dn_startpos+'px;';
 	dn_interval=setInterval('scrollDOMnews()',dn_speed);

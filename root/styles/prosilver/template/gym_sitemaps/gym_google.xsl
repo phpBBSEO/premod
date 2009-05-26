@@ -52,7 +52,7 @@
 <body id="phpbb">
 <!--
 	GYM Sitemaps and RSS XSLTransform
-	(C) 2006, 2007, 2008 phpBB SEO - http://www.phpbb-seo.com/
+	(C) 2006, 2007, 2008, 2009 phpBB SEO - http://www.phpbb-seo.com/
 -->
 		<div id="wrap">
 			<a id="top" name="top" accesskey="t"></a>

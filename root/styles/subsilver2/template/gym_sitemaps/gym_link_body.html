@@ -22,7 +22,7 @@
 		var dn_paraID='{GYM_RSS_CSSID}DomID';
 	// ]]>
 	</script>
-	<script type="text/javascript" src="{T_TEMPLATE_PATH}/gym_rss_links.js"></script>
+	<script type="text/javascript" src="{T_TEMPLATE_PATH}/gym_sitemaps/gym_rss_links.js"></script>
 	<!-- ENDIF -->
 	<!-- IF GYM_CHAN_TITLE --><h3><!-- IF GYM_CHAN_SOURCE --><a href="{GYM_CHAN_SOURCE}" title="{GYM_CHAN_TITLE} - {L_GYM_RSS_SOURCE}"><img src="{ROOT_PATH}gym_sitemaps/images/feed-icon.png" alt="{GYM_CHAN_TITLE} - {L_GYM_RSS_SOURCE}"/> {L_GYM_RSS_SOURCE}</a> <strong>&raquo;</strong> <a href="{GYM_CHAN_LINK}" title="{GYM_CHAN_TITLE}">{GYM_CHAN_TITLE}</a><!-- ELSE -->{GYM_CHAN_TITLE}<!-- ENDIF --></h3><!-- ENDIF -->
 	
@@ -38,7 +38,7 @@
 	</tr>
 	<!-- BEGIN gym_link_list -->
 	<tr>
-		<td class="row1" width="25" align="center">{gym_link_list.IMG}</td>
+		<td class="row1" width="25" align="center"><img src="{gym_link_list.IMG}" alt=""/></td>
 		<td class="row<!-- IF  gym_link_list.S_ROW_COUNT is even -->1<!-- ELSE -->2<!-- ENDIF -->">
 			<a href="{gym_link_list.LINK}" class="topictitle" title="{gym_link_list.TITLE}">{gym_link_list.TITLE}</a>
 			<!-- IF gym_link_list.SOURCE -->
@@ -56,9 +56,9 @@
 	</tr>
 	<!-- END gym_link_list -->
 </table>	
-	<!-- ELSE -->
-	<!-- BEGIN gym_link_list -->
+<!-- ELSE -->
 <table class="tablebg" width="100%" cellspacing="1">
+	<!-- BEGIN gym_link_list -->
 	<tr>
 		<th align="left"><!-- IF gym_link_list.SOURCE -->&nbsp;<a href="{gym_link_list.SOURCE}" title="{gym_link_list.TITLE} - {L_GYM_RSS_SOURCE}"><img src="{ROOT_PATH}gym_sitemaps/images/feed-icon.png" alt="{gym_link_list.TITLE} - {L_GYM_RSS_SOURCE}"/> {L_GYM_RSS_SOURCE}</a> &bull; <!-- ENDIF --> <a href="{gym_link_list.LINK}" title="{gym_link_list.TITLE}">{gym_link_list.TITLE}</a> </th>
 	</tr>
