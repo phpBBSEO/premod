@@ -73,7 +73,7 @@ class acp_phpbb_seo {
 			case 'settings':
 				$this->write_type = 'forum';
 				$display_vars['title'] = 'ACP_PHPBB_SEO_CLASS';
-				$user->lang['ACP_PHPBB_SEO_CLASS_EXPLAIN'] = sprintf($user->lang['ACP_PHPBB_SEO_CLASS_EXPLAIN'], '</p><hr/><p><b>' . $user->lang['ACP_PHPBB_SEO_VERSION'] . ' : ' . $this->modrtype_lang['link'] . ' - ' . $phpbb_seo->version . ' ( ' . $this->modrtype_lang['forumlink'] . ' )</b></p><hr/><p>');
+				$user->lang['ACP_PHPBB_SEO_CLASS_EXPLAIN'] = sprintf($user->lang['ACP_PHPBB_SEO_CLASS_EXPLAIN'], $this->modrtype_lang['ulink'], $this->modrtype_lang['uforumlink'], '</p><hr/><p><b>' . $user->lang['ACP_PHPBB_SEO_MODE'] . ' : ' . $this->modrtype_lang['link'] . ' - ' . $phpbb_seo->version . ' ( ' . $this->modrtype_lang['forumlink'] . ' )</b></p><hr/><p>');
 				$display_vars['vars'] = array();
 				$i = 2;
 				$display_vars['vars']['legend1'] = 'ACP_PHPBB_SEO_CLASS';
@@ -201,6 +201,7 @@ class acp_phpbb_seo {
 		if (sizeof($error)) {
 			$submit = false;
 		}
+		$additional_notes = '';
 		// We go through the display_vars to make sure no one is trying to set variables he/she is not allowed to...
 		foreach ($display_vars['vars'] as $config_name => $null) {
 			if (!isset($cfg_array[$config_name]) || strpos($config_name, 'legend') !== false) {
@@ -268,6 +269,7 @@ class acp_phpbb_seo {
 						if (!$db_tools->sql_column_exists(TOPICS_TABLE, 'topic_url')) {
 							$db_tools->sql_column_add(TOPICS_TABLE, 'topic_url', array('VCHAR', ''));
 						}
+						$additional_notes = sprintf($user->lang['SYNC_TOPIC_URL_NOTE'], '<a href="' . $phpbb_seo->seo_path['phpbb_url'] . 'phpbb_seo/sync_url.' . $phpEx . '" onclick="window.open(this.href); return false;">', '</a>');
 					}
 					// Let's make sure the proper index is added for the no dupe (in case it is installed and activated)
 					if ($config_name === 'no_dupe_on' && $config_value == 1 && !$phpbb_seo->seo_opt['no_dupe']['on']) {
@@ -309,6 +311,9 @@ class acp_phpbb_seo {
 					$msg = !empty($seo_msg) ? '<br /><h1 style="color:red;text-align:left;">' . $user->lang['SEO_VALIDATE_INFO'] . '</h1><ul style="text-align:left;">' . implode(' ',$seo_msg) . '</ul><br />' : '';
 					global $msg_long_text;
 					$msg_long_text = $user->lang['SEO_CACHE_MSG_OK'] . $msg . adm_back_link($this->u_action);
+					if ($additional_notes) {
+						$msg_long_text .= "<br/><br/>$additional_notes";
+					}
 					trigger_error(false);
 				} else {
 					trigger_error($user->lang['SEO_CACHE_MSG_FAIL'] . adm_back_link($this->u_action));
@@ -795,23 +800,30 @@ class acp_phpbb_seo {
 		if ($phpbb_seo->modrtype < 1 || $phpbb_seo->modrtype > 3) {
 			$phpbb_seo->modrtype = 1;
 		}
-		$modrtype_lang['titles'] = array( 1 => $user->lang['ACP_SEO_SIMPLE'], 2 =>  $user->lang['ACP_SEO_MIXED'], 3 =>  $user->lang['ACP_SEO_ADVANCED']);
+		$modrtype_lang['titles'] = array( 1 => $user->lang['ACP_SEO_SIMPLE'], 2 =>  $user->lang['ACP_SEO_MIXED'], 3 =>  $user->lang['ACP_SEO_ADVANCED'], 'u' => $user->lang['ACP_ULTIMATE_SEO_URL']);
 		$modrtype_lang['title'] = $modrtype_lang['titles'][$phpbb_seo->modrtype];
+		$modrtype_lang['utitle'] = $modrtype_lang['titles']['u'];
 		$modrtype_lang['types'] = array( 1 => 'SIMPLE', 2 => 'MIXED', 1 => 'SIMPLE', 3 => 'ADVANCED');
 		$modrtype_lang['type'] = $modrtype_lang['types'][$phpbb_seo->modrtype];
-		$modrtype_lang['modrlinks_en'] = array( 1 =>  'http://www.phpbb-seo.com/en/simple-seo-url/simple-phpbb3-seo-url-t1566.html', 2 =>  'http://www.phpbb-seo.com/en/mixed-seo-url/mixed-phpbb3-seo-url-t1565.html', 3 =>  'http://www.phpbb-seo.com/en/advanced-seo-url/advanced-phpbb3-seo-url-t1219.html' );
-		$modrtype_lang['modrlinks_fr'] = array( 1 =>  'http://www.phpbb-seo.com/fr/reecriture-url-simple/seo-url-phpbb3-simple-t1945.html', 2 =>  'http://www.phpbb-seo.com/fr/reecriture-url-intermediaire/seo-url-intermediaire-t1946.html', 3 =>  'http://www.phpbb-seo.com/fr/reecriture-url-avancee/seo-url-phpbb3-avance-t1501.html' );
-		$modrtype_lang['modrforumlinks_en'] = array( 1 =>  'http://www.phpbb-seo.com/en/simple-seo-url/', 2 =>  'http://www.phpbb-seo.com/en/mixed-seo-url/', 3 =>  'http://www.phpbb-seo.com/en/advanced-seo-url/' );
-		$modrtype_lang['modrforumlinks_fr'] = array( 1 =>  'http://www.phpbb-seo.com/fr/reecriture-url-simple/', 2 =>  'http://www.phpbb-seo.com/fr/reecriture-url-intermediaire/', 3 =>  'http://www.phpbb-seo.com/fr/reecriture-url-avancee/' );
+		$modrtype_lang['modrlinks_en'] = array( 1 =>  'http://www.phpbb-seo.com/en/simple-seo-url/simple-phpbb-seo-url-t1566.html', 2 =>  'http://www.phpbb-seo.com/en/mixed-seo-url/mixed-phpbb-seo-url-t1565.html', 3 =>  'http://www.phpbb-seo.com/en/advanced-seo-url/advanced-phpbb-seo-url-t1219.html', 'u' => 'http://www.phpbb-seo.com/en/phpbb-mod-rewrite/ultimate-seo-url-t4608.html' );
+		$modrtype_lang['modrlinks_fr'] = array( 1 =>  'http://www.phpbb-seo.com/fr/reecriture-url-simple/seo-url-phpbb-simple-t1945.html', 2 =>  'http://www.phpbb-seo.com/fr/reecriture-url-intermediaire/seo-url-intermediaire-t1946.html', 3 =>  'http://www.phpbb-seo.com/fr/reecriture-url-avancee/seo-url-phpbb-avance-t1501.html', 'u' => 'http://www.phpbb-seo.com/fr/mod-rewrite-phpbb/ultimate-seo-url-t4489.html' );
+		$modrtype_lang['modrforumlinks_en'] = array( 1 =>  'http://www.phpbb-seo.com/en/simple-seo-url/', 2 =>  'http://www.phpbb-seo.com/en/mixed-seo-url/', 3 =>  'http://www.phpbb-seo.com/en/advanced-seo-url/', 'u' => 'http://www.phpbb-seo.com/en/phpbb-mod-rewrite/' );
+		$modrtype_lang['modrforumlinks_fr'] = array( 1 =>  'http://www.phpbb-seo.com/fr/reecriture-url-simple/', 2 =>  'http://www.phpbb-seo.com/fr/reecriture-url-intermediaire/', 3 =>  'http://www.phpbb-seo.com/fr/reecriture-url-avancee/', 'u' => 'http://www.phpbb-seo.com/fr/mod-rewrite-phpbb/' );
 		if (strpos($config['default_lang'], 'fr') !== false ) {
 			$modrtype_lang['linkurl'] = $modrtype_lang['modrlinks_fr'][$phpbb_seo->modrtype];
 			$modrtype_lang['forumlinkurl'] = $modrtype_lang['modrforumlinks_fr'][$phpbb_seo->modrtype];
+			$modrtype_lang['ulinkurl'] = $modrtype_lang['modrlinks_fr']['u'];
+			$modrtype_lang['uforumlinkurl'] = $modrtype_lang['modrforumlinks_fr']['u'];
 		} else {
 			$modrtype_lang['linkurl'] = $modrtype_lang['modrlinks_en'][$phpbb_seo->modrtype];
 			$modrtype_lang['forumlinkurl'] = $modrtype_lang['modrforumlinks_en'][$phpbb_seo->modrtype];
+			$modrtype_lang['ulinkurl'] = $modrtype_lang['modrlinks_en']['u'];
+			$modrtype_lang['uforumlinkurl'] = $modrtype_lang['modrforumlinks_en']['u'];
 		}
 		$modrtype_lang['link'] = '<a href="' . $modrtype_lang['linkurl'] . '" title="' . $user->lang['ACP_PHPBB_SEO_VERSION'] . ' ' . $modrtype_lang['title'] . '" onclick="window.open(this.href); return false;"><b>' . $modrtype_lang['title'] . '</b></a>';
 		$modrtype_lang['forumlink'] = '<a href="' . $modrtype_lang['forumlinkurl'] . '" title="' . $user->lang['ACP_SEO_SUPPORT_FORUM'] . '" onclick="window.open(this.href); return false;"><b>' . $user->lang['ACP_SEO_SUPPORT_FORUM'] . '</b></a>';
+		$modrtype_lang['ulink'] = '<a href="' . $modrtype_lang['ulinkurl'] . '" title="' . $user->lang['ACP_PHPBB_SEO_VERSION'] . ' ' . $modrtype_lang['utitle'] . '" onclick="window.open(this.href); return false;"><b>' . $modrtype_lang['utitle'] . '</b></a>';
+		$modrtype_lang['uforumlink'] = '<a href="' . $modrtype_lang['uforumlinkurl'] . '" title="' . $user->lang['ACP_SEO_SUPPORT_FORUM'] . '" onclick="window.open(this.href); return false;"><b>' . $user->lang['ACP_SEO_SUPPORT_FORUM'] . '</b></a>';
 		return $modrtype_lang;
 	}
 	/**

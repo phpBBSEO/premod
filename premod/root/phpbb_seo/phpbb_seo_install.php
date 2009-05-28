@@ -191,7 +191,6 @@ class module {
 	function page_footer() {
 		global $db, $template, $phpbb_seo;
 		$template->display('body');
-		echo $phpbb_seo->seo_end(true);
 		// Close our DB connection.
 		if (!empty($db) && is_object($db)) {
 			$db->sql_close();
@@ -340,8 +339,8 @@ class module {
 		echo '	</div>';
 		echo '	<div id="page-footer">';
 		echo '		Powered by phpBB &copy; 2000, 2002, 2005, 2007 <a href="http://www.phpbb.com/">phpBB Group</a>';
+		echo 		$phpbb_seo->seo_end(true);
 		echo '	</div>';
-		echo $phpbb_seo->seo_end(true);
 		echo '</div>';
 		echo '</body>';
 		echo '</html>';
@@ -403,7 +402,7 @@ class install_phpbb_seo extends module {
 				$this->page_title = $user->lang['SUB_INTRO'];
 				$template->assign_vars(array(
 					'TITLE'			=> $user->lang[$this->uninst_prefix . 'SEO_INSTALL_INTRO'],
-					'BODY'			=> sprintf($user->lang[$this->uninst_prefix . 'SEO_INSTALL_INTRO_BODY'], $this->modrtype_lang['link'], $phpbb_seo->version),
+					'BODY'			=> sprintf($user->lang[$this->uninst_prefix . 'SEO_INSTALL_INTRO_BODY'], $this->modrtype_lang['ulink'], $phpbb_seo->version),
 					'L_SUBMIT'		=> $user->lang[$this->uninst_prefix . 'SEO_INSTALL'],
 					'S_LANG_SELECT'	=> '',
 					'U_ACTION'		=> $this->p_master->module_url . "?mode=$mode&amp;sub=final",
@@ -658,7 +657,7 @@ class install_phpbb_seo extends module {
 			}
 			$submit_action = append_sid($phpbb_root_path . 'adm/index.' . $phpEx . '?sid=' . $user->session_id);
 			$title = $user->lang['SEO_INSTALL_CONGRATS'];
-			$body =  sprintf($user->lang['SEO_INSTALL_CONGRATS_EXPLAIN'], $this->modrtype_lang['link'], $phpbb_seo->version);
+			$body =  sprintf($user->lang['SEO_INSTALL_CONGRATS_EXPLAIN'], $this->modrtype_lang['ulink'], $phpbb_seo->version);
 		} else {
 			$purge_topic_table = false;
 			if ($purge_topic_table) {
@@ -674,7 +673,7 @@ class install_phpbb_seo extends module {
 			}
 			$submit_action = append_sid($phpbb_root_path . 'index.' . $phpEx);
 			$title = $user->lang['UN_SEO_INSTALL_CONGRATS'];
-			$body = sprintf($user->lang['UN_SEO_INSTALL_CONGRATS_EXPLAIN'], $this->modrtype_lang['link'], $phpbb_seo->version);
+			$body = sprintf($user->lang['UN_SEO_INSTALL_CONGRATS_EXPLAIN'], $this->modrtype_lang['ulink'], $phpbb_seo->version);
 		}
 		$cache->purge();
 		$template->assign_vars(array(
@@ -700,23 +699,30 @@ function set_phpbb_seo_links() {
 	if ($phpbb_seo->modrtype < 1 || $phpbb_seo->modrtype > 3) {
 		$phpbb_seo->modrtype = 1;
 	}
-	$modrtype_lang['titles'] = array( 1 => $user->lang['ACP_SEO_SIMPLE'], 2 =>  $user->lang['ACP_SEO_MIXED'], 3 =>  $user->lang['ACP_SEO_ADVANCED']);
+	$modrtype_lang['titles'] = array( 1 => $user->lang['ACP_SEO_SIMPLE'], 2 =>  $user->lang['ACP_SEO_MIXED'], 3 =>  $user->lang['ACP_SEO_ADVANCED'], 'u' => $user->lang['ACP_ULTIMATE_SEO_URL']);
 	$modrtype_lang['title'] = $modrtype_lang['titles'][$phpbb_seo->modrtype];
+	$modrtype_lang['utitle'] = $modrtype_lang['titles']['u'];
 	$modrtype_lang['types'] = array( 1 => 'SIMPLE', 2 => 'MIXED', 1 => 'SIMPLE', 3 => 'ADVANCED');
 	$modrtype_lang['type'] = $modrtype_lang['types'][$phpbb_seo->modrtype];
-	$modrtype_lang['modrlinks_en'] = array( 1 =>  'http://www.phpbb-seo.com/boards/simple-seo-url/simple-phpbb3-seo-url-vt1566.html', 2 =>  'http://www.phpbb-seo.com/boards/mixed-seo-url/mixed-phpbb3-seo-url-vt1565.html', 3 =>  'http://www.phpbb-seo.com/boards/advanced-seo-url/advanced-phpbb3-seo-url-vt1219.html' );
-	$modrtype_lang['modrlinks_fr'] = array( 1 =>  'http://www.phpbb-seo.com/forums/reecriture-url-simple/seo-url-phpbb3-simple-vt1945.html', 2 =>  'http://www.phpbb-seo.com/forums/reecriture-url-intermediaire/seo-url-intermediaire-vt1946.html', 3 =>  'http://www.phpbb-seo.com/forums/reecriture-url-avancee/seo-url-phpbb3-avance-vt1501.html' );
-	$modrtype_lang['modrforumlinks_en'] = array( 1 =>  'http://www.phpbb-seo.com/boards/simple-seo-url-vf60/', 2 =>  'http://www.phpbb-seo.com/boards/mixed-seo-url-vf59/', 3 =>  'http://www.phpbb-seo.com/boards/advanced-seo-url-vf54/' );
-	$modrtype_lang['modrforumlinks_fr'] = array( 1 =>  'http://www.phpbb-seo.com/forums/reecriture-url-simple-vf63/', 2 =>  'http://www.phpbb-seo.com/forums/reecriture-url-intermediaire-vf62/', 3 =>  'http://www.phpbb-seo.com/forums/reecriture-url-avancee-vf56/' );
+	$modrtype_lang['modrlinks_en'] = array( 1 =>  'http://www.phpbb-seo.com/en/simple-seo-url/simple-phpbb-seo-url-t1566.html', 2 =>  'http://www.phpbb-seo.com/en/mixed-seo-url/mixed-phpbb-seo-url-t1565.html', 3 =>  'http://www.phpbb-seo.com/en/advanced-seo-url/advanced-phpbb-seo-url-t1219.html', 'u' => 'http://www.phpbb-seo.com/en/phpbb-mod-rewrite/ultimate-seo-url-t4608.html' );
+	$modrtype_lang['modrlinks_fr'] = array( 1 =>  'http://www.phpbb-seo.com/fr/reecriture-url-simple/seo-url-phpbb-simple-t1945.html', 2 =>  'http://www.phpbb-seo.com/fr/reecriture-url-intermediaire/seo-url-intermediaire-t1946.html', 3 =>  'http://www.phpbb-seo.com/fr/reecriture-url-avancee/seo-url-phpbb-avance-t1501.html', 'u' => 'http://www.phpbb-seo.com/fr/mod-rewrite-phpbb/ultimate-seo-url-t4489.html' );
+	$modrtype_lang['modrforumlinks_en'] = array( 1 =>  'http://www.phpbb-seo.com/en/simple-seo-url/', 2 =>  'http://www.phpbb-seo.com/en/mixed-seo-url/', 3 =>  'http://www.phpbb-seo.com/en/advanced-seo-url/', 'u' => 'http://www.phpbb-seo.com/en/phpbb-mod-rewrite/' );
+	$modrtype_lang['modrforumlinks_fr'] = array( 1 =>  'http://www.phpbb-seo.com/fr/reecriture-url-simple/', 2 =>  'http://www.phpbb-seo.com/fr/reecriture-url-intermediaire/', 3 =>  'http://www.phpbb-seo.com/fr/reecriture-url-avancee/', 'u' => 'http://www.phpbb-seo.com/fr/mod-rewrite-phpbb/' );
 	if (strpos($config['default_lang'], 'fr') !== false ) {
 		$modrtype_lang['linkurl'] = $modrtype_lang['modrlinks_fr'][$phpbb_seo->modrtype];
-		$modrtype_lang['link'] = '<a href="' . $modrtype_lang['modrlinks_fr'][$phpbb_seo->modrtype] . '" title="' . $modrtype_lang['title'] . '" target="_phpBBSEO"><b>' . $modrtype_lang['title'] . '</b></a>';
 		$modrtype_lang['forumlinkurl'] = $modrtype_lang['modrforumlinks_fr'][$phpbb_seo->modrtype];
+		$modrtype_lang['ulinkurl'] = $modrtype_lang['modrlinks_fr']['u'];
+		$modrtype_lang['uforumlinkurl'] = $modrtype_lang['modrforumlinks_fr']['u'];
 	} else {
 		$modrtype_lang['linkurl'] = $modrtype_lang['modrlinks_en'][$phpbb_seo->modrtype];
-		$modrtype_lang['link'] = '<a href="' . $modrtype_lang['modrlinks_en'][$phpbb_seo->modrtype] . '" title="' . $modrtype_lang['title'] . '" target="_phpBBSEO"><b>' . $modrtype_lang['title'] . '</b></a>';
 		$modrtype_lang['forumlinkurl'] = $modrtype_lang['modrforumlinks_en'][$phpbb_seo->modrtype];
+		$modrtype_lang['ulinkurl'] = $modrtype_lang['modrlinks_en']['u'];
+		$modrtype_lang['uforumlinkurl'] = $modrtype_lang['modrforumlinks_en']['u'];
 	}
+	$modrtype_lang['link'] = '<a href="' . $modrtype_lang['linkurl'] . '" title="' . $user->lang['ACP_PHPBB_SEO_VERSION'] . ' ' . $modrtype_lang['title'] . '" onclick="window.open(this.href); return false;"><b>' . $modrtype_lang['title'] . '</b></a>';
+	$modrtype_lang['forumlink'] = '<a href="' . $modrtype_lang['forumlinkurl'] . '" title="' . $user->lang['ACP_SEO_SUPPORT_FORUM'] . '" onclick="window.open(this.href); return false;"><b>' . $user->lang['ACP_SEO_SUPPORT_FORUM'] . '</b></a>';
+	$modrtype_lang['ulink'] = '<a href="' . $modrtype_lang['ulinkurl'] . '" title="' . $user->lang['ACP_PHPBB_SEO_VERSION'] . ' ' . $modrtype_lang['utitle'] . '" onclick="window.open(this.href); return false;"><b>' . $modrtype_lang['utitle'] . '</b></a>';
+	$modrtype_lang['uforumlink'] = '<a href="' . $modrtype_lang['uforumlinkurl'] . '" title="' . $user->lang['ACP_SEO_SUPPORT_FORUM'] . '" onclick="window.open(this.href); return false;"><b>' . $user->lang['ACP_SEO_SUPPORT_FORUM'] . '</b></a>';
 	return $modrtype_lang;
 }
 /**
@@ -733,7 +739,7 @@ class overview_phpbb_seo extends module {
 		switch ($sub) {
 			case 'intro' :
 				$title = $user->lang['SEO_OVERVIEW_TITLE'];
-				$body = sprintf($user->lang['SEO_OVERVIEW_BODY'], $this->modrtype_lang['link'], $phpbb_seo->version, $this->modrtype_lang['linkurl']);
+				$body = sprintf($user->lang['SEO_OVERVIEW_BODY'], $this->modrtype_lang['ulink'], $phpbb_seo->version, $this->modrtype_lang['ulinkurl']);
 			break;
 			case 'license' :
 				$title = $user->lang['SEO_LICENCE_TITLE'];
@@ -741,7 +747,7 @@ class overview_phpbb_seo extends module {
 			break;
 			case 'support' :
 				$title = $user->lang['SEO_SUPPORT_TITLE'];
-				$body = sprintf($user->lang['SEO_SUPPORT_BODY'],$this->modrtype_lang['forumlinkurl'], $this->modrtype_lang['title'], $this->modrtype_lang['linkurl'] );
+				$body = sprintf($user->lang['SEO_SUPPORT_BODY'],$this->modrtype_lang['uforumlinkurl'], $this->modrtype_lang['utitle'], $this->modrtype_lang['ulinkurl'] );
 			break;
 		}
 		$this->tpl_name = 'install_main';

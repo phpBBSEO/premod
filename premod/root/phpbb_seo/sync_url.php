@@ -72,6 +72,7 @@ if ($mode === 'sync') {
 	$result = $db->sql_query($sql);
 	while ($row = $db->sql_fetchrow($result)) {
 		$forum_data[$row['forum_id']] = $row['forum_name'];
+		$phpbb_seo->set_url($row['forum_name'], $row['forum_id'], $phpbb_seo->seo_static['forum']);
 	}
 	$db->sql_freeresult($result);
 	// let's work
