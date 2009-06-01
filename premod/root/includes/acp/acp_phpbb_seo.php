@@ -836,7 +836,7 @@ class acp_phpbb_seo {
 		if (file_exists($cache_dir) && is_dir($cache_dir)) {
 			$exists = true;
 			if (!is_writeable($cache_dir)) {
-				phpbb_chmod($cache_dir, CHMOD_WRITE);
+				phpbb_chmod($cache_dir, CHMOD_READ | CHMOD_WRITE);
 				$fp = @fopen($cache_dir . 'test_lock', 'wb');
 				if ($fp !== false) {
 					$write = true;
@@ -883,7 +883,7 @@ class acp_phpbb_seo {
 		@fclose ($handle);
 		unset($update);
 		@umask(0000);
-		phpbb_chmod($file, CHMOD_WRITE);
+		phpbb_chmod($file, CHMOD_READ | CHMOD_WRITE);
 		// Keep a backup of the current settings
 		@copy($file, $file . '.current');
 		return TRUE;

@@ -2,7 +2,7 @@
 /**
 *
 * @package install
-* @version $Id: convert_phpbb20.php 9155 2008-12-02 17:13:34Z acydburn $
+* @version $Id: convert_phpbb20.php 9333 2009-02-20 14:50:43Z Kellanved $
 * @copyright (c) 2006 phpBB Group
 * @license http://opensource.org/licenses/gpl-license.php GNU Public License
 *
@@ -494,7 +494,7 @@ if (!$get_info)
 				array('topic_moved_id',			0,									''),
 				array('topic_type',				'topics.topic_type',				'phpbb_convert_topic_type'),
 				array('topic_first_post_id',	'topics.topic_first_post_id',		''),
-				array('topic_last_view_time',	'posts.post_time',					''),
+				array('topic_last_view_time',	'posts.post_time',					'intval'),
 				array('poll_title',				'vote_desc.vote_text',				array('function1' => 'null_to_str', 'function2' => 'phpbb_set_encoding', 'function3' => 'utf8_htmlspecialchars')),
 				array('poll_start',				'vote_desc.vote_start',				'null_to_zero'),
 				array('poll_length',			'vote_desc.vote_length',			'null_to_zero'),
@@ -865,7 +865,7 @@ if (!$get_info)
 				array('user_regdate',			'users.user_regdate',				''),
 				array('username',				'users.username',					'phpbb_set_default_encoding'), // recode to utf8 with default lang
 				array('username_clean',			'users.username',					array('function1' => 'phpbb_set_default_encoding', 'function2' => 'utf8_clean_string')),
-				array('user_password',			'users.user_password',				''),
+				array('user_password',			'users.user_password',				'phpbb_hash'),
 				array('user_pass_convert',		1,									''),
 				array('user_posts',				'users.user_posts',					'intval'),
 				array('user_email',				'users.user_email',					'strtolower'),

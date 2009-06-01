@@ -2,7 +2,7 @@
 /**
 *
 * @package install
-* @version $Id: functions_phpbb20.php 9113 2008-11-24 19:23:23Z naderman $
+* @version $Id: functions_phpbb20.php 9325 2009-02-09 14:47:21Z toonarmy $
 * @copyright (c) 2006 phpBB Group
 * @license http://opensource.org/licenses/gpl-license.php GNU Public License
 *
@@ -461,7 +461,7 @@ function phpbb_get_birthday($birthday = '')
 		}
 
 		// The birthday mod from niels is using this code to transform to day/month/year
-		return sprintf('%2d-%2d-%4d', gmdate('n', $birthday * 86400 + 1), gmdate('j', $birthday * 86400 + 1), gmdate('Y', $birthday * 86400 + 1));
+		return sprintf('%2d-%2d-%4d', gmdate('j', $birthday * 86400 + 1), gmdate('n', $birthday * 86400 + 1), gmdate('Y', $birthday * 86400 + 1));
 	}
 }
 

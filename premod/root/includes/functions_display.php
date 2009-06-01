@@ -2,7 +2,7 @@
 /**
 *
 * @package phpBB3
-* @version $Id: functions_display.php 9082 2008-11-22 20:26:09Z acydburn $
+* @version $Id: functions_display.php 9467 2009-04-17 16:10:39Z Kellanved $
 * @copyright (c) 2005 phpBB Group
 * @license http://opensource.org/licenses/gpl-license.php GNU Public License
 *
@@ -276,7 +276,7 @@ function display_forums($root_data = '', $display_moderators = true, $return_mod
 	// Handle marking posts
 	if ($mark_read == 'forums' || $mark_read == 'all')
 	{
-		$redirect = build_url('mark', 'hash');
+		$redirect = build_url(array('mark', 'hash'));
 		$token = request_var('hash', '');
 		if (check_link_hash($token, 'global'))
 		{
@@ -924,7 +924,7 @@ function topic_status(&$topic_row, $replies, $unread_topic, &$folder_img, &$fold
 */
 function display_custom_bbcodes()
 {
-	global $db, $template;
+	global $db, $template, $user;
 
 	// Start counting from 22 for the bbcode ids (every bbcode takes two ids - opening/closing)
 	$num_predefined_bbcodes = 22;
@@ -938,6 +938,12 @@ function display_custom_bbcodes()
 	$i = 0;
 	while ($row = $db->sql_fetchrow($result))
 	{
+		// If the helpline is defined within the language file, we will use the localised version, else just use the database entry...
+		if (isset($user->lang[strtoupper($row['bbcode_helpline'])]))
+		{
+			$row['bbcode_helpline'] = $user->lang[strtoupper($row['bbcode_helpline'])];
+		}
+
 		$template->assign_block_vars('custom_tags', array(
 			'BBCODE_NAME'		=> "'[{$row['bbcode_tag']}]', '[/" . str_replace('=', '', $row['bbcode_tag']) . "]'",
 			'BBCODE_ID'			=> $num_predefined_bbcodes + ($i * 2),
@@ -1105,9 +1111,7 @@ function display_user_activity(&$userdata)
 		'ACTIVE_TOPIC_POSTS'	=> ($active_t_count == 1) ? sprintf($user->lang['USER_POST'], 1) : sprintf($user->lang['USER_POSTS'], $active_t_count),
 		'ACTIVE_TOPIC_PCT'		=> sprintf($l_active_pct, $active_t_pct),
 		'U_ACTIVE_FORUM'		=> append_sid("{$phpbb_root_path}viewforum.$phpEx", 'f=' . $active_f_id),
-		// www.phpBB-SEO.com SEO TOOLKIT BEGIN
-		'U_ACTIVE_TOPIC'		=> append_sid("{$phpbb_root_path}viewtopic.$phpEx", (!empty($active_t_forum_id) ? "f=$active_t_forum_id&amp;" : '' ) . 't=' . $active_t_id),
-		// www.phpBB-SEO.com SEO TOOLKIT END
+		'U_ACTIVE_TOPIC'		=> append_sid("{$phpbb_root_path}viewtopic.$phpEx", 't=' . $active_t_id),
 		'S_SHOW_ACTIVITY'		=> true)
 	);
 }

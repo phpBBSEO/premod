@@ -2,7 +2,7 @@
 /**
 *
 * @package acp
-* @version $Id: acp_main.php 9171 2008-12-04 14:53:04Z acydburn $
+* @version $Id: acp_main.php 9351 2009-02-28 19:22:27Z acydburn $
 * @copyright (c) 2005 phpBB Group
 * @license http://opensource.org/licenses/gpl-license.php GNU Public License
 *
@@ -212,7 +212,6 @@ class acp_main
 						}
 
 						$step = ($config['num_posts']) ? (max((int) ($config['num_posts'] / 5), 20000)) : 20000;
-
 						$db->sql_query('UPDATE ' . USERS_TABLE . ' SET user_posts = 0');
 
 						while ($start < $max_post_id)
@@ -509,6 +508,12 @@ class acp_main
 		{
 			// World-Writable? (000x)
 			$template->assign_var('S_WRITABLE_CONFIG', (bool) (@fileperms($phpbb_root_path . 'config.' . $phpEx) & 0x0002));
+		}
+
+		// Fill dbms version if not yet filled
+		if (empty($config['dbms_version']))
+		{
+			set_config('dbms_version', $db->sql_server_info(true));
 		}
 
 		$this->tpl_name = 'acp_main';

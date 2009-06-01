@@ -7,6 +7,7 @@
 <meta http-equiv="content-style-type" content="text/css" />
 <meta http-equiv="imagetoolbar" content="no" />
 {META_TAG}
+<meta http-equiv="X-UA-Compatible" content="IE=EmulateIE7" />
 {META}
 <!-- BEGIN gym_rsslinks -->
 <link rel="alternate" type="application/rss+xml" title="{gym_rsslinks.TITLE}" href="{gym_rsslinks.URL}" />
@@ -41,7 +42,7 @@ function jumpto() {
 	var seo_delim_start = '{SEO_START_DELIM}';
 	var seo_static_pagination = '{SEO_SATIC_PAGE}';
 	var seo_ext_pagination = '{SEO_EXT_PAGE}';
-	if (page !== null && !isNaN(page) && page > 0) {
+	if (page !== null && !isNaN(page) && page == Math.floor(page) && page > 0) {
 		var seo_page = (page - 1) * perpage;
 		if ( base_url.indexOf('?') >= 0 ) {
 			document.location.href = base_url.replace(/&amp;/g, '&') + '&start=' + seo_page;

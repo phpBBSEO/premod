@@ -4,7 +4,7 @@
 * install [English]
 *
 * @package language
-* @version $Id: install.php 9177 2008-12-05 11:36:51Z acydburn $
+* @version $Id: install.php 9508 2009-05-03 11:18:08Z acydburn $
 * @copyright (c) 2005 phpBB Group
 * @license http://opensource.org/licenses/gpl-license.php GNU Public License
 *
@@ -79,7 +79,7 @@ $lang = array_merge($lang, array(
 	'CONTINUE_OLD_CONVERSION'	=> 'Continue previously started conversion',
 	'CONVERT'					=> 'Convert',
 	'CONVERT_COMPLETE'			=> 'Conversion completed',
-	'CONVERT_COMPLETE_EXPLAIN'	=> 'You have now successfully converted your board to phpBB 3.0. You can now login and <a href="../">access your board</a>. Please ensure that the settings were transferred correctly before enabling your board by deleting the install directory. Remember that help on using phpBB is available online via the <a href="http://www.phpbb.com/support/documentation/3.0/">Documentation</a> and the <a href="http://www.phpbb-seo.com/boards/phpbb-seo-premod-vf61/">support forums</a>.',
+	'CONVERT_COMPLETE_EXPLAIN'	=> 'You have now successfully converted your board to phpBB 3.0. You can now login and <a href="../">access your board</a>. Please ensure that the settings were transferred correctly before enabling your board by deleting the install directory. Remember that help on using phpBB is available online via the <a href="http://www.phpbb.com/support/documentation/3.0/">Documentation</a> and the <a href="http://www.phpbb.com/community/viewforum.php?f=46">support forums</a>.',
 	'CONVERT_INTRO'				=> 'Welcome to the phpBB Unified Convertor Framework',
 	'CONVERT_INTRO_BODY'		=> 'From here, you are able to import data from other (installed) board systems. The list below shows all the conversion modules currently available. If there is no convertor shown in this list for the board software you wish to convert from, please check our website where further conversion modules may be available for download.',
 	'CONVERT_NEW_CONVERSION'	=> 'New conversion',
@@ -188,10 +188,10 @@ $lang = array_merge($lang, array(
 		<h2>Convert an existing board to phpBB3</h2>
 		<p>The phpBB Unified Convertor Framework supports the conversion of phpBB 2.0.x and other board systems to phpBB3. If you have an existing board that you wish to convert, please <a href="%2$s">proceed on to the convertor</a>.</p>
 		<h2>Go live with your phpBB3!</h2>
-		<p>Clicking the button below will take you to your Administration Control Panel (ACP). Take some time to examine the options available to you. Remember that help is available online via the <a href="http://www.phpbb.com/support/documentation/3.0/">Documentation</a> and the <a href="http://www.phpbb-seo.com/boards/phpbb-seo-premod-vf61/">support forums</a>, see the <a href="%3$s">README</a> for further information.</p><p><strong>Please now delete, move or rename the install directory before you use your board. If this directory is still present, only the Administration Control Panel (ACP) will be accessible.</strong></p>',
+		<p>Clicking the button below will take you to your Administration Control Panel (ACP). Take some time to examine the options available to you. Remember that help is available online via the <a href="http://www.phpbb.com/support/documentation/3.0/">Documentation</a> and the <a href="http://www.phpbb.com/community/viewforum.php?f=46">support forums</a>, see the <a href="%3$s">README</a> for further information.</p><p><strong>Please now delete, move or rename the install directory before you use your board. If this directory is still present, only the Administration Control Panel (ACP) will be accessible.</strong></p>',
 	'INSTALL_INTRO'				=> 'Welcome to Installation',
 
-	'INSTALL_INTRO_BODY'		=> 'With this option, it is possible to install the phpBB SEO premod onto your server.</p><p>In order to proceed, you will need your database settings. If you do not know your database settings, please contact your host and ask for them. You will not be able to continue without them. You need:</p>
+	'INSTALL_INTRO_BODY'		=> 'With this option, it is possible to install phpBB3 onto your server.</p><p>In order to proceed, you will need your database settings. If you do not know your database settings, please contact your host and ask for them. You will not be able to continue without them. You need:</p>
 
 	<ul>
 		<li>The Database Type - the database you will be using.</li>
@@ -268,6 +268,8 @@ $lang = array_merge($lang, array(
 
 	'MAKE_FOLDER_WRITABLE'		=> 'Please make sure that this folder exists and is writable by the webserver then try again:<br />»<strong>%s</strong>.',
 	'MAKE_FOLDERS_WRITABLE'		=> 'Please make sure that these folders exist and are writable by the webserver then try again:<br />»<strong>%s</strong>.',
+
+	'MYSQL_SCHEMA_UPDATE_REQUIRED'	=> 'Your MySQL database schema for phpBB is outdated. phpBB detected a schema for MySQL 3.x/4.x, but the server runs on MySQL %2$s.<br /><strong>Before you proceed the update, you need to upgrade the schema.</strong><br /><br />Please refer to the <a href="http://www.phpbb.com/kb/article/doesnt-have-a-default-value-errors/">Knowledge Base article about upgrading the MySQL schema</a>. If you encounter problems, please use <a href="http://www.phpbb.com/community/viewforum.php?f=46">our support forums</a>.',
 
 	'NAMING_CONFLICT'			=> 'Naming conflict: %s and %s are both aliases<br /><br />%s',
 	'NEXT_STEP'					=> 'Proceed to next step',
@@ -381,7 +383,7 @@ $lang = array_merge($lang, array(
 	'COMPLETE_LOGIN_TO_BOARD'		=> 'You should now <a href="../ucp.php?mode=login">login to your board</a> and check if everything is working fine. Do not forget to delete, rename or move your install directory!',
 	'CONTINUE_UPDATE_NOW'			=> 'Continue the update process now',		// Shown within the database update script at the end if called from the updater
 	'CONTINUE_UPDATE'				=> 'Continue update now',					// Shown after file upload to indicate the update process is not yet finished
-	'CURRENT_FILE'					=> 'Beginning of current original file',
+	'CURRENT_FILE'					=> 'Begin of Conflict - Original File code before update',
 	'CURRENT_VERSION'				=> 'Current version',
 
 	'DATABASE_TYPE'						=> 'Database type',
@@ -391,7 +393,7 @@ $lang = array_merge($lang, array(
 	'DESTINATION'						=> 'Destination file',
 	'DIFF_INLINE'						=> 'Inline',
 	'DIFF_RAW'							=> 'Raw unified diff',
-	'DIFF_SEP_EXPLAIN'					=> 'End of current original file / Beginning of new updated file',
+	'DIFF_SEP_EXPLAIN'					=> 'Code block used within the updated/new file',
 	'DIFF_SIDE_BY_SIDE'					=> 'Side by Side',
 	'DIFF_UNIFIED'						=> 'Unified diff',
 	'DO_NOT_UPDATE'						=> 'Do not update this file',
@@ -399,6 +401,8 @@ $lang = array_merge($lang, array(
 	'DOWNLOAD'							=> 'Download',
 	'DOWNLOAD_AS'						=> 'Download as',
 	'DOWNLOAD_UPDATE_METHOD_BUTTON'		=> 'Download modified files archive (recommended)',
+	'DOWNLOAD_CONFLICTS'				=> 'Download conflicts for this file',
+	'DOWNLOAD_CONFLICTS_EXPLAIN'		=> 'Search for &lt;&lt;&lt; to spot conflicts',
 	'DOWNLOAD_UPDATE_METHOD'			=> 'Download modified files archive',
 	'DOWNLOAD_UPDATE_METHOD_EXPLAIN'	=> 'Once downloaded you should unpack the archive. You will find the modified files you need to upload to your phpBB root directory within it. Please upload the files to their respective locations then. After you have uploaded all files, please check the files again with the other button below.',
 
@@ -443,13 +447,13 @@ $lang = array_merge($lang, array(
 
 	'MERGE_NO_MERGE_NEW_OPTION'	=> 'Do not merge - use new file',
 	'MERGE_NO_MERGE_MOD_OPTION'	=> 'Do not merge - use currently installed file',
-	'MERGE_MOD_FILE_OPTION'		=> 'Merge differences and use modified code within conflicting block',
-	'MERGE_NEW_FILE_OPTION'		=> 'Merge differences and use new file code within conflicting block',
+	'MERGE_MOD_FILE_OPTION'		=> 'Merge modifications (Loose new phpBB code within conflicting block)',
+	'MERGE_NEW_FILE_OPTION'		=> 'Merge modifications (Loose modified code within conflicting block)',
 	'MERGE_SELECT_ERROR'		=> 'Conflicting file merge modes are not correctly selected.',
 	'MERGING_FILES'				=> 'Merging differences',
 	'MERGING_FILES_EXPLAIN'		=> 'Currently collecting final file changes.<br /><br />Please wait until phpBB has completed all operations on changed files.',
 
-	'NEW_FILE'						=> 'End of new updated file',
+	'NEW_FILE'						=> 'End of Conflict',
 	'NEW_USERNAME'					=> 'New username',
 	'NO_AUTH_UPDATE'				=> 'Not authorised to update',
 	'NO_ERRORS'						=> 'No errors',
@@ -523,7 +527,7 @@ $lang = array_merge($lang, array(
 		<p>The recommended way of updating your installation listed here is only valid for the automatic update package. You are also able to update your installation using the methods listed within the INSTALL.html document. The steps for updating phpBB3 automatically are:</p>
 
 		<ul style="margin-left: 20px; font-size: 1.1em;">
-			<li>Go to the <a href="http://www.phpbb-seo.com/boards/phpbb-seo-premod-vf61/" title="http://www.phpbb-seo.com/boards/phpbb-seo-premod-vf61/">support forum</a> and download the "Automatic Update Package" archive.<br /><br /></li>
+			<li>Go to the <a href="http://www.phpbb.com/downloads/" title="http://www.phpbb.com/downloads/">phpBB.com downloads page</a> and download the "Automatic Update Package" archive.<br /><br /></li>
 			<li>Unpack the archive.<br /><br /></li>
 			<li>Upload the complete uncompressed install folder to your phpBB root directory (where your config.php file is).<br /><br /></li>
 		</ul>

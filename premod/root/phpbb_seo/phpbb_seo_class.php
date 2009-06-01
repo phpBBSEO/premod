@@ -334,6 +334,7 @@ class phpbb_seo extends setup_phpbb_seo {
 	*/
 	function set_user_url( $username, $user_id = 0 ) {
 		if (empty($this->seo_url['user'][$user_id])) {
+			$username = strip_tags($username);
 			$this->seo_url['username'][$username] = $user_id;
 			if ( $this->seo_opt['profile_inj'] ) {
 				if ( $this->seo_opt['profile_noids'] ) {

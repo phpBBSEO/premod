@@ -2,7 +2,7 @@
 /**
 *
 * @package install
-* @version $Id: install_install.php 9041 2008-11-02 11:19:12Z acydburn $
+* @version $Id: install_install.php 9354 2009-03-02 02:33:15Z toonarmy $
 * @copyright (c) 2005 phpBB Group
 * @license http://opensource.org/licenses/gpl-license.php GNU Public License
 *
@@ -113,7 +113,7 @@ class install_install extends module
 				$db_tools = new phpbb_db_tools($db);
 				$db_tools->sql_column_add(TOPICS_TABLE, 'topic_url', array('VCHAR', ''));
 				$db_tools->sql_create_index(TOPICS_TABLE, 'topic_lpid', array('topic_last_post_id'));
-				set_config('seo_premod_version', '3.0.4');
+				set_config('seo_premod_version', '3.0.5');
 				// Remove the lock file
 				@unlink($phpbb_root_path . 'cache/install_lock');
 
@@ -551,7 +551,7 @@ class install_install extends module
 		{
 			if (!isset($available_dbms[$data['dbms']]) || !$available_dbms[$data['dbms']]['AVAILABLE'])
 			{
-				$error['db'][] = $lang['INST_ERR_NO_DB'];
+				$error[] = $lang['INST_ERR_NO_DB'];
 				$connect_test = false;
 			}
 			else
@@ -2124,7 +2124,7 @@ class install_install extends module
 		'Heritrix [Crawler]'		=> array('heritrix/1.', ''),
 		'IBM Research [Bot]'		=> array('ibm.com/cs/crawler', ''),
 		'ICCrawler - ICjobs'		=> array('ICCrawler - ICjobs', ''),
-		'ichiro [Crawler]'			=> array('ichiro/2', ''),
+		'ichiro [Crawler]'			=> array('ichiro/', ''),
 		'Majestic-12 [Bot]'			=> array('MJ12bot/', ''),
 		'Metager [Bot]'				=> array('MetagerBot/', ''),
 		'MSN NewsBlogs'				=> array('msnbot-NewsBlogs/', ''),
