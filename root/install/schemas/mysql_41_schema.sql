@@ -1,5 +1,5 @@
 #
-# $Id: mysql_41_schema.sql 9129 2008-11-27 13:44:24Z acydburn $
+# $Id: mysql_41_schema.sql 9400 2009-03-20 13:22:19Z acydburn $
 #
 
 # Table: 'phpbb_attachments'
@@ -49,7 +49,7 @@ CREATE TABLE phpbb_acl_options (
 	is_local tinyint(1) UNSIGNED DEFAULT '0' NOT NULL,
 	founder_only tinyint(1) UNSIGNED DEFAULT '0' NOT NULL,
 	PRIMARY KEY (auth_option_id),
-	KEY auth_option (auth_option)
+	UNIQUE auth_option (auth_option)
 ) CHARACTER SET `utf8` COLLATE `utf8_bin`;
 
 

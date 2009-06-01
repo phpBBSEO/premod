@@ -1,5 +1,5 @@
 #
-# $Id: firebird_schema.sql 9127 2008-11-26 19:58:35Z acydburn $
+# $Id: firebird_schema.sql 9400 2009-03-20 13:22:19Z acydburn $
 #
 
 
@@ -65,7 +65,7 @@ CREATE TABLE phpbb_acl_options (
 
 ALTER TABLE phpbb_acl_options ADD PRIMARY KEY (auth_option_id);;
 
-CREATE INDEX phpbb_acl_options_auth_option ON phpbb_acl_options(auth_option);;
+CREATE UNIQUE INDEX phpbb_acl_options_auth_option ON phpbb_acl_options(auth_option);;
 
 CREATE GENERATOR phpbb_acl_options_gen;;
 SET GENERATOR phpbb_acl_options_gen TO 0;;

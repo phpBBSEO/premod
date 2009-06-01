@@ -22,7 +22,8 @@ function popup(url, width, height, name)
 // www.phpBB-SEO.com SEO TOOLKIT BEGIN
 function jumpto() {
 	var page = prompt(jump_page, on_page);
-	if (page !== null && !isNaN(page) && page > 0) {
+
+	if (page !== null && !isNaN(page) && page == Math.floor(page) && page > 0) {
 		var seo_page = (page - 1) * per_page;
 		if ( base_url.indexOf('?') >= 0 ) {
 			document.location.href = base_url.replace(/&amp;/g, '&') + '&start=' + seo_page;
@@ -213,6 +214,12 @@ function selectCode(a)
 		// Firefox and Opera
 		else
 		{
+			// workaround for bug # 42885
+			if (window.opera && e.innerHTML.substring(e.innerHTML.length - 4) == '<BR>')
+			{
+				e.innerHTML = e.innerHTML + '&nbsp;';
+			}
+
 			var r = document.createRange();
 			r.selectNodeContents(e);
 			s.removeAllRanges();
