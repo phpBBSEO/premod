@@ -1,7 +1,7 @@
 <?php
 /** 
 *
-* @package Advanced phpBB3 SEO mod Rewrite
+* @package Advanced phpBB SEO mod Rewrite
 * @version $Id: phpbb_seo_class.php dcz Exp $
 * @copyright (c) 2006, 2007, 2008, 2009 dcz - www.phpbb-seo.com
 * @license http://www.opensource.org/licenses/rpl.php RPL Public License 
@@ -10,15 +10,14 @@
 /**
 * @ignore
 */
-if (!defined('IN_PHPBB'))
-{
+if (!defined('IN_PHPBB')) {
 	exit;
 }
 require($phpbb_root_path . "phpbb_seo/includes/setup_phpbb_seo.$phpEx");
 /**
 * phpBB_SEO Class
 * www.phpBB-SEO.com
-* @package Advanced phpBB3 SEO mod Rewrite
+* @package Ultimate SEO URL phpBB SEO
 */
 class phpbb_seo extends setup_phpbb_seo {
 	var	$version = '0.6.0';
