@@ -3,14 +3,20 @@
 *
 * @package Advanced phpBB SEO mod Rewrite
 * @version $Id: phpbb_seo_class.php 2007/08/30 13:48:48 dcz Exp $
-* @copyright (c) 2006, 2007 dcz - www.phpbb-seo.com
+* @copyright (c) 2006, 2007, 2008, 2009 dcz - www.phpbb-seo.com
 * @license http://www.opensource.org/licenses/rpl.php RPL Public License 
 *
 */
 /**
+* @ignore
+*/
+if (!defined('IN_PHPBB')) {
+	exit;
+}
+/**
 * phpBB_SEO Class
 * www.phpBB-SEO.com
-* @package Advanced phpBB3 SEO mod Rewrite
+* @package Ultimate SEO URL phpBB SEO
 */
 class acp_phpbb_seo {
 	var $u_action;
@@ -24,14 +30,12 @@ class acp_phpbb_seo {
 	var $lengh_limit = 20;
 	var $word_limit = 3;
 	var $seo_unset_opts = array();
-	/**
-	* Constructor
-	*/
+
 	function main($id, $mode) {
 		global $config, $db, $user, $auth, $template, $cache;
 		global $phpbb_root_path, $phpbb_admin_path, $phpEx, $table_prefix, $phpbb_seo;
 		// Start the phpbb_seo class
-		if ( !is_object($phpbb_seo) ) {
+		if ( empty($phpbb_seo) ) {
 			include_once($phpbb_root_path . 'phpbb_seo/phpbb_seo_class.' . $phpEx);
 			$phpbb_seo = new phpbb_seo();
 		}
@@ -188,10 +192,6 @@ class acp_phpbb_seo {
 				trigger_error('NO_MODE', E_USER_ERROR);
 			break;
 		}
-	//	if (isset($display_vars['lang']))
-	//	{
-	//		$user->add_lang($display_vars['lang']);
-	//	}
 		$error = array();
 		$seo_msg = array();
 		$cfg_array = (isset($_REQUEST['config'])) ? utf8_normalize_nfc(request_var('config', array('' => ''), true)) : $this->new_config;
@@ -391,7 +391,6 @@ class acp_phpbb_seo {
 			}
 			$html .= '<option value="' . $sel_value . '"' . $selected . '>' . $sel_title . '</option>';
 		}
-
 		return $html;
 	}
 	/**
@@ -886,7 +885,7 @@ class acp_phpbb_seo {
 		phpbb_chmod($file, CHMOD_READ | CHMOD_WRITE);
 		// Keep a backup of the current settings
 		@copy($file, $file . '.current');
-		return TRUE;
+		return true;
 	}
 } // End of acp class
 ?>

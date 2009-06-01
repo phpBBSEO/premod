@@ -1,7 +1,7 @@
 <?php
 /** 
 *
-* @package Advanced phpBB3 SEO mod Rewrite
+* @package Advanced phpBB SEO mod Rewrite
 * @version $Id: phpbb_seo_class.php dcz Exp $
 * @copyright (c) 2006, 2007, 2008, 2009 dcz - www.phpbb-seo.com
 * @license http://www.opensource.org/licenses/rpl.php RPL Public License 
@@ -10,14 +10,13 @@
 /**
 * @ignore
 */
-if (!defined('IN_PHPBB'))
-{
+if (!defined('IN_PHPBB')) {
 	exit;
 }
 /**
 * setup_phpbb_seo Class
 * www.phpBB-SEO.com
-* @package Advanced phpBB3 SEO mod Rewrite
+* @package Ultimate SEO URL phpBB SEO
 */
 class setup_phpbb_seo {
 	/**
@@ -40,7 +39,7 @@ class setup_phpbb_seo {
 		$this->seo_opt['zero_dupe']['start'] = 0; // do not change
 		$this->seo_opt['zero_dupe']['redir_def'] = array(); // do not change
 		// <-- Zero Dupe
-		// Let's load config and forum urls
+		// Let's load config and forum urls, mods adding options in the cache file must do it before
 		if ($this->check_cache()) {
 			foreach($this->cache_config['dynamic_options'] as $optionname => $optionvalue ) {
 				if (@is_array($this->cache_config['settings'][$optionname])) {
@@ -50,8 +49,8 @@ class setup_phpbb_seo {
 				}
 			}
 			$this->modrtype = @isset($this->seo_opt['modrtype']) ? $this->seo_opt['modrtype'] : $this->modrtype;
-			if ( $this->modrtype > 1 ) { // Load cached URLs	
-				$this->seo_url['forum'] = $this->cache_config['forum'];
+			if ( $this->modrtype > 1 ) { // Load cached URLs
+				$this->seo_url['forum'] =& $this->cache_config['forum'];
 			}
 		}
 		// ====> here starts the add-on and custom set up <====
@@ -112,15 +111,22 @@ class setup_phpbb_seo {
 	* Custom HTTP 301 redirections.
 	* To kill duplicates
 	*/
-	function seo_redirect($url, $header = '301 Moved Permanently', $code = 301, $replace = TRUE) {
+	function seo_redirect($url, $header = '301 Moved Permanently', $code = 301, $replace = true) {
 		global $db;
 		if (!$this->seo_opt['zero_dupe']['on'] || @headers_sent()) {
 			return false;
 		}
 		garbage_collection();
 		$url = str_replace('&amp;', '&', $url);
+		// Behave as redirect() for checks to provide with the same level of protection
 		// Make sure no linebreaks are there... to prevent http response splitting for PHP < 4.4.2
 		if (strpos(urldecode($url), "\n") !== false || strpos(urldecode($url), "\r") !== false || strpos($url, ';') !== false) {
+			trigger_error('Tried to redirect to potentially insecure url.', E_USER_ERROR);
+		}
+		// Now, also check the protocol and for a valid url the last time...
+		$allowed_protocols = array('http', 'https'/*, 'ftp', 'ftps'*/);
+		$url_parts = parse_url($url);
+		if ($url_parts === false || empty($url_parts['scheme']) || !in_array($url_parts['scheme'], $allowed_protocols)) {
 			trigger_error('Tried to redirect to potentially insecure url.', E_USER_ERROR);
 		}
 		$http = 'HTTP/1.1 ';
@@ -159,7 +165,6 @@ class setup_phpbb_seo {
 	*/
 	function seo_chk_dupe($url = '', $uri = '', $path = '') {
 		global $auth, $user, $_SID, $phpbb_root_path, $config;
-		static $global_defs;
 		if (empty($this->seo_opt['req_file']) || (!$this->seo_opt['rewrite_usermsg'] && $this->seo_opt['req_file'] == 'search') ) {
 			return false;
 		}
@@ -171,12 +176,9 @@ class setup_phpbb_seo {
 		$path = empty($path) ? $phpbb_root_path : $path;
 		$uri = !empty($uri) ? $uri : $this->seo_path['uri'];
 		$reg = !empty($user->data['is_registered']) ? true : false;
-		if (empty($url)) {;
-			$url = $this->expected_url($path);
-		} else {
-			$url = str_replace('&amp;', '&', append_sid($url, false, true, 0));
-		}
+		$url = empty($url) ? $this->expected_url($path) : str_replace('&amp;', '&', append_sid($url, false, true, 0));
 		$url = $this->drop_sid($url);
+		// Only add sid if user is registered and needs it to keep session
 		if (!empty($_GET['sid']) && !empty($_SID) && ($reg || !$this->seo_opt['rem_sid']) ) {
 			if ($_GET['sid'] == $user->session_id) {
 				$url .=  (utf8_strpos( $url, '?' ) !== false ? '&' : '?') . 'sid=' . $user->session_id;
@@ -185,10 +187,17 @@ class setup_phpbb_seo {
 		$url = str_replace( '%26', '&', urldecode($url));
 		if ($this->seo_opt['zero_dupe']['do_redir']) {
 			$this->seo_redirect($url);
-		} elseif ($this->seo_opt['zero_dupe']['strict']) {
-			return $this->seo_opt['zero_dupe']['go_redir'] && ( ($uri != $url) ? $this->seo_redirect($url) : false );
 		} else {
-			return $this->seo_opt['zero_dupe']['go_redir'] && ( (utf8_strpos( $uri, $url ) === false) ? $this->seo_redirect($url) : false );
+			$url_check = $url;
+			// we remove url hash for comparison, but keep it for redirect
+			if (strpos($url, '#') !== false) {
+				list($url_check, $hash) = explode('#', $url, 2);
+			}
+			if ($this->seo_opt['zero_dupe']['strict']) {
+				return $this->seo_opt['zero_dupe']['go_redir'] && ( ($uri != $url_check) ? $this->seo_redirect($url) : false );
+			} else {
+				return $this->seo_opt['zero_dupe']['go_redir'] && ( (utf8_strpos( $uri, $url_check ) === false) ? $this->seo_redirect($url) : false );
+			}
 		}
 	}
 	/**
@@ -224,9 +233,7 @@ class setup_phpbb_seo {
 	}
 	/**
 	* check start var consistency
-	* and return our best guess for $start, eg the first valid page 
-	* parameter according to pagination settings being lower
-	* than the one sent.
+	* Returns our best guess for $start, eg the first valid page
 	*/
 	function seo_chk_start($start = 0, $limit = 0) {
 		if ($limit > 0) {

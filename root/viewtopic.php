@@ -507,7 +507,7 @@ $phpbb_seo->seo_opt['zero_dupe']['start'] = $phpbb_seo->seo_chk_start( $start, $
 if ( $post_id && !$view && !$phpbb_seo->set_do_redir_post()) {
 	$phpbb_seo->seo_opt['zero_dupe']['redir_def'] = array(
 		'p' => array('val' => $post_id, 'keep' => true, 'force' => true, 'hash' => "p$post_id"),
-		'hilit' => array('val' => (($highlight_match) ? $highlight : ''), 'keep' => !empty($highlight)),
+		'hilit' => array('val' => (($highlight_match) ? $highlight : ''), 'keep' => !empty($highlight_match)),
 	);
 } else {
 	$seo_watch = request_var('watch', '');
