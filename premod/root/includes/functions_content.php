@@ -935,14 +935,16 @@ function parse_attachments($forum_id, &$message, &$attachments, &$update_count, 
 			$block_array += array(
 				'COMMENT_CLEAN'		=> $comment_clean,
 			);
-			if (empty($phpbb_seo->seo_url['file'][$attachment['attach_id']])) {
-				if (($_pos = utf8_strpos($comment, '<br')) !== false) {
-					$comment_url = strip_tags(utf8_substr($comment, 0, $_pos));
-				} else {
-					$comment_url = $comment_clean;
+			if (!empty($phpbb_seo->seo_opt['rewrite_files'])) {
+				if (empty($phpbb_seo->seo_url['file'][$attachment['attach_id']])) {
+					if (($_pos = utf8_strpos($comment, '<br')) !== false) {
+						$comment_url = strip_tags(utf8_substr($comment, 0, $_pos));
+					} else {
+						$comment_url = $comment_clean;
+					}
+					$comment_url = utf8_strlen($comment_url) > 60 ? utf8_substr($comment_url, 0, 60) : $comment_url; 
+					$phpbb_seo->seo_url['file'][$attachment['attach_id']] = $phpbb_seo->format_url($comment_url, $phpbb_seo->seo_static['file'][$display_cat]);
 				}
-				$comment_url = utf8_strlen($comment_url) > 60 ? utf8_substr($comment_url, 0, 60) : $comment_url; 
-				$phpbb_seo->seo_url['file'][$attachment['attach_id']] = $phpbb_seo->format_url($comment_url, $phpbb_seo->seo_static['file'][$display_cat]);
 			}
 			// www.phpBB-SEO.com SEO TOOLKIT END
 

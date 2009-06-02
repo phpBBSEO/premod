@@ -53,6 +53,12 @@ $lang = array_merge($lang, array(
 	'RSS' => 'RSS',
 	'RSS_ALTERNATE' => 'RSS alternate links',
 	'RSS_ALTERNATE_EXPLAIN' => 'Display or not RSS alternate links in browsers navigation bar',
+	'RSS_LINKING_TYPE' => 'RSS Linking Type',
+	'RSS_LINKING_TYPE_EXPLAIN' => 'The type of feed to display among the forum pages.<br/>Can be set to :<br/><b>&bull; News Feeds with or without content</b><br/>Items are displayed in the creation date order, with or without content,<br/><b>&bull; Regular Feeds with or without content</b><br/>Items are displayed in the last activity date order, with or without content.<br/>This only affects the link displayed, not the feeds actually available.',
+	'RSS_LINKING_NEWS' => 'News Feeds',
+	'RSS_LINKING_NEWS_DIGEST' => 'News Feeds with content',
+	'RSS_LINKING_REGULAR' => 'Regular Feeds',
+	'RSS_LINKING_REGULAR_DIGEST' => 'Regular Feeds with content',
 	// Reset settings
 	'RSS_MAIN_RESET' => 'RSS main options',
 	'RSS_MAIN_RESET_EXPLAIN' => 'Reset all the RSS main options to default values.',

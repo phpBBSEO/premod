@@ -537,7 +537,7 @@ class acp_phpbb_seo {
 				$htaccess_tpl .= '<b style="color:blue"># FORUM INDEX REWRITERULE WOULD STAND HERE IF USED. "forum" REQUIRES TO BE SET AS FORUM INDEX' . "\n";
 				$htaccess_tpl .= '# RewriteRule ^{WIERD_SLASH}{PHPBB_LPATH}<b style="color:#A020F0">forum</b>\.<b style="color:#6A5ACD">html</b>$ {DEFAULT_SLASH}{PHPBB_RPATH}index.{PHP_EX} [QSA,L,NC]</b>' . "\n";
 			}
-			$htaccess_common_tpl = '<b style="color:blue"># PHPBB FILES</b>' . "\n";
+			$htaccess_common_tpl = '<b style="color:blue"># PHPBB FILES ALL MODES</b>' . "\n";
 			$htaccess_common_tpl .= '<b style="color:green">RewriteRule</b> ^{WIERD_SLASH}{PHPBB_LPATH}{STATIC_FILES}{DELIM_FILES}[a-z0-9_-]+{DELIM_FILES}({STATIC_THUMB}{DELIM_FILES})?([0-9]+)$ {DEFAULT_SLASH}{PHPBB_RPATH}download/file.{PHP_EX}?id=$2&amp;t=$1 [QSA,L,NC]' . "\n";
 			if ( $phpbb_seo->seo_opt['profile_noids'] ) {
 				$htaccess_common_tpl .= '<b style="color:blue"># PROFILES THROUGH USERNAME</b>' . "\n";
@@ -578,16 +578,16 @@ class acp_phpbb_seo {
 				$htaccess_common_tpl .= '#####################################################</b>' . "\n\n";
 			}
 			// We now handle all modes at once (simple / mixed / advanced)
-			$htaccess_tpl .= '<b style="color:blue"># FORUM</b>' . "\n";
+			$htaccess_tpl .= '<b style="color:blue"># FORUM ALL MODES</b>' . "\n";
 			$htaccess_tpl .= '<b style="color:green">RewriteRule</b> ^{WIERD_SLASH}{PHPBB_LPATH}({STATIC_FORUM}|[a-z0-9_-]*{DELIM_FORUM})([0-9]+){FORUM_PAGINATION}$ {DEFAULT_SLASH}{PHPBB_RPATH}viewforum.{PHP_EX}?f=$2&amp;start=$4 [QSA,L,NC]' . "\n";
-			$htaccess_tpl .= '<b style="color:blue"># TOPIC WITH VIRTUAL FOLDER</b>' . "\n";
+			$htaccess_tpl .= '<b style="color:blue"># TOPIC WITH VIRTUAL FOLDER ALL MODES</b>' . "\n";
 			$htaccess_tpl .= '<b style="color:green">RewriteRule</b> ^{WIERD_SLASH}{PHPBB_LPATH}({STATIC_FORUM}|[a-z0-9_-]*{DELIM_FORUM})([0-9]+)/({STATIC_TOPIC}|[a-z0-9_-]*{DELIM_TOPIC})([0-9]+){TOPIC_PAGINATION}$ {DEFAULT_SLASH}{PHPBB_RPATH}viewtopic.{PHP_EX}?f=$2&amp;t=$4&amp;start=$6 [QSA,L,NC]' . "\n";
-			$htaccess_tpl .= '<b style="color:blue"># GLOBAL ANNOUNCES WITH VIRTUAL FOLDER</b>' . "\n";
+			$htaccess_tpl .= '<b style="color:blue"># GLOBAL ANNOUNCES WITH VIRTUAL FOLDER ALL MODES</b>' . "\n";
 			$htaccess_tpl .= '<b style="color:green">RewriteRule</b> ^{WIERD_SLASH}{PHPBB_LPATH}{STATIC_ANNOUNCES}{EXT_ANNOUNCES}({STATIC_TOPIC}|[a-z0-9_-]*{DELIM_TOPIC})([0-9]+){TOPIC_PAGINATION}$ {DEFAULT_SLASH}{PHPBB_RPATH}viewtopic.{PHP_EX}?t=$2&amp;start=$4 [QSA,L,NC]' . "\n";
-			$htaccess_tpl .= '<b style="color:blue"># TOPIC WITHOUT FORUM ID &amp; DELIM</b>' . "\n";
+			$htaccess_tpl .= '<b style="color:blue"># TOPIC WITHOUT FORUM ID &amp; DELIM ALL MODES</b>' . "\n";
 			$htaccess_tpl .= '<b style="color:green">RewriteRule</b> ^{WIERD_SLASH}{PHPBB_LPATH}([a-z0-9_-]*)/?({STATIC_TOPIC}|[a-z0-9_-]*{DELIM_TOPIC})([0-9]+){TOPIC_PAGINATION}$ {DEFAULT_SLASH}{PHPBB_RPATH}viewtopic.{PHP_EX}?forum_uri=$1&amp;t=$3&amp;start=$5 [QSA,L,NC]' . "\n";
 			$htaccess_tpl .= $htaccess_common_tpl;
-			$htaccess_tpl .= '<b style="color:blue"># FORUM WITHOUT ID &amp; DELIM</b>' . "\n";
+			$htaccess_tpl .= '<b style="color:blue"># FORUM WITHOUT ID &amp; DELIM ALL MODES (SAME DELIM)</b>' . "\n";
 			if ($phpbb_seo->seo_ext['forum'] != '/') {
 				$htaccess_tpl .= '<b style="color:blue"># THESE FOUR LINES MUST BE LOCATED AT THE END OF YOUR HTACCESS TO WORK PROPERLY</b>' . "\n";
 				$htaccess_tpl .= '<b style="color:green">RewriteCond</b> %{REQUEST_FILENAME} !-f' . "\n";

@@ -86,6 +86,7 @@ class acp_gym_sitemaps {
 			'all' => 'GYM_AUTH_ALL',
 			'none' => 'GYM_AUTH_NONE',
 		);
+		$this->dyn_select['rss_linking_types'] = array('n' => 'RSS_LINKING_NEWS', 'nd' => 'RSS_LINKING_NEWS_DIGEST', 'r' => 'RSS_LINKING_REGULAR', 'rd' => 'RSS_LINKING_REGULAR_DIGEST');
 		// Get the module list
 		// Populate the $this->gym_modules[$mode][$module] array
 		$this->gym_get_modules($mode);
@@ -220,6 +221,7 @@ $maction_param =
 			'L_MODULE_ITLE_EXPLAIN'	=> $l_module_title_explain,
 			'L_TITLE'		=> $l_title,
 			'L_TITLE_EXPLAIN'	=> $l_title_explain,
+			'GYM_VERSION'		=> $this->gym_config['gym_version'],
 			'INSTALL_LINK'		=> $install_link,
 			'MAINTENANCE_LINKS'	=> $maintenance_links,
 			'S_ERROR'		=> (sizeof($error)) ? true : false,

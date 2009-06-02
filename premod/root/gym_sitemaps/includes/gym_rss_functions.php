@@ -157,8 +157,12 @@ function get_gym_links($gym_config) {
 		$override_rss_gzip = get_override('rss', 'gzip', $gym_config);
 		$rss_gzip = (boolean) get_gym_option('rss', 'forum', 'gzip', $override_rss_gzip, $gym_config);
 		$rss_gzip_ext = ($rss_gzip || $config['gzip_compress']) ? (get_gym_option('rss', 'forum', 'gzip_ext', $override_rss_gzip, $gym_config) ? '.gz' : '') : '';
-		$rss_main_url = $gym_config['rss_url'] . ($rss_mod_rewrite ? 'rss/rss.xml' . $rss_gzip_ext : "gymrss.$phpEx");
-		$rss_chan_url = $gym_config['rss_url'] . ($rss_mod_rewrite ? 'rss/' : "gymrss.$phpEx?channels");
+		// Take car of linking type
+		$link_type_sep = $rss_mod_rewrite ? '/' : '&amp;';
+		$link_type_to_options = array('n' => 'news', 'nd' => 'news'. $link_type_sep . 'digest', 'r' => '', 'rd' => 'digest');
+		$link_type_bit = isset($link_type_to_options[$gym_config['rss_linking_type']]) ? $link_type_to_options[$gym_config['rss_linking_type']] : '';
+		$rss_main_url = $gym_config['rss_url'] . ($rss_mod_rewrite ? 'rss/' . ($link_type_bit ? $link_type_bit . '/' : '') . 'rss.xml' . $rss_gzip_ext : "gymrss.$phpEx" . ($link_type_bit ? '?' . $link_type_bit : ''));
+		$rss_chan_url = $gym_config['rss_url'] . ($rss_mod_rewrite ? 'rss/' . ($link_type_bit ? $link_type_bit . '/' : '') : "gymrss.$phpEx?channels" . ($link_type_bit ? '&amp;' . $link_type_bit : ''));
 		$links['setup']['rss'] = array(
 			'display_alternate' => (int) $gym_config['rss_alternate'],
 			'override_mod_rewrite' => $override_rss_mod_rewrite,
@@ -177,11 +181,12 @@ function get_gym_links($gym_config) {
 			$rss_forum_exclude = set_exclude_list($gym_config['rss_forum_exclude']) + $auth_guest_list['skip_all'] + $auth_guest_list['empty'];
 			$rss_forum_mod_rewrite = (boolean) get_gym_option('rss', 'forum', 'modrewrite', $override_rss_mod_rewrite, $gym_config);
 			$rss_forum_modrtype = max(0, (int) get_gym_option('rss', 'forum', 'modrtype', $override_rss_mod_rewrite, $gym_config));
+
 			$links['setup']['rss'] = array_merge( $links['setup']['rss'], 
 				array(
 					'display_forum_alternate' => (int) $gym_config['rss_forum_alternate'],
 					'forum_rss' => !empty($gym_config['rss_forum_installed']),
-					'forum_cat_rss' => $gym_config['rss_url'] . ($rss_forum_mod_rewrite && $_phpbb_seo ? ($rss_forum_modrtype > 1 ? "%1\$s/forum.xml$rss_gzip_ext" : "forum" . $phpbb_seo->seo_delim['forum'] . "%2\$s/forum.xml$rss_gzip_ext") : "gymrss.$phpEx?forum=%2\$s"),
+					'forum_cat_rss' => $gym_config['rss_url'] . ($rss_forum_mod_rewrite && $_phpbb_seo ? ($rss_forum_modrtype > 1 ? "%1\$s/" . ($link_type_bit ? $link_type_bit . '/' : '') . "forum.xml$rss_gzip_ext" : "forum" . $phpbb_seo->seo_delim['forum'] . "%2\$s/" . ($link_type_bit ? $link_type_bit . '/' : '') . "forum.xml$rss_gzip_ext") : "gymrss.$phpEx?forum=%2\$s" . ($link_type_bit ? '&amp;' . $link_type_bit : '')),
 					'auth_guest' => $rss_auth_guest,
 					'forum_exclude' => $rss_forum_exclude,
 					'forum_allow_auth' => $rss_forum_allow_auth,
