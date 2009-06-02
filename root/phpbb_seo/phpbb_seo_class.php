@@ -44,22 +44,7 @@ class phpbb_seo extends setup_phpbb_seo {
 	var	$url_in = '';
 	var	$url = '';
 	var	$page_url = '';
-	var	$seo_opt = array(
-			'url_rewrite' => false,
-			'modrtype' => 2, // We set it to mixed as a default value
-			'sql_rewrite' => false,
-			'profile_inj' => false,
-			'profile_vfolder' => false,
-			'profile_noids' => false,
-			'rewrite_usermsg' => false,
-			'rem_sid' => false,
-			'rem_hilit' => true,
-			'rem_small_words' => false,
-			'virtual_folder' => false,
-			'virtual_root' => false,
-			'cache_layer' => true,
-			'rem_ids' => false,
-		);
+	var	$seo_opt = array( 'url_rewrite' => false, 'modrtype' => 2, 'sql_rewrite' => false, 'profile_inj' => false, 'profile_vfolder' => false, 'profile_noids' => false, 'rewrite_usermsg' => false, 'rewrite_files' => false, 'rem_sid' => false, 'rem_hilit' => true, 'rem_small_words' => false, 'virtual_folder' => false, 'virtual_root' => false, 'cache_layer' => true, 'rem_ids' => false, );
 	var	$rewrite_method = array();
 	var	$paginate_method = array();
 	var	$seo_cache = array();
@@ -106,11 +91,11 @@ class phpbb_seo extends setup_phpbb_seo {
 		$script_path = (empty($script_path) ) ? '' : $script_path . '/';
 		$this->seo_path['root_url'] =  strtolower($server_protocol . $server_name . $server_port);
 		$this->seo_path['phpbb_urlR'] = $this->seo_path['phpbb_url'] =  $this->seo_path['root_url'] . $script_path;
-		$this->seo_path['phpbb_script'] =  $script_path;
-		$this->seo_path['phpbb_filesR'] = $this->seo_path['phpbb_url'] . $this->seo_static['file_index'] . $this->seo_delim['file'];
+		$this->seo_path['phpbb_script'] =  $script_path;	
 		$this->seo_path['phpbb_files'] = $this->seo_path['phpbb_url'] . 'download/';
 		// Load settings from phpbb_seo/includes/phpbb_seo_modules.php
 		$this->init_phpbb_seo();
+		$this->seo_path['phpbb_filesR'] = $this->seo_path['phpbb_url'] . $this->seo_static['file_index'] . $this->seo_delim['file'];
 		// see if we have some custom replacement
 		if (!empty($this->url_replace)) {
 			$this->url_replace = array( 
@@ -136,7 +121,7 @@ class phpbb_seo extends setup_phpbb_seo {
 			),
 			$this->rewrite_method[$phpbb_root_path]
 		);
-		$this->rewrite_method[$phpbb_root_path . 'download/']['file'] = 'phpbb_files';
+		$this->rewrite_method[$phpbb_root_path . 'download/']['file'] = $this->seo_opt['rewrite_files'] ? 'phpbb_files' : '';
 		$this->paginate_method = array_merge( 
 			array(
 				'topic' => $this->seo_ext['topic'] === '/' ? 'rewrite_pagination_page' : 'rewrite_pagination',
@@ -199,7 +184,7 @@ class phpbb_seo extends setup_phpbb_seo {
 			// Replace backslashes and doubled slashes (could happen on some proxy setups)
 			$this->seo_opt['req_self'] = str_replace(array('\\', '//'), '/', $script_name);
 			// basenamed page name (for example: index)
-			$this->seo_opt['req_file'] = urlencode(htmlspecialchars(str_replace('.' . $phpEx, '', basename($this->seo_opt['req_self']))));
+			$this->seo_opt['req_file'] = urlencode(htmlspecialchars(str_replace(".$phpEx", '', basename($this->seo_opt['req_self']))));
 		}
 		if ( $this->seo_opt['url_rewrite'] && !defined('ADMIN_START') && isset($this->file_hbase[$this->seo_opt['req_file']])) {	
 			$this->seo_opt['seo_base_href'] = '<base href="' . $this->file_hbase[$this->seo_opt['req_file']] . '"/>';

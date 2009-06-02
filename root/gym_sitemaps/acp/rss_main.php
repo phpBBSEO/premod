@@ -207,6 +207,7 @@ class rss_main {
 						'rss_lang' => array('lang' => 'RSS_LANG', 'validate' => 'string', 'type' => 'select', 'method' => 'select_string', 'explain' => true,),
 						'rss_url'	=> array('lang' => 'RSS_URL', 'validate' => 'string',	'type' => 'text:40:255', 'explain' => true),
 						'rss_alternate'	=> array('lang' => 'RSS_ALTERNATE', 'validate' => 'bool', 'type' => 'radio:yes_no', 'explain' => true),
+						'rss_linking_type'	=> array('lang' => 'RSS_LINKING_TYPE', 'validate' => 'string', 'type' => 'select', 'method' => 'select_string', 'explain' => true),
 						// Auth settings
 						'legend2'	=> 'RSS_AUTH_SETTINGS',
 						'rss_allow_auth' => array('lang' => 'RSS_ALLOW_AUTH', 'validate' => 'bool', 'type' => 'radio:yes_no', 'explain' => true),
@@ -229,6 +230,7 @@ class rss_main {
 					'rss_logo_url' => 'logo.gif',
 					'rss_image_url' => 'rss_forum_big.gif',
 					'rss_alternate' => 1,
+					'rss_linking_type' => 'n',
 					'rss_lang' => $config['default_lang'],
 					'rss_url' => $phpbb_seo->seo_path['phpbb_url'],
 					'rss_allow_auth' => 0,
@@ -243,6 +245,7 @@ class rss_main {
 				),
 				'select' => array( 
 					'rss_lang' => $user->lang['ISO_639_1'],
+					'rss_linking_type' => @$this->dyn_select['rss_linking_types'],
 
 				),
 			),
@@ -287,8 +290,6 @@ class rss_main {
 				),
 				'select' => array( 
 					'rss_sumarize_method' => @$this->dyn_select['sumarize_method'],
-					'rss_lang' => $user->lang['ISO_639_1'],
-
 				),
 			),
 			'info' => array(

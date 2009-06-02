@@ -54,6 +54,12 @@ $lang = array_merge($lang, array(
 	'RSS' => 'Flux RSS',
 	'RSS_ALTERNATE' => 'Liens alternate RSS',
 	'RSS_ALTERNATE_EXPLAIN' => 'Afficher ou nons les liens alternate RSS dans la barre de navigation des navigateurs',
+	'RSS_LINKING_TYPE' => 'Type de Liens RSS',
+	'RSS_LINKING_TYPE_EXPLAIN' => 'Le type de flux dont les liens seront affichés sur les pages du forum.<br/>Peut prendre les valeurs :<br/><b>&bull; Flux News avec ou sans contenu</b><br/>Les éléments sont affichés dans l’ordre de parution, avec ou sans contenu,<br/><b>&bull; Flux Standards avec ou sans contenu</b><br/>Les éléments sont affichés dans l’ordre modification, avec ou sans contenu.<br/>Cette option n’affecte que les liens affichés automatiquement, pas les flux effectivement disponibles.',
+	'RSS_LINKING_NEWS' => 'Flux News',
+	'RSS_LINKING_NEWS_DIGEST' => 'Flux News avec contenu',
+	'RSS_LINKING_REGULAR' => 'Flux Standards',
+	'RSS_LINKING_REGULAR_DIGEST' => 'Flux Standards avec contenu',
 	// Reset settings
 	'RSS_MAIN_RESET' => 'Options globales Flux RSS',
 	'RSS_MAIN_RESET_EXPLAIN' => 'Rétablir toutes les options par défaut des flux RSS.',

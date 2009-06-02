@@ -386,6 +386,9 @@ if ($debug_from_version === false)
 		WHERE config_name = 'version'";
 	_sql($sql, $errored, $error_ary);
 	// SEO premod
+	if (!$db_tools->sql_column_exists(TOPICS_TABLE, 'topic_url')) {
+		$db_tools->sql_column_add(TOPICS_TABLE, 'topic_url', array('VCHAR', ''));
+	}
 	set_config('seo_premod_version', '3.0.5');
 }
 
