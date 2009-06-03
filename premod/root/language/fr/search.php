@@ -5,7 +5,7 @@
 * translated originally by PhpBB-fr.com <http://www.phpbb-fr.com/> and phpBB.biz <http://www.phpBB.biz>
 *
 * @package language
-* @version $Id: search.php,v 1.23 2008/07/03 12:41:26 elglobo Exp $
+* @version $Id: search.php, v1.24 2009/05/27 22:05:00 Elglobo Exp $
 * @copyright (c) 2005 phpBB Group 
 * @license http://opensource.org/licenses/gpl-license.php GNU Public License 
 *
@@ -53,8 +53,9 @@ $lang = array_merge($lang, array(
 
 	'JUMP_TO_POST' => 'Aller au message',
 
-	'LOGIN_EXPLAIN_EGOSEARCH'	=> 'Vous devez être enregistré et connecté afin de voir vos propres messages.',
-
+	'LOGIN_EXPLAIN_EGOSEARCH'			=> 'Vous devez être enregistré et connecté afin de voir vos propres messages.',
+	'MAX_NUM_SEARCH_KEYWORDS_REFINE'	=> 'Vous avez spécifié un nombre de mots trop important à rechercher. N’entrez pas plus de %1$d mots.',
+	
 	'NO_KEYWORDS'   => 'Vous devez indiquer au moins un mot pour effectuer une recherche. Chaque mot doit se composer d’au moins %d caractères et ne doit pas en contenir plus de %d en excluant les jokers.',
 	'NO_RECENT_SEARCHES'   => 'Aucune recherche n’a été effectuée récemment.',
 	'NO_SEARCH'   => 'Désolé mais vous n’êtes pas autorisé à utiliser le système de recherche.',

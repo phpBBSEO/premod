@@ -5,7 +5,7 @@
 * translated originally by PhpBB-fr.com <http://www.phpbb-fr.com/> and phpBB.biz <http://www.phpBB.biz>
 *
 * @package language
-* @version $Id: common.php,v 1.23 2008/12/14 10:47:00 elglobo Exp $
+* @version $Id: common.php, v1.24 2009/05/27 21:27:00 Elglobo Exp $
 * @copyright (c) 2005 phpBB Group 
 * @license http://opensource.org/licenses/gpl-license.php GNU Public License 
 *
@@ -88,7 +88,7 @@ $lang = array_merge($lang, array(
 	'AVATAR_NO_SIZE'				=> 'Impossible de déterminer la largeur ou la hauteur de l’avatar lié, entrez-les manuellement',
 	'AVATAR_PARTIAL_UPLOAD'			=> 'Le fichier n’a pu être que partiellement transféré.',
 	'AVATAR_PHP_SIZE_NA'			=> 'La taille de l’avatar est trop importante.<br />La taille maximum réglée dans php.ini n’a pas pu être déterminée.',
-	'AVATAR_PHP_SIZE_OVERRUN'		=> 'La taille de l’avatar est trop importante. La taille maximum de transfert autorisée est %d Mo.<br />Notez que ce paramètre est inscrit dans php.ini et ne peut pas être dépassé.',
+	'AVATAR_PHP_SIZE_OVERRUN'		=> 'La taille de l’avatar est trop importante. La taille maximum de transfert autorisée est %1$d %2$s.<br />Notez que ce paramètre est inscrit dans php.ini et ne peut pas être dépassé.',
 	'AVATAR_URL_INVALID'			=> 'L’URL indiquée est invalide.',
 	'AVATAR_URL_NOT_FOUND'			=> 'Le fichier indiqué est introuvable.',
 	'AVATAR_WRONG_FILESIZE'			=> 'La taille de l’avatar doit être comprise entre 0 et %1d %2s.',
@@ -122,12 +122,12 @@ $lang = array_merge($lang, array(
 	'COLLAPSE_VIEW'			=> 'Réduire la vue',
 	'CLOSE_WINDOW'			=> 'Fermer la fenêtre',
 	'COLOUR_SWATCH'			=> 'Palette de couleurs',
-	'COMMA_SEPARATOR'		=> ', ',	// Used in pagination of ACP & prosilver, use localised comma if appropriate, eg: Ideographic or Arabic
+	'COMMA_SEPARATOR'		=> ', ',		// Used in pagination of ACP & prosilver, use localised comma if appropriate, eg: Ideographic or Arabic
 	'CONFIRM'				=> 'Confirmer',
 	'CONFIRM_CODE'			=> 'Code de confirmation',
 	'CONFIRM_CODE_EXPLAIN'	=> 'Entrez le code exactement comme vous le voyez dans l’image. Notez que le zéro n’existe pas et que le code n’est pas sensible à la casse.',
 	'CONFIRM_CODE_WRONG'	=> 'Le code de confirmation que vous avez entré est incorrect.',
-	'CONFIRM_OPERATION'		=> 'Etes-vous sûr de vouloir effectuer cette opération?',
+	'CONFIRM_OPERATION'		=> 'Êtes-vous sûr de vouloir effectuer cette opération?',
 	'CONGRATULATIONS'		=> 'Félicitations à',
 	'CONNECTION_FAILED'		=> 'La connexion a échouée.',
 	'CONNECTION_SUCCESS'	=> 'Vous êtes connecté!',
@@ -159,7 +159,7 @@ $lang = array_merge($lang, array(
 	'VIEWED_COUNT_NONE'		=> 'Pas encore vu',
 
 	'EDIT_POST'							=> 'Editer le message',
-	'EMAIL'								=> 'E-mail',
+	'EMAIL'								=> 'E-mail', 	// Short form for EMAIL_ADDRESS
 	'EMAIL_ADDRESS'						=> 'Adresse e-mail',
 	'EMAIL_SMTP_ERROR_RESPONSE'			=> 'Un problème est survenu lors de l’envoi de l’e-mail à la <strong>ligne %1$s</strong>. Réponse: %2$s.',
 	'EMPTY_SUBJECT'						=> 'Vous devez indiquer un titre pour poster un nouveau sujet.',
@@ -229,6 +229,8 @@ $lang = array_merge($lang, array(
 	'FTP_USERNAME_EXPLAIN'		=> 'Nom d’utilisateur utilisé pour se connecter à votre serveur.',
 
 	'GENERAL_ERROR'				=> 'Erreur générale',
+	'GB'						=> 'Go',
+	'GIB'						=> 'Gio',
 	'GO'						=> 'Aller',
 	'GOTO_PAGE'					=> 'Aller à la page',
 	'GROUP'						=> 'Groupe',
@@ -382,7 +384,7 @@ $lang = array_merge($lang, array(
 	'NO_ONLINE_USERS'			=> 'Aucun utilisateur enregistré',
 	'NO_POSTS'					=> 'Pas de message',
 	'NO_POSTS_TIME_FRAME'		=> 'Aucun message n’a été posté dans ce sujet pour la période indiquée.',
-	'NO_SUBJECT'				=> 'Aucun sujet indiqué',								// Used for posts having no subject defined but displayed within management pages.
+	'NO_SUBJECT'				=> 'Aucun sujet indiqué',			// Used for posts having no subject defined but displayed within management pages.
 	'NO_SUCH_SEARCH_MODULE'		=> 'La recherche indiquée n’existe pas.',
 	'NO_SUPPORTED_AUTH_METHODS'	=> 'Aucune méthode d’authentification supportée.',
 	'NO_TOPIC'					=> 'Le sujet demandé n’existe pas.',
@@ -440,7 +442,7 @@ $lang = array_merge($lang, array(
 	'POST_TOPIC'			=> 'Ecrire un nouveau sujet',
 	'POST_UNAPPROVED'		=> 'Ce message est en attente d’approbation',
 	'PREVIEW'				=> 'Aperçu',
-	'PREVIOUS'				=> 'Précédente',		// Used in pagination
+	'PREVIOUS'				=> 'Précédente',				// Used in pagination
 	'PREVIOUS_STEP'			=> 'Précédente',
 	'PRIVACY'				=> 'Politique de vie privée',
 	'PRIVATE_MESSAGE'		=> 'Message privé',
@@ -521,8 +523,8 @@ $lang = array_merge($lang, array(
 	'SELECT_ALL_CODE'			=> 'Tout sélectionner',
 	'SELECT_DESTINATION_FORUM'	=> 'Choisissez un forum de destination',
 	'SELECT_FORUM'				=> 'Sélectionner un forum',
-	'SEND_EMAIL'				=> 'Envoyer un e-mail',
-	'SEND_EMAIL_USER'			=> 'Envoyer un e-mail à',				// Used as: {L_SEND_EMAIL_USER} {USERNAME} -> E-mail UserX
+	'SEND_EMAIL'				=> 'Envoyer un e-mail',				// Used for submit buttons
+	'SEND_EMAIL_USER'			=> 'Envoyer un e-mail à',			// Used as: {L_SEND_EMAIL_USER} {USERNAME} -> E-mail UserX
 	'SEND_PRIVATE_MESSAGE'		=> 'Envoyer un message privé',
 	'SETTINGS'					=> 'Paramètres',
 	'SIGNATURE'					=> 'Signature',

@@ -1,10 +1,10 @@
 <?php
-/** 
+/**
 *
-* @package Advanced phpBB SEO mod Rewrite
-* @version $Id: phpbb_seo_class.php dcz Exp $
-* @copyright (c) 2006, 2007, 2008, 2009 dcz - www.phpbb-seo.com
-* @license http://www.opensource.org/licenses/rpl.php RPL Public License 
+* @package Ultimate SEO URL phpBB SEO
+* @version $id: phpbb_seo_class.php - 35345 06-03-2009 16:28:22 - 0.6.0 dcz $
+* @copyright (c) 2006 - 2009 www.phpbb-seo.com
+* @license http://www.opensource.org/licenses/rpl.php RPL Public License
 *
 */
 /**

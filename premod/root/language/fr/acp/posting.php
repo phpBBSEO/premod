@@ -5,7 +5,7 @@
 * translated originally by PhpBB-fr.com <http://www.phpbb-fr.com/> and phpBB.biz <http://www.phpBB.biz>
 *
 * @package language
-* @version $Id: posting.php,v 1.23 2008/11/14 11:53:00 EricSchreiner Exp $
+* @version $Id: posting.php, v1.24 2009/05/27 21:19:00 Elglobo Exp $
 * @copyright (c) 2005 phpBB Group 
 * @license http://opensource.org/licenses/gpl-license.php GNU Public License 
 *
@@ -185,7 +185,7 @@ $lang = array_merge($lang, array(
 
 // Word censors
 $lang = array_merge($lang, array(
-	'ACP_WORDS_EXPLAIN'		=> 'Depuis ce panneau de contrôle, vous pouvez ajouter, éditer et supprimer les mots qui seront automatiquement censurés sur votre forum. En outre, personne ne pourra s’inscrire avec un nom d’utilisateur contenant un de ces mots. Les jokers (*) sont acceptés dans le champ, exemple: *test* censurera détestable, test* censurera testament, *test censurera contest.',
+	'ACP_WORDS_EXPLAIN'		=> 'Depuis ce panneau de contrôle, vous pouvez ajouter, éditer et supprimer les mots qui seront automatiquement censurés sur votre forum. Les gens seront toujours autorisés à s’inscrire avec un nom d’utilisateur contenant ces mots. Les jokers (*) sont acceptés dans le champ, exemple: *test* censurera détestable, test* censurera testament, *test censurera contest.',
 	'ADD_WORD'				=> 'Ajouter un nouveau mot',
 
 	'EDIT_WORD'		=> 'Editer la censure',

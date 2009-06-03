@@ -5,7 +5,7 @@
 * translated originally by PhpBB-fr.com <http://www.phpbb-fr.com/> and phpBB.biz <http://www.phpBB.biz>
 *
 * @package language
-* @version $Id: posting.php,v 1.23 2008/11/14 13:56:00 elglobo Exp $
+* @version $Id: posting.php, v1.24 2009/05/27 22:03:00 Elglobo Exp $
 * @copyright (c) 2005 phpBB Group 
 * @license http://opensource.org/licenses/gpl-license.php GNU Public License 
 *
@@ -76,9 +76,9 @@ $lang = array_merge($lang, array(
 
 	'DELETE_FILE'				=> 'Supprimer le fichier',
 	'DELETE_MESSAGE'			=> 'Supprimer le message',
-	'DELETE_MESSAGE_CONFIRM'	=> 'Etes-vous sûr de vouloir supprimer ce message?',
+	'DELETE_MESSAGE_CONFIRM'	=> 'Êtes-vous sûr de vouloir supprimer ce message?',
 	'DELETE_OWN_POSTS'			=> 'Désolé, vous ne pouvez supprimer que vos propres messages.',
-	'DELETE_POST_CONFIRM'		=> 'Etes-vous sûr de vouloir supprimer ce message?',
+	'DELETE_POST_CONFIRM'		=> 'Êtes-vous sûr de vouloir supprimer ce message?',
 	'DISALLOWED_CONTENT' 		=> 'L’envoi a été rejeté car le fichier envoyé a été identifié comme un éventuel vecteur d’attaque.',
 	'DELETE_POST_WARN'			=> 'Une fois supprimé, le message ne pourra pas être récupéré',
 	'DISABLE_BBCODE'			=> 'Désactiver les BBCodes',
@@ -142,7 +142,7 @@ $lang = array_merge($lang, array(
 
 	'PARTIAL_UPLOAD'			=> 'Le fichier n’a été que partiellement transféré.',
 	'PHP_SIZE_NA'				=> 'La taille du fichier joint est trop grande.<br />Impossible de déterminer la taille maximale définie par PHP dans php.ini.',
-	'PHP_SIZE_OVERRUN'			=> 'La taille du fichier joint est trop grande, la taille maximale est de %d Mo.<br />Notez que ce paramètre se trouve dans php.ini et ne peut pas être outrepassé.',
+	'PHP_SIZE_OVERRUN'			=> 'La taille du fichier joint est trop grande, la taille maximale est de %1$d %2$s.<br />Notez que ce paramètre se trouve dans php.ini et ne peut pas être outrepassé.',
 	'PLACE_INLINE'				=> 'Insérer dans le message',
 	'POLL_DELETE'				=> 'Supprimer le sondage',
 	'POLL_FOR'					=> 'Durée du sondage',

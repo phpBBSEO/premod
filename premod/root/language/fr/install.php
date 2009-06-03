@@ -5,7 +5,7 @@
 * translated originally by PhpBB-fr.com <http://www.phpbb-fr.com/> and phpBB.biz <http://www.phpBB.biz>
 *
 * @package language
-* @version $Id: install.php,v 1.23 2008/12/14 10:50:00 elglobo Exp $
+* @version $Id: install.php, v1.24 2009/05/27 21:46:00 Elglobo Exp $
 * @copyright (c) 2005 phpBB Group 
 * @license http://opensource.org/licenses/gpl-license.php GNU Public License 
 *
@@ -80,7 +80,7 @@ $lang = array_merge($lang, array(
 	'CONTINUE_OLD_CONVERSION'	=> 'Continuer la conversion commencée précédemment',
 	'CONVERT'					=> 'Convertir',
 	'CONVERT_COMPLETE'			=> 'La conversion est terminée',
-	'CONVERT_COMPLETE_EXPLAIN'	=> 'Vous avez converti votre forum vers phpBB 3.0. Assurez-vous que les paramètres aient été correctement transférés avant d’activer votre forum en supprimant le répertoire install. Vous pouvez désormais vous connecter et <a href="../">accédez à votre forum</a>. Souvenez-vous que l’aide sur l’utilisation de phpBB est disponible dans le <a href="http://www.phpbb.com/support/documentation/3.0/">Guide de l’utilisateur</a> et le <a href="http://www.phpbb-seo.com/forums/">forum d’assistance</a>',
+	'CONVERT_COMPLETE_EXPLAIN'	=> 'Vous avez converti votre forum vers phpBB 3.0. Assurez-vous que les paramètres aient été correctement transférés avant d’activer votre forum en supprimant le répertoire install. Vous pouvez désormais vous connecter et <a href="../">accédez à votre forum</a>. Souvenez-vous que l’aide sur l’utilisation de phpBB est disponible dans le <a href="http://www.phpbb.com/support/documentation/3.0/">Guide de l’utilisateur</a> et le <a href="http://forums.phpbb-fr.com/">forum d’assistance</a>',
 	'CONVERT_INTRO'				=> 'Bienvenue sur la “phpBB Unified Convertor Framework”',
 	'CONVERT_INTRO_BODY'		=> 'D’ici, vous pouvez importer des données à partir d’autres systèmes de forum. La liste suivante montre tous les modules de conversion actuellement disponibles. Si le module de conversion de votre forum ne s’y trouve pas, visitez notre site Internet pour vérifier si le convertisseur est disponible.',
 	'CONVERT_NEW_CONVERSION'	=> 'Nouvelle conversion',
@@ -189,7 +189,7 @@ $lang = array_merge($lang, array(
       <h2>Convertir un forum existant vers phpBB3</h2>
       <p>Le processus de conversion de phpBB3 permet de convertir un forum phpBB2 et d’autres systèmes de forum en un forum phpBB3. Si vous avez déjà un forum installé, <a href="%2$s">convertissez-le</a>.</p>
       <h2>Utiliser votre forum maintenant!</h2>
-      <p>En cliquant sur le bouton ci-dessous, vous serez redirigé vers le panneau d’administration de votre forum. Prenez le temps d’examiner les différentes options disponibles. Une aide en ligne est accessible via <a href="http://www.phpbb.com/support/documentation/3.0/">la documentation </a> et le <a href="http://www.phpbb-seo.com/forums/premod-phpbb-seo-vf64/">forum de support</a>, consultez le fichier <a href="%3$s">Lisez-moi</a> pour plus d’informations.</p><p><strong>Effacez, renommez ou déplacez le répertoire install de votre FTP avant d’utiliser le forum. Si ce répertoire est présent, seul le panneau d’administration de votre forum sera disponible.</strong></p>',
+      <p>En cliquant sur le bouton ci-dessous, vous serez redirigé vers le panneau d’administration de votre forum. Prenez le temps d’examiner les différentes options disponibles. Une aide en ligne est accessible via <a href="http://www.phpbb.com/support/documentation/3.0/">la documentation </a> et le <a href="http://forums.phpbb-fr.com/">forum de support</a>, consultez le fichier <a href="%3$s">Lisez-moi</a> pour plus d’informations.</p><p><strong>Effacez, renommez ou déplacez le répertoire install de votre FTP avant d’utiliser le forum. Si ce répertoire est présent, seul le panneau d’administration de votre forum sera disponible.</strong></p>',
 	'INSTALL_INTRO'				=> 'Bienvenue dans l’installation',
 
 	'INSTALL_INTRO_BODY'		=> 'Avec cette option, il est possible d’installer phpBB3 sur votre serveur.</p><p>Pour cela, vous aurez besoin des paramètres de connexion à votre base de données. Si vous ne les connaissez pas, contactez votre fournisseur d’hébergement pour les lui demander. Vous ne pourrez pas continuer l’installation sans les paramètres suivants:</p>
@@ -270,6 +270,8 @@ $lang = array_merge($lang, array(
 	'MAKE_FOLDER_WRITABLE'   	=> 'Vérifiez que ce dossier existe et qu’il est autorisé en écriture par le serveur Web et recommencez:<br />»<strong>%s</strong>',
 	'MAKE_FOLDERS_WRITABLE'   	=> 'Vérifiez que ces dossiers existent et sont accessibles en écriture par le serveur Web et recommencez:<br />»<strong>%s</strong>',
 
+	'MYSQL_SCHEMA_UPDATE_REQUIRED'	=> 'Le schéma de votre base de données MySQL n’est pas à jour. phpBB a détecté un schéma pour MySQL 3.x/4.x, mais le serveur fonctionne avec MySQL %2$s.<br /><strong>Avant de procéder à la mise à jour, vous devez mettre à jour le schéma.</strong><br /><br />Consultez l’<a href="http://www.phpbb.com/kb/article/doesnt-have-a-default-value-errors/">article de la base de connaissances à propos de la mise à jour du schéma MySQL</a>. Utilisez <a href="http://www.phpbb.com/community/viewforum.php?f=46">les forums de support officiels</a> ou <a href="http://forums.phpbb-fr.com/support-phpbb3/">nos forums de support</a> si vous rencontrez des difficultés.',
+		
 	'NAMING_CONFLICT'   		=> 'Conflit de noms: %s et %s sont tous deux des alias<br /><br />%s',
 	'NEXT_STEP' 				=> 'Etape suivante',
 	'NOT_FOUND'   				=> 'Introuvable',
@@ -385,7 +387,7 @@ $lang = array_merge($lang, array(
 	'CONTINUE_UPDATE_NOW'			=> 'Continuer la procédure de mise à jour maintenant',	// Shown within the database update script at the end if called from the updater
 	'CONTINUE_UPDATE'				=> 'Continuer la mise à jour maintenant',				// Shown after file upload to indicate the update process is not yet finished
 	
-	'CURRENT_FILE'   				=> 'Début du fichier original actuel',
+	'CURRENT_FILE'   				=> 'Début du conflit - Code du fichier original avant la mise à jour',
 	'CURRENT_VERSION'   			=> 'Version actuelle',
 
 	'DATABASE_TYPE'						=> 'Type de base de données',
@@ -395,7 +397,7 @@ $lang = array_merge($lang, array(
 	'DESTINATION'						=> 'Fichier de destination',
 	'DIFF_INLINE'						=> 'Inclus',
 	'DIFF_RAW'							=> 'Modification unie brute',
-	'DIFF_SEP_EXPLAIN'					=> 'Fin du fichier original actuel / Début du nouveau fichier mis à jour',
+	'DIFF_SEP_EXPLAIN'					=> 'Bloc de code utilisé dans le fichier mis à jour ou le nouveau fichier',
 	'DIFF_SIDE_BY_SIDE'					=> 'Côte à côte',
 	'DIFF_UNIFIED'						=> 'Modification unie',
 	'DO_NOT_UPDATE'						=> 'Ne pas mettre à jour ce fichier',
@@ -403,6 +405,8 @@ $lang = array_merge($lang, array(
 	'DOWNLOAD'							=> 'Télécharger',
 	'DOWNLOAD_AS'						=> 'Télécharger sous',
 	'DOWNLOAD_UPDATE_METHOD_BUTTON' 	=> 'Télécharger l’archive des fichiers modifiés (recommandé)',
+	'DOWNLOAD_CONFLICTS'				=> 'Télécharger les conflits de ce fichier',
+	'DOWNLOAD_CONFLICTS_EXPLAIN'		=> 'Rechercher &lt;&lt;&lt; afin de repérer les conflits',
 	'DOWNLOAD_UPDATE_METHOD'			=> 'Télécharger une archive de fichiers modifiés',
 	'DOWNLOAD_UPDATE_METHOD_EXPLAIN'	=> 'Une fois téléchargée, vous devez décompresser l’archive. Vous y trouverez les fichiers modifiés que vous devez transférer dans votre répertoire à la racine de phpBB. Transférez les fichiers à leur emplacement respectif. Après avoir transféré tous les fichiers, vérifiez à nouveau les fichiers avec l’autre bouton ci-dessous.',
 
@@ -447,13 +451,13 @@ $lang = array_merge($lang, array(
 	
 	'MERGE_NO_MERGE_NEW_OPTION'	=> 'Ne pas fusionner - utiliser un nouveau fichier',
 	'MERGE_NO_MERGE_MOD_OPTION'	=> 'Ne pas fusionner - utiliser le fichier installé actuel',
-	'MERGE_MOD_FILE_OPTION'		=> 'Fusionner les différences et utiliser le code modifié dans le bloc en conflit',
-	'MERGE_NEW_FILE_OPTION'		=> 'Fusionner les différences et utiliser le code du nouveau fichier dans le bloc en conflit',
+	'MERGE_MOD_FILE_OPTION'		=> 'Fusionner les modifications (entraîne la perte du nouveau code de phpBB dans le bloc en conflit)',
+	'MERGE_NEW_FILE_OPTION'		=> 'Fusionner les modifications (entraîne la perte du code modifié dans le bloc en conflit)',
 	'MERGE_SELECT_ERROR'		=> 'Les modes du fichier fusionné en conflit ne sont pas correctement sélectionnés.',
 	'MERGING_FILES'				=> 'Fusion des différences',
 	'MERGING_FILES_EXPLAIN'		=> 'Collecte actuellement les modifications finales des fichiers.<br /><br />Patientez jusqu’à ce que phpBB termine toutes les opérations sur les fichiers modifiés.',
 
-	'NEW_FILE'						=> 'Fin du nouveau fichier mis à jour',
+	'NEW_FILE'						=> 'Fin du conflit',
 	'NEW_USERNAME'					=> 'Nouveau nom d’utilisateur',
 	'NO_AUTH_UPDATE'				=> 'Non autorisé à mettre à jour',
 	'NO_ERRORS'						=> 'Aucune erreur',

@@ -5,7 +5,7 @@
 * translated originally by PhpBB-fr.com <http://www.phpbb-fr.com/> and phpBB.biz <http://www.phpBB.biz>
 *
 * @package language
-* @version $Id: search.php,v 1.23 2008/12/14 10:46:00 elglobo Exp $
+* @version $Id: search.php, v1.24 2009/05/27 21:21:00 Elglobo Exp $
 * @copyright (c) 2005 phpBB Group 
 * @license http://opensource.org/licenses/gpl-license.php GNU Public License 
 *
@@ -73,6 +73,8 @@ $lang = array_merge($lang, array(
 	
 	'MAX_SEARCH_CHARS'						=> 'Caractères maximum indexés par la recherche',
 	'MAX_SEARCH_CHARS_EXPLAIN'				=> 'Seuls les mots inférieurs ou égaux à ce nombre de caractères seront indexés.',
+	'MAX_NUM_SEARCH_KEYWORDS'				=> 'Nombre maximum de mots clés autorisés',
+	'MAX_NUM_SEARCH_KEYWORDS_EXPLAIN'		=> 'Nombre maximum de mots que l’utilisateur est capable de rechercher. Une valeur à “0” autorise un nombre illimité de mots.',
 	'MIN_SEARCH_CHARS'						=> 'Caractères minimum indexés par la recherche',
 	'MIN_SEARCH_CHARS_EXPLAIN'				=> 'Seuls les mots supérieurs ou égaux à ce nombre de caractères seront indexés.',
 	'MIN_SEARCH_AUTHOR_CHARS'				=> 'Caractères minimum du nom de l’auteur',

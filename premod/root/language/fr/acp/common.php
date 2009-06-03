@@ -5,7 +5,7 @@
 * translated originally by PhpBB-fr.com <http://www.phpbb-fr.com/> and phpBB.biz <http://www.phpBB.biz>
 *
 * @package language
-* @version $Id: common.php,v 1.23 2008/11/14 11:42:00 Elglobo Exp $
+* @version $Id: common.php, v1.24 2009/05/27 21:09:00 Elglobo Exp $
 * @copyright (c) 2005 phpBB Group 
 * @license http://opensource.org/licenses/gpl-license.php GNU Public License 
 *
@@ -201,7 +201,7 @@ $lang = array_merge($lang, array(
 	'ADMIN'					=> 'Administration',
 	'ADMIN_INDEX'			=> 'Index de l’administration',
 	'ADMIN_PANEL'			=> 'Panneau d’administration',
-	'ADM_LOGOUT' 			=> 'Déconnexion de l’ACP',
+	'ADM_LOGOUT' 			=> 'Déconnexion&nbsp;ACP',
 	'ADM_LOGGED_OUT' 		=> 'Vous avez été déconnecté du panneau d’administration',
 
 	'BACK'					=> 'Retour',
@@ -331,21 +331,21 @@ $lang = array_merge($lang, array(
 	'POSTS_PER_DAY'		=> 'Moyenne journalière de messages',
 
 	'PURGE_CACHE'			=> 'Vider le cache',
-	'PURGE_CACHE_CONFIRM'	=> 'Etes-vous sûr de vouloir vider le cache?',
+	'PURGE_CACHE_CONFIRM'	=> 'Êtes-vous sûr de vouloir vider le cache?',
 	'PURGE_CACHE_EXPLAIN'	=> 'Vide tous les fichiers du cache, cela inclut tous les fichiers ou requêtes des templates mis en cache.',
 
 	'RESET_DATE'					=> 'Réinitialiser la date d’ouverture du forum',
-	'RESET_DATE_CONFIRM'			=> 'Etes-vous sûr de vouloir réinitialiser la date d’ouverture du forum?',
+	'RESET_DATE_CONFIRM'			=> 'Êtes-vous sûr de vouloir réinitialiser la date d’ouverture du forum?',
 	'RESET_ONLINE'					=> 'Réinitialiser le record des utilisateurs connectés',
-	'RESET_ONLINE_CONFIRM'			=> 'Etes-vous sûr de vouloir réinitialiser le record des utilisateurs connectés?',
+	'RESET_ONLINE_CONFIRM'			=> 'Êtes-vous sûr de vouloir réinitialiser le record des utilisateurs connectés?',
 	'RESYNC_POSTCOUNTS'				=> 'Resynchroniser les compteurs de message',
 	'RESYNC_POSTCOUNTS_EXPLAIN'		=> 'Seuls les messages existants seront pris en compte. Les messages délestés ne seront pas pris en compte.',
-	'RESYNC_POSTCOUNTS_CONFIRM'		=> 'Etes-vous sûr de vouloir resynchroniser les compteurs de message d’utilisateur?',
+	'RESYNC_POSTCOUNTS_CONFIRM'		=> 'Êtes-vous sûr de vouloir resynchroniser les compteurs de message d’utilisateur?',
 	'RESYNC_POST_MARKING'			=> 'Resynchroniser les sujets pointés',
-	'RESYNC_POST_MARKING_CONFIRM'	=> 'Etes-vous sûr de vouloir resynchroniser les sujets pointés?',
+	'RESYNC_POST_MARKING_CONFIRM'	=> 'Êtes-vous sûr de vouloir resynchroniser les sujets pointés?',
 	'RESYNC_POST_MARKING_EXPLAIN'	=> 'Décoche tous les sujets et coche correctement les sujets ayant eus une activité durant les six derniers mois.',
 	'RESYNC_STATS'					=> 'Resynchroniser les statistiques',
-	'RESYNC_STATS_CONFIRM'			=> 'Etes-vous sûr de vouloir resynchroniser les statistiques?',
+	'RESYNC_STATS_CONFIRM'			=> 'Êtes-vous sûr de vouloir resynchroniser les statistiques?',
 	'RESYNC_STATS_EXPLAIN'			=> 'Recalcule le nombre total de messages, sujets, utilisateurs et fichiers joints.',
 	'RUN'							=> 'Exécuter maintenant',
 
@@ -526,7 +526,7 @@ $lang = array_merge($lang, array(
 	'LOG_FORUM_SYNC'						=> '<strong>Resynchronisation d’un forum</strong><br />» %s',
 
 	'LOG_GROUP_CREATED'		=> '<strong>Création d’un nouveau groupe</strong><br />» %s',
-	'LOG_GROUP_DEFAULTS'	=> '<strong>Groupe par défaut pour le membre</strong><br />» %s',
+	'LOG_GROUP_DEFAULTS'   => '<strong>Groupe “%1$s” par défaut pour le membre</strong><br />» %2$s',
 	'LOG_GROUP_DELETE'		=> '<strong>Suppression d’un groupe</strong><br />» %s',
 	'LOG_GROUP_DEMOTED'		=> '<strong>Rétrogradation d’un chef dans le groupe</strong> %1$s<br />» %2$s',
 	'LOG_GROUP_PROMOTED'	=> '<strong>Promotion d’un membre en chef de groupe</strong> %1$s<br />» %2$s',
@@ -538,7 +538,7 @@ $lang = array_merge($lang, array(
 
 	'LOG_IMAGESET_ADD_DB'			=> '<strong>Ajout d’un pack d’images dans la base de données</strong><br />» %s',
 	'LOG_IMAGESET_ADD_FS'			=> '<strong>Ajout d’un pack d’images dans le système de fichiers</strong><br />» %s',
-	'LOG_IMAGESET_DELETE'			=> '<strong>Suppression d’un pack d’images/b><br />» %s',
+	'LOG_IMAGESET_DELETE'			=> '<strong>Suppression d’un pack d’images</strong><br />» %s',
 	'LOG_IMAGESET_EDIT_DETAILS'		=> '<strong>Edition des informations d’un pack d’images</strong><br />» %s',
 	'LOG_IMAGESET_EDIT'				=> '<strong>Edition d’un pack d’images</strong><br />» %s',
 	'LOG_IMAGESET_EXPORT'			=> '<strong>Export d’un pack d’images</strong><br />» %s',

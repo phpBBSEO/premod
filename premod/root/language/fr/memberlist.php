@@ -5,7 +5,7 @@
 * translated originally by PhpBB-fr.com <http://www.phpbb-fr.com/> and phpBB.biz <http://www.phpBB.biz>
 *
 * @package language
-* @version $Id: memberlist.php,v 1.23 2008/07/03 17:17:20 elglobo Exp $
+* @version $Id: memberlist.php, v1.24 2009/06/01 23:15:00 Elglobo Exp $
 * @copyright (c) 2005 phpBB Group 
 * @license http://opensource.org/licenses/gpl-license.php GNU Public License 
 *
@@ -59,7 +59,7 @@ $lang = array_merge($lang, array(
    'EMPTY_NAME_EMAIL'   => 'Vous devez entrer le nom réel du destinataire.',
    'EMPTY_SUBJECT_EMAIL'   => 'Vous devez indiquer un sujet pour l’e-mail.',
    'EQUAL_TO'   => 'Egal à',
-   'FIND_USERNAME_EXPLAIN'   => 'Utilisez ce formulaire pour rechercher un membre. Vous n’avez pas besoin de compléter tous les champs. Pour effectuer une recherche partielle, utilisez un * comme joker. Utilisez le format de date <kbd>AAAA-MM-JJ</kbd>, par exemple: <samp>2004-02-29</samp>. Utilisez les cases à cocher pour sélectionner un ou plusieurs noms d’utilisateurs (plusieurs noms d’utilisateurs peuvent être acceptés selon le formulaire lui-même) puis cliquez sur “Insérer la sélection” pour retourner au formulaire précédent.',
+   'FIND_USERNAME_EXPLAIN'   => 'Utilisez ce formulaire pour rechercher un membre. Vous n’avez pas besoin de compléter tous les champs. Pour effectuer une recherche partielle, utilisez un * comme joker. Utilisez le format de date <kbd>AAAA-MM-JJ</kbd>, par exemple: <samp>2004-02-29</samp>. Utilisez les cases à cocher pour sélectionner un ou plusieurs noms d’utilisateurs (plusieurs noms d’utilisateurs peuvent être acceptés selon le formulaire lui-même) puis cliquez sur “Valider la sélection” pour retourner au formulaire précédent.',
    'FLOOD_EMAIL_LIMIT'   => 'Vous ne pouvez pas envoyer un autre e-mail si rapidement. Réessayez à nouveau dans quelques instants.',
    'GROUP_LEADER'   => 'Modérateur du groupe',
    'HIDE_MEMBER_SEARCH'   => 'Cacher la recherche des membres',

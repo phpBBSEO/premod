@@ -5,7 +5,7 @@
 * translated originally by PhpBB-fr.com <http://www.phpbb-fr.com/> and phpBB.biz <http://www.phpBB.biz>
 *
 * @package language
-* @version $Id: database.php,v 1.23 2007/11/22 11:28:44 elglobo Exp $
+* @version $Id: database.php, v1.24 2007/11/22 11:28:44 Elglobo Exp $
 * @copyright (c) 2005 phpBB Group 
 * @license http://opensource.org/licenses/gpl-license.php GNU Public License 
 *
@@ -50,7 +50,7 @@ $lang = array_merge($lang, array(
 	'DATABASE'			=> 'Utilitaires de base de données',
 	'DATA_ONLY'			=> 'Données seulement',
 	'DELETE_BACKUP'		=> 'Effacer la sauvegarde',
-	'DELETE_SELECTED_BACKUP'	=> 'Etes-vous sûr de vouloir supprimer la sauvegarde de la base de données?',
+	'DELETE_SELECTED_BACKUP'	=> 'Êtes-vous sûr de vouloir supprimer la sauvegarde de la base de données?',
 	'DESELECT_ALL'		=> 'Tout désélectionner',
 	'DOWNLOAD_BACKUP'	=> 'Télécharger la sauvegarde',
 
