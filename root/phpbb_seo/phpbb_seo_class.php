@@ -89,9 +89,9 @@ class phpbb_seo extends setup_phpbb_seo {
 		$server_port = ($server_port && $server_port <> 80) ? ':' . $server_port : '';
 		$script_path = trim($config['script_path'], '/ ');
 		$script_path = (empty($script_path) ) ? '' : $script_path . '/';
-		$this->seo_path['root_url'] =  strtolower($server_protocol . $server_name . $server_port);
+		$this->seo_path['root_url'] = strtolower($server_protocol . $server_name . $server_port);
 		$this->seo_path['phpbb_urlR'] = $this->seo_path['phpbb_url'] =  $this->seo_path['root_url'] . $script_path;
-		$this->seo_path['phpbb_script'] =  $script_path;	
+		$this->seo_path['phpbb_script'] = $script_path;	
 		$this->seo_path['phpbb_files'] = $this->seo_path['phpbb_url'] . 'download/';
 		// Load settings from phpbb_seo/includes/phpbb_seo_modules.php
 		$this->init_phpbb_seo();
@@ -245,7 +245,7 @@ class phpbb_seo extends setup_phpbb_seo {
 		return empty($url) ? $type : $url;
 	}
 	/**
-	* set_url( $url, $id = 0, $type = 'forum' )
+	* set_url( $url, $id = 0, $type = 'forum', $parent = '' )
 	* Prepare url first part and checks cache
 	*/
 	function set_url( $url, $id = 0, $type = 'forum',  $parent = '') {

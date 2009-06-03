@@ -30,6 +30,7 @@ class phpbb_seo {
 	var	$seo_opt = array();
 	var	$modrtype = -1;
 	var	$sftpl = array();
+	var	$RegEx = array();
 	/**
 	* constuctor
 	*/
@@ -56,26 +57,32 @@ class phpbb_seo {
 			'virtual_folder' => false,
 			'virtual_root' => false,
 		);
-		$this->seo_opt['url_pattern'] = array('`&(amp;)?#?[a-z0-9]+;`i', '`[^a-z0-9]`i'); // Do not remove : html/xml entities & non a-z chars
+		$this->RegEx['url_find'] = array('`&([a-z]+)(acute|grave|circ|cedil|tilde|uml|lig|ring|caron|slash);`i', '`&(amp;)?[^;]+;`i', '`[^a-z0-9]`i'); // Do not remove : deaccentuation, html/xml entities & non a-z chars
+		$this->RegEx['url_replace'] = array('\1', '-', '-');
 		if ($this->seo_opt['rem_small_words']) {
-			$this->seo_opt['url_pattern'][] = '`(^|-)[a-z0-9]{1,2}(?=-|$)`i';
+			$this->RegEx['url_find'][] = '`(^|-)[a-z0-9]{1,2}(?=-|$)`i';
+			$this->RegEx['url_replace'][] = '-';
 		}
-		$this->seo_opt['url_pattern'][] ='`[-]+`'; // Do not remove : multi hyphen reduction
+		$this->RegEx['url_find'][] ='`[-]+`'; // Do not remove : multi hyphen reduction
+		$this->RegEx['url_replace'][] = '-';
 		$this->sftpl = array(
-			'topic' => ($this->seo_opt['virtual_folder'] ? '%1$s/' : '') . ($this->modrtype >= 2 ? '%2$s' . $this->seo_delim['topic'] . '%3$s' : $this->seo_static['topic'] . '%3$s'), 
-			'forum' => $this->modrtype >= 2 ? '%2$s' : $this->seo_static['forum'] . '%3$s',
+				'topic' => ($this->seo_opt['virtual_folder'] ? '%1$s/' : '') . '%2$s' . $this->seo_delim['topic'] . '%3$s',
+				'topic_smpl' => ($this->seo_opt['virtual_folder'] ? '%1$s/' : '') . $this->seo_static['topic'] . '%3$s',
+				'forum' => $this->modrtype >= 2 ? '%2$s' : $this->seo_static['forum'] . '%3$s',
+				'group' => $this->seo_opt['profile_inj'] ? '%2$s' . $this->seo_delim['group'] . '%3$s' : $this->seo_static['group'] . '%3$s',
 		);
 		// --> DOMAIN SETTING <-- //
+// --> DOMAIN SETTING <-- //
 		// Path Settings, only rely on DB
 		$server_protocol = ($config['server_protocol']) ? $config['server_protocol'] : (($config['cookie_secure']) ? 'https://' : 'http://');
 		$server_name = trim($config['server_name'], '/') . '/';
-		$server_port = (int) $config['server_port'];
-		$server_port = ($server_port <> 80) ? ':' . $server_port : '';
-		$script_path = trim($config['script_path'], '/');
+		$server_port = max(0, (int) $config['server_port']);
+		$server_port = ($server_port && $server_port <> 80) ? ':' . $server_port : '';
+		$script_path = trim($config['script_path'], '/ ');
 		$script_path = (empty($script_path) ) ? '' : $script_path . '/';
-		$this->seo_path['root_url'] =  $server_protocol . $server_name;
+		$this->seo_path['root_url'] = strtolower($server_protocol . $server_name . $server_port);
 		$this->seo_path['phpbb_urlR'] = $this->seo_path['phpbb_url'] =  $this->seo_path['root_url'] . $script_path;
-		$this->seo_path['phpbb_script'] =  $script_path;
+		$this->seo_path['phpbb_script'] = $script_path;
 		// File setting
 		$this->seo_req_uri();
 		$this->seo_opt['seo_base_href'] = $this->seo_opt['req_file'] = $this->seo_opt['req_self'] = '';
@@ -101,54 +108,50 @@ class phpbb_seo {
 	* Prepare Titles for URL injection
 	*/
 	function format_url( $url, $type = 'topic' ) {
-		$url = preg_replace('`\[.*\]`U','', $url);
-		$url = htmlentities($url, ENT_COMPAT, 'utf-8');
-		$url = preg_replace( '`&([a-z]+)(acute|uml|circ|grave|ring|cedil|slash|tilde|caron|lig);`i', "\\1", $url );
-		$url = preg_replace( $this->seo_opt['url_pattern'] , '-', $url);
+		$url = preg_replace('`\[.*\]`U','',$url);
+		$url = htmlentities($url, ENT_COMPAT, 'UTF-8');
+		$url = preg_replace($this->RegEx['url_find'] , $this->RegEx['url_replace'], $url);
 		$url = strtolower(trim($url, '-'));
 		return empty($url) ? $type : $url;
 	}
 	/**
-	* set_url( $url, $id = 0, $type = 'forum' )
+	* set_url( $url, $id = 0, $type = 'forum', $parent = '' )
 	* Prepare url first part and checks cache
 	*/
-	function set_url( $url, $id = 0, $type = 'forum' ) {
+	function set_url( $url, $id = 0, $type = 'forum',  $parent = '') {
 		if ( empty($this->seo_url[$type][$id]) ) {
-			return ( $this->seo_url[$type][$id] = !empty($this->cache_config[$type][$id]) ? $this->cache_config[$type][$id] : $this->format_url( $url, $type ) . $this->seo_delim[$type] . $id );
+			return ( $this->seo_url[$type][$id] = !empty($this->cache_config[$type][$id]) ? $this->cache_config[$type][$id] : sprintf($this->sftpl[$type], $parent, $this->format_url($url, $this->seo_static[$type]) . $this->seo_delim[$type] . $id, $id) );
 		}
 		return $this->seo_url[$type][$id];
 	}
 	/**
-	* prepare_url( $type, $title, $id, $parent = '' )
+	* prepare_url( $type, $title, $id, $parent = '', $smpl = false )
 	* Prepare url first part
 	*/
-	function prepare_url( $type, $title, $id, $parent = '' ) {
-		return empty($this->seo_url[$type][$id]) ? ($this->seo_url[$type][$id] = sprintf($this->sftpl[$type], $parent, $this->format_url($title, $this->seo_static[$type]), $id)) : $this->seo_url[$type][$id];
+	function prepare_url( $type, $title, $id, $parent = '', $smpl = false ) {
+		return empty($this->seo_url[$type][$id]) ? ($this->seo_url[$type][$id] = sprintf($this->sftpl[$type . ($smpl ? '_smpl' : '')], $parent, !$smpl ? $this->format_url($title, $this->seo_static[$type]) : '', $id)) : $this->seo_url[$type][$id];
 	}
 	/**
 	* set_title( $type, $title, $id, $parent = '' )
 	* Set title for url injection
 	*/
 	function set_title( $type, $title, $id, $parent = '' ) {
-		return empty($this->seo_url[$type][$id]) ? ($this->seo_url[$type][$id] = $parent . $this->format_url($title, $this->seo_static[$type])) : $this->seo_url[$type][$id];
+		return empty($this->seo_url[$type][$id]) ? ($this->seo_url[$type][$id] = ($parent ? $parent . '/' : '') . $this->format_url($title, $this->seo_static[$type])) : $this->seo_url[$type][$id];
 	}
 	/**
 	* prepare_iurl( $data, $type, $parent = '' )
-	* Prepare url first part with SQL based URL rewriting
+	* Prepare url first part (not for forums) with SQL based URL rewriting
 	*/
 	function prepare_iurl( $data, $type, $parent = '' ) {
-		static $titles_key = array( 'topic' => 'topic_title', 'forum' => 'forum_name');
-		$id = max(0, (int) @$data[$type . '_id']);
+		$id = max(0, (int) $data[$type . '_id']);
 		if ( empty($this->seo_url[$type][$id]) ) {
 			if (!empty($data[$type . '_url'])) {
-				return ($this->seo_url[$type][$id] = $data[$type . '_url'] . $this->seo_delim[$type] . $id);
-			} elseif (isset($data[$type . '_id']) && isset($data[$titles_key[$type]])) {
-				return ($this->seo_url[$type][$id] = sprintf($this->sftpl[$type], $parent, $this->format_url($data[$titles_key[$type]], $this->seo_static[$type]), $id));
+				return ($this->seo_url[$type][$id] = $data[$type . '_url'] . $id);
+			} else {
+				return ($this->seo_url[$type][$id] = sprintf($this->sftpl[$type . ($this->modrtype > 2 ? '' : '_smpl')], $parent, $this->modrtype > 2 ? $this->format_url($data[$type . '_title'], $this->seo_static[$type]) : '', $id));
 			}
-			return false;
 		}
 		return $this->seo_url[$type][$id];
-		
 	}
 	/**
 	* drop_sid( $url )
