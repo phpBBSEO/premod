@@ -5,7 +5,7 @@
 * translated originally by PhpBB-fr.com <http://www.phpbb-fr.com/> and phpBB.biz <http://www.phpBB.biz>
 *
 * @package language
-* @version $Id: board.php,v 1.23 2008/11/14 11:27:00 EricSchreiner Exp $
+* @version $Id: board.php, v1.24 2009/05/27 21:05:00 Elglobo Exp $
 * @copyright (c) 2005 phpBB Group
 * @license http://opensource.org/licenses/gpl-license.php GNU Public License
 *
@@ -243,6 +243,15 @@ $lang = array_merge($lang, array(
 	'CAPTCHA_GD_X_GRID_EXPLAIN'				=> 'Utiliser le paramètre ci-dessous pour rendre la confirmation visuelle plus difficile à déchiffrer. Mettre “0” pour désactiver le bruit de fond x-axis.',
 	'CAPTCHA_GD_Y_GRID'						=> 'GD CAPTCHA avec bruit de fond y-axis',
 	'CAPTCHA_GD_Y_GRID_EXPLAIN'				=> 'Utiliser le paramètre ci-dessous pour rendre la confirmation visuelle plus difficile à déchiffrer. Mettre “0” pour désactiver le bruit de fond y-axis.',
+	'CAPTCHA_GD_WAVE'						=> 'Distorsion ondulatoire du GD CAPTCHA',
+	'CAPTCHA_GD_WAVE_EXPLAIN'				=> 'Cela appliquera une distorsion ondulatoire au CAPTCHA.',
+ 	'CAPTCHA_GD_3D_NOISE'					=> 'Ajouter des objets de bruit en 3D',
+	'CAPTCHA_GD_3D_NOISE_EXPLAIN'			=> 'Cela ajoutera des objets supplémentaires au CAPTCHA, par-dessus les lettres.',
+	'CAPTCHA_GD_FONTS'						=> 'Utiliser différentes polices',
+	'CAPTCHA_GD_FONTS_EXPLAIN'				=> 'Ce paramètre contrôle le nombre différent de formes de lettres qui sont utilisées. Vous pouvez seulement utiliser les formes par défaut ou introduire des lettres modifiées. L’ajout de lettres en minuscule est également possible.',
+	'CAPTCHA_FONT_DEFAULT'					=> 'Défaut',
+	'CAPTCHA_FONT_NEW'						=> 'Nouvelles formes',
+	'CAPTCHA_FONT_LOWER'					=> 'Utiliser également des minuscules',
 
 	'CAPTCHA_PREVIEW_MSG'					=> 'Vos modifications pour les paramètres de la confirmation visuelle n’ont pas été sauvegardées. Ceci est juste un aperçu.',
 	'CAPTCHA_PREVIEW_EXPLAIN'				=> 'Voici le CAPTCHA tel qu’il apparaîtra avec vos paramètres actuels. Utilisez le bouton Aperçu pour rafraîchir. Notez que les CAPTCHA sont aléatoires et diffèrents d’un membre à l’autre.',
@@ -250,6 +259,8 @@ $lang = array_merge($lang, array(
 	'VISUAL_CONFIRM_POST_EXPLAIN'			=> 'Oblige les invités à saisir un code aléatoire correspondant à une image afin d’empêcher la publication de messages en masse.',
 	'VISUAL_CONFIRM_REG'					=> 'Activer la confirmation visuelle pour les inscriptions',
 	'VISUAL_CONFIRM_REG_EXPLAIN'			=> 'Oblige les nouveaux utilisateurs à saisir un code aléatoire correspondant à une image afin d’empêcher les inscriptions en masse.',
+	'VISUAL_CONFIRM_REFRESH'				=> 'Autoriser les utilisateurs à rafraîchir l’image de confirmation',
+	'VISUAL_CONFIRM_REFRESH_EXPLAIN'		=> 'Autorise les utilisateurs à demander de nouveaux codes de confirmation s’ils sont incapables de déchiffrer la confirmation visuelle durant l’inscription.',	
 ));
 
 // Cookie Settings
@@ -397,7 +408,7 @@ $lang = array_merge($lang, array(
 	'REF_HOST' 						=> 'Valider uniquement l’hôte',
 	'REF_PATH' 						=> 'Valider également le chemin',
 	'REFERER_VALID' 				=> 'Valider le référant',
-	'REFERER_VALID_EXPLAIN'         => 'Si activé, le référant des requêtes POST sera comparé au paramétrage effectué pour le chemin de l’hôte ou du script. Ceci peut entraîner certains problèmes avec les forums utilisant plusieurs domaines ou des connexions externes.',
+	'REFERER_VALID_EXPLAIN'  => 'Si activé, le référant des requêtes POST sera comparé au paramétrage effectué pour le chemin de l’hôte ou du script. Ceci peut entraîner certains problèmes avec les forums utilisant plusieurs domaines ou des connexions externes.',
 	'TPL_ALLOW_PHP'					=> 'Autoriser le PHP dans les templates',
 	'TPL_ALLOW_PHP_EXPLAIN'			=> 'Si cette option est activée, les instructions <code>PHP</code> et <code>INCLUDEPHP</code> seront reconnues et analysées dans les templates.',
 ));

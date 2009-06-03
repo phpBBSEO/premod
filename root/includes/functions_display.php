@@ -1057,7 +1057,7 @@ function display_user_activity(&$userdata)
 	if (!empty($active_t_row))
 	{
 		// www.phpBB-SEO.com SEO TOOLKIT BEGIN
-		$sql = 'SELECT t.topic_title, t.topic_type, f.forum_id, f.forum_name
+		$sql = 'SELECT t.topic_title, t.topic_type ' . (!empty($phpbb_seo->seo_opt['sql_rewrite']) ? ', t.topic_url' : '') . ', f.forum_id, f.forum_name
 			FROM ' . TOPICS_TABLE . ' AS t, ' . FORUMS_TABLE . ' AS f
 			WHERE t.topic_id = ' . $active_t_row['topic_id'] . '
 			AND f.forum_id = t.forum_id';

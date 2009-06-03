@@ -5,7 +5,7 @@
 * translated originally by PhpBB-fr.com <http://www.phpbb-fr.com/> and phpBB.biz <http://www.phpBB.biz>
 *
 * @package language
-* @version $Id: groups.php,v 1.23 2008/07/03 12:58:20 elglobo Exp $
+* @version $Id: groups.php, v1.24 2008/07/03 12:58:20 Elglobo Exp $
 * @copyright (c) 2005 phpBB Group 
 * @license http://opensource.org/licenses/gpl-license.php GNU Public License 
 *
@@ -46,7 +46,7 @@ $lang = array_merge($lang, array(
    'CHANGED_DEFAULT_GROUP'	=> 'Le groupe par défaut a été modifié.',
    
    'GROUP_AVATAR' => 'Avatar du groupe',
-   'GROUP_CHANGE_DEFAULT' => 'Etes-vous sûr de vouloir modifier votre groupe par défaut pour “%s”?',
+   'GROUP_CHANGE_DEFAULT' => 'Êtes-vous sûr de vouloir modifier votre groupe par défaut pour “%s”?',
    'GROUP_CLOSED' => 'Fermé',
    'GROUP_DESC' => 'Description du groupe',
    'GROUP_HIDDEN' => 'Invisible',
@@ -57,9 +57,9 @@ $lang = array_merge($lang, array(
    'GROUP_IS_OPEN' => 'C’est un groupe ouvert, mais l’utilisateur doit faire une demande pour en devenir membre.',
    'GROUP_IS_SPECIAL' => 'C’est un groupe spécial, les groupes spéciaux sont gérés par les administrateurs.',
    'GROUP_JOIN' => 'Rejoindre le groupe',
-   'GROUP_JOIN_CONFIRM' => 'Etes-vous sûr de vouloir rejoindre le groupe sélectionné?',
+   'GROUP_JOIN_CONFIRM' => 'Êtes-vous sûr de vouloir rejoindre le groupe sélectionné?',
    'GROUP_JOIN_PENDING' => 'Demander à rejoindre un groupe',
-   'GROUP_JOIN_PENDING_CONFIRM' => 'Etes-vous sûr de vouloir demander à rejoindre le groupe sélectionné?',
+   'GROUP_JOIN_PENDING_CONFIRM' => 'Êtes-vous sûr de vouloir demander à rejoindre le groupe sélectionné?',
    'GROUP_JOINED' => 'Vous êtes désormais membre de ce groupe.',
    'GROUP_JOINED_PENDING' => 'Votre demande d’adhésion a été prise en compte. Vous devez attendre que le modérateur du groupe approuve votre demande.',
    'GROUP_LIST' => 'Gérer les membres',
@@ -68,9 +68,9 @@ $lang = array_merge($lang, array(
    'GROUP_OPEN' => 'Ouvrir',
    'GROUP_RANK' => 'Rang du groupe',
    'GROUP_RESIGN_MEMBERSHIP' => 'Se désinscrire du groupe',
-   'GROUP_RESIGN_MEMBERSHIP_CONFIRM' => 'Etes-vous sûr de vouloir vous désinscrire du groupe sélectionné?',
+   'GROUP_RESIGN_MEMBERSHIP_CONFIRM' => 'Êtes-vous sûr de vouloir vous désinscrire du groupe sélectionné?',
    'GROUP_RESIGN_PENDING' => 'Annuler une demande d’adhésion',
-   'GROUP_RESIGN_PENDING_CONFIRM' => 'Etes-vous sûr de vouloir annuler votre demande d’adhésion au groupe sélectionné?',
+   'GROUP_RESIGN_PENDING_CONFIRM' => 'Êtes-vous sûr de vouloir annuler votre demande d’adhésion au groupe sélectionné?',
    'GROUP_RESIGNED_MEMBERSHIP' => 'Vous avez été désinscrit du groupe sélectionné.',
    'GROUP_RESIGNED_PENDING' => 'Votre demande d’adhésion pour le groupe sélectionné a été annulée.',
    'GROUP_TYPE' => 'Type du groupe',
@@ -90,7 +90,7 @@ $lang = array_merge($lang, array(
 
    'USER_GROUP_CHANGE' => 'De “%1$s” vers “%2$s”',
    'USER_GROUP_DEMOTE' => 'Rétrograder le chef de groupe.',
-   'USER_GROUP_DEMOTE_CONFIRM'   => 'Etes-vous sûr de vouloir rétrograder le chef de groupe sélectionné?',
+   'USER_GROUP_DEMOTE_CONFIRM'   => 'Êtes-vous sûr de vouloir rétrograder le chef de groupe sélectionné?',
    'USER_GROUP_DEMOTED' => 'Le chef de groupe a été rétrogradé en simple membre.',
 ));
 

@@ -5,7 +5,7 @@
 * translated originally by PhpBB-fr.com <http://www.phpbb-fr.com/> and phpBB.biz <http://www.phpBB.biz>
 *
 * @package language
-* @version $Id: search_ignore_words.php,v 1.23 2008/12/14 10:56:00 dcz Exp $
+* @version $Id: search_ignore_words.php, v1.24 2008/12/14 10:56:00 dcz Exp $
 * @copyright (c) 2005 phpBB Group
 * @license http://opensource.org/licenses/gpl-license.php GNU Public License
 *

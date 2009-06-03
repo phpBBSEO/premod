@@ -5,7 +5,7 @@
 * translated originally by PhpBB-fr.com <http://www.phpbb-fr.com/> and phpBB.biz <http://www.phpBB.biz>
 *
 * @package language
-* @version $Id: permissions_phpbb.php,v 1.23 2008/11/14 11:52:00 EricSchreiner Exp $
+* @version $Id: permissions_phpbb.php, v1.24 2009/06/01 23:19:00 Elglobo Exp $
 * @copyright (c) 2005 phpBB Group 
 * @license http://opensource.org/licenses/gpl-license.php GNU Public License 
 *
@@ -201,7 +201,7 @@ $lang = array_merge($lang, array(
 	'acl_a_words'	=> array('lang'	=> 'Peut modifier les mots censurés', 'cat' => 'posting'),
 	'acl_a_bbcode'	=> array('lang'	=> 'Peut créer des balises BBCodes', 'cat' => 'posting'),
 	'acl_a_attach'	=> array('lang'	=> 'Peut modifier la configuration des fichiers joints', 'cat' => 'posting'),
-	'acl_a_user'	=> array('lang'	=> 'Peut gérer les utilisateurs<br /><em>Ceci inclu également l’affichage du navigateur des utilisateurs dans la liste des utilisateurs connectés.</em>', 'cat' => 'user_group'),
+	'acl_a_user'	=> array('lang'	=> 'Peut gérer les utilisateurs<br /><em>Ceci inclut également l’affichage du navigateur des utilisateurs dans la liste des utilisateurs connectés.</em>', 'cat' => 'user_group'),
 	'acl_a_userdel'	=> array('lang'	=> 'Peut supprimer/trier les utilisateurs', 'cat' => 'user_group'),
 	'acl_a_group'	=> array('lang'	=> 'Peut gérer les groupes', 'cat' => 'user_group'),
 	'acl_a_groupadd'	=> array('lang'	=> 'Peut ajouter un groupe', 'cat' => 'user_group'),

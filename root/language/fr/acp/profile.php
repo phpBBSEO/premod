@@ -5,7 +5,7 @@
 * translated originally by PhpBB-fr.com <http://www.phpbb-fr.com/> and phpBB.biz <http://www.phpBB.biz>
 *
 * @package language
-* @version $Id: profile.php,v 1.23 2008/12/14 10:44:00 elglobo Exp $
+* @version $Id: profile.php, v1.24 2009/05/27 21:20:00 Elglobo Exp $
 * @copyright (c) 2005 phpBB Group
 * @license http://opensource.org/licenses/gpl-license.php GNU Public License
 */
@@ -60,12 +60,12 @@ $lang = array_merge($lang, array(
    'DEFAULT_LANGUAGE_NOT_FILLED'   		=> 'L’entrée de langue pour la langue par défaut n’a pas été renseignée pour ce champs de profil.',
    'DEFAULT_VALUE'   					=> 'Valeur par défaut',
    'DELETE_PROFILE_FIELD'   			=> 'Supprimer le champ de profil',
-   'DELETE_PROFILE_FIELD_CONFIRM'   	=> 'Etes-vous sûr de voir supprimer ce champ de profil?',
+   'DELETE_PROFILE_FIELD_CONFIRM'   	=> 'Êtes-vous sûr de voir supprimer ce champ de profil?',
    'DISPLAY_AT_PROFILE'   				=> 'Afficher dans le panneau de l’utilisateur',
    'DISPLAY_AT_PROFILE_EXPLAIN'   		=> 'L’utilisateur peut modifier ce champ de profil dans le panneau de l’utilisateur.',
    'DISPLAY_AT_REGISTER'   				=> 'Afficher sur l’écran d’inscription',
    'DISPLAY_AT_REGISTER_EXPLAIN'   		=> 'Si cette option est activée, le champ sera affiché à l’inscription.',
-   'DISPLAY_PROFILE_FIELD'   			=> 'Afficher le champ de profil',
+   'DISPLAY_PROFILE_FIELD'   			=> 'Afficher publiquement le champ de profil',
    'DISPLAY_PROFILE_FIELD_EXPLAIN'   	=> 'Le champ de profil sera visible dans tous les endroits autorisés dans les paramètres de charge. Réglez cela sur “Non” masquera le champ des pages de sujets, des profils et de la liste des membres.',
    'DROPDOWN_ENTRIES_EXPLAIN'   		=> 'Saisissez vos options, chaque option doit être sur une ligne différente.',
    

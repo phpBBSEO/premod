@@ -1,9 +1,12 @@
 <?php
 /**
-* phpBB_SEO Class
-* www.phpBB-SEO.com
-* @package Advanced phpBB3 SEO mod Rewrite
- */
+*
+* @package Ultimate SEO URL phpBB SEO
+* @version $id: phpbb_seo_install.php - 30846 06-03-2009 16:28:22 - 0.6.0 dcz $
+* @copyright (c) 2006 - 2009 www.phpbb-seo.com
+* @license http://www.opensource.org/licenses/rpl.php RPL Public License
+*
+*/
 /*
  * Based on the phpBB3 install package / www.phpBB.com
  */

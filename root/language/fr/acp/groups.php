@@ -5,7 +5,7 @@
 * translated originally by PhpBB-fr.com <http://www.phpbb-fr.com/> and phpBB.biz <http://www.phpBB.biz>
 *
 * @package language
-* @version $Id: groups.php,v 1.23 2008/11/14 11:50:00 EricSchreiner Exp $
+* @version $Id: groups.php, v1.24 2009/06/01 23:27:00 Elglobo Exp $
 * @copyright (c) 2005 phpBB Group
 * @license http://opensource.org/licenses/gpl-license.php GNU Public License
 *
@@ -54,9 +54,9 @@ $lang = array_merge($lang, array(
 	'GROUP_CLOSED'					=> 'Fermé',
 	'GROUP_COLOR'					=> 'Couleur du groupe',
 	'GROUP_COLOR_EXPLAIN'			=> 'Définit la couleur dans laquelle les noms d’utilisateur des membres apparaîtront, laissez cette case vide pour conserver les paramètres par défaut.',
-	'GROUP_CONFIRM_ADD_USER'		=> 'Etes-vous sûr de voir ajouter l’utilisateur %1$s au groupe?',
-	'GROUP_CONFIRM_ADD_USERS'		=> 'Etes-vous sûr de voir ajouter les utilisateurs %1$s au groupe?',
-	'GROUP_CREATED'					=> 'Le groupe a été crée.',
+	'GROUP_CONFIRM_ADD_USER'		=> 'Êtes-vous sûr de voir ajouter l’utilisateur %1$s au groupe?',
+	'GROUP_CONFIRM_ADD_USERS'		=> 'Êtes-vous sûr de voir ajouter les utilisateurs %1$s au groupe?',
+	'GROUP_CREATED'					=> 'Le groupe a été créé.',
 	'GROUP_DEFAULT'					=> 'Définir comme groupe par défaut',
 	'GROUP_DEFS_UPDATED'			=> 'Le groupe a été défini par défaut pour les utilisateurs sélectionnés.',
 	'GROUP_DELETE'					=> 'Supprimer le membre du groupe',

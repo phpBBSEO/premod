@@ -5,7 +5,7 @@
 * translated originally by PhpBB-fr.com <http://www.phpbb-fr.com/> and phpBB.biz <http://www.phpBB.biz>
 *
 * @package language
-* @version $Id: styles.php,v 1.23 2008/11/14 12:48:00 EricSchreiner Exp $
+* @version $Id: styles.php, v1.24 2008/11/14 12:48:00 EricSchreiner Exp $
 * @copyright (c) 2005 phpBB Group 
 * @license http://opensource.org/licenses/gpl-license.php GNU Public License 
 *
@@ -63,10 +63,10 @@ $lang = array_merge($lang, array(
 	'CACHE_FILENAME' => 'Nom du fichier',
 	'CACHE_FILESIZE' => 'Taille du fichier',
 	'CACHE_MODIFIED' => 'Modifié',
-	'CONFIRM_IMAGESET_REFRESH'		=> 'Etes-vous sûr de vouloir rafraîchir toutes les données des packs d’images? Les paramètres du fichier de configuration du pack d’images écraseront toutes modifications des packs d’images qui ont été extraites de l’éditeur de packs d’images.',
-	'CONFIRM_TEMPLATE_CLEAR_CACHE'	=> 'Etes-vous sûr de vouloir supprimer toutes les versions de vos fichiers de template mis en cache?',
-	'CONFIRM_TEMPLATE_REFRESH' => 'Etes-vous sûr de vouloir rafraîchir toutes les données du template dans la base de données, avec le contenu des fichiers de template du système de fichiers? Cela écrasera toutes les modifications effectuées avec l’éditeur de template dont les templates étaient stockés dans la base de données.',
-	'CONFIRM_THEME_REFRESH' => 'Etes-vous sûr de vouloir rafraîchir les données du thème dans la base avec les thèmes du système de fichiers? Cela écrasera toutes les modifications effectuées avec l’éditeur de thèmes dont les thèmes étaient stockés dans la base de données.',
+	'CONFIRM_IMAGESET_REFRESH'		=> 'Êtes-vous sûr de vouloir rafraîchir toutes les données des packs d’images? Les paramètres du fichier de configuration du pack d’images écraseront toutes modifications des packs d’images qui ont été extraites de l’éditeur de packs d’images.',
+	'CONFIRM_TEMPLATE_CLEAR_CACHE'	=> 'Êtes-vous sûr de vouloir supprimer toutes les versions de vos fichiers de template mis en cache?',
+	'CONFIRM_TEMPLATE_REFRESH' => 'Êtes-vous sûr de vouloir rafraîchir toutes les données du template dans la base de données, avec le contenu des fichiers de template du système de fichiers? Cela écrasera toutes les modifications effectuées avec l’éditeur de template dont les templates étaient stockés dans la base de données.',
+	'CONFIRM_THEME_REFRESH' => 'Êtes-vous sûr de vouloir rafraîchir les données du thème dans la base avec les thèmes du système de fichiers? Cela écrasera toutes les modifications effectuées avec l’éditeur de thèmes dont les thèmes étaient stockés dans la base de données.',
 	'COPYRIGHT' => 'Copyright',
 	'CREATE_IMAGESET' => 'Créer un nouveau pack d’images',
 	'CREATE_STYLE' => 'Créer un nouveau style',

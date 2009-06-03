@@ -5,7 +5,7 @@
 * translated originally by PhpBB-fr.com <http://www.phpbb-fr.com/> and phpBB.biz <http://www.phpBB.biz>
 *
 * @package language
-* @version $Id: ucp.php,v 1.23 2008/12/14 10:51:00 elglobo Exp $
+* @version $Id: ucp.php, v1.24 2009/05/27 22:51:00 Elglobo Exp $
 * @copyright (c) 2005 phpBB Group 
 * @license http://opensource.org/licenses/gpl-license.php GNU Public License 
 *
@@ -122,6 +122,8 @@ $lang = array_merge($lang, array(
 	'CONFIRM_EMAIL'   			=> 'Confirmation de l’adresse e-mail',
 	'CONFIRM_EMAIL_EXPLAIN'   	=> 'Vous devez l’indiquer uniquement en cas de modification de votre adresse e-mail.',
 	'CONFIRM_EXPLAIN'   		=> 'Pour éviter les inscriptions automatisées, l’administrateur exige la saisie d’un code de confirmation. Ce code est inscrit dans l’image affichée ci-dessous. Si vous êtes déficient visuel ou si vous ne pouvez pas lire ce code, contactez %sl’administrateur de ce forum%s.',
+	'VC_REFRESH'				=> 'Rafraîchir le code de confirmation',
+	'VC_REFRESH_EXPLAIN'		=> 'Si vous n’arrivez pas à lire le code, vous pouvez en demander un nouveau en cliquant.',
 	'CONFIRM_PASSWORD'   		=> 'Confirmation du mot de passe',
 	'CONFIRM_PASSWORD_EXPLAIN'  => 'Vous devez confirmer le mot de passe uniquement si vous l’avez modifié ci-dessus.',
 	'COPPA_BIRTHDAY'   			=> 'Pour continuer l’inscription, indiquez votre date de naissance.',
@@ -144,18 +146,18 @@ $lang = array_merge($lang, array(
 	'DELETED_TOPIC'   			=> 'Le sujet a été supprimé.',
 	'DELETE_ATTACHMENT'   		=> 'Supprimer le fichier joint',
 	'DELETE_ATTACHMENTS'   		=> 'Supprimer les fichiers joints',
-	'DELETE_ATTACHMENT_CONFIRM' => 'Etes-vous sûr de vouloir supprimer ce fichier joint?',
-	'DELETE_ATTACHMENTS_CONFIRM'=> 'Etes-vous sûr de vouloir supprimer ces fichiers joints?',
+	'DELETE_ATTACHMENT_CONFIRM' => 'Êtes-vous sûr de vouloir supprimer ce fichier joint?',
+	'DELETE_ATTACHMENTS_CONFIRM'=> 'Êtes-vous sûr de vouloir supprimer ces fichiers joints?',
 	'DELETE_AVATAR'   			=> 'Supprimer l’image',
-	'DELETE_COOKIES_CONFIRM'   	=> 'Etes-vous sûr de vouloir supprimer tous les cookies de ce forum?',
+	'DELETE_COOKIES_CONFIRM'   	=> 'Êtes-vous sûr de vouloir supprimer tous les cookies de ce forum?',
 	'DELETE_MARKED_PM'   		=> 'Supprimer les messages sélectionnés',
-	'DELETE_MARKED_PM_CONFIRM'  => 'Etes-vous sûr de vouloir supprimer tous les messages sélectionnés?',
+	'DELETE_MARKED_PM_CONFIRM'  => 'Êtes-vous sûr de vouloir supprimer tous les messages sélectionnés?',
 	'DELETE_OLDEST_MESSAGES'   	=> 'Supprimer les anciens messages',
 	'DELETE_MESSAGE'   			=> 'Supprimer le message',
-	'DELETE_MESSAGE_CONFIRM'   	=> 'Etes-vous sûr de vouloir supprimer ce message privé?',
+	'DELETE_MESSAGE_CONFIRM'   	=> 'Êtes-vous sûr de vouloir supprimer ce message privé?',
 	'DELETE_MESSAGES_IN_FOLDER' => 'Supprimer définitivement tous les messages du dossier des messages supprimés',
 	'DELETE_RULE'   			=> 'Supprimer le filtre',
-	'DELETE_RULE_CONFIRM'   	=> 'Etes-vous sûr de vouloir supprimer ce filtre?',
+	'DELETE_RULE_CONFIRM'   	=> 'Êtes-vous sûr de vouloir supprimer ce filtre?',
 	'DEMOTE_SELECTED'   		=> 'Rétrograder de la sélection',
 	'DISABLE_CENSORS'   		=> 'Activer la censure de mots',
 	'DISPLAY_GALLERY'   		=> 'Afficher la galerie',
@@ -325,7 +327,7 @@ $lang = array_merge($lang, array(
 	'PASS_TYPE_SYMBOL_EXPLAIN'  => 'Le mot de passe doit avoir une longueur comprise entre %1$d et %2$d caractères et doit contenir des lettres de casse mélangée, des chiffres et des symboles.',
 	'PASSWORD'   				=> 'Mot de passe',
 	'PASSWORD_ACTIVATED'   		=> 'Votre nouveau mot de passe a été activé.',
-	'PASSWORD_UPDATED'   		=> 'Votre nouveau mot de passe a été envoyé à votre adresse e-mail d’origine.',
+	'PASSWORD_UPDATED'   		=> 'Un nouveau mot de passe a été envoyé à votre adresse e-mail.',
 	'PERMISSIONS_RESTORED'   	=> 'Les permissions d’origine ont été restaurées.',
 	'PERMISSIONS_TRANSFERRED'   => 'Les permissions ont été transférées depuis <strong>%s</strong>, vous pouvez maintenant parcourir le forum avec les permissions de cet utilisateur.<br />Notez que les permissions d’administration n’ont pas été transférées. Vous pouvez réinitialiser vos permissions à tout moment.',
 	'PM_DISABLED'   			=> 'La messagerie privée a été désactivée sur ce forum.',

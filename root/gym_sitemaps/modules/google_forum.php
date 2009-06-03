@@ -2,8 +2,8 @@
 /**
 *
 * @package phpBB SEO GYM Sitemaps
-* @version $id: google_forum.php - 18582 12-20-2008 14:40:10 - 2.0.RC3 dcz $
-* @copyright (c) 2006 - 2008 www.phpbb-seo.com
+* @version $id: google_forum.php - 16350 06-03-2009 16:19:35 - 2.0.RC4 dcz $
+* @copyright (c) 2006 - 2009 www.phpbb-seo.com
 * @license http://opensource.org/osi3.0/licenses/lgpl-license.php GNU Lesser General Public License
 *
 */

@@ -1,10 +1,11 @@
 <?php
-/** 
+/**
 *
-* @package Advanced phpBB3 SEO mod Rewrite
-* @version $Id: sync.php dcz Exp $
-* @copyright (c) 2009 dcz - www.phpbb-seo.com
-* @license http://opensource.org/osi3.0/licenses/lgpl-license.php GNU Lesser General Public License
+* @package Ultimate SEO URL phpBB SEO
+* @version $id: sync_url.php - 6585 06-03-2009 16:28:22 - 0.6.0 dcz $
+* @copyright (c) 2006 - 2009 www.phpbb-seo.com
+* @license http://www.opensource.org/licenses/rpl.php RPL Public License
+*
 */
 define('IN_PHPBB', true);
 $phpbb_root_path = (defined('PHPBB_ROOT_PATH')) ? PHPBB_ROOT_PATH : './../';

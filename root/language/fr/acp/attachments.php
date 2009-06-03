@@ -5,7 +5,7 @@
 * translated originally by PhpBB-fr.com <http://www.phpbb-fr.com/> and phpBB.biz <http://www.phpBB.biz>
 *
 * @package language
-* @version $Id: attachments.php,v 1.23 2008/11/13 12:51:00 EricSchreiner Exp $
+* @version $Id: attachments.php, v1.24 2009/05/01 23:26:00 Elglobo Exp $
 * @copyright (c) 2005 phpBB Group 
 * @license http://opensource.org/licenses/gpl-license.php GNU Public License 
 *
@@ -150,7 +150,7 @@ $lang = array_merge($lang, array(
 	'SPECIAL_CATEGORY'				=> 'Catégorie spéciale',
 	'SPECIAL_CATEGORY_EXPLAIN'		=> 'Les catégories spéciales proposent un affichage particulier.',
 	'SUCCESSFULLY_UPLOADED'			=> 'Le transfert est terminé.',
-	'SUCCESS_EXTENSION_GROUP_ADD'	=> 'Le groupe d’extension a été crée.',
+	'SUCCESS_EXTENSION_GROUP_ADD'	=> 'Le groupe d’extension a été créé.',
 	'SUCCESS_EXTENSION_GROUP_EDIT'	=> 'Le groupe d’extension a été mis à jour.',
 
 	'UPLOADING_FILES'				=> 'Transfert de fichiers',

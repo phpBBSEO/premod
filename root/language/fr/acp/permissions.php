@@ -5,7 +5,7 @@
 * translated originally by PhpBB-fr.com <http://www.phpbb-fr.com/> and phpBB.biz <http://www.phpBB.biz>
 *
 * @package language
-* @version $Id: permissions.php,v 1.23 2008/07/03 17:41:35 elglobo Exp $
+* @version $Id: permissions.php, v1.24 2008/07/03 17:41:35 Elglobo Exp $
 * @copyright (c) 2005 phpBB Group 
 * @license http://opensource.org/licenses/gpl-license.php GNU Public License 
 *
@@ -114,7 +114,7 @@ $lang = array_merge($lang, array(
 
 	'DEFAULT'					=> 'Défaut',
 	'DELETE_ROLE'				=> 'Supprimer le modèle',
-	'DELETE_ROLE_CONFIRM'		=> 'Etes-vous sûr(e) de vouloir supprimer ce modèle? Les éléments auxquels ce modèle est assigné <strong>ne</strong> perdront <strong>pas</strong> leurs paramètres de permission.',
+	'DELETE_ROLE_CONFIRM'		=> 'Êtes-vous sûr(e) de vouloir supprimer ce modèle? Les éléments auxquels ce modèle est assigné <strong>ne</strong> perdront <strong>pas</strong> leurs paramètres de permission.',
 	'DISPLAY_ROLE_ITEMS'		=> 'Voir les éléments utilisant ce modèle',
 
 	'EDIT_PERMISSIONS'			=> 'Editer les permissions',

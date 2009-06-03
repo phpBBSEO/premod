@@ -5,7 +5,7 @@
 * translated originally by PhpBB-fr.com <http://www.phpbb-fr.com/> and phpBB.biz <http://www.phpBB.biz>
 *
 * @package language
-* @version $Id: prune.php,v 1.23 2008/07/03 17:32:49 elglobo Exp $
+* @version $Id: prune.php, v1.24 2008/07/03 17:32:49 Elglobo Exp $
 * @copyright (c) 2005 phpBB Group 
 * @license http://opensource.org/licenses/gpl-license.php GNU Public License 
 *
@@ -80,7 +80,7 @@ $lang = array_merge($lang, array(
 	'PRUNE_ANNOUNCEMENTS'   		=> 'Délester les annonces',
 	'PRUNE_FINISHED_POLLS' 			=> 'Délester les sondages expirés',
 	'PRUNE_FINISHED_POLLS_EXPLAIN'  => 'Supprimer les sujets avec un sondage expiré.',
-	'PRUNE_FORUM_CONFIRM'   		=> 'Etes-vous sûr de vouloir délester les forums sélectionnés selon les critères ci-dessous? Une fois supprimés, il n’y a aucun moyen de récupérer les sujets et les messages.',
+	'PRUNE_FORUM_CONFIRM'   		=> 'Êtes-vous sûr de vouloir délester les forums sélectionnés selon les critères ci-dessous? Une fois supprimés, il n’y a aucun moyen de récupérer les sujets et les messages.',
 	'PRUNE_NOT_POSTED'   			=> 'Nombre de jours depuis le dernier message posté',
 	'PRUNE_NOT_VIEWED'   			=> 'Nombre de jours depuis la dernière visualisation du sujet',
 	'PRUNE_OLD_POLLS'   			=> 'Délester les anciens sondages',
