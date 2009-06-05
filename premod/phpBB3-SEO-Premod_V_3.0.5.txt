@@ -65,6 +65,31 @@
 ##############################################################
 ## MOD History:
 ##
+##	2009-06-27 - 3.0.5
+##		- All mods Updated to comply with phpBB 3.0.5.
+##		- GYM Sitemaps & RSS 2.0.RC4 :
+##			- Added : more option for displaying RSS links among the forum,
+##			- Fixed : News feeds ordering,
+##			- Added : subsilver2 html templates,
+##			- Fixed : Google ping again!,
+##			- Fixed : RSS channel validation,
+##			- Fixed : Google XML and TXT modules,
+##			- Various bug fixes and enhancement.
+##		- mod rewrite 0.6.0 :
+##			- Complete rewrite of the phpbb_seo class, URL rewriting never was this fast,
+##			- Added : SQL Rewriting for topic urls, allowing per case URLs for each topics (optional),
+##			- Added : Attachment Rewriting (optional),
+##			- All types of URL rewritings are now merged into a single mod: Ultimate SEO URL.
+##		- zero duplicate 0.6.0 :
+##			- Fixed : URL hash kept upon redirection (for browsers supporting it),
+##			- Better SID handling (SID are never added when they are not present in request).
+##		- no duplicate 0.6.0 :
+##			- Fixed : possibly wrong forum id on index.
+##		- Meta tags 0.2.8 :
+##			- Fixed : Enabling search_ignore_words.php filtering (optional),
+##			- Added  : File based filtering.
+##		- Optimal titles 1.0.6 :
+##			- Index page title is now built using the phpBB sitename.
 ##	2008-12-20 - 3.0.4
 ##		- All mods Updated to comply with phpBB 3.0.4.
 ##		- GYM Sitemaps & RSS 2.0.RC3 :
@@ -403,9 +428,9 @@ _________________
 On the phpBB SEO ACP module, go to the ".htaccess" page.
 A personalised .htaccess will be generated. It's the first one to consider trying.
 You will have too put it where the red bolded messages of the .htaccess generator tells you to.
-If you cannot find the location mentionned, it means that you did not properly set you phpBB server settings in the ACP.
+If you cannot find the location mentioned, it means that you did not properly set your phpBB server settings in the ACP.
 If the default suggestion does not work, you will be to try more options, and generate several alternative.
-You'll find an empty .htaccess file in this mod's archive contrib/ folder, you can use it to paste the .htaccess content generated on the htaccess page or save it directly on the server.
+You'll find an empty .htaccess file in this mod's archive contrib/ folder, you can use it to paste the .htaccess content generated on the htaccess page or save it directly on the server (saved .htaccess will be found in the phpbb/cache/ directory).
 
 The .htaccess generator will add the required rewriterules to make your domain canonical, but they will be
 left commented (un-active) at first, as this is the kind of thing that require human attention.

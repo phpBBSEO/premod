@@ -2,7 +2,7 @@
 /**
 *
 * @package phpBB3
-* @version $Id: viewforum.php 9003 2008-10-11 18:23:12Z toonarmy $
+* @version $Id: viewforum.php 9459 2009-04-17 15:08:09Z acydburn $
 * @copyright (c) 2005 phpBB Group
 * @license http://opensource.org/licenses/gpl-license.php GNU Public License
 *
@@ -79,9 +79,7 @@ if (!$forum_data)
 	trigger_error('NO_FORUM');
 }
 // www.phpBB-SEO.com SEO TOOLKIT BEGIN
-if ( empty($phpbb_seo->seo_url['forum'][$forum_data['forum_id']]) ) {
-	$phpbb_seo->seo_url['forum'][$forum_data['forum_id']] = $phpbb_seo->set_url($forum_data['forum_name'], $forum_data['forum_id'], $phpbb_seo->seo_static['forum']);
-}
+$phpbb_seo->set_url($forum_data['forum_name'], $forum_data['forum_id'], $phpbb_seo->seo_static['forum']);
 // www.phpBB-SEO.com SEO TOOLKIT END
 
 // Configure style, language, etc.
@@ -435,20 +433,11 @@ if ($forum_data['forum_type'] == FORUM_POST)
 		if ($row['topic_type'] == POST_GLOBAL)
 		{
 			$global_announce_list[$row['topic_id']] = true;
-			// www.phpBB-SEO.com SEO TOOLKIT BEGIN
-			$phpbb_seo->seo_opt['topic_type'][$row['topic_id']] = POST_GLOBAL;
-			// www.phpBB-SEO.com SEO TOOLKIT END
 		}
 		else
 		{
 			$topics_count--;
 		}
-		// www.phpBB-SEO.com SEO TOOLKIT BEGIN
-		if ( empty($phpbb_seo->seo_url['topic'][$row['topic_id']]) ) {
-			$phpbb_seo->seo_censored[$row['topic_id']] = censor_text($row['topic_title']);
-			$phpbb_seo->seo_url['topic'][$row['topic_id']] = $phpbb_seo->format_url($phpbb_seo->seo_censored[$row['topic_id']]);
-		}
-		// www.phpBB-SEO.com SEO TOOLKIT END
 	}
 	$db->sql_freeresult($result);
 }
@@ -534,12 +523,6 @@ if (sizeof($topic_list))
 		}
 
 		$rowset[$row['topic_id']] = $row;
-		// www.phpBB-SEO.com SEO TOOLKIT BEGIN
-		if ( empty($phpbb_seo->seo_url['topic'][$row['topic_id']]) ) {
-			$phpbb_seo->seo_censored[$row['topic_id']] = censor_text($row['topic_title']);
-			$phpbb_seo->seo_url['topic'][$row['topic_id']] = $phpbb_seo->format_url($phpbb_seo->seo_censored[$row['topic_id']]);
-		}
-		// www.phpBB-SEO.com SEO TOOLKIT END
 	}
 	$db->sql_freeresult($result);
 }
@@ -589,12 +572,6 @@ if (sizeof($shadow_topic_list))
 		$row['topic_reported'] = 0;
 
 		$rowset[$orig_topic_id] = $row;
-		// www.phpBB-SEO.com SEO TOOLKIT BEGIN
-		if ( empty($phpbb_seo->seo_url['topic'][$row['topic_moved_id']]) ) {
-			$phpbb_seo->seo_censored[$row['topic_moved_id']] = censor_text($row['topic_title']);
-			$phpbb_seo->seo_url['topic'][$row['topic_moved_id']] = $phpbb_seo->format_url($phpbb_seo->seo_censored[$row['topic_moved_id']]);
-		}
-		// www.phpBB-SEO.com SEO TOOLKIT END
 	}
 	$db->sql_freeresult($result);
 }
@@ -672,7 +649,10 @@ if (sizeof($topic_list))
 	foreach ($topic_list as $topic_id)
 	{
 		$row = &$rowset[$topic_id];
-
+		// www.phpBB-SEO.com SEO TOOLKIT BEGIN
+		$cur_forum_id = ($row['forum_id']) ? (int) $row['forum_id'] : $forum_id;
+		$phpbb_seo->prepare_iurl($row, 'topic', $row['topic_type'] == POST_GLOBAL ? $phpbb_seo->seo_static['global_announce'] : $phpbb_seo->seo_url['forum'][$cur_forum_id]);
+		// www.phpBB-SEO.com SEO TOOLKIT BEGIN
 		// This will allow the style designer to output a different header
 		// or even separate the list of announcements from sticky and normal topics
 		$s_type_switch_test = ($row['topic_type'] == POST_ANNOUNCE || $row['topic_type'] == POST_GLOBAL) ? 1 : 0;
@@ -695,7 +675,8 @@ if (sizeof($topic_list))
 		topic_status($row, $replies, $unread_topic, $folder_img, $folder_alt, $topic_type);
 
 		// Generate all the URIs ...
-		$view_topic_url = append_sid("{$phpbb_root_path}viewtopic.$phpEx", 'f=' . (($row['forum_id']) ? $row['forum_id'] : $forum_id) . '&amp;t=' . $topic_id);
+		$view_topic_url_params = 'f=' . (($row['forum_id']) ? $row['forum_id'] : $forum_id) . '&amp;t=' . $topic_id;
+		$view_topic_url = append_sid("{$phpbb_root_path}viewtopic.$phpEx", $view_topic_url_params);
 
 		$topic_unapproved = (!$row['topic_approved'] && $auth->acl_get('m_approve', $forum_id)) ? true : false;
 		$posts_unapproved = ($row['topic_approved'] && $row['topic_replies'] < $row['topic_replies_real'] && $auth->acl_get('m_approve', $forum_id)) ? true : false;
@@ -725,9 +706,7 @@ if (sizeof($topic_list))
 			'PAGINATION'		=> topic_generate_pagination($replies, $view_topic_url),
 			'REPLIES'			=> $replies,
 			'VIEWS'				=> $row['topic_views'],
-			// www.phpBB-SEO.com SEO TOOLKIT BEGIN
-			'TOPIC_TITLE'		=> (isset($phpbb_seo->seo_censored[$topic_id]) ) ? $phpbb_seo->seo_censored[$topic_id] : censor_text($row['topic_title']),
-			// www.phpBB-SEO.com SEO TOOLKIT END
+			'TOPIC_TITLE'		=> censor_text($row['topic_title']),
 			'TOPIC_TYPE'		=> $topic_type,
 
 			'TOPIC_FOLDER_IMG'		=> $user->img($folder_img, $folder_alt),
@@ -755,12 +734,10 @@ if (sizeof($topic_list))
 			'S_TOPIC_LOCKED'		=> ($row['topic_status'] == ITEM_LOCKED) ? true : false,
 			'S_TOPIC_MOVED'			=> ($row['topic_status'] == ITEM_MOVED) ? true : false,
 
-			// www.phpBB-SEO.com SEO TOOLKIT BEGIN
-			'U_NEWEST_POST'			=> append_sid("{$phpbb_root_path}viewtopic.$phpEx", 'f=' . (($row['forum_id']) ? $row['forum_id'] : $forum_id) . '&amp;t=' . $topic_id . '&amp;view=unread') . '#unread',
+			'U_NEWEST_POST'			=> append_sid("{$phpbb_root_path}viewtopic.$phpEx", $view_topic_url_params . '&amp;view=unread') . '#unread',
 			// www.phpBB-SEO.com SEO TOOLKIT BEGIN -> no dupe
-			'U_LAST_POST' => @$phpbb_seo->seo_opt['no_dupe']['on'] ? append_sid("{$phpbb_root_path}viewtopic.$phpEx", 'f=' . (($row['forum_id']) ? $row['forum_id'] : $forum_id) . '&amp;t=' . $topic_id . '&amp;start=' . @intval($phpbb_seo->seo_opt['topic_last_page'][$topic_id])) . '#p' . $row['topic_last_post_id'] : append_sid("{$phpbb_root_path}viewtopic.$phpEx", 'f=' . (($row['forum_id']) ? $row['forum_id'] : $forum_id) . '&amp;t=' . $topic_id . '&amp;p=' . $row['topic_last_post_id']) . '#p' . $row['topic_last_post_id'],
+			'U_LAST_POST' => @$phpbb_seo->seo_opt['no_dupe']['on'] ? append_sid("{$phpbb_root_path}viewtopic.$phpEx", 'f=' . (($row['forum_id']) ? $row['forum_id'] : $forum_id) . '&amp;t=' . $topic_id . '&amp;start=' . @intval($phpbb_seo->seo_opt['topic_last_page'][$topic_id])) . '#p' . $row['topic_last_post_id'] : append_sid("{$phpbb_root_path}viewtopic.$phpEx", $view_topic_url_params . '&amp;p=' . $row['topic_last_post_id']) . '#p' . $row['topic_last_post_id'],
 			// www.phpBB-SEO.com SEO TOOLKIT END -> no dupe
-			// www.phpBB-SEO.com SEO TOOLKIT END
 			'U_LAST_POST_AUTHOR'	=> get_username_string('profile', $row['topic_last_poster_id'], $row['topic_last_poster_name'], $row['topic_last_poster_colour']),
 			'U_TOPIC_AUTHOR'		=> get_username_string('profile', $row['topic_poster'], $row['topic_first_poster_name'], $row['topic_first_poster_colour']),
 			'U_VIEW_TOPIC'			=> $view_topic_url,
