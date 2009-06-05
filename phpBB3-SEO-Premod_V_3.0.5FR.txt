@@ -6,10 +6,10 @@
 ## 			Visitez http://www.phpbb-seo.com/fr/premod-phpbb-seo/premod-referencement-phpbb-t1951.html
 ## 			pour obtenir du support et vérifier l'existence de mise à jour.
 ##
-## MOD Version: 	3.0.4
+## MOD Version: 	3.0.5
 ##
 ## Installation Level: 	Aussi facile que phpBB3
-## Installation Time: 	10 Minutes
+## Installation Time: 	15 Minutes
 ## Files To Edit: 	0
 ##
 ##############################################################
@@ -217,29 +217,28 @@ _____________________________________________
 >>>>   MISE A JOUR	                <<<<<
 _____________________________________________
 
-Mise à jour : 3.0.3 => 3.0.4 : 
+Mise à jour : 3.0.4 => 3.0.5 : 
 Tout d'abord, rendez vous sur http://telecharger.phpbb-seo.com/premod-referencement-phpbb-10/
 poour télécharger un des pack de mise à jour.
 Vous pouvez mettre à jour en suivant deux méthodes :
-	1) Mise à jour automatique : "3.0.3 vers 3.0.4 MAJ automatique"
+	1) Mise à jour automatique : "3.0.5 vers 3.0.5 MAJ automatique"
 		- Uplodez le contenu du dossier auto_update/install/*.* vers install/*.*,
 		- Rendez vous à l'ACP => SYSTEM et suivez les instructions.
 		L'auto updateur prendra vos éventuelles modifications en compte et tentera
 		de merger les nouveaux fichiers avec ceux que vous auriez modifié.
 		C'est la methode la plus sûre dans la plupart des cas, l'updateur vous dira
 		s'il a des problème pour modifier certain fichiers.
-	2) Mise à jour manuelle : "3.0.3 vers 3.0.4 Fichiers modifiés"
+	2) Mise à jour manuelle : "3.0.4 vers 3.0.5 Fichiers modifiés"
 		Vous trouverez les fichiers modifiés dans le dossier modified/ de l'archive.
 		- Uploadez / mergez / écrasez tous les fichiers,
 		- Uploadez le dossier modified/install/*.* vers install/*.*,
 		- Lancez www.example.com/phpbb/install/database_update.php pour mettre à jour la base de données.
 
-Si vous rencontrez des difficultés lors de la mise à jour du fichier phpbb_seo_class.php, vous devrez procéder 
-manuellement. Il vous suffit pour cela de prendre la nouvelle version du fichier et d'y ajouter vos éventuels 
-réglages personnalisés comme s'il s'agissait d'une première installation.
+Vos réglages d'urls de la classe phpbb_seo ne seront pas altérés par la MAJ, mais de nouvelle options sont ajoutés.
+Vous DEVREZ mettre à jour votre .htaccess un fois cette mise à jour effectuée.
+Le fichier phpbb_seo_class.php ne contient plus les personnalisation des parties statiques et des délimiteurs de vos URLs, ces réglages se font désormais dans phpbb_seo/includes/setup_phpbb_seo.php. Si vous aviez personnalisé les réglages par défaut pour les parties statiques et les délimiteurs, vous DEVREZ reporter ces modification dans ce fichier. Veuillez vous reporter à ce qui est dit plus bas pour plus de détails.
 
-Enfin, une fois les nouveaux fichiers en place, il vous faudra vider le cache de phpBB et rafraîchir vos thèmes 
-(ACP => STYLE => Thèmes => Rafraîchir).
+Enfin, une fois les nouveaux fichiers en place, il vous faudra vider le cache de phpBB et rafraîchir vos thèmes (ACP => STYLE => Thèmes => Rafraîchir).
 
 Nous avons inclus le mod GYM Sitemap & RSS, mais nous avons séparé l'installation
 reportez vous aux instructions plus bas pour plus de détails.

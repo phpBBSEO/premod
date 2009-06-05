@@ -4,9 +4,52 @@
 
 Once you will have installed the mod, you will have to clear phpBB's cache.
 
-Code change for prosilver and subsilver templates with the phpBB SEO premod 3.0.0 :
-http://www.phpbb-seo.com/boards/phpbb-seo-premod/seo-url-premod-vt1549.html (en)
-http://www.phpbb-seo.com/forums/premod-phpbb-seo/premod-referencement-phpbb-vt1951.html (fr)
+Code change for prosilver and subsilver templates with the phpBB SEO premod 3.0.5 :
+http://www.phpbb-seo.com/en/phpbb-seo-premod/seo-url-premod-t1549.html (en)
+http://www.phpbb-seo.com/fr/premod-phpbb-seo/premod-referencement-phpbb-t1951.html (fr)
+
+#
+#-----[ OPEN ]------------------------------------------
+## MOD Title:		 Advanced phpBB3 SEO mod Rewrite
+#
+
+styles/prosilver/template/attachment.html
+
+#
+#-----[ FIND ]------------------------------------------
+#
+
+			<dt><a href="{_file.U_DOWNLOAD_LINK}"><img src="{_file.THUMB_IMAGE}" alt="{_file.DOWNLOAD_NAME}" title="{_file.DOWNLOAD_NAME} ({_file.FILESIZE} {_file.SIZE_LANG}) {_file.L_DOWNLOAD_COUNT}" /></a></dt>
+
+#
+#-----[ REPLACE WITH ]------------------------------------------
+#
+
+			<dt><a href="{_file.U_DOWNLOAD_LINK}"><img src="{_file.THUMB_IMAGE}" alt="{_file.DOWNLOAD_NAME}" title="<!-- IF _file.COMMENT_CLEAN -->{_file.COMMENT_CLEAN} / {_file.DOWNLOAD_NAME}<!-- ELSE -->{_file.DOWNLOAD_NAME} ({_file.FILESIZE} {_file.SIZE_LANG}) {_file.L_DOWNLOAD_COUNT}<!-- ENDIF -->" /></a></dt>
+
+#
+#-----[ FIND ]------------------------------------------
+#
+
+			<dt class="attach-image"><img src="{_file.U_INLINE_LINK}" alt="{_file.DOWNLOAD_NAME}" onclick="viewableArea(this);" /></dt>
+
+#
+#-----[ REPLACE WITH ]------------------------------------------
+#
+
+			<dt class="attach-image"><img src="{_file.U_INLINE_LINK}" alt="{_file.DOWNLOAD_NAME}" title="<!-- IF _file.COMMENT_CLEAN -->{_file.COMMENT_CLEAN} / <!-- ENDIF -->{_file.DOWNLOAD_NAME}" onclick="viewableArea(this);" /></dt>
+
+#
+#-----[ FIND ]------------------------------------------
+#
+
+			<dt><!-- IF _file.UPLOAD_ICON -->{_file.UPLOAD_ICON} <!-- ENDIF --><a class="postlink" href="{_file.U_DOWNLOAD_LINK}">{_file.DOWNLOAD_NAME}</a></dt>
+
+#
+#-----[ REPLACE WITH ]------------------------------------------
+#
+
+			<dt><!-- IF _file.UPLOAD_ICON -->{_file.UPLOAD_ICON} <!-- ENDIF --><a class="postlink" href="{_file.U_DOWNLOAD_LINK}" title="<!-- IF _file.COMMENT_CLEAN -->{_file.COMMENT_CLEAN} / <!-- ENDIF -->{_file.DOWNLOAD_NAME}">{_file.DOWNLOAD_NAME}</a></dt>
 
 #
 #-----[ OPEN ]------------------------------------------
@@ -23,9 +66,16 @@ function jumpto()
 {
 	var page = prompt(jump_page, on_page);
 
-	if (page !== null && !isNaN(page) && page > 0)
+	if (page !== null && !isNaN(page) && page == Math.floor(page) && page > 0)
 	{
-		document.location.href = base_url.replace(/&amp;/g, '&') + '&start=' + ((page - 1) * per_page);
+		if (base_url.indexOf('?') == -1)
+		{
+			document.location.href = base_url + '?start=' + ((page - 1) * per_page);
+		}
+		else
+		{
+			document.location.href = base_url.replace(/&amp;/g, '&') + '&start=' + ((page - 1) * per_page);
+		}
 	}
 }
 
@@ -36,7 +86,8 @@ function jumpto()
 // www.phpBB-SEO.com SEO TOOLKIT BEGIN
 function jumpto() {
 	var page = prompt(jump_page, on_page);
-	if (page !== null && !isNaN(page) && page > 0) {
+
+	if (page !== null && !isNaN(page) && page == Math.floor(page) && page > 0) {
 		var seo_page = (page - 1) * per_page;
 		if ( base_url.indexOf('?') >= 0 ) {
 			document.location.href = base_url.replace(/&amp;/g, '&') + '&start=' + seo_page;
@@ -81,6 +132,7 @@ styles/prosilver/template/overall_header.html
 <meta name="copyright" content="2002-2006 phpBB Group" />
 <meta name="keywords" content="" />
 <meta name="description" content="" />
+<meta http-equiv="X-UA-Compatible" content="IE=EmulateIE7" />
 {META}
 <title>{SITENAME} &bull; <!-- IF S_IN_MCP -->{L_MCP} &bull; <!-- ELSEIF S_IN_UCP -->{L_UCP} &bull; <!-- ENDIF -->{PAGE_TITLE}</title>
 
@@ -96,6 +148,7 @@ styles/prosilver/template/overall_header.html
 <meta http-equiv="content-language" content="{S_USER_LANG}" />
 <meta http-equiv="imagetoolbar" content="no" />
 {META_TAG}
+<meta http-equiv="X-UA-Compatible" content="IE=EmulateIE7" />
 {META}
 <!-- BEGIN gym_rsslinks -->
 <link rel="alternate" type="application/rss+xml" title="{gym_rsslinks.TITLE}" href="{gym_rsslinks.URL}" />
@@ -278,6 +331,49 @@ div.gymsublist ul li {
 #
 #-----[ OPEN ]------------------------------------------
 ## MOD Title:		 Advanced phpBB3 SEO mod Rewrite
+#
+
+styles/subsilver2/template/attachment.html
+
+#
+#-----[ FIND ]------------------------------------------
+#
+
+			<a href="{_file.U_DOWNLOAD_LINK}"><img src="{_file.THUMB_IMAGE}" alt="{_file.DOWNLOAD_NAME}" /></a><br />
+
+#
+#-----[ REPLACE WITH ]------------------------------------------
+#
+
+			<a href="{_file.U_DOWNLOAD_LINK}"><img src="{_file.THUMB_IMAGE}" alt="{_file.DOWNLOAD_NAME}" title="<!-- IF _file.COMMENT_CLEAN -->{_file.COMMENT_CLEAN} / {_file.DOWNLOAD_NAME}<!-- ELSE -->{_file.DOWNLOAD_NAME} ({_file.FILESIZE} {_file.SIZE_LANG}) {_file.L_DOWNLOAD_COUNT}<!-- ENDIF -->"/></a><br />
+
+#
+#-----[ FIND ]------------------------------------------
+#
+
+			<img src="{_file.U_INLINE_LINK}" alt="{_file.DOWNLOAD_NAME}" /><br />
+
+#
+#-----[ REPLACE WITH ]------------------------------------------
+#
+
+			<img src="{_file.U_INLINE_LINK}" alt="{_file.DOWNLOAD_NAME}" title="<!-- IF _file.COMMENT_CLEAN -->{_file.COMMENT_CLEAN} / <!-- ENDIF -->{_file.DOWNLOAD_NAME}"/><br />
+
+#
+#-----[ FIND ]------------------------------------------
+#
+
+				<a href="{_file.U_DOWNLOAD_LINK}">{_file.DOWNLOAD_NAME}</a> [{_file.FILESIZE} {_file.SIZE_LANG}]
+
+#
+#-----[ REPLACE WITH ]------------------------------------------
+#
+
+				<a href="{_file.U_DOWNLOAD_LINK}" title="<!-- IF _file.COMMENT_CLEAN -->{_file.COMMENT_CLEAN} / <!-- ENDIF -->{_file.DOWNLOAD_NAME}">{_file.DOWNLOAD_NAME}</a> [{_file.FILESIZE} {_file.SIZE_LANG}]
+
+#
+#-----[ OPEN ]------------------------------------------
+## MOD Title:		 Advanced phpBB3 SEO mod Rewrite
 ## MOD Title:		 phpBB3 SEO Dynamic Meta tags
 ## MOD Title:		 phpBB3 SEO Optimal titles
 ## MOD Title:		 GYM Sitempas & RSS
@@ -300,6 +396,7 @@ styles/subsilver2/template/overall_header.html
 <meta name="copyright" content="2002-2006 phpBB Group" />
 <meta name="keywords" content="" />
 <meta name="description" content="" />
+<meta http-equiv="X-UA-Compatible" content="IE=EmulateIE7" />
 {META}
 <title>{SITENAME} &bull; <!-- IF S_IN_MCP -->{L_MCP} &bull; <!-- ELSEIF S_IN_UCP -->{L_UCP} &bull; <!-- ENDIF -->{PAGE_TITLE}</title>
 
@@ -315,6 +412,7 @@ styles/subsilver2/template/overall_header.html
 <meta http-equiv="content-language" content="{S_USER_LANG}" />
 <meta http-equiv="imagetoolbar" content="no" />
 {META_TAG}
+<meta http-equiv="X-UA-Compatible" content="IE=EmulateIE7" />
 {META}
 <!-- BEGIN gym_rsslinks -->
 <link rel="alternate" type="application/rss+xml" title="{gym_rsslinks.TITLE}" href="{gym_rsslinks.URL}" />
@@ -328,12 +426,19 @@ styles/subsilver2/template/overall_header.html
 function jumpto()
 {
 	var page = prompt('{LA_JUMP_PAGE}:', '{ON_PAGE}');
-	var perpage = '{PER_PAGE}';
+	var per_page = '{PER_PAGE}';
 	var base_url = '{A_BASE_URL}';
 
-	if (page !== null && !isNaN(page) && page > 0)
+	if (page !== null && !isNaN(page) && page == Math.floor(page) && page > 0)
 	{
-		document.location.href = base_url.replace(/&amp;/g, '&') + '&start=' + ((page - 1) * perpage);
+		if (base_url.indexOf('?') == -1)
+		{
+			document.location.href = base_url + '?start=' + ((page - 1) * per_page);
+		}
+		else
+		{
+			document.location.href = base_url.replace(/&amp;/g, '&') + '&start=' + ((page - 1) * per_page);
+		}
 	}
 }
 
@@ -349,7 +454,7 @@ function jumpto() {
 	var seo_delim_start = '{SEO_START_DELIM}';
 	var seo_static_pagination = '{SEO_SATIC_PAGE}';
 	var seo_ext_pagination = '{SEO_EXT_PAGE}';
-	if (page !== null && !isNaN(page) && page > 0) {
+	if (page !== null && !isNaN(page) && page == Math.floor(page) && page > 0) {
 		var seo_page = (page - 1) * perpage;
 		if ( base_url.indexOf('?') >= 0 ) {
 			document.location.href = base_url.replace(/&amp;/g, '&') + '&start=' + seo_page;

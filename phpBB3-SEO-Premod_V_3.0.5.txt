@@ -1,14 +1,14 @@
 ##############################################################
 ## MOD Title: 		phpBB3 SEO Premod
 ## MOD Author: 		dcz / www.phpbb-seo.com
-## MOD Description: 	This Package is a fully SEOed phpBB3 Premod
+## MOD Description: 	This Package is a fully SEOed phpBB Premod
 ## 			Check http://www.phpbb-seo.com/en/phpbb-seo-premod/seo-url-premod-t1549.html
 ## 			for the latest version or to get help.
 ##
-## MOD Version: 	3.0.4
+## MOD Version: 	3.0.5
 ##
 ## Installation Level: 	As easy as phpBB3
-## Installation Time: 	10 Minutes
+## Installation Time: 	15 Minutes
 ## Files To Edit: 	0
 ##
 ##############################################################
@@ -213,27 +213,27 @@ ________________________________________
 >>>>   UPDATE INSTRUCTION   	   <<<<<
 ________________________________________
 
-Update 3.0.3 => 3.0.4 :
+Update 3.0.4 => 3.0.5 :
 First, go to http://downloads.phpbb-seo.com/seo-url-premod-12/
 where you'll be able to download the update packages
 You can update using two method :
-	1) Auto updating : "3.0.3 to 3.0.4 Auto update"
+	1) Auto updating : "3.0.4 to 3.0.5 Auto update"
 		- Upload the auto_update/install/*.* folder of the update package to install/*.*
 		- Go to ACP => SYSTEM and follow instructions.
 		The auto update method will take the eventual code change you have made into account, 
 		and will attempt to merge the new files with your online modified ones.
 		It's the safest method for most, the installer will tel you if it has trouble to update some files.
-	2) Manual updating : "3.0.3 to 3.0.4 Changed Files"
+	2) Manual updating : "3.0.4 to 3.0.5 Changed Files"
 		You'll find the modified file list in the modified/ folder of the update package.
 		- Upload / merge / overwrite all file,
 		- Upload the modified/install/*.* to install/*.*,
 		- Run www.example.com/phpbb/install/database_update.php to update the DB.
 
-If you encounter some difficulties to update the phpbb_seo_class.php file, for example if you modded it, 
-you will just have to use the new file and edit it to re enter your previous customisations (static part & delimiters).
+This update will not change any of your current URL settings, but it will add some new one.
+You WILL have to update you .htaccess once done.
+The phpbb_seo_class.php file does not hold static part and delimiters customisation any more, these are now set in the phpbb_seo/includes/setup_phpbb_seo.php. If you customized your default delimiters, static part etc, you will have to set them up in that file. Please read what's said bellow for more details about how to do it.
 
-Once you will have updated, you will have to refresh your theme's cache as well as phpBB's cache 
-(ACP => STYLE, Themes => Refresh).
+Once you will have updated, you will have to refresh your theme's cache as well as phpBB's cache (ACP => STYLE, Themes => Refresh).
 
 We have included the mod GYM Sitemap & RSS, but we kept the install separated
 see bellow to install.
@@ -260,7 +260,7 @@ Before you start, read this with caution.
 	2) Follow the installation / conversion / upgrade steps;
 	3) Go to phpBB ACP : It's now time to play with settings described bellow;
 	4) Generate your personalized .htaccess and upload or move it following the instructions;
-	5) Test a rewritten URL, such as www.yoursite.com/phpBB/post1.html, if you end up with a 404 (not a phpBB message), 
+	5) Test a rewritten URL, such as yoursite.com/phpBB/post1.html, if you end up with a 404 (not a phpBB message), 
 	go back to step 5;
 	6) Activate URL rewriting in phpBB ACP and allow yourself some auto-congratulation :D
 	7) Activating the Zero duplicate is wise at this point. 
