@@ -2,7 +2,7 @@
 /**
 *
 * @package phpBB3
-* @version $Id: viewtopic.php 9138 2008-11-30 16:53:36Z acydburn $
+* @version $Id: viewtopic.php 9470 2009-04-18 17:22:41Z acydburn $
 * @copyright (c) 2005 phpBB Group
 * @license http://opensource.org/licenses/gpl-license.php GNU Public License
 *
@@ -275,9 +275,9 @@ $db->sql_freeresult($result);
 if (!$topic_data)
 {
 	// If post_id was submitted, we try at least to display the topic as a last resort...
-	if ($post_id && $forum_id && $topic_id)
+	if ($post_id && $topic_id)
 	{
-		redirect(append_sid("{$phpbb_root_path}viewtopic.$phpEx", "f=$forum_id&amp;t=$topic_id"));
+		redirect(append_sid("{$phpbb_root_path}viewtopic.$phpEx", "t=$topic_id" . (($forum_id) ? "&amp;f=$forum_id" : '')));
 	}
 
 	trigger_error('NO_TOPIC');
@@ -319,18 +319,38 @@ if ($post_id)
 $forum_id = (int) $topic_data['forum_id'];
 $topic_id = (int) $topic_data['topic_id'];
 // www.phpBB-SEO.com SEO TOOLKIT BEGIN
-if ( empty($phpbb_seo->seo_url['topic'][$topic_id]) ) {
-	if ($topic_data['topic_type'] == POST_GLOBAL) {
-		$phpbb_seo->seo_opt['topic_type'][$topic_id] = POST_GLOBAL;
-		// Let's make sure user will see global annoucements
-		$auth->cache[$forum_id]['f_read'] = 1;
+$phpbb_seo->set_url($topic_data['forum_name'], $forum_id, $phpbb_seo->seo_static['forum']);
+if ($topic_data['topic_type'] == POST_GLOBAL) {
+	// Let's make sure user will see global annoucements
+	$auth->cache[$forum_id]['f_read'] = 1;
+	$_parent = $phpbb_seo->seo_static['global_announce'];
+} else {
+	$_parent = $phpbb_seo->seo_url['forum'][$forum_id];
+}
+if (!empty($phpbb_seo->seo_opt['sql_rewrite'])) {
+	if ( !$phpbb_seo->check_url('topic', $topic_data['topic_url'], $_parent)) {
+		if (!empty($topic_data['topic_url'])) {
+			// Here we get rid of the seo delim (-t) and put it back even in simple mod 
+			// to be able to handle all cases at once
+			$_url = preg_replace('`' . $phpbb_seo->seo_delim['topic'] . '$`i', '', $topic_data['topic_url']);
+			$_title = $phpbb_seo->get_url_info('topic', $_url . $phpbb_seo->seo_delim['topic'] . $topic_id, 'title');
+		} else {
+			$_title = $phpbb_seo->modrtype > 2 ? censor_text($topic_data['topic_title']) : '';
+		}
+		unset($phpbb_seo->seo_url['topic'][$topic_id]);
+		$topic_data['topic_url'] = $phpbb_seo->get_url_info('topic', $phpbb_seo->prepare_url( 'topic', $_title, $topic_id, $_parent, (( empty($_title) || ($_title == $phpbb_seo->seo_static['topic']) ) ? true : false) ), 'url');
+		unset($phpbb_seo->seo_url['topic'][$topic_id]);
+		if ($topic_data['topic_url']) {
+			// Update the topic_url field for later re-use
+			$sql = "UPDATE " . TOPICS_TABLE . " SET topic_url = '" . $db->sql_escape($topic_data['topic_url']) . "'
+				WHERE topic_id = $topic_id";
+			$db->sql_query($sql);
+		}
 	}
-	$phpbb_seo->seo_censored[$topic_id] = censor_text($topic_data['topic_title']);
-	$phpbb_seo->seo_url['topic'][$topic_id] = $phpbb_seo->format_url($phpbb_seo->seo_censored[$topic_id]);
+} else {
+	$topic_data['topic_url'] = '';
 }
-if ( empty($phpbb_seo->seo_url['forum'][$topic_data['forum_id']]) ) {
-	$phpbb_seo->seo_url['forum'][$topic_data['forum_id']] = $phpbb_seo->set_url($topic_data['forum_name'], $topic_data['forum_id'], $phpbb_seo->seo_static['forum']);
-}
+$phpbb_seo->prepare_iurl($topic_data, 'topic', $_parent);
 // www.phpBB-SEO.com SEO TOOLKIT END
 //
 $topic_replies = ($auth->acl_get('m_approve', $forum_id)) ? $topic_data['topic_replies_real'] : $topic_data['topic_replies'];
@@ -486,8 +506,8 @@ if ($start < 0 || $start >= $total_posts)
 $phpbb_seo->seo_opt['zero_dupe']['start'] = $phpbb_seo->seo_chk_start( $start, $config['posts_per_page'] );
 if ( $post_id && !$view && !$phpbb_seo->set_do_redir_post()) {
 	$phpbb_seo->seo_opt['zero_dupe']['redir_def'] = array(
-		'p' => array('val' => $post_id, 'keep' => true, 'force' => true),
-		'hilit' => array('val' => (($highlight_match) ? $highlight : ''), 'keep' => !empty($highlight)),
+		'p' => array('val' => $post_id, 'keep' => true, 'force' => true, 'hash' => "p$post_id"),
+		'hilit' => array('val' => (($highlight_match) ? $highlight : ''), 'keep' => !empty($highlight_match)),
 	);
 } else {
 	$seo_watch = request_var('watch', '');
@@ -500,8 +520,8 @@ if ( $post_id && !$view && !$phpbb_seo->set_do_redir_post()) {
 	$phpbb_seo->seo_opt['zero_dupe']['redir_def'] = array(
 		'uid' => array('val' => $seo_uid, 'keep' => (boolean) ($keep_hash && $seo_uid)),
 		'f' => array('val' => $forum_id, 'keep' => true, 'force' => true),
-		't' => array('val' => $topic_id, 'keep' => true, 'force' => true),
-		'p' => array('val' => $post_id, 'keep' =>  ($view == 'show' ? true : false)),
+		't' => array('val' => $topic_id, 'keep' => true, 'force' => true, 'hash' => $post_id ? "p$post_id" : ''),
+		'p' => array('val' => $post_id, 'keep' =>  ($post_id && $view == 'show' ? true : false), 'hash' => "p$post_id"),
 		'watch' => array('val' => $seo_watch, 'keep' => $keep_watch),
 		'unwatch' => array('val' => $seo_unwatch, 'keep' => $keep_unwatch),
 		'bookmark' => array('val' => $seo_bookmark, 'keep' => (boolean) ($user->data['is_registered'] && $config['allow_bookmarks'] && $seo_bookmark)),
@@ -674,7 +694,7 @@ $template->assign_vars(array(
 	'S_SINGLE_MODERATOR'	=> (!empty($forum_moderators[$forum_id]) && sizeof($forum_moderators[$forum_id]) > 1) ? false : true,
 	'S_TOPIC_ACTION' 		=> append_sid("{$phpbb_root_path}viewtopic.$phpEx", "f=$forum_id&amp;t=$topic_id&amp;start=$start"),
 	'S_TOPIC_MOD' 			=> ($topic_mod != '') ? '<select name="action" id="quick-mod-select">' . $topic_mod . '</select>' : '',
-	'S_MOD_ACTION' 			=> append_sid("{$phpbb_root_path}mcp.$phpEx", "f=$forum_id&amp;t=$topic_id&amp;quickmod=1&amp;redirect=" . urlencode(str_replace('&amp;', '&', $viewtopic_url)), true, $user->session_id),
+	'S_MOD_ACTION' 			=> append_sid("{$phpbb_root_path}mcp.$phpEx", "f=$forum_id&amp;t=$topic_id&amp;start=$start&amp;quickmod=1&amp;redirect=" . urlencode(str_replace('&amp;', '&', $viewtopic_url)), true, $user->session_id),
 
 	'S_VIEWTOPIC'			=> true,
 	'S_DISPLAY_SEARCHBOX'	=> ($auth->acl_get('u_search') && $auth->acl_get('f_search', $forum_id) && $config['load_search']) ? true : false,
@@ -755,8 +775,8 @@ if (!empty($topic_data['poll_start']))
 		}
 	}
 
-	$s_can_vote = (((!sizeof($cur_voted_id) && $auth->acl_get('f_vote', $forum_id)) ||
-		($auth->acl_get('f_votechg', $forum_id) && $topic_data['poll_vote_change'])) &&
+	// Can not vote at all if no vote permission
+	$s_can_vote = ($auth->acl_get('f_vote', $forum_id) &&
 		(($topic_data['poll_length'] != 0 && $topic_data['poll_start'] + $topic_data['poll_length'] > time()) || $topic_data['poll_length'] == 0) &&
 		$topic_data['topic_status'] != ITEM_LOCKED &&
 		$topic_data['forum_status'] != ITEM_LOCKED) ? true : false;
@@ -976,7 +996,7 @@ $result = $db->sql_query_limit($sql, $sql_limit, $sql_start);
 $i = ($store_reverse) ? $sql_limit - 1 : 0;
 while ($row = $db->sql_fetchrow($result))
 {
-	$post_list[$i] = $row['post_id'];
+	$post_list[$i] = (int) $row['post_id'];
 	($store_reverse) ? $i-- : $i++;
 }
 $db->sql_freeresult($result);
@@ -1030,14 +1050,14 @@ while ($row = $db->sql_fetchrow($result))
 		$max_post_time = $row['post_time'];
 	}
 
-	$poster_id = $row['poster_id'];
+	$poster_id = (int) $row['poster_id'];
 	// www.phpBB-SEO.com SEO TOOLKIT BEGIN
 	$phpbb_seo->set_user_url( $row['username'], $poster_id );
 	// www.phpBB-SEO.com SEO TOOLKIT END
 	// Does post have an attachment? If so, add it to the list
 	if ($row['post_attachment'] && $config['allow_attachments'])
 	{
-		$attach_list[] = $row['post_id'];
+		$attach_list[] = (int) $row['post_id'];
 
 		if ($row['post_approved'])
 		{
@@ -1223,7 +1243,10 @@ $db->sql_freeresult($result);
 // Load custom profile fields
 if ($config['load_cpf_viewtopic'])
 {
-	include($phpbb_root_path . 'includes/functions_profile_fields.' . $phpEx);
+	if (!class_exists('custom_profile'))
+	{
+		include($phpbb_root_path . 'includes/functions_profile_fields.' . $phpEx);
+	}
 	$cp = new custom_profile();
 
 	// Grab all profile fields from users in id cache for later use - similar to the poster cache
@@ -1382,7 +1405,7 @@ for ($i = 0, $end = sizeof($post_list); $i < $end; ++$i)
 			}
 			$db->sql_freeresult($result);
 		}
-		$seo_meta->meta['keywords'] = !empty($m_kewrd) ? $seo_meta->make_keywords($m_kewrd) : $seo_meta->make_keywords($seo_meta->meta['meta_desc']);
+		$seo_meta->meta['keywords'] = $seo_meta->make_keywords($row['post_subject'] . (!empty($m_kewrd) ? $m_kewrd : $seo_meta->meta['meta_desc']));
 	}
 	// www.phpBB-SEO.com SEO TOOLKIT END  - META
 	// Second parse bbcode here
@@ -1481,7 +1504,7 @@ for ($i = 0, $end = sizeof($post_list); $i < $end; ++$i)
 		// It is safe to grab the username from the user cache array, we are at the last
 		// post and only the topic poster and last poster are allowed to bump.
 		// Admins and mods are bound to the above rules too...
-		$l_bumped_by = '<br /><br />' . sprintf($user->lang['BUMPED_BY'], $user_cache[$topic_data['topic_bumper']]['username'], $user->format_date($topic_data['topic_last_post_time']));
+		$l_bumped_by = '<br /><br />' . sprintf($user->lang['BUMPED_BY'], $user_cache[$topic_data['topic_bumper']]['username'], $user->format_date($topic_data['topic_last_post_time'], false, true));
 	}
 	else
 	{
@@ -1521,7 +1544,7 @@ for ($i = 0, $end = sizeof($post_list); $i < $end; ++$i)
 		'POSTER_WARNINGS'	=> $user_cache[$poster_id]['warnings'],
 		'POSTER_AGE'		=> $user_cache[$poster_id]['age'],
 
-		'POST_DATE'			=> $user->format_date($row['post_time']),
+		'POST_DATE'			=> $user->format_date($row['post_time'], false, ($view == 'print') ? true : false),
 		'POST_SUBJECT'		=> $row['post_subject'],
 		'MESSAGE'			=> $message,
 		'SIGNATURE'			=> ($row['enable_sig']) ? $user_cache[$poster_id]['sig'] : '',
@@ -1618,7 +1641,7 @@ for ($i = 0, $end = sizeof($post_list); $i < $end; ++$i)
 unset($rowset, $user_cache);
 
 // Update topic view and if necessary attachment view counters ... but only for humans and if this is the first 'page view'
-if (isset($user->data['session_page']) && !$user->data['is_bot'] && strpos($user->data['session_page'], '&t=' . $topic_id) === false)
+if (isset($user->data['session_page']) && !$user->data['is_bot'] && (strpos($user->data['session_page'], '&t=' . $topic_id) === false || isset($user->data['session_created'])))
 {
 	$sql = 'UPDATE ' . TOPICS_TABLE . '
 		SET topic_views = topic_views + 1, topic_last_view_time = ' . time() . "

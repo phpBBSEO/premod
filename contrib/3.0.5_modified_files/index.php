@@ -88,9 +88,7 @@ while ($row = $db->sql_fetchrow($result))
 	else
 	{
 		// www.phpBB-SEO.com SEO TOOLKIT BEGIN
-		if ( $phpbb_seo->seo_opt['profile_inj'] && empty($phpbb_seo->seo_url['group'][$row['group_id']]) ) {
-			$phpbb_seo->seo_url['group'][$row['group_id']] = $phpbb_seo->format_url($row['group_name'], $phpbb_seo->seo_static['group']);
-		}
+		$phpbb_seo->prepare_url('group', $row['group_name'], $row['group_id']);
 		// www.phpBB-SEO.com SEO TOOLKIT END
 		$legend[] = '<a' . $colour_text . ' href="' . append_sid("{$phpbb_root_path}memberlist.$phpEx", 'mode=group&amp;g=' . $row['group_id']) . '">' . $group_name . '</a>';
 	}
@@ -149,7 +147,9 @@ $template->assign_vars(array(
 $seo_meta->meta['meta_desc'] = $seo_meta->meta_filter_txt($config['sitename'] . ' : ' .  $config['site_desc']);
 $seo_meta->meta['keywords'] = $seo_meta->make_keywords($seo_meta->meta['meta_desc']);
 // www.phpBB-SEO.com SEO TOOLKIT END - META
-page_header($user->lang['INDEX']);
+// www.phpBB-SEO.com SEO TOOLKIT BEGIN - TITLE
+page_header($config['sitename']);
+// www.phpBB-SEO.com SEO TOOLKIT END - TITLE
 
 $template->set_filenames(array(
 	'body' => 'index_body.html')

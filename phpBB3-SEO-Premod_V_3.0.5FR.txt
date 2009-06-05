@@ -67,6 +67,31 @@
 ##############################################################
 ## MOD History:
 ##
+#	2009-06-27 - 3.0.5
+##		- All mods Updated to comply with phpBB 3.0.5.
+##		- GYM Sitemaps & RSS 2.0.RC4 :
+##			- Added : more option for displaying RSS links among the forum,
+##			- Fixed : News feeds ordering,
+##			- Added : subsilver2 html templates,
+##			- Fixed : Google ping again!,
+##			- Fixed : RSS channel validation,
+##			- Fixed : Google XML and TXT modules,
+##			- Various bug fixes and enhancement.
+##		- mod rewrite 0.6.0 :
+##			- Complete rewrite of the phpbb_seo class, URL rewriting never was this fast,
+##			- Added : SQL Rewriting for topic urls, allowing per case URLs for each topics (optional),
+##			- Added : Attachment Rewriting (optional),
+##			- All types of URL rewritings are now merged into a single mod: Ultimate SEO URL.
+##		- zero duplicate 0.6.0 :
+##			- Fixed : URL hash kept upon redirection (for browsers supporting it),
+##			- Better SID handling (SID are never added when they are not present in request).
+##		- no duplicate 0.6.0 :
+##			- Fixed : possibly wrong forum id on index.
+##		- Meta tags 0.2.8 :
+##			- Fixed : Enabling search_ignore_words.php filtering (optional),
+##			- Added  : File based filtering.
+##		- Optimal titles 1.0.6 :
+##			- Index page title is now built using the phpBB sitename.
 ##	2008-12-20 - 3.0.4
 ##		- All mods Updated to comply with phpBB 3.0.4.
 ##		- GYM Sitemaps & RSS 2.0.RC3 :
@@ -417,7 +442,7 @@ Dans le module d'administration phpBB SEO, rendez vous sur la page "htaccess".
 Un .htaccess adapté à vos réglages y sera affiché. C'est le premier .htaccess à essayer.
 Si la suggestion par défaut ne fonctionne pas, vous pourrez afficher des options supplémentaires, et générer plusieurs variantes.
 Vous trouverez un fichier .htaccess vide dans le dossier contrib/ de l'archive du mod. 
-Vous pouvez l'utilisez pour y copier le contenu du .htaccess généré par la page de réglage ou l'enregistré directement sur le serveur.
+Vous pouvez l'utilisez pour y copier le contenu du .htaccess généré par la page de réglage ou l'enregistré directement sur le serveur (le .htaccess est alors sauvegarder dans phpbb_seo/cache/).
 
 Le generateur de .htaccess va ajouter les rewriterules nécéssaires pour vous assurer de l'unicité de votre domaine, 
 mais elles seront au départ commentées (inactives), car c'est le genre de chose qui requiert une intervention humaine.

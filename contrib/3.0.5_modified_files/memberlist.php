@@ -2,7 +2,7 @@
 /**
 *
 * @package phpBB3
-* @version $Id: memberlist.php 9156 2008-12-02 18:48:25Z toonarmy $
+* @version $Id: memberlist.php 9482 2009-04-24 17:27:10Z terrafrost $
 * @copyright (c) 2005 phpBB Group
 * @license http://opensource.org/licenses/gpl-license.php GNU Public License
 *
@@ -25,7 +25,7 @@ $user->setup(array('memberlist', 'groups'));
 if (!empty($_REQUEST['un'])) {
 	$_REQUEST['un'] = rawurldecode($_REQUEST['un']);
 	if (!$phpbb_seo->is_utf8($_REQUEST['un'])) {
-		$_REQUEST['un'] = utf8_normalize_nfc(utf8_recode($_REQUEST['un'], 'iso-8859-1'));
+		$_REQUEST['un'] = utf8_normalize_nfc(utf8_recode($_REQUEST['un'], 'ISO-8859-1'));
 	}
 }
 // www.phpBB-SEO.com SEO TOOLKIT END
@@ -249,9 +249,7 @@ switch ($mode)
 				$group_name = ($row['group_type'] == GROUP_SPECIAL) ? $user->lang['G_' . $row['group_name']] : $row['group_name'];
 				
 				// www.phpBB-SEO.com SEO TOOLKIT BEGIN
-				if ( $phpbb_seo->seo_opt['profile_inj'] && empty($phpbb_seo->seo_url['group'][$row['group_id']]) ) {
-					$phpbb_seo->seo_url['group'][$row['group_id']] = $phpbb_seo->format_url($row['group_name'], $phpbb_seo->seo_static['group']);
-				}
+				$phpbb_seo->prepare_url('group', $row['group_name'], $row['group_id']);
 				// www.phpBB-SEO.com SEO TOOLKIT END
 				$u_group = append_sid("{$phpbb_root_path}memberlist.$phpEx", 'mode=group&amp;g=' . $row['group_id']);
 			}
@@ -918,7 +916,10 @@ switch ($mode)
 		}
 
 		$template->assign_vars(array(
-			'ERROR_MESSAGE'		=> (sizeof($error)) ? implode('<br />', $error) : '')
+			'ERROR_MESSAGE'		=> (sizeof($error)) ? implode('<br />', $error) : '',
+			'SUBJECT'			=> $subject,
+			'MESSAGE'			=> $message,
+			)
 		);
 
 	break;
@@ -1297,9 +1298,7 @@ switch ($mode)
 
 		// www.phpBB-SEO.com SEO TOOLKIT BEGIN - Zero dupe
 		if ($mode == 'group') {
-			if ( empty($phpbb_seo->seo_url['group'][$group_row['group_id']]) ) {
-				$phpbb_seo->seo_url['group'][$group_row['group_id']] = $phpbb_seo->format_url($group_row['group_name'], $phpbb_seo->seo_static['group']);
-			}
+			$phpbb_seo->prepare_url('group', $group_row['group_name'], $group_row['group_id']);
 			$phpbb_seo->seo_opt['zero_dupe']['start'] = $phpbb_seo->seo_chk_start( $start, $config['topics_per_page'] );
 
 			$phpbb_seo->seo_chk_dupe("{$phpbb_root_path}memberlist.$phpEx?" . implode('&amp;', $params) . '&amp;start=' . $phpbb_seo->seo_opt['zero_dupe']['start']);
@@ -1669,6 +1668,7 @@ function show_profile($data)
 		'U_PM'			=> ($config['allow_privmsg'] && $auth->acl_get('u_sendpm') && ($data['user_allow_pm'] || $auth->acl_gets('a_', 'm_') || $auth->acl_getf_global('m_'))) ? append_sid("{$phpbb_root_path}ucp.$phpEx", 'i=pm&amp;mode=compose&amp;u=' . $user_id) : '',
 		'U_EMAIL'		=> $email,
 		'U_WWW'			=> (!empty($data['user_website'])) ? $data['user_website'] : '',
+		'U_SHORT_WWW'			=> (!empty($data['user_website'])) ? ((strlen($data['user_website']) > 55) ? substr($data['user_website'], 0, 39) . ' ... ' . substr($data['user_website'], -10) : $data['user_website']) : '',
 		'U_ICQ'			=> ($data['user_icq']) ? 'http://www.icq.com/people/webmsg.php?to=' . urlencode($data['user_icq']) : '',
 		'U_AIM'			=> ($data['user_aim'] && $auth->acl_get('u_sendim')) ? append_sid("{$phpbb_root_path}memberlist.$phpEx", 'mode=contact&amp;action=aim&amp;u=' . $user_id) : '',
 		'U_YIM'			=> ($data['user_yim']) ? 'http://edit.yahoo.com/config/send_webmesg?.target=' . urlencode($data['user_yim']) . '&amp;.src=pg' : '',
