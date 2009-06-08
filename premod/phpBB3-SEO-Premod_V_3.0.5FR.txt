@@ -1,5 +1,5 @@
 ##############################################################
-## MOD Title: 		Premod phpBB3 SEO
+## MOD Title: 		Premod phpBB SEO
 ## MOD Author: 		dcz / www.phpbb-seo.com
 ## MOD Description: 	Cette prémod est une version de phpBB complète et optimisée pour le référencement.
 ##			Veuillez lire les notes de l'auteur avent d'installer ce mod.
