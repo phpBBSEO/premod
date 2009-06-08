@@ -109,6 +109,25 @@ function jumpto() {
 
 #
 #-----[ OPEN ]------------------------------------------
+## MOD Title:		 phpBB3 SEO No Duplicate
+#
+
+styles/prosilver/template/forumlist_body.html
+
+#
+#-----[ FIND ]------------------------------------------
+#
+
+						<!-- IF forumrow.LAST_POST_TIME --><dfn>{L_LAST_POST}</dfn>
+
+#
+#-----[ AFTER, ADD ]------------------------------------------
+#
+
+<!-- IF forumrow.LAST_POST_LINK --><i>{forumrow.LAST_POST_LINK}</i><br/><!-- ENDIF -->
+
+#
+#-----[ OPEN ]------------------------------------------
 ## MOD Title:		 Advanced phpBB3 SEO mod Rewrite
 ## MOD Title:		 phpBB3 SEO Dynamic Meta tags
 ## MOD Title:		 phpBB3 SEO Optimal titles
@@ -211,26 +230,33 @@ styles/prosilver/template/overall_footer.html
 			<li class="leftside">{GYM_RSS_CHAN_LINK}</li>
 		</ul>
 		<!-- ENDIF -->
-
 #
 #-----[ OPEN ]------------------------------------------
-## MOD Title:		 phpBB3 SEO No Duplicate
+## MOD Title:		 Advanced phpBB3 SEO mod Rewrite
 #
 
-styles/prosilver/template/forumlist_body.html
+styles/prosilver/template/posting_editor.html
 
 #
 #-----[ FIND ]------------------------------------------
 #
 
-						<!-- IF forumrow.LAST_POST_TIME --><dfn>{L_LAST_POST}</dfn>
+	<dl style="clear: left;">
+		<dt><label for="subject">{L_SUBJECT}:</label></dt>
+		<dd><input type="text" name="subject" id="subject" size="45" maxlength="<!-- IF S_NEW_MESSAGE -->60<!-- ELSE -->64<!-- ENDIF -->" tabindex="2" value="{SUBJECT}{DRAFT_SUBJECT}" class="inputbox autowidth" /></dd>
+	</dl>
 
 #
 #-----[ AFTER, ADD ]------------------------------------------
 #
 
-<!-- IF forumrow.LAST_POST_LINK --><i>{forumrow.LAST_POST_LINK}</i><br/><!-- ENDIF -->
-
+		<!-- IF S_URL -->
+		<dl style="clear: left;">
+			<dt><label for="url">URL:</label></dt>
+				<dd><input type="text" name="url" id="url" size="45" maxlength="250" tabindex="2" value="{TOPIC_URL}" class="inputbox autowidth" /></dd>
+		</dl>
+		<!-- ENDIF -->
+		
 #
 #-----[ OPEN ]------------------------------------------
 ## MOD Title:		 GYM Sitempas & RSS
@@ -373,6 +399,27 @@ styles/subsilver2/template/attachment.html
 
 #
 #-----[ OPEN ]------------------------------------------
+## MOD Title:		 phpBB3 SEO No Duplicate
+#
+
+styles/subsilver2/template/forumlist_body.html
+
+#
+#-----[ FIND ]------------------------------------------
+#
+
+				<!-- IF forumrow.LAST_POST_TIME -->
+
+#
+#-----[ AFTER, ADD ]------------------------------------------
+#
+
+					<!-- IF forumrow.LAST_POST_LINK -->
+					<p class="topicdetails"><i>{forumrow.LAST_POST_LINK}</i></p>
+					<!-- ENDIF -->
+					
+#
+#-----[ OPEN ]------------------------------------------
 ## MOD Title:		 Advanced phpBB3 SEO mod Rewrite
 ## MOD Title:		 phpBB3 SEO Dynamic Meta tags
 ## MOD Title:		 phpBB3 SEO Optimal titles
@@ -495,24 +542,30 @@ styles/subsilver2/template/overall_footer.html
 
 #
 #-----[ OPEN ]------------------------------------------
-## MOD Title:		 phpBB3 SEO No Duplicate
+## MOD Title:		 Advanced phpBB3 SEO mod Rewrite
 #
 
-styles/subsilver2/template/forumlist_body.html
+styles/subsilver2/template/posting_body.html
 
 #
 #-----[ FIND ]------------------------------------------
 #
 
-				<!-- IF forumrow.LAST_POST_TIME -->
+<tr>
+	<td class="row1" width="22%"><b class="genmed">{L_SUBJECT}:</b></td>
+	<td class="row2" width="78%"><input class="post" style="width:450px" type="text" name="subject" size="45" maxlength="<!-- IF S_NEW_MESSAGE -->60<!-- ELSE -->64<!-- ENDIF -->" tabindex="2" value="{SUBJECT}" /></td>
+</tr>
 
 #
 #-----[ AFTER, ADD ]------------------------------------------
 #
 
-					<!-- IF forumrow.LAST_POST_LINK -->
-					<p class="topicdetails"><i>{forumrow.LAST_POST_LINK}</i></p>
-					<!-- ENDIF -->
+<!-- IF S_URL -->
+<tr>
+	<td class="row1" width="22%"><b class="genmed">URL:</b></td>
+	<td class="row2" width="78%"><input class="post" style="width:450px" type="text" name="url" size="45" maxlength="250" tabindex="2" value="{TOPIC_URL}" /></td>
+</tr>
+<!-- ENDIF -->
 
 #
 #-----[ OPEN ]------------------------------------------

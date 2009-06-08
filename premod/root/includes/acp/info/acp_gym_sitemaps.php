@@ -2,7 +2,7 @@
 /**
 *
 * @package phpBB SEO GYM Sitemaps
-* @version $id: acp_gym_sitemaps.php - 1361 06-03-2009 16:19:35 - 2.0.RC4 dcz $
+* @version $id: acp_gym_sitemaps.php - 1361 06-08-2009 09:44:27 - 2.0.RC5 dcz $
 * @copyright (c) 2006 - 2009 www.phpbb-seo.com
 * @license http://opensource.org/osi3.0/licenses/lgpl-license.php GNU Lesser General Public License
 *
@@ -16,7 +16,7 @@ class acp_gym_sitemaps_info {
 		return array(
 			'filename'	=> 'gym_sitemaps',
 			'title'		=> 'ACP_GYM_SITEMAPS',
-			'version'	=> '2.0.RC4',
+			'version'	=> '2.0.RC5',
 			'modes'		=> array(
 				'main'		=> array('title' => 'ACP_GYM_MAIN', 'auth' => 'acl_a_board', 'cat' => array('ACP_GYM_SITEMAPS')),
 				'google'	=> array('title' => 'ACP_GYM_GOOGLE_MAIN', 'auth' => 'acl_a_board', 'cat' => array('ACP_GYM_SITEMAPS')),
