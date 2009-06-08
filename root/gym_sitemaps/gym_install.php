@@ -2,7 +2,7 @@
 /**
 *
 * @package phpBB SEO GYM Sitemaps
-* @version $id: gym_install.php - 35818 06-03-2009 16:19:35 - 2.0.RC4 dcz $
+* @version $id: gym_install.php - 35818 06-08-2009 09:44:27 - 2.0.RC5 dcz $
 * @copyright (c) 2006 - 2009 www.phpbb-seo.com
 * @license http://opensource.org/osi3.0/licenses/lgpl-license.php GNU Lesser General Public License
 *
@@ -14,7 +14,7 @@ define('IN_PHPBB', true);
 define('IN_INSTALL', true);
 $phpbb_root_path = (defined('PHPBB_ROOT_PATH')) ? PHPBB_ROOT_PATH : './../';
 $phpEx = substr(strrchr(__FILE__, '.'), 1);
-@define('GYM_VERSION', '2.0.RC4');
+@define('GYM_VERSION', '2.0.RC5');
 // Try to override some limits - maybe it helps some...
 @set_time_limit(0);
 $mem_limit = @ini_get('memory_limit');

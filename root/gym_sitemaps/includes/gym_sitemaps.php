@@ -2,7 +2,7 @@
 /**
 *
 * @package phpBB SEO GYM Sitemaps
-* @version $id: gym_sitemaps.php - 28773 06-03-2009 16:19:35 - 2.0.RC4 dcz $
+* @version $id: gym_sitemaps.php - 28190 06-08-2009 09:44:27 - 2.0.RC5 dcz $
 * @copyright (c) 2006 - 2009 www.phpbb-seo.com
 * @license http://opensource.org/osi3.0/licenses/lgpl-license.php GNU Lesser General Public License
 *
@@ -533,7 +533,7 @@ class gym_sitemaps {
 	*/
 	function topic_url($topic_data, $forum_id, $forum_url = '') {
 		global $phpbb_seo;
-		return $phpbb_seo->seo_opt['url_rewrite'] ? $this->prepare_iurl($topic_data, 'topic', trim($forum_url, '/')) : sprintf($this->url_config['topic_tpl'], $forum_id, (int) $topic['topic_id']);
+		return $phpbb_seo->seo_opt['url_rewrite'] ? $phpbb_seo->prepare_iurl($topic_data, 'topic', trim($forum_url, '/')) : sprintf($this->url_config['topic_tpl'], $forum_id, (int) $topic['topic_id']);
 	}
 	/**
 	* Returns usable start param
@@ -542,20 +542,6 @@ class gym_sitemaps {
 	function set_start($type, $start) {
 		global $phpbb_seo;
 		return $start > 0 ? sprintf($this->url_config[$type . '_start_tpl'], (int) $start) : $this->url_config[$type . '_ext'];
-	}
-	/**
-	* prepare_iurl( $data, $type, $parent = '' )
-	* Prepare url first part with SQL based URL rewriting
-	* Same as phpbb_seo::prepare_iurl but without url caching
-	*/
-	function prepare_iurl( $data, $type, $parent = '' ) {
-		global $phpbb_seo;
-		$id = max(0, (int) $data[$type . '_id']);
-		if (!empty($data[$type . '_url'])) {
-			return $data[$type . '_url'] . $phpbb_seo->seo_delim[$type] . $id;
-		} else {
-			return sprintf($phpbb_seo->sftpl[$type], $parent, $phpbb_seo->modrtype == 3 ? $phpbb_seo->format_url($data[$type . '_title'], $phpbb_seo->seo_static[$type]) : '', $id);
-		}
 	}
 	/**
 	* check start var consistency
