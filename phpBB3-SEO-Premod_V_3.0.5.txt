@@ -1,5 +1,5 @@
 ##############################################################
-## MOD Title: 		phpBB3 SEO Premod
+## MOD Title: 		phpBB SEO Premod
 ## MOD Author: 		dcz / www.phpbb-seo.com
 ## MOD Description: 	This Package is a fully SEOed phpBB Premod
 ## 			Check http://www.phpbb-seo.com/en/phpbb-seo-premod/seo-url-premod-t1549.html
