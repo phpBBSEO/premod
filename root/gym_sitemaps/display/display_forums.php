@@ -2,7 +2,7 @@
 /**
 *
 * @package phpBB SEO GYM Sitemaps
-* @version $id: display_forums.php - 17223 06-03-2009 16:19:35 - 2.0.RC4 dcz $
+* @version $id: display_forums.php - 17223 06-08-2009 09:44:27 - 2.0.RC5 dcz $
 * @copyright (c) 2006 - 2009 www.phpbb-seo.com
 * @license http://opensource.org/osi3.0/licenses/lgpl-license.php GNU Lesser General Public License
 *
