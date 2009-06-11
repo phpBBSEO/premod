@@ -256,6 +256,25 @@ styles/prosilver/template/posting_editor.html
 				<dd><input type="text" name="url" id="url" size="45" maxlength="250" tabindex="2" value="{TOPIC_URL}" class="inputbox autowidth" /></dd>
 		</dl>
 		<!-- ENDIF -->
+
+#
+#-----[ OPEN ]------------------------------------------
+## MOD Title:		 Advanced phpBB3 SEO mod Rewrite
+#
+
+styles/prosilver/template/simple_header.html
+
+#
+#-----[ FIND ]------------------------------------------
+#
+
+<head>
+
+#
+#-----[ AFTER, ADD]------------------------------------------
+#
+
+{SEO_BASE_HREF}
 		
 #
 #-----[ OPEN ]------------------------------------------
@@ -566,6 +585,25 @@ styles/subsilver2/template/posting_body.html
 	<td class="row2" width="78%"><input class="post" style="width:450px" type="text" name="url" size="45" maxlength="250" tabindex="2" value="{TOPIC_URL}" /></td>
 </tr>
 <!-- ENDIF -->
+
+#
+#-----[ OPEN ]------------------------------------------
+## MOD Title:		 Advanced phpBB3 SEO mod Rewrite
+#
+
+styles/subsilver2/template/simple_header.html
+
+#
+#-----[ FIND ]------------------------------------------
+#
+
+<head>
+
+#
+#-----[ AFTER, ADD ]------------------------------------------
+#
+
+{SEO_BASE_HREF}
 
 #
 #-----[ OPEN ]------------------------------------------

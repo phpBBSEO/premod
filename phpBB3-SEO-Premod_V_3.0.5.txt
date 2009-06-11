@@ -65,7 +65,7 @@
 ##############################################################
 ## MOD History:
 ##
-##	2009-06-27 - 3.0.5
+##	2009-06-05 - 3.0.5
 ##		- All mods Updated to comply with phpBB 3.0.5.
 ##		- GYM Sitemaps & RSS 2.0.RC5 :
 ##			- Fixed : Glitch in gym_sitemaps/includes/gym_sitemaps.php,
