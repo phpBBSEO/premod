@@ -167,11 +167,10 @@ function display_forums($root_data = '', $display_moderators = true, $return_mod
 		}
 
 		// www.phpBB-SEO.com SEO TOOLKIT BEGIN -> no dupe
-		if ($phpbb_seo->seo_opt['no_dupe']['on']) {
+		if (@$phpbb_seo->seo_opt['no_dupe']['on']) {
 			if ($row['topic_status'] == ITEM_MOVED) {
 				$row['topic_id'] = $row['topic_moved_id'];
 			}
-			$phpbb_seo->prepare_iurl($row, 'topic', $row['topic_type'] == POST_GLOBAL ? $phpbb_seo->seo_static['global_announce'] : $phpbb_seo->seo_url['forum'][$forum_id]);
 			$phpbb_seo->seo_opt['topic_forum_name'][$row['topic_id']] = $row['forum_name'];
 			if ($auth->acl_get('m_approve', $forum_id)) {
 				$row['forum_topics'] = $row['forum_topics_real'];
@@ -262,9 +261,10 @@ function display_forums($root_data = '', $display_moderators = true, $return_mod
 				$forum_rows[$parent_id]['forum_last_poster_colour'] = $row['forum_last_poster_colour'];
 				$forum_rows[$parent_id]['forum_id_last_post'] = $forum_id;
 				// www.phpBB-SEO.com SEO TOOLKIT BEGIN -> no dupe
-				if ($phpbb_seo->seo_opt['no_dupe']['on']) {
+				if (@$phpbb_seo->seo_opt['no_dupe']['on']) {
 					$forum_rows[$parent_id]['topic_id'] = $row['topic_id'];
 					$forum_rows[$parent_id]['topic_title'] = $row['topic_title'];
+					$forum_rows[$parent_id]['topic_type'] = $row['topic_type'];
 					$forum_rows[$parent_id]['forum_password'] = $row['forum_password'];
 				}
 				// www.phpBB-SEO.com SEO TOOLKIT END -> no dupe
@@ -416,7 +416,8 @@ function display_forums($root_data = '', $display_moderators = true, $return_mod
 			$last_post_subject = $row['forum_last_post_subject'];
 			$last_post_time = $user->format_date($row['forum_last_post_time']);
 			// www.phpBB-SEO.com SEO TOOLKIT BEGIN -> no dupe
-			if ($phpbb_seo->seo_opt['no_dupe']['on'] && !$row['forum_password'] && $auth->acl_get('f_read', $row['forum_id_last_post'])) {
+			if (@$phpbb_seo->seo_opt['no_dupe']['on'] && !$row['forum_password'] && $auth->acl_get('f_read', $row['forum_id_last_post'])) {
+				$phpbb_seo->prepare_iurl($row, 'topic', $row['topic_type'] == POST_GLOBAL ? $phpbb_seo->seo_static['global_announce'] : $phpbb_seo->seo_url['forum'][$forum_id]);
 				$last_post_url =  append_sid("{$phpbb_root_path}viewtopic.$phpEx", 'f=' . $row['forum_id_last_post'] . '&amp;t=' . $row['topic_id'] . '&amp;start=' . @intval($phpbb_seo->seo_opt['topic_last_page'][$row['topic_id']]) ) . '#p' . $row['forum_last_post_id'];
 				$topic_title = censor_text($row['topic_title']);
 				// Limit in chars for the last post link text.

@@ -27,7 +27,6 @@ class phpbb_seo {
 	var	$seo_cache = array();
 	var	$seo_ext = array();
 	var	$seo_static = array();
-	var	$seo_opt = array();
 	var	$modrtype = -1;
 	var	$sftpl = array();
 	var	$RegEx = array();
