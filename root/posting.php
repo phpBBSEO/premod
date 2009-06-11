@@ -1002,9 +1002,6 @@ if ($submit || $preview || $refresh)
 
 			$data = array(
 				'topic_title'			=> (empty($post_data['topic_title'])) ? $post_data['post_subject'] : $post_data['topic_title'],
-				// www.phpBB-SEO.com SEO TOOLKIT BEGIN
-				'topic_url' => isset($post_data['topic_url']) ? $post_data['topic_url'] : '',
-				// www.phpBB-SEO.com SEO TOOLKIT END
 				'topic_first_post_id'	=> (isset($post_data['topic_first_post_id'])) ? (int) $post_data['topic_first_post_id'] : 0,
 				'topic_last_post_id'	=> (isset($post_data['topic_last_post_id'])) ? (int) $post_data['topic_last_post_id'] : 0,
 				'topic_time_limit'		=> (int) $post_data['topic_time_limit'],
@@ -1039,7 +1036,11 @@ if ($submit || $preview || $refresh)
 				'topic_approved'		=> (isset($post_data['topic_approved'])) ? $post_data['topic_approved'] : false,
 				'post_approved'			=> (isset($post_data['post_approved'])) ? $post_data['post_approved'] : false,
 			);
-
+			// www.phpBB-SEO.com SEO TOOLKIT BEGIN
+			if (!empty($phpbb_seo->seo_opt['sql_rewrite'])) {
+				$data += array('topic_url' => isset($post_data['topic_url']) ? $post_data['topic_url'] : '');
+			}
+			// www.phpBB-SEO.com SEO TOOLKIT END
 			if ($mode == 'edit')
 			{
 				$data['topic_replies_real'] = $post_data['topic_replies_real'];
