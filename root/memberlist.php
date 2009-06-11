@@ -247,7 +247,6 @@ switch ($mode)
 			else
 			{
 				$group_name = ($row['group_type'] == GROUP_SPECIAL) ? $user->lang['G_' . $row['group_name']] : $row['group_name'];
-				
 				// www.phpBB-SEO.com SEO TOOLKIT BEGIN
 				$phpbb_seo->prepare_url('group', $row['group_name'], $row['group_id']);
 				// www.phpBB-SEO.com SEO TOOLKIT END

@@ -682,7 +682,7 @@ if (sizeof($topic_list))
 		$posts_unapproved = ($row['topic_approved'] && $row['topic_replies'] < $row['topic_replies_real'] && $auth->acl_get('m_approve', $forum_id)) ? true : false;
 		$u_mcp_queue = ($topic_unapproved || $posts_unapproved) ? append_sid("{$phpbb_root_path}mcp.$phpEx", 'i=queue&amp;mode=' . (($topic_unapproved) ? 'approve_details' : 'unapproved_posts') . "&amp;t=$topic_id", true, $user->session_id) : '';
 		// www.phpBB-SEO.com SEO TOOLKIT BEGIN -> no dupe
-		if ($phpbb_seo->seo_opt['no_dupe']['on']) {
+		if (@$phpbb_seo->seo_opt['no_dupe']['on']) {
 			if (($replies + 1) > $phpbb_seo->seo_opt['topic_per_page']) {
 				$phpbb_seo->seo_opt['topic_last_page'][$topic_id] = floor($replies / $phpbb_seo->seo_opt['topic_per_page']) * $phpbb_seo->seo_opt['topic_per_page'];
 			}

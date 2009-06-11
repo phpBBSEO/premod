@@ -1752,7 +1752,7 @@ function submit_post($mode, $subject, $username, $topic_type, &$poll, &$data, $u
 				'topic_title'				=> $subject,
 				// www.phpBB-SEO.com SEO TOOLKIT BEGIN
 				'topic_url' => isset($data['topic_url']) ? $data['topic_url'] : '',
-				// www.phpBB-SEO.com SEO TOOLKIT END			
+				// www.phpBB-SEO.com SEO TOOLKIT END
 				'topic_first_poster_name'	=> (!$user->data['is_registered'] && $username) ? $username : (($user->data['user_id'] != ANONYMOUS) ? $user->data['username'] : ''),
 				'topic_first_poster_colour'	=> $user->data['user_colour'],
 				'topic_type'				=> $topic_type,
@@ -1834,7 +1834,7 @@ function submit_post($mode, $subject, $username, $topic_type, &$poll, &$data, $u
 				'topic_approved'			=> (!$post_approval) ? 0 : $data['topic_approved'],
 				'topic_title'				=> $subject,
 				// www.phpBB-SEO.com SEO TOOLKIT BEGIN
-				'topic_url' =>  isset($data['topic_url']) ? $data['topic_url'] : '',
+				'topic_url' => isset($data['topic_url']) ? $data['topic_url'] : '',
 				// www.phpBB-SEO.com SEO TOOLKIT END
 				'topic_first_poster_name'	=> $username,
 				'topic_type'				=> $topic_type,
