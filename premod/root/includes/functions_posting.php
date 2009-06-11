@@ -1749,17 +1749,18 @@ function submit_post($mode, $subject, $username, $topic_type, &$poll, &$data, $u
 				'forum_id'					=> ($topic_type == POST_GLOBAL) ? 0 : $data['forum_id'],
 				'icon_id'					=> $data['icon_id'],
 				'topic_approved'			=> $post_approval,
-				'topic_title'				=> $subject,
-				// www.phpBB-SEO.com SEO TOOLKIT BEGIN
-				'topic_url' => isset($data['topic_url']) ? $data['topic_url'] : '',
-				// www.phpBB-SEO.com SEO TOOLKIT END
+				'topic_title'				=> $subject,		
 				'topic_first_poster_name'	=> (!$user->data['is_registered'] && $username) ? $username : (($user->data['user_id'] != ANONYMOUS) ? $user->data['username'] : ''),
 				'topic_first_poster_colour'	=> $user->data['user_colour'],
 				'topic_type'				=> $topic_type,
 				'topic_time_limit'			=> ($topic_type == POST_STICKY || $topic_type == POST_ANNOUNCE) ? ($data['topic_time_limit'] * 86400) : 0,
 				'topic_attachment'			=> (!empty($data['attachment_data'])) ? 1 : 0,
 			);
-
+			// www.phpBB-SEO.com SEO TOOLKIT BEGIN
+			if (!empty($phpbb_seo->seo_opt['sql_rewrite'])) {
+				$sql_data[TOPICS_TABLE]['sql'] += array('topic_url' => isset($data['topic_url']) ? $data['topic_url'] : '');
+			}
+			// www.phpBB-SEO.com SEO TOOLKIT END
 			if (isset($poll['poll_options']) && !empty($poll['poll_options']))
 			{
 				$poll_start = ($poll['poll_start']) ? $poll['poll_start'] : $current_time;
@@ -1833,9 +1834,6 @@ function submit_post($mode, $subject, $username, $topic_type, &$poll, &$data, $u
 				'icon_id'					=> $data['icon_id'],
 				'topic_approved'			=> (!$post_approval) ? 0 : $data['topic_approved'],
 				'topic_title'				=> $subject,
-				// www.phpBB-SEO.com SEO TOOLKIT BEGIN
-				'topic_url' => isset($data['topic_url']) ? $data['topic_url'] : '',
-				// www.phpBB-SEO.com SEO TOOLKIT END
 				'topic_first_poster_name'	=> $username,
 				'topic_type'				=> $topic_type,
 				'topic_time_limit'			=> ($topic_type == POST_STICKY || $topic_type == POST_ANNOUNCE) ? ($data['topic_time_limit'] * 86400) : 0,
@@ -1848,7 +1846,11 @@ function submit_post($mode, $subject, $username, $topic_type, &$poll, &$data, $u
 
 				'topic_attachment'			=> (!empty($data['attachment_data'])) ? 1 : (isset($data['topic_attachment']) ? $data['topic_attachment'] : 0),
 			);
-
+			// www.phpBB-SEO.com SEO TOOLKIT BEGIN
+			if (!empty($phpbb_seo->seo_opt['sql_rewrite'])) {
+				$sql_data[TOPICS_TABLE]['sql'] += array('topic_url' => isset($data['topic_url']) ? $data['topic_url'] : '');
+			}
+			// www.phpBB-SEO.com SEO TOOLKIT END
 			// Correctly set back the topic replies and forum posts... only if the topic was approved before and now gets disapproved
 			if (!$post_approval && $data['topic_approved'])
 			{
