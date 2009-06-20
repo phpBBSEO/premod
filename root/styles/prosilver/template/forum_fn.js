@@ -25,19 +25,25 @@ function jumpto() {
 
 	if (page !== null && !isNaN(page) && page == Math.floor(page) && page > 0) {
 		var seo_page = (page - 1) * per_page;
+		var anchor = '';
+		var anchor_parts = base_url.split('#');
+		if ( anchor_parts[1] ) {
+			base_url = anchor_parts[0];
+			anchor = '#' + anchor_parts[1];
+		}
 		if ( base_url.indexOf('?') >= 0 ) {
-			document.location.href = base_url.replace(/&amp;/g, '&') + '&start=' + seo_page;
+			document.location.href = base_url.replace(/&amp;/g, '&') + '&start=' + seo_page + anchor;
 		} else if ( seo_page > 0 ) {
 			var seo_type1 = base_url.match(/\.[a-z0-9]+$/i);
 			if (seo_type1 !== null) {
-				document.location.href = base_url.replace(/\.[a-z0-9]+$/i, '') + seo_delim_start + seo_page + seo_type1;
+				document.location.href = base_url.replace(/\.[a-z0-9]+$/i, '') + seo_delim_start + seo_page + seo_type1 + anchor;
 			}
 			var seo_type2 = base_url.match(/\/$/);
 			if (seo_type2 !== null) {
-				document.location.href = base_url + seo_static_pagination + seo_page + seo_ext_pagination;
+				document.location.href = base_url + seo_static_pagination + seo_page + seo_ext_pagination + anchor;
 			}
 		} else {
-			document.location.href = base_url;
+			document.location.href = base_url + anchor;
 		}
 	}
 }

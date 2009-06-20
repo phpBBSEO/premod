@@ -93,6 +93,16 @@ class phpbb_seo extends setup_phpbb_seo {
 		$this->seo_path['phpbb_urlR'] = $this->seo_path['phpbb_url'] =  $this->seo_path['root_url'] . $script_path;
 		$this->seo_path['phpbb_script'] = $script_path;	
 		$this->seo_path['phpbb_files'] = $this->seo_path['phpbb_url'] . 'download/';
+		// File setting
+		$this->seo_req_uri();
+		$this->seo_opt['seo_base_href'] = $this->seo_opt['req_file'] = $this->seo_opt['req_self'] = '';
+		if ($script_name = (!empty($_SERVER['PHP_SELF'])) ? $_SERVER['PHP_SELF'] : getenv('PHP_SELF')) {
+			// From session.php
+			// Replace backslashes and doubled slashes (could happen on some proxy setups)
+			$this->seo_opt['req_self'] = str_replace(array('\\', '//'), '/', $script_name);
+			// basenamed page name (for example: index)
+			$this->seo_opt['req_file'] = urlencode(htmlspecialchars(str_replace(".$phpEx", '', basename($this->seo_opt['req_self']))));
+		}
 		// Load settings from phpbb_seo/includes/phpbb_seo_modules.php
 		$this->init_phpbb_seo();
 		$this->seo_path['phpbb_filesR'] = $this->seo_path['phpbb_url'] . $this->seo_static['file_index'] . $this->seo_delim['file'];
@@ -176,16 +186,6 @@ class phpbb_seo extends setup_phpbb_seo {
 			),
 			$this->sftpl
 		);
-		// File setting
-		$this->seo_req_uri();
-		$this->seo_opt['seo_base_href'] = $this->seo_opt['req_file'] = $this->seo_opt['req_self'] = '';
-		if ($script_name = (!empty($_SERVER['PHP_SELF'])) ? $_SERVER['PHP_SELF'] : getenv('PHP_SELF')) {
-			// From session.php
-			// Replace backslashes and doubled slashes (could happen on some proxy setups)
-			$this->seo_opt['req_self'] = str_replace(array('\\', '//'), '/', $script_name);
-			// basenamed page name (for example: index)
-			$this->seo_opt['req_file'] = urlencode(htmlspecialchars(str_replace(".$phpEx", '', basename($this->seo_opt['req_self']))));
-		}
 		if ( $this->seo_opt['url_rewrite'] && !defined('ADMIN_START') && isset($this->file_hbase[$this->seo_opt['req_file']])) {	
 			$this->seo_opt['seo_base_href'] = '<base href="' . $this->file_hbase[$this->seo_opt['req_file']] . '"/>';
 		}
