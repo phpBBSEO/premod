@@ -100,7 +100,7 @@ function rem_gym_config($config_name, &$cfg_array) {
 * Builds the rss and sitemaps links
 */
 function obtain_gym_links($gym_links = array()) {
-	global $phpbb_root_path, $template, $cache, $config, $phpEx, $user, $phpbb_seo, $auth;	
+	global $phpbb_root_path, $template, $cache, $config, $phpEx, $user, $phpbb_seo, $auth;
 	if (empty($config['gym_installed'])) {
 		return;
 	}
@@ -128,14 +128,14 @@ function obtain_gym_links($gym_links = array()) {
 	$rss_setup = & $links['setup']['rss'];
 	$google_setup = & $links['setup']['google'];
 	if (!empty($html_setup['forum_allow_cat_news']) || !empty($html_setup['forum_allow_cat_map']) || !empty($rss_setup['forum_rss']) || !empty($google_setup['forum_google'])) {
-		$_f_sep = $phpbb_seo->seo_delim['forum'];
-		if ($links['setup']['main']['link_index'] && !empty($template->_tpldata['forumrow'])) {	
+		$_f_sep = $_phpbb_seo ? $phpbb_seo->seo_delim['forum'] : '';
+		if ($links['setup']['main']['link_index'] && !empty($template->_tpldata['forumrow'])) {
 			foreach ($template->_tpldata['forumrow'] as $k => $v) {
 				$num_topics = !empty($v['TOPICS']) ? max(0, (int) $v['TOPICS']) : 0;
 				if ($num_topics && empty($v['S_IS_LINK']) && empty($v['S_IS_CAT'])) {
 					$link = '';
 					$forum_id = (int) $v['FORUM_ID'];
-					$forum_name = $v['FORUM_NAME'];	
+					$forum_name = $v['FORUM_NAME'];
 					if (isset($html_setup['auth_guest'][$forum_id]) || (!empty($html_setup['forum_allow_auth']) && !isset($html_setup['forum_exclude'][$forum_id]))) {
 						if ($html_setup['forum_allow_cat_news']) {
 							$url = sprintf($html_setup['forum_cat_news'], $_phpbb_seo ? $phpbb_seo->seo_url['forum'][$forum_id] : '', $forum_id );
@@ -193,7 +193,7 @@ function obtain_gym_links($gym_links = array()) {
 					$links['main']['GYM_RSS_FORUM_LINK'] = sprintf($gym_link_tpl, $url, 'feed-icon.png', $title, $rss_setup['l_rss_feed']);
 					if (!empty($links['setup']['rss']['display_forum_alternate'])) {
 						$links['alternate'][] = array(
-							'TITLE' => $title, 
+							'TITLE' => $title,
 							'URL' => $url
 						);
 					}
@@ -305,7 +305,7 @@ function get_date_from_header($response_header_array) {
 	return 0;
 }
 /**
-* numeric_entify_utf8() 
+* numeric_entify_utf8()
 * borrowed from php.net : http://www.php.net/utf8_decode
 */
 function numeric_entify_utf8($utf8_string) {
