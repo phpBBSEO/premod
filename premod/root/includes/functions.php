@@ -3655,10 +3655,10 @@ function page_header($page_title = '', $display_online_list = true)
 	}
 	// www.phpBB-SEO.com SEO TOOLKIT BEGIN
 	global $phpbb_seo;
-	$template->assign_vars( array( 'PHPBB_FULL_URL' => $phpbb_seo->seo_path['phpbb_url'], 
-			'SEO_BASE_HREF' => $phpbb_seo->seo_opt['seo_base_href'], 
-			'SEO_START_DELIM' => $phpbb_seo->seo_delim['start'], 
-			'SEO_SATIC_PAGE' => $phpbb_seo->seo_static['pagination'], 
+	$template->assign_vars( array( 'PHPBB_FULL_URL' => $phpbb_seo->seo_path['phpbb_url'],
+			'SEO_BASE_HREF' => $phpbb_seo->seo_opt['seo_base_href'],
+			'SEO_START_DELIM' => $phpbb_seo->seo_delim['start'],
+			'SEO_SATIC_PAGE' => $phpbb_seo->seo_static['pagination'],
 			'SEO_EXT_PAGE' => $phpbb_seo->seo_ext['pagination'])
 	);
 	// www.phpBB-SEO.com SEO TOOLKIT END
@@ -4056,13 +4056,13 @@ class seo_meta {
 	*	=> ellipsis : ellipsis to use if clipping,
 	*	=> topic_sql : Do a SQL to build topic meta keywords or just use the meta desc tag,
 	*	=> check_ignore : Check the search_ignore_words.php list.
-	*		Please note : 
+	*		Please note :
 	*			This will require some more work for the server.
 	*			And this is mostly useless if you have re-enabled the search_ignore_words.php list
 	*			filtering in includes/search/fulltest_native.php (and of course use fulltest_native index).
 	*	=> bypass_common : Bypass common words in viewtopic.php.
 	*		Set to true by default because the most interesting keywords are as well among the most common.
-	*		This of course provides with even better results when fulltest_native is used 
+	*		This of course provides with even better results when fulltest_native is used
 	*		and search_ignore_words.php list was re-enabled.
 	*	=> disallowed : Disallow tag based on GET var used : varname => 1|0, 1 will through a disallow meta tag.
 	*	=> noindex_files : Disallow tag based on the physical script file name
@@ -4126,10 +4126,10 @@ class seo_meta {
 			if ( utf8_strlen($word) > $this->mconfig['wordminlen'] ) {
 				$keywords .= ', ' . $word;
 				$num++;
-				if ( $num >= $this->mconfig['keywordlimit'] ) {	
+				if ( $num >= $this->mconfig['keywordlimit'] ) {
 					break;
 				}
-			}	
+			}
 		}
 		return trim($keywords, ', ');
 	}
