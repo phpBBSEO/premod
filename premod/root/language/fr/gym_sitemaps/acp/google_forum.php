@@ -43,7 +43,7 @@ $lang = array_merge($lang, array(
 	'GOOGLE_FORUM_GLOBAL_PRIORITY' => 'Priorité des annonces générales',
 	'GOOGLE_FORUM_GLOBAL_PRIORITY_EXPLAIN' => 'Priorité des annonces générales (le nombre doit être compris entre 0.0 & 1.0 inclus).',
 	'GOOGLE_FORUM_EXCLUDE' => 'Exclusion de forums',
-	'GOOGLE_FORUM_EXCLUDE_EXPLAIN' => 'Sélécttionnez les forums pour lesquels vous ne souhaitez pas de plan de sitemap<br /><u>Note</u> :<br />Si ce champ est laissé vide, tous les forums publics seront listés.',
+	'GOOGLE_FORUM_EXCLUDE_EXPLAIN' => 'Sélectionnez les forums pour lesquels vous ne souhaitez pas de plan de sitemap<br /><u>Note</u> :<br />Si ce champ est laissé vide, tous les forums publics seront listés.',
 	// Reset settings
 	'GOOGLE_FORUM_RESET' => 'Module Sitemaps Forum',
 	'GOOGLE_FORUM_RESET_EXPLAIN' => 'Rétablir toutes les options par défaut du module Sitemaps Forum.',
