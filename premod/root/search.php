@@ -537,7 +537,7 @@ if ($keywords || $author || $author_id || $search_id || $submit)
 	$u_search .= (!$search_child) ? '&amp;sc=0' : '';
 	$u_search .= ($search_fields != 'all') ? '&amp;sf=' . $search_fields : '';
 	$u_search .= ($return_chars != 300) ? '&amp;ch=' . $return_chars : '';
-	$u_search = preg_replace('`(^&amp;|&amp;$)`i', '', $u_search);	
+	$u_search = preg_replace('`(^&amp;|&amp;$)`i', '', $u_search);
 	if ( $phpbb_seo->seo_opt['rewrite_usermsg'] && (!empty($author) || !empty($author_id)) ) {
 		$author_name = '';
 		if (!empty($author_id)) {
@@ -563,7 +563,7 @@ if ($keywords || $author || $author_id || $search_id || $submit)
 		}
 		$author = empty($author) ? $author_name : $author;
 		// www.phpBB-SEO.com SEO TOOLKIT BEGIN - Zero dupe
-		if (!$submit) {
+		if (!$submit && !$u_search_forum) {
 			$seo_search_params = (!empty($u_search) ? '?' . $u_search . '&amp;': '?') .  'start=' .  $phpbb_seo->seo_chk_start( $start, $per_page );
 			$phpbb_seo->seo_chk_dupe("{$phpbb_root_path}search.$phpEx$seo_search_params");
 		}
