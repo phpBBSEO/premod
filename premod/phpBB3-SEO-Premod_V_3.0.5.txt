@@ -451,7 +451,7 @@ IMPORTANT :
 	If your forum previously was indexed with the natural urls (viewtopic.php etc...), then you must make sure
 	that the robots.txt advised for our mod rewrite is not installed, if so DELETE it from the server.
 	This because we want to redirect old urls before we disallow them, it's CRUCIAL!
-	In such case, at least two after you activated the zero duplicate, you can safely implement the robots.txt.
+	In such case, wait at least two month after you activated the zero duplicate before you can safely implement the robots.txt.
 
 __________________________________________________
 NOTE: profile and user messages pages ID removing:
