@@ -49,7 +49,7 @@ class google_txt {
 	}
 	/**
 	* Initialize mod rewrite to handle multiple URL standards.
-	* Only one 'if' is required after this in THE loop to properly switch 
+	* Only one 'if' is required after this in THE loop to properly switch
 	* between the four types (none, advanced, mixed and simple).
 	* @access private
 	*/
@@ -125,10 +125,10 @@ class google_txt {
 			} else {
 				// Clear the cache to make sure the guilty url is not shown in the sitemapIndex
 				$cache->remove_file($cache->cache_dir . "data_gym_config_google_txt.$phpEx");
-				$this->gym_error(404, '', __FILE__, __LINE__);
+				$this->gym_master->gym_error(404, '', __FILE__, __LINE__);
 			}
 		} else {
-			$this->gym_error(404, '', __FILE__, __LINE__);
+			$this->gym_master->gym_error(404, '', __FILE__, __LINE__);
 		}
 		return;
 	}
@@ -157,7 +157,7 @@ class google_txt {
 	*/
 	function get_source_list() {
 		global $cache;
-		if (($this->txt_files = $cache->get('_gym_config_google_txt')) === false) {	
+		if (($this->txt_files = $cache->get('_gym_config_google_txt')) === false) {
 			$this->txt_files = array();
 			$RegEx = '`^google_([a-z0-9_-]+)\.txt`i';
 			$txt_dir = @opendir( $this->module_config['google_sources'] );
