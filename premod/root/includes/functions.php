@@ -4111,9 +4111,9 @@ class seo_meta {
 			if (empty($stop_words)) {
 				global $user, $phpEx;
 				$words = array();
-				if (file_exists("{$user->lang_path}/search_ignore_words.$phpEx")){
+				if (file_exists("{$user->lang_path}{$user->lang_name}/search_ignore_words.$phpEx")){
 					// include the file containing ignore words
-					include("{$user->lang_path}/search_ignore_words.$phpEx");
+					include("{$user->lang_path}{$user->lang_name}/search_ignore_words.$phpEx");
 				}
 				$stop_words = & $words;
 			}
