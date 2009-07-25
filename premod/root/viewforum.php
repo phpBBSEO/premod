@@ -155,7 +155,7 @@ if ($seo_uid) { // Reorder vars a bit as required
 	// but the handling as well acts as a poweful security shield so, it's worth it ;)
 	$_hash_tmp = $phpbb_seo->seo_opt['zero_dupe']['redir_def']['hash'];
 	unset($phpbb_seo->seo_opt['zero_dupe']['redir_def']['hash']);
-	$phpbb_seo->seo_opt['zero_dupe']['redir_def']['hash'] = $_hash_tmp; 
+	$phpbb_seo->seo_opt['zero_dupe']['redir_def']['hash'] = $_hash_tmp;
 } else {
 	unset($phpbb_seo->seo_opt['zero_dupe']['redir_def']['uid']);
 }
@@ -651,7 +651,9 @@ if (sizeof($topic_list))
 		$row = &$rowset[$topic_id];
 		// www.phpBB-SEO.com SEO TOOLKIT BEGIN
 		$cur_forum_id = ($row['forum_id']) ? (int) $row['forum_id'] : $forum_id;
-		$phpbb_seo->prepare_iurl($row, 'topic', $row['topic_type'] == POST_GLOBAL ? $phpbb_seo->seo_static['global_announce'] : $phpbb_seo->seo_url['forum'][$cur_forum_id]);
+		if ($row['topic_type'] == POST_GLOBAL || !empty($phpbb_seo->seo_url['forum'][$cur_forum_id])) {
+			$phpbb_seo->prepare_iurl($row, 'topic', $row['topic_type'] == POST_GLOBAL ? $phpbb_seo->seo_static['global_announce'] : $phpbb_seo->seo_url['forum'][$cur_forum_id]);
+		}
 		// www.phpBB-SEO.com SEO TOOLKIT BEGIN
 		// This will allow the style designer to output a different header
 		// or even separate the list of announcements from sticky and normal topics
