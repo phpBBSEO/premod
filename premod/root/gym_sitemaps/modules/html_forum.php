@@ -111,7 +111,7 @@ class html_forum {
 	* 	- Know what url should be used
 	* 	- Know if the call is active and auth
 	* 	- Set up all params for the up comming call if necessary (when not caching)
-	* Please note : 
+	* Please note :
 	* 	This method must exist in other modules, called by html_output in gym_html.php through load_module
 	* @access private
 	*/
@@ -130,9 +130,9 @@ class html_forum {
 			'sort' => 'DESC',
 			'display_user_info' => $this->module_config['html_allow_profile'],
 			'display_user_link' => $this->module_config['html_allow_profile_links'],
-			'display_link' => true, 
+			'display_link' => true,
 			'display_online' => $this->module_config['html_disp_online'],
-			'display_post_buttons' => $this->module_config['html_forum_post_buttons'], 
+			'display_post_buttons' => $this->module_config['html_forum_post_buttons'],
 			'display_pagination' => 0,
 			'display_last_post' => $this->module_config['html_forum_last_post'],
 			'display_file' => $this->url_settings['html_default'],
@@ -283,7 +283,7 @@ class html_forum {
 					$forum_id = $this->call['forum_id'] = $this->actions['module_sub'];
 
 					// Here we need to be able to list categories as well as forums
-					// A forum news or map is viewable when is a readable postable forum or a listable forum cat 
+					// A forum news or map is viewable when is a readable postable forum or a listable forum cat
 					// (with authed children see below)
 					$this->actions['is_auth'] = (boolean) ( isset($this->actions['auth_view_read'][$forum_id]) || (isset($this->module_auth['forum']['skip_cat'][$forum_id]) && isset($this->actions['auth_view_list'][$forum_id])) );
 					$this->actions['is_public'] = (boolean) isset($this->actions['auth_guest_list'][$forum_id]);
@@ -316,7 +316,7 @@ class html_forum {
 					// Upon single forum calls, grabb forum data separatelly to allow access to forum data when there is no topic to list
 					// As well prevent topic row from listing repeated forum data
 					if ($this->actions['is_active']) {
-						$sql = "SELECT * 
+						$sql = "SELECT *
 							FROM " . FORUMS_TABLE . "
 							WHERE forum_id = $forum_id";
 						$result = $db->sql_query($sql);
@@ -391,7 +391,7 @@ class html_forum {
 		return;
 	}
 	/**
-	* html_module() 
+	* html_module()
 	* Add local optional module content to the main output, last_topics in our case
 	* @access private
 	*/
@@ -402,7 +402,7 @@ class html_forum {
 		return;
 	}
 	/**
-	* html_index() 
+	* html_index()
 	* Add local links to the main site map
 	* @access private
 	*/
@@ -431,9 +431,9 @@ class html_forum {
 			$linkables = array( 'html_forum', 'html_forum_global', 'html_forum_announce', 'html_forum_sticky');
 			foreach ($linkables as $type) {
 				$links[$type] = array(
-					'map_title' => $forum_allow_news ? $user->lang[strtoupper($type . '_map')] : '', 
+					'map_title' => $forum_allow_news ? $user->lang[strtoupper($type . '_map')] : '',
 					'map_url' => $forum_allow_news ? $this->url_settings[$type . '_map'] : '',
-					'news_title' => $forum_allow_map ? $user->lang[strtoupper($type . '_news')] : '', 
+					'news_title' => $forum_allow_map ? $user->lang[strtoupper($type . '_news')] : '',
 					'news_url' => $forum_allow_map ? $this->url_settings[$type . '_news'] : '',
 				);
 			}
@@ -469,10 +469,10 @@ class html_forum {
 				)
 			);
 			// Get The Data, first forums
-			unset($this->forum_datas[0]);
 			if (!empty($this->forum_datas)) {
 				$f_id_done = array_keys($this->forum_datas);
 				$f_id_done = array_combine($f_id_done, $f_id_done);
+				unset($f_id_done[0]);
 				$forum_query_ids = array_diff_assoc($forum_auth_ids, $f_id_done);
 			} else {
 				$forum_query_ids = $forum_auth_ids;
