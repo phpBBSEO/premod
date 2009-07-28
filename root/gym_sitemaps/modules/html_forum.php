@@ -440,12 +440,15 @@ class html_forum {
 		}
 		return;
 	}
-	function last_topics($limit=10) {
+	function last_topics($limit = 10) {
 		global $db, $template, $user, $config, $phpEx, $phpbb_root_path, $phpbb_seo, $auth, $cache;
 		// Usefull for multi bb topic & forum tracking
 		// Leave default for single forum eg : '_track'
 		$tracking_cookie_name = (defined('XLANG_AKEY') ? XLANG_AKEY : '') . '_track';
 		$this->outputs['right_col_tpl'] = 'gym_sitemaps/last_topics_list.html';
+		// wa can use start here since there are always more topics overall than in a single forum
+		$start = $this->start ? $this->gym_master->chk_start($this->start, $limit) : 0;
+		$template->assign_vars(array('LAST_POST_IMG' => $user->img('icon_topic_latest', 'VIEW_LATEST_POST')));
 		// Wee need to check auth here
 		$this->module_config['last_topics_exclude_list'] = $this->gym_master->set_exclude_list($this->module_config['html_ltopic_exclude']);
 		$forum_auth_ids = array_diff_assoc($this->module_auth['forum']['read_post'], $this->module_config['last_topics_exclude_list']);
@@ -531,7 +534,7 @@ class html_forum {
 			$sql_array['WHERE'] = "$topic_sql_auth
 						AND t.topic_status <> " . ITEM_MOVED;
 			$sql_array['ORDER_BY'] = 'topic_last_post_time DESC';
-			$result = $db->sql_query_limit($db->sql_build_query('SELECT', $sql_array), $limit);
+			$result = $db->sql_query_limit($db->sql_build_query('SELECT', $sql_array), $limit, $start);
 			while ($row = $db->sql_fetchrow($result)) {
 				$topic_id = (int) $row['topic_id'];
 				$forum_id = (int) $row['forum_id'];
@@ -588,7 +591,7 @@ class html_forum {
 					$topic_id = (int) $topic_id;
 					if (empty($this->forum_tracking_info[$forum_id])) {
 						if ($load_db_lastread) {
-							$this->topic_tracking_info[$topic_id] = !empty($this->forum_datas[$forum_id]['mark_time']) ? $this->forum_datas[$forum_id]['mark_time'] : $user->data['user_lastmark'];
+							$this->topic_tracking_info[$topic_id] = !empty($topic_data['mark_time']) ? $topic_data['mark_time'] : $user->data['user_lastmark'];
 						} else if ($load_anon_lastread) {
 							$topic_id36 = base_convert($topic_id, 10, 36);
 							if (isset($this->tracking_topics['t'][$topic_id36])) {
@@ -605,6 +608,8 @@ class html_forum {
 					// www.phpBB-SEO.com SEO TOOLKIT END
 					// Replies
 					$replies = $this->forum_datas[$forum_id]['m_approve'] ? $topic_data['topic_replies_real'] : $topic_data['topic_replies'];
+					$last_page = (($replies + 1) > $config['posts_per_page']) ? floor($replies / $config['posts_per_page']) * $config['posts_per_page'] : 0;
+					$last_post_url =  append_sid("{$phpbb_root_path}viewtopic.$phpEx", "f=$forum_id&amp;t=$topic_id" . ($last_page ? "&amp;start=$last_page" : '')) . '#p' . $topic_data['topic_last_post_id'];
 					$unread_topic = (isset($this->topic_tracking_info[$topic_id]) && $topic_data['topic_last_post_time'] > $this->topic_tracking_info[$topic_id]) ? true : false;
 					// Get folder img, topic status/type related information
 					if ($display_topic_status) {
@@ -625,6 +630,7 @@ class html_forum {
 							'TOPIC_ICON_IMG_HEIGHT' => (!empty($this->icons[$topic_data['icon_id']])) ? $this->icons[$topic_data['icon_id']]['height'] : '',
 							'U_NEWEST_POST' => $unread_topic ? append_sid("{$phpbb_root_path}viewtopic.$phpEx", 'f=' .  $forum_id . '&amp;t=' . $topic_id . '&amp;view=unread#unread') : '',
 							'U_VIEW_TOPIC' => $view_topic_url,
+							'U_LAST_POST' => $last_post_url,
 							'S_UNREAD_TOPIC' => $unread_topic,
 						)
 					);

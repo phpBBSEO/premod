@@ -24,13 +24,13 @@
 	<!-- ENDIF -->
 
 	<!-- IF not forumrow.S_IS_CAT -->
-		<li class="row">
+		<li class="row<!-- IF forumrow.S_ROW_COUNT is even --> bg1<!-- ELSE --> bg2<!-- ENDIF -->">
 			<dl class="icon" style="background-image: url({forumrow.FORUM_FOLDER_IMG_SRC}); background-repeat: no-repeat;">
-				<dt title="{forumrow.FORUM_FOLDER_IMG_ALT}" <!-- IF DISPLAY_LAST_POST -->style="width:64%;"<!-- ELSE -->style="width:92%;"<!-- ENDIF -->>
+				<dt title="{forumrow.FORUM_FOLDER_IMG_ALT}" <!-- IF DISPLAY_LAST_POST -->style="width:63%;"<!-- ELSE -->style="width:85%;"<!-- ENDIF -->>
 					<!-- IF forumrow.FORUM_IMAGE --><span class="forum-image">{forumrow.FORUM_IMAGE}</span><!-- ENDIF -->
 					<!-- IF forumrow.FORUM_NEWS_LINK -->{forumrow.FORUM_NEWS_LINK} <!-- ENDIF -->
-					<!-- IF forumrow.FORUM_MAP_LINK --> &nbsp; {forumrow.FORUM_MAP_LINK}<br /><!-- ENDIF -->
-					{forumrow.FORUM_DESC}
+					<!-- IF forumrow.FORUM_MAP_LINK --> &nbsp; {forumrow.FORUM_MAP_LINK}<!-- ENDIF --><br />
+					{forumrow.FORUM_DESC}<br />
 					<!-- IF forumrow.MODERATORS -->
 						<br /><strong>{forumrow.L_MODERATOR_STR}:</strong> {forumrow.MODERATORS}
 					<!-- ENDIF -->

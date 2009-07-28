@@ -34,7 +34,7 @@ class gym_html extends gym_sitemaps {
 		$this->output_data['tpl'] = $this->output_data['page_title'] = '';
 		// Used to store module data upon index calls
 		$this->output_data['module_data'] = array();
-		$this->actions['pagination_limit'] = 0;	
+		$this->actions['pagination_limit'] = 0;
 		// Setup the output
 		$this->cache_config = array_merge(
 			// Global
@@ -47,7 +47,7 @@ class gym_html extends gym_sitemaps {
 				'opt_cache_ttl' => round($this->set_module_option('opt_cache_ttl', $this->gym_config['html_override']),2) * 3600,
 			)
 		);
-		$this->html_config = array( 
+		$this->html_config = array(
 			'html_c_info' => $this->gym_config['html_c_info'],
 			'html_url' => $this->gym_config['html_url'],
 			'html_pagination' => (int) $this->set_module_option('pagination', $this->override['pagination']),
@@ -100,7 +100,7 @@ class gym_html extends gym_sitemaps {
 		$this->cache_config['do_cache_opt'] = (boolean) ($this->html_config['html_auth_guest'] && $this->cache_config['opt_cache_on']);
 		$this->output_data['left_col_cache_file'] = $this->output_data['right_col_cache_file'] = '';
 		$this->actions['is_auth'] = $this->actions['is_active'] = $this->actions['is_public'] = false;
-		
+
 		if (!$standalone) {
 			// Check the rss specific vars and do basic set_up for msg output
 			$this->init_html_vars();
@@ -115,7 +115,7 @@ class gym_html extends gym_sitemaps {
 	*/
 	function init_html_vars() {
 		global $user, $phpEx, $phpbb_seo;
-		// Take care about module categorie urls, assuming that they are of the proper form 
+		// Take care about module categorie urls, assuming that they are of the proper form
 		// news|map/module_main/module_sub/
 		// this code will filter in between special map|news and categroy map and news
 		// assuming that the cat urls will be of the following form title-sepXX (forum-title-fxx.html or /)
@@ -146,7 +146,7 @@ class gym_html extends gym_sitemaps {
 			$this->actions['html_type'] = 'news';
 			$this->actions['display_stats'] = $this->html_config['html_stats_on_news'];
 			$this->actions['display_birthdays'] = $this->html_config['html_birthdays_on_news'];
-			
+
 		} else {
 			$this->actions['html_type'] = 'map';
 			$this->actions['display_stats'] = $this->html_config['html_stats_on_map'];
@@ -185,7 +185,7 @@ class gym_html extends gym_sitemaps {
 		return sprintf($this->url_config[$tpl_key], $title, $id) . $this->html_add_start($start, $tpl_start_key);
 	}
 	/**
-	* html_output() will build all rss output
+	* html_output() will build all html output
 	* @access private
 	*/
 	function html_output() {
@@ -262,7 +262,7 @@ class gym_html extends gym_sitemaps {
 			}
 		}
 		// Optional output
-		if (!empty($this->output_data['right_col'])) {	
+		if (!empty($this->output_data['right_col'])) {
 			if ($this->cache_config['do_cache_opt'] && !empty($this->output_data['right_col_cache_file'])) {
 				$cache_file = '_gym_html_' . $this->output_data['right_col_cache_file'] . '_' . $user->data['user_lang'];
 				if (($right_col = $cache->get($cache_file)) === false) {
@@ -344,7 +344,7 @@ class gym_html extends gym_sitemaps {
 		return;
 	}
 	/**
-	* html_index() 
+	* html_index()
 	* Builds the site map index
 	* @access private
 	*/
@@ -371,7 +371,7 @@ class gym_html extends gym_sitemaps {
 			$template->set_filenames(array('index_data' => 'gym_sitemaps/gym_link_body.html'));
 		} else {
 			$cache_file = '_gym_html_map_' . $user->data['user_lang'];
-			if (($this->output_data['module_data'] = $cache->get($cache_file)) === false) {	
+			if (($this->output_data['module_data'] = $cache->get($cache_file)) === false) {
 				$this->load_modules('html_index');
 				$cache->put($cache_file, $this->output_data['module_data']);
 			}
@@ -419,13 +419,13 @@ class gym_html extends gym_sitemaps {
 		return $return;
 	}
 	/**
-	* prepare_message($message, $bbcode_uid, $bbcode_bitfield, $patterns = array(), $replaces = array()) 
+	* prepare_message($message, $bbcode_uid, $bbcode_bitfield, $patterns = array(), $replaces = array())
 	* will put together BBcodes and smilies before the output
 	* @access private
 	*/
 	function prepare_message(&$message, $bbcode_uid, $bitfield, $patterns = array(), $replaces = array()) {
 		global $config, $user, $phpbb_root_path;
-		static $bbcode;	
+		static $bbcode;
 		if (!empty($patterns)) {
 			$message = preg_replace($patterns, $replaces, $message);
 		}
@@ -443,7 +443,7 @@ class gym_html extends gym_sitemaps {
 				include_once($phpbb_root_path . 'includes/bbcode.' . $phpEx);
 			}
 			if (empty($bbcode)) {
-				$bbcode = new bbcode($bitfield);	
+				$bbcode = new bbcode($bitfield);
 			} else {
 				$bbcode->bbcode($bitfield);
 			}
@@ -649,7 +649,7 @@ class gym_html extends gym_sitemaps {
 			}
 			$rows[$row['forum_id']] = $row;
 		}
-		
+
 		$db->sql_freeresult($result);
 		// Do not return this forum info
 		if (!$one_lvl) {

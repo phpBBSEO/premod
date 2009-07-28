@@ -12,22 +12,14 @@
 </ul>
 <!-- ENDIF -->
 
-<!-- IF RIGHT_COL -->
-<div class="right-box" style="width:25%;text-align:left">
-	{RIGHT_COL}
-</div>
-<div class="left-box" style="width:74%;text-align:left">
-<!-- ENDIF -->
-{LEFT_COL}
-<!-- IF RIGHT_COL --></div>
-<div class="clear">&nbsp;</div>
-<!-- ENDIF -->
-
+<div style="width:99%"><div class="column1" style="width:<!-- IF RIGHT_COL -->73<!-- ELSE -->99<!-- ENDIF -->%;text-align:left">{LEFT_COL}</div>
+<!-- IF RIGHT_COL --><div class="column2" style="width:25%;text-align:left">{RIGHT_COL}</div><!-- ENDIF -->
+<div class="clear">&nbsp;</div></div>
 <!-- IF not S_USER_LOGGED_IN and not S_IS_BOT -->
 	<form method="post" action="{S_LOGIN_ACTION}" class="headerspace">
 	<h3><a href="{U_LOGIN_LOGOUT}">{L_LOGIN_LOGOUT}</a><!-- IF S_REGISTER_ENABLED -->&nbsp; &bull; &nbsp;<a href="{U_REGISTER}">{L_REGISTER}</a><!-- ENDIF --></h3>
 		<fieldset class="quick-login">
-			<label for="username">{L_USERNAME}:</label>&nbsp;<input type="text" name="username" id="username" size="10" class="inputbox" title="{L_USERNAME}" />  
+			<label for="username">{L_USERNAME}:</label>&nbsp;<input type="text" name="username" id="username" size="10" class="inputbox" title="{L_USERNAME}" />
 			<label for="password">{L_PASSWORD}:</label>&nbsp;<input type="password" name="password" id="password" size="10" class="inputbox" title="{L_PASSWORD}" />
 			<!-- IF S_AUTOLOGIN_ENABLED -->
 				| <label for="autologin">{L_LOG_ME_IN} <input type="checkbox" name="autologin" id="autologin" /></label>
@@ -51,7 +43,7 @@
 
 <!-- IF S_DISPLAY_BIRTHDAY_LIST and BIRTHDAY_LIST -->
 	<h3>{L_BIRTHDAYS}</h3>
-	<p><!-- IF BIRTHDAY_LIST -->{L_CONGRATULATIONS}: <strong>{BIRTHDAY_LIST}</strong><!-- ELSE -->{L_NO_BIRTHDAYS}<!-- ENDIF --></p>
+	<p>{L_CONGRATULATIONS}: <strong>{BIRTHDAY_LIST}</strong></p>
 <!-- ENDIF -->
 
 <!-- IF TOTAL_USERS -->
