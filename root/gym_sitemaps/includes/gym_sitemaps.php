@@ -93,7 +93,7 @@ class gym_sitemaps {
 			'modrewrite' => false,
 		);
 		$this->gzip_config = array('gzip_level' => (int) $this->gym_config['gym_gzip_level']);
-		$this->cache_config = array( 
+		$this->cache_config = array(
 			'do_cache' => true, // this is used when preventing the caching of private content.
 			'cached' => 'false',
 			'mod_since' => (boolean) $this->gym_config['gym_mod_since'],
@@ -280,7 +280,7 @@ class gym_sitemaps {
 		}
 	}
 	/**
-	 * xml_encode() 
+	 * xml_encode()
 	 * helper
 	 */
 	function xml_encode($utf8_string) {
@@ -289,7 +289,7 @@ class gym_sitemaps {
 		return numeric_entify_utf8(str_replace($find, $replace, $utf8_string));
 	}
 	/**
-	* check_forum_auth() 
+	* check_forum_auth()
 	* Returns various forum auth and properties
 	*/
 	function check_forum_auth($guest_auth = true) {
@@ -356,7 +356,7 @@ class gym_sitemaps {
 			return $forum_auth_list['read_post'];
 		}
 		// else handle the real auth
-		$forum_auth_list['read'] = $forum_auth_list['list'] = $forum_auth_list['skip_link'];
+		$forum_auth_list['read'] = $forum_auth_list['list'] = array();
 		$forum_list_ary = $auth->acl_getf('f_list', true);
 		foreach ($forum_list_ary as $forum_id => $null) {
 			$forum_auth_list['list'][$forum_id] = (int) $forum_id;
@@ -365,14 +365,10 @@ class gym_sitemaps {
 		foreach ($forum_read_ary as $forum_id => $null) {
 			$forum_auth_list['read'][$forum_id] = (int) $forum_id;
 		}
-		// And the non postable / password protected forums
-		if (!empty($forum_auth_list['skip_all'])) {
-			foreach ($forum_auth_list['skip_all'] as $forum_id) {
-				$forum_id = (int) $forum_id;
-			}
-		}
 		ksort($forum_auth_list['list']);
 		ksort($forum_auth_list['read']);
+		$forum_auth_list['list'] = array_diff_assoc($forum_auth_list['list'], $forum_auth_list['skip_link']);
+		$forum_auth_list['read'] = array_diff_assoc($forum_auth_list['read'], $forum_auth_list['skip_link']);
 		$forum_auth_list['list_post'] = array_diff_assoc($forum_auth_list['list'], $forum_auth_list['skip_all']);
 		$forum_auth_list['read_post'] = array_diff_assoc($forum_auth_list['read'], $forum_auth_list['skip_all']);
 
@@ -397,7 +393,7 @@ class gym_sitemaps {
 	}
 	/**
 	* obtain_robots_disallows()
-	* obtain the eventual robots.txt exclusions 
+	* obtain the eventual robots.txt exclusions
 	* and parse them into a patern array for later use
 	* @access private
 	*/
@@ -500,7 +496,7 @@ class gym_sitemaps {
 		$this->url_config['topic_start_tpl'] = $this->url_config['start_default'] . '%1$d';
 		$this->url_config['forum_tpl'] = "viewforum.$phpEx?f=%1\$d";
 		$this->url_config['topic_tpl'] = "viewtopic.$phpEx?f=%1\$d&amp;t=%2\$d";
-		if (!$phpbb_seo->seo_opt['url_rewrite']) {	
+		if (!$phpbb_seo->seo_opt['url_rewrite']) {
 			$this->url_config['forum_index'] = "index.$phpEx";
 			$phpbb_seo->seo_opt['virtual_folder'] = false;
 			$this->url_config['forum_ext'] = '';
@@ -514,7 +510,7 @@ class gym_sitemaps {
 				$this->url_config['topic_start_tpl'] = $this->url_config['topic_ext'] == '/' ? '/' . $phpbb_seo->seo_static['pagination'] . '%1$d' . $phpbb_seo->seo_ext['pagination'] : $phpbb_seo->seo_delim['start'] . '%1$d' . $this->url_config['topic_ext'];
 			}
 			if ($this->url_config['modrtype'] >= 2) { // +Mixed
-			} 
+			}
 			if ($this->url_config['modrtype'] >= 3) { // +Advanced
 			}
 		}
@@ -545,7 +541,7 @@ class gym_sitemaps {
 	}
 	/**
 	* check start var consistency
-	* and return our best guess for $start, eg the first valid page 
+	* and return our best guess for $start, eg the first valid page
 	* parameter according to pagination settings being lower
 	* than the one sent.
 	*/
@@ -553,7 +549,7 @@ class gym_sitemaps {
 		if ($limit > 0) {
 			$start = is_int($start/$limit) ? $start : intval($start/$limit)*$limit;
 		}
-		return (int) $start; 
+		return (int) $start;
 	}
 	/**
 	* parse_link() builds an html link
