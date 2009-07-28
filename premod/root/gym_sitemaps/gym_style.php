@@ -58,7 +58,7 @@ $recache = false;
 $theme = false;
 // Let's go
 if (!empty($action) && !empty($type) && !empty($language) && !empty($theme_id)) {
-	// build cache file name 
+	// build cache file name
 	$file = "{$phpbb_root_path}gym_sitemaps/cache/style_{$action}_{$language}_$theme_id.$type";
 	if (file_exists($file)) {
 		$cached_time = filemtime($file);
@@ -162,7 +162,7 @@ if (!empty($action) && !empty($type) && !empty($language) && !empty($theme_id)) 
 			header('Expires: ' . gmdate('D, d M Y H:i:s \G\M\T', $expire_time));
 			header('Content-type: ' . $content_type . '; charset=UTF-8');
 			readfile($file);
-			exit;	
+			exit;
 		}
 		// Path Settings
 		$server_protocol = ($config['server_protocol']) ? $config['server_protocol'] : (($config['cookie_secure']) ? 'https://' : 'http://');
@@ -176,7 +176,7 @@ if (!empty($action) && !empty($type) && !empty($language) && !empty($theme_id)) 
 		$phpbb_url = $root_url . $script_path;
 		// Parse Theme Data
 		$replace = array(
-			'{T_IMAGE_PATH}'	=> "{$phpbb_url}gym_sitemaps/images/", 
+			'{T_IMAGE_PATH}'	=> "{$phpbb_url}gym_sitemaps/images/",
 			'{T_STYLE_PATH}'	=> "{$phpbb_url}gym_sitemaps/style/",
 			'{S_CONTENT_DIRECTION}'	=> $lang['DIRECTION'],
 			'{S_USER_LANG}'		=> $language

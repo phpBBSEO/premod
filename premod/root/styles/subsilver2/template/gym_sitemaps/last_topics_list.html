@@ -7,7 +7,7 @@
 	</tr>
 	<!-- BEGIN last_topics -->
 	<tr class="row<!-- IF last_forums.last_topics.S_ROW_COUNT is odd -->2<!-- ELSE -->1<!-- ENDIF -->">
-		<td width="25" align="center">{last_forums.last_topics.TOPIC_FOLDER_IMG}</td>
+		<td width="25" align="center" style="padding:5px;">{last_forums.last_topics.TOPIC_FOLDER_IMG}</td>
 		<!-- IF S_TOPIC_ICONS -->
 		<td width="25" align="center"><!-- IF last_forums.last_topics.TOPIC_ICON_IMG --><img src="{T_ICONS_PATH}{last_forums.last_topics.TOPIC_ICON_IMG}" width="{last_forums.last_topics.TOPIC_ICON_IMG_WIDTH}" height="{last_forums.last_topics.TOPIC_ICON_IMG_HEIGHT}" alt="" title="" /><!-- ENDIF --></td>
 		<!-- ENDIF -->
@@ -16,6 +16,7 @@
 			<a href="{last_forums.last_topics.U_VIEW_TOPIC}">{last_forums.last_topics.TOPIC_TITLE}</a><br/>
 			<!-- IF last_forums.last_topics.PAGINATION --><p class="gensmall"> [ {GOTO_PAGE_IMG}{L_GOTO_PAGE}: {last_forums.last_topics.PAGINATION} ] </p><!-- ENDIF -->
 		</td>
+		<td><a href="{last_forums.last_topics.U_LAST_POST}">{LAST_POST_IMG}</a></td>
 	</tr>
 	<!-- END last_topics -->
 	<!-- END last_forums -->
