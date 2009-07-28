@@ -58,8 +58,8 @@ class html_forum {
 				'html_forum_news_ltopic' => (int) $this->gym_master->gym_config['html_forum_news_ltopic'],
 				'html_forum_cat_news_ltopic' => (int) $this->gym_master->gym_config['html_forum_cat_news_ltopic'],
 				'html_forum_last_post' => (boolean) $this->gym_master->gym_auth_value($this->gym_master->gym_config['html_forum_last_post']),
-				'html_forum_first' => (int) $this->gym_master->gym_config['html_forum_first'],
-				'html_forum_news_first' => (int) $this->gym_master->gym_config['html_forum_news_first'],
+				'html_forum_first' => ((int) $this->gym_master->gym_config['html_forum_first']) ? 'first' : 'last',
+				'html_forum_news_first' => ((int) $this->gym_master->gym_config['html_forum_news_first']) ? 'first' : 'last',
 				'html_forum_post_buttons' => (boolean) $this->gym_master->gym_auth_value($this->gym_master->gym_config['html_forum_post_buttons']),
 				'html_exclude_list' => trim($this->gym_master->gym_config['html_forum_exclude'], ','),
 				'html_ltopic_exclude' => trim($this->gym_master->gym_config['html_forum_ltopic_exclude'], ','),
@@ -272,10 +272,8 @@ class html_forum {
 				$this->call['file'] = 'display_forums.' . $phpEx;
 				$this->call['method'] = 'display_forums';
 				// Here we need to be able to list categories as well as forums
-				// List all listable forums expect excluded
-				// $this->call['forum_sql'] = $db->sql_in_set('f.forum_id', $this->actions['auth_view_list'], false, true);
-				// List all, filter later !
-				$this->call['forum_sql'] = '';
+				// List all listable forums except excluded and links
+				$this->call['forum_sql'] = $db->sql_in_set('f.forum_id', $this->actions['auth_view_list'], false, true);
 			} else if ($this->actions['html_news_list'] || $this->actions['html_map_list']) {
 				// Filter $this->actions['module_sub'] var type
 				$this->actions['module_sub'] = (int) $this->actions['module_sub'];
@@ -589,18 +587,17 @@ class html_forum {
 				// Now the topics
 				foreach ($topic_datas as $topic_id => $topic_data) {
 					$topic_id = (int) $topic_id;
-					if (empty($this->forum_tracking_info[$forum_id])) {
-						if ($load_db_lastread) {
-							$this->topic_tracking_info[$topic_id] = !empty($topic_data['mark_time']) ? $topic_data['mark_time'] : $user->data['user_lastmark'];
-						} else if ($load_anon_lastread) {
-							$topic_id36 = base_convert($topic_id, 10, 36);
-							if (isset($this->tracking_topics['t'][$topic_id36])) {
-								$this->tracking_topics['t'][$topic_id] = base_convert($this->tracking_topics['t'][$topic_id36], 36, 10) + $config['board_startdate'];
-							}
-							$this->topic_tracking_info[$topic_id] = isset($this->tracking_topics['t'][$topic_id]) ? $this->tracking_topics['t'][$topic_id] : $user->data['user_lastmark'];
+					if ($load_db_lastread) {
+						$this->topic_tracking_info[$topic_id] = !empty($topic_data['mark_time']) ? $topic_data['mark_time'] : $user->data['user_lastmark'];
+					} else if ($load_anon_lastread) {
+						$topic_id36 = base_convert($topic_id, 10, 36);
+						if (isset($this->tracking_topics['t'][$topic_id36])) {
+							$this->tracking_topics['t'][$topic_id] = base_convert($this->tracking_topics['t'][$topic_id36], 36, 10) + $config['board_startdate'];
 						}
-					} else {
-						$this->topic_tracking_info[$topic_id] = $this->forum_tracking_info[$forum_id];
+						$this->topic_tracking_info[$topic_id] = isset($this->tracking_topics['t'][$topic_id]) ? $this->tracking_topics['t'][$topic_id] : $user->data['user_lastmark'];
+					}
+					if (!empty($this->forum_tracking_info[$forum_id])) {
+						$this->topic_tracking_info[$topic_id] = $this->topic_tracking_info[$topic_id] > $this->forum_tracking_info[$forum_id] ? $this->topic_tracking_info[$topic_id] : $this->forum_tracking_info[$forum_id];
 					}
 					$topic_data['topic_title'] = censor_text($topic_data['topic_title']);
 					// www.phpBB-SEO.com SEO TOOLKIT BEGIN

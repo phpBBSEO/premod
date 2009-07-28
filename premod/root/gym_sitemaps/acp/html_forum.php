@@ -124,7 +124,7 @@ class html_forum {
 					'html_forum_cat_sort' => 'DESC',
 					'html_forum_news_sort' => 'DESC',
 					'html_forum_cat_news_sort' => 'DESC',
-					'html_forum_first' => 1,
+					'html_forum_first' => 0,
 					'html_forum_news_first' => 1,
 				),
 				'select' => array( 
