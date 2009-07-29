@@ -1,5 +1,5 @@
 <?php
-/** 
+/**
 *
 * phpbb_seo [English]
 *
@@ -63,7 +63,7 @@ $lang = array_merge($lang, array(
 	'SEO_HTACCESS_CAPTION_SLASH' => 'Optional slashes',
 	'SEO_SLASH_DEFAULT'	=> 'Default',
 	'SEO_SLASH_ALT'		=> 'Alternate',
-	'SEO_MOD_TYPE_ER'	=> 'The mod rewrite type is not set up properly in phpbb_seo/phpbb_seo_class.php.', 
+	'SEO_MOD_TYPE_ER'	=> 'The mod rewrite type is not set up properly in phpbb_seo/phpbb_seo_class.php.',
 	'SEO_SHOW'		=> 'Show',
 	'SEO_HIDE'		=> 'Hide',
 	'SEO_SELECT_ALL'	=> 'Select all',
@@ -191,7 +191,7 @@ $lang = array_merge($lang, array(
 	'virtual_folder' => 'Virtual Folder',
 	'virtual_folder_explain' => 'Allow to add the forum URL as a virtual folder in topic URLs.<br/><br/><b>Example :</b><br/><em><b>forum-title-fxx/topic-title-txx.html</b> VS <b>topic-title-txx.html</b> for a topic URL.</em><br/><br/><b style="color:red">Please Note</b><br/><em>The Virtual folder injection option can change all your web site’s URLs almost too easily.<br/>Starting to use it with an already indexed web site should thus be considered with as much care as when migrating and not to often.<br/>So you’d better be decided to go for it or not.<br/>Changing this option requires and .htaccess update.</em>',
 	'virtual_root' => 'Virtual Root',
-	'virtual_root_explain' => 'If phpBB is installed in a sud folder (example phpBB3/), you can simulate a root install for rewritten links.<br/><br/><b>Example :</b><br/><em><b>phpBB3/forum-title-fxx/topic-title-txx.html</b> VS <b>forum-title-fxx/topic-title-txx.html</b> for a topic URL.</em><br/><br/>This can be handy to shorten URLs a bit, especially if you are using the "Virtual Folder" feature. UnRewritten links will continue to appear and work in the phpBB folder.<br/><br/><b style="color:red">Please Note :</b><br/><em>Using this option requires to use a home page for the forum index (like forum.html).<br/> This option can change all your web site’s URLs almost too easily.<br/>Starting to use it with an already indexed web site should thus be considered with as much care as when migrating and not to often.<br/>So you’d better be decided to go for it or not.<br/>Changing this option requires and .htaccess update.</em>',
+	'virtual_root_explain' => 'If phpBB is installed in a sub folder (example phpBB3/), you can simulate a root install for rewritten links.<br/><br/><b>Example :</b><br/><em><b>phpBB3/forum-title-fxx/topic-title-txx.html</b> VS <b>forum-title-fxx/topic-title-txx.html</b> for a topic URL.</em><br/><br/>This can be handy to shorten URLs a bit, especially if you are using the "Virtual Folder" feature. UnRewritten links will continue to appear and work in the phpBB folder.<br/><br/><b style="color:red">Please Note :</b><br/><em>Using this option requires to use a home page for the forum index (like forum.html).<br/> This option can change all your web site’s URLs almost too easily.<br/>Starting to use it with an already indexed web site should thus be considered with as much care as when migrating and not to often.<br/>So you’d better be decided to go for it or not.<br/>Changing this option requires and .htaccess update.</em>',
 	'cache_layer' => 'Forum URL caching',
 	'cache_layer_explain' => 'Turns on the cache for forum URLs and allow to separate forum titles from their URL<br/><br/><b>Example :</b><br/><em><b>forum-title-fxx/</b> VS <b>any-title-fxx/</b> for a forum URL.</em><br/><br/><b style="color:red">Please Note</b><br/><em>This option will allow you to change your forum URL, thus potentially many topic URLS if you are using the Virtual Folder option.<br/>The topic URLs will always be redirected properly with the Zero Duplicate.<br/>It will as well be the case for forum URL as long as you keep the delimiter and IDs, see below.</em>',
 	'rem_ids' => 'Forum ID Removing',
@@ -205,7 +205,7 @@ $lang = array_merge($lang, array(
 	'copyrights_title' => 'Link title',
 	'copyrights_title_explain' => 'You can here chose the text to be used as the phpBB SEO copyright link title. Leave empty for defaults.',
 	// Zero duplicate
-	// Options 
+	// Options
 	'ACP_ZERO_DUPE_OFF' => 'Off',
 	'ACP_ZERO_DUPE_MSG' => 'Post',
 	'ACP_ZERO_DUPE_GUEST' => 'Guest',
