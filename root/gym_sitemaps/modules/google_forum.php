@@ -47,11 +47,14 @@ class google_forum {
 		$this->gym_master->check_forum_auth(true);
 		// Only consider publicly readable and postable forums
 		$this->actions['auth_guest_read'] = $this->actions['auth_view_read'] = array_diff_assoc($this->module_auth['forum']['read_post'], $this->module_config['exclude_list']);
+		if (empty($this->actions['auth_view_read'])) {
+			$this->gym_master->gym_error(404, '', __FILE__, __LINE__);
+		}
 		$this->init_url_settings();
 	}
 	/**
 	* Initialize mod rewrite to handle multiple URL standards.
-	* Only one 'if' is required after this in THE loop to properly switch 
+	* Only one 'if' is required after this in THE loop to properly switch
 	* between the four types (none, advanced, mixed and simple).
 	* @access private
 	*/
@@ -79,6 +82,7 @@ class google_forum {
 	*/
 	function sitemap() {
 		global $config, $phpbb_seo, $db, $user, $auth;
+		$approve_sql = ' AND topic_approved = 1';
 		if ($this->actions['module_sub'] === 'announces') {
 			// Start with forums info
 			$forum_data = array();
@@ -89,7 +93,7 @@ class google_forum {
 			$sql = "SELECT COUNT(topic_id) AS topic
 				FROM " . TOPICS_TABLE . "
 				WHERE forum_id = 0
-				AND topic_type = " . POST_GLOBAL;
+				AND topic_type = " . POST_GLOBAL . $approve_sql;
 			$result = $db->sql_query($sql);
 			$row = $db->sql_fetchrow($result);
 			$db->sql_freeresult($result);
@@ -106,14 +110,14 @@ class google_forum {
 			// Forum index location
 			$this->gym_master->parse_item($phpbb_seo->seo_path['phpbb_urlR'] . $this->url_config['forum_index'], 1, 'always', time());
 			$forum_sql = ' forum_id = 0 AND topic_type = ' . POST_GLOBAL . ' AND ';
-			$this->list_topics($forum_sql, $forum_data, '');
+			$this->list_topics($forum_sql, $forum_data, $approve_sql);
 		} else {
 			// Filter $this->actions['module_sub'] var type
 			$this->actions['module_sub'] = intval($this->actions['module_sub']);
 			if ($this->actions['module_sub'] > 0) {
 				// then It's a forum sitemap
 				// Check forum auth and grab necessary infos
-				$sql = "SELECT * 
+				$sql = "SELECT *
 					FROM ". FORUMS_TABLE ." f
 					WHERE forum_id = " . $this->actions['module_sub'];
 				$result = $db->sql_query($sql);
@@ -132,7 +136,6 @@ class google_forum {
 				$paginated = $config['posts_per_page'];
 				$forum_data['topic_count'] = $forum_data['forum_topics'];
 				$forum_data['replies_key'] = 'topic_replies';
-				$approve_sql = ' AND topic_approved = 1';
 				// Do not serve content if there is no topic in the forum
 				if ( $forum_data['topic_count'] < $this->module_config['google_threshold'] ) {
 					$this->gym_master->gym_error(404, 'GYM_TOO_FEW_ITEMS', __FILE__, __LINE__, $sql);
@@ -148,7 +151,7 @@ class google_forum {
 				$this->gym_master->seo_kill_dupes($forum_sitemap_url);
 				// Forum index location
 				$this->gym_master->parse_item($phpbb_seo->seo_path['phpbb_urlR'] . $this->url_config['forum_index'], 1, 'always', time());
-				$sql = "SELECT * 
+				$sql = "SELECT *
 					FROM ". FORUMS_TABLE . " WHERE " . $db->sql_in_set('forum_id' , $this->actions['auth_view_read'], false, true) . "
 					ORDER BY forum_last_post_id " . $this->module_config['google_sort'];
 				$result = $db->sql_query($sql);
@@ -173,7 +176,7 @@ class google_forum {
 					if ($pages > 1 && $this->module_config['google_pagination']) {
 						// Reset Pages limits for this topic
 						$pag_limit1 = $this->module_config['google_limitdown'];
-						$pag_limit2 = $this->module_config['google_limitup'];	
+						$pag_limit2 = $this->module_config['google_limitup'];
 						// If $pag_limit2 too big for this topic, lets output all pages
 						$pag_limit2 = ( $pages < $pag_limit2 ) ?  ($pages - 1) :  $pag_limit2;
 						$i=1;
@@ -201,6 +204,7 @@ class google_forum {
 	*/
 	function sitemapindex() {
 		global $phpbb_seo, $db, $config, $user, $auth;
+		$approve_sql = ' AND topic_approved = 1';
 		// It's global list call, add module sitemaps
 		// Reset the local counting, since we are cycling through modules
 		$this->output_data['url_sofar'] = 0;
@@ -209,7 +213,7 @@ class google_forum {
 		$sql = "SELECT COUNT(topic_id) AS topic
 			FROM " . TOPICS_TABLE . "
 			WHERE forum_id = 0
-			AND topic_type = " . POST_GLOBAL;
+			AND topic_type = " . POST_GLOBAL . $approve_sql;
 		$result = $db->sql_query($sql);
 		$row = $db->sql_fetchrow($result);
 		$db->sql_freeresult($result);
@@ -219,7 +223,7 @@ class google_forum {
 			$this->gym_master->parse_sitemap($announces_sitemap_url, $user->time_now - rand(1,150));
 		}
 		$sql = "SELECT *
-			FROM ". FORUMS_TABLE . " 
+			FROM ". FORUMS_TABLE . "
 				WHERE " . $db->sql_in_set('forum_id', $this->actions['auth_view_read'], false, true) . "
 			ORDER BY forum_last_post_id " . $this->module_config['google_sort'];
 		$result = $db->sql_query($sql);
@@ -277,13 +281,13 @@ class google_forum {
 	*/
 	function list_topics($forum_sql, $forum_data, $approve_sql = '') {
 		global $db, $phpbb_seo, $auth, $config, $user;
-		// initial setup 
+		// initial setup
 		$topic_sofar = 0;
 		$topics = array();
 		$sql_first = "SELECT *
 				FROM " . TOPICS_TABLE . "
 				WHERE $forum_sql
-					topic_status <> " . ITEM_MOVED . " 
+					topic_status <> " . ITEM_MOVED . "
 					$approve_sql
 					ORDER BY topic_last_post_id " . $this->module_config['google_sort'];
 		$paginated = $config['posts_per_page'];
@@ -309,7 +313,7 @@ class google_forum {
 				if ($pages > 1 && $this->module_config['google_pagination']) {
 					// Reset Pages limits for this topic
 					$pag_limit1 = $this->module_config['google_limitdown'];
-					$pag_limit2 = $this->module_config['google_limitup'];	
+					$pag_limit2 = $this->module_config['google_limitup'];
 					// If $pag_limit2 too big for this topic, lets output all pages
 					$pag_limit2 = ( $pages < $pag_limit2 ) ?  ($pages - 1) :  $pag_limit2;
 					$i=1;

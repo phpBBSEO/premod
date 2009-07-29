@@ -59,14 +59,17 @@ class rss_forum {
 		$this->gym_master->check_forum_auth($this->module_config['rss_auth_guest']);
 		$this->actions['auth_guest_read'] = array_diff_assoc($this->module_auth['forum']['public_read'], $this->module_config['exclude_list'], $this->module_auth['forum']['skip_all']);
 		$this->actions['auth_view_read'] = array_diff_assoc($this->module_auth['forum']['read_post'], $this->module_config['exclude_list']);
-		$this->actions['in_id_sql'] = $db->sql_in_set('', $this->actions['auth_view_read'], false, true);
+		if (empty($this->actions['auth_view_read'])) {
+			$this->gym_master->gym_error(404, '', __FILE__, __LINE__);
+		}
+		$this->actions['in_id_sql'] = $db->sql_in_set('forum_id', $this->actions['auth_view_read'], false, true);
 		$this->gym_master->gym_output->setup_cache(); // Will exit if the cache is sent
 
 		$this->init_url_settings();
 	}
 	/**
 	* Initialize mod rewrite to handle multiple URL standards.
-	* Only one 'if' is required after this in THE loop to properly switch 
+	* Only one 'if' is required after this in THE loop to properly switch
 	* between the four types (none, advanced, mixed and simple).
 	* @access private
 	*/
@@ -99,7 +102,7 @@ class rss_forum {
 		return;
 	}
 	/**
-	* rss_main() 
+	* rss_main()
 	* Add content to the main listing (channel list and rss feed)
 	* @access private
 	*/
@@ -108,6 +111,9 @@ class rss_forum {
 		// It's global channel list call, add static channels
 		// Reset the local counting, since we are cycling through modules
 		$this->output_data['url_sofar'] = 0;
+		$time_limit = '';
+		$approve_sql = ' AND topic_approved = 1';
+		$approve_sqlt = ' AND t.topic_approved = 1';
 		if ( $this->actions['rss_channel_list'] ) { // Channel lists
 			// Add the forum channel
 			$chan_source = $this->module_config['rss_url'] . $this->url_config['rss_vpath'] . $this->url_config['rss_forum_channel_default'] . $this->url_config['extra_paramsE'] . $this->url_config['rss_forum_channel'] . $this->url_config['rss_forum_file'];
@@ -125,7 +131,7 @@ class rss_forum {
 			$sql = "SELECT COUNT(topic_id) AS topic
 				FROM " . TOPICS_TABLE . "
 				WHERE forum_id = 0
-				AND topic_type = " . POST_GLOBAL;
+				AND topic_type = " . POST_GLOBAL . $approve_sql;
 			$result = $db->sql_query($sql);
 			$row = $db->sql_fetchrow($result);
 			$db->sql_freeresult($result);
@@ -149,9 +155,9 @@ class rss_forum {
 		} else { // Main feeds
 			// Grabb forums info
 			$forum_data = array();
-			$sql = "SELECT * 
+			$sql = "SELECT *
 				FROM " . FORUMS_TABLE . "
-					WHERE forum_id " . $this->actions['in_id_sql'] . "
+					WHERE " . $this->actions['in_id_sql'] . "
 				ORDER BY forum_last_post_id " . $this->module_config['rss_sort'];
 			$result = $db->sql_query($sql);
 			while ($row = $db->sql_fetchrow($result)) {
@@ -171,16 +177,15 @@ class rss_forum {
 			$sql = "SELECT COUNT(topic_id) AS topic
 				FROM " . TOPICS_TABLE . "
 				WHERE $time_limit_sql
-					forum_id " . $this->actions['in_id_sql'] . "
-					AND topic_type <> " . POST_GLOBAL . "
-					AND topic_status <> " . ITEM_MOVED;
+					" . $this->actions['in_id_sql'] . "
+					AND topic_status <> " . ITEM_MOVED . $approve_sql;
 			$result = $db->sql_query($sql);
 			$row = $db->sql_fetchrow($result);
 			$forum_data['topic_count'] = ( $row['topic'] ) ? $row['topic'] : 1;
 			$db->sql_freeresult($result);
 			unset($row);
-			$forum_sql = 't.forum_id ' . $this->actions['in_id_sql'] . ' AND ';
-			$this->list_topics($forum_sql, $forum_data);
+			$forum_sql = 't.' . $this->actions['in_id_sql'] . ' AND ';
+			$this->list_topics($forum_sql, $forum_data, $time_limit, $approve_sqlt);
 		}
 		// Add the local counting, since we are cycling through modules
 		$this->output_data['url_sofar_total'] = $this->output_data['url_sofar_total'] + $this->output_data['url_sofar'];
@@ -193,7 +198,9 @@ class rss_forum {
 	function rss_module() {
 		global $user, $db, $phpbb_seo, $auth, $config;
 		$forum_sql = '';
-		$time_limit = $approve_sql = '';
+		$time_limit = '';
+		$approve_sql = ' AND topic_approved = 1';
+		$approve_sqlt = ' AND t.topic_approved = 1';
 		$forum_data = array('topic_count' => 0);
 		if ($this->actions['module_sub'] === 'channels') { // Module channel list
 			//If so check for dupes and build channel header
@@ -227,7 +234,7 @@ class rss_forum {
 			$sql = "SELECT COUNT(topic_id) AS topic
 				FROM " . TOPICS_TABLE . "
 				WHERE forum_id = 0
-				AND topic_type = " . POST_GLOBAL;
+				AND topic_type = " . POST_GLOBAL . $approve_sql;
 			$result = $db->sql_query($sql);
 			$row = $db->sql_fetchrow($result);
 			$db->sql_freeresult($result);
@@ -247,7 +254,7 @@ class rss_forum {
 			// Count items
 			$sql = "SELECT COUNT(topic_id) AS topic
 				FROM " . TOPICS_TABLE . " t
-				WHERE $forum_sql";
+				WHERE $forum_sql $approve_sql";
 			$result = $db->sql_query($sql);
 			$row = $db->sql_fetchrow($result);
 			$db->sql_freeresult($result);
@@ -280,8 +287,8 @@ class rss_forum {
 			$this->actions['module_sub'] = intval($this->actions['module_sub']);
 			if ($this->actions['module_sub'] > 0) { // Forum Feed
 				$forum_sql = ' t.forum_id = ' . $this->actions['module_sub'] . ' AND ';
-				// Check forum auth and grab necessary infos			
-				$sql = "SELECT * 
+				// Check forum auth and grab necessary infos
+				$sql = "SELECT *
 					FROM ". FORUMS_TABLE ." f
 					WHERE forum_id = " . $this->actions['module_sub'];
 					$result = $db->sql_query($sql);
@@ -313,7 +320,6 @@ class rss_forum {
 					$this->forum_cache[$forum_id]['approve'] = 0;
 					$forum_data['topic_count'] =  $forum_data['forum_topics'];
 					$this->forum_cache[$forum_id]['replies_key'] = 'topic_replies';
-					$approve_sql = ' AND topic_approved = 1';
 					// In case the forum called for a feed is really big, apply time limit
 					if ( $this->module_config['rss_limit_time'] > 0 && $forum_data['topic_count'] > 500) {
 						$time_limit = ($this->output_data['time'] - $this->module_config['rss_limit_time']);
@@ -321,9 +327,8 @@ class rss_forum {
 						$sql = "SELECT COUNT(topic_id) AS forum_topics
 							FROM " . TOPICS_TABLE . "
 							WHERE forum_id = $forum_id
-								topic_last_post_time > $time_limit
-								AND topic_type <> " . POST_GLOBAL . " 
-								AND topic_status <> " . ITEM_MOVED . " 
+								AND topic_last_post_time > $time_limit
+								AND topic_status <> " . ITEM_MOVED . "
 								$approve_sql";
 						$result = $db->sql_query($sql);
 						$row = $db->sql_fetchrow($result);
@@ -350,7 +355,7 @@ class rss_forum {
 					$this->module_config['rss_auth_msg'] = ($this->gym_master->is_forum_public($forum_id) ? '' : "\n\n" . $user->lang['RSS_AUTH_THIS'] . "\n" );
 					// Profiles
 					$lastposter = '';
-					if ($this->module_config['rss_allow_profile'] ) { 
+					if ($this->module_config['rss_allow_profile'] ) {
 						$lastposter = "\n" . $user->lang['GYM_LAST_POST_BY'] . $this->gym_master->username_string($forum_data['forum_last_poster_id'], $forum_data['forum_last_poster_name'], $forum_data['forum_last_poster_colour'], $this->module_config['rss_allow_profile_links']);
 					}
 					$chan_desc = $forum_desc . $forum_rules . "\n" . $forum_stats . $lastposter;
@@ -359,10 +364,10 @@ class rss_forum {
 
 			} else { // module Rss
 
-				$forum_sql = ' t.forum_id ' . $this->actions['in_id_sql'] . ' AND ';
+				$forum_sql = ' t.' . $this->actions['in_id_sql'] . ' AND ';
 				$chan_source = $this->module_config['rss_url'] . $this->url_config['rss_forum_default'] . $this->url_config['rss_vpath'] . $this->url_config['extra_paramsE'] . $this->url_config['rss_forum_file'];
 				$this->gym_master->seo_kill_dupes($chan_source);
-		
+
 				// Forum stats
 				$forum_stats = '<b>' . $user->lang['STATISTICS'] . '</b> : ' . sprintf($user->lang['TOTAL_USERS_OTHER'], $config['num_users']) . ' || ';
 				$forum_stats .= sprintf($user->lang['TOTAL_TOPICS_OTHER'], $config['num_topics']) . ' || ';
@@ -379,9 +384,9 @@ class rss_forum {
 				$this->gym_master->parse_channel($chan_title_full, $chan_desc . $forum_stats, $chan_link,  $this->output_data['last_mod_time'], $this->module_config['rss_image_url'], $chan_source);
 				// Grabb forums info
 				$forum_data = array();
-				$sql = "SELECT * 
+				$sql = "SELECT *
 					FROM " . FORUMS_TABLE . "
-						WHERE forum_id " . $this->actions['in_id_sql'] . "
+						WHERE " . $this->actions['in_id_sql'] . "
 					ORDER BY forum_last_post_id " . $this->module_config['rss_sort'];
 				$result = $db->sql_query($sql);
 				while ($row = $db->sql_fetchrow($result)) {
@@ -399,19 +404,17 @@ class rss_forum {
 				}
 				$sql = "SELECT COUNT(topic_id) AS topic
 					FROM " . TOPICS_TABLE . " t
-					WHERE $time_limit_sql 
-						topic_type <> " . POST_GLOBAL . " 
-						AND topic_status <> " . ITEM_MOVED . "
-						AND forum_id " . $this->actions['in_id_sql'];
+					WHERE $time_limit_sql " . $this->actions['in_id_sql'] . "
+					AND topic_status <> " . ITEM_MOVED . $approve_sql;
 				$result = $db->sql_query($sql);
 				$row = $db->sql_fetchrow($result);
 				$forum_data['topic_count'] = !empty( $row['topic'] ) ? $row['topic'] : 1;
 				$db->sql_freeresult($result);
 				unset($row);
 			}
-			$this->list_topics($forum_sql, $forum_data, $time_limit, $approve_sql);
+			$this->list_topics($forum_sql, $forum_data, $time_limit, $approve_sqlt);
 		}
-		
+
 	}
 	/**
 	* list_forums() builds the output for forum listing
@@ -420,9 +423,9 @@ class rss_forum {
 	*/
 	function list_forums() {
 		global $db, $user, $phpbb_seo, $auth;
-		$sql = "SELECT * 
+		$sql = "SELECT *
 			FROM " . FORUMS_TABLE . "
-				WHERE forum_id " . $this->actions['in_id_sql'] . "
+				WHERE " . $this->actions['in_id_sql'] . "
 			ORDER BY forum_last_post_id " . $this->module_config['rss_sort'];
 		$result = $db->sql_query($sql);
 		while( $forum_data = $db->sql_fetchrow($result) ) {
@@ -444,7 +447,7 @@ class rss_forum {
 			$item_title = $forum_data['forum_name'];
 			// Profiles
 			$lastposter = '';
-			if ($this->module_config['rss_allow_profile'] && !empty($forum_data['forum_last_poster_id'])) { 
+			if ($this->module_config['rss_allow_profile'] && !empty($forum_data['forum_last_poster_id'])) {
 				$lastposter =  "\n" . $user->lang['GYM_LAST_POST_BY'] . $this->gym_master->username_string($forum_data['forum_last_poster_id'], $forum_data['forum_last_poster_name'], $forum_data['forum_last_poster_colour'], $this->module_config['rss_allow_profile_links']) . "\n";
 			}
 			// Build URLs
@@ -484,11 +487,11 @@ class rss_forum {
 		$sql_first = "SELECT t.* $msg_sql1
 			FROM " . TOPICS_TABLE . " t $msg_sql2
 			WHERE $forum_sql $time_limit
-				t.topic_status <> " . ITEM_MOVED . " 
+				t.topic_status <> " . ITEM_MOVED . "
 				$approve_sql
 				$msg_sql3
 				ORDER BY $order_key " . $this->module_config['rss_sort'];
-		// Absolute limit 
+		// Absolute limit
 		$topic_sofar = 0;
 		$topics = array();
 		$paginated = $config['posts_per_page'];
@@ -512,7 +515,8 @@ class rss_forum {
 					$this->forum_cache[$forum_id]['replies_key'] = 'topic_replies';
 					$this->forum_cache[$forum_id]['forum_url_full'] = $this->gym_master->parse_link($phpbb_seo->seo_path['phpbb_urlR'] . $this->forum_cache[$forum_id]['forum_url'] . $this->url_config['forum_ext'], $this->forum_cache[$forum_id]['forum_name'], 'h5');
 				}
-				if ( $topic['topic_reported'] == 1 || !$topic['topic_approved'] ) { // Skip for now if reported or unapproved
+				if ( $topic['topic_reported'] || !$topic['topic_approved'] ) { // Skip for now if reported or unapproved
+
 					continue;
 				}
 				$pages = ceil( ($topic[$this->forum_cache[$forum_id]['replies_key']] + 1) / $paginated);
@@ -522,7 +526,7 @@ class rss_forum {
 				$topic_stats .= ' || ' . ($topic['topic_views'] + 1) . ' ' . $user->lang['VIEWS'];
 				$topic['topic_url'] = $phpbb_seo->seo_path['phpbb_urlR'] . $this->gym_master->topic_url($topic, $forum_id, $this->forum_cache[$forum_id]['forum_url']);
 				$has_reply = ($topic['topic_last_post_id'] > $topic['topic_first_post_id']) ? true : false;
-				
+
 				// Is this item public ?
 				$this->module_config['rss_auth_msg'] = ($this->gym_master->is_forum_public($forum_id) ? '' :  "\n\n" . $user->lang['RSS_AUTH_THIS'] ) . "\n\n";
 
@@ -540,7 +544,7 @@ class rss_forum {
 					}
 					// Profiles
 					$lastposter = '';
-					if ($this->module_config['rss_allow_profile']  && !empty($topic['topic_poster'])) { 
+					if ($this->module_config['rss_allow_profile']  && !empty($topic['topic_poster'])) {
 						$lastposter = "\n" . $user->lang['GYM_FIRST_POST_BY'] . $this->gym_master->username_string($topic['topic_poster'], $topic['topic_first_poster_name'], $topic['topic_first_poster_colour'], $this->module_config['rss_allow_profile_links']) . "\n\n";
 					}
 					$item_desc = $this->forum_cache[$forum_id]['forum_url_full'] . "\n\n" .  $first_message. "\n" . $topic_stats . $lastposter;
@@ -577,7 +581,7 @@ class rss_forum {
 					}
 					// Profiles
 					$lastposter = '';
-					if ($this->module_config['rss_allow_profile'] && !empty($topic[$user_id_key]) ) { 
+					if ($this->module_config['rss_allow_profile'] && !empty($topic[$user_id_key]) ) {
 						$lastposter = "\n" . $user->lang['GYM_' . strtoupper($profile_key) . '_POST_BY'] . $this->gym_master->username_string($topic[$user_id_key], $topic['topic_' . $profile_key . '_poster_name'], $topic['topic_' . $profile_key . '_poster_colour'], $this->module_config['rss_allow_profile_links']);
 					}
 					$item_desc = $this->forum_cache[$forum_id]['forum_url_full'] .  $last_message . "\n" . $topic_stats .  $lastposter;
