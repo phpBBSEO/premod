@@ -171,7 +171,10 @@ class html_forum {
 			if (!$pre_set) {
 				$this->actions['is_public'] = $this->gym_master->gym_auth['reg'];
 				$this->actions['is_auth'] = $this->actions['is_active'] = !empty($this->module_auth['forum']['read_post']);
-				$this->call['forum_sql'] = $db->sql_in_set('t.forum_id', $this->module_auth['forum']['read_post'], false, true);
+				if (empty($this->actions['auth_view_read'])) {
+					$this->gym_master->gym_error(404, '', __FILE__, __LINE__);
+				}
+				$this->call['forum_sql'] = $db->sql_in_set('t.forum_id', $this->actions['auth_view_read'], false, true);
 				$this->call['topic_sql'] = "t.topic_type = " . POST_ANNOUNCE;
 				$type_key = 'forum_announce';
 				$pre_set = true;
@@ -180,7 +183,10 @@ class html_forum {
 			if (!$pre_set) {
 				$this->actions['is_public'] = $this->gym_master->gym_auth['reg'];
 				$this->actions['is_auth'] = $this->actions['is_active'] = !empty($this->module_auth['forum']['read_post']);
-				$this->call['forum_sql'] = $db->sql_in_set('t.forum_id', $this->module_auth['forum']['read_post'], false, true);
+				if (empty($this->actions['auth_view_read'])) {
+					$this->gym_master->gym_error(404, '', __FILE__, __LINE__);
+				}
+				$this->call['forum_sql'] = $db->sql_in_set('t.forum_id', $this->actions['auth_view_read'], false, true);
 				$this->call['topic_sql'] = "t.topic_type = " . POST_STICKY;
 				$type_key = 'forum_sticky';
 				$pre_set = true;
@@ -236,6 +242,9 @@ class html_forum {
 					$this->actions['auth_view_read'] = array_diff_assoc($this->module_auth['forum']['read_post'], $this->module_config['exclude_list']);
 					$this->actions['is_auth'] = $this->actions['is_active'] = !empty($this->actions['auth_view_read']);
 					$this->call['single_forum'] = sizeof($this->actions['auth_view_read']) > 1 ? false : true;
+					if (empty($this->actions['auth_view_read'])) {
+						$this->gym_master->gym_error(404, '', __FILE__, __LINE__);
+					}
 					// Output news from all authed forums
 					$this->call['forum_sql'] = $db->sql_in_set('t.forum_id', $this->actions['auth_view_read'], false, true);
 				} else {
@@ -273,6 +282,9 @@ class html_forum {
 				$this->call['method'] = 'display_forums';
 				// Here we need to be able to list categories as well as forums
 				// List all listable forums except excluded and links
+				if (empty($this->actions['auth_view_list'])) {
+					$this->gym_master->gym_error(404, '', __FILE__, __LINE__);
+				}
 				$this->call['forum_sql'] = $db->sql_in_set('f.forum_id', $this->actions['auth_view_list'], false, true);
 			} else if ($this->actions['html_news_list'] || $this->actions['html_map_list']) {
 				// Filter $this->actions['module_sub'] var type
@@ -450,8 +462,8 @@ class html_forum {
 		// Wee need to check auth here
 		$this->module_config['last_topics_exclude_list'] = $this->gym_master->set_exclude_list($this->module_config['html_ltopic_exclude']);
 		$forum_auth_ids = array_diff_assoc($this->module_auth['forum']['read_post'], $this->module_config['last_topics_exclude_list']);
-		$topic_sql_auth = $db->sql_in_set('t.forum_id', $forum_auth_ids, false, true);
-		if ($topic_sql_auth{1} != 1) {
+		if (!empty($forum_auth_ids)) {
+			$topic_sql_auth = $db->sql_in_set('t.forum_id', $forum_auth_ids, false, true);
 			$template->assign_vars(array(
 				'NEWEST_POST_IMG' => $user->img('icon_topic_newest', 'VIEW_NEWEST_POST'),
 				'LAST_POST_IMG' => $user->img('icon_topic_latest', 'VIEW_LATEST_POST'),
@@ -530,7 +542,7 @@ class html_forum {
 				}
 			}
 			$sql_array['WHERE'] = "$topic_sql_auth
-						AND t.topic_status <> " . ITEM_MOVED;
+						AND t.topic_status <> " . ITEM_MOVED . ' AND t.topic_approved = 1';
 			$sql_array['ORDER_BY'] = 'topic_last_post_time DESC';
 			$result = $db->sql_query_limit($db->sql_build_query('SELECT', $sql_array), $limit, $start);
 			while ($row = $db->sql_fetchrow($result)) {
