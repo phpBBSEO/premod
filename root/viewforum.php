@@ -654,7 +654,7 @@ if (sizeof($topic_list))
 		if ($row['topic_type'] == POST_GLOBAL || !empty($phpbb_seo->seo_url['forum'][$cur_forum_id])) {
 			$phpbb_seo->prepare_iurl($row, 'topic', $row['topic_type'] == POST_GLOBAL ? $phpbb_seo->seo_static['global_announce'] : $phpbb_seo->seo_url['forum'][$cur_forum_id]);
 		}
-		// www.phpBB-SEO.com SEO TOOLKIT BEGIN
+		// www.phpBB-SEO.com SEO TOOLKIT END
 		// This will allow the style designer to output a different header
 		// or even separate the list of announcements from sticky and normal topics
 		$s_type_switch_test = ($row['topic_type'] == POST_ANNOUNCE || $row['topic_type'] == POST_GLOBAL) ? 1 : 0;
