@@ -62,7 +62,7 @@ class display_forums {
 			$sql_array['SELECT'] .= ', t.topic_id, t.topic_title, t.topic_replies, t.topic_replies_real, t.topic_status, t.topic_type, t.topic_moved_id' . (!empty($phpbb_seo->seo_opt['sql_rewrite']) ? ', t.topic_url ' : ' ');
 			$sql_array['LEFT_JOIN'][] = array(
 				'FROM'	=> array(TOPICS_TABLE => 't'),
-				'ON'	=> "t.topic_last_post_id = f.forum_last_post_id" 
+				'ON'	=> "t.topic_last_post_id = f.forum_last_post_id"
 			);
 		}
 		// www.phpBB-SEO.com SEO TOOLKIT END -> no dupe
@@ -103,7 +103,7 @@ class display_forums {
 				// www.phpBB-SEO.com SEO TOOLKIT BEGIN
 				$phpbb_seo->seo_url['forum'][$forum_id] = $phpbb_seo->set_url($row['forum_name'], $forum_id, $phpbb_seo->seo_static['forum']);
 				// www.phpBB-SEO.com SEO TOOLKIT END
-				$master->forum_datas[$forum_id] = array_merge($row, 
+				$master->forum_datas[$forum_id] = array_merge($row,
 					array(
 						'm_approve' => $auth->acl_get('m_approve', $forum_id),
 						'forum_name' => !empty($row['forum_name']) ? $row['forum_name'] : '',
@@ -141,7 +141,7 @@ class display_forums {
 					$diff = $level - $last_level;
 					$html_before = str_repeat("\n<ul><li>", $diff );
 					$html_after = "";
-				} 
+				}
 				if ($level < $last_level) { // Going one or several level up
 					$diff = $last_level - $level;
 					$html_before = str_repeat("</li></ul>\n", $diff ) . "</li>\n<li>";
@@ -252,7 +252,7 @@ class display_forums {
 						} else {
 							$folder_image = 'forum_link';
 						}
-					
+
 					}
 					$forum_folder_img = $user->img($folder_image, $folder_alt);
 					$forum_folder_img_src = $user->img($folder_image, $folder_alt, false, '', 'src');
@@ -267,7 +267,7 @@ class display_forums {
 					'FORUM_NEWS_LINK' => $forum_news_link,
 				);
 				if (!$is_cat) {
-					$tpl_data += array(	
+					$tpl_data += array(
 						'FORUM_DESC' => ($master->call['display_desc'] && !$is_cat) ? $master->generate_forum_info($row) : '',
 						'FORUM_FOLDER_IMG' => $forum_folder_img,
 						'FORUM_FOLDER_IMG_SRC' => $forum_folder_img_src,
@@ -281,18 +281,18 @@ class display_forums {
 						if ($row['forum_last_post_id']) {
 							$last_post_subject = $row['forum_last_post_subject'];
 							$last_post_time = $user->format_date($row['forum_last_post_time']);
-							$row['topic_title'] = censor_text($row['topic_title']);
-							if ($row['topic_status'] == ITEM_MOVED) {
-								$row['topic_id'] = $row['topic_moved_id'];
-							}
-							if (!empty($row['topic_id']) && !$row['forum_password']) {
+							if (!empty($phpbb_seo->seo_opt['no_dupe']['on']) && !empty($row['topic_id']) && !$row['forum_password']) {
+								if ($row['topic_status'] == ITEM_MOVED) {
+									$row['topic_id'] = $row['topic_moved_id'];
+								}
 								$topic_id = (int) $row['topic_id'];
+								$row['topic_title'] = censor_text($row['topic_title']);
 								// www.phpBB-SEO.com SEO TOOLKIT BEGIN
 								$phpbb_seo->prepare_iurl($row, 'topic', $row['topic_type'] == POST_GLOBAL ? $phpbb_seo->seo_static['global_announce'] : $phpbb_seo->seo_url['forum'][$forum_id]);
 								// www.phpBB-SEO.com SEO TOOLKIT END
 								$last_post_url =  append_sid("{$phpbb_root_path}viewtopic.$phpEx", "f=$forum_id&amp;t=$topic_id&amp;start=" . @intval($phpbb_seo->seo_opt['topic_last_page'][$topic_id]) ) . '#p' . $row['forum_last_post_id'];
 								$last_post_link = '<a href="' . append_sid("{$phpbb_root_path}viewtopic.$phpEx", "f=$forum_id&amp;t=$topic_id") . '" title="' . $row['topic_title'] . ' : ' . $row['forum_name'] . '">' . $row['topic_title'] . '</a>';
-							} else {	
+							} else {
 								$last_post_url =  append_sid("{$phpbb_root_path}viewtopic.$phpEx", "f=$forum_id&amp;p=" . $row['forum_last_post_id']) . '#p' . $row['forum_last_post_id'];
 								$last_post_link = '';
 							}
