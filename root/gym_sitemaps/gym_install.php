@@ -88,7 +88,7 @@ class module {
 	*/
 	function create($module_type, $module_url, $selected_mod = false, $selected_submod = false) {
 		global $db, $config, $phpEx, $phpbb_root_path, $user;
-		$module = array( 
+		$module = array(
 			array(
 				'module_type'		=> 'install',
 				'module_title'		=> 'OVERVIEW',
@@ -262,7 +262,7 @@ class module {
 				$cat = $cat_ary['name'];
 				$l_cat = (!empty($user->lang['CAT_' . $cat])) ? $user->lang['CAT_' . $cat] : preg_replace('#_#', ' ', $cat);
 				$cat = strtolower($cat);
-				$url = $this->module_url . "?mode=$cat";	
+				$url = $this->module_url . "?mode=$cat";
 				if ($this->mode == $cat) {
 					$template->assign_block_vars('t_block1', array(
 						'L_TITLE'		=> $l_cat,
@@ -270,7 +270,7 @@ class module {
 						'U_TITLE'		=> $url,
 					));
 					if (is_array($this->module_ary[$this->id]['subs'])) {
-						$subs = $this->module_ary[$this->id]['subs']; 
+						$subs = $this->module_ary[$this->id]['subs'];
 						foreach ($subs as $option) {
 							$l_option = (!empty($user->lang['SUB_' . $option])) ? $user->lang['SUB_' . $option] : preg_replace('#_#', ' ', $option);
 							$option = strtolower($option);
@@ -283,7 +283,7 @@ class module {
 						}
 					}
 					if (is_array($this->module_ary[$this->id]['stages'])) {
-						$subs = $this->module_ary[$this->id]['stages']; 
+						$subs = $this->module_ary[$this->id]['stages'];
 						$matched = false;
 						foreach ($subs as $option) {
 							$l_option = (!empty($user->lang['STAGE_' . $option])) ? $user->lang['STAGE_' . $option] : preg_replace('#_#', ' ', $option);
@@ -468,10 +468,10 @@ class install_gym_sitemaps extends module {
 								}
 							}
 						}
-						closedir($dir);	
+						closedir($dir);
 						foreach ($gym_modules[$otype] as $_module => $type_module) { // List all available modules
 							$module_file = $phpbb_root_path . 'gym_sitemaps/acp/' . $type_module . '.' . $phpEx;
-	
+
 							if ( file_exists($module_file) ) {
 								include_once($module_file);
 								if (class_exists($type_module)) {
@@ -515,7 +515,7 @@ class install_gym_sitemaps extends module {
 	function add_modules($mode, $sub) {
 		global $db, $user, $phpbb_root_path, $phpEx;
 		include_once($phpbb_root_path . 'includes/acp/acp_modules.' . $phpEx);
-		$_module = &new acp_modules();
+		$_module = new acp_modules();
 		if ( $this->get_module_id('ACP_GYM_SITEMAPS')  > 0 ) {
 			$url_mod = !empty($sub) ? '?mode=' . $mode : '';
 
@@ -601,7 +601,7 @@ class install_gym_sitemaps extends module {
 						}
 					}
 				}
-			}	
+			}
 		}
 	}
 	/**
@@ -610,7 +610,7 @@ class install_gym_sitemaps extends module {
 	function remove_modules($mode, $sub) {
 		global $db, $user, $phpbb_root_path, $phpEx;
 		include_once($phpbb_root_path . 'includes/acp/acp_modules.' . $phpEx);
-		$_module = &new acp_modules();
+		$_module = new acp_modules();
 		// Set the module class
 		$module_classes = array_keys($this->module_categories);
 		$_module->u_action = "phpbb_seo_install.$phpEx";
@@ -739,10 +739,10 @@ class install_gym_sitemaps extends module {
 					$sql[] = "CREATE TABLE [" . GYM_CONFIG_TABLE . "] (
 							[config_name] [varchar] (255) DEFAULT ('') NOT NULL ,
 							[config_value] [varchar] (255) DEFAULT ('') NOT NULL ,
-							[config_type] [varchar] (10) DEFAULT ('') NOT NULL 
+							[config_type] [varchar] (10) DEFAULT ('') NOT NULL
 						) ON [PRIMARY] ";
-					$sql[] = "ALTER TABLE [" . GYM_CONFIG_TABLE . "] WITH NOCHECK ADD 
-							CONSTRAINT [PK_gym_config] PRIMARY KEY  CLUSTERED 
+					$sql[] = "ALTER TABLE [" . GYM_CONFIG_TABLE . "] WITH NOCHECK ADD
+							CONSTRAINT [PK_gym_config] PRIMARY KEY  CLUSTERED
 							(
 								[config_name]
 							)  ON [PRIMARY] ";
@@ -814,12 +814,12 @@ class install_gym_sitemaps extends module {
 			} else {
 				set_config('gym_installed', 0);
 			}
-			add_log('admin', 'SEO_LOG_' . strtoupper($mode), $this->version );	
+			add_log('admin', 'SEO_LOG_' . strtoupper($mode), $this->version );
 		} else {
 			set_config('gym_installed', 0);
 			add_log('admin', 'SEO_LOG_' . strtoupper($mode) . '_FAIL', $this->errors);
 			$cache->purge();
-			$this->p_master->error($user->lang['SEO_ERROR_INSTALL'] . '<br/><pre>' . implode('<br/>', $this->errors) . '</pre>', __LINE__, __FILE__);	
+			$this->p_master->error($user->lang['SEO_ERROR_INSTALL'] . '<br/><pre>' . implode('<br/>', $this->errors) . '</pre>', __LINE__, __FILE__);
 		}
 		$cache->purge();
 		$this->page_title = $user->lang['STAGE_FINAL'];
