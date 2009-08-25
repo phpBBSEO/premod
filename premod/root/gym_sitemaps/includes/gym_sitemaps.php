@@ -107,6 +107,8 @@ class gym_sitemaps {
 			'all' => true,
 			'none' => false,
 		);
+		// Workarround for error message handling
+		$phpbb_seo->file_hbase['map'] = $phpbb_seo->file_hbase['gymrss'] = $phpbb_seo->file_hbase['sitemap'] = $phpbb_seo->seo_path['phpbb_url'];
 		// Clear buffer, just in case it was started elswhere
 		while (@ob_end_clean());
 		return;
