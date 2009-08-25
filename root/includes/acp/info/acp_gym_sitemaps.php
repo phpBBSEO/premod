@@ -16,7 +16,7 @@ class acp_gym_sitemaps_info {
 		return array(
 			'filename'	=> 'gym_sitemaps',
 			'title'		=> 'ACP_GYM_SITEMAPS',
-			'version'	=> '2.0.RC5',
+			'version'	=> '2.0.0',
 			'modes'		=> array(
 				'main'		=> array('title' => 'ACP_GYM_MAIN', 'auth' => 'acl_a_board', 'cat' => array('ACP_GYM_SITEMAPS')),
 				'google'	=> array('title' => 'ACP_GYM_GOOGLE_MAIN', 'auth' => 'acl_a_board', 'cat' => array('ACP_GYM_SITEMAPS')),

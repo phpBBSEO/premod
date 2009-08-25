@@ -38,7 +38,7 @@ class google_main {
 	*/
 	function acp_module() {
 		global $phpbb_seo;
-		return array( 
+		return array(
 			'cache' => array(
 			       	'display_vars' => array(
 					'title'	=> 'GYM_CACHE',
@@ -72,7 +72,7 @@ class google_main {
 					'google_modrewrite' => 0,
 					'google_modrtype' => 0,
 				),
-				'select' => array( 
+				'select' => array(
 					'google_modrtype' => @$this->dyn_select['modrtype'],
 				),
 			),
@@ -115,7 +115,7 @@ class google_main {
 				'default' => array(
 					'google_sort' => 'DESC',
 				),
-				'select' => array( 
+				'select' => array(
 					'google_sort' => @$this->dyn_select['sort'],
 				),
 			),
@@ -141,34 +141,34 @@ class google_main {
 					'vars'	=> array(
 						'legend1'	=> 'GYM_OVERRIDE',
 						'google_override'	=> array('lang' => 'GYM_OVERRIDE_MAIN', 'validate' => 'string', 'type' => 'select', 'method' => 'select_string', 'explain' => true,),
-						'google_override_cache'	=> array('lang' => 'GYM_OVERRIDE_CACHE','validate' => 'string', 'type' => 'select', 'method' => 'select_string', 'explain' => true,),						
+						'google_override_cache'	=> array('lang' => 'GYM_OVERRIDE_CACHE','validate' => 'string', 'type' => 'select', 'method' => 'select_string', 'explain' => true,),
 						'google_override_modrewrite'	=> array('lang' => 'GYM_OVERRIDE_MODREWRITE','validate' => 'string', 'type' => 'select', 'method' => 'select_string', 'explain' => true,),
 						'google_override_gzip'	=> array('lang' => 'GYM_OVERRIDE_GZIP','validate' => 'string', 'type' => 'select', 'method' => 'select_string', 'explain' => true,),
 						'google_override_limit'	=> array('lang' => 'GYM_OVERRIDE_LIMIT','validate' => 'string', 'type' => 'select', 'method' => 'select_string', 'explain' => true,),
 						'google_override_sort'	=> array('lang' => 'GYM_OVERRIDE_SORT','validate' => 'string', 'type' => 'select', 'method' => 'select_string', 'explain' => true,),
 						'google_override_pagination'	=> array('lang' => 'GYM_OVERRIDE_PAGINATION','validate' => 'string', 'type' => 'select', 'method' => 'select_string', 'explain' => true,),
-						
+
 					),
 				),
 				'default' => array(
 					'google_override' => OVERRIDE_MODULE,
 					'google_override_cache'	=> OVERRIDE_OTYPE,
 					'google_override_modrewrite' => OVERRIDE_OTYPE,
-					'google_override_gzip'	=> OVERRIDE_GLOBAL,					
-					'google_override_limit'	=> OVERRIDE_OTYPE,					
+					'google_override_gzip'	=> OVERRIDE_GLOBAL,
+					'google_override_limit'	=> OVERRIDE_OTYPE,
 					'google_override_sort'	=> OVERRIDE_MODULE,
 					'google_override_pagination' => OVERRIDE_OTYPE,
 				),
-				'select' => array( 
+				'select' => array(
 					'google_override' => $this->google_override,
 					'google_override_cache' => @$this->dyn_select['override'],
 					'google_override_modrewrite' => @$this->dyn_select['override'],
-					'google_override_gzip' => @$this->dyn_select['override'],					
+					'google_override_gzip' => @$this->dyn_select['override'],
 					'google_override_limit' => @$this->dyn_select['override'],
 					'google_override_sort' => @$this->dyn_select['override'],
-					'google_override_pagination' => @$this->dyn_select['override'],					
+					'google_override_pagination' => @$this->dyn_select['override'],
 				),
-			),	
+			),
 			'main' => array(
 			       	'display_vars' => array(
 					'title'	=> 'GOOGLE_MAIN',
@@ -176,19 +176,29 @@ class google_main {
 						// Settings
 						'legend1'	=> 'GOOGLE_URL',
 						'google_url'	=> array('lang' => 'GOOGLE_URL', 'validate' => 'string', 'type' => 'text:35:200', 'explain' => true),
-						'legend2' => 'GOOGLE_PING',
+						// Auth settings
+						'legend2'	=> 'GOOGLE_AUTH_SETTINGS',
+						'google_allow_auth' => array('lang' => 'GOOGLE_ALLOW_AUTH', 'validate' => 'bool', 'type' => 'radio:yes_no', 'explain' => true),
+						'google_cache_auth' => array('lang' => 'GOOGLE_CACHE_AUTH', 'validate' => 'bool', 'type' => 'radio:yes_no', 'explain' => true),
+						// Ping
+						'legend3' => 'GOOGLE_PING',
 						'google_ping' => array('lang' => 'GOOGLE_PING', 'validate' => 'bool', 'type' => 'radio:yes_no', 'explain' => true),
-						'legend3' => 'GYM_STYLE',
+						// Styling
+						'legend4' => 'GYM_STYLE',
 						'google_xslt'	=> array('lang' => 'GOOGLE_XSLT', 'validate' => 'bool', 'type' => 'radio:yes_no', 'explain' => true),
 						'google_load_phpbb_css' => array('lang' => 'GOOGLE_LOAD_PHPBB_CSS', 'validate' => 'bool', 'type' => 'radio:yes_no', 'explain' => true),
-						'legend4' => 'GOOGLE_THRESHOLD',
+						// Threshold
+						'legend5' => 'GOOGLE_THRESHOLD',
 						'google_threshold' => array('lang' => 'GOOGLE_THRESHOLD', 'validate' => 'int:1:100', 'type' => 'text:4:4', 'explain' => true),
-						'legend5' => 'GOOGLE_PRIORITIES',
+						// Priorities
+						'legend6' => 'GOOGLE_PRIORITIES',
 						'google_default_priority' => array('lang' => 'GOOGLE_DEFAULT_PRIORITY', 'type' => 'custom', 'validate' => 'string', 'method' => 'validate_num', 'params' => array('{CONFIG_VALUE}', '{KEY}', 2, 0, 1),  'explain' => true,),
 					)
 				),
 				'default' => array(
 					'google_url'	=> $phpbb_seo->seo_path['phpbb_url'],
+					'google_allow_auth' => 0,
+					'google_cache_auth' => 1,
 					'google_ping' => 0,
 					'google_xslt'	=> 1,
 					'google_load_phpbb_css'	=> 0,

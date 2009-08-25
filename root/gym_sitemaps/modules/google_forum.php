@@ -44,12 +44,15 @@ class google_forum {
 		// Build exclude_list array
 		$this->module_config['exclude_list'] = $this->gym_master->set_exclude_list($this->module_config['google_exclude']);
 		// Wee need to check auth here (Only public and postable forums for sitemaps)
-		$this->gym_master->check_forum_auth(true);
-		// Only consider publicly readable and postable forums
-		$this->actions['auth_guest_read'] = $this->actions['auth_view_read'] = array_diff_assoc($this->module_auth['forum']['read_post'], $this->module_config['exclude_list']);
+		$this->gym_master->check_forum_auth($this->module_config['google_auth_guest']);
+		// Wee need to check auth here
+		$this->actions['auth_guest_read'] = array_diff_assoc($this->module_auth['forum']['public_read'], $this->module_config['exclude_list'], $this->module_auth['forum']['skip_all']);
+		$this->actions['auth_view_read'] = array_diff_assoc($this->module_auth['forum']['read_post'], $this->module_config['exclude_list']);
 		if (empty($this->actions['auth_view_read'])) {
 			$this->gym_master->gym_error(404, '', __FILE__, __LINE__);
 		}
+		// Check cache
+		$this->gym_master->gym_output->setup_cache(); // Will exit if the cache is sent
 		$this->init_url_settings();
 	}
 	/**
