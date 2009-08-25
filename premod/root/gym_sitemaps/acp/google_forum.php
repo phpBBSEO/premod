@@ -35,7 +35,7 @@ class google_forum {
 	* @access private
 	*/
 	function acp_module() {
-		return array( 
+		return array(
 			'cache' => array(
 				'display_vars' => array(
 					'title'	=> 'GYM_CACHE',
@@ -67,7 +67,7 @@ class google_forum {
 					'google_forum_modrewrite' => 0,
 					'google_forum_modrtype' => 0,
 				),
-				'select' => array( 
+				'select' => array(
 					'google_forum_modrtype' => @$this->dyn_select['modrtype'],
 				),
 			),
@@ -110,7 +110,7 @@ class google_forum {
 				'default' => array(
 					'google_forum_sort' => 'DESC',
 				),
-				'select' => array( 
+				'select' => array(
 					'google_forum_sort' => @$this->dyn_select['sort'],
 				),
 			),
@@ -143,7 +143,6 @@ class google_forum {
 						'google_forum_exclude' => array('lang' => 'GOOGLE_FORUM_EXCLUDE', 'multiple_validate' => 'int', 'type' => 'custom', 'method' => 'select_multiple_string', 'explain' => true),
 						'legend3' => 'GOOGLE_PING',
 						'google_forum_ping' => array('lang' => 'GOOGLE_PING', 'validate' => 'bool', 'type' => 'radio:yes_no', 'explain' => true, 'overriding' => true),
-
 					),
 				),
 				'default' => array(

@@ -58,7 +58,7 @@ class gym_google extends gym_sitemaps {
 				'cache_file_ext' => ( $this->gym_output->gzip_config['gzip'] || $this->set_module_option('cache_force_gzip', $this->override['cache']) ) ? '.xml.gz' : '.xml',
 			)
 		);
-		// Can you believe it, sprintf is faster than straight parsing. 
+		// Can you believe it, sprintf is faster than straight parsing.
 		$this->style_config	= array('Sitemap_tpl' => "\n\t" . '<url>' . "\n\t\t" . '<loc>%1$s</loc>%2$s%3$s%4$s' . "\n\t" . '</url>',
 			'SitmIndex_tpl' => "\n\t" . '<sitemap>' . "\n\t\t" . '<loc>%s</loc>%s' . "\n\t" . '</sitemap>',
 			'lastmod_tpl' => "\n\t\t" . '<lastmod>%s</lastmod>',
@@ -85,11 +85,15 @@ class gym_google extends gym_sitemaps {
 			'google_ping' => $this->set_module_option('ping', $this->gym_config['google_override']),
 			// display threshold
 			'google_threshold' => max(1, (int) $this->gym_config['google_threshold']),
+			'google_allow_auth' => (int) $this->set_module_option('allow_auth', $this->gym_config['google_override']),
+			'google_cache_auth' => (int) $this->set_module_option('cache_auth', $this->gym_config['google_override']),
 		);
+		$this->google_config['google_auth_guest'] = ($this->google_config['google_allow_auth'] && ($user->data['is_bot'] || $user->data['is_registered'])) ? false : true;
+		$this->cache_config['do_cache'] = $this->google_config['google_auth_guest'] ? true :  $this->google_config['google_cache_auth'];
 		if ($this->gym_config['google_xslt']) {
 			$this->style_config['xslt_style'] = "\n" . '<?xml-stylesheet type="text/xsl" href="' . $phpbb_seo->seo_path['phpbb_url'] . 'gym_sitemaps/gym_style.' . $phpEx . '?action-google,type-xsl,lang-' . $config['default_lang'] . ',theme_id-' . $config['default_style'] . '" ?'.'>';
 		}
-		// Take care about module categorie urls, assuming that they are of the proper form 
+		// Take care about module categorie urls, assuming that they are of the proper form
 		// title-sepXX.xml
 		// assuming that phpbb_seo seo_delim array is properly set.
 		if (empty($this->actions['module_main']) && empty($this->actions['module_sub']) && !empty($_REQUEST['module_sep']) && !empty($_REQUEST['module_sub'])) {
@@ -98,17 +102,22 @@ class gym_google extends gym_sitemaps {
 				$this->actions['module_sub'] = (int) $_REQUEST['module_sub'];
 			}
 		}
-		// Check cache
-		$this->gym_output->setup_cache(); // Will exit if the cache is sent
+		// Are we going to explain ?
+		$do_explain = false;
+		if (!empty($_REQUEST['explain']) && $auth->acl_get('a_') && defined('DEBUG_EXTRA') && method_exists($db, 'sql_report')) {
+			$do_explain = true;
+			$this->cache_config['do_cache'] = false;
+		}
 		if ( empty($this->actions['module_main']) ) { // SitemapIndex
 			$this->google_sitemapindex();
 		} else { // Sitemap
 			$this->google_sitemap();
 		}
-		if (!empty($_REQUEST['explain']) && $auth->acl_get('a_') && defined('DEBUG_EXTRA') && method_exists($db, 'sql_report')) {
+		if ($do_explain) {
 			$db->sql_report('display');
+		} else {
+			$this->gym_output->do_output();
 		}
-		$this->gym_output->do_output();
 		return;
 	}
 	/**
@@ -161,7 +170,7 @@ class gym_google extends gym_sitemaps {
 	*/
 	function parse_sitemap($url, $lastmodtime = 0) {
 		global $config, $user;
-		if ($lastmodtime > $config['board_startdate']) {	
+		if ($lastmodtime > $config['board_startdate']) {
 			$lastmodtime = sprintf($this->style_config['lastmod_tpl'], gmdate('Y-m-d\TH:i:s'.'+00:00', intval($lastmodtime)));
 		} else {
 			$lastmodtime = '';

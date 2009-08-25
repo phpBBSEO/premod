@@ -48,5 +48,11 @@ $lang = array_merge($lang, array(
 	'GOOGLE_XSLT_EXPLAIN' => 'Activates the XSL style-sheet to ouptut user-friendly Google sitemaps with clickable links and more. This will only be effective after you will have cleared the Google sitemaps cache using the Maintenance link above.',
 	'GOOGLE_LOAD_PHPBB_CSS' => 'Load phpBB CSS',
 	'GOOGLE_LOAD_PHPBB_CSS_EXPLAIN' => 'The GYM sitemap module uses the phpBB3 templating system. The XSL stylesheets used to build the html output are compatible with phpBB3 styling.<br/>With this, you can apply the phpBB CSS on the XSL stylesheet instead of the default one. This way, all your theme personalizations such as background and font color or even images will be used in the Google sitemap styled ouptut.<br/>This will only have effect after you will have cleared the RSS cache in the "Maintenance" menu.<br/>If the Google sitemaps style file are not present in the current style, the default style (always available, based on prosilver) will be used.<br/>Do not try to use prosilver templates with another style, the CSS most likely won\'t match.',
+	// Auth settings
+	'GOOGLE_AUTH_SETTINGS' => 'Authorization settings',
+	'GOOGLE_ALLOW_AUTH' => 'Authorizations',
+	'GOOGLE_ALLOW_AUTH_EXPLAIN' => 'Activate the authorization for Sitemaps. If activated, logged in users and bots will be able to browse private forum sitemaps if they have the proper authorization.',
+	'GOOGLE_CACHE_AUTH' => 'Cache private sitemaps',
+	'GOOGLE_CACHE_AUTH_EXPLAIN' => 'You can disable cache for non public sitemaps when allowed.<br/> Caching private sitemaps will increase the number of file cached. It should not be a problem, but you can decide to only cache public sitemaps here.',
 ));
 ?>

@@ -49,5 +49,11 @@ $lang = array_merge($lang, array(
 	'GOOGLE_XSLT_EXPLAIN' => 'Active la feuille de style XSL pour obtenir un affichage visuellement agréable avec entre autres des liens cliquables. Ceci ne prendra effet que lorsque vous aurez vidé le cache des Sitemaps Google depuis le menu "Maintenance".',
 	'GOOGLE_LOAD_PHPBB_CSS' => 'Charger les CSS de phpBB',
 	'GOOGLE_LOAD_PHPBB_CSS_EXPLAIN' => 'Le MOD GYM Sitemaps utilise le système de styles de phpBB3. Les feuilles de style XSL utilisées pour produire le fichier html en sortie sont compatibles avec le système de styles de phpBB3.<br />Avec ce paramétrage, plutôt que d’utiliser le style par défaut, vous pouvez appliquer la feuille de style de phpBB à la feuille de style XSL. De cette façon, toutes vos personnalisations de thème telles que le fond, les couleurs de polices ou encore les images seront utilisées en sortie pour l’affichage des Sitemaps Google.<br />Ceci ne prendra effet que lorsque vous aurez vidé le cache des Sitemaps Google depuis le menu "Maintenance".<br />Si les fichiers de style des Sitemaps Google ne sont pas disponibles sur le style utilisé, le style par défaut (toujours disponible et basé sur Prosilver) sera utilisé.<br />N’essayez pas d’utiliser les templates de Prosilver avec un autre style, les CSS ne correspondront certainement pas.',
+	// Auth settings
+	'GOOGLE_AUTH_SETTINGS' => 'Paramètres liés aux autorisations',
+	'GOOGLE_ALLOW_AUTH' => 'Autorisations',
+	'GOOGLE_ALLOW_AUTH_EXPLAIN' => 'Active les autorisations pour les sitemaps. Si activé, les utilisateurs connectés et les bots pourront voir les sitemaps des forum privés s’ils ont les autorisations nécessaires.',
+	'GOOGLE_CACHE_AUTH' => 'Cache des sitemaps privés',
+	'GOOGLE_CACHE_AUTH_EXPLAIN' => 'Vous pouvez désactiver le cache pour les sitemaps privés si les autorisations sont activées.<br /> Mettre en cache les sitemaps privés augmentera le nombre de fichiers en cache, ce qui ne devrait pas poser de problème en général. Cependant cette option vous permet de décider de ne mettre en cache que les sitemaps publics.',
 ));
 ?>
