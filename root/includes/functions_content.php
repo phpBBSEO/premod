@@ -942,7 +942,7 @@ function parse_attachments($forum_id, &$message, &$attachments, &$update_count, 
 					} else {
 						$comment_url = $comment_clean;
 					}
-					$comment_url = utf8_strlen($comment_url) > 60 ? utf8_substr($comment_url, 0, 60) : $comment_url; 
+					$comment_url = utf8_strlen($comment_url) > 60 ? utf8_substr($comment_url, 0, 60) : $comment_url;
 					$phpbb_seo->seo_url['file'][$attachment['attach_id']] = $phpbb_seo->format_url($comment_url, $phpbb_seo->seo_static['file'][$display_cat]);
 				}
 			}
@@ -1253,7 +1253,7 @@ function get_username_string($mode, $user_id, $username, $username_colour = '', 
 				// $profile_url = ($custom_profile_url !== false) ? $custom_profile_url . '&amp;u=' . (int) $user_id : str_replace(array('={USER_ID}', '=%7BUSER_ID%7D'), '=' . (int) $user_id, $_profile_cache['base_url']);
 				global $phpbb_seo, $phpbb_root_path, $phpEx;
 				$phpbb_seo->set_user_url( $username, $user_id );
-				$profile_url = ($custom_profile_url !== false) ? $custom_profile_url . '&amp;u=' . (int) $user_id : append_sid("{$phpbb_root_path}memberlist.$phpEx", 'mode=viewprofile&amp;u=' . (int) $user_id);
+				$profile_url = ($custom_profile_url !== false) ? reapply_sid($custom_profile_url,'u=' . (int) $user_id) : append_sid("{$phpbb_root_path}memberlist.$phpEx", 'mode=viewprofile&amp;u=' . (int) $user_id);
 				// www.phpBB-SEO.com SEO TOOLKIT END
 			}
 			else
