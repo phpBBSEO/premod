@@ -94,7 +94,7 @@ function display_forums($root_data = '', $display_moderators = true, $return_mod
 		$sql_array['SELECT'] .= ', t.topic_id, t.topic_title, t.topic_replies, t.topic_replies_real, t.topic_status, t.topic_type, t.topic_moved_id' . (!empty($phpbb_seo->seo_opt['sql_rewrite']) ? ', t.topic_url ' : ' ');
 		$sql_array['LEFT_JOIN'][] = array(
 			'FROM'	=> array(TOPICS_TABLE => 't'),
-			'ON'	=> "t.topic_last_post_id = f.forum_last_post_id" 
+			'ON'	=> "t.topic_last_post_id = f.forum_last_post_id"
 		);
 	}
 	// www.phpBB-SEO.com SEO TOOLKIT END -> no dupe
@@ -425,7 +425,7 @@ function display_forums($root_data = '', $display_moderators = true, $return_mod
 				// Limit topic text link to $char_limit, without breacking words
 				$topic_text_lilnk = $char_limit > 0 && ( ( $length = utf8_strlen($topic_title) ) > $char_limit ) ? ( utf8_strlen($fragment = utf8_substr($topic_title, 0, $char_limit + 1 - 4)) < $length + 1 ? preg_replace('`\s*\S*$`', '', $fragment) . ' ...' : $topic_title ) : $topic_title;
 				$last_post_link = '<a href="' . append_sid("{$phpbb_root_path}viewtopic.$phpEx", 'f=' . $row['forum_id_last_post'] . '&amp;t=' . $row['topic_id']) . '" title="' . $topic_title . ' : ' . $phpbb_seo->seo_opt['topic_forum_name'][$row['topic_id']] . '">' . $topic_text_lilnk . '</a>';
-			} else {	
+			} else {
 				$last_post_url =  append_sid("{$phpbb_root_path}viewtopic.$phpEx", 'f=' . $row['forum_id_last_post'] . '&amp;p=' . $row['forum_last_post_id']) . '#p' . $row['forum_last_post_id'];
 				$last_post_link = '';
 			}
@@ -1058,11 +1058,20 @@ function display_user_activity(&$userdata)
 	if (!empty($active_t_row))
 	{
 		// www.phpBB-SEO.com SEO TOOLKIT BEGIN
-		$sql = 'SELECT t.topic_title, t.topic_type ' . (!empty($phpbb_seo->seo_opt['sql_rewrite']) ? ', t.topic_url' : '') . ', f.forum_id, f.forum_name
-			FROM ' . TOPICS_TABLE . ' AS t, ' . FORUMS_TABLE . ' AS f
-			WHERE t.topic_id = ' . $active_t_row['topic_id'] . '
-			AND f.forum_id = t.forum_id';
-		$result = $db->sql_query($sql);
+		$sql_array = array(
+			'SELECT'	=> 't.topic_title, t.topic_type ' . (!empty($phpbb_seo->seo_opt['sql_rewrite']) ? ', t.topic_url' : '') . ', f.forum_id, f.forum_name',
+			'FROM'		=> array(
+				TOPICS_TABLE	=> 't',
+			),
+			'LEFT_JOIN' => array(
+				array(
+					'FROM'	=> array(FORUMS_TABLE => 'f'),
+					'ON'	=> 'f.forum_id = t.forum_id',
+				),
+			),
+			'WHERE' => 't.topic_id = ' . (int) $active_t_row['topic_id']
+		);
+		$result = $db->sql_query($db->sql_build_query('SELECT', $sql_array));
 		$seo_active_t_row = $db->sql_fetchrow($result);
 		if ($seo_active_t_row) {
 			$active_t_row = array_merge($active_t_row, $seo_active_t_row);
