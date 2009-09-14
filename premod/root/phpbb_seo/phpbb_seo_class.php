@@ -84,7 +84,7 @@ class phpbb_seo extends setup_phpbb_seo {
 		// --> DOMAIN SETTING <-- //
 		// Path Settings, only rely on DB
 		$server_protocol = ($config['server_protocol']) ? $config['server_protocol'] : (($config['cookie_secure']) ? 'https://' : 'http://');
-		$server_name = trim($config['server_name'], '/');
+		$server_name = trim($config['server_name'], '/ ');
 		$server_port = max(0, (int) $config['server_port']);
 		$server_port = ($server_port && $server_port <> 80) ? ':' . $server_port : '';
 		$script_path = trim($config['script_path'], '/ ');
