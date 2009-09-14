@@ -2,7 +2,7 @@
 /**
 *
 * @package install
-* @version $Id: convert_phpbb20.php 9333 2009-02-20 14:50:43Z Kellanved $
+* @version $Id: convert_phpbb20.php 9656 2009-06-23 10:48:53Z acydburn $
 * @copyright (c) 2006 phpBB Group
 * @license http://opensource.org/licenses/gpl-license.php GNU Public License
 *
@@ -611,6 +611,7 @@ if (!$get_info)
 				'query_first'	=> array('target', $convert->truncate_statement . POSTS_TABLE),
 				'execute_first'	=> '
 					$config["max_post_chars"] = 0;
+					$config["min_post_chars"] = 0;
 					$config["max_quote_depth"] = 0;
 				',
 
@@ -660,6 +661,7 @@ if (!$get_info)
 
 				'execute_first'	=> '
 					$config["max_post_chars"] = 0;
+					$config["min_post_chars"] = 0;
 					$config["max_quote_depth"] = 0;
 				',
 

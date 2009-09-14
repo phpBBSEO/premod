@@ -2,7 +2,7 @@
 /**
 *
 * @package acp
-* @version $Id: acp_database.php 9417 2009-03-30 13:52:58Z acydburn $
+* @version $Id: acp_database.php 9928 2009-08-05 13:05:55Z bantu $
 * @copyright (c) 2005 phpBB Group
 * @license http://opensource.org/licenses/gpl-license.php GNU Public License
 *
@@ -548,7 +548,7 @@ class base_extractor
 
 			if (!$this->fp)
 			{
-				trigger_error('Unable to write temporary file to storage folder', E_USER_ERROR);
+				trigger_error('FILE_WRITE_FAIL', E_USER_ERROR);
 			}
 		}
 	}
@@ -1157,16 +1157,17 @@ class postgres_extractor extends base_extractor
 					AND (c.oid = d.adrelid)
 					AND d.adnum = " . $row['attnum'];
 			$def_res = $db->sql_query($sql_get_default);
+			$def_row = $db->sql_fetchrow($def_res);
+			$db->sql_freeresult($def_res);
 
-			if (!$def_res)
+			if (empty($def_row))
 			{
 				unset($row['rowdefault']);
 			}
 			else
 			{
-				$row['rowdefault'] = $db->sql_fetchfield('rowdefault', false, $def_res);
+				$row['rowdefault'] = $def_row['rowdefault'];
 			}
-			$db->sql_freeresult($def_res);
 
 			if ($row['type'] == 'bpchar')
 			{
@@ -1854,7 +1855,8 @@ class oracle_extractor extends base_extractor
 			// Build the SQL statement to recreate the data.
 			for ($i = 0; $i < $i_num_fields; $i++)
 			{
-				$str_val = $row[$ary_name[$i]];
+				// Oracle uses uppercase - we use lowercase
+				$str_val = $row[strtolower($ary_name[$i])];
 
 				if (preg_match('#char|text|bool|raw#i', $ary_type[$i]))
 				{
@@ -1885,7 +1887,7 @@ class oracle_extractor extends base_extractor
 				}
 
 				$schema_vals[$i] = $str_quote . $str_val . $str_quote;
-				$schema_fields[$i] = '"' . $ary_name[$i] . "'";
+				$schema_fields[$i] = '"' . $ary_name[$i] . '"';
 			}
 
 			// Take the ordered fields and their associated data and build it

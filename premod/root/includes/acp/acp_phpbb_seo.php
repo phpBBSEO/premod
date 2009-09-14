@@ -186,7 +186,7 @@ class acp_phpbb_seo {
 				}
 				// Dirty yet simple templating
 				$user->lang['ACP_HTACCESS_EXPLAIN'] .= $this->seo_htaccess();
-				
+
 			break;
 			default:
 				trigger_error('NO_MODE', E_USER_ERROR);
@@ -572,7 +572,7 @@ class acp_phpbb_seo {
 				$htaccess_common_tpl .= $rss_commpat_pre . ' ^{WIERD_SLASH}{RSS_LPATH}rss(/(news)+)?(/(digest)+)?(/(short|long)+)?/?$ {DEFAULT_SLASH}{RSS_RPATH}gymrss.{PHP_EX}?channels&amp;$2&amp;$4&amp;$6 [QSA,L,NC]' . $rss_commpat_post . "\n";
 				// HTML
 				$htaccess_common_tpl .= '<b style="color:blue"># HTML Global news &amp; maps</b>' . "\n";
-				$htaccess_common_tpl .= $html_commpat_note;				
+				$htaccess_common_tpl .= $html_commpat_note;
 				$htaccess_common_tpl .= $html_commpat_pre . ' ^{WIERD_SLASH}{HTML_LPATH}(news|maps){HTML_PAGINATION}$ {DEFAULT_SLASH}{HTML_RPATH}map.{PHP_EX}?$1&amp;start=$3 [QSA,L,NC]' . $html_commpat_post . "\n";
 				$htaccess_common_tpl .= '<b style="color:blue"># END GYM Sitemaps &amp; RSS' . "\n";
 				$htaccess_common_tpl .= '#####################################################</b>' . "\n\n";
@@ -607,7 +607,7 @@ class acp_phpbb_seo {
 				$htaccess_tpl .= '# GYM Sitemaps &amp; RSS</b>' . "\n";
 				// HTML
 				$htaccess_tpl .= '<b style="color:blue"># HTML Module additional modes</b>' . "\n";
-				$htaccess_tpl .= $html_commpat_note;				
+				$htaccess_tpl .= $html_commpat_note;
 				$htaccess_tpl .= $html_commpat_pre . ' ^{WIERD_SLASH}{HTML_LPATH}(news|maps)/([a-z0-9_-]+)(/([a-z0-9_-]+))?{HTML_PAGINATION}$ {DEFAULT_SLASH}{HTML_RPATH}map.{PHP_EX}?$2=$4&amp;$1&amp;start=$6 [QSA,L,NC]' . $html_commpat_post . "\n";
 				// RSS
 				$htaccess_tpl .= '<b style="color:blue"># Main feeds &amp; channels</b>' . "\n";
@@ -628,7 +628,7 @@ class acp_phpbb_seo {
 				$htaccess_tpl .= $google_commpat_pre . ' ^{WIERD_SLASH}{GOOGLE_LPATH}[a-z0-9_-]+-([a-z]{1})([0-9]+)\.xml(\.gz)?$ {DEFAULT_SLASH}{GOOGLE_RPATH}sitemap.{PHP_EX}?module_sep=$1&amp;module_sub=$2&amp;gzip=$3 [QSA,L,NC]' . $google_commpat_post . "\n";
 				$htaccess_tpl .= '<b style="color:blue"># Module sitemaps</b>' . "\n";
 				$htaccess_tpl .= $google_commpat_note;
-				$htaccess_tpl .= $google_commpat_pre . ' ^{WIERD_SLASH}{GOOGLE_LPATH}([a-z0-9_]+)-([a-z0-9_-]+)\.xml(\.gz)?$ {DEFAULT_SLASH}{GOOGLE_RPATH}sitemap.{PHP_EX}?$1=$2&amp;gzip=$3 [QSA,L,NC]' . $google_commpat_post . "\n";	
+				$htaccess_tpl .= $google_commpat_pre . ' ^{WIERD_SLASH}{GOOGLE_LPATH}([a-z0-9_]+)-([a-z0-9_-]+)\.xml(\.gz)?$ {DEFAULT_SLASH}{GOOGLE_RPATH}sitemap.{PHP_EX}?$1=$2&amp;gzip=$3 [QSA,L,NC]' . $google_commpat_post . "\n";
 				$htaccess_tpl .= '<b style="color:blue"># END GYM Sitemaps &amp; RSS' . "\n";
 				$htaccess_tpl .= '#####################################################</b>' . "\n";
 			}
@@ -681,8 +681,8 @@ class acp_phpbb_seo {
 			$htaccess_tpl_vars = array(
 				'{REWRITEBASE}' => $rewritebase,
 				'{PHP_EX}' => $phpEx,
-				'{PHPBB_LPATH}' => ($this->new_config['rbase'] || $phpbb_seo->seo_opt['virtual_root']) ? '' : $phpbb_path, 
-				'{PHPBB_RPATH}' => $this->new_config['rbase'] ? '' : $phpbb_path, 
+				'{PHPBB_LPATH}' => ($this->new_config['rbase'] || $phpbb_seo->seo_opt['virtual_root']) ? '' : $phpbb_path,
+				'{PHPBB_RPATH}' => $this->new_config['rbase'] ? '' : $phpbb_path,
 				'{RSS_LPATH}' => $rss_path ? $rss_path . '/' : '',
 				'{RSS_RPATH}' => $rss_path ? $rss_path . '/' : '',
 				'{GOOGLE_LPATH}' => $google_path ? $google_path . '/' : '',
@@ -777,7 +777,7 @@ class acp_phpbb_seo {
 			$htaccess_output .= '<div style="padding:5px;margin-top:10px;background-color:#FFFFFF;border:1px solid #d8d8d8;font-size:12px;"><b>' . $user->lang['SEO_HTACCESS_CAPTION'] . ':</b><ul style="margin-left:30px;margin-top:10px;font-weight:bold;font-size:12px;">' . "\n";
 			$htaccess_output .= '<li style="color:blue">&nbsp;' . $user->lang['SEO_HTACCESS_CAPTION_COMMENT'] . '</li>' . "\n";
 			$htaccess_output .= '<li style="color:#A020F0">&nbsp;' . $user->lang['SEO_HTACCESS_CAPTION_STATIC'] . '</li>' . "\n";
-			$htaccess_output .= '<li style="color:#6A5ACD">&nbsp;' . $user->lang['SEO_HTACCESS_CAPTION_SUFFIX'] . '</li>' . "\n";	
+			$htaccess_output .= '<li style="color:#6A5ACD">&nbsp;' . $user->lang['SEO_HTACCESS_CAPTION_SUFFIX'] . '</li>' . "\n";
 			$htaccess_output .= '<li style="color:#FF00FF">&nbsp;' . $user->lang['SEO_HTACCESS_CAPTION_DELIM'] . '</li>' . "\n";
 			if ($this->new_config['more_options']) {
 				$htaccess_output .= '<li style="color:red">&nbsp;' . $user->lang['SEO_HTACCESS_CAPTION_SLASH'] . '</li>&nbsp;' . "\n";
@@ -829,8 +829,8 @@ class acp_phpbb_seo {
 	*  check_cache_folder Validates the cache folder status
 	*/
 	function check_cache_folder($cache_dir, $msg = true) {
-		global $user;
-		$exists = $write = false;
+		global $user, $phpEx;
+		$exists = $write = $inner_write = false;
 		$cache_msg = '';
 		if (file_exists($cache_dir) && is_dir($cache_dir)) {
 			$exists = true;
@@ -845,11 +845,34 @@ class acp_phpbb_seo {
 			} else {
 				$write = true;
 			}
+			// check if the config cache file is here already and writeable
+			$check = $cache_dir . "phpbb_cache.$phpEx";
+			$checks = array("$check.old", "$check.current", "$cache_dir.htaccess", "$cache_dir.htaccess.old", "$cache_dir.htaccess.current");
+			if (file_exists($check)) {
+				if (!is_writeable($check)) {
+					$inner_write = false;
+					phpbb_chmod($check, CHMOD_READ | CHMOD_WRITE);
+					$fp = @fopen($check, 'wb');
+					if ($fp !== false) {
+						$inner_write = true;
+					}
+					@fclose($fp);
+					if ($inner_write) {
+						// chmod worked, apply it to all other files in there
+						foreach($checks as $cfile) {
+							phpbb_chmod($cfile, CHMOD_READ | CHMOD_WRITE);
+						}
+					}
+				} else {
+					$inner_write = true;
+				}
+			}
 		}
 		if ($msg) {
 			$exists = ($exists) ? '<b style="color:green">' . $user->lang['SEO_CACHE_FOUND'] . '</b>' : '<b style="color:red">' . $user->lang['SEO_CACHE_NOT_FOUND'] . '</b>';
 			$write = ($write) ? '<br/> <b style="color:green">' . $user->lang['SEO_CACHE_WRITABLE'] . '</b>' : (($exists) ? '<br/> <b style="color:red">' . $user->lang['SEO_CACHE_UNWRITABLE'] . '</b>' : '');
-			$cache_msg = sprintf($user->lang['SEO_CACHE_STATUS'], $cache_dir) . '<br/>' . $exists . $write;
+			$inner_write = $inner_write ? '' : '<br/> <b style="color:red">' . $user->lang['SEO_CACHE_INNER_UNWRITABLE'] . '</b>';
+			$cache_msg = sprintf($user->lang['SEO_CACHE_STATUS'], $cache_dir) . '<br/>' . $exists . $write . $inner_write;
 			return '<br/><b>' . $user->lang['SEO_CACHE_FILE_TITLE'] . ':</b><br/>' . $cache_msg . '<br/><br/>';
 		} else {
 			return ($exists && $write);

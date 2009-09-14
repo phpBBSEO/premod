@@ -2,7 +2,7 @@
 /**
 *
 * @package phpBB3
-* @version $Id: bbcode.php 9461 2009-04-17 15:23:17Z acydburn $
+* @version $Id: bbcode.php 9722 2009-07-07 11:41:07Z acydburn $
 * @copyright (c) 2005 phpBB Group
 * @license http://opensource.org/licenses/gpl-license.php GNU Public License
 *
@@ -265,7 +265,7 @@ class bbcode
 				case 6:
 					$this->bbcode_cache[$bbcode_id] = array(
 						'preg' => array(
-							'!\[color=(#[0-9a-f]{6}|[a-z\-]+):$uid\](.*?)\[/color:$uid\]!is'	=> $this->bbcode_tpl('color', $bbcode_id),
+							'!\[color=(#[0-9a-f]{3}|#[0-9a-f]{6}|[a-z\-]+):$uid\](.*?)\[/color:$uid\]!is'	=> $this->bbcode_tpl('color', $bbcode_id),
 						)
 					);
 				break;

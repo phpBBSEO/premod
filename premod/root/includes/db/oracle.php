@@ -2,7 +2,7 @@
 /**
 *
 * @package dbal
-* @version $Id: oracle.php 9175 2008-12-05 11:18:59Z acydburn $
+* @version $Id: oracle.php 9965 2009-08-12 15:00:47Z acydburn $
 * @copyright (c) 2005 phpBB Group
 * @license http://opensource.org/licenses/gpl-license.php GNU Public License
 *
@@ -566,6 +566,11 @@ class dbal_oracle extends dbal
 	function _sql_custom_build($stage, $data)
 	{
 		return $data;
+	}
+
+	function _sql_bit_and($column_name, $bit, $compare = '')
+	{
+		return 'BITAND(' . $column_name . ', ' . (1 << $bit) . ')' . (($compare) ? ' ' . $compare : '');
 	}
 
 	/**
