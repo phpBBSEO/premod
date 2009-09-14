@@ -25,6 +25,7 @@
 </xsl:variable>
 <html xmlns="http://www.w3.org/1999/xhtml" dir="{S_CONTENT_DIRECTION}" lang="{S_USER_LANG}" xml:lang="{S_USER_LANG}">
 <head>
+	<base href="{PHPBB_URL}"/>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
 	<title><xsl:value-of select="channel/title" /> -  {L_FEED}</title>
 	<link rel="alternate" type="application/rss+xml" title="{channel/title}" href="{$rss_link}" />

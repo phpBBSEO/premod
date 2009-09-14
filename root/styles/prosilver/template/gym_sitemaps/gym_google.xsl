@@ -35,6 +35,7 @@
 
 <html xmlns="http://www.w3.org/1999/xhtml" dir="{S_CONTENT_DIRECTION}" lang="{S_USER_LANG}" xml:lang="{S_USER_LANG}">
 <head>
+	<base href="{PHPBB_URL}"/>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
 	<title>
 		<xsl:choose><xsl:when test="$fileType='Sitemap'">{L_SITEMAP} : <xsl:choose><xsl:when test="sitemap:urlset/sitemap:url/sitemap:loc='{ROOT_URL}'"><xsl:value-of select="substring-after('{ROOT_URL}', 'http://')"></xsl:value-of></xsl:when>
