@@ -5,7 +5,7 @@
 ## 			Check http://www.phpbb-seo.com/en/phpbb-seo-premod/seo-url-premod-t1549.html
 ## 			for the latest version or to get help.
 ##
-## MOD Version: 	3.0.5
+## MOD Version: 	3.0.6
 ##
 ## Installation Level: 	As easy as phpBB3
 ## Installation Time: 	15 Minutes
@@ -214,17 +214,17 @@ ________________________________________
 >>>>   UPDATE INSTRUCTION   	   <<<<<
 ________________________________________
 
-Update 3.0.4 => 3.0.5 :
+Update 3.0.5 => 3.0.6 :
 First, go to http://downloads.phpbb-seo.com/seo-url-premod-12/
 where you'll be able to download the update packages
 You can update using two method :
-	1) Auto updating : "3.0.4 to 3.0.5 Auto update"
+	1) Auto updating : "3.0.5 to 3.0.6 Auto update"
 		- Upload the auto_update/install/*.* folder of the update package to install/*.*
 		- Go to ACP => SYSTEM and follow instructions.
 		The auto update method will take the eventual code change you have made into account, 
 		and will attempt to merge the new files with your online modified ones.
 		It's the safest method for most, the installer will tel you if it has trouble to update some files.
-	2) Manual updating : "3.0.4 to 3.0.5 Changed Files"
+	2) Manual updating : "3.0.5 to 3.0.6 Changed Files"
 		You'll find the modified file list in the modified/ folder of the update package.
 		- Upload / merge / overwrite all file,
 		- Upload the modified/install/*.* to install/*.*,

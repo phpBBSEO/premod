@@ -6,7 +6,7 @@
 ## 			Visitez http://www.phpbb-seo.com/fr/premod-phpbb-seo/premod-referencement-phpbb-t1951.html
 ## 			pour obtenir du support et vérifier l'existence de mise à jour.
 ##
-## MOD Version: 	3.0.5
+## MOD Version: 	3.0.6
 ##
 ## Installation Level: 	Aussi facile que phpBB3
 ## Installation Time: 	15 Minutes
@@ -212,24 +212,22 @@
 #-----[ DIY INSTRUCTIONS ]--------------------------------------------------
 #
 
-Le pack de langue FR mis à jour n'est malheureusement pas disponible à ce jour, il sera inclus à cette archive dès mise à disposition.
-
 _____________________________________________
 >>>>   MISE A JOUR	                <<<<<
 _____________________________________________
 
-Mise à jour : 3.0.4 => 3.0.5 : 
+Mise à jour : 3.0.5 => 3.0.6 : 
 Tout d'abord, rendez vous sur http://telecharger.phpbb-seo.com/premod-referencement-phpbb-10/
 poour télécharger un des pack de mise à jour.
 Vous pouvez mettre à jour en suivant deux méthodes :
-	1) Mise à jour automatique : "3.0.5 vers 3.0.5 MAJ automatique"
+	1) Mise à jour automatique : "3.0.5 vers 3.0.6 MAJ automatique"
 		- Uplodez le contenu du dossier auto_update/install/*.* vers install/*.*,
 		- Rendez vous à l'ACP => SYSTEM et suivez les instructions.
 		L'auto updateur prendra vos éventuelles modifications en compte et tentera
 		de merger les nouveaux fichiers avec ceux que vous auriez modifié.
 		C'est la methode la plus sûre dans la plupart des cas, l'updateur vous dira
 		s'il a des problème pour modifier certain fichiers.
-	2) Mise à jour manuelle : "3.0.4 vers 3.0.5 Fichiers modifiés"
+	2) Mise à jour manuelle : "3.0.5 vers 3.0.6 Fichiers modifiés"
 		Vous trouverez les fichiers modifiés dans le dossier modified/ de l'archive.
 		- Uploadez / mergez / écrasez tous les fichiers,
 		- Uploadez le dossier modified/install/*.* vers install/*.*,
