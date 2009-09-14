@@ -2,7 +2,7 @@
 /**
 *
 * @package install
-* @version $Id: install_install.php 9354 2009-03-02 02:33:15Z toonarmy $
+* @version $Id: install_install.php 10070 2009-08-31 08:58:44Z bantu $
 * @copyright (c) 2005 phpBB Group
 * @license http://opensource.org/licenses/gpl-license.php GNU Public License
 *
@@ -113,7 +113,7 @@ class install_install extends module
 				$db_tools = new phpbb_db_tools($db);
 				$db_tools->sql_column_add(TOPICS_TABLE, 'topic_url', array('VCHAR', ''));
 				$db_tools->sql_create_index(TOPICS_TABLE, 'topic_lpid', array('topic_last_post_id'));
-				set_config('seo_premod_version', '3.0.5');
+				set_config('seo_premod_version', '3.0.6-RC1');
 				// Remove the lock file
 				@unlink($phpbb_root_path . 'cache/install_lock');
 
@@ -1345,7 +1345,7 @@ class install_install extends module
 				WHERE config_name = 'avatar_salt'",
 
 			'UPDATE ' . $data['table_prefix'] . "users
-				SET username = '" . $db->sql_escape($data['admin_name']) . "', user_password='" . $db->sql_escape(md5($data['admin_pass1'])) . "', user_ip = '" . $db->sql_escape($user_ip) . "', user_lang = '" . $db->sql_escape($data['default_lang']) . "', user_email='" . $db->sql_escape($data['board_email1']) . "', user_dateformat='" . $db->sql_escape($lang['default_dateformat']) . "', user_email_hash = " . (crc32($data['board_email1']) . strlen($data['board_email1'])) . ", username_clean = '" . $db->sql_escape(utf8_clean_string($data['admin_name'])) . "'
+				SET username = '" . $db->sql_escape($data['admin_name']) . "', user_password='" . $db->sql_escape(md5($data['admin_pass1'])) . "', user_ip = '" . $db->sql_escape($user_ip) . "', user_lang = '" . $db->sql_escape($data['default_lang']) . "', user_email='" . $db->sql_escape($data['board_email1']) . "', user_dateformat='" . $db->sql_escape($lang['default_dateformat']) . "', user_email_hash = " . $db->sql_escape(phpbb_email_hash($data['board_email1'])) . ", username_clean = '" . $db->sql_escape(utf8_clean_string($data['admin_name'])) . "'
 				WHERE username = 'Admin'",
 
 			'UPDATE ' . $data['table_prefix'] . "moderator_cache
@@ -1380,6 +1380,10 @@ class install_install extends module
 
 		if (@extension_loaded('gd') || can_load_dll('gd'))
 		{
+			$sql_ary[] = 'UPDATE ' . $data['table_prefix'] . "config
+				SET config_value = 'phpbb_captcha_gd'
+				WHERE config_name = 'captcha_plugin'";
+
 			$sql_ary[] = 'UPDATE ' . $data['table_prefix'] . "config
 				SET config_value = '1'
 				WHERE config_name = 'captcha_gd'";
@@ -1962,7 +1966,7 @@ class install_install extends module
 			'TITLE'		=> $lang['INSTALL_CONGRATS'],
 			'BODY'		=> sprintf($lang['INSTALL_CONGRATS_EXPLAIN'], $config['version'], append_sid($phpbb_root_path . 'install/index.' . $phpEx, 'mode=convert&amp;language=' . $data['language']), '../docs/README.html'),
 			'L_SUBMIT'	=> $lang['INSTALL_LOGIN'],
-			'U_ACTION'	=> append_sid($phpbb_root_path . 'adm/index.' . $phpEx),
+			'U_ACTION'	=> append_sid($phpbb_root_path . 'adm/index.' . $phpEx, 'i=send_statistics&amp;mode=send_statistics'),
 		));
 	}
 
@@ -2238,6 +2242,7 @@ class install_install extends module
 			),
 			'ACP_FORUM_BASED_PERMISSIONS' => array(
 				'ACP_FORUM_PERMISSIONS',
+				'ACP_FORUM_PERMISSIONS_COPY',
 				'ACP_FORUM_MODERATORS',
 				'ACP_USERS_FORUM_PERMISSIONS',
 				'ACP_GROUPS_FORUM_PERMISSIONS',

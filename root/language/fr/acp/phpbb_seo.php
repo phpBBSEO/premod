@@ -1,5 +1,5 @@
 <?php
-/** 
+/**
 *
 * seo_cache [French]
 *
@@ -63,7 +63,7 @@ $lang = array_merge($lang, array(
 	'SEO_HTACCESS_CAPTION_SLASH' => 'Slashes Optionnels',
 	'SEO_SLASH_DEFAULT'	=> 'Défaut',
 	'SEO_SLASH_ALT'		=> 'Alternative',
-	'SEO_MOD_TYPE_ER'	=> 'Le type de mod rewrite n’est pas convenablement configuré dans phpbb_seo/phpbb_seo_class.php.', 
+	'SEO_MOD_TYPE_ER'	=> 'Le type de mod rewrite n’est pas convenablement configuré dans phpbb_seo/phpbb_seo_class.php.',
 	'SEO_SHOW'		=> 'Montrer',
 	'SEO_HIDE'		=> 'Cacher',
 	'SEO_SELECT_ALL'	=> 'Sélectionner',
@@ -133,6 +133,7 @@ $lang = array_merge($lang, array(
 	'SEO_CACHE_NOT_FOUND'		=> 'Le dossier cache n’a pas été trouvé.',
 	'SEO_CACHE_WRITABLE'		=> 'Le dossier cache est utilisable.',
 	'SEO_CACHE_UNWRITABLE'		=> 'Le dossier cache n’est pas utilisable. Vous devez configurer son CHMOD sur 0777.',
+	'SEO_CACHE_INNER_UNWRITABLE' => 'Les fichiers se trouvant dans le dossier cache ne sont pas utilisables. Assurez vous de configurer le bon CHMOD pour le dossier cache ET les fichiers qui s’y trouvent.',
 	'SEO_CACHE_FORUM_NAME'		=> 'Nom du forum',
 	'SEO_CACHE_URL_OK'		=> 'URL en cache',
 	'SEO_CACHE_URL_NOT_OK'		=> 'URL pas en cache',
@@ -205,7 +206,7 @@ $lang = array_merge($lang, array(
 	'copyrights_title' => 'Titre du lien',
 	'copyrights_title_explain' => 'Vous pouvez personaliser le texte du titre du lien en retour vers phpBB SEO, laissez vide pour les valeurs par défauts.',
 	// Zero duplicate
-	// Options 
+	// Options
 	'ACP_ZERO_DUPE_OFF' => 'Inactif',
 	'ACP_ZERO_DUPE_MSG' => 'Message',
 	'ACP_ZERO_DUPE_GUEST' => 'Invités',
