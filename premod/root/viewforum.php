@@ -652,9 +652,17 @@ if (sizeof($topic_list))
 	{
 		$row = &$rowset[$topic_id];
 		// www.phpBB-SEO.com SEO TOOLKIT BEGIN
-		$cur_forum_id = ($row['forum_id']) ? (int) $row['forum_id'] : $forum_id;
-		if ($row['topic_type'] == POST_GLOBAL || !empty($phpbb_seo->seo_url['forum'][$cur_forum_id])) {
-			$phpbb_seo->prepare_iurl($row, 'topic', $row['topic_type'] == POST_GLOBAL ? $phpbb_seo->seo_static['global_announce'] : $phpbb_seo->seo_url['forum'][$cur_forum_id]);
+		if (!empty($row['topic_url'])) {
+			$phpbb_seo->prepare_iurl($row, 'topic', '');
+		} else {
+			if ($phpbb_seo->modrtype > 2) {
+				$row['topic_title'] = censor_text($row['topic_title']);
+			}
+			$cur_forum_id = ($row['forum_id']) ? (int) $row['forum_id'] : $forum_id;
+			$parent_forum = $row['topic_type'] == POST_GLOBAL ? $phpbb_seo->seo_static['global_announce'] : (!empty($phpbb_seo->seo_url['forum'][$cur_forum_id]) ? $phpbb_seo->seo_url['forum'][$cur_forum_id] : false);
+			if ($parent_forum) {
+				$phpbb_seo->prepare_iurl($row, 'topic', $parent_forum);
+			}
 		}
 		// www.phpBB-SEO.com SEO TOOLKIT END
 		// This will allow the style designer to output a different header
