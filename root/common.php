@@ -218,6 +218,7 @@ $config = $cache->obtain_config();
 if (empty($phpbb_seo) ) {
 	require_once($phpbb_root_path . 'phpbb_seo/phpbb_seo_class.'.$phpEx);
 	$phpbb_seo = new phpbb_seo();
+	@define('PHPBB_USE_BOARD_URL_PATH', true);
 }
 // www.phpBB-SEO.com SEO TOOLKIT END
 // Add own hook handler
