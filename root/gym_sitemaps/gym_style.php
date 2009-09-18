@@ -78,13 +78,12 @@ if (!empty($action) && !empty($type) && !empty($language) && !empty($theme_id)) 
 		// Include files
 		require($phpbb_root_path . 'config.' . $phpEx);
 		if (empty($acm_type) || empty($dbms)) {
-			die('Hacking attempt');
+			exit;
 		}
 		require($phpbb_root_path . 'includes/acm/acm_' . $acm_type . '.' . $phpEx);
 		require($phpbb_root_path . 'includes/cache.' . $phpEx);
 		require($phpbb_root_path . 'includes/db/' . $dbms . '.' . $phpEx);
 		require($phpbb_root_path . 'includes/constants.' . $phpEx);
-		require($phpbb_root_path . 'includes/functions.' . $phpEx);
 		require_once($phpbb_root_path . 'gym_sitemaps/includes/gym_common.' . $phpEx);
 		$db = new $sql_db();
 		$cache = new cache();
@@ -256,17 +255,16 @@ if (!empty($action) && !empty($type) && !empty($language) && !empty($theme_id)) 
 				$output = preg_replace(array('`/\*.*\*/`Us', '`[\s]+`'), ' ', $output);
 			}
 		}
-		$handle = fopen($file, 'wb');
+		$handle = @fopen($file, 'wb');
 		@flock($handle, LOCK_EX);
 		@fwrite($handle, $output);
 		@flock($handle, LOCK_UN);
 		@fclose ($handle);
-		@umask(0000);
-		@chmod($file,  0666);
-		unset($output);
+		@chmod($file, 0666);
+
 		header('Expires: ' . gmdate('D, d M Y H:i:s \G\M\T', $expire_time));
 		header('Content-type: ' . $content_type . '; charset=UTF-8');
-		readfile($file);
+		echo $output;
 		exit;
 	}
 }
