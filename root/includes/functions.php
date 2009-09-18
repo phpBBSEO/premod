@@ -3962,11 +3962,12 @@ function page_header($page_title = '', $display_online_list = true, $item_id = 0
 	// www.phpBB-SEO.com SEO TOOLKIT BEGIN
 	global $phpbb_seo;
 	$template->assign_vars( array( 'PHPBB_FULL_URL' => $phpbb_seo->seo_path['phpbb_url'],
-			'SEO_BASE_HREF' => $phpbb_seo->seo_opt['seo_base_href'],
-			'SEO_START_DELIM' => $phpbb_seo->seo_delim['start'],
-			'SEO_SATIC_PAGE' => $phpbb_seo->seo_static['pagination'],
-			'SEO_EXT_PAGE' => $phpbb_seo->seo_ext['pagination'])
-	);
+		'SEO_BASE_HREF' => $phpbb_seo->seo_opt['seo_base_href'],
+		'SEO_START_DELIM' => $phpbb_seo->seo_delim['start'],
+		'SEO_SATIC_PAGE' => $phpbb_seo->seo_static['pagination'],
+		'SEO_EXT_PAGE' => $phpbb_seo->seo_ext['pagination'],
+		'SEO_CANONICAL_URL' => $phpbb_seo->seo_path['canonical'],
+	));
 	// www.phpBB-SEO.com SEO TOOLKIT END
 	// www.phpBB-SEO.com SEO TOOLKIT BEGIN  - META
 	global $seo_meta;
@@ -4456,7 +4457,7 @@ class seo_meta {
 	* Returns meta tag code
 	*/
 	function build_meta( $page_title = '') {
-		global $phpEx, $user;
+		global $phpEx, $user, $phpbb_seo;
 		$this->meta['meta_desc'] = ( !empty($this->meta['meta_desc']) ) ? $this->meta['meta_desc'] : $this->meta_filter_txt($page_title . ' : ' . $this->meta['meta_desc_def']);
 		$this->meta['keywords'] = ( !empty($this->meta['keywords']) ) ? $this->meta['keywords'] : $this->make_keywords( $page_title . ' ' . $this->meta['meta_keywords_def']);
 		$this->meta['meta_title'] = ( !empty($this->meta['meta_title']) ) ? $this->meta_filter_txt($this->meta['meta_title']) : $page_title;
@@ -4471,6 +4472,12 @@ class seo_meta {
 		// Do we allow indexing based on physical script file name
 		if (@isset($this->mconfig['noindex_files'][str_replace(".$phpEx", '', $user->page['page_name'])])) {
 			$this->meta['meta_robots'] = 'noindex,follow';
+		}
+		// If url Rewriting is on, we can deny indexing for any rewritten url with ?
+		if (!empty($phpbb_seo->seo_opt['url_rewrite'])) {
+			if (preg_match('`(\.html?|/)\?[^\?]*$`i', $phpbb_seo->seo_path['uri'])) {
+				$this->meta['meta_robots'] = 'noindex,follow';
+			}
 		}
 		return sprintf( $this->meta['meta_tpl'], $this->meta['meta_title'], $this->meta['meta_lang'], $this->meta['meta_desc'], $this->meta['keywords'], $this->meta['meta_cat'], $this->meta['meta_robots'], $this->meta['meta_distrib'], $this->meta['meta_restype'], $this->meta['meta_copy'] );
 	}

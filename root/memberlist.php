@@ -79,6 +79,9 @@ switch ($mode)
 {
 	case 'leaders':
 		// www.phpBB-SEO.com SEO TOOLKIT BEGIN - Zero dupe
+		if (!empty($phpbb_seo->seo_opt['url_rewrite'])) {
+			$phpbb_seo->seo_path['canonical'] = $phpbb_seo->drop_sid(append_sid("{$phpbb_root_path}memberlist.$phpEx", 'mode=leaders'));
+		}
 		$phpbb_seo->seo_opt['zero_dupe']['redir_def'] = array(
 			'mode' => array('val' => 'leaders', 'keep' => true),
 		);
@@ -449,6 +452,9 @@ switch ($mode)
 		$phpbb_seo->set_user_url( $member['username'], $user_id );
 		// www.phpBB-SEO.com SEO TOOLKIT END
 		// www.phpBB-SEO.com SEO TOOLKIT BEGIN - Zero dupe
+		if (!empty($phpbb_seo->seo_opt['url_rewrite'])) {
+			$phpbb_seo->seo_path['canonical'] = $phpbb_seo->drop_sid(append_sid("{$phpbb_root_path}memberlist.$phpEx", "mode=viewprofile&amp;u=$user_id"));
+		}
 		$phpbb_seo->seo_opt['zero_dupe']['redir_def'] = array(
 			'mode' => array('val' => 'viewprofile', 'keep' => true),
 			'u' => array('val' => $user_id, 'keep' => true, 'force' => true),
@@ -1312,6 +1318,9 @@ switch ($mode)
 			$phpbb_seo->seo_opt['zero_dupe']['start'] = $phpbb_seo->seo_chk_start( $start, $config['topics_per_page'] );
 
 			$phpbb_seo->seo_chk_dupe("{$phpbb_root_path}memberlist.$phpEx?" . implode('&amp;', $params) . '&amp;start=' . $phpbb_seo->seo_opt['zero_dupe']['start']);
+			if (!empty($phpbb_seo->seo_opt['url_rewrite'])) {
+				$phpbb_seo->seo_path['canonical'] = $phpbb_seo->drop_sid(append_sid("{$phpbb_root_path}memberlist.$phpEx", "mode=group&amp;g={$group_row['group_id']}&amp;start=" . $phpbb_seo->seo_opt['zero_dupe']['start']));
+			}
 		}
 		// www.phpBB-SEO.com SEO TOOLKIT END - Zero dupe
 		unset($search_params, $sort_params);
@@ -1566,7 +1575,7 @@ switch ($mode)
 			'S_ORDER_SELECT'	=> $s_sort_dir,
 			'S_CHAR_OPTIONS'	=> $s_char_options,
 			// www.phpBB-SEO.com SEO TOOLKIT BEGIN
-			// Here we circumvent because our append_sid does not allow 
+			// Here we circumvent because our append_sid does not allow
 			// an url to end with an ?, as it should.
 			'S_MODE_ACTION'		=> $pagination_url . (strpos($pagination_url, '?') !== false ? '' : '?') )
 			// www.phpBB-SEO.com SEO TOOLKIT END

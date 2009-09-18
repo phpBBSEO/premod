@@ -131,6 +131,9 @@ if ($forum_data['forum_topics_per_page']) {
 	$config['topics_per_page'] = $forum_data['forum_topics_per_page'];
 }
 $phpbb_seo->seo_opt['zero_dupe']['start'] = $phpbb_seo->seo_chk_start( $start, $config['topics_per_page'] );
+if (!empty($phpbb_seo->seo_opt['url_rewrite'])) {
+	$phpbb_seo->seo_path['canonical'] = $phpbb_seo->drop_sid(append_sid("{$phpbb_root_path}viewforum.$phpEx", "f=$forum_id&amp;start=$start"));
+}
 $seo_watch = request_var('watch', '');
 $seo_unwatch = request_var('unwatch', '');
 $keep_watch = (boolean) ($seo_watch == 'forum' && $user->data['is_registered']);
