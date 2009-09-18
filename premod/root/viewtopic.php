@@ -348,7 +348,7 @@ if ($topic_data['topic_type'] == POST_GLOBAL) {
 if (!empty($phpbb_seo->seo_opt['sql_rewrite'])) {
 	if ( !$phpbb_seo->check_url('topic', $topic_data['topic_url'], $_parent)) {
 		if (!empty($topic_data['topic_url'])) {
-			// Here we get rid of the seo delim (-t) and put it back even in simple mod 
+			// Here we get rid of the seo delim (-t) and put it back even in simple mod
 			// to be able to handle all cases at once
 			$_url = preg_replace('`' . $phpbb_seo->seo_delim['topic'] . '$`i', '', $topic_data['topic_url']);
 			$_title = $phpbb_seo->get_url_info('topic', $_url . $phpbb_seo->seo_delim['topic'] . $topic_id, 'title');
@@ -523,6 +523,9 @@ if ($start < 0 || $start >= $total_posts)
 }
 // www.phpBB-SEO.com SEO TOOLKIT BEGIN -> Zero dupe
 $phpbb_seo->seo_opt['zero_dupe']['start'] = $phpbb_seo->seo_chk_start( $start, $config['posts_per_page'] );
+if (!empty($phpbb_seo->seo_opt['url_rewrite'])) {
+	$phpbb_seo->seo_path['canonical'] = $phpbb_seo->drop_sid(append_sid("{$phpbb_root_path}viewtopic.$phpEx", "f=$forum_id&amp;t=$topic_id&amp;start=$start"));
+}
 if ( $post_id && !$view && !$phpbb_seo->set_do_redir_post()) {
 	$phpbb_seo->seo_opt['zero_dupe']['redir_def'] = array(
 		'p' => array('val' => $post_id, 'keep' => true, 'force' => true, 'hash' => "p$post_id"),

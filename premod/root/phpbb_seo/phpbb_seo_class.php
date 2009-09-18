@@ -93,6 +93,7 @@ class phpbb_seo extends setup_phpbb_seo {
 		$this->seo_path['phpbb_urlR'] = $this->seo_path['phpbb_url'] =  $this->seo_path['root_url'] . $script_path;
 		$this->seo_path['phpbb_script'] = $script_path;
 		$this->seo_path['phpbb_files'] = $this->seo_path['phpbb_url'] . 'download/';
+		$this->seo_path['canonical'] = '';
 		// magic quotes, do it like this in case phpbb_seo class is not started in common.php
 		if (!defined('STRIP')) {
 			if (version_compare(PHP_VERSION, '6.0.0-dev', '<') ) {

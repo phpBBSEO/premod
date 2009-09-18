@@ -25,6 +25,9 @@ $user->session_begin();
 $auth->acl($user->data);
 $user->setup('viewforum');
 // www.phpBB-SEO.com SEO TOOLKIT BEGIN -> Zero dupe
+if (!empty($phpbb_seo->seo_opt['url_rewrite'])) {
+	$phpbb_seo->seo_path['canonical'] = $phpbb_seo->drop_sid(append_sid("{$phpbb_root_path}index.$phpEx"));
+}
 $seo_mark = request_var('mark', '');
 $keep_mark = in_array($seo_mark, array('topics', 'topic', 'forums', 'all')) ? (boolean) ($user->data['is_registered'] || $config['load_anon_lastread']) : false;
 $phpbb_seo->seo_opt['zero_dupe']['redir_def'] = array(
