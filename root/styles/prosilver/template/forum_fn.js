@@ -47,6 +47,51 @@ function jumpto() {
 		}
 	}
 }
+// Open external links in new window in a XHTML 1.x compliant way.
+/**
+*  phpbb_seo_href()
+*  Fixes href="#something" links with virtual directories
+*  Optionally open external or marked with a css class links in a new window
+*  in a XHTML 1.x compliant way.
+*/
+function phpbb_seo_href() {
+	var current_domain = document.domain;
+	if (!current_domain || !document.getElementsByTagName) return;
+	if (seo_ext_classes) {
+		var extclass = new RegExp("(^|\\s)(" + seo_ext_classes + ")(\\s|$)");
+	}
+	if (seo_hashfix) {
+		var basehref = document.getElementsByTagName('base')[0];
+		if (basehref) {
+			basehref = basehref.href;
+			var hashtest = new RegExp("^(" + basehref + "|)#[a-z0-9_-]+$");
+			var current_href = document.location.href.replace(/#[a-z0-9_-]+$/i, "");
+		} else {
+			seo_hashfix = false;
+		}
+	}
+	var hrefels = document.getElementsByTagName("a");
+	var hrefelslen = hrefels.length;
+	for (var i = 0; i < hrefelslen; i++) {
+		var el = hrefels[i];
+		var hrefinner = el.innerHTML.toLowerCase();
+		if (el.onclick || (el.href == '') || (el.href.indexOf('javascript') >=0 ) || (hrefinner.indexOf('<a') >= 0) ) {
+			continue;
+		}
+		if (seo_hashfix && el.hash && hashtest.test(el.href)) {
+			el.href = current_href + el.hash;
+		}
+		if (seo_external) {
+			if ((el.href.indexOf(current_domain) >= 0) && !(seo_ext_classes && extclass.test(el.className))) {
+				continue;
+			}
+			el.onclick = function () { window.open(this.href); return false; };
+		}
+	}
+}
+if (seo_external || seo_hashfix) {
+	onload_functions.push('phpbb_seo_href()');
+}
 // www.phpBB-SEO.com SEO TOOLKIT END
 
 /**
@@ -414,32 +459,3 @@ function apply_onkeypress_event()
 * Detect JQuery existance. We currently do not deliver it, but some styles do, so why not benefit from it. ;)
 */
 var jquery_present = typeof jQuery == 'function';
-// www.phpBB-SEO.com SEO TOOLKIT BEGIN
-// Open external links in new window in a XHTML 1.x compliant way.
-function nw_external() {
-	var current_domain = document.domain;
-	if (!current_domain || !document.getElementsByTagName) return;
-	var hrefels = new Array;
-	var hrefelslen = 0;
-	var hrefinner = '';
-	if (seo_ext_classes) {
-		var extclass = new RegExp("(^|\\s)(" + seo_ext_classes + ")(\\s|$)");
-	}
-	hrefels = document.getElementsByTagName("a");
-	hrefelslen = hrefels.length;
-	for (var i = 0; i < hrefelslen; i++) {
-		var el = hrefels[i];
-		hrefinner = el.innerHTML.toLowerCase();
-		if ( (el.href == '') || (el.href.indexOf('javascript') >=0 ) || (hrefinner.indexOf('<a') >= 0) || el.onclick != null ) {
-			continue;
-		}
-		if ((el.href.indexOf(current_domain) >= 0) && !(seo_ext_classes && extclass.test(el.className))) {
-			continue;
-		}
-		el.onclick = function () { window.open(this.href); return false; };
-	}
-}
-if (seo_external) {
-	onload_functions.push('nw_external()');
-}
-// www.phpBB-SEO.com SEO TOOLKIT END
