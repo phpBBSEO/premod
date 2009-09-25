@@ -1776,9 +1776,7 @@ if ($all_marked_read)
 	if ($post_unread)
 	{
 		$template->assign_vars(array(
-			// www.phpBB-SEO.com SEO TOOLKIT BEGIN
-			'U_VIEW_UNREAD_POST'	=> append_sid("{$phpbb_root_path}viewtopic.$phpEx", "f=$forum_id&amp;t=$topic_id&amp;start=$start") . '#unread',
-			// www.phpBB-SEO.com SEO TOOLKIT END
+			'U_VIEW_UNREAD_POST'	=> '#unread',
 		));
 	}
 	else if (isset($topic_tracking_info[$topic_id]) && $topic_data['topic_last_post_time'] > $topic_tracking_info[$topic_id])
@@ -1796,9 +1794,7 @@ else if (!$all_marked_read)
 	if ($last_page && $post_unread)
 	{
 		$template->assign_vars(array(
-			// www.phpBB-SEO.com SEO TOOLKIT BEGIN
-			'U_VIEW_UNREAD_POST'	=> append_sid("{$phpbb_root_path}viewtopic.$phpEx", "f=$forum_id&amp;t=$topic_id&amp;start=$start") . '#unread',
-			// www.phpBB-SEO.com SEO TOOLKIT END
+			'U_VIEW_UNREAD_POST'	=> '#unread',
 		));
 	}
 	else if (!$last_page)
