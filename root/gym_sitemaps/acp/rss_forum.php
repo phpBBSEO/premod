@@ -43,7 +43,7 @@ class rss_forum {
 		global $config, $phpbb_seo, $user;
 		$config['sitename'] = utf8_normalize_nfc($config['sitename']);
 		$config['site_desc'] = utf8_normalize_nfc($config['site_desc']);
-		return array( 
+		return array(
 			'cache' => array(
  				'display_vars' => array(
 					'title'	=> 'GYM_CACHE',
@@ -75,7 +75,7 @@ class rss_forum {
 					'rss_forum_modrewrite' => 0,
 					'rss_forum_modrtype' => 0,
 				),
-				'select' => array( 
+				'select' => array(
 					'rss_forum_modrtype' => @$this->dyn_select['modrtype'],
 				),
 			),
@@ -133,7 +133,7 @@ class rss_forum {
 				'default' => array(
  					'rss_forum_sort' => 'DESC',
 				),
-				'select' => array( 
+				'select' => array(
 					'rss_forum_sort' => @$this->dyn_select['sort'],
 				),
 			),
@@ -172,7 +172,7 @@ class rss_forum {
 						'rss_forum_cache_auth' => array('lang' => 'RSS_CACHE_AUTH', 'validate' => 'bool', 'type' => 'radio:yes_no', 'explain' => true, 'overriding' => true),
 						// Notifications
 						'legend3'	=> 'RSS_NOTIFY',
-						'rss_forum_yahoo_notify' => array('lang' => 'RSS_YAHOO_NOTIFY', 'validate' => 'bool', 'type' => 'radio:yes_no', 'explain' => true, 'overriding' => true),	
+						'rss_forum_yahoo_notify' => array('lang' => 'RSS_YAHOO_NOTIFY', 'validate' => 'bool', 'type' => 'radio:yes_no', 'explain' => true, 'overriding' => true),
 						// Exclusions
 						'legend4' => 'RSS_FORUM_EXCLUDE',
 						'rss_forum_exclude' => array('lang' => 'RSS_FORUM_EXCLUDE', 'multiple_validate' => 'int', 'type' => 'custom', 'method' => 'select_multiple_string', 'explain' => true),
@@ -193,7 +193,7 @@ class rss_forum {
 					// Notifications
 					'rss_forum_yahoo_notify' => 0,
 				),
-				'select' => array( 
+				'select' => array(
 					'rss_forum_lang' => $user->lang['ISO_639_1'],
 					'rss_forum_exclude' => @$this->dyn_select['forums'],
 
@@ -218,6 +218,7 @@ class rss_forum {
 						'rss_forum_allow_smilies' => array('lang' => 'RSS_ALLOW_SMILIES', 'validate' => 'bool', 'type' => 'radio:yes_no', 'explain' => true, 'overriding' => true),
 						'rss_forum_sumarize' => array('lang' => 'RSS_SUMARIZE', 'validate' => 'int:0:1000', 'type' => 'text:4:4', 'explain' => true, 'overriding' => true),
 						'rss_forum_sumarize_method' => array('lang' => 'RSS_SUMARIZE_METHOD', 'validate' => 'string', 'type' => 'select', 'method' => 'select_string', 'explain' => true, 'overriding' => true),
+						'rss_forum_nohtml' => array('lang' => 'RSS_NOHTML', 'validate' => 'bool', 'type' => 'radio:yes_no', 'explain' => true, 'overriding' => true),
 						// form specific
 						'legend2'	=> 'RSS_FORUM_CONTENT',
 						'rss_forum_first' => array('lang' => 'RSS_FORUM_FIRST', 'validate' => 'bool', 'type' => 'radio:yes_no', 'explain' => true),
@@ -240,11 +241,12 @@ class rss_forum {
 					'rss_forum_allow_smilies' => 1,
 					'rss_forum_sumarize' => 25,
 					'rss_forum_sumarize_method' => 'words',
+					'rss_forum_nohtml' => 0,
 					'rss_forum_first' =>  0,
 					'rss_forum_last' => 1,
 					'rss_forum_rules' => 0,
 				),
-				'select' => array( 
+				'select' => array(
 					'rss_forum_sumarize_method' => @$this->dyn_select['sumarize_method'],
 				),
 			),

@@ -118,6 +118,8 @@ $lang = array_merge($lang, array(
 	'RSS_ALLOW_EMAILS_EXPLAIN' => 'Vous choisissez ici d’avoir en sortie "email AT domain DOT com" au lieu de "email@domain.com" dans le contenu des éléments.',
 	'RSS_ALLOW_SMILIES' => 'Autoriser les smileys',
 	'RSS_ALLOW_SMILIES_EXPLAIN' => 'Vous pouvez choisir d’inclure ou ignorer les smileys dans le contenu.',
+	'RSS_NOHTML' => 'Filtre HTML',
+	'RSS_NOHTML_EXPLAIN' => 'Filtrer ou non le html des flux. Si vous activez l’option, les flux ne contiendront que du texte brut.',
 	// Old URL handling
 	'RSS_1XREDIR' => 'Gestion des URLs réécrites de GYM 1.x',
 	'RSS_1XREDIR_EXPLAIN' => 'Active la détection des URLs réécrites au format GYM 1.x. Le module affichera un flux spécial fournissant la nouvelle URL du flux demandé.<br /><br /><u>Note</u> :<br /><br />Cette option nécessite la mise en place des rewriterules de compatibilité comme expliqué dans le fichier d’installation.',
