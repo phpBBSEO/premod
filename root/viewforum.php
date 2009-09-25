@@ -193,8 +193,8 @@ else
 // www.phpBB-SEO.com SEO TOOLKIT BEGIN - TITLE
 $extra_title = ($start > 0) ? ' - ' . $user->lang['Page'] . ( floor( $start / $config['topics_per_page'] ) + 1 ) : '';
 // www.phpBB-SEO.com SEO TOOLKIT BEGIN - META
-$seo_meta->meta['meta_desc'] = $seo_meta->meta_filter_txt($forum_data['forum_name'] . ' : ' . (!empty($forum_data['forum_desc']) ? $forum_data['forum_desc'] : $config['site_desc']));
-$seo_meta->meta['keywords'] = $seo_meta->make_keywords($seo_meta->meta['meta_desc']);
+$seo_meta->collect('description', $forum_data['forum_name'] . ' : ' . (!empty($forum_data['forum_desc']) ? $forum_data['forum_desc'] : $seo_meta->meta_def['description']));
+$seo_meta->collect('keywords', $forum_data['forum_name'] . ' ' . $seo_meta->meta['description']);
 // www.phpBB-SEO.com SEO TOOLKIT END - META
 page_header($forum_data['forum_name'] . $extra_title, true, $forum_id);
 // www.phpBB-SEO.com SEO TOOLKIT END - TITLE

@@ -1,13 +1,13 @@
 <?php
-/** 
+/**
 *
 * acp common [Standard french]
 * translated originally by PhpBB-fr.com <http://www.phpbb-fr.com/> and phpBB.biz <http://www.phpBB.biz>
 *
 * @package language
 * @version $Id: common.php, v1.24 2009/05/27 21:09:00 Elglobo Exp $
-* @copyright (c) 2005 phpBB Group 
-* @license http://opensource.org/licenses/gpl-license.php GNU Public License 
+* @copyright (c) 2005 phpBB Group
+* @license http://opensource.org/licenses/gpl-license.php GNU Public License
 *
 */
 
@@ -58,7 +58,7 @@ $lang = array_merge($lang, array(
 	'ACP_BOARD_MANAGEMENT'		=> 'Gestion du forum',
 	'ACP_BOARD_SETTINGS'		=> 'Configuration du forum',
 	'ACP_BOTS'					=> 'Robots',
-	
+
 	'ACP_CAPTCHA'				=> 'CAPTCHA',
 
 	'ACP_CAT_DATABASE'			=> 'Base de données',
@@ -76,14 +76,14 @@ $lang = array_merge($lang, array(
 	'ACP_COOKIE_SETTINGS'		=> 'Paramètres de cookie',
 	'ACP_CRITICAL_LOGS'			=> 'Journal des erreurs',
 	'ACP_CUSTOM_PROFILE_FIELDS'	=> 'Champs de profil personnalisés',
-	
+
 	'ACP_DATABASE'				=> 'Gestion de la base de données',
 	'ACP_DISALLOW'				=> 'Interdit',
 	'ACP_DISALLOW_USERNAMES'	=> 'Interdire des noms d’utilisateurs',
-	
+
 	'ACP_EMAIL_SETTINGS'		=> 'Paramètres des e-mails',
 	'ACP_EXTENSION_GROUPS'		=> 'Gérer les groupes d’extensions',
-	
+
 	'ACP_FORUM_BASED_PERMISSIONS'	=> 'Permissions basiques des forums',
 	'ACP_FORUM_LOGS'				=> 'Journaux du forum',
 	'ACP_FORUM_MANAGEMENT'			=> 'Gestion du forum',
@@ -100,20 +100,20 @@ $lang = array_merge($lang, array(
 	'ACP_GROUPS_MANAGE'				=> 'Gérer les groupes',
 	'ACP_GROUPS_MANAGEMENT'			=> 'Gestion des groupes',
 	'ACP_GROUPS_PERMISSIONS'		=> 'Permissions des groupes',
-	
+
 	'ACP_ICONS'					=> 'Icônes de sujet',
 	'ACP_ICONS_SMILIES'			=> 'Icônes et smileys de sujet',
 	'ACP_IMAGESETS'				=> 'Packs d’images',
 	'ACP_INACTIVE_USERS'		=> 'Utilisateurs inactifs',
 	'ACP_INDEX'					=> 'Index de l’administration',
-	
+
 	'ACP_JABBER_SETTINGS'		=> 'Paramètres Jabber',
-	
+
 	'ACP_LANGUAGE'				=> 'Gestion des langues',
 	'ACP_LANGUAGE_PACKS'		=> 'Langues',
 	'ACP_LOAD_SETTINGS'			=> 'Paramètres de charge',
 	'ACP_LOGGING'				=> 'Se connecte',
-	
+
 	'ACP_MAIN'					=> 'Index de l’administration',
 	'ACP_MANAGE_EXTENSIONS'		=> 'Gérer les extensions',
 	'ACP_MANAGE_FORUMS'			=> 'Gérer les forums',
@@ -126,11 +126,11 @@ $lang = array_merge($lang, array(
 	'ACP_MODULE_MANAGEMENT'		=> 'Gestion de modules',
 	'ACP_MOD_LOGS'				=> 'Journal de modération',
 	'ACP_MOD_ROLES'				=> 'Modèles de modération',
-	
+
 	'ACP_NO_ITEMS'				=> 'Il n’y a actuellement aucun élément.',
-	
+
 	'ACP_ORPHAN_ATTACHMENTS'	=> 'Fichiers joints orphelins',
-	
+
 	'ACP_PERMISSIONS'			=> 'Permissions',
 	'ACP_PERMISSION_MASKS'		=> 'Masques de permission',
 	'ACP_PERMISSION_ROLES'		=> 'Modèles de permission',
@@ -140,9 +140,9 @@ $lang = array_merge($lang, array(
 	'ACP_PRUNE_FORUMS'			=> 'Délester les forums',
 	'ACP_PRUNE_USERS'			=> 'Délester des utilisateurs',
 	'ACP_PRUNING'				=> 'Délestage',
-	
+
 	'ACP_QUICK_ACCESS'			=> 'Accès rapide',
-	
+
 	'ACP_RANKS'					=> 'Rangs',
 	'ACP_REASONS'				=> 'Rapports/raisons',
 	'ACP_REGISTER_SETTINGS'		=> 'Paramètres des inscriptions',
@@ -161,10 +161,10 @@ $lang = array_merge($lang, array(
 	'ACP_STYLE_COMPONENTS'		=> 'Composants des styles',
 	'ACP_STYLE_MANAGEMENT'		=> 'Gestion de style',
 	'ACP_STYLES'				=> 'Styles',
-	
+
 	'ACP_TEMPLATES'				=> 'Templates',
 	'ACP_THEMES'				=> 'Thèmes',
-	
+
 	'ACP_UPDATE'					=> 'Mise à jour',
 	'ACP_USERS_FORUM_PERMISSIONS'	=> 'Permissions utilisateurs/forums',
 	'ACP_USERS_LOGS'				=> 'Journal d’utilisateur',
@@ -191,7 +191,7 @@ $lang = array_merge($lang, array(
 	'ACP_VIEW_FORUM_PERMISSIONS'		=> 'Permissions basiques des forums',
 	'ACP_VIEW_GLOBAL_MOD_PERMISSIONS'	=> 'Permissions des modérateurs globaux',
 	'ACP_VIEW_USER_PERMISSIONS'			=> 'Permissions basiques des utilisateurs',
-	
+
 	'ACP_WORDS'					=> 'Censure',
 
 	'ACTION'				=> 'Action',
@@ -247,7 +247,7 @@ $lang = array_merge($lang, array(
 	'NOTIFY'				=> 'Notification',
 	'NO_ADMIN'				=> 'Vous n’êtes pas autorisé à administrer ce forum.',
 	'NO_EMAILS_DEFINED'		=> 'Aucun e-mail valide indiquée.',
-	'NO_PASSWORD_SUPPLIED'	=> 'Vous devez indiquer votre mot de passe pour accéder au panneau d’administration',	
+	'NO_PASSWORD_SUPPLIED'	=> 'Vous devez indiquer votre mot de passe pour accéder au panneau d’administration',
 
 	'OFF'					=> 'Off',
 	'ON'					=> 'On',
@@ -257,7 +257,7 @@ $lang = array_merge($lang, array(
 	'PARSE_URLS'						=> 'Autoriser les liens',
 	'PERMISSIONS_TRANSFERRED'			=> 'Les permissions ont été transférées',
 	'PERMISSIONS_TRANSFERRED_EXPLAIN'	=> 'Vous utilisez actuellement les permissions de %1$s. Vous pouvez naviguer sur le forum avec ses permissions mais ne pourrait pas accéder au panneau d’administration car les permissions d’administration ne sont pas transférables. Vous pouvez <a href="%2$s"><strong>réinitialiser vos permissions</strong></a> à tout moment.',
-	'PIXEL'								=> 'px',	
+	'PIXEL'								=> 'px',
 	'PROCEED_TO_ACP'					=> '%sAller au panneau d’administration%s',
 
 	'REMIND'							=> 'Rappeler',
@@ -266,9 +266,9 @@ $lang = array_merge($lang, array(
 
 	'SELECT_ANONYMOUS'		=> 'Sélectionner l’utilisateur invité',
 	'SELECT_OPTION'			=> 'Sélectionner une option',
-	
+
 	'SETTING_TOO_LOW'		=> 'La valeur indiquée pour le paramètre “%1$s” est trop faible. La valeur minimale autorisée est de %2$d.',
-	'SETTING_TOO_BIG'		=> 'La valeur indiquée pour le paramètre “%1$s” est trop élevée. La valeur maximale autorisée est de %2$d.',	
+	'SETTING_TOO_BIG'		=> 'La valeur indiquée pour le paramètre “%1$s” est trop élevée. La valeur maximale autorisée est de %2$d.',
 	'SETTING_TOO_LONG'		=> 'La valeur indiquée pour le paramètre “%1$s” est trop longue. La longueur maximale autorisée est de %2$d.',
 	'SETTING_TOO_SHORT'		=> 'La valeur indiquée pour le paramètre “%1$s” est trop courte. La longueur minimale autorisée est de %2$d.',
 
@@ -415,10 +415,10 @@ $lang = array_merge($lang, array(
 
 	'LOG_ACL_TRANSFER_PERMISSIONS'		=> '<strong>Transfert des permissions de</strong><br />» %s',
 	'LOG_ACL_RESTORE_PERMISSIONS'		=> '<strong>Restauration de vos permissions après l’utilisation des permissions de</strong><br />» %s',
-	
+
 	'LOG_ADMIN_AUTH_FAIL'		=> '<strong>Echec de connexion à l’administration</strong>',
 	'LOG_ADMIN_AUTH_SUCCESS'	=> '<strong>Connexion réussie à l’administration</strong>',
-	
+
 	'LOG_ATTACHMENTS_DELETED'   => '<strong>Suppression de fichiers joints d’un utilisateur</strong><br />» %s',
 
 	'LOG_ATTACH_EXT_ADD'		=> '<strong>Ajout/modification d’extension de fichier joint</strong><br />» %s',
@@ -509,7 +509,7 @@ $lang = array_merge($lang, array(
 
 	'LOG_ERROR_JABBER'		=> '<strong>Erreur de compte Jabber</strong><br />» %s',
 	'LOG_ERROR_EMAIL'		=> '<strong>Erreur d’e-mail</strong><br />» %s',
-	
+
 	'LOG_FORUM_ADD'							=> '<strong>Création d’un nouveau forum</strong><br />» %s',
 	'LOG_FORUM_DEL_FORUM'					=> '<strong>Suppression d’un forum</strong><br />» %s',
 	'LOG_FORUM_DEL_FORUMS'					=> '<strong>Suppression d’un forum et de ses sous-forums</strong><br />» %s',
@@ -694,6 +694,7 @@ $lang = array_merge($lang, array(
 	'ACP_PHPBB_SEO_CLASS' => 'Configuration de la classe phpBB SEO',
 	'ACP_FORUM_URL' => 'Configuration des URLs des forums',
 	'ACP_HTACCESS' => '.htaccess',
+	'ACP_SEO_EXTENDED' => 'Configuration additionnelle',
 	'ACP_PREMOD_UPDATE' => '<h1>Annonce de mise à jour</h1>
 	<p>Cette mise à jour ne concerne que la premod, pas phpBB lui même.</p>
 	<p>Une nouvelle version de la premod phpBB SEO est donc disponible : %1$s<br/>Veuillez vous rendre sur <a href="%2$s" title="Le sujet de mise à disposition"><b>le sujet de mise à disposition</b></a> pour procéder à la mise à jour.</p>',
@@ -704,6 +705,7 @@ $lang = array_merge($lang, array(
 	'SEO_LOG_CONFIG_SETTINGS' => '<strong>Modification des réglages de la classe phpBB SEO</strong>',
 	'SEO_LOG_CONFIG_FORUM_URL' => '<strong>Modification des URLs des Forum</strong>',
 	'SEO_LOG_CONFIG_HTACCESS' => '<strong>Nouveau .htaccess généré</strong>',
+	'SEO_LOG_CONFIG_EXTENDED' => '<strong>Modification des réglages additionnels des mods phpBB SEO</strong>',
 ));
 // www.phpBB-SEO.com SEO TOOLKIT END
 // www.phpBB-SEO.com SEO TOOLKIT BEGIN -> GYM Sitemaps

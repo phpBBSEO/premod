@@ -1321,6 +1321,15 @@ function change_database_data(&$no_updates, $version)
 					'auth'		=> 'aclf_m_report',
 					'cat'		=> 'MCP_REPORTS'
 				),
+				// SEO premod, add the new extended settings panel
+				'extented'		=> array(
+					'base'		=> 'phpbb_seo',
+					'class'		=> 'acp',
+					'title'		=> 'ACP_SEO_EXTENDED',
+					'auth'		=> 'acl_a_board',
+					'cat'		=> 'ACP_MOD_REWRITE'
+				),
+
 			);
 
 			_add_modules($modules_to_install);

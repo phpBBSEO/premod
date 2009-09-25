@@ -30,17 +30,17 @@ $lang = array_merge($lang, array(
 	// ACP Main CAT
 	'ACP_CAT_PHPBB_SEO'	=> 'phpBB SEO',
 	'ACP_MOD_REWRITE'	=> 'Réécriture d’URL',
-	// ACP sub cat
+	// ACP phpbb seo class
 	'ACP_PHPBB_SEO_CLASS' => 'Configuration de la classe phpBB SEO',
 	'ACP_PHPBB_SEO_CLASS_EXPLAIN'	=> 'Vous pouvez régler ici différentes options du mod phpBB SEO %1$s (%2$s).<br/>Les réglages par défaut comme les délimiteurs et les extensions doivent toujours être configurés dans le fichier <b>phpbb_seo/includes/setup_phpbb_seo.php</b>, les modifier implique un changement de .htaccess ainsi que des redirections appropriées.%3$s',
 	'ACP_PHPBB_SEO_VERSION' => 'Version',
 	'ACP_PHPBB_SEO_MODE' => 'Mode',
 	'ACP_SEO_SUPPORT_FORUM' => 'Forum de support',
-	// ACP sub cat
+	// ACP forum urls
 	'ACP_FORUM_URL'	=> 'Configuration des URLs des forums',
 	'ACP_FORUM_URL_EXPLAIN' => 'Vous pouvez régler ici le contenu du cache, qui sera injecté dans les URLs des forums.<br/>Les forums en vert sont en cache, ceux en rouge ne le sont pas encore.<br/><br/><b style="color:red">Nota Bene :</b><br/><em><b>mots-cles-fxx/</b> sera toujours convenablement redirigé par le Zéro Duplicate, mais pas si vous le modifiez par la suite : <b>mots-cles/</b> ne sera pas directement redirigé vers <b>autres-mots-cles/</b>.<br/> Dans ce cas, <b>mots-cles/</b> sera considéré comme un forum qui n’existe pas, à défaut de redirections personnalisées.</em><br/>',
 	'ACP_NO_FORUM_URL'	=> '<b>La configuration des URLs des forums est désactivée<b><br/>La configuration des URLs des forums est uniquemant possible en mode Avancé ou Intermédiaire et lorsque le Cache des URLs des forums est activé.<br/> Les URLs éventuellement configurées continuent cependant d’être utilisées en mode Avancé ou Intermédiaire.',
-	// ACP sub cat
+	// ACP .htaccess
 	'ACP_HTACCESS'	=> 'htaccess',
 	'ACP_HTACCESS_EXPLAIN'	=> 'Cet outil vous aidera à construire votre .htaccess.<br/>La version proposée ci-dessous prend en compte les réglages du fichier phpbb_seo/phpbb_seo_class.php.<br/>Vous pouvez modifier les valeurs des tableaux $seo_ext et $seo_static et personnaliser vos URLs avant de générer un .htaccess.<br/>Vous pouvez par exemple choisir d’utiliser .htm au lieu de .html, ’message’ au lieu de ’post’, ’mon-equipe’ au lieu de ’equipe’ etc ...<br/>Si vous modifiez ces valeurs après que vos pages aient été indexées, vous aurez besoin de redirections personnalisées.<br/>Les réglages par défaut ne sont pas du tout mauvais, vous pouvez sauter la première étape de personnalisation sans soucis si vous préférez.<br/><br/>Par défaut, le .htacess ci-dessous doit être placé à la racine de votre domaine (ie : où www.example.com est installé).<br/>Si phpBB est installé dans un sous dossier, cliquez sur le bouton "Plus d’options" ci-dessous, cela ajoutera une option pour permettre son utilisation dans un sous dossier.',
 	'SEO_HTACCESS_RBASE'	=> 'Emplacement du .htaccess',
@@ -67,6 +67,35 @@ $lang = array_merge($lang, array(
 	'SEO_SHOW'		=> 'Montrer',
 	'SEO_HIDE'		=> 'Cacher',
 	'SEO_SELECT_ALL'	=> 'Sélectionner',
+	// ACP extended
+	'ACP_SEO_EXTENDED_EXPLAIN' => 'Configuration additionnelle des mods phpBB SEO.',
+	'SEO_EXTERNAL_LINKS' => 'Liens externes',
+	'SEO_EXTERNAL_LINKS_EXPLAIN' => 'Ouvrir ou non les liens externes dans une nouvelle fenêtre du navigateur.',
+	'SEO_EXTERNAL_CLASSES' => 'Classe css externe',
+	'SEO_EXTERNAL_CLASSES_EXPLAIN' => 'Vous pouvez définir des classes css qui activeront l’ouverture dans une nouvelle fenêtre pour les liens. Liste de classes séparées par des virgules, exemple : postlink,external',
+	'SEO_META' => 'Méta tags',
+	'SEO_META_TITLE' => 'Méta title',
+	'SEO_META_TITLE_EXPLAIN' => 'Titre méta par défaut, utilisé sur les pages n’ayant pas de titre défini. Désactive le méta title si vide.',
+	'SEO_META_DESC' => 'Méta description',
+	'SEO_META_DESC_EXPLAIN' => 'Description méta par défaut, utilisé sur les pages n’ayant pas de description définie.',
+	'SEO_META_DESC_LIMIT' => 'Limite Méta description',
+	'SEO_META_DESC_LIMIT_EXPLAIN' => 'Limite en nombre de mots pour les méta description.',
+	'SEO_META_KEYWORDS' => 'Méta keywords',
+	'SEO_META_KEYWORDS_EXPLAIN' => 'Mot clés méta par défaut, utilisés sur les pages n’ayant pas de description / mot clés définis. Entrez une liste de mot clés séparés par des espaces.',
+	'SEO_META_KEYWORDS_LIMIT' => 'Limite Méta keywords',
+	'SEO_META_KEYWORDS_LIMIT_EXPLAIN' => 'Limite en nombre de mots pour les méta keywords.',
+	'SEO_META_MIN_LEN' => 'Filtre mots courts',
+	'SEO_META_MIN_LEN_EXPLAIN' => 'Nombre de lettres limite pour la prise en compte des mots cléfs, seul les mots composés de plus de lettre que cette valeur seront pris en compte.',
+	'SEO_META_CHECK_IGNORE' => 'Filtre mots ignorés',
+	'SEO_META_CHECK_IGNORE_EXPLAIN' => 'Exclure, ou non, les mots du fichier search_ignore_words.php des méta keywords.',
+	'SEO_META_LANG' => 'Méta langue',
+	'SEO_META_LANG_EXPLAIN' => 'Code langue utilisé dans les méta tags.',
+	'SEO_META_COPY' => 'Méta copyright',
+	'SEO_META_COPY_EXPLAIN' => 'Copyright utilisé dans les méta tags. Désactive le méta copyritght si vide.',
+	'SEO_META_FILE_FILTER' => 'Filtre fichiers',
+	'SEO_META_FILE_FILTER_EXPLAIN' => 'Liste de noms de fichiers php sans extensions séparés par des virgules ne devant pas être indéxés (robots:noindex,follow). Exemple : ucp,mcp',
+	'SEO_META_GET_FILTER' => 'Filtre _GET',
+	'SEO_META_GET_FILTER_EXPLAIN' => 'Liste de variable _GET séparées par des virgules ne devant pas être indéxées (robots:noindex,follow). Exemple : style,hilit,sid',
 	// Install
 	'SEO_INSTALL_PANEL'	=> 'Installation phpBB SEO',
 	'SEO_ERROR_INSTALL'	=> 'Une erreur est survenue lore de l’installation. Il est plus prudent de désinstaller une fois avant de rééssayer.',

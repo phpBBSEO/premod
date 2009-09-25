@@ -3967,11 +3967,13 @@ function page_header($page_title = '', $display_online_list = true, $item_id = 0
 		'SEO_SATIC_PAGE' => $phpbb_seo->seo_static['pagination'],
 		'SEO_EXT_PAGE' => $phpbb_seo->seo_ext['pagination'],
 		'SEO_CANONICAL_URL' => $phpbb_seo->seo_path['canonical'],
+		'SEO_EXTERNAL' => !empty($config['seo_ext_links']) ? 'true' : 'false',
+		'SEO_EXT_CLASSES' => !empty($config['seo_ext_classes']) ? "'" . preg_replace('`[^a-z0-9_|-]+`', '', str_replace(',', '|', trim($config['seo_ext_classes'], ', '))) . "'" : 'false',
 	));
 	// www.phpBB-SEO.com SEO TOOLKIT END
 	// www.phpBB-SEO.com SEO TOOLKIT BEGIN  - META
 	global $seo_meta;
-	$seo_meta->seo_meta_tags();
+	$seo_meta->build_meta($page_title);
 	// www.phpBB-SEO.com SEO TOOLKIT END  - META
 	// www.phpBB-SEO.com SEO TOOLKIT BEGIN - GYM LINKS
 	if (!empty($config['gym_installed'])) {
@@ -4116,9 +4118,6 @@ function page_header($page_title = '', $display_online_list = true, $item_id = 0
 		'SITENAME'						=> $config['sitename'],
 		'SITE_DESCRIPTION'				=> $config['site_desc'],
 		'PAGE_TITLE'					=> $page_title,
-		// www.phpBB-SEO.com - META
-		'META_TAG' => $seo_meta->build_meta($page_title),
- 		// www.phpBB-SEO.com - META
 		'SCRIPT_NAME'					=> str_replace('.' . $phpEx, '', $user->page['page_name']),
 		'LAST_VISIT_DATE'				=> sprintf($user->lang['YOU_LAST_VISIT'], $s_last_visit),
 		'LAST_VISIT_YOU'				=> $s_last_visit,
@@ -4424,7 +4423,21 @@ function phpbb_user_session_handler()
 }
 // www.phpBB-SEO.com SEO TOOLKIT BEGIN  - META
 class seo_meta {
-	var $meta = array();
+	var $meta = array('title' => '', 'description' => '', 'keywords' => '', 'lang' => '', 'category' => '', 'robots' => '', 'distribution' => '', 'resource-type' => '', 'copyright' => '');
+	var $meta_def = array();
+	var $filters = array('description' => 'meta_filter_txt', 'keywords' => 'make_keywords');
+	// here you can comment a tag line to deactivate it
+	var $tpl = array(
+		'title' => '<meta name="title" content="%s" />',
+		'lang' => '<meta lang="%s" />',
+		'description' => '<meta name="description" content="%s" />',
+		'keywords' => '<meta name="keywords" content="%s" />',
+		'category' => '<meta name="category" content="%s" />',
+		'robots' => '<meta name="robots" content="%s" />',
+		'distribution' => '<meta name="distribution" content="%s" />',
+		'resource-type' => '<meta name="resource-type" content="%s" />',
+		'copyright' => '<meta name="copyright" content="%s" />',
+	);
 	/**
 	* Some config :
 	*	=> keywordlimit : number of keywords (max) in the keyword tag,
@@ -4442,54 +4455,94 @@ class seo_meta {
 	*		Set to true by default because the most interesting keywords are as well among the most common.
 	*		This of course provides with even better results when fulltest_native is used
 	*		and search_ignore_words.php list was re-enabled.
-	*	=> disallowed : Disallow tag based on GET var used : varname => 1|0, 1 will through a disallow meta tag.
-	*	=> noindex_files : Disallow tag based on the physical script file name
+	*	=> get_filter : Disallow tag based on GET var used : coma separated list, will through a disallow meta tag.
+	*	=> file_filter : Disallow tag based on the physical script file name : coma separated list of file names
 	* Some default values are set bellow in the seo_meta_tags() method
 	**/
 	var $mconfig = array('keywordlimit' => 15, 'wordlimit' => 25, 'wordminlen' => 2, 'bbcodestrip' => 'img|url|flash|code', 'ellipsis' => ' ...', 'topic_sql' => true, 'check_ignore' => false, 'bypass_common' => true,
 		// Consider adding ", 'p' => 1" if your forum is no indexed yet or if no post urls are to be redirected
 		// to add a noindex tag on post urls
-		'disallowed' => array('style' => 1, 'hilit' => 1, 'print' => 1, 'sid' => 1),
+		'get_filter' => 'style,hilit,sid',
 		// noindex based on physical script file name
-		'noindex_files' => array("ucp" => 1),
+		'file_filter' => 'ucp',
 	);
 	/**
-	* Returns meta tag code
+	* assign / retrun meta tag code
 	*/
-	function build_meta( $page_title = '') {
-		global $phpEx, $user, $phpbb_seo;
-		$this->meta['meta_desc'] = ( !empty($this->meta['meta_desc']) ) ? $this->meta['meta_desc'] : $this->meta_filter_txt($page_title . ' : ' . $this->meta['meta_desc_def']);
-		$this->meta['keywords'] = ( !empty($this->meta['keywords']) ) ? $this->meta['keywords'] : $this->make_keywords( $page_title . ' ' . $this->meta['meta_keywords_def']);
-		$this->meta['meta_title'] = ( !empty($this->meta['meta_title']) ) ? $this->meta_filter_txt($this->meta['meta_title']) : $page_title;
-		// Do we allow indexing based on get variable
-		$this->meta['meta_robots'] = $this->meta['meta_robots_def'];
-		foreach ( $this->mconfig['disallowed'] as $get => $disallow) {
-			if ($disallow && isset($_GET[$get])) {
-				$this->meta['meta_robots'] = 'noindex,follow';
-				break;
+	function build_meta( $page_title = '', $return = false) {
+		global $phpEx, $user, $phpbb_seo, $template, $config;
+		static $beenhere = false;
+		if (!$beenhere) {
+			$this->seo_meta_tags();
+			$beenhere = true;
+		}
+		// If meta robots was not manually set
+		if (empty($this->meta['robots'])) {
+			// If url Rewriting is on, we shall be more strict on noindex (since we can :p)
+			if (!empty($phpbb_seo->seo_opt['url_rewrite'])) {
+				// If url Rewriting is on, we can deny indexing for any rewritten url with ?
+				if (preg_match('`(\.html?|/)\?[^\?]*$`i', $phpbb_seo->seo_path['uri'])) {
+					$this->meta['robots'] = 'noindex,follow';
+				} else {
+					// lets still add some more specific ones
+					$this->mconfig['get_filter'] = array_merge($this->mconfig['get_filter'], array('st','sk','sd','ch'));
+				}
+			}
+			// Do we allow indexing based on physical script file name
+			if (empty($this->meta['robots'])) {
+				if (strpos($this->mconfig['file_filter'], str_replace(".$phpEx", '', $user->page['page_name'])) !== false) {
+					$this->meta['robots'] = 'noindex,follow';
+				}
+			}
+			// Do we allow indexing based on get variable
+			if (empty($this->meta['robots'])) {
+				foreach ( $this->mconfig['get_filter'] as $get ) {
+					if (isset($_GET[$get])) {
+						$this->meta['robots'] = 'noindex,follow';
+						break;
+					}
+				}
+			}
+			// fallback to default if necessary
+			if (empty($this->meta['robots'])) {
+				$this->meta['robots'] = $this->meta_def['robots'];
 			}
 		}
-		// Do we allow indexing based on physical script file name
-		if (@isset($this->mconfig['noindex_files'][str_replace(".$phpEx", '', $user->page['page_name'])])) {
-			$this->meta['meta_robots'] = 'noindex,follow';
+		// deal with titles, assign the tag if a default is set
+		if (!empty($this->meta_def['title'])) {
+			$this->meta['title'] = $page_title;
 		}
-		// If url Rewriting is on, we can deny indexing for any rewritten url with ?
-		if (!empty($phpbb_seo->seo_opt['url_rewrite'])) {
-			if (preg_match('`(\.html?|/)\?[^\?]*$`i', $phpbb_seo->seo_path['uri'])) {
-				$this->meta['meta_robots'] = 'noindex,follow';
+		$meta_code = '';
+		foreach ($this->tpl as $key => $value) {
+			if (isset($this->meta[$key])) {
+				// do like this so we can deactivate one particular tag on a given page,
+				// by just setting the meta to an empty string
+				if (trim($this->meta[$key])) {
+					$this->meta[$key] = isset($this->filters[$key]) ? $this->{$this->filters[$key]}($this->meta[$key]) : $this->meta[$key];
+			       }
+			} else if (!empty($this->meta_def[$key])) {
+				$this->meta[$key] = isset($this->filters[$key]) ? $this->{$this->filters[$key]}($this->meta_def[$key]) : $this->meta_def[$key];
+			}
+			if (trim($this->meta[$key])) {
+				$meta_code .= sprintf($value, utf8_htmlspecialchars($this->meta[$key])) . "\n";
 			}
 		}
-		return sprintf( $this->meta['meta_tpl'], $this->meta['meta_title'], $this->meta['meta_lang'], $this->meta['meta_desc'], $this->meta['keywords'], $this->meta['meta_cat'], $this->meta['meta_robots'], $this->meta['meta_distrib'], $this->meta['meta_restype'], $this->meta['meta_copy'] );
+		if (!$return) {
+			$template->assign_var('META_TAG', $meta_code);
+		} else {
+			return $meta_code;
+		}
 	}
 	/**
 	* Returns a coma separated keyword list
 	*/
-	function make_keywords($text) {
+	function make_keywords($text, $decode_entities = false) {
 		global $phpbb_root_path, $phpEx;
 		static $stop_words = array();
 		$keywords = '';
 		$num = 0;
-		$text = utf8_strtolower(preg_replace(array('`&(amp;)?[^:]+;`i', '`[[:punct:]]+`', '`[0-9]+`',  '`[\s]+`'), ' ', strip_tags($text)));
+		$text = $decode_entities ? html_entity_decode(strip_tags($text), ENT_COMPAT, 'UTF-8') : strip_tags($text);
+		$text = utf8_strtolower(preg_replace(array('`&(amp;)?[^\;]+;`i', '`[[:punct:]]+`', '`[0-9]+`',  '`[\s]+`'), ' ', $text));
 		$text = explode(' ', trim($text), 50);
 		if ($this->mconfig['check_ignore']) {
 			if (empty($stop_words)) {
@@ -4518,22 +4571,23 @@ class seo_meta {
 		return trim($keywords, ', ');
 	}
 	/**
-	* Filter php/html tags and white spaces and returns htmlspecialchared string with limit in words
+	* Filter php/html tags and white spaces and string with limit in words
 	*/
 	function meta_filter_txt($text, $bbcode = true) {
 		if ($bbcode) {
 			static $RegEx = array();
-			static $replace = array(' ', ' ', '', ' ');
+			static $replace = array(' ', ' ', ' ', '', ' ');
 			if (empty($RegEx)) {
-				$RegEx = array('`<[^>]*>(.*<[^>]*>)?`Usi', // HTML code
+				$RegEx = array('`&(amp;)?[^\;]+;`i', // HTML entitites
+					'`<[^>]*>(.*<[^>]*>)?`Usi', // HTML code
 					'`\[(' . $this->mconfig['bbcodestrip'] . ')[^\[\]]+\].*\[/\1[^\[\]]+\]`Usi', // bbcode to strip
-					'`\[/?[^\[\]]+\]`mi', // Strip all bbcode tags
+					'`\[\/?[^\]\[]*\]`Ui', // Strip all bbcode tags
 					'`[\s]+`' // Multiple spaces
 				);
 			}
-			return $this->word_limit(htmlspecialchars(preg_replace($RegEx, $replace, $text), ENT_COMPAT, 'UTF-8'));
+			return $this->word_limit(preg_replace($RegEx, $replace, $text));
 		}
-		return $this->word_limit(htmlspecialchars(preg_replace(array('`<[^>]*>(.*<[^>]*>)?`Usi', '`[\s]+`'), ' ', $text), ENT_COMPAT, 'UTF-8'));
+		return $this->word_limit(preg_replace(array('`<[^>]*>(.*<[^>]*>)?`Usi', '`\[\/?[^\]\[]*\]`Ui', '`[\s]+`'), ' ', $text));
 	}
 	/**
 	* Cut the text according to the number of words.
@@ -4543,26 +4597,47 @@ class seo_meta {
 		return count($words = preg_split('/\s+/', ltrim($string), $this->mconfig['wordlimit'] + 1)) > $this->mconfig['wordlimit'] ? rtrim(utf8_substr($string, 0, utf8_strlen($string) - utf8_strlen(end($words)))) . $this->mconfig['ellipsis'] : $string;
 	}
 	/**
+	* add description tag
+	* $content : if empty, no description tag will show up
+	* do not use to fall back to default
+	*/
+	function collect($type, $content = '', $combine = false) {
+		if ($combine) {
+			$this->meta[$type] = (isset($this->meta[$type]) ? $this->meta[$type] . ' ' : '') . (string) $content;
+		} else {
+			$this->meta[$type] = (string) $content;
+		}
+	}
+	/**
 	* Initialize meta tags
+	* All values from here will pass through utf8_htmlspecialchars() later
 	*/
 	function seo_meta_tags() {
-		global $config, $phpbb_seo;
-		$this->meta['meta_tpl'] =  '<meta name="title" content="%s" />' . "\n" . '<meta name="description" lang="%s" content="%s" />' . "\n" . '<meta name="keywords"    content="%s" />' . "\n" . '<meta name="category"    content="%s" />' . "\n" . '<meta name="robots"      content="%s" />'. "\n" . '<meta name="distribution" content="%s" />' . "\n" . '<meta name="resource-type" content="%s" />' . "\n" . '<meta name="copyright" content="%s" />' . "\n";
-		// If url Rewriting is on, we shall be more strict on noindex (since we can :p)
-		if (!empty($phpbb_seo->seo_opt['url_rewrite'])) {
-			$this->mconfig['disallowed'] = array_merge($this->mconfig['disallowed'], array('st' => 1, 'sk' => 1, 'sd' => 1, 'ch' => 1,));
+		global $config;
+		// Default values, if these are empty and no dynammic value is sent, no meta will be outputed
+		// Note that if you for example set $this->meta['description'] = '', no meta desc will show on that page,
+		// even with $this->meta_def['description'] filled
+		$this->meta_def['title'] = isset($config['seo_meta_title']) ? $config['seo_meta_title'] : $config['sitename'];
+		$this->meta_def['description'] = isset($config['seo_meta_desc']) ? $config['seo_meta_desc'] : $config['site_desc'];
+		$this->meta_def['keywords'] = isset($config['seo_meta_keywords']) ? $config['seo_meta_keywords'] : $config['site_desc'];
+		$this->meta_def['robots'] = 'index,follow';
+		// Global values, if thes are empty, the corresponding meta will not show up
+		// For these an empty value will remove the corresponding tag from all pages
+		$this->meta['lang'] = isset($config['seo_meta_lang']) ? $config['seo_meta_lang'] : $config['default_lang'];
+		$this->meta['category'] = 'general';
+		$this->meta['distribution'] = 'global';
+		$this->meta['resource-type'] = 'document';
+		$this->meta['copyright'] = isset($config['seo_meta_copy']) ? $config['seo_meta_copy'] : $config['sitename'];
+		// other settings that may be set through acp in cas the mod is not used standalone
+		if (isset($config['seo_meta_desc_limit'])) {
+			$this->mconfig['wordlimit'] = (int) $config['seo_meta_desc_limit'];
+			$this->mconfig['keywordlimit'] = (int) $config['seo_meta_keywords_limit'];
+			$this->mconfig['wordminlen'] = (int) $config['seo_meta_min_len'];
+			$this->mconfig['check_ignore'] = (int) $config['seo_meta_check_ignore'];
+			$this->mconfig['file_filter'] = $config['seo_meta_file_filter'];
+			$this->mconfig['get_filter'] = preg_replace('`[\s]+`', '', trim($config['seo_meta_get_filter'], ','));
 		}
-		// Here you can hard code a static default title, description and keywords
-		// As is, the mod will return information based on the phpbb config
-		$this->meta['meta_title_def'] = $config['sitename'];
-		$this->meta['meta_desc_def'] = $config['site_desc'];
-		$this->meta['meta_keywords_def'] =  $config['site_desc'];
-		$this->meta['meta_lang'] =  $config['default_lang'];
-		$this->meta['meta_cat'] =  'general';
-		$this->meta['meta_robots_def'] =  'index,follow';
-		$this->meta['meta_distrib'] =  'global';
-		$this->meta['meta_restype'] =  'document';
-		$this->meta['meta_copy'] =  $config['sitename'];
+		$this->mconfig['get_filter'] = explode(',', $this->mconfig['get_filter']);
 		return;
 	}
 }
