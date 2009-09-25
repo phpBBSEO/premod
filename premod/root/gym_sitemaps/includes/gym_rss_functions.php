@@ -17,7 +17,7 @@ define('GYM_RSS_FUNC_INC', true);
 * retunrs the link array
 */
 function get_gym_links($gym_config) {
-	global $phpbb_root_path, $config, $phpEx, $user, $cache, $db, $phpbb_seo;	
+	global $phpbb_root_path, $config, $phpEx, $user, $cache, $db, $phpbb_seo;
 	$links = array();
 	$_phpbb_seo = !empty($phpbb_seo);
 	$board_url = $_phpbb_seo ? $phpbb_seo->seo_path['phpbb_url'] : generate_board_url() . '/';
@@ -129,7 +129,7 @@ function get_gym_links($gym_config) {
 			$google_forum_mod_rewrite = (boolean) get_gym_option('google', 'forum', 'modrewrite', $override_google_mod_rewrite, $gym_config);
 			$google_auth_guest = array_diff_assoc($auth_guest_list['read_post'], set_exclude_list($gym_config['google_forum_exclude']), $auth_guest_list['thresholded']);
 			$google_forum_exclude = set_exclude_list($gym_config['google_forum_exclude']) + $auth_guest_list['skip_all'];
-			$links['setup']['google'] = array_merge( $links['setup']['google'], 
+			$links['setup']['google'] = array_merge( $links['setup']['google'],
 				array(
 					'forum_google' => true,
 					'forum_cat_google' => $gym_config['google_url'] . ($google_forum_mod_rewrite && $_phpbb_seo ? "%1\$s.xml$google_gzip_ext" : "sitemap.$phpEx?forum=%2\$s"),
@@ -138,12 +138,12 @@ function get_gym_links($gym_config) {
 				)
 			);
 		}
-		$links['main'] = array_merge( $links['main'], 
+		$links['main'] = array_merge( $links['main'],
 			array(
 				'GYM_LINKS' => (int) $gym_config['gym_link_main'],
 				'GYM_LINKS_CAT' => (int) $gym_config['gym_link_cat'],
-				'GYM_GOOGLE_TITLE' => $user->lang['GOOGLE_SITEMAPINDEX'], 
-				'GYM_GOOGLE_URL' => $sitemap_url, 
+				'GYM_GOOGLE_TITLE' => $user->lang['GOOGLE_SITEMAPINDEX'],
+				'GYM_GOOGLE_URL' => $sitemap_url,
 				'GYM_GOOGLE_LINK' => sprintf($gym_link_tpl, $sitemap_url, 'sitemap-icon.gif', $user->lang['GOOGLE_SITEMAPINDEX']),
 				'GYM_GOOGLE_THRESOLD' => (int) $links['setup']['google']['threshold'],
 			)
@@ -182,7 +182,7 @@ function get_gym_links($gym_config) {
 			$rss_forum_mod_rewrite = (boolean) get_gym_option('rss', 'forum', 'modrewrite', $override_rss_mod_rewrite, $gym_config);
 			$rss_forum_modrtype = max(0, (int) get_gym_option('rss', 'forum', 'modrtype', $override_rss_mod_rewrite, $gym_config));
 
-			$links['setup']['rss'] = array_merge( $links['setup']['rss'], 
+			$links['setup']['rss'] = array_merge( $links['setup']['rss'],
 				array(
 					'display_forum_alternate' => (int) $gym_config['rss_forum_alternate'],
 					'forum_rss' => !empty($gym_config['rss_forum_installed']),
@@ -193,13 +193,13 @@ function get_gym_links($gym_config) {
 				)
 			);
 		}
-		$links['main'] = array_merge( $links['main'], 
+		$links['main'] = array_merge( $links['main'],
 			array(
-				'GYM_RSS_TITLE' => $user->lang['RSS_FEED'], 
-				'GYM_RSS_URL' => $rss_main_url, 
+				'GYM_RSS_TITLE' => $user->lang['RSS_FEED'],
+				'GYM_RSS_URL' => $rss_main_url,
 				'GYM_RSS_LINK' => sprintf($gym_link_tpl, $rss_main_url, 'feed-icon.png', $user->lang['RSS_FEED']),
-				'GYM_RSS_CHAN_TITLE' => $user->lang['RSS_CHAN_LIST_TITLE'], 
-				'GYM_RSS_CHAN_URL' => $rss_chan_url, 
+				'GYM_RSS_CHAN_TITLE' => $user->lang['RSS_CHAN_LIST_TITLE'],
+				'GYM_RSS_CHAN_URL' => $rss_chan_url,
 				'GYM_RSS_CHAN_LINK' => sprintf($gym_link_tpl, $rss_chan_url, 'feed-icon.png', $user->lang['RSS_CHAN_LIST_TITLE']),
 			)
 		);
@@ -236,7 +236,7 @@ function get_gym_links($gym_config) {
 			$html_auth_guest = array_diff_assoc($auth_guest_list['list'], set_exclude_list($gym_config['html_forum_exclude']), $auth_guest_list['empty']);
 			$html_forum_allow_auth = (boolean) get_gym_option('html', 'forum', 'allow_auth', $gym_config['html_override'], $gym_config);
 			$html_forum_exclude = set_exclude_list($gym_config['html_forum_exclude']) + $auth_guest_list['skip_link'] + $auth_guest_list['empty'];
-			$links['setup']['html'] = array_merge( $links['setup']['html'], 
+			$links['setup']['html'] = array_merge( $links['setup']['html'],
 				array(
 					'forum_allow_map' => $html_forum_allow_map,
 					'forum_map_url' => $html_allow_map ? $gym_config['html_url'] . ($html_forum_mod_rewrite ? 'maps/forum/' : "map.$phpEx?forum") : '',
@@ -252,19 +252,19 @@ function get_gym_links($gym_config) {
 				)
 			);
 		}
-		$links['main'] = array_merge( $links['main'], 
+		$links['main'] = array_merge( $links['main'],
 			array(
-				'GYM_HTML_NEWS_TITLE' => $user->lang['HTML_NEWS'], 
-				'GYM_HTML_NEWS_URL' => $html_news_url, 
+				'GYM_HTML_NEWS_TITLE' => $user->lang['HTML_NEWS'],
+				'GYM_HTML_NEWS_URL' => $html_news_url,
 				'GYM_HTML_NEWS_LINK' => sprintf($gym_link_tpl, $html_news_url, 'html_news.gif', $user->lang['HTML_NEWS']),
-				'GYM_HTML_MAP_TITLE' => $user->lang['HTML_MAP'], 
-				'GYM_HTML_MAP_URL' => $html_map_url, 
+				'GYM_HTML_MAP_TITLE' => $user->lang['HTML_MAP'],
+				'GYM_HTML_MAP_URL' => $html_map_url,
 				'GYM_HTML_MAP_LINK' => sprintf($gym_link_tpl, $html_map_url, 'maps-icon.gif', $user->lang['HTML_MAP']),
-				'GYM_HTML_THEFORUM_NEWS_TITLE' => $user->lang['HTML_FORUM_NEWS'], 
-				'GYM_HTML_THEFORUM_NEWS_URL' => $links['setup']['html']['forum_news_url'], 
+				'GYM_HTML_THEFORUM_NEWS_TITLE' => $user->lang['HTML_FORUM_NEWS'],
+				'GYM_HTML_THEFORUM_NEWS_URL' => $links['setup']['html']['forum_news_url'],
 				'GYM_HTML_THEFORUM_NEWS_LINK' => sprintf($gym_link_tpl, $links['setup']['html']['forum_news_url'], 'html_news.gif', $user->lang['HTML_FORUM_NEWS']),
-				'GYM_HTML_THEFORUM_MAP_TITLE' => $user->lang['HTML_FORUM_MAP'], 
-				'GYM_HTML_THEFORUM_MAP_URL' => $links['setup']['html']['forum_map_url'], 
+				'GYM_HTML_THEFORUM_MAP_TITLE' => $user->lang['HTML_FORUM_MAP'],
+				'GYM_HTML_THEFORUM_MAP_URL' => $links['setup']['html']['forum_map_url'],
 				'GYM_HTML_THEFORUM_MAP_LINK' => sprintf($gym_link_tpl, $links['setup']['html']['forum_map_url'], 'maps-icon.gif', $user->lang['HTML_FORUM_MAP']),
 			)
 		);
@@ -275,18 +275,18 @@ function get_gym_links($gym_config) {
 		'link_cat' => (int) $gym_config['gym_link_cat'],
 		'f_public_read' => array_diff_assoc($auth_guest_list['read'], $auth_guest_list['skip_pass']) + array_intersect_assoc($auth_guest_list['skip_cat'], $auth_guest_list['list']),
 	);
-	$links['main'] = array_merge( $links['main'], 
-		array( 
+	$links['main'] = array_merge( $links['main'],
+		array(
 			'GYM_LINKS' => (int) $gym_config['gym_link_main'],
 			'GYM_LINKS_CAT' => (int) $gym_config['gym_link_cat'],
 		)
 	);
 	$links['alternate'] = array();
 	if (!empty($links['setup']['rss']['display_alternate'])) {
-		$links['alternate'] = array( 
-			array( 'TITLE' => $user->lang['RSS_FEED'], 
+		$links['alternate'] = array(
+			array( 'TITLE' => $user->lang['RSS_FEED'],
 				'URL' => $rss_main_url ),
-			array( 'TITLE' => $user->lang['RSS_CHAN_LIST_TITLE'], 
+			array( 'TITLE' => $user->lang['RSS_CHAN_LIST_TITLE'],
 				'URL' => $rss_chan_url ),
 		);
 	}
@@ -333,9 +333,7 @@ function get_feed_data($_params) {
 							}
 							$feed_data['items'][$i]['DESC'] = false;
 							if ($_params['desc'] && $description = get_match('`<description>(.*)</description>`Usi', $item, $encoding)) {
-								if ($_params['html']) {
-									$description = str_replace('&', '&amp;', $description);
-								} else {
+								if (empty($_params['html'])) {
 									$description = htmlspecialchars($_params['striptags'] ? strip_tags($description) : $description, ENT_COMPAT, 'UTF-8');
 								}
 								$feed_data['items'][$i]['DESC'] = str_replace(array("\r", "\n"), '<br />', $description);
@@ -376,8 +374,8 @@ function detect_encoding($string) {
 }
 /**
 * get_match($pattern, $string, $encoding)
-* returns properly encoded match from feed	 
-*/   	
+* returns properly encoded match from feed
+*/
 function get_match($pattern, $string, $encoding = 'utf-8') {
 	static $filters = array('<![CDATA['=>'', ']]>'=>'');
 	$string = strtr($string, $filters);
@@ -388,50 +386,10 @@ function get_match($pattern, $string, $encoding = 'utf-8') {
   		if( strtolower($encoding) != 'utf-8') {
 			$out[1] = utf8_recode($out[1], $encoding);
 		}
-  		return html_entity_decode_utf8(htmlspecialchars_decode(trim($out[1]))); 	
+  		return html_entity_decode(trim($out[1]), ENT_COMPAT, 'UTF-8');
 	} else {
 		return '';
 	}
-}
-
-/**
-* html_entity_decode_utf8($string)
-* Inspired from php.net : http://www.php.net/html_entity_decode
-*/
-function html_entity_decode_utf8($string) {
-	static $trans_tbl = array();
-	// replace numeric entities
-	$string = preg_replace_callback('`&#x([0-9a-f]+);`i', 'codehexdec2utf_callback', $string);
-	$string = preg_replace_callback('`&#([0-9]+);`', 'code2utf_callback', $string);
-	// replace literal entities
-	if (empty($trans_tbl)) {
-		foreach (get_html_translation_table(HTML_ENTITIES) as $val=>$key) {
-			$trans_tbl[$key] = utf8_recode($val, 'iso-8859-1');
-		}
-	}
-	return strtr($string, $trans_tbl);
-}
-/**
-* code2utf_callback($matches)
-* Returns the utf string corresponding to the unicode value
-* Inspired from php.net : http://www.php.net/html_entity_decode
-*/
-function code2utf_callback($matches) {
-	$num = $matches[1];
-	if ($num < 128) return chr($num);
-	if ($num < 2048) return chr(($num >> 6) + 192) . chr(($num & 63) + 128);
-	if ($num < 65536) return chr(($num >> 12) + 224) . chr((($num >> 6) & 63) + 128) . chr(($num & 63) + 128);
-	if ($num < 2097152) return chr(($num >> 18) + 240) . chr((($num >> 12) & 63) + 128) . chr((($num >> 6) & 63) + 128) . chr(($num & 63) + 128);
-	return '';
-}
-/**
-* codehexdec2utf_callback($matches)
-* Returns the utf string corresponding to the unicode value
-* Inspired from php.net : http://www.php.net/html_entity_decode
-*/
-function codehexdec2utf_callback($matches) {
-	$matches[1] = hexdec($matches[1]);
-	return code2utf_callback($matches);
 }
 /**
 * set_exclude_list($id_list) will build up the public unauthed ids
