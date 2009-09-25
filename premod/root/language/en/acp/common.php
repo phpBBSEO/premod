@@ -744,6 +744,7 @@ $lang = array_merge($lang, array(
 	'ACP_PHPBB_SEO_CLASS' => 'phpBB SEO Class settings',
 	'ACP_FORUM_URL' => 'Forum URL Management',
 	'ACP_HTACCESS' => '.htaccess',
+	'ACP_SEO_EXTENDED' => 'Extended config',
 	'ACP_PREMOD_UPDATE' => '<h1>Release announcement</h1>
 	<p>This update does only concern the premod, not the phpBB core.</p>
 	<p>A new version of the phpBB SEO premod is thus available : %1$s<br/>Make sure you visit<a href="%2$s" title="The release thread"><b>the release thread</b></a> and update your installation.</p>',
@@ -754,6 +755,7 @@ $lang = array_merge($lang, array(
 	'SEO_LOG_CONFIG_SETTINGS' => '<strong>Altered phpBB SEO Class settings</strong>',
 	'SEO_LOG_CONFIG_FORUM_URL' => '<strong>Altered Forum URLs</strong>',
 	'SEO_LOG_CONFIG_HTACCESS' => '<strong>Generated new .htaccess</strong>',
+	'SEO_LOG_CONFIG_EXTENDED' => '<strong>Altered phpBB SEO extended config</strong>',
 ));
 // www.phpBB-SEO.com SEO TOOLKIT END
 // www.phpBB-SEO.com SEO TOOLKIT BEGIN -> GYM Sitemaps

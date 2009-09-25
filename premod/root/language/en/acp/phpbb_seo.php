@@ -30,17 +30,17 @@ $lang = array_merge($lang, array(
 	// ACP Main CAT
 	'ACP_CAT_PHPBB_SEO'	=> 'phpBB SEO',
 	'ACP_MOD_REWRITE'	=> 'URL Rewriting settings',
-	// ACP sub Cat
+	// ACP phpbb seo class
 	'ACP_PHPBB_SEO_CLASS'	=> 'phpBB SEO Class settings',
 	'ACP_PHPBB_SEO_CLASS_EXPLAIN'	=> 'You can here set up various options of the phpBB SEO %1$s mod (%2$s).<br/>The various default settings such as the delimiters and suffixes still must be set up in <b>phpbb_seo/includes/setup_phpbb_seo.php</b>, since changing these implies an .htaccess update and most likely appropriate redirections.%3$s',
 	'ACP_PHPBB_SEO_VERSION' => 'Version',
 	'ACP_PHPBB_SEO_MODE' => 'Mode',
 	'ACP_SEO_SUPPORT_FORUM' => 'Support Forum',
-	// ACP sub Cat
+	// ACP forum urls
 	'ACP_FORUM_URL'	=> 'Forum URL Management',
 	'ACP_FORUM_URL_EXPLAIN'		=> 'You can here see what’s in the cache file containing the forum title to inject in their URLs.<br/>Forum in green colors are cached, the one in red are not yet.<br/><br/><b style="color:red">Please Note :</b><br/><em><b>any-title-fxx/</b> will always be properly redirected with the Zero Duplicate but it won’t be the case if you edit <b>any-title/</b> to <b>something-else/</b>.<br/> In such case, <b>any-title/</b> will for now be treated as a forum that does not exist if you do not set appropriate redirections.</em>',
 	'ACP_NO_FORUM_URL'	=> '<b>Forum URL Management disabled<b><br/>The forum URL management is only available in advanced and Mixed mode and when Forum URL caching is activated.<br/>Forum URLs already configured will stay active in advanced and Mixed mode.',
-	// ACP sub Cat
+	// ACP .htaccess
 	'ACP_HTACCESS'	=> '.htaccess',
 	'ACP_HTACCESS_EXPLAIN'	=> 'This tool will help you out building your .htacess.<br/>The version proposed bellow is based on your phpbb_seo/phpbb_seo_class.php settings.<br/>You can edit the $seo_ext and $seo_static values before you install the .htaccess to get personalized URLs.<br/>You can for example choose to use .htm instead of .html, "message" instead of "post" "mysite-team" instead of "the-team" and so on.<br/>If you edit these while they where already indexed in SE, you’ll need personalized redirections.<br/>The default settings are not bad at all, you can skip this step without worries if you prefer.<br/>It’s though the best time to do it, doing it after a while will require some personalized redirections.<br/>By default the following .htaccess shall be uploaded in the domain’s root (eg where www.example.com is linked).<br/>If phpBB is installed in a sub folder, hitting the more option below will add an option to upload it in the phpBB folder instead.',
 	'SEO_HTACCESS_RBASE'	=> '.htaccess location',
@@ -67,6 +67,35 @@ $lang = array_merge($lang, array(
 	'SEO_SHOW'		=> 'Show',
 	'SEO_HIDE'		=> 'Hide',
 	'SEO_SELECT_ALL'	=> 'Select all',
+	// ACP extended
+	'ACP_SEO_EXTENDED_EXPLAIN' => 'phpBB SEO mods extended settings.',
+	'SEO_EXTERNAL_LINKS' => 'External links',
+	'SEO_EXTERNAL_LINKS_EXPLAIN' => 'Open, or not, external links in a new browser window / tab',
+	'SEO_EXTERNAL_CLASSES' => 'External by css class',
+	'SEO_EXTERNAL_CLASSES_EXPLAIN' => 'here you can define some css classes that will activate the new window feature on links using it. Coma separated list of class names, example: postlink,external',
+	'SEO_META' => 'Meta tags',
+	'SEO_META_TITLE' => 'Meta title',
+	'SEO_META_TITLE_EXPLAIN' => 'Default Meta title, used on page not defining a page title. Unactivates the meta title tag if empty.',
+	'SEO_META_DESC' => 'Meta description',
+	'SEO_META_DESC_EXPLAIN' => 'Default Meta description, used on page not defining a meta description.',
+	'SEO_META_DESC_LIMIT' => 'Meta description limit',
+	'SEO_META_DESC_LIMIT_EXPLAIN' => 'Limit in words for the Meta description tag.',
+	'SEO_META_KEYWORDS' => 'Meta keywords',
+	'SEO_META_KEYWORDS_EXPLAIN' => 'Default Meta keywords, used on page not defining meta keywords. Simply enter a list of keywords.',
+	'SEO_META_KEYWORDS_LIMIT' => 'Meta keywords limit',
+	'SEO_META_KEYWORDS_LIMIT_EXPLAIN' => 'Limit in words for the Meta keywords tag.',
+	'SEO_META_MIN_LEN' => 'Short words filter',
+	'SEO_META_MIN_LEN_EXPLAIN' => 'Minimum amount of characters in a word to be included in the Meta keywords tag, only words composed of more than this limit will be taken into account.',
+	'SEO_META_CHECK_IGNORE' => 'Ignore words filter',
+	'SEO_META_CHECK_IGNORE_EXPLAIN' => 'Apply, or not, the search_ignore_words.php exclusions in the meta keywords tag.',
+	'SEO_META_LANG' => 'Meta lang',
+	'SEO_META_LANG_EXPLAIN' => 'Lang code used in meta tags.',
+	'SEO_META_COPY' => 'Meta copyright',
+	'SEO_META_COPY_EXPLAIN' => 'Copyright used in meta tags. Unactivates the meta copyright tag if empty.',
+	'SEO_META_FILE_FILTER' => 'File filter',
+	'SEO_META_FILE_FILTER_EXPLAIN' => 'Coma separated list of physical php script file name that should not be indexed (robots:noindex,follow). Example : ucp,mcp',
+	'SEO_META_GET_FILTER' => '_GET filter',
+	'SEO_META_GET_FILTER_EXPLAIN' => 'Coma separated list of _GET variable that should not be indexed (robots:noindex,follow). Example : style,hilit,sid',
 	// Install
 	'SEO_INSTALL_PANEL'	=> 'phpBB SEO Installation Panel',
 	'SEO_ERROR_INSTALL'	=> 'An error occured during the installtion process. Uninstall once is safer before you retry.',

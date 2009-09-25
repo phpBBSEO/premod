@@ -42,6 +42,8 @@ class acp_phpbb_seo {
 		$user->add_lang('acp/phpbb_seo');
 		$action	= request_var('action', '');
 		$submit = (isset($_POST['submit'])) ? true : false;
+		$form_key = 'acp_board';
+		add_form_key($form_key);
 		$display_vars = array();
 		// --> Zero Dupe
 		if (@isset($phpbb_seo->seo_opt['zero_dupe']) ) {
@@ -109,7 +111,7 @@ class acp_phpbb_seo {
 						}
 					}
 				}
-			break;
+				break;
 			case 'forum_url':
 				// used for cache
 				$this->write_type = 'forum';
@@ -124,19 +126,25 @@ class acp_phpbb_seo {
 				$display_vars['vars']['legend1'] = 'ACP_FORUM_URL';
 				$sql = "SELECT forum_id, forum_name
 					FROM " . FORUMS_TABLE . "
-					ORDER BY forum_id ASC";
+					ORDER BY left_id ASC";
 				$result = $db->sql_query($sql);
-				$row = array();
 				$forum_url_title = $error_cust = '';
 				while( $row = $db->sql_fetchrow($result) ) {
-					// Only trust ids from the db
-					$forum_id = $row['forum_id'];
-					$this->forum_ids[$forum_id] = $row['forum_name'];
+					$this->forum_ids[$row['forum_id']] = $row['forum_name'];
+				}
+				$db->sql_freeresult($result);
+				// take care of deleted forums
+				foreach ($phpbb_seo->cache_config['forum'] as $fid => $null) {
+					if (!isset($this->forum_ids[$fid])) {
+						unset($phpbb_seo->cache_config['forum'][$fid]);
+					}
+				}
+				foreach ($this->forum_ids as $forum_id => $forum_name) {
 					$error_cust = '';
 					// Is the URL cached already ?
 					if ( empty($phpbb_seo->cache_config['forum'][$forum_id]) ) {
 						// Suggest the one from the title
-						$forum_url_title = $phpbb_seo->format_url($row['forum_name'], $phpbb_seo->seo_static['forum']);
+						$forum_url_title = $phpbb_seo->format_url($forum_name, $phpbb_seo->seo_static['forum']);
 						if (!in_array($forum_url_title, $forbidden)) {
 							if (array_search($forum_url_title, $phpbb_seo->cache_config['forum'])) {
 								$this->new_config['forum_url' . $forum_id] = $forum_url_title .  $phpbb_seo->seo_delim['forum'] . $forum_id;
@@ -148,19 +156,19 @@ class acp_phpbb_seo {
 							$this->new_config['forum_url' . $forum_id] = $forum_url_title . $phpbb_seo->seo_delim['forum'] . $forum_id;
 							$error_cust = '<li>&nbsp;' . sprintf($user->lang['SEO_ADVICE_RESERVED'], $forum_url_title) . '</li>';
 						}
-						$title = '<b style="color:red">' . $row['forum_name'] . ' - ID ' . $row['forum_id'] . '</b>';
+						$title = '<b style="color:red">' . $forum_name . ' - ID ' . $forum_id . '</b>';
 						$status_msg = '<b style="color:red">' . $user->lang['SEO_CACHE_URL_NOT_OK'] . '</b>';
 						$status_msg .= '<br/><span style="color:red">' . $user->lang['SEO_CACHE_URL'] . '&nbsp;:</span>&nbsp;' . $this->new_config['forum_url' . $forum_id] . $phpbb_seo->seo_ext['forum'];
-						$display_vars['vars']['forum_url' . $forum_id] = array('lang' => $title, 'validate' => 'string', 'type' => 'custom', 'method' => 'forum_url_input', 'explain' => true, 'lang_explain_custom' => $status_msg,'append' => $this->seo_advices($this->new_config['forum_url' . $forum_id], $forum_id,  FALSE, $error_cust));
+						$display_vars['vars']['forum_url' . $forum_id] = array('lang' => $title, 'validate' => 'string', 'type' => 'custom', 'method' => 'forum_url_input', 'explain' => true, 'lang_explain_custom' => $status_msg,'append' => $this->seo_advices($this->new_config['forum_url' . $forum_id], $forum_id,  false, $error_cust));
 					} else { // Cached
 						$this->new_config['forum_url' . $forum_id] = $phpbb_seo->cache_config['forum'][$forum_id];
-						$title = '<b style="color:green">' . $row['forum_name'] . ' - ID ' . $row['forum_id'] . '</b>';
+						$title = '<b style="color:green">' . $forum_name . ' - ID ' . $forum_id . '</b>';
 						$status_msg = '<span style="color:green">' . $user->lang['SEO_CACHE_URL_OK'] . '&nbsp;:</span>&nbsp;<b style="color:green">' . $this->new_config['forum_url' . $forum_id] . '</b>';
 						$status_msg .= '<br/><span style="color:green">' . $user->lang['SEO_CACHE_URL'] . '&nbsp;:</span>&nbsp;' . $this->new_config['forum_url' . $forum_id] . $phpbb_seo->seo_ext['forum'];
-						$display_vars['vars']['forum_url' . $forum_id] = array('lang' => $title, 'validate' => 'string', 'type' => 'custom', 'method' => 'forum_url_input', 'explain' => true, 'lang_explain_custom' => $status_msg,'append' => $this->seo_advices($this->new_config['forum_url' . $forum_id], $forum_id, TRUE));
+						$display_vars['vars']['forum_url' . $forum_id] = array('lang' => $title, 'validate' => 'string:0:100', 'type' => 'custom', 'method' => 'forum_url_input', 'explain' => true, 'lang_explain_custom' => $status_msg,'append' => $this->seo_advices($this->new_config['forum_url' . $forum_id], $forum_id, true));
 					}
 				}
-			break;
+				break;
 			case 'htaccess':
 				$this->write_type = 'htaccess';
 				$display_vars['title'] = 'ACP_HTACCESS';
@@ -187,7 +195,45 @@ class acp_phpbb_seo {
 				// Dirty yet simple templating
 				$user->lang['ACP_HTACCESS_EXPLAIN'] .= $this->seo_htaccess();
 
-			break;
+				break;
+			case 'extented':
+				$display_vars = array(
+					'title'	=> 'ACP_SEO_EXTENDED',
+					'vars'	=> array(
+						'legend1' => 'SEO_EXTERNAL_LINKS',
+						'seo_ext_links' => array('lang' => 'SEO_EXTERNAL_LINKS', 'validate' => 'bool', 'type' => 'radio:enabled_disabled', 'explain' => true, 'default' => 1),
+						'seo_ext_classes' =>  array('lang' => 'SEO_EXTERNAL_CLASSES', 'validate' => 'string', 'type' => 'text:25:150', 'explain' => true, 'default' => ''),
+					),
+				);
+				// dynamic meta tag mod
+				if (class_exists('seo_meta')) {
+					$display_vars['vars'] += array(
+						'legend2' => 'SEO_META',
+						'seo_meta_title' =>  array('lang' => 'SEO_META_TITLE', 'validate' => 'string:0:225', 'type' => 'text:25:150', 'explain' => true, 'default' => $config['sitename']),
+						'seo_meta_desc' =>  array('lang' => 'SEO_META_DESC', 'validate' => 'string:0:225', 'type' => 'text:40:255', 'explain' => true, 'default' => $config['site_desc']),
+						'seo_meta_desc_limit' => array('lang' => 'SEO_META_DESC_LIMIT', 'validate' => 'int:5:40', 'type' => 'text:3:4', 'explain' => true, 'default' => 25),
+						'seo_meta_keywords' =>  array('lang' => 'SEO_META_KEYWORDS', 'validate' => 'string:0:225', 'type' => 'text:40:150', 'explain' => true, 'default' => $config['site_desc']),
+						'seo_meta_keywords_limit' => array('lang' => 'SEO_META_KEYWORDS_LIMIT', 'validate' => 'int:5:40', 'type' => 'text:3:4', 'explain' => true, 'default' => 15),
+						'seo_meta_min_len' => array('lang' => 'SEO_META_MIN_LEN', 'validate' => 'int:0:10', 'type' => 'text:3:4', 'explain' => true, 'default' => 2),
+						'seo_meta_check_ignore' => array('lang' => 'SEO_META_CHECK_IGNORE', 'validate' => 'bool', 'type' => 'radio:enabled_disabled', 'explain' => true, 'default' => 0),
+						'seo_meta_lang' =>  array('lang' => 'SEO_META_LANG', 'validate' => 'lang', 'type' => 'select', 'function' => 'language_select', 'params' => array('{CONFIG_VALUE}'), 'explain' => true,  'default' => $config['default_lang']),
+						'seo_meta_copy' =>  array('lang' => 'SEO_META_COPY', 'validate' => 'string:0:225', 'type' => 'text:25:150', 'explain' => true, 'default' => $config['sitename']),
+						'seo_meta_file_filter' =>  array('lang' => 'SEO_META_FILE_FILTER', 'validate' => 'string:0:225', 'type' => 'text:25:150', 'explain' => true, 'default' => 'ucp'),
+						'seo_meta_get_filter' =>  array('lang' => 'SEO_META_GET_FILTER', 'validate' => 'string:0:225', 'type' => 'text:25:150', 'explain' => true, 'default' => 'style,hilit,sid'),
+					);
+				}
+				// install if necessary
+				foreach ($display_vars['vars'] as $config_name => $config_setup) {
+					if (strpos($config_name, 'legend') !== false) {
+						continue;
+					}
+					if (!isset($config[$config_name])) {
+						set_config($config_name, $config_setup['default']);
+						unset($display_vars['vars'][$config_name]['default']);
+					}
+				}
+				$this->new_config = $config;
+				break;
 			default:
 				trigger_error('NO_MODE', E_USER_ERROR);
 			break;
@@ -195,6 +241,9 @@ class acp_phpbb_seo {
 		$error = array();
 		$seo_msg = array();
 		$cfg_array = (isset($_REQUEST['config'])) ? utf8_normalize_nfc(request_var('config', array('' => ''), true)) : $this->new_config;
+		if ($submit && !check_form_key($form_key)) {
+			$error[] = $user->lang['FORM_INVALID'];
+		}
 		// We validate the complete config if whished
 		validate_config_vars($display_vars['vars'], $cfg_array, $error);
 		// Do not write values if there is an error
@@ -295,6 +344,8 @@ class acp_phpbb_seo {
 							$db_tools->sql_create_index(TOPICS_TABLE, $add_index_name, array('topic_last_post_id'));
 						}
 					}
+				} elseif ($mode == 'extented') {
+					set_config($config_name, $config_value);
 				}
 			}
 		}
@@ -304,6 +355,9 @@ class acp_phpbb_seo {
 					$this->write_cache($this->write_type);
 					add_log('admin', 'SEO_LOG_CONFIG_' . strtoupper($mode));
 				}
+			} elseif ($mode == 'extented') {
+				add_log('admin', 'SEO_LOG_CONFIG_' . strtoupper($mode));
+				trigger_error($user->lang['CONFIG_UPDATED'] . adm_back_link($this->u_action));
 			} else {
 				if ( $this->write_cache($this->write_type) ) {
 					ksort($phpbb_seo->cache_config[$this->write_type]);
@@ -324,7 +378,9 @@ class acp_phpbb_seo {
 		$this->page_title = $display_vars['title'];
 		$phpbb_seo->seo_end();
 		$l_title_explain = $user->lang[$display_vars['title'] . '_EXPLAIN'];
-		$l_title_explain .= $mode == 'htaccess' ? '' : $this->check_cache_folder(SEO_CACHE_PATH);
+		if ($mode != 'extented') {
+			$l_title_explain .= $mode == 'htaccess' ? '' : $this->check_cache_folder(SEO_CACHE_PATH);
+		}
 		$template->assign_vars(array(
 			'L_TITLE'			=> $user->lang[$display_vars['title']],
 			'L_TITLE_EXPLAIN'	=> $l_title_explain,

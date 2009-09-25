@@ -1452,7 +1452,7 @@ for ($i = 0, $end = sizeof($post_list); $i < $end; ++$i)
 	// www.phpBB-SEO.com SEO TOOLKIT BEGIN  - META
 	if ($i == 0) {
 		$m_kewrd = '';
-		$seo_meta->meta['meta_desc'] = $seo_meta->meta_filter_txt($message);
+		$seo_meta->collect('description', $message);
 		if ($seo_meta->mconfig['topic_sql']) {
 			$common_sql = $seo_meta->mconfig['bypass_common'] ? '' : 'AND w.word_common = 0';
 			$sql = "SELECT w.word_text
@@ -1461,13 +1461,13 @@ for ($i = 0, $end = sizeof($post_list); $i < $end; ++$i)
 					AND w.word_id = m.word_id
 					$common_sql
 				ORDER BY w.word_count DESC";
-			$result = $db->sql_query_limit($sql, 15);
+			$result = $db->sql_query_limit($sql, min(25, (int) $seo_meta->mconfig['keywordlimit']));
 			while ( $meta_row = $db->sql_fetchrow($result) ) {
 				$m_kewrd .= ' ' . $meta_row['word_text'];
 			}
 			$db->sql_freeresult($result);
 		}
-		$seo_meta->meta['keywords'] = $seo_meta->make_keywords($row['post_subject'] . (!empty($m_kewrd) ? $m_kewrd : $seo_meta->meta['meta_desc']));
+		$seo_meta->collect('keywords', $topic_data['topic_title'] . ' ' . $row['post_subject'] . ' ' . (!empty($m_kewrd) ? $m_kewrd : $seo_meta->meta['description']));
 	}
 	// www.phpBB-SEO.com SEO TOOLKIT END  - META
 	// Second parse bbcode here
