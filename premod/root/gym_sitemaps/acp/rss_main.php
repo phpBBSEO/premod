@@ -46,7 +46,7 @@ class rss_main {
 		global $config, $phpbb_seo, $user;
 		$config['sitename'] = utf8_normalize_nfc($config['sitename']);
 		$config['site_desc'] = utf8_normalize_nfc($config['site_desc']);
-		return array( 
+		return array(
 			'cache' => array(
  				'display_vars' => array(
 					'title'	=> 'GYM_CACHE',
@@ -82,7 +82,7 @@ class rss_main {
 					'rss_modrtype' => 0,
 					'rss_1xredir' => 0,
 				),
-				'select' => array( 
+				'select' => array(
 					'rss_modrtype' => @$this->dyn_select['modrtype'],
 				),
 			),
@@ -140,7 +140,7 @@ class rss_main {
 				'default' => array(
  					'rss_sort' => 'DESC',
 				),
-				'select' => array( 
+				'select' => array(
 					'rss_sort' => @$this->dyn_select['sort'],
 				),
 			),
@@ -168,29 +168,29 @@ class rss_main {
 						'rss_override'	=> array('lang' => 'GYM_OVERRIDE_MAIN', 'validate' => 'string', 'type' => 'select', 'method' => 'select_string', 'explain' => true,),
 						'rss_override_cache'	=> array('lang' => 'GYM_OVERRIDE_CACHE','validate' => 'string', 'type' => 'select', 'method' => 'select_string', 'explain' => true,),
 						'rss_override_modrewrite'	=> array('lang' => 'GYM_OVERRIDE_MODREWRITE','validate' => 'string', 'type' => 'select', 'method' => 'select_string', 'explain' => true,),
-						'rss_override_gzip'	=> array('lang' => 'GYM_OVERRIDE_GZIP','validate' => 'string', 'type' => 'select', 'method' => 'select_string', 'explain' => true,),						
+						'rss_override_gzip'	=> array('lang' => 'GYM_OVERRIDE_GZIP','validate' => 'string', 'type' => 'select', 'method' => 'select_string', 'explain' => true,),
 						'rss_override_limit'	=> array('lang' => 'GYM_OVERRIDE_LIMIT','validate' => 'string', 'type' => 'select', 'method' => 'select_string', 'explain' => true,),
 						'rss_override_sort'	=> array('lang' => 'GYM_OVERRIDE_SORT','validate' => 'string', 'type' => 'select', 'method' => 'select_string', 'explain' => true,),
-						'rss_override_pagination'	=> array('lang' => 'GYM_OVERRIDE_PAGINATION','validate' => 'string', 'type' => 'select', 'method' => 'select_string', 'explain' => true,),						
+						'rss_override_pagination'	=> array('lang' => 'GYM_OVERRIDE_PAGINATION','validate' => 'string', 'type' => 'select', 'method' => 'select_string', 'explain' => true,),
 					),
 				),
 				'default' => array(
  					'rss_override'	=> OVERRIDE_MODULE,
 					'rss_override_cache' => OVERRIDE_OTYPE,
 					'rss_override_modrewrite' => OVERRIDE_OTYPE,
-					'rss_override_gzip' => OVERRIDE_GLOBAL,					
+					'rss_override_gzip' => OVERRIDE_GLOBAL,
 					'rss_override_limit' => OVERRIDE_OTYPE,
 					'rss_override_sort' => OVERRIDE_MODULE,
-					'rss_override_pagination' => OVERRIDE_OTYPE,					
+					'rss_override_pagination' => OVERRIDE_OTYPE,
 				),
-				'select' => array( 
+				'select' => array(
 					'rss_override' => $this->rss_override,
 					'rss_override_cache' => @$this->dyn_select['override'],
 					'rss_override_modrewrite' => @$this->dyn_select['override'],
-					'rss_override_gzip' => @$this->dyn_select['override'],					
+					'rss_override_gzip' => @$this->dyn_select['override'],
 					'rss_override_limit' => @$this->dyn_select['override'],
 					'rss_override_sort' => @$this->dyn_select['override'],
-					'rss_override_pagination' => @$this->dyn_select['override'],					
+					'rss_override_pagination' => @$this->dyn_select['override'],
 				),
 			),
 			'main' => array(
@@ -243,7 +243,7 @@ class rss_main {
 					'rss_force_xslt' => 1,
 					'rss_load_phpbb_css' => 0,
 				),
-				'select' => array( 
+				'select' => array(
 					'rss_lang' => $user->lang['ISO_639_1'],
 					'rss_linking_type' => @$this->dyn_select['rss_linking_types'],
 
@@ -269,6 +269,7 @@ class rss_main {
 						'rss_allow_smilies' => array('lang' => 'RSS_ALLOW_SMILIES', 'validate' => 'bool', 'type' => 'radio:yes_no', 'explain' => true),
 						'rss_sumarize' => array('lang' => 'RSS_SUMARIZE', 'validate' => 'int:0:1000', 'type' => 'text:4:4', 'explain' => true,),
 						'rss_sumarize_method' => array('lang' => 'RSS_SUMARIZE_METHOD', 'validate' => 'string', 'type' => 'select', 'method' => 'select_string', 'explain' => true,),
+						'rss_nohtml' => array('lang' => 'RSS_NOHTML', 'validate' => 'bool', 'type' => 'radio:yes_no', 'explain' => true),
 					),
 				),
 				'default' => array(
@@ -287,8 +288,9 @@ class rss_main {
 					'rss_allow_smilies' => 1,
 					'rss_sumarize' => 50,
 					'rss_sumarize_method' => 'words',
+					'rss_nohtml' => 0,
 				),
-				'select' => array( 
+				'select' => array(
 					'rss_sumarize_method' => @$this->dyn_select['sumarize_method'],
 				),
 			),

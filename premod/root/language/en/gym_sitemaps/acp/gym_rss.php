@@ -117,6 +117,8 @@ $lang = array_merge($lang, array(
 	'RSS_ALLOW_EMAILS_EXPLAIN' => 'You chose here to output "email AT domain DOT com" instead of "email@domain.com" in the items content.',
 	'RSS_ALLOW_SMILIES' => 'Allow Smilies',
 	'RSS_ALLOW_SMILIES_EXPLAIN' => 'You may choose here to either parse or ignore the smilies in content.',
+	'RSS_NOHTML' => 'HTML filter',
+	'RSS_NOHTML_EXPLAIN' => 'Filter, or not, html in rss feeds. If you activate this option, rss feeds will only contain plain text.',
 	// Old URL handling
 	'RSS_1XREDIR' => 'Handle GYM 1x rewriten URL',
 	'RSS_1XREDIR_EXPLAIN' => 'Activate the GYM 1x rewriten URLs detection. The module will display a custom feed providing with the new URL of the requested feed.<br/><u>Note :</u><br/>This option requires the compatibility rewriterules as explained in the install file.',
