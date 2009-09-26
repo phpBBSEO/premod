@@ -2,7 +2,7 @@
 /**
 *
 * @package phpBB3
-* @version $Id: report.php 9814 2009-07-21 20:59:11Z naderman $
+* @version $Id: report.php 10164 2009-09-19 10:46:19Z acydburn $
 * @copyright (c) 2005 phpBB Group
 * @license http://opensource.org/licenses/gpl-license.php GNU Public License
 *
@@ -118,7 +118,8 @@ else
 
 	if (!$report_data)
 	{
-		trigger_error('PM_NOT_EXIST');
+		$user->add_lang('ucp');
+		trigger_error('NO_MESSAGE');
 	}
 
 	if ($report_data['message_reported'])

@@ -2,7 +2,7 @@
 /**
 *
 * @package phpBB3
-* @version $Id: functions_privmsgs.php 10092 2009-09-03 13:44:16Z bantu $
+* @version $Id: functions_privmsgs.php 10165 2009-09-19 12:21:39Z nickvergessen $
 * @copyright (c) 2005 phpBB Group
 * @license http://opensource.org/licenses/gpl-license.php GNU Public License
 *
@@ -1900,7 +1900,7 @@ function set_user_message_limit()
 */
 function get_recipient_strings($pm_by_id)
 {
-	global $user, $db;
+	global $db, $phpbb_root_path, $phpEx, $user;
 
 	$address_list = $recipient_list = $address = array();
 

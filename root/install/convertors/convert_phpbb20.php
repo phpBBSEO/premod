@@ -2,7 +2,7 @@
 /**
 *
 * @package install
-* @version $Id: convert_phpbb20.php 9656 2009-06-23 10:48:53Z acydburn $
+* @version $Id: convert_phpbb20.php 10148 2009-09-15 19:01:42Z acydburn $
 * @copyright (c) 2006 phpBB Group
 * @license http://opensource.org/licenses/gpl-license.php GNU Public License
 *
@@ -31,8 +31,8 @@ unset($dbpasswd);
 */
 $convertor_data = array(
 	'forum_name'	=> 'phpBB 2.0.x',
-	'version'		=> '1.0.2',
-	'phpbb_version'	=> '3.0.4',
+	'version'		=> '1.0.3',
+	'phpbb_version'	=> '3.0.6',
 	'author'		=> '<a href="http://www.phpbb.com/">phpBB Group</a>',
 	'dbms'			=> $dbms,
 	'dbhost'		=> $dbhost,
@@ -129,7 +129,7 @@ $config_schema = array(
 		'board_timezone'		=> 'board_timezone',
 		'allow_privmsg'			=> 'not(privmsg_disable)',
 		'gzip_compress'			=> 'gzip_compress',
-		'coppa_enable'			=> 'is_empty(coppa_mail)',
+		'coppa_enable'			=> '!is_empty(coppa_mail)',
 		'coppa_fax'				=> 'coppa_fax',
 		'coppa_mail'			=> 'coppa_mail',
 		'record_online_users'	=> 'record_online_users',

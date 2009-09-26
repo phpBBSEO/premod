@@ -2,7 +2,7 @@
 /**
 *
 * @package phpBB3
-* @version $Id: session.php 10103 2009-09-04 14:53:35Z terrafrost $
+* @version $Id: session.php 10178 2009-09-22 15:09:09Z acydburn $
 * @copyright (c) 2005 phpBB Group
 * @license http://opensource.org/licenses/gpl-license.php GNU Public License
 *
@@ -182,7 +182,7 @@ class session
 			else
 			{
 				// Set to OS hostname or localhost
-				$host = (function_exists('php_uname')) ? gethostbyaddr(gethostbyname(php_uname('n'))) : 'localhost';
+				$host = (function_exists('php_uname')) ? php_uname('n') : 'localhost';
 			}
 		}
 

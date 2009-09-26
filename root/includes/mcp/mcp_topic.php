@@ -2,7 +2,7 @@
 /**
 *
 * @package mcp
-* @version $Id: mcp_topic.php 10114 2009-09-07 11:42:30Z acydburn $
+* @version $Id: mcp_topic.php 10180 2009-09-23 09:41:54Z acydburn $
 * @copyright (c) 2005 phpBB Group
 * @license http://opensource.org/licenses/gpl-license.php GNU Public License
 *
@@ -259,7 +259,7 @@ function mcp_topic_view($id, $mode, $action)
 	// Display topic icons for split topic
 	$s_topic_icons = false;
 
-	if ($auth->acl_get('m_split', $topic_info['forum_id']))
+	if ($auth->acl_gets('m_split', 'm_merge', (int) $topic_info['forum_id']))
 	{
 		include_once($phpbb_root_path . 'includes/functions_posting.' . $phpEx);
 		$s_topic_icons = posting_gen_topic_icons('', $icon_id);

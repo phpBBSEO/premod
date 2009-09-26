@@ -2,7 +2,7 @@
 /**
 *
 * @package phpBB3
-* @version $Id: bbcode.php 9722 2009-07-07 11:41:07Z acydburn $
+* @version $Id: bbcode.php 10150 2009-09-16 08:11:52Z nickvergessen $
 * @copyright (c) 2005 phpBB Group
 * @license http://opensource.org/licenses/gpl-license.php GNU Public License
 *
@@ -128,7 +128,7 @@ class bbcode
 	*/
 	function bbcode_cache_init()
 	{
-		global $user, $phpbb_root_path;
+		global $phpbb_root_path, $template, $user;
 
 		if (empty($this->template_filename))
 		{
@@ -137,7 +137,7 @@ class bbcode
 
 			if (!@file_exists($this->template_filename))
 			{
-				if (isset($user->theme['template_inherits_id']) && $user->theme['template_inherits_id'])
+				if (isset($template->orig_tpl_inherits_id) && $template->orig_tpl_inherits_id)
 				{
 					$this->template_filename = $phpbb_root_path . 'styles/' . $user->theme['template_inherit_path'] . '/template/bbcode.html';
 					if (!@file_exists($this->template_filename))
