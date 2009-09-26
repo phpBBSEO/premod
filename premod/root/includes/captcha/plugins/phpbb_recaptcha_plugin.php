@@ -2,7 +2,7 @@
 /**
 *
 * @package VC
-* @version $Id: phpbb_recaptcha_plugin.php 10085 2009-09-01 15:08:04Z acydburn $
+* @version $Id: phpbb_recaptcha_plugin.php 10177 2009-09-22 10:03:17Z acydburn $
 * @copyright (c) 2006, 2008 phpBB Group
 * @license http://opensource.org/licenses/gpl-license.php GNU Public License
 *
@@ -100,6 +100,8 @@ class phpbb_recaptcha extends phpbb_default_captcha
 					set_config($captcha_var, $value);
 				}
 			}
+
+			add_log('admin', 'LOG_CONFIG_VISUAL');
 			trigger_error($user->lang['CONFIG_UPDATED'] . adm_back_link($module->u_action));
 		}
 		else if ($submit)

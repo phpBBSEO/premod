@@ -2,7 +2,7 @@
 /**
 *
 * @package phpBB3
-* @version $Id: functions_upload.php 10122 2009-09-08 14:02:40Z acydburn $
+* @version $Id: functions_upload.php 10141 2009-09-13 14:31:32Z acydburn $
 * @copyright (c) 2005 phpBB Group
 * @license http://opensource.org/licenses/gpl-license.php GNU Public License
 *
@@ -349,7 +349,6 @@ class filespec
 			}
 
 			phpbb_chmod($this->destination_file, $chmod);
-			return true;
 		}
 
 		// Try to get real filesize from destination folder

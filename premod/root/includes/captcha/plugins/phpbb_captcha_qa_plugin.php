@@ -2,7 +2,7 @@
 /**
 *
 * @package VC
-* @version $Id: phpbb_captcha_qa_plugin.php 10116 2009-09-07 11:57:58Z acydburn $
+* @version $Id: phpbb_captcha_qa_plugin.php 10177 2009-09-22 10:03:17Z acydburn $
 * @copyright (c) 2006, 2008 phpBB Group
 * @license http://opensource.org/licenses/gpl-license.php GNU Public License
 *
@@ -56,13 +56,13 @@ class phpbb_captcha_qa
 		$this->answer = request_var('qa_answer', '', true);
 
 		$this->type = (int) $type;
-		$this->question_lang = $user->data['user_lang'];
+		$this->question_lang = $user->lang_name;
 
 		// we need all defined questions - shouldn't be too many, so we can just grab them
 		// try the user's lang first
 		$sql = 'SELECT question_id
 			FROM ' . CAPTCHA_QUESTIONS_TABLE . "
-			WHERE lang_iso = '" . $db->sql_escape($user->data['user_lang']) . "'";
+			WHERE lang_iso = '" . $db->sql_escape($user->lang_name) . "'";
 		$result = $db->sql_query($sql, 3600);
 
 		while ($row = $db->sql_fetchrow($result))
@@ -685,6 +685,7 @@ class phpbb_captcha_qa
 						$this->acp_add_question($data);
 					}
 
+					add_log('admin', 'LOG_CONFIG_VISUAL');
 					trigger_error($user->lang['CONFIG_UPDATED'] . adm_back_link($list_url));
 				}
 			}

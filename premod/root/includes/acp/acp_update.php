@@ -2,7 +2,7 @@
 /**
 *
 * @package acp
-* @version $Id: acp_update.php 9880 2009-07-28 13:58:01Z aptx $
+* @version $Id: acp_update.php 10154 2009-09-16 14:37:17Z acydburn $
 * @copyright (c) 2005 phpBB Group
 * @license http://opensource.org/licenses/gpl-license.php GNU Public License
 *
@@ -43,6 +43,7 @@ class acp_update
 		$latest_version = trim($info[0]);
 
 		$announcement_url = trim($info[1]);
+		$announcement_url = (strpos($announcement_url, '&amp;') === false) ? str_replace('&', '&amp;', $announcement_url) : $announcement_url;
 		$update_link = append_sid($phpbb_root_path . 'install/index.' . $phpEx, 'mode=update');
 
 		// Determine automatic update...

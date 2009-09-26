@@ -2,7 +2,7 @@
 /**
 *
 * @package mcp
-* @version $Id: mcp_reports.php 9814 2009-07-21 20:59:11Z naderman $
+* @version $Id: mcp_reports.php 10162 2009-09-18 14:56:58Z nickvergessen $
 * @copyright (c) 2005 phpBB Group
 * @license http://opensource.org/licenses/gpl-license.php GNU Public License
 *
@@ -593,7 +593,7 @@ function close_report($report_id_list, $mode, $action, $pm = false)
 					$db->sql_query($sql);
 
 					if ($action == 'delete')
-					{echo "aha";
+					{
 						delete_pm(ANONYMOUS, $close_report_posts, PRIVMSGS_INBOX);
 					}
 				}

@@ -2,7 +2,7 @@
 /**
 *
 * @package acp
-* @version $Id: functions_admin.php 10112 2009-09-06 23:59:35Z bantu $
+* @version $Id: functions_admin.php 10159 2009-09-17 13:44:50Z bantu $
 * @copyright (c) 2005 phpBB Group
 * @license http://opensource.org/licenses/gpl-license.php GNU Public License
 *
@@ -254,7 +254,7 @@ function get_forum_list($acl_list = 'f_list', $id_only = true, $postable_only = 
 
 		if ($acl_list == '' || ($acl_list != '' && $auth->acl_gets($acl_list, $row['forum_id'])))
 		{
-			$rowset[] = ($id_only) ? $row['forum_id'] : $row;
+			$rowset[] = ($id_only) ? (int) $row['forum_id'] : $row;
 		}
 	}
 
@@ -2514,6 +2514,7 @@ function view_log($mode, &$log, &$log_count, $limit = 0, $offset = 0, $forum_id 
 
 		case 'mod':
 			$log_type = LOG_MOD;
+			$sql_forum = '';
 
 			if ($topic_id)
 			{
