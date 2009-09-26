@@ -2,7 +2,7 @@
 /**
 *
 * @package phpBB SEO GYM Sitemaps
-* @version $id: html_main.php - 15990 06-08-2009 09:44:27 - 2.0.RC5 dcz $
+* @version $Id$
 * @copyright (c) 2006 - 2009 www.phpbb-seo.com
 * @license http://opensource.org/osi3.0/licenses/lgpl-license.php GNU Lesser General Public License
 *
@@ -26,7 +26,7 @@ class html_main {
 	*/
 	function html_main(&$gym_master) {
 		global $user;
-		$this->gym_master = &$gym_master;	
+		$this->gym_master = &$gym_master;
 		if (isset($this->gym_master->dyn_select) ) {
 			$this->html_override = $this->gym_master->dyn_select['override'];
 			unset($this->html_override[OVERRIDE_GLOBAL]);
@@ -42,7 +42,7 @@ class html_main {
 		global $config, $phpbb_seo, $user, $phpEx;
 		$config['sitename'] = utf8_normalize_nfc($config['sitename']);
 		$config['site_desc'] = utf8_normalize_nfc($config['site_desc']);
-		return array( 
+		return array(
 			'cache' => array(
  				'display_vars' => array(
 					'title'	=> 'HTML_CACHE',
@@ -50,7 +50,7 @@ class html_main {
 						'legend1'	=> 'HTML_CACHE',
 						'html_main_cache_on'	=> array('lang' => 'HTML_MAIN_CACHE_ON', 'validate' => 'bool', 'type' => 'radio:yes_no', 'explain' => true),
 						'html_main_cache_ttl' => array('lang' => 'HTML_MAIN_CACHE_TTL', 'validate' => 'string', 'type' => 'text:4:4', 'explain' => true),
-						'html_opt_cache_on'	=> array('lang' => 'HTML_OPT_CACHE_ON', 'validate' => 'bool', 'type' => 'radio:yes_no', 'explain' => true),	
+						'html_opt_cache_on'	=> array('lang' => 'HTML_OPT_CACHE_ON', 'validate' => 'bool', 'type' => 'radio:yes_no', 'explain' => true),
 						'html_opt_cache_ttl' => array('lang' => 'HTML_OPT_CACHE_TTL', 'validate' => 'string', 'type' => 'text:4:4', 'explain' => true),
 					),
 				),
@@ -74,7 +74,7 @@ class html_main {
 					'html_modrewrite' => 0,
 					'html_modrtype' => 0,
 				),
-				'select' => array( 
+				'select' => array(
 					'html_modrtype' => @$this->dyn_select['modrtype'],
 				),
 			),
@@ -128,7 +128,7 @@ class html_main {
 					'html_news_sort' => 'DESC',
 					'html_cat_news_sort' => 'DESC',
 				),
-				'select' => array( 
+				'select' => array(
 					'html_sort' => @$this->dyn_select['sort'],
 					'html_cat_sort' => @$this->dyn_select['sort'],
 					'html_news_sort' => @$this->dyn_select['sort'],
@@ -164,29 +164,29 @@ class html_main {
 						'html_override'	=> array('lang' => 'GYM_OVERRIDE_MAIN', 'validate' => 'string', 'type' => 'select', 'method' => 'select_string', 'explain' => true,),
 						'html_override_cache'	=> array('lang' => 'GYM_OVERRIDE_CACHE','validate' => 'string', 'type' => 'select', 'method' => 'select_string', 'explain' => true,),
 						'html_override_modrewrite'	=> array('lang' => 'GYM_OVERRIDE_MODREWRITE','validate' => 'string', 'type' => 'select', 'method' => 'select_string', 'explain' => true,),
-						'html_override_gzip'	=> array('lang' => 'GYM_OVERRIDE_GZIP','validate' => 'string', 'type' => 'select', 'method' => 'select_string', 'explain' => true,),						
+						'html_override_gzip'	=> array('lang' => 'GYM_OVERRIDE_GZIP','validate' => 'string', 'type' => 'select', 'method' => 'select_string', 'explain' => true,),
 						'html_override_limit'	=> array('lang' => 'GYM_OVERRIDE_LIMIT','validate' => 'string', 'type' => 'select', 'method' => 'select_string', 'explain' => true,),
 						'html_override_sort'	=> array('lang' => 'GYM_OVERRIDE_SORT','validate' => 'string', 'type' => 'select', 'method' => 'select_string', 'explain' => true,),
-						'html_override_pagination'	=> array('lang' => 'GYM_OVERRIDE_PAGINATION','validate' => 'string', 'type' => 'select', 'method' => 'select_string', 'explain' => true,),						
+						'html_override_pagination'	=> array('lang' => 'GYM_OVERRIDE_PAGINATION','validate' => 'string', 'type' => 'select', 'method' => 'select_string', 'explain' => true,),
 					),
 				),
 				'default' => array(
  					'html_override'	=> OVERRIDE_MODULE,
 					'html_override_cache' => OVERRIDE_OTYPE,
 					'html_override_modrewrite' => OVERRIDE_OTYPE,
-					'html_override_gzip' => OVERRIDE_GLOBAL,					
+					'html_override_gzip' => OVERRIDE_GLOBAL,
 					'html_override_limit' => OVERRIDE_OTYPE,
 					'html_override_sort' => OVERRIDE_MODULE,
-					'html_override_pagination' => OVERRIDE_OTYPE,					
+					'html_override_pagination' => OVERRIDE_OTYPE,
 				),
-				'select' => array( 
+				'select' => array(
 					'html_override' => $this->html_override,
 					'html_override_cache' => $this->html_override,
 					'html_override_modrewrite' => @$this->dyn_select['override'],
-					'html_override_gzip' => @$this->dyn_select['override'],					
+					'html_override_gzip' => @$this->dyn_select['override'],
 					'html_override_limit' => $this->html_override,
 					'html_override_sort' => @$this->dyn_select['override'],
-					'html_override_pagination' => $this->html_override,					
+					'html_override_pagination' => $this->html_override,
 				),
 			),
 			'main' => array(
@@ -196,7 +196,7 @@ class html_main {
 						// Settings
 						'legend1'	=> 'HTML_SETTINGS',
 						'html_allow_map' => array('lang' => 'HTML_ALLOW_MAP', 'validate' => 'bool', 'type' => 'radio:yes_no', 'explain' => true),
-						'html_allow_cat_map' => array('lang' => 'HTML_ALLOW_CAT_MAP', 'validate' => 'bool', 'type' => 'radio:yes_no', 'explain' => true),		
+						'html_allow_cat_map' => array('lang' => 'HTML_ALLOW_CAT_MAP', 'validate' => 'bool', 'type' => 'radio:yes_no', 'explain' => true),
 						'html_sitename' => array('lang' => 'HTML_SITENAME', 'validate' => 'string', 'type' => 'text:40:255', 'explain' => true),
 						'html_site_desc' => array('lang' => 'HTML_SITE_DESC', 'validate' => 'string', 'type' => 'textarea:6:50', 'explain' => true),
 						'html_c_info' => array('lang' => 'HTML_C_INFO', 'validate' => 'string', 'type' => 'text:40:255', 'explain' => true),
@@ -235,7 +235,7 @@ class html_main {
 					'html_birthdays_on_news' => 'reg',
 					'html_birthdays_on_map' => 'reg',
 				),
-				'select' => array( 
+				'select' => array(
 					'html_disp_online' => @$this->dyn_select['gym_auth'],
 					'html_disp_tracking' => @$this->dyn_select['gym_auth'],
 					'html_disp_status' => @$this->dyn_select['gym_auth'],
@@ -282,7 +282,7 @@ class html_main {
 					'html_sumarize' => 75,
 					'html_sumarize_method' => 'words',
 				),
-				'select' => array( 
+				'select' => array(
 					'html_sumarize_method' => @$this->dyn_select['sumarize_method'],
 					'html_allow_bbcode' => @$this->dyn_select['gym_auth'],
 					'html_allow_links' =>  @$this->dyn_select['gym_auth'],

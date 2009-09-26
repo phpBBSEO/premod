@@ -1,10 +1,10 @@
 <?php
 /**
 *
-* @package phpBB SEO GYM Sitemaps
-* @version $id: phpbb_seo_class_light.php - 9087 06-08-2009 09:44:27 - 2.0.RC5 dcz $
+* @package Ultimate SEO URL phpBB SEO
+* @version $Id$
 * @copyright (c) 2006 - 2009 www.phpbb-seo.com
-* @license http://opensource.org/osi3.0/licenses/lgpl-license.php GNU Lesser General Public License
+* @license http://www.opensource.org/licenses/rpl1.5.txt Reciprocal Public License 1.5
 *
 */
 // First basic security
@@ -17,7 +17,7 @@ if ( !defined('IN_PHPBB') ) {
 * www.phpBB-SEO.com
 * @package phpBB SEO
 */
-// 
+//
 
 class phpbb_seo {
 	var	$seo_url = array();
@@ -94,7 +94,7 @@ class phpbb_seo {
 		}
 		return;
 	}
-	// --> Gen stats 
+	// --> Gen stats
 	/**
 	* Returns microtime
 	* Borrowed from php.net

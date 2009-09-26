@@ -2,9 +2,9 @@
 /**
 *
 * @package Ultimate SEO URL phpBB SEO
-* @version $id: sync_url.php - 6585 06-03-2009 16:28:22 - 0.6.0 dcz $
+* @version $Id$
 * @copyright (c) 2006 - 2009 www.phpbb-seo.com
-* @license http://www.opensource.org/licenses/rpl.php RPL Public License
+* @license http://www.opensource.org/licenses/rpl1.5.txt Reciprocal Public License 1.5
 *
 */
 define('IN_PHPBB', true);
@@ -86,7 +86,7 @@ if ($mode === 'sync') {
 		$_parent = $row['topic_type'] == POST_GLOBAL ? $phpbb_seo->seo_static['global_announce'] : $phpbb_seo->seo_url['forum'][$forum_id];
 		if ( !$phpbb_seo->check_url('topic', $row['topic_url'], $_parent)) {
 			if (!empty($row['topic_url'])) {
-				// Here we get rid of the seo delim (-t) and put it back even in simple mod 
+				// Here we get rid of the seo delim (-t) and put it back even in simple mod
 				// to be able to handle all cases at once
 				$_url = preg_replace('`' . $phpbb_seo->seo_delim['topic'] . '$`i', '', $row['topic_url']);
 				$_title = $phpbb_seo->get_url_info('topic', $_url . $phpbb_seo->seo_delim['topic'] . $topic_id, 'title');

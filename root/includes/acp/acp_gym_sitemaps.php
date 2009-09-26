@@ -2,7 +2,7 @@
 /**
 *
 * @package phpBB SEO GYM Sitemaps
-* @version $id: acp_gym_sitemaps.php - 45275 06-08-2009 09:44:27 - 2.0.RC5 dcz $
+* @version $Id$
 * @copyright (c) 2006 - 2009 www.phpbb-seo.com
 * @license http://opensource.org/osi3.0/licenses/lgpl-license.php GNU Lesser General Public License
 *
@@ -136,7 +136,7 @@ class acp_gym_sitemaps {
 				$user->add_lang('gym_sitemaps/acp/' . $this->gym_modules_acp[$mode][$active_modules]['info']['lang_file']);
 			}
 		}
-		
+
 		$error = array();
 		$cfg_array = (isset($_REQUEST['config'])) ? utf8_normalize_nfc(request_var('config', array('' => ''), true)) : $this->new_config;
 		// We validate the complete config if whished
@@ -158,7 +158,7 @@ class acp_gym_sitemaps {
 					foreach($m_values as $k => $v) {
 						if ($validate_int) {
 							$v = (int) $v;
-						} 
+						}
 						if (empty($v)) {
 							unset($m_values[$k]);
 						} else {
@@ -197,7 +197,7 @@ class acp_gym_sitemaps {
 		$this->page_title = $display_vars['title'];
 		// add the maitenance links
 		$maintenance_links = '';
-$maction_param = 
+$maction_param =
 		$maintenance_links .= '<a href="' . $this->u_action . '&amp;maction=maintenance&amp;action=' . $action . '&amp;module=' . $module . '"><b style="color:red;">' . $user->lang['GYM_MAINTENANCE'] . '</b></a><b> &bull; </b>';
 		$maintenance_links .= '<a href="' . $this->u_action . '&amp;maction=settings&amp;action=' . $action . '&amp;module=' . $module . '"><b style="color:red;">' . $user->lang['GYM_SETTINGS'] . '</b></a>';
 		$install_link = ($mode !== 'main') ? '<b> &bull; </b><a href="' . $this->u_action . '&amp;maction=install&amp;action=' . $action . '&amp;module=' . $module . '"><b style="color:red;">' . $user->lang['GYM_INSTALL'] . '</b></a>' : '';
@@ -211,7 +211,7 @@ $maction_param =
 		$lang_key = $this->gym_modules_acp[$mode][$module]['info']['title_lang'];
 		$l_module_title = $this->safe_lang($lang_key);
 		$l_module_title_explain = $this->safe_lang($lang_key . '_EXPLAIN');
-		$l_title = $this->safe_lang($display_vars['title']);	
+		$l_title = $this->safe_lang($display_vars['title']);
 		$l_title_explain = $this->safe_lang($display_vars['title'] . '_EXPLAIN');
 		$l_title_explain .= ($action === 'cache' && $mode !== 'html') ? $this->check_cache_folder($phpbb_root_path . 'gym_sitemaps/cache') : '';
 		$template->assign_vars(array(
@@ -289,7 +289,7 @@ $maction_param =
 				}
 			}
 			@closedir($dir);
-			// Reorder a bit, put the main panel at the first position, others will keep 
+			// Reorder a bit, put the main panel at the first position, others will keep
 			// the file system sorting
 			if (!empty($this->gym_modules[$mode]['main'])) {
 				$main = $this->gym_modules[$mode]['main'];
@@ -320,7 +320,7 @@ $maction_param =
 		}
 	}
 	/**
-	* gym_pick_module( $mode, $module, $action) 
+	* gym_pick_module( $mode, $module, $action)
 	* pick a given module data
 	*/
 	function gym_pick_module( $mode, $mode_module, &$return_array) {
@@ -338,7 +338,7 @@ $maction_param =
 		}
 	}
 	/**
-	* gym_menu( $mode, $module, $action) 
+	* gym_menu( $mode, $module, $action)
 	* Builds the module action links
 	*/
 	function gym_menu( $mode, $module, $action) {
@@ -431,7 +431,7 @@ $maction_param =
 		$i = 1;
 		// Installed modules
 		$active = array();
-		foreach ($this->gym_modules[$mode] as $_module) { 
+		foreach ($this->gym_modules[$mode] as $_module) {
 			if ($_module !== 'main') {
 				$active[$mode][$_module] = $mode . '_' . $_module;
 			}
@@ -520,7 +520,7 @@ $maction_param =
 									rem_gym_config($module_config, $this->gym_config);
 								} else {
 									set_gym_config($module_config, $default_value, $mode, $this->gym_config);
-								}		
+								}
 							}
 						}
 					}
@@ -567,11 +567,11 @@ $maction_param =
 					}
 					$var_key = $output_mode . '_' . $type_module . '_reset';
 					$this->new_config[$var_key] = 0;
-					$display_vars['vars'][$var_key] = array('lang' => strtoupper($var_key), 'validate' => 'bool', 'type' => 'radio:yes_no', 'explain' => true);	
+					$display_vars['vars'][$var_key] = array('lang' => strtoupper($var_key), 'validate' => 'bool', 'type' => 'radio:yes_no', 'explain' => true);
 				}
 			}
 		} elseif ($module === 'main') { // Only looking for one output type modules
-			
+
 			foreach ($this->gym_modules[$mode] as $type_module) { // add the output types modules
 				// Grabb the data
 				$this->gym_module_acp($mode, $type_module);
@@ -649,7 +649,7 @@ $maction_param =
 				}
 				closedir($res);
 				if ($accessed) {
-					if ($deleted !='') { 
+					if ($deleted !='') {
 						$message = $user->lang['GYM_CACHE_CLEARED'] . $cache_dir . '<br/><br/>';
 						$message .= '<div align="left">' . $user->lang['GYM_FILE_CLEARED'] . " $num_del<ul>$deleted</ul></div>";
 					} else {
@@ -813,7 +813,7 @@ $maction_param =
 	}
 	/**
 	*  module_custom_select($value, $key) to grabb custom select function from modules
-	* In the $display_vars array : 
+	* In the $display_vars array :
 	* 'gym_config_key' => array('lang' => 'LANG_TITLE', 'validate' => 'int|bool|string', 'type' => 'custom', 'method' => 'module_custom_select', 'explain' => true),
 	* Will build the custom select unsing the module's select_gym_config_key($value, $key) method.
 	*/
@@ -885,7 +885,7 @@ $maction_param =
 		if (empty($this->dyn_select['forums'])) {
 			$this->dyn_select['forums'] = make_forum_select(false, false, true, true, true, false, true);
 			foreach($this->dyn_select['forums'] as $f_id => $f_data) {
-				$this->dyn_select['forums'][$f_id] = array( 
+				$this->dyn_select['forums'][$f_id] = array(
 					'title' => $f_data['padding'] . $f_data['forum_name'],
 					'disabled' => $f_data['disabled'],
 				);

@@ -2,7 +2,7 @@
 /**
 *
 * @package phpBB SEO GYM Sitemaps
-* @version $id: display_posts.php - 35647 06-08-2009 09:44:27 - 2.0.RC5 dcz $
+* @version $Id$
 * @copyright (c) 2006 - 2009 www.phpbb-seo.com
 * @license http://opensource.org/osi3.0/licenses/lgpl-license.php GNU Lesser General Public License
 *
@@ -115,7 +115,7 @@ class display_posts {
 		if ($master->call['single_forum']) {
 			$sql_where .= $auth->acl_get('m_approve', $master->call['forum_id']) ? '' : ' AND t.topic_approved = 1';
 		} else {
-			// only admins and global moderators will see un-approved topics 
+			// only admins and global moderators will see un-approved topics
 			// in the forum they have access to.
 			$sql_where .= ($auth->acl_gets('a_') || $auth->acl_getf_global('m_')) ? '' : ' AND t.topic_approved = 1';
 		}
@@ -198,7 +198,7 @@ class display_posts {
 			if ( !empty($master->module_config['html_msg_filters']['pattern']) ) {
 				$patterns = $master->module_config['html_msg_filters']['pattern'];
 				$replaces = $master->module_config['html_msg_filters']['replace'];
-				$bbcode_filter = true;		
+				$bbcode_filter = true;
 			}
 			// Grab ranks
 			$ranks = $cache->obtain_ranks();
@@ -286,7 +286,7 @@ class display_posts {
 							'avatar' => '',
 							'rank_title' => '',
 							'rank_image' => '',
-							'rank_image_src' => '',	
+							'rank_image_src' => '',
 							'profile' => '',
 							'pm' => '',
 							'email' => '',
@@ -531,7 +531,7 @@ class display_posts {
 						'U_MSN' => $user_cache[$poster_id]['msn'],
 						'U_YIM' => $user_cache[$poster_id]['yim'],
 						'U_JABBER' => $user_cache[$poster_id]['jabber'],
-					
+
 					);
 				}
 				if ($display_post_buttons) {
@@ -568,7 +568,7 @@ class display_posts {
 			}
 			unset($topic_datas, $user_cache);
 		}
-		$news_desc = false;	
+		$news_desc = false;
 		$rules_info = array('forum_rules' => false, 'forum_rules_link' => false);
 		// In case we are listing category's children
 		if ($master->call['cat_forum']) {
@@ -627,7 +627,7 @@ class display_posts {
 				'YIM_IMG' => $user->img('icon_contact_yahoo', 'YIM'),
 				'JABBER_IMG' => $user->img('icon_contact_jabber', 'JABBER'),
 			);
-		}		
+		}
 		if ($display_post_buttons) {
 			$tpl_vars += array(
 				'QUOTE_IMG' => $user->img('icon_post_quote', 'REPLY_WITH_QUOTE'),

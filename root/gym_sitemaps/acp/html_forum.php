@@ -2,7 +2,7 @@
 /**
 *
 * @package phpBB SEO GYM Sitemaps
-* @version $id: html_forum.php - 17944 06-08-2009 09:44:27 - 2.0.RC5 dcz $
+* @version $Id$
 * @copyright (c) 2006 - 2009 www.phpbb-seo.com
 * @license http://opensource.org/osi3.0/licenses/lgpl-license.php GNU Lesser General Public License
 *
@@ -39,7 +39,7 @@ class html_forum {
 		global $config, $phpbb_seo, $user;
 		$config['sitename'] = utf8_normalize_nfc($config['sitename']);
 		$config['site_desc'] = utf8_normalize_nfc($config['site_desc']);
-		return array( 
+		return array(
 			'cache' => array(
  				'display_vars' => array(
 					'title'	=> 'HTML_CACHE',
@@ -71,7 +71,7 @@ class html_forum {
 					'html_forum_modrewrite' => 0,
 					'html_forum_modrtype' => 0,
 				),
-				'select' => array( 
+				'select' => array(
 					'html_forum_modrtype' => @$this->dyn_select['modrtype'],
 				),
 			),
@@ -127,7 +127,7 @@ class html_forum {
 					'html_forum_first' => 0,
 					'html_forum_news_first' => 1,
 				),
-				'select' => array( 
+				'select' => array(
 					'html_forum_sort' => @$this->dyn_select['sort'],
 					'html_forum_cat_sort' => @$this->dyn_select['sort'],
 					'html_forum_news_sort' => @$this->dyn_select['sort'],
@@ -190,10 +190,10 @@ class html_forum {
 						'html_forum_cat_news_ltopic' => array('lang' => 'HTML_FORUM_CAT_NEWS_LTOPIC', 'validate' => 'int:0:100', 'type' => 'text:4:4', 'explain' => true),
 						'html_forum_ltopic_exclude' => array('lang' => 'HTML_FORUM_LTOPIC_EXCLUDE', 'multiple_validate' => 'int', 'type' => 'custom', 'method' => 'select_multiple_string', 'explain' => true),
 						// form specific
-						'legend4'	=> 'HTML_FORUM_CONTENT',	
+						'legend4'	=> 'HTML_FORUM_CONTENT',
 						'html_forum_last_post' => array('lang' => 'HTML_FORUM_LAST_POST', 'validate' => 'string', 'type' => 'select', 'method' => 'select_string', 'explain' => true),
 						'html_forum_rules' => array('lang' => 'HTML_FORUM_RULES', 'validate' => 'string', 'type' => 'select', 'method' => 'select_string', 'explain' => true),
-						'html_forum_desc' => array('lang' => 'HTML_FORUM_DESC', 'validate' => 'string', 'type' => 'select', 'method' => 'select_string', 'explain' => true),	
+						'html_forum_desc' => array('lang' => 'HTML_FORUM_DESC', 'validate' => 'string', 'type' => 'select', 'method' => 'select_string', 'explain' => true),
 					),
 				),
 				'default' => array(
@@ -279,7 +279,7 @@ class html_forum {
 					'html_forum_sumarize' => 75,
 					'html_forum_sumarize_method' => 'words',
 				),
-				'select' => array( 
+				'select' => array(
 					'html_forum_sumarize_method' => @$this->dyn_select['sumarize_method'],
 					'html_forum_post_buttons' => @$this->dyn_select['gym_auth'],
 					'html_forum_allow_bbcode' => @$this->dyn_select['gym_auth'],

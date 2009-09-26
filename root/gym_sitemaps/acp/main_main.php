@@ -2,7 +2,7 @@
 /**
 *
 * @package phpBB SEO GYM Sitemaps
-* @version $id: main_main.php - 9165 06-08-2009 09:44:27 - 2.0.RC5 dcz $
+* @version $Id$
 * @copyright (c) 2006 - 2009 www.phpbb-seo.com
 * @license http://opensource.org/osi3.0/licenses/lgpl-license.php GNU Lesser General Public License
 *
@@ -34,7 +34,7 @@ class main_main {
 	* @access private
 	*/
 	function acp_module() {
-		return array( 
+		return array(
 			'cache' => array(
 			       	'display_vars' => array(
 					'title'	=> 'GYM_CACHE',
@@ -74,11 +74,11 @@ class main_main {
 					'gym_modrtype' => 0,
 					'gym_zero_dupe' => 0,
 				),
-				'select' => array( 
+				'select' => array(
 					'gym_modrtype' => @$this->dyn_select['modrtype'],
 				),
 			),
-			'gzip' => array( 
+			'gzip' => array(
 				'display_vars' => array(
 					'title'	=> 'GYM_GZIP',
 					'vars'	=> array(
@@ -93,7 +93,7 @@ class main_main {
 					'gym_gzip_level' => 6,
 					'gym_gzip_ext' => 1,
 				),
-				'select' => array( 
+				'select' => array(
 					'gym_gzip_level' => array(1 => 1, 2 => 2, 3 => 3, 4 => 4, 5 => 5, 6 => 6, 7 => 7, 8 => 8, 9 => 9),
 				),
 			),
@@ -124,7 +124,7 @@ class main_main {
 				'default' => array(
 					'gym_sort' => 'DESC',
 				),
-				'select' => array( 
+				'select' => array(
 					'gym_sort' => @$this->dyn_select['sort'],
 				),
 			),
@@ -162,18 +162,18 @@ class main_main {
 					'gym_override' => 1,
 					'gym_override_cache' => OVERRIDE_OTYPE,
 					'gym_override_modrewrite' => OVERRIDE_GLOBAL,
-					'gym_override_gzip' => OVERRIDE_GLOBAL,					
+					'gym_override_gzip' => OVERRIDE_GLOBAL,
 					'gym_override_limit' => OVERRIDE_OTYPE,
 					'gym_override_sort' => OVERRIDE_OTYPE,
-					'gym_override_pagination' => OVERRIDE_OTYPE,					
+					'gym_override_pagination' => OVERRIDE_OTYPE,
 				),
-				'select' => array( 
+				'select' => array(
 					'gym_override_cache' => @$this->dyn_select['override'],
 					'gym_override_modrewrite' => @$this->dyn_select['override'],
-					'gym_override_gzip' => @$this->dyn_select['override'],					
+					'gym_override_gzip' => @$this->dyn_select['override'],
 					'gym_override_limit' => @$this->dyn_select['override'],
 					'gym_override_sort' => @$this->dyn_select['override'],
-					'gym_override_pagination' => @$this->dyn_select['override'],					
+					'gym_override_pagination' => @$this->dyn_select['override'],
 				),
 			),
 			'main' => array(
@@ -189,7 +189,7 @@ class main_main {
 				'default' => array(
 					'gym_link_main' => 1,
 					'gym_link_index' => 1,
-					'gym_link_cat' => 1,					
+					'gym_link_cat' => 1,
 				),
 			),
 			'info' => array(
@@ -198,13 +198,13 @@ class main_main {
 				'actions' => array('main', 'cache', 'modrewrite', 'gzip', 'limit', 'sort', 'pagination', 'override'),
 				'mode' => 'main',
 				'module' => 'main',
-				'select' => array( 
+				'select' => array(
 					'gym_override_cache' => @$this->dyn_select['override'],
 					'gym_override_modrewrite' => @$this->dyn_select['override'],
-					'gym_override_gzip' => @$this->dyn_select['override'],					
+					'gym_override_gzip' => @$this->dyn_select['override'],
 					'gym_override_limit' => @$this->dyn_select['override'],
 					'gym_override_sort' => @$this->dyn_select['override'],
-					'gym_override_pagination' => @$this->dyn_select['override'],					
+					'gym_override_pagination' => @$this->dyn_select['override'],
 					'gym_sort' => @$this->dyn_select['sort'],
 					'gym_modrtype' => @$this->dyn_select['modrtype'],
 					'gym_gzip_level' => @$this->dyn_select['gzip_level'],

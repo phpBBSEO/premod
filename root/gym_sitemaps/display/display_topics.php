@@ -2,7 +2,7 @@
 /**
 *
 * @package phpBB SEO GYM Sitemaps
-* @version $id: display_topics.php - 19453 06-08-2009 09:44:27 - 2.0.RC5 dcz $
+* @version $Id$
 * @copyright (c) 2006 - 2009 www.phpbb-seo.com
 * @license http://opensource.org/osi3.0/licenses/lgpl-license.php GNU Lesser General Public License
 *
@@ -110,7 +110,7 @@ class display_topics {
 		if ($master->call['single_forum']) {
 			$sql_where .= $auth->acl_get('m_approve', $master->call['forum_id']) ? '' : ' AND t.topic_approved = 1';
 		} else {
-			// only admins and global moderators will see un-approved topics 
+			// only admins and global moderators will see un-approved topics
 			// in the forum they have access to.
 			$sql_where .= ($auth->acl_gets('a_') || $auth->acl_getf_global('m_')) ? '' : ' AND t.topic_approved = 1';
 		}
@@ -250,7 +250,7 @@ class display_topics {
 					'S_TOPIC_LOCKED' => ($row['topic_status'] == ITEM_LOCKED) ? true : false,
 					'S_TOPIC_MOVED' => ($row['topic_status'] == ITEM_MOVED) ? true : false,
 					'U_NEWEST_POST' => $unread_topic ? append_sid("{$phpbb_root_path}viewtopic.$phpEx", 'f=' .  $forum_id . '&amp;t=' . $topic_id . '&amp;view=unread#unread') : '',
-					
+
 					'U_VIEW_TOPIC' => $view_topic_url,
 					'U_VIEW_FORUM' => $view_forum_url,
 					'U_MCP_REPORT' => append_sid("{$phpbb_root_path}mcp.$phpEx", 'i=reports&amp;mode=reports&amp;f=' . $forum_id . '&amp;t=' . $topic_id, true, $user->session_id),
