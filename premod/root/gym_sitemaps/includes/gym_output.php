@@ -2,8 +2,8 @@
 /**
 *
 * @package phpBB SEO GYM Sitemaps
-* @version $id: gym_output.php - 13433 11-20-2008 11:43:24 - 2.0.RC1 dcz $
-* @copyright (c) 2006 - 2008 www.phpbb-seo.com
+* @version $Id$
+* @copyright (c) 2006 - 2009 www.phpbb-seo.com
 * @license http://opensource.org/osi3.0/licenses/lgpl-license.php GNU Lesser General Public License
 *
 */
@@ -168,7 +168,7 @@ class gym_output {
 		if ( defined('ADMIN_START') ) {
 			return;
 		}
-		// build cache file name 
+		// build cache file name
 		$file_name = ( !empty($this->options['module_sub']) ?  $this->options['module_sub'] : '' ) . trim(str_replace(array('&amp;', '/'), '-', $this->options['extra_params_full']),'-') . '-a' . $this->options['auth_param'];
 		if ($this->gym_master->gym_config['gym_cript_cache']) {
 			$file_name = md5( $file_name );
@@ -205,7 +205,7 @@ class gym_output {
 			$this->check_mod_since();
 			$this->cache_output();
 		}
-		
+
 		return;
 	}
 	/**
@@ -221,7 +221,7 @@ class gym_output {
 		return;
 	}
 	/**
-	* mem_usage() 
+	* mem_usage()
 	* @access private
 	*/
 	function mem_usage() {

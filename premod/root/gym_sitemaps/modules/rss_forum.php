@@ -2,7 +2,7 @@
 /**
 *
 * @package phpBB SEO GYM Sitemaps
-* @version $id: rss_forum.php - 36848 06-08-2009 09:44:27 - 2.0.RC5 dcz $
+* @version $Id$
 * @copyright (c) 2006 - 2009 www.phpbb-seo.com
 * @license http://opensource.org/osi3.0/licenses/lgpl-license.php GNU Lesser General Public License
 *

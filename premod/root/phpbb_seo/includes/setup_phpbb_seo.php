@@ -2,9 +2,9 @@
 /**
 *
 * @package Ultimate SEO URL phpBB SEO
-* @version $id: setup_phpbb_seo.php - 9649 06-03-2009 16:28:22 - 0.6.0 dcz $
+* @version $Id$
 * @copyright (c) 2006 - 2009 www.phpbb-seo.com
-* @license http://www.opensource.org/licenses/rpl.php RPL Public License
+* @license http://www.opensource.org/licenses/rpl1.5.txt Reciprocal Public License 1.5
 *
 */
 /**
@@ -75,7 +75,7 @@ class setup_phpbb_seo {
 		// Example :
 		//	$this->seo_delim['forum'] = '-mydelim'; // instead of the default "-f"
 
-		// ==> Static parts <== 
+		// ==> Static parts <==
 		// Can be overridden, requires .htaccess update.
 		// Example :
 		//	$this->seo_static['post'] = 'message'; // instead of the default "post"
@@ -155,12 +155,12 @@ class setup_phpbb_seo {
 				break;
 			default:
 				$this->seo_opt['zero_dupe']['do_redir_post'] = false;
-				break;	
+				break;
 		}
 		return $this->seo_opt['zero_dupe']['do_redir_post'];
 	}
 	/**
-	* Redirects if the uri sent does not match (fully) the 
+	* Redirects if the uri sent does not match (fully) the
 	* attended url
 	*/
 	function seo_chk_dupe($url = '', $uri = '', $path = '') {
@@ -247,5 +247,5 @@ class setup_phpbb_seo {
 		return 0;
 	}
 	// <-- Zero Duplicate
-} // End of the phpbb_seo_modules class 
+} // End of the phpbb_seo_modules class
 ?>

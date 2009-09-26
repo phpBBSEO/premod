@@ -2,8 +2,8 @@
 /**
 *
 * @package phpBB SEO GYM Sitemaps
-* @version $id: gym_common.php - 19332 12-17-2008 16:27:59 - 2.0.RC3 dcz $
-* @copyright (c) 2006 - 2008 www.phpbb-seo.com
+* @version $Id$
+* @copyright (c) 2006 - 2009 www.phpbb-seo.com
 * @license http://opensource.org/osi3.0/licenses/lgpl-license.php GNU Lesser General Public License
 *
 */
@@ -85,7 +85,7 @@ $lang = array_merge($lang, array(
 	'SEO_CACHE_NOT_FOUND' => 'File cache was not found.',
 	'SEO_CACHE_WRITABLE' => 'File cache is writeable.',
 	'SEO_CACHE_UNWRITABLE' => 'File cache is <b>not</b> writeable.  Please CHMOD the cache folder to 0777.',
-	
+
 	// Mod Rewrite type
 	'ACP_SEO_SIMPLE' => 'Simple',
 	'ACP_SEO_MIXED' => 'Intermediate',
@@ -110,7 +110,7 @@ $lang = array_merge($lang, array(
 	'GYM_FILE_CLEARED' => 'File(s) erased: ',
 	'GYM_CACHE_ACCESSED' => 'The caching folder was properly accessed, but no files were deleted: ',
 	'MODULE_CACHE_CLEARED' => 'ACP module cache cleared with success, if you just uploaded a module, it’s ACP will show up now.',
-	
+
 	// set defaults
 	'GYM_SETTINGS' => 'Settings',
 	'GYM_RESET_ALL' => 'Reset All',
@@ -141,7 +141,7 @@ $lang = array_merge($lang, array(
 	'GYM_OVERRIDE_GLOBAL' => 'Global',
 	'GYM_OVERRIDE_OTYPE' => 'Output Type',
 	'GYM_OVERRIDE_MODULE' => 'Module',
-	
+
 	// override messages
 	'GYM_OVERRIDED_GLOBAL' => 'This option is currently overridden at the top level (Main configuration)',
 	'GYM_OVERRIDED_OTYPE' => 'This option is currently overridden at the output type level',

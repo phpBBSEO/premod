@@ -2,7 +2,7 @@
 /**
 *
 * @package phpBB SEO GYM Sitemaps
-* @version $id: google_xml.php - 10473 06-08-2009 09:44:27 - 2.0.RC5 dcz $
+* @version $Id$
 * @copyright (c) 2006 - 2009 www.phpbb-seo.com
 * @license http://opensource.org/osi3.0/licenses/lgpl-license.php GNU Lesser General Public License
 *
@@ -51,7 +51,7 @@ class google_xml {
 	}
 	/**
 	* Initialize mod rewrite to handle multiple URL standards.
-	* Only one 'if' is required after this in THE loop to properly switch 
+	* Only one 'if' is required after this in THE loop to properly switch
 	* between the four types (none, advanced, mixed and simple).
 	* @access private
 	*/
@@ -171,8 +171,8 @@ class google_xml {
 						$cache->remove_file($cache->cache_dir . "data_gym_config_google_xml.$phpEx");
 						$this->gym_master->gym_error(500, '', __FILE__, __LINE__);
 					}
-					
-				}	
+
+				}
 			} else {
 				// Clear the cache to make sure the guilty url is not shown in the sitemapIndex
 				$cache->remove_file($cache->cache_dir . "data_gym_config_google_xml.$phpEx");

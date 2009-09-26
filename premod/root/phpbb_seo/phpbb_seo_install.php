@@ -2,9 +2,9 @@
 /**
 *
 * @package Ultimate SEO URL phpBB SEO
-* @version $id: phpbb_seo_install.php - 30846 06-03-2009 16:28:22 - 0.6.0 dcz $
+* @version $Id$
 * @copyright (c) 2006 - 2009 www.phpbb-seo.com
-* @license http://www.opensource.org/licenses/rpl.php RPL Public License
+* @license http://www.opensource.org/licenses/rpl1.5.txt Reciprocal Public License 1.5
 *
 */
 /*
@@ -87,7 +87,7 @@ class module {
 	*/
 	function create($module_type, $module_url, $selected_mod = false, $selected_submod = false) {
 		global $db, $config, $phpEx, $phpbb_root_path, $user;
-		$module = array( 
+		$module = array(
 			array(
 				'module_type'		=> 'install',
 				'module_title'		=> 'OVERVIEW',
@@ -252,7 +252,7 @@ class module {
 				$cat = $cat_ary['name'];
 				$l_cat = (!empty($user->lang['CAT_' . $cat])) ? $user->lang['CAT_' . $cat] : preg_replace('#_#', ' ', $cat);
 				$cat = strtolower($cat);
-				$url = $this->module_url . "?mode=$cat";	
+				$url = $this->module_url . "?mode=$cat";
 				if ($this->mode == $cat) {
 					$template->assign_block_vars('t_block1', array(
 						'L_TITLE'		=> $l_cat,
@@ -260,7 +260,7 @@ class module {
 						'U_TITLE'		=> $url,
 					));
 					if (is_array($this->module_ary[$this->id]['subs'])) {
-						$subs = $this->module_ary[$this->id]['subs']; 
+						$subs = $this->module_ary[$this->id]['subs'];
 						foreach ($subs as $option) {
 							$l_option = (!empty($user->lang['SUB_' . $option])) ? $user->lang['SUB_' . $option] : preg_replace('#_#', ' ', $option);
 							$option = strtolower($option);
@@ -273,7 +273,7 @@ class module {
 						}
 					}
 					if (is_array($this->module_ary[$this->id]['stages'])) {
-						$subs = $this->module_ary[$this->id]['stages']; 
+						$subs = $this->module_ary[$this->id]['stages'];
 						$matched = false;
 						foreach ($subs as $option) {
 							$l_option = (!empty($user->lang['STAGE_' . $option])) ? $user->lang['STAGE_' . $option] : preg_replace('#_#', ' ', $option);
@@ -666,7 +666,7 @@ class install_phpbb_seo extends module {
 			if ($purge_topic_table) {
 				if ($db_tools->sql_column_exists(TOPICS_TABLE, 'topic_url')) {
 					$db_tools->sql_column_remove(TOPICS_TABLE, 'topic_url');
-				}		
+				}
 			}
 			if (in_array($drop_index_name, $indexes)) {
 				$db_tools->sql_index_drop(TOPICS_TABLE, $drop_index_name);

@@ -2,9 +2,9 @@
 /**
 *
 * @package Ultimate SEO URL phpBB SEO
-* @version $id: acp_phpbb_seo.php - 1040 06-03-2009 16:28:22 - 0.6.0 dcz $
+* @version $Id$
 * @copyright (c) 2006 - 2009 www.phpbb-seo.com
-* @license http://www.opensource.org/licenses/rpl.php RPL Public License
+* @license http://www.opensource.org/licenses/rpl1.5.txt Reciprocal Public License 1.5
 *
 */
 

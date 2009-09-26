@@ -2,8 +2,8 @@
 /**
 *
 * @package phpBB SEO GYM Sitemaps
-* @version $id: gym_common.php - 23684 12-17-2008 16:27:59 - 2.0.RC3 dcz $
-* @copyright (c) 2006 - 2008 www.phpbb-seo.com
+* @version $Id$
+* @copyright (c) 2006 - 2009 www.phpbb-seo.com
 * @license http://opensource.org/osi3.0/licenses/lgpl-license.php GNU Lesser General Public License
 *
 */
@@ -86,8 +86,8 @@ $lang = array_merge($lang, array(
 	'SEO_CACHE_NOT_FOUND' => 'Le dossier du cache n’à pas été trouvé.',
 	'SEO_CACHE_WRITABLE' => 'Le dossier du cache dispose des permissions en écriture.',
 	'SEO_CACHE_UNWRITABLE' => 'Le dossier du cache ne dispose <b>pas</b> des permissions en écriture. Vous devez appliquer un CHMOD 0777 sur le dossier.',
-	
-	// Mod Rewrite 
+
+	// Mod Rewrite
 	'ACP_SEO_SIMPLE' => 'Simple',
 	'ACP_SEO_MIXED' => 'Intermédiaire',
 	'ACP_SEO_ADVANCED' => 'Avancé',
@@ -111,7 +111,7 @@ $lang = array_merge($lang, array(
 	'GYM_FILE_CLEARED' => 'Fichier(s) effacé(s) : ',
 	'GYM_CACHE_ACCESSED' => 'Le cache à vider ne contenait aucun élement, aucun fichier n’a donc été effacé dans : ',
 	'MODULE_CACHE_CLEARED' => 'Vidage du cache de configuration du module effectué, si vous venez d’uploader un module, son panneau de configuration sera désormais visible.',
-	
+
 	// set defaults
 	'GYM_SETTINGS' => 'Paramètres',
 	'GYM_RESET_ALL' => 'Tout réinitialiser',
@@ -142,7 +142,7 @@ $lang = array_merge($lang, array(
 	'GYM_OVERRIDE_GLOBAL' => 'Global',
 	'GYM_OVERRIDE_OTYPE' => 'Type de Rendu',
 	'GYM_OVERRIDE_MODULE' => 'Module',
-	
+
 	// override messages
 	'GYM_OVERRIDED_GLOBAL' => 'Cette option est actuellement écrasée par un paramétrage prioritaire au niveau global (Configuration générale)',
 	'GYM_OVERRIDED_OTYPE' => 'Cette option est actuellement écrasée par un paramétrage prioritaire au niveau du type de rendu',
