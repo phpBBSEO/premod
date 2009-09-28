@@ -247,7 +247,7 @@ class acp_phpbb_seo {
 		// We validate the complete config if whished
 		validate_config_vars($display_vars['vars'], $cfg_array, $error);
 		// Do not write values if there is an error
-		if (sizeof($error)) {
+		if (!empty($error)) {
 			$submit = false;
 		}
 		$additional_notes = '';
@@ -315,16 +315,23 @@ class acp_phpbb_seo {
 							include($phpbb_root_path . 'includes/db/db_tools.' . $phpEx);
 						}
 						$db_tools = new phpbb_db_tools($db);
+						$db_tools->db->sql_return_on_error(true);
 						if (!$db_tools->sql_column_exists(TOPICS_TABLE, 'topic_url')) {
 							$db_tools->sql_column_add(TOPICS_TABLE, 'topic_url', array('VCHAR', ''));
 						}
 						$additional_notes = sprintf($user->lang['SYNC_TOPIC_URL_NOTE'], '<a href="' . $phpbb_seo->seo_path['phpbb_url'] . 'phpbb_seo/sync_url.' . $phpEx . '" onclick="window.open(this.href); return false;">', '</a>');
+						if ($db_tools->db->sql_error_triggered) {
+							$error[] = '<b>' . $user->lang['sql_rewrite'] . '</b> : ' . $user->lang['SEO_SQL_ERROR'] . ' [ ' . $db_tools->db->sql_layer . ' ] : ' . $db_tools->db->sql_error_returned['message'] . ' [' . $db_tools->db->sql_error_returned['code'] . ']' . '<br/>' . $user->lang['SEO_SQL_TRY_MANUALLY'] . '<br/>' . $db_tools->db->sql_error_sql;
+							$submit = false;
+						}
+						$db_tools->db->sql_return_on_error(false);
 					}
 					// Let's make sure the proper index is added for the no dupe (in case it is installed and activated)
 					if ($config_name === 'no_dupe_on' && $config_value == 1 && !$phpbb_seo->seo_opt['no_dupe']['on']) {
 						if (!class_exists('phpbb_db_tools')) {
 							include($phpbb_root_path . 'includes/db/db_tools.' . $phpEx);
 						}
+						$db->sql_return_on_error(true);
 						// in case we already started the phpbb_db_tools class above
 						if (empty($db_tools)) {
 							$db_tools = new phpbb_db_tools($db);
@@ -343,11 +350,19 @@ class acp_phpbb_seo {
 							@ini_set('memory_limit', '128M');
 							$db_tools->sql_create_index(TOPICS_TABLE, $add_index_name, array('topic_last_post_id'));
 						}
+						if ($db_tools->db->sql_error_triggered) {
+							$error[] = '<b>' . $user->lang['no_dupe'] . '</b> : ' . $user->lang['SEO_SQL_ERROR'] . ' [ ' . $db_tools->db->sql_layer . ' ] : ' . $db_tools->db->sql_error_returned['message'] . ' [' . $db_tools->db->sql_error_returned['code'] . ']' . '<br/>' . $user->lang['SEO_SQL_TRY_MANUALLY'] . '<br/>' . $db_tools->db->sql_error_sql;
+							$submit = false;
+						}
+						$db_tools->db->sql_return_on_error(false);
 					}
 				} elseif ($mode == 'extented') {
 					set_config($config_name, $config_value);
 				}
 			}
+		}
+		if (sizeof($error)) {
+			$submit = false;
 		}
 		if ($submit) {
 			if ($mode == 'htaccess') {
