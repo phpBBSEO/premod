@@ -151,6 +151,8 @@ $lang = array_merge($lang, array(
 	'UN_SEO_INSTALL_CONGRATS_EXPLAIN'	=> '<p>You have now successfully uninstalled the %1$s phpBB3 SEO mod rewrite %2$s.<p>
 	<p>This will not desactivate URL rewriting on your board as long as the phpBB files are still modded.</p>',
 	'SEO_VALIDATE_INFO'	=> 'Validation Info :',
+	'SEO_SQL_ERROR' => 'SQL error',
+	'SEO_SQL_TRY_MANUALLY' => 'The db user does not seems to have enough rights to run the required SQL query, please run it manually (phpMyadmin) :',
 	// Security
 	'SEO_LOGIN'		=> 'The board requires you to be registered and logged in to view this page.',
 	'SEO_LOGIN_ADMIN'	=> 'The board requires you to be logged in as admin to view this page.<br/>Your session has been destroyed for security purposes.',

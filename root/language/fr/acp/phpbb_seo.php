@@ -148,9 +148,11 @@ $lang = array_merge($lang, array(
 	<h2>Générer un .htaccess personnalisé</h2>
 	<p>Une fois que vous aurez procédé aux réglages ci dessus, vous pourrez utiliser une interface simple pour générer votre .htaccess personnalisé et l’enregistrer sur votre serveur.</p>',
 	'UN_SEO_INSTALL_CONGRATS'	=> 'Le module d’administration phpBB SEO à été désinstallé.',
-	'UN_SEO_INSTALL_CONGRATS_EXPLAIN'	=> '<p>>Vous avez correctement désinstallé le mod rewrite phpBB3 SEO  %1$s %2$s.<p>
+	'UN_SEO_INSTALL_CONGRATS_EXPLAIN'	=> '<p>Vous avez correctement désinstallé le mod rewrite phpBB3 SEO  %1$s %2$s.<p>
 	<p> Cette opération ne désactivera pas la réécriture d’URLs sur votre forum tant que les fichiers de phpBB ne seront pas modifiés.</p>',
 	'SEO_VALIDATE_INFO'	=> 'Validation :',
+	'SEO_SQL_ERROR' => 'Erreur lors de la requête SQL',
+	'SEO_SQL_TRY_MANUALLY' => 'L’utilisateur SQL semble ne pas avoir les droit suffisant pour effectuer la requête nécéssaire, veuillez la lancer manuellement (phpMyadmin) :',
 	// Security
 	'SEO_LOGIN'		=> 'Vous devez être enregistré pour pouvoir accéder à cette page.',
 	'SEO_LOGIN_ADMIN'	=> 'Vous devez être enregistré en tant qu’administrateur pour pouvoir accéder à cette page.<br/>Votre session à été détruite pour des raisons de sécurité.',
