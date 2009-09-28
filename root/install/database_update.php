@@ -893,6 +893,8 @@ function database_update_info()
 				TOPICS_TABLE			=> array(
 					'topic_lpid'		=> array('topic_last_post_id'),
 				),
+			),
+		),
 		// Changes from 3.0.6-RC1 to 3.0.6-RC2
 		'3.0.6-RC1'		=> array(
 			'drop_keys'		=> array(
