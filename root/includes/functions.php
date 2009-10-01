@@ -4536,7 +4536,6 @@ class seo_meta {
 	* Returns a coma separated keyword list
 	*/
 	function make_keywords($text, $decode_entities = false) {
-		global $phpbb_root_path, $phpEx;
 		static $stop_words = array();
 		$keywords = '';
 		$num = 0;
@@ -4545,7 +4544,7 @@ class seo_meta {
 		$text = explode(' ', trim($text), 50);
 		if ($this->mconfig['check_ignore']) {
 			if (empty($stop_words)) {
-				global $user, $phpEx;
+				global $phpbb_root_path, $user, $phpEx;
 				$words = array();
 				if (file_exists("{$user->lang_path}{$user->lang_name}/search_ignore_words.$phpEx")){
 					// include the file containing ignore words
