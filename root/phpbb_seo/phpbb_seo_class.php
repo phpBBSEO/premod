@@ -57,6 +57,9 @@ class phpbb_seo extends setup_phpbb_seo {
 	*/
 	function phpbb_seo() {
 		global $phpEx, $config, $phpbb_root_path;
+		// fix for an interesting bug with parse_str http://bugs.php.net/bug.php?id=48697
+		// and apparently, the bug is still here in php5.3
+		@ini_set("mbstring.internal_encoding", 'UTF-8');
 		// Nothing should be edited here, please do your custom settings in the
 		// phpbb_seo/includes/phpbb_seo_modules.php instead to make your updates easier.
 		// reset the rewrite_method for $phpbb_root_path
