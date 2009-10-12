@@ -65,6 +65,43 @@
 ##############################################################
 ## MOD History:
 ##
+##	2009-10-XX - 3.0.6
+##		- All mods Updated to comply with phpBB 3.0.6.
+##		- GYM Sitemaps & RSS 2.0.0 :
+##			- Fixed : GYM linking when used standalone,
+##			- Fixed : Typos in language paks,
+##			- Fixed : Bug in the last topic listing dealing with global announcements,
+##			- Fixed : Bad calls to gym_sitemaps::gym_error,
+##			- Fixed : Topic tracking on last active topics,
+##			- Fixed : minor issue with passworded forums,
+##			- Fixed : Send a 404 when no forum are readable / viewable by the user,
+##			- Fixed : Standalone usage bug dealing with the no duplicate display,
+##			- Fixed : RSS parser when html is activated (preserve double escaped as escaped),
+##			- Added : Bot auth support for sitemaps,
+##			- Added : Last post link on last topic view,
+##			- Added : No html option for rss feeds,
+##			- SEOed the prosilver templates, left col comes first now, + other display enhancements,
+##			- Removed deprecated & usage (php5.3.0) when starting the module classes.
+##		- Utlimate SEO URL 0.6.2 :
+##			- Fixed : PM pop up with virtual root option,
+##			- Fixed : Paginated search when searching on several forums,
+##			- Fixed : For real the port != 80 case!,
+##			- Fixed : Issues with global announcements on active topic listing,
+##			- Fixed : $custom_profile_url usage,
+##			- Added : Extended ACP menu for new $config based options,
+##			- Added : Open external links in new windows (configurable in the extended menu),
+##			- Added : Error message for when the db user does not have enough right to alter tables (sql rewriting & no dupe),
+##			- Added : Rewriterules to handle dummy clients who do not understand base href tags in addition to the new PHPBB_USE_BOARD_URL_PATH constant activation,
+##			- Made req_file info available in setup_phpbb_seo.php,
+##			- parse_string is now used again, with a proper stripslahe handling and a fix for http://www.phpbb.com/bugs/phpbb3/52315
+#
+##		- zero duplicate 0.6.2 :
+##			- Added : Canonical element to forum index, forums, topics, posts, user, groups and leaders pages,
+##		- no duplicate 0.6.2 :
+##			- Some code reorganization.
+##		- Meta tags 0.4.0 :
+##			- Fixed : Bad path when calling search_ignore_words.php,
+##			- Added : Various options that can be configurable in the extended acp menu when the mod is not used in standalone mode,
 ##	2009-06-05 - 3.0.5
 ##		- All mods Updated to comply with phpBB 3.0.5.
 ##		- GYM Sitemaps & RSS 2.0.RC5 :
@@ -236,8 +273,8 @@ The phpbb_seo_class.php file does not hold static part and delimiters customisat
 
 Once you will have updated, you will have to refresh your theme's cache as well as phpBB's cache (ACP => STYLE, Themes => Refresh).
 
-We have included the mod GYM Sitemap & RSS, but we kept the install separated
-see bellow to install.
+We have included the mod GYM Sitemap & RSS, but we kept the install separated.
+See bellow to install.
 
 To update GYM from all 2.0.x (phpBB3) versions you will have to upload all files in the root/ directory of the archive to your phpBB/ ftp directory, after you will have taken care manually of the eventual code change you would have implemented in the template files (directory phpBB/styles/, .html, .js and .xsl) added by the module.
 Once done, just lunch the update script (example.com/phpBB/gym_sitemaps/gym_install.php).
@@ -369,7 +406,7 @@ new forum URL.
 If not, the new forum URL will not be cached and the default one will be used (forum-title-fxx).
 
 ________________________________________
-Custom replacement for title injection :
+Custom replacement for title injection : http://www.phpbb-seo.com/en/phpbb-mod-rewrite/custom-title-injection-t4709.html
 ________________________________________
 
 The phpbb_seo class handles de-accentuation for most of the occidental characters, but you could need to handle more cases for your project.
@@ -494,11 +531,9 @@ http://www.phpbb-seo.com/en/gym-sitemaps-rss/google-yahoo-msn-sitemaps-rss-t2734
 
 PLEASE NOTE : 
 
-	GYM Sitemaps & RSS is released at a RC stage, the install left separated from the regular install.
-	It's up to you to use it or not, but you should know that at this stage, some feature may not be implemented and bugs
-	may still be found.
-	And, even more important, GYM sitemaps and RSS is likely to be updated before the premod, it will be up to you to
-	keep it up to date meanwhile, you can be notified about updates by subscribing to the release thread while logged in :
+	The install left separated from the regular install, so it's up to you to use it or not.
+	GYM sitemaps and RSS is likely to be updated before the premod, it will be up to you to
+	keep it up to date meanwhile, you can be notified about updates by subscribing to the release thread while logged at :
 	http://www.phpbb-seo.com/en/gym-sitemaps-rss/google-yahoo-msn-sitemaps-rss-t2734.html
 
 
