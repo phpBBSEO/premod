@@ -97,6 +97,10 @@ $lang = array_merge($lang, array(
 	'SEO_META_FILE_FILTER_EXPLAIN' => 'Coma separated list of physical php script file name that should not be indexed (robots:noindex,follow). Example : ucp,mcp',
 	'SEO_META_GET_FILTER' => '_GET filter',
 	'SEO_META_GET_FILTER_EXPLAIN' => 'Coma separated list of _GET variable that should not be indexed (robots:noindex,follow). Example : style,hilit,sid',
+	'SEO_META_ROBOTS' => 'Meta Robots',
+	'SEO_META_ROBOTS_EXPLAIN' => 'The Meta Robots tag tells bots how to index your pages. It is set by default to "index,follow", which allow bots to index and cache your pages and to follow links in them. Unactivates the meta Robots tag if empty.<br/><b style="color:red;">Attention :</b>:<br/>This tag is sensible, if you where to use "noindex", none of your pages would be indexed.',
+	'SEO_META_NOARCHIVE' => 'Noarchive Meta Robots',
+	'SEO_META_NOARCHIVE_EXPLAIN' => 'The Noarchive Meta Robots tag tells bots if they can or not cache the page. It only concern caching, it has no relation with indexing and SERPs of the page.<br/>You can here enter a coma separated list of forum IDs that will have the "noarchive" option added to theire meta robots.<br/>This feature can be handy for example when you have some forums opened to bots but closed to guests. Adding the "noarchive" option to them will prevent guest from accessing content through the search engine cache, while the forum and its topic will still appear in SERPs.',
 	// Install
 	'SEO_INSTALL_PANEL'	=> 'phpBB SEO Installation Panel',
 	'SEO_ERROR_INSTALL'	=> 'An error occured during the installtion process. Uninstall once is safer before you retry.',
