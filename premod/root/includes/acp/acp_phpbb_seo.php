@@ -216,10 +216,12 @@ class acp_phpbb_seo {
 						'seo_meta_keywords_limit' => array('lang' => 'SEO_META_KEYWORDS_LIMIT', 'validate' => 'int:5:40', 'type' => 'text:3:4', 'explain' => true, 'default' => 15),
 						'seo_meta_min_len' => array('lang' => 'SEO_META_MIN_LEN', 'validate' => 'int:0:10', 'type' => 'text:3:4', 'explain' => true, 'default' => 2),
 						'seo_meta_check_ignore' => array('lang' => 'SEO_META_CHECK_IGNORE', 'validate' => 'bool', 'type' => 'radio:enabled_disabled', 'explain' => true, 'default' => 0),
-						'seo_meta_lang' =>  array('lang' => 'SEO_META_LANG', 'validate' => 'lang', 'type' => 'select', 'function' => 'language_select', 'params' => array('{CONFIG_VALUE}'), 'explain' => true,  'default' => $config['default_lang']),
+						'seo_meta_lang' =>  array('lang' => 'SEO_META_LANG', 'validate' => 'lang', 'type' => 'select', 'method' => 'language_select', 'params' => array('{CONFIG_VALUE}'), 'explain' => true,  'default' => $config['default_lang']),
 						'seo_meta_copy' =>  array('lang' => 'SEO_META_COPY', 'validate' => 'string:0:225', 'type' => 'text:25:150', 'explain' => true, 'default' => $config['sitename']),
 						'seo_meta_file_filter' =>  array('lang' => 'SEO_META_FILE_FILTER', 'validate' => 'string:0:225', 'type' => 'text:25:150', 'explain' => true, 'default' => 'ucp'),
 						'seo_meta_get_filter' =>  array('lang' => 'SEO_META_GET_FILTER', 'validate' => 'string:0:225', 'type' => 'text:25:150', 'explain' => true, 'default' => 'style,hilit,sid'),
+						'seo_meta_robots' =>  array('lang' => 'SEO_META_ROBOTS', 'validate' => 'string:0:225', 'type' => 'text:25:150', 'explain' => true, 'default' => 'index,follow'),
+						'seo_meta_noarchive' =>  array('lang' => 'SEO_META_NOARCHIVE', 'validate' => 'string:0:225', 'type' => 'text:25:150', 'explain' => true, 'default' => ''),
 					);
 				}
 				// install if necessary
@@ -985,6 +987,13 @@ class acp_phpbb_seo {
 		// Keep a backup of the current settings
 		@copy($file, $file . '.current');
 		return true;
+	}
+	/**
+	* Pick a language, any language ... or no language
+	*/
+	function language_select($default = '') {
+		global $user;
+		return '<option value="">' . $user->lang['DISABLED'] . '</option>' . language_select($default);
 	}
 } // End of acp class
 ?>
