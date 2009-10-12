@@ -673,7 +673,7 @@ class acp_phpbb_seo {
 			}
 			// fix for dumb clients unable to deal with base href
 			$htaccess_tpl .= '<b style="color:blue"># FIX RELATIVE PATHS : FILES</b>' . "\n";
-			$htaccess_tpl .= '<b style="color:green">RewriteRule</b> ^{WIERD_SLASH}{PHPBB_LPATH}.+/(style\.php|ucp\.php|mcp\.php|faq\.php)$ {DEFAULT_SLASH}{PHPBB_RPATH}$1 [QSA,L,NC,R=301]' . "\n";
+			$htaccess_tpl .= '<b style="color:green">RewriteRule</b> ^{WIERD_SLASH}{PHPBB_LPATH}.+/(style\.{PHP_EX}|ucp\.{PHP_EX}|mcp\.{PHP_EX}|faq\.{PHP_EX}|download/file.{PHP_EX})$ {DEFAULT_SLASH}{PHPBB_RPATH}$1 [QSA,L,NC,R=301]' . "\n";
 			$htaccess_tpl .= '<b style="color:blue"># FIX RELATIVE PATHS : IMAGES</b>' . "\n";
 			$htaccess_tpl .= '<b style="color:green">RewriteRule</b> ^{WIERD_SLASH}{PHPBB_LPATH}.+/(styles/.*|images/.*)/$ {DEFAULT_SLASH}{PHPBB_RPATH}$1 [QSA,L,NC,R=301]' . "\n";
 			$htaccess_tpl .= '<b style="color:blue"># END PHPBB PAGES' . "\n";
