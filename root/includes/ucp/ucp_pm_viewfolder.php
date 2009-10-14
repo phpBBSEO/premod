@@ -2,7 +2,7 @@
 /**
 *
 * @package ucp
-* @version $Id: ucp_pm_viewfolder.php 10138 2009-09-11 14:38:23Z Kellanved $
+* @version $Id: ucp_pm_viewfolder.php 10204 2009-10-04 11:08:12Z acydburn $
 * @copyright (c) 2005 phpBB Group
 * @license http://opensource.org/licenses/gpl-license.php GNU Public License
 *
@@ -432,7 +432,6 @@ function get_pm_from($folder_id, $folder, $user_id)
 		'TOTAL_MESSAGES'	=> (($pm_count == 1) ? $user->lang['VIEW_PM_MESSAGE'] : sprintf($user->lang['VIEW_PM_MESSAGES'], $pm_count)),
 
 		'POST_IMG'		=> (!$auth->acl_get('u_sendpm')) ? $user->img('button_topic_locked', 'POST_PM_LOCKED') : $user->img('button_pm_new', 'POST_NEW_PM'),
-		'L_NO_MESSAGES'	=> (!$auth->acl_get('u_sendpm')) ? $user->lang['NO_AUTH_SEND_MESSAGE'] : $user->lang['NO_MESSAGES'],
 
 		'S_NO_AUTH_SEND_MESSAGE'	=> !$auth->acl_get('u_sendpm'),
 

@@ -2,7 +2,7 @@
 /**
 *
 * @package acp
-* @version $Id: acp_profile.php 9916 2009-08-03 15:46:56Z Kellanved $
+* @version $Id: acp_profile.php 10216 2009-10-07 14:54:10Z toonarmy $
 * @copyright (c) 2005 phpBB Group
 * @license http://opensource.org/licenses/gpl-license.php GNU Public License
 *
@@ -509,6 +509,14 @@ class acp_profile
 						// Get the number of options if this key is 'field_maxlen'
 						$var = request_var('field_default_value', 0);
 					}*/
+					else if ($field_type == FIELD_INT && $key == 'field_default_value')
+					{
+						// Permit an empty string
+						if (request_var('field_default_value', '') === '')
+						{
+							$var = '';
+						}
+					}
 
 					$cp->vars[$key] = $var;
 				}

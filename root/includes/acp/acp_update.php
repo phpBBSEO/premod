@@ -2,7 +2,7 @@
 /**
 *
 * @package acp
-* @version $Id: acp_update.php 10154 2009-09-16 14:37:17Z acydburn $
+* @version $Id: acp_update.php 10195 2009-09-29 14:48:24Z acydburn $
 * @copyright (c) 2005 phpBB Group
 * @license http://opensource.org/licenses/gpl-license.php GNU Public License
 *
@@ -38,6 +38,11 @@ class acp_update
 		$errno = 0;
 
 		$info = obtain_latest_version_info(request_var('versioncheck_force', false), true);
+
+		if ($info === false)
+		{
+			trigger_error('VERSIONCHECK_FAIL', E_USER_WARNING);
+		}
 
 		$info = explode("\n", $info);
 		$latest_version = trim($info[0]);
