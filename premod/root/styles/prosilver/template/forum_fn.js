@@ -55,8 +55,11 @@ function jumpto() {
 *  in a XHTML 1.x compliant way.
 */
 function phpbb_seo_href() {
-	var current_domain = document.domain;
+	var current_domain = document.domain.toLowerCase();
 	if (!current_domain || !document.getElementsByTagName) return;
+	if (seo_external_sub && current_domain.indexOf('.') >= 0) {
+		current_domain = current_domain.replace(new RegExp(/^[a-z0-9_-]+\.([a-z0-9_-]+\.([a-z]{2,6}|[a-z]{2,3}\.[a-z]{2,3}))$/i), '$1');
+	}
 	if (seo_ext_classes) {
 		var extclass = new RegExp("(^|\\s)(" + seo_ext_classes + ")(\\s|$)");
 	}

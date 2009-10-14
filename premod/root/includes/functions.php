@@ -3966,6 +3966,7 @@ function page_header($page_title = '', $display_online_list = true, $item_id = 0
 		'SEO_EXT_PAGE' => $phpbb_seo->seo_ext['pagination'],
 		'SEO_CANONICAL_URL' => $phpbb_seo->seo_path['canonical'],
 		'SEO_EXTERNAL' => !empty($config['seo_ext_links']) ? 'true' : 'false',
+		'SEO_EXTERNAL_SUB' => !empty($config['seo_ext_subdomain']) ? 'true' : 'false',
 		'SEO_EXT_CLASSES' => !empty($config['seo_ext_classes']) ? "'" . preg_replace('`[^a-z0-9_|-]+`', '', str_replace(',', '|', trim($config['seo_ext_classes'], ', '))) . "'" : 'false',
 		'SEO_HASHFIX' => $phpbb_seo->seo_opt['url_rewrite'] && $phpbb_seo->seo_opt['virtual_folder'] ? 'true' : 'false',
 	));

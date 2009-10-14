@@ -202,6 +202,7 @@ class acp_phpbb_seo {
 					'vars'	=> array(
 						'legend1' => 'SEO_EXTERNAL_LINKS',
 						'seo_ext_links' => array('lang' => 'SEO_EXTERNAL_LINKS', 'validate' => 'bool', 'type' => 'radio:enabled_disabled', 'explain' => true, 'default' => 1),
+						'seo_ext_subdomain' => array('lang' => 'SEO_EXTERNAL_SUBDOMAIN', 'validate' => 'bool', 'type' => 'radio:yes_no', 'explain' => true, 'default' => 0),
 						'seo_ext_classes' =>  array('lang' => 'SEO_EXTERNAL_CLASSES', 'validate' => 'string', 'type' => 'text:25:150', 'explain' => true, 'default' => ''),
 					),
 				);
