@@ -2,7 +2,7 @@
 /**
 *
 * @package mcp
-* @version $Id: mcp_main.php 9905 2009-08-01 12:28:50Z acydburn $
+* @version $Id: mcp_main.php 10196 2009-09-29 14:51:58Z acydburn $
 * @copyright (c) 2005 phpBB Group
 * @license http://opensource.org/licenses/gpl-license.php GNU Public License
 *
@@ -813,7 +813,14 @@ function mcp_delete_topic($topic_ids)
 
 		foreach ($data as $topic_id => $row)
 		{
-			add_log('mod', $row['forum_id'], $topic_id, 'LOG_DELETE_' . ($row['topic_moved_id'] ? 'SHADOW_' : '') . 'TOPIC', $row['topic_title']);
+			if ($row['topic_moved_id'])
+			{
+				add_log('mod', $row['forum_id'], $topic_id, 'LOG_DELETE_SHADOW_TOPIC', $row['topic_title']);
+			}
+			else
+			{
+				add_log('mod', $row['forum_id'], $topic_id, 'LOG_DELETE_TOPIC', $row['topic_title'], $row['topic_first_poster_name']);
+			}
 		}
 
 		$return = delete_topics('topic_id', $topic_ids);
@@ -897,7 +904,8 @@ function mcp_delete_post($post_ids)
 
 		foreach ($post_data as $id => $row)
 		{
-			add_log('mod', $row['forum_id'], $row['topic_id'], 'LOG_DELETE_POST', $row['post_subject']);
+			$post_username = ($row['poster_id'] == ANONYMOUS && !empty($row['post_username'])) ? $row['post_username'] : $row['username'];
+			add_log('mod', $row['forum_id'], $row['topic_id'], 'LOG_DELETE_POST', $row['post_subject'], $post_username);
 		}
 
 		// Now delete the posts, topics and forums are automatically resync'ed

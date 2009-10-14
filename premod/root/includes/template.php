@@ -2,7 +2,7 @@
 /**
 *
 * @package phpBB3
-* @version $Id: template.php 10150 2009-09-16 08:11:52Z nickvergessen $
+* @version $Id: template.php 10217 2009-10-09 11:12:37Z acydburn $
 * @copyright (c) 2005 phpBB Group, sections (c) 2001 ispi of Lincoln Inc
 * @license http://opensource.org/licenses/gpl-license.php GNU Public License
 *
@@ -152,6 +152,7 @@ class template
 	function destroy()
 	{
 		$this->_tpldata = array('.' => array(0 => array()));
+		$this->_rootref = &$this->_tpldata['.'][0];
 	}
 
 	/**
@@ -248,8 +249,13 @@ class template
 	{
 		global $user, $phpEx, $config;
 
+		if (!isset($this->filename[$handle]))
+		{
+			trigger_error("template->_tpl_load(): No file specified for handle $handle", E_USER_ERROR);
+		}
+
 		$filename = $this->cachepath . str_replace('/', '.', $this->filename[$handle]) . '.' . $phpEx;
-		$this->files_template[$handle] = $user->theme['template_id'];
+		$this->files_template[$handle] = (isset($user->theme['template_id'])) ? $user->theme['template_id'] : 0;
 
 		$recompile = false;
 		if (!file_exists($filename) || @filesize($filename) === 0)

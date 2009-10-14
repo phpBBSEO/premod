@@ -1,7 +1,7 @@
 <?php
 /**
 * @package ucp
-* @version $Id: ucp_pm.php 9636 2009-06-20 18:45:16Z acydburn $
+* @version $Id: ucp_pm.php 10204 2009-10-04 11:08:12Z acydburn $
 * @copyright (c) 2005 phpBB Group
 * @license http://opensource.org/licenses/gpl-license.php GNU Public License
 *
@@ -122,6 +122,7 @@ class ucp_pm
 					// trigger_error('NO_AUTH_SEND_MESSAGE');
 					$template->assign_vars(array(
 						'S_NO_AUTH_SEND_MESSAGE'	=> true,
+						'S_COMPOSE_PM_VIEW'			=> true,
 					));
 
 					$tpl_file = 'ucp_pm_viewfolder';

@@ -2,7 +2,7 @@
 /**
 *
 * @package ucp
-* @version $Id: ucp_pm_compose.php 10186 2009-09-25 08:41:47Z nickvergessen $
+* @version $Id: ucp_pm_compose.php 10208 2009-10-04 18:03:19Z acydburn $
 * @copyright (c) 2005 phpBB Group
 * @license http://opensource.org/licenses/gpl-license.php GNU Public License
 *
@@ -811,7 +811,7 @@ function compose_pm($id, $mode, $action)
 	}
 
 	// Decode text for message display
-	$bbcode_uid = (($action == 'quote' || $action == 'forward') && !$preview && !$refresh && !sizeof($error)) ? $bbcode_uid : $message_parser->bbcode_uid;
+	$bbcode_uid = (($action == 'quote' || $action == 'forward') && !$preview && !$refresh) ? $bbcode_uid : $message_parser->bbcode_uid;
 
 	$message_parser->decode_message($bbcode_uid);
 

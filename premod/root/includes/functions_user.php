@@ -2,7 +2,7 @@
 /**
 *
 * @package phpBB3
-* @version $Id: functions_user.php 10099 2009-09-04 12:04:30Z bantu $
+* @version $Id: functions_user.php 10214 2009-10-05 17:54:55Z acydburn $
 * @copyright (c) 2005 phpBB Group
 * @license http://opensource.org/licenses/gpl-license.php GNU Public License
 *
@@ -2832,11 +2832,11 @@ function group_user_del($group_id, $user_id_ary = false, $username_ary = false, 
 
 	if ($config['coppa_enable'])
 	{
-		$group_order = array('ADMINISTRATORS', 'GLOBAL_MODERATORS', 'REGISTERED_COPPA', 'REGISTERED', 'BOTS', 'GUESTS');
+		$group_order = array('ADMINISTRATORS', 'GLOBAL_MODERATORS', 'NEWLY_REGISTERED', 'REGISTERED_COPPA', 'REGISTERED', 'BOTS', 'GUESTS');
 	}
 	else
 	{
-		$group_order = array('ADMINISTRATORS', 'GLOBAL_MODERATORS', 'REGISTERED', 'BOTS', 'GUESTS');
+		$group_order = array('ADMINISTRATORS', 'GLOBAL_MODERATORS', 'NEWLY_REGISTERED', 'REGISTERED', 'BOTS', 'GUESTS');
 	}
 
 	// We need both username and user_id info

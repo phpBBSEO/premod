@@ -2,7 +2,7 @@
 /**
 *
 * @package phpBB3
-* @version $Id: functions_profile_fields.php 9788 2009-07-19 00:20:03Z toonarmy $
+* @version $Id: functions_profile_fields.php 10216 2009-10-07 14:54:10Z toonarmy $
 * @copyright (c) 2005 phpBB Group
 * @license http://opensource.org/licenses/gpl-license.php GNU Public License
 *
@@ -624,7 +624,7 @@ class custom_profile
 			}
 			else
 			{
-				if (!$preview && isset($user->profile_fields[$user_ident]) && is_null($user->profile_fields[$user_ident]))
+				if (!$preview && array_key_exists($user_ident, $user->profile_fields) && is_null($user->profile_fields[$user_ident]))
 				{
 					$value = NULL;
 				}
