@@ -108,7 +108,7 @@ function obtain_gym_links($gym_links = array()) {
 	$board_url = $_phpbb_seo ? $phpbb_seo->seo_path['phpbb_url'] : generate_board_url() . '/';
 	$gym_config = array();
 	$cache_file = '_gym_links_' . $user->data['user_lang'];
-	$gym_link_tpl = '<a href="%1$s" title="%3$s"><img src="' . $board_url . 'gym_sitemaps/images/%2$s" alt="%3$s"/>&nbsp;%4$s</a>&nbsp;';
+	$gym_link_tpl = '<a href="%1$s" title="%3$s" class="gym"><img src="' . $board_url . 'gym_sitemaps/images/%2$s" alt="%3$s"/>&nbsp;%4$s</a>&nbsp;';
 	if (($links = $cache->get($cache_file)) === false) {
 		obtain_gym_config('main', $gym_config);
 		$user->add_lang('gym_sitemaps/gym_common');

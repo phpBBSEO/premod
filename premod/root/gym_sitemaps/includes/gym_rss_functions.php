@@ -21,7 +21,7 @@ function get_gym_links($gym_config) {
 	$links = array();
 	$_phpbb_seo = !empty($phpbb_seo);
 	$board_url = $_phpbb_seo ? $phpbb_seo->seo_path['phpbb_url'] : generate_board_url() . '/';
-	$gym_link_tpl = '<a href="%1$s" title="%3$s"><img src="' . $board_url . 'gym_sitemaps/images/%2$s" alt="%3$s"/>&nbsp;%3$s</a>';
+	$gym_link_tpl = '<a href="%1$s" title="%3$s" class="gym"><img src="' . $board_url . 'gym_sitemaps/images/%2$s" alt="%3$s"/>&nbsp;%3$s</a>';
 	$google_threshold = max(1, (int) $gym_config['google_threshold']);
 	//compute guest auth
 	$cache_file = '_gym_auth_guests_forum';
