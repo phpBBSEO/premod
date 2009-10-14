@@ -960,21 +960,21 @@ $maction_param =
 	/**
 	*  check_cache_folder Validates the cache folder status
 	*/
-	function check_cache_folder($cache_dir, $msg = TRUE) {
+	function check_cache_folder($cache_dir, $msg = true) {
 		global $user;
-		$exists = $write = FALSE;
+		$exists = $write = false;
 		$cache_msg = '';
 		$cache_dir = rtrim($cache_dir, '/');
 		if (file_exists($cache_dir) && is_dir($cache_dir)) {
-			$exists = TRUE;
+			$exists = true;
 			if (!is_writeable($cache_dir)) {
-				@chmod($cache_dir, 0777);
-					$fp = @fopen($cache_dir . 'test_lock', 'wb');
-					if ($fp !== false) {
-						$write = true;
-					}
-					@fclose($fp);
-					@unlink($phpbb_root_path . $dir . 'test_lock');
+				phpbb_chmod($cache_dir, CHMOD_READ | CHMOD_WRITE);
+				$fp = @fopen($cache_dir . 'test_lock', 'wb');
+				if ($fp !== false) {
+					$write = true;
+				}
+				@fclose($fp);
+				@unlink($phpbb_root_path . $dir . 'test_lock');
 			} else {
 				$write = true;
 			}
