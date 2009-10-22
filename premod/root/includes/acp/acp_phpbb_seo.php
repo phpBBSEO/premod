@@ -206,10 +206,17 @@ class acp_phpbb_seo {
 						'seo_ext_classes' =>  array('lang' => 'SEO_EXTERNAL_CLASSES', 'validate' => 'string', 'type' => 'text:25:150', 'explain' => true, 'default' => ''),
 					),
 				);
+				// Optimal title
+				if (isset($user->lang['Page'])) {
+					$display_vars['vars'] += array(
+						'legend2' => 'SEO_PAGE_TITLES',
+						'seo_append_sitename' =>  array('lang' => 'SEO_APPEND_SITENAME', 'validate' => 'bool', 'type' => 'radio:yes_no', 'explain' => true, 'default' => 0),
+					);
+				}
 				// dynamic meta tag mod
 				if (class_exists('seo_meta')) {
 					$display_vars['vars'] += array(
-						'legend2' => 'SEO_META',
+						'legend3' => 'SEO_META',
 						'seo_meta_title' =>  array('lang' => 'SEO_META_TITLE', 'validate' => 'string:0:225', 'type' => 'text:25:150', 'explain' => true, 'default' => $config['sitename']),
 						'seo_meta_desc' =>  array('lang' => 'SEO_META_DESC', 'validate' => 'string:0:225', 'type' => 'text:40:255', 'explain' => true, 'default' => $config['site_desc']),
 						'seo_meta_desc_limit' => array('lang' => 'SEO_META_DESC_LIMIT', 'validate' => 'int:5:40', 'type' => 'text:3:4', 'explain' => true, 'default' => 25),

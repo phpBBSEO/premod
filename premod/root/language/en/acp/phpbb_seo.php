@@ -76,7 +76,12 @@ $lang = array_merge($lang, array(
 	'SEO_EXTERNAL_SUBDOMAIN_EXPLAIN' => 'Open, or not, sub-domains (of your forum domain) links in a new browser window / tab',
 	'SEO_EXTERNAL_CLASSES' => 'External by css class',
 	'SEO_EXTERNAL_CLASSES_EXPLAIN' => 'here you can define some css classes that will activate the new window feature on links using it. Coma separated list of class names, example: postlink,external',
-	'SEO_META' => 'Meta tags',
+	// Titles
+	'SEO_PAGE_TITLES' => '<a href="http://www.phpbb-seo.com/en/phpbb-seo-toolkit/optimal-titles-t1289.html" title="Optimal Titles mod" onclick="window.open(this.href); return false;">Page titles</a>',
+	'SEO_APPEND_SITENAME' => 'Append site name to page titles',
+	'SEO_APPEND_SITENAME_EXPLAIN' => 'Append, or not, site name to page titles.<br/><b style="color:red;">Warning :</b><br/>This option requires that you properly edited all your overall_header.html for the Optimal titles mod, site name could be repeated in page titles otherwise.',
+	// Meta
+	'SEO_META' => '<a href="http://www.phpbb-seo.com/en/phpbb-seo-toolkit/seo-dynamic-meta-tags-t1308.html" title="Dynamic Meta tags mod" onclick="window.open(this.href); return false;">Meta tags</a>',
 	'SEO_META_TITLE' => 'Meta title',
 	'SEO_META_TITLE_EXPLAIN' => 'Default Meta title, used on page not defining a page title. Unactivates the meta title tag if empty',
 	'SEO_META_DESC' => 'Meta description',
@@ -100,7 +105,7 @@ $lang = array_merge($lang, array(
 	'SEO_META_GET_FILTER' => '_GET filter',
 	'SEO_META_GET_FILTER_EXPLAIN' => 'Coma separated list of _GET variable that should not be indexed (robots:noindex,follow). Example : style,hilit,sid',
 	'SEO_META_ROBOTS' => 'Meta Robots',
-	'SEO_META_ROBOTS_EXPLAIN' => 'The Meta Robots tag tells bots how to index your pages. It is set by default to "index,follow", which allow bots to index and cache your pages and to follow links in them. Unactivates the meta Robots tag if empty.<br/><b style="color:red;">Attention :</b>:<br/>This tag is sensible, if you where to use "noindex", none of your pages would be indexed',
+	'SEO_META_ROBOTS_EXPLAIN' => 'The Meta Robots tag tells bots how to index your pages. It is set by default to "index,follow", which allow bots to index and cache your pages and to follow links in them. Unactivates the meta Robots tag if empty.<br/><b style="color:red;">Warning :</b><br/>This tag is sensible, if you where to use "noindex", none of your pages would be indexed',
 	'SEO_META_NOARCHIVE' => 'Noarchive Meta Robots',
 	'SEO_META_NOARCHIVE_EXPLAIN' => 'The Noarchive Meta Robots tag tells bots if they can or not cache the page. It only concern caching, it has no relation with indexing and SERPs of the page.<br/>You can here enter a coma separated list of forum IDs that will have the "noarchive" option added to theire meta robots.<br/>This feature can be handy for example when you have some forums opened to bots but closed to guests. Adding the "noarchive" option to them will prevent guest from accessing content through the search engine cache, while the forum and its topic will still appear in SERPs',
 	// Install
