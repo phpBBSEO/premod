@@ -93,6 +93,7 @@
 ##			- Fixed : $custom_profile_url usage,
 ##			- Added : Extended ACP menu for new $config based options,
 ##			- Added : Open external links in new windows (configurable in the extended menu),
+##			- Added : Append site name to page title when the Optimal title mod is installed,
 ##			- Added : Error message for when the db user does not have enough right to alter tables (sql rewriting & no dupe),
 ##			- Added : Rewriterules to handle dummy clients who do not understand base href tags in addition to the new PHPBB_USE_BOARD_URL_PATH constant activation,
 ##			- Made req_file info available in setup_phpbb_seo.php,

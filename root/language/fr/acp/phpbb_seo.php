@@ -70,13 +70,19 @@ $lang = array_merge($lang, array(
 	'SEO_SELECT_ALL'	=> 'Sélectionner',
 	// ACP extended
 	'ACP_SEO_EXTENDED_EXPLAIN' => 'Configuration additionnelle des mods phpBB SEO.',
+	// External links
 	'SEO_EXTERNAL_LINKS' => 'Liens externes',
 	'SEO_EXTERNAL_LINKS_EXPLAIN' => 'Ouvrir ou non les liens externes dans une nouvelle fenêtre du navigateur',
 	'SEO_EXTERNAL_SUBDOMAIN' => 'Liens externes sous-domaine',
 	'SEO_EXTERNAL_SUBDOMAIN_EXPLAIN' => 'Ouvrir ou non les liens pointant vers un sous domaine du domaine de votre forum dans une nouvelle fenêtre du navigateur',
 	'SEO_EXTERNAL_CLASSES' => 'Classe css externe',
 	'SEO_EXTERNAL_CLASSES_EXPLAIN' => 'Vous pouvez définir des classes css qui activeront l’ouverture dans une nouvelle fenêtre pour les liens. Liste de classes séparées par des virgules, exemple : postlink,external',
-	'SEO_META' => 'Méta tags',
+	// Titles
+	'SEO_PAGE_TITLES' => '<a href="http://www.phpbb-seo.com/fr/toolkit-phpbb-seo/optimisation-titres-t1653.html" title="Mod Optimal Titles" onclick="window.open(this.href); return false;">Titre des pages</a>',
+	'SEO_APPEND_SITENAME' => 'Ajouter le nom du site au titres des pages',
+	'SEO_APPEND_SITENAME_EXPLAIN' => 'Ajouter, ou non, le nom du site à la fin du titres des pages.<br/><b style="color:red;">Attention :</b><br/>Cette option nécéssite que vous ayez convenablement modifié tous vos overall_header.html pour le mod Optimal titles, le nom du site pourrait si non apparaitre deux fois dans le titres de pages.',
+	// Meta
+	'SEO_META' => '<a href="http://www.phpbb-seo.com/fr/toolkit-phpbb-seo/meta-tags-dynamiques-seo-t1678.html" title="Mod Méta tags dynamiques" onclick="window.open(this.href); return false;">Méta tags</a>',
 	'SEO_META_TITLE' => 'Méta title',
 	'SEO_META_TITLE_EXPLAIN' => 'Titre méta par défaut, utilisé sur les pages n’ayant pas de titre défini. Désactive le méta title si vide.',
 	'SEO_META_DESC' => 'Méta description',
@@ -100,7 +106,7 @@ $lang = array_merge($lang, array(
 	'SEO_META_GET_FILTER' => 'Filtre _GET',
 	'SEO_META_GET_FILTER_EXPLAIN' => 'Liste de variable _GET séparées par des virgules ne devant pas être indéxées (robots:noindex,follow). Exemple : style,hilit,sid',
 	'SEO_META_ROBOTS' => 'Méta Robots',
-	'SEO_META_ROBOTS_EXPLAIN' => 'La balise Méta Robots indique aux bots des moteur de recherche comment indexer les pages de votre site. Elle est réglée sur "index,follow" par défaut, ce qui autorise les moteurs de recherche à indexer et mettre en cache les pages et à suivre les liens qui s’y trouvent. Désactive la balise si vide.<br/><b style="color:red;">Attention :</b>:<br/>Cette balise est sensible, si vous mettez "noindex", aucune page ne sera référencée',
+	'SEO_META_ROBOTS_EXPLAIN' => 'La balise Méta Robots indique aux bots des moteur de recherche comment indexer les pages de votre site. Elle est réglée sur "index,follow" par défaut, ce qui autorise les moteurs de recherche à indexer et mettre en cache les pages et à suivre les liens qui s’y trouvent. Désactive la balise si vide.<br/><b style="color:red;">Attention :</b><br/>Cette balise est sensible, si vous mettez "noindex", aucune page ne sera référencée',
 	'SEO_META_NOARCHIVE' => 'Méta Robots Noarchive',
 	'SEO_META_NOARCHIVE_EXPLAIN' => 'La balise Méta Robots Noarchive indique aux moteurs de recherche s’ils doivent ou non mettre les pages. Cette option ne concerne que la mise en cache des pages, elle est sans rapports avec l’indexation et le positionnement des pages.<br/>Vous pouvez ici indiquer une liste d’ID de forums, séparés par des virgules, qui auront l’option "noarchive" ajoutée à leur balise méta robots en cours.<br/>C’est par exemple très pratique si certains de vos forums sont ouverts aux robots sans être ouverts aux invités. Vous pourrez dans ce cas utiliser l’option noarchive pour ceux-ci, afin qu’ils apparaissent dans les résultats des moteurs de recherches sans que les invités puissent voir le contenu des pages sans s’inscrire via le cache des moteurs de recherches',
 	// Install

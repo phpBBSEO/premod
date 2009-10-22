@@ -3970,6 +3970,9 @@ function page_header($page_title = '', $display_online_list = true, $item_id = 0
 		'SEO_EXT_CLASSES' => !empty($config['seo_ext_classes']) ? "'" . preg_replace('`[^a-z0-9_|-]+`', '', str_replace(',', '|', trim($config['seo_ext_classes'], ', '))) . "'" : 'false',
 		'SEO_HASHFIX' => $phpbb_seo->seo_opt['url_rewrite'] && $phpbb_seo->seo_opt['virtual_folder'] ? 'true' : 'false',
 	));
+	if (isset($user->lang['Page']) && !empty($config['seo_append_sitename'])) {
+		$page_title = $page_title && strpos($page_title, $config['sitename']) === false ? $page_title . ' - ' . $config['sitename'] : $page_title;
+	}
 	// www.phpBB-SEO.com SEO TOOLKIT END
 	// www.phpBB-SEO.com SEO TOOLKIT BEGIN  - META
 	global $seo_meta;
