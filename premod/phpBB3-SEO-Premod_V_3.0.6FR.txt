@@ -85,6 +85,7 @@
 ##			- SEOed the prosilver templates, left col comes first now, + other display enhancements,
 ##			- Removed deprecated & usage (php5.3.0) when starting the module classes.
 ##		- Utlimate SEO URL 0.6.2 :
+##			- Fixed : Issue with user name with dot pagination when common search rewriting if off,
 ##			- Fixed : PM pop up with virtual root option,
 ##			- Fixed : Paginated search when searching on several forums,
 ##			- Fixed : For real the port != 80 case!,
