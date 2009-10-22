@@ -2093,8 +2093,8 @@ function generate_pagination($base_url, $num_items, $per_page, $start_item, $add
 		static $pagin_replace = array();
 		static $prev_find = array();
 		if (empty($pagin_replace)) {
-			$pagin_find = array('`(\.(?!' . $phpEx . ')[a-z0-9]+)([\w\#$%&~\-;:=,?@+]*)(&amp;|\?)start=([0-9]+)`i', '`/([\w\#$%&~\-;:=,?@+]*)(&amp;|\?)start=([0-9]+)`i' );
-			$pagin_replace = array( $phpbb_seo->seo_delim['start'] . '\\4\\1\\2', '/' . $phpbb_seo->seo_static['pagination'] . '\\3' . $phpbb_seo->seo_ext['pagination'] . '\\1' );
+			$pagin_find = array('`\<a href="(https?\://[a-z0-9_/\.-]+/[a-z0-9_\.-]+)(\.(?!' . $phpEx . ')[a-z0-9]+)(\?([\w\#$%&~\-;:=,@+\.]+))?(&amp;|\?)start=([0-9]+)"\>`i', '`\<a href="(https?\://[a-z0-9_/\.-]+/[a-z0-9_\.-]+)/(\?([\w\#$%&~\-;:=,@+\.]+))?(&amp;|\?)start=([0-9]+)"\>`i' );
+			$pagin_replace = array( '<a href="\1' . $phpbb_seo->seo_delim['start'] . '\6\2\3">', '<a href="\1/' . $phpbb_seo->seo_static['pagination'] . '\5' . $phpbb_seo->seo_ext['pagination'] . '\2">' );
 			$prev_find = array($phpbb_seo->seo_delim['start'] . '0', $phpbb_seo->seo_static['pagination'] . '0' . $phpbb_seo->seo_ext['pagination']);
 		}
 		$page_string = str_replace($url_delim . 'start=0', '', $page_string);
