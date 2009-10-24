@@ -227,6 +227,9 @@ class display_posts {
 			$result = $db->sql_query($sql);
 			while ($row = $db->sql_fetchrow($result)) {
 				$poster_id = (int) $row['poster_id'];
+				// www.phpBB-SEO.com SEO TOOLKIT BEGIN
+				$phpbb_seo->set_user_url( $row['username'], $poster_id );
+				// www.phpBB-SEO.com SEO TOOLKIT END
 				$forum_id = (int) $row['forum_id'];
 				$topic_id = (int) $row['topic_id'];
 				// Define the global bbcode bitfield, will be used to load bbcodes

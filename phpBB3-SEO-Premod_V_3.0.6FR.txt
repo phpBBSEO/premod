@@ -70,6 +70,7 @@
 ##	2009-10-XX - 3.0.6
 ##		- All mods Updated to comply with phpBB 3.0.6.
 ##		- GYM Sitemaps & RSS 2.0.0 :
+##			- Fixed : Profile link not rewritten on news pages,
 ##			- Fixed : GYM linking when used standalone,
 ##			- Fixed : Typos in language paks,
 ##			- Fixed : Bug in the last topic listing dealing with global announcements,
