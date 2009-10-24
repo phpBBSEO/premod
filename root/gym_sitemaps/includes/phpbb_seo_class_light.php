@@ -7,8 +7,10 @@
 * @license http://www.opensource.org/licenses/rpl1.5.txt Reciprocal Public License 1.5
 *
 */
-// First basic security
-if ( !defined('IN_PHPBB') ) {
+/**
+* @ignore
+*/
+if (!defined('IN_PHPBB')) {
 	exit;
 }
 /**
@@ -20,42 +22,63 @@ if ( !defined('IN_PHPBB') ) {
 //
 
 class phpbb_seo {
-	var	$seo_url = array();
-	var	$seo_delim = array();
+	var	$modrtype = -1;
 	var	$seo_path = array();
+	var	$seo_url = array( 'forum' =>  array(), 'topic' =>  array(), 'user' => array(), 'username' => array(), 'group' => array(), 'file' => array() );
+	var	$seo_delim = array( 'forum' => '-f', 'topic' => '-t', 'user' => '-u', 'group' => '-g', 'start' => '-', 'sr' => '-', 'file' => '/');
+	var	$seo_ext = array( 'forum' => '.html', 'topic' => '.html', 'post' => '.html', 'user' => '.html', 'group' => '.html',  'index' => '', 'global_announce' => '/', 'leaders' => '.html', 'atopic' => '.html', 'utopic' => '.html', 'npost' => '.html', 'pagination' => '.html', 'gz_ext' => '');
+	var	$seo_static = array( 'forum' => 'forum', 'topic' => 'topic', 'post' => 'post', 'user' => 'member', 'group' => 'group', 'index' => '', 'global_announce' => 'announces', 'leaders' => 'the-team', 'atopic' => 'active-topics', 'utopic' => 'unanswered', 'npost' => 'newposts', 'pagination' => 'page', 'gz_ext' => '.gz' );
 	var	$seo_opt = array();
 	var	$seo_cache = array();
-	var	$seo_ext = array();
-	var	$seo_static = array();
-	var	$modrtype = -1;
-	var	$sftpl = array();
 	var	$RegEx = array();
+	var	$sftpl = array();
+	var	$url_replace = array();
 	/**
 	* constuctor
 	*/
 	function phpbb_seo() {
 		global $config, $phpEx;
-		$this->seo_cache = array();
-		$this->seo_censored = array();
-		$this->start = $this->path = '';
+		// fix for an interesting bug with parse_str http://bugs.php.net/bug.php?id=48697
+		// and apparently, the bug is still here in php5.3
+		@ini_set("mbstring.internal_encoding", 'UTF-8');
 		// URL Settings
-		// The arrays where the preformated titles are stored.
-		$this->seo_url = array( 'forum' =>  array(), 'topic' =>  array(), 'user' => array(),  'usermsg' => array(), 'username' => array(), 'group' => array() );
-		// Delimiters : used as separators in the .htaccess RegEx
-		// can be edited, requires .htaccess update.
-		$this->seo_delim = array( 'forum' => '-f', 'topic' => '-t', 'user' => '-u', 'usermsg' => '-m', 'group' => '-g', 'start' => '-');
-		// Default : Used as URL when format_url would return nothing or with simple URLs
-		// can be edited, requires .htaccess update.
-		$this->seo_static = array( 'forum' => 'forum', 'topic' => 'topic', 'post' => 'post', 'user' => 'member', 'group' => 'group', 'index' => '', 'global_announce' => 'announces', 'leaders' => 'the-team', 'usermsg' => 'messages', 'pagination' => 'page', 'gz_ext' => '.gz' );
-		// URL suffixes, for the phpBB URLs
-		// can be edited, requires .htaccess update.
-		$this->seo_ext = array( 'forum' => '.html', 'topic' => '.html', 'post' => '.html', 'user' => '.html', 'usermsg' => '.html', 'group' => '.html',  'index' => '', 'global_announce' => '/', 'leaders' => '.html', 'pagination' => '.html', 'gz_ext' => '');
 		$this->seo_opt = array(
 			'profile_inj' => false,
 			'rem_small_words' => false,
 			'virtual_folder' => false,
 			'virtual_root' => false,
 		);
+		// --> DOMAIN SETTING <-- //
+		// Path Settings, only rely on DB
+		$server_protocol = ($config['server_protocol']) ? $config['server_protocol'] : (($config['cookie_secure']) ? 'https://' : 'http://');
+		$server_name = trim($config['server_name'], '/ ');
+		$server_port = max(0, (int) $config['server_port']);
+		$server_port = ($server_port && $server_port <> 80) ? ':' . $server_port : '';
+		$script_path = trim($config['script_path'], '/ ');
+		$script_path = (empty($script_path) ) ? '' : $script_path . '/';
+		$this->seo_path['root_url'] = strtolower($server_protocol . $server_name . $server_port . '/');
+		$this->seo_path['phpbb_urlR'] = $this->seo_path['phpbb_url'] =  $this->seo_path['root_url'] . $script_path;
+		$this->seo_path['phpbb_script'] = $script_path;
+		$this->seo_path['canonical'] = '';
+		// File setting
+		$this->seo_req_uri();
+		$this->seo_opt['seo_base_href'] = $this->seo_opt['req_file'] = $this->seo_opt['req_self'] = '';
+		if ($script_name = (!empty($_SERVER['PHP_SELF'])) ? $_SERVER['PHP_SELF'] : getenv('PHP_SELF')) {
+			// From session.php
+			// Replace backslashes and doubled slashes (could happen on some proxy setups)
+			$this->seo_opt['req_self'] = str_replace(array('\\', '//'), '/', $script_name);
+			// basenamed page name (for example: index)
+			$this->seo_opt['req_file'] = urlencode(htmlspecialchars(str_replace(".$phpEx", '', basename($this->seo_opt['req_self']))));
+		}
+		// see if we have some custom replacement
+		if (!empty($this->url_replace)) {
+			$this->url_replace = array(
+				'find' => array_keys($this->url_replace),
+				'replace' => array_values($this->url_replace)
+			);
+		}
+		// preg_replace() patterns for format_url()
+		// One could want to add |th|horn after |slash, but I'm not sure that Þ should be replaced with t and Ð with e
 		$this->RegEx['url_find'] = array('`&([a-z]+)(acute|grave|circ|cedil|tilde|uml|lig|ring|caron|slash);`i', '`&(amp;)?[^;]+;`i', '`[^a-z0-9]`i'); // Do not remove : deaccentuation, html/xml entities & non a-z chars
 		$this->RegEx['url_replace'] = array('\1', '-', '-');
 		if ($this->seo_opt['rem_small_words']) {
@@ -64,34 +87,15 @@ class phpbb_seo {
 		}
 		$this->RegEx['url_find'][] ='`[-]+`'; // Do not remove : multi hyphen reduction
 		$this->RegEx['url_replace'][] = '-';
+		// $1 parent : string/
+		// $2 title / url : topic-title / forum-url-fxx
+		// $3 id
 		$this->sftpl = array(
-				'topic' => ($this->seo_opt['virtual_folder'] ? '%1$s/' : '') . '%2$s' . $this->seo_delim['topic'] . '%3$s',
-				'topic_smpl' => ($this->seo_opt['virtual_folder'] ? '%1$s/' : '') . $this->seo_static['topic'] . '%3$s',
-				'forum' => $this->modrtype >= 2 ? '%2$s' : $this->seo_static['forum'] . '%3$s',
-				'group' => $this->seo_opt['profile_inj'] ? '%2$s' . $this->seo_delim['group'] . '%3$s' : $this->seo_static['group'] . '%3$s',
+			'topic' => ($this->seo_opt['virtual_folder'] ? '%1$s/' : '') . '%2$s' . $this->seo_delim['topic'] . '%3$s',
+			'topic_smpl' => ($this->seo_opt['virtual_folder'] ? '%1$s/' : '') . $this->seo_static['topic'] . '%3$s',
+			'forum' => $this->modrtype >= 2 ? '%2$s' : $this->seo_static['forum'] . '%3$s',
+			'group' => $this->seo_opt['profile_inj'] ? '%2$s' . $this->seo_delim['group'] . '%3$s' : $this->seo_static['group'] . '%3$s',
 		);
-		// --> DOMAIN SETTING <-- //
-// --> DOMAIN SETTING <-- //
-		// Path Settings, only rely on DB
-		$server_protocol = ($config['server_protocol']) ? $config['server_protocol'] : (($config['cookie_secure']) ? 'https://' : 'http://');
-		$server_name = trim($config['server_name'], '/') . '/';
-		$server_port = max(0, (int) $config['server_port']);
-		$server_port = ($server_port && $server_port <> 80) ? ':' . $server_port : '';
-		$script_path = trim($config['script_path'], '/ ');
-		$script_path = (empty($script_path) ) ? '' : $script_path . '/';
-		$this->seo_path['root_url'] = strtolower($server_protocol . $server_name . $server_port);
-		$this->seo_path['phpbb_urlR'] = $this->seo_path['phpbb_url'] =  $this->seo_path['root_url'] . $script_path;
-		$this->seo_path['phpbb_script'] = $script_path;
-		// File setting
-		$this->seo_req_uri();
-		$this->seo_opt['seo_base_href'] = $this->seo_opt['req_file'] = $this->seo_opt['req_self'] = '';
-		if ($script_name = (!empty($_SERVER['PHP_SELF'])) ? $_SERVER['PHP_SELF'] : getenv('PHP_SELF')) {
-			// From sessions.php
-			// Replace backslashes and doubled slashes (could happen on some proxy setups)
-			$this->seo_opt['req_self'] = str_replace(array('\\', '//'), '/', $script_name);
-			// basenamed page name (for example: index)
-			$this->seo_opt['req_file'] = urlencode(htmlspecialchars(str_replace('.' . $phpEx, '', basename($this->seo_opt['req_self']))));
-		}
 		return;
 	}
 	// --> Gen stats
@@ -104,10 +108,14 @@ class phpbb_seo {
 	}
 	// --> URL rewriting functions <--
 	/**
+	* format_url( $url, $type = 'topic' )
 	* Prepare Titles for URL injection
 	*/
 	function format_url( $url, $type = 'topic' ) {
 		$url = preg_replace('`\[.*\]`U','',$url);
+		if (isset($this->url_replace['find'])) {
+			$url = str_replace($this->url_replace['find'], $this->url_replace['replace'], $url);
+		}
 		$url = htmlentities($url, ENT_COMPAT, 'UTF-8');
 		$url = preg_replace($this->RegEx['url_find'] , $this->RegEx['url_replace'], $url);
 		$url = strtolower(trim($url, '-'));
@@ -158,6 +166,38 @@ class phpbb_seo {
 	*/
 	function drop_sid( $url ) {
 		return (strpos($url, 'sid=') !== false) ? trim(preg_replace(array('`&(amp;)?sid=[a-z0-9]*(&amp;|&)?`', '`(\?)sid=[a-z0-9]*`'), array('\2', '\1'), $url), '?') : $url;
+	}
+	/**
+	* set_user_url( $username, $user_id = 0 )
+	* Prepare profile url
+	*/
+	function set_user_url( $username, $user_id = 0 ) {
+		if (empty($this->seo_url['user'][$user_id])) {
+			$username = strip_tags($username);
+			$this->seo_url['username'][$username] = $user_id;
+			if ( $this->seo_opt['profile_inj'] ) {
+				if ( $this->seo_opt['profile_noids'] ) {
+					$this->seo_url['user'][$user_id] = $this->seo_static['user'] . '/' . $this->seo_url_encode($username);
+				} else {
+					$this->seo_url['user'][$user_id] = $this->format_url($username,  $this->seo_delim['user']) . $this->seo_delim['user'] . $user_id;
+				}
+			} else {
+				$this->seo_url['user'][$user_id] = $this->seo_static['user'] . $user_id;
+			}
+		}
+	}
+	/**
+	* seo_url_encode( $url )
+	* custom urlencoding
+	*/
+	function seo_url_encode( $url ) {
+		// can be faster to return $url directly if you do not allow more chars than
+		// [a-zA-Z0-9_\.-] in your usernames
+		// return $url;
+		// Here we hanlde the "&", "/", "+" and "#" case proper ( http://www.php.net/urlencode => http://issues.apache.org/bugzilla/show_bug.cgi?id=34602 )
+		static $find = array('&', '/', '#', '+');
+		static $replace = array('%26', '%2F', '%23', '%2b');
+		return rawurlencode(str_replace( $find, $replace, utf8_normalize_nfc(htmlspecialchars_decode(str_replace('&amp;amp;', '%26', rawurldecode($url))))));
 	}
 	/**
 	* Returns the full REQUEST_URI
