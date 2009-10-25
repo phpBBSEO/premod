@@ -687,47 +687,5 @@ $lang = array_merge($lang, array(
 	'LOG_WORD_DELETE'		=> '<strong>Suppression d’un mot censuré</strong><br />» %s',
 	'LOG_WORD_EDIT'			=> '<strong>Edition d’un mot censuré</strong><br />» %s',
 ));
-// www.phpBB-SEO.com SEO TOOLKIT BEGIN
-$lang = array_merge($lang, array(
-	'ACP_CAT_PHPBB_SEO' => 'phpBB SEO',
-	'ACP_MOD_REWRITE' => 'Réécriture d’url',
-	'ACP_PHPBB_SEO_CLASS' => 'Configuration de la classe phpBB SEO',
-	'ACP_FORUM_URL' => 'Configuration des URLs des forums',
-	'ACP_HTACCESS' => '.htaccess',
-	'ACP_SEO_EXTENDED' => 'Configuration additionnelle',
-	'ACP_PREMOD_UPDATE' => '<h1>Annonce de mise à jour</h1>
-	<p>Cette mise à jour ne concerne que la premod, pas phpBB lui même.</p>
-	<p>Une nouvelle version de la premod phpBB SEO est donc disponible : %1$s<br/>Veuillez vous rendre sur <a href="%2$s" title="Le sujet de mise à disposition"><b>le sujet de mise à disposition</b></a> pour procéder à la mise à jour.</p>',
-	'SEO_LOG_INSTALL_PHPBB_SEO' => '<strong>Installation du mod rewrite phpBB SEO (v%s)</strong>',
-	'SEO_LOG_INSTALL_PHPBB_SEO_FAIL' => '<strong>Echec de l’installation du mod rewrite phpBB SEO</strong><br/>%s',
-	'SEO_LOG_UNINSTALL_PHPBB_SEO' => '<strong>Désinstallation du mod rewrite phpBB SEO (v%s)</strong>',
-	'SEO_LOG_UNINSTALL_PHPBB_SEO_FAIL' => '<strong>Echec de la désinstallation du mod rewrite phpBB SEO</strong><br/>%s',
-	'SEO_LOG_CONFIG_SETTINGS' => '<strong>Modification des réglages de la classe phpBB SEO</strong>',
-	'SEO_LOG_CONFIG_FORUM_URL' => '<strong>Modification des URLs des Forum</strong>',
-	'SEO_LOG_CONFIG_HTACCESS' => '<strong>Nouveau .htaccess généré</strong>',
-	'SEO_LOG_CONFIG_EXTENDED' => '<strong>Modification des réglages additionnels des mods phpBB SEO</strong>',
-));
-// www.phpBB-SEO.com SEO TOOLKIT END
-// www.phpBB-SEO.com SEO TOOLKIT BEGIN -> GYM Sitemaps
-$lang = array_merge($lang, array(
-	'ACP_GYM_SITEMAPS' => 'GYM Sitemaps &amp; RSS',
-	'ACP_GYM_MAIN' => 'Configuration générale',
-	'ACP_GYM_GOOGLE_MAIN' => 'Sitemaps Google',
-	'ACP_GYM_RSS_MAIN' => 'Flux RSS',
-	'ACP_GYM_YAHOO_MAIN' => 'Yahoo! urllist.txt',
-	'ACP_GYM_HTML_MAIN' => 'Pages HTML',
-	'GYM_LOG_CONFIG_MAIN' => '<strong>Modification des paramètres de GYM Sitemaps &amp; RSS</strong><br/>&raquo; Configuration générale',
-	'GYM_LOG_CONFIG_GOOGLE' => '<strong>Modification des paramètres de GYM Sitemaps &amp; RSS</strong><br/>&raquo; Sitemaps Google',
-	'GYM_LOG_CONFIG_RSS' => '<strong>Modification des paramètres de GYM Sitemaps &amp; RSS</strong><br/>&raquo; Flux RSS',
-	'GYM_LOG_CONFIG_HTML' => '<strong>Modification des paramètres de GYM Sitemaps &amp; RSS</strong><br/>&raquo; Plans de site HTML',
-	'GYM_LOG_CONFIG_YAHOO' => '<strong>Modification des paramètres de GYM Sitemaps &amp; RSS</strong><br/>&raquo; Liste d’URLs Yahoo!',
-	// Install Logs
-	'SEO_LOG_INSTALL_GYM_SITEMAPS' => '<strong>Installation de GYM Sitemaps &amp; RSS V%s</strong>',
-	'SEO_LOG_INSTALL_GYM_SITEMAPS_FAIL' => '<strong>Echec de l’installation de GYM Sitemaps &amp; RSS</strong><br/>%s',
-	'SEO_LOG_UNINSTALL_GYM_SITEMAPS' => '<strong>Désinstallation de GYM Sitemaps &amp; RSS V%s</strong>',
-	'SEO_LOG_UNINSTALL_GYM_SITEMAPS_FAIL' => '<strong>Echec de la désinstallation de GYM Sitemaps &amp; RSS</strong><br/>%s',
-	'SEO_LOG_UPDATE_GYM_SITEMAPS' => '<strong>Mise à jour de GYM Sitemaps &amp; RSS vers V%s</strong>',
-	'SEO_LOG_UPDATE_GYM_SITEMAPS_FAIL' => '<strong>Echec de la mise à jour de GYM Sitemaps &amp; RSS</strong><br/>%s',
-));
-// www.phpBB-SEO.com SEO TOOLKIT END -> GYM Sitemaps
+
 ?>

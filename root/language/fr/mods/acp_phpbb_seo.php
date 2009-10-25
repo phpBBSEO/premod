@@ -1,7 +1,7 @@
 <?php
 /**
 *
-* phpbb_seo [French]
+* acp_phpbb_seo [French]
 *
 * @package Ultimate SEO URL phpBB SEO
 * @version $Id$
@@ -12,6 +12,11 @@
 /**
 * DO NOT CHANGE
 */
+if (!defined('IN_PHPBB'))
+{
+	exit;
+}
+
 if (empty($lang) || !is_array($lang))
 {
 	$lang = array();

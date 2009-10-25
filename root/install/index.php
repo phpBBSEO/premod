@@ -227,7 +227,7 @@ if (!file_exists($phpbb_root_path . 'language/' . $language) || !is_dir($phpbb_r
 include($phpbb_root_path . 'language/' . $language . '/common.' . $phpEx);
 include($phpbb_root_path . 'language/' . $language . '/acp/common.' . $phpEx);
 include($phpbb_root_path . 'language/' . $language . '/acp/board.' . $phpEx);
-include($phpbb_root_path . 'language/' . $language . '/acp/phpbb_seo.' . $phpEx);
+include($phpbb_root_path . 'language/' . $language . '/mods/acp_phpbb_seo.' . $phpEx);
 include($phpbb_root_path . 'language/' . $language . '/install.' . $phpEx);
 include($phpbb_root_path . 'language/' . $language . '/posting.' . $phpEx);
 
