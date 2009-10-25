@@ -94,8 +94,9 @@ class seo_meta {
 			$this->mconfig['check_ignore'] = (int) $config['seo_meta_check_ignore'];
 			$this->mconfig['file_filter'] = $config['seo_meta_file_filter'];
 			$this->mconfig['get_filter'] = preg_replace('`[\s]+`', '', trim($config['seo_meta_get_filter'], ', '));
+			$this->mconfig['bbcodestrip'] = str_replace(',', '|', preg_replace('`[\s]+`', '', trim($config['seo_meta_bbcode_filter'], ', ')));
 		}
-		$this->mconfig['get_filter'] = @explode(',', $this->mconfig['get_filter']);
+		$this->mconfig['get_filter'] = !empty($this->mconfig['get_filter']) ? @explode(',', $this->mconfig['get_filter']) : array();
 		return;
 	}
 	/**
@@ -216,7 +217,11 @@ class seo_meta {
 			if (empty($RegEx)) {
 				$RegEx = array('`&(amp;)?[^\;]+;`i', // HTML entitites
 					'`<[^>]*>(.*<[^>]*>)?`Usi', // HTML code
-					'`\[(' . $this->mconfig['bbcodestrip'] . ')[^\[\]]+\].*\[/\1[^\[\]]+\]`Usi', // bbcode to strip
+				);
+				if (!empty($this->mconfig['bbcodestrip'])) {
+					$RegEx[] = '`\[(' . $this->mconfig['bbcodestrip'] . ')[^\[\]]*\].*\[/\1[^\[\]]*\]`Usi'; // bbcode to strip
+				}
+				$RegEx += array(
 					'`\[\/?[^\]\[]*\]`Ui', // Strip all bbcode tags
 					'`[\s]+`' // Multiple spaces
 				);

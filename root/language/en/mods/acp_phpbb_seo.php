@@ -93,6 +93,8 @@ $lang = array_merge($lang, array(
 	'SEO_META_DESC_EXPLAIN' => 'Default Meta description, used on page not defining a meta description',
 	'SEO_META_DESC_LIMIT' => 'Meta description limit',
 	'SEO_META_DESC_LIMIT_EXPLAIN' => 'Limit in words for the Meta description tag',
+	'SEO_META_BBCODE_FILTER' => 'Bbcodes Filter',
+	'SEO_META_BBCODE_FILTER_EXPLAIN' => 'Coma separated list of bbcodes which will be fully filtered in meta tags. Others will simply be deactivated and their content may apear in meta tags.<br/> Default filtered bbcodes are : <b>img,url,flash,code</b>.<br/><b style="color:red;">Attention :</b><br/>Not filtering img, url and flash bbcode is not a good idea, as well as the code one in most cases. Generally speaking, only keep bbcode’s content for bbcodes having interesting content for metas',
 	'SEO_META_KEYWORDS' => 'Meta keywords',
 	'SEO_META_KEYWORDS_EXPLAIN' => 'Default Meta keywords, used on page not defining meta keywords. Simply enter a list of keywords',
 	'SEO_META_KEYWORDS_LIMIT' => 'Meta keywords limit',

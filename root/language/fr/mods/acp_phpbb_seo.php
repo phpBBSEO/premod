@@ -94,6 +94,8 @@ $lang = array_merge($lang, array(
 	'SEO_META_DESC_EXPLAIN' => 'Description méta par défaut, utilisé sur les pages n’ayant pas de description définie',
 	'SEO_META_DESC_LIMIT' => 'Limite Méta description',
 	'SEO_META_DESC_LIMIT_EXPLAIN' => 'Limite en nombre de mots pour les méta description',
+	'SEO_META_BBCODE_FILTER' => 'Filtre Bbcodes',
+	'SEO_META_BBCODE_FILTER_EXPLAIN' => 'Liste de bbcodes, séparées par des virgules, qui seront totallement filtrés dans les méta tags. Les autre seront simplement désactivé et leur contenu pourra apparaitre.<br/> Les bbcodes filtrés par défaut sont : <b>img,url,flash,code</b>.<br/><b style="color:red;">Attention :</b><br/>Ne pas filtrer les bbcodes img, url et flash n’est pas un bonne idée pour vos métas, de même que le bbcode code dans la plupart des cas. Dans le cas général, ne conservez le contenu des bbcodes qui en ont',
 	'SEO_META_KEYWORDS' => 'Méta keywords',
 	'SEO_META_KEYWORDS_EXPLAIN' => 'Mot clés méta par défaut, utilisés sur les pages n’ayant pas de description / mot clés définis. Entrez une liste de mot clés séparés par des espaces',
 	'SEO_META_KEYWORDS_LIMIT' => 'Limite Méta keywords',
