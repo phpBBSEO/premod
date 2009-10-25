@@ -220,6 +220,7 @@ class acp_phpbb_seo {
 						'seo_meta_title' =>  array('lang' => 'SEO_META_TITLE', 'validate' => 'string:0:225', 'type' => 'text:25:150', 'explain' => true, 'default' => $config['sitename']),
 						'seo_meta_desc' =>  array('lang' => 'SEO_META_DESC', 'validate' => 'string:0:225', 'type' => 'text:40:255', 'explain' => true, 'default' => $config['site_desc']),
 						'seo_meta_desc_limit' => array('lang' => 'SEO_META_DESC_LIMIT', 'validate' => 'int:5:40', 'type' => 'text:3:4', 'explain' => true, 'default' => 25),
+						'seo_meta_bbcode_filter' =>  array('lang' => 'SEO_META_BBCODE_FILTER', 'validate' => 'string:0:225', 'type' => 'text:25:150', 'explain' => true, 'default' => 'img|url|flash|code'),
 						'seo_meta_keywords' =>  array('lang' => 'SEO_META_KEYWORDS', 'validate' => 'string:0:225', 'type' => 'text:40:150', 'explain' => true, 'default' => $config['site_desc']),
 						'seo_meta_keywords_limit' => array('lang' => 'SEO_META_KEYWORDS_LIMIT', 'validate' => 'int:5:40', 'type' => 'text:3:4', 'explain' => true, 'default' => 15),
 						'seo_meta_min_len' => array('lang' => 'SEO_META_MIN_LEN', 'validate' => 'int:0:10', 'type' => 'text:3:4', 'explain' => true, 'default' => 2),
@@ -366,7 +367,7 @@ class acp_phpbb_seo {
 						}
 						$db_tools->db->sql_return_on_error(false);
 					}
-				} elseif ($mode == 'extented') {
+				} elseif ($mode == 'extended') {
 					set_config($config_name, $config_value);
 				}
 			}
