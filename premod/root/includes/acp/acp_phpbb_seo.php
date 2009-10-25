@@ -39,7 +39,7 @@ class acp_phpbb_seo {
 			include_once($phpbb_root_path . 'phpbb_seo/phpbb_seo_class.' . $phpEx);
 			$phpbb_seo = new phpbb_seo();
 		}
-		$user->add_lang('acp/phpbb_seo');
+		$user->add_lang('mods/acp_phpbb_seo');
 		$action	= request_var('action', '');
 		$submit = (isset($_POST['submit'])) ? true : false;
 		$form_key = 'acp_board';
@@ -196,7 +196,7 @@ class acp_phpbb_seo {
 				$user->lang['ACP_HTACCESS_EXPLAIN'] .= $this->seo_htaccess();
 
 				break;
-			case 'extented':
+			case 'extended':
 				$display_vars = array(
 					'title'	=> 'ACP_SEO_EXTENDED',
 					'vars'	=> array(

@@ -38,7 +38,7 @@ require($phpbb_root_path . 'includes/functions_install.' . $phpEx);
 // Start session management
 $user->session_begin();
 $auth->acl($user->data);
-$user->setup('acp/phpbb_seo');
+$user->setup('mods/acp_phpbb_seo');
 // Security check
 if (!$user->data['is_registered']) {
 	login_box('', $user->lang['SEO_LOGIN'],'', false, false);

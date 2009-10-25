@@ -737,47 +737,5 @@ $lang = array_merge($lang, array(
 	'LOG_WORD_DELETE'		=> '<strong>Deleted word censor</strong><br />» %s',
 	'LOG_WORD_EDIT'			=> '<strong>Edited word censor</strong><br />» %s',
 ));
-// www.phpBB-SEO.com SEO TOOLKIT BEGIN
-$lang = array_merge($lang, array(
-	'ACP_CAT_PHPBB_SEO' => 'phpBB SEO',
-	'ACP_MOD_REWRITE' => 'URL Rewriting settings',
-	'ACP_PHPBB_SEO_CLASS' => 'phpBB SEO Class settings',
-	'ACP_FORUM_URL' => 'Forum URL Management',
-	'ACP_HTACCESS' => '.htaccess',
-	'ACP_SEO_EXTENDED' => 'Extended config',
-	'ACP_PREMOD_UPDATE' => '<h1>Release announcement</h1>
-	<p>This update does only concern the premod, not the phpBB core.</p>
-	<p>A new version of the phpBB SEO premod is thus available : %1$s<br/>Make sure you visit<a href="%2$s" title="The release thread"><b>the release thread</b></a> and update your installation.</p>',
-	'SEO_LOG_INSTALL_PHPBB_SEO' => '<strong>phpBB SEO mod rewrite installed (v%s)</strong>',
-	'SEO_LOG_INSTALL_PHPBB_SEO_FAIL' => '<strong>phpBB SEO mod rewrite install attempt failed</strong><br/>%s',
-	'SEO_LOG_UNINSTALL_PHPBB_SEO' => '<strong>phpBB SEO mod rewrite uninstalled (v%s)</strong>',
-	'SEO_LOG_UNINSTALL_PHPBB_SEO_FAIL' => '<strong>phpBB SEO mod rewrite uninstall attempts failed</strong><br/>%s',
-	'SEO_LOG_CONFIG_SETTINGS' => '<strong>Altered phpBB SEO Class settings</strong>',
-	'SEO_LOG_CONFIG_FORUM_URL' => '<strong>Altered Forum URLs</strong>',
-	'SEO_LOG_CONFIG_HTACCESS' => '<strong>Generated new .htaccess</strong>',
-	'SEO_LOG_CONFIG_EXTENDED' => '<strong>Altered phpBB SEO extended config</strong>',
-));
-// www.phpBB-SEO.com SEO TOOLKIT END
-// www.phpBB-SEO.com SEO TOOLKIT BEGIN -> GYM Sitemaps
-$lang = array_merge($lang, array(
-	'ACP_GYM_SITEMAPS' => 'GYM Sitemaps &amp; RSS',
-	'ACP_GYM_MAIN' => 'Main configuration',
-	'ACP_GYM_GOOGLE_MAIN' => 'Google Sitemaps',
-	'ACP_GYM_RSS_MAIN' => 'RSS Feeds',
-	'ACP_GYM_YAHOO_MAIN' => 'Yahoo! url list',
-	'ACP_GYM_HTML_MAIN' => 'HTML sitemaps',
-	'GYM_LOG_CONFIG_MAIN' => '<strong>Altered GYM sitemaps &amp; RSS settings</strong><br/>&raquo; Main settings',
-	'GYM_LOG_CONFIG_GOOGLE' => '<strong>Altered GYM sitemaps &amp; RSS settings</strong><br/>&raquo; Google sitemaps',
-	'GYM_LOG_CONFIG_RSS' => '<strong>Altered GYM sitemaps &amp; RSS settings</strong><br/>&raquo; RSS Feeds',
-	'GYM_LOG_CONFIG_HTML' => '<strong>Altered GYM sitemaps &amp; RSS settings</strong><br/>&raquo; HTML sitemaps',
-	'GYM_LOG_CONFIG_YAHOO' => '<strong>Altered GYM sitemaps &amp; RSS settings</strong><br/>&raquo; Yahoo! URL lists',
-	// Install Logs
-	'SEO_LOG_INSTALL_GYM_SITEMAPS' => '<strong>GYM Sitemaps &amp; RSS V%s Installed</strong>',
-	'SEO_LOG_INSTALL_GYM_SITEMAPS_FAIL' => '<strong>GYM Sitemaps &amp; RSS install attempt failed</strong><br/>%s',
-	'SEO_LOG_UNINSTALL_GYM_SITEMAPS' => '<strong>GYM Sitemaps &amp; RSS V%s Un-installed</strong>',
-	'SEO_LOG_UNINSTALL_GYM_SITEMAPS_FAIL' => '<strong>GYM Sitemaps &amp; RSS Un-install attempt failed</strong><br/>%s',
-	'SEO_LOG_UPDATE_GYM_SITEMAPS' => '<strong>Updated GYM Sitemaps &amp; RSS to V%s</strong>',
-	'SEO_LOG_UPDATE_GYM_SITEMAPS_FAIL' => '<strong>GYM Sitemaps &amp; RSS Update attempt failed</strong><br/>%s',
-));
-// www.phpBB-SEO.com SEO TOOLKIT END -> GYM Sitemaps
+
 ?>
