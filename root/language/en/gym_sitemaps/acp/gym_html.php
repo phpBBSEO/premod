@@ -33,6 +33,14 @@ if (empty($lang) || !is_array($lang))
 $lang = array_merge($lang, array(
 	'HTML_MAIN' => 'HTML Settings',
 	'HTML_MAIN_EXPLAIN' => 'These are the main setting for the HTML module.<br/>They can be applied to all the HTML modules depending on your HTML override settings.',
+	// Linking setup
+	'HTML_LINKS_ACTIVATION' => 'Forum Linking',
+	'HTML_LINKS_MAIN' => 'Main links',
+	'HTML_LINKS_MAIN_EXPLAIN' => 'Display or not main news and maps links in footer.<br/>This feature requires that main links display is activated in the main configuration.',
+	'HTML_LINKS_INDEX' => 'Links on index',
+	'HTML_LINKS_INDEX_EXPLAIN' => 'Display or not links to the available news and maps for each forum on the forum index. These links are added below the forum descritpions.<br/>This feature requires that links on index display is activated in the main configuration.',
+	'HTML_LINKS_CAT' => 'Links on forum page',
+	'HTML_LINKS_CAT_EXPLAIN' => 'Display or not links to the news and maps of the current forum. These links are added below the forum title.<br/>This feature requires that links on forum page display is activated in the main configuration.',
 	// Reset settings
 	'HTML_ALL_RESET' => 'ALL HTML modules',
 	// Limits

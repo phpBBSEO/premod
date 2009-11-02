@@ -81,6 +81,7 @@
 ##			- Added : Bot auth support for sitemaps,
 ##			- Added : Last post link on last topic view,
 ##			- Added : No html option for rss feeds,
+##			- Added : Option for displaying each type of links among the forum,
 ##			- Reorganized language pack,
 ##			- SEOed the prosilver templates, left col comes first now, + other display enhancements,
 ##			- Removed deprecated & usage (php5.3.0) when starting the module classes.

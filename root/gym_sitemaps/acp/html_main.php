@@ -193,15 +193,22 @@ class html_main {
  				'display_vars' => array(
 					'title'	=> 'HTML_MAIN',
 					'vars'	=> array(
+						// URL Settings
+						'legend1'	=> 'HTML_URL',
+						'html_url'	=> array('lang' => 'HTML_URL', 'validate' => 'string',	'type' => 'text:40:255', 'explain' => true),
+						// Link Settings
+						'legend2'	=> 'HTML_LINKS_ACTIVATION',
+						'html_link_main'	=> array('lang' => 'HTML_LINKS_MAIN', 'validate' => 'bool', 'type' => 'radio:yes_no', 'explain' => true,),
+						'html_link_index' => array('lang' => 'HTML_LINKS_INDEX', 'validate' => 'bool', 'type' => 'radio:yes_no', 'explain' => true,),
+						'html_link_cat' => array('lang' => 'HTML_LINKS_CAT', 'validate' => 'bool', 'type' => 'radio:yes_no', 'explain' => true,),
 						// Settings
-						'legend1'	=> 'HTML_SETTINGS',
+						'legend3'	=> 'HTML_SETTINGS',
 						'html_allow_map' => array('lang' => 'HTML_ALLOW_MAP', 'validate' => 'bool', 'type' => 'radio:yes_no', 'explain' => true),
 						'html_allow_cat_map' => array('lang' => 'HTML_ALLOW_CAT_MAP', 'validate' => 'bool', 'type' => 'radio:yes_no', 'explain' => true),
 						'html_sitename' => array('lang' => 'HTML_SITENAME', 'validate' => 'string', 'type' => 'text:40:255', 'explain' => true),
 						'html_site_desc' => array('lang' => 'HTML_SITE_DESC', 'validate' => 'string', 'type' => 'textarea:6:50', 'explain' => true),
 						'html_c_info' => array('lang' => 'HTML_C_INFO', 'validate' => 'string', 'type' => 'text:40:255', 'explain' => true),
 						'html_logo_url' => array('lang' => 'HTML_LOGO_URL', 'validate' => 'string', 'type' => 'text:25:200', 'explain' => true),
-						'html_url'	=> array('lang' => 'HTML_URL', 'validate' => 'string',	'type' => 'text:40:255', 'explain' => true),
 						'html_stats_on_news' => array('lang' => 'HTML_STATS_ON_NEWS', 'validate' => 'string', 'type' => 'select', 'method' => 'select_string', 'explain' => true,),
 						'html_stats_on_map' => array('lang' => 'HTML_STATS_ON_MAP', 'validate' => 'string', 'type' => 'select', 'method' => 'select_string', 'explain' => true,),
 						'html_birthdays_on_news' => array('lang' => 'HTML_BIRTHDAYS_ON_NEWS', 'validate' => 'string', 'type' => 'select', 'method' => 'select_string', 'explain' => true,),
@@ -212,18 +219,21 @@ class html_main {
 						'html_allow_profile' => array('lang' => 'HTML_ALLOW_PROFILE', 'validate' => 'string', 'type' => 'select', 'method' => 'select_string', 'explain' => true,),
 						'html_allow_profile_links' => array('lang' => 'HTML_ALLOW_PROFILE_LINKS', 'validate' => 'string', 'type' => 'select', 'method' => 'select_string', 'explain' => true,),
 						// Auth settings
-						'legend2'	=> 'HTML_AUTH_SETTINGS',
+						'legend4'	=> 'HTML_AUTH_SETTINGS',
 						'html_allow_auth' => array('lang' => 'HTML_ALLOW_AUTH', 'validate' => 'bool', 'type' => 'radio:yes_no', 'explain' => true),
 					),
 				),
 				'default' => array(
+					'html_url' => $phpbb_seo->seo_path['phpbb_url'],
+					'html_link_main' => 1,
+					'html_link_index' => 1,
+					'html_link_cat' => 1,
 					'html_allow_map' => 1,
 					'html_allow_cat_map' => 1,
  					'html_c_info' => $config['sitename'],
 					'html_sitename' => $config['sitename'],
 					'html_site_desc' => $config['site_desc'],
 					'html_logo_url' => '',
-					'html_url' => $phpbb_seo->seo_path['phpbb_url'],
 					'html_disp_online' => 'globalmod',
 					'html_disp_tracking' => 'reg',
 					'html_disp_status' => 'reg',

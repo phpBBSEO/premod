@@ -33,6 +33,14 @@ if (empty($lang) || !is_array($lang))
 $lang = array_merge($lang, array(
 	'RSS_MAIN' => 'RSS Feeds Settings',
 	'RSS_MAIN_EXPLAIN' => 'These are the main setting for the RSS feeds module.<br/>They can be applied to all the RSS modules depending on your RSS override settings.',
+	// Linking setup
+	'RSS_LINKS_ACTIVATION' => 'Forum Linking',
+	'RSS_LINKS_MAIN' => 'Main links',
+	'RSS_LINKS_MAIN_EXPLAIN' => 'Display or not rss and rss list links in footer.<br/>This feature requires that main links display is activated in the main configuration.',
+	'RSS_LINKS_INDEX' => 'Links on index',
+	'RSS_LINKS_INDEX_EXPLAIN' => 'Display or not links to the available rss feed for each forum on the forum index. These links are added below the forum descritpions.<br/>This feature requires that links on index display is activated in the main configuration.',
+	'RSS_LINKS_CAT' => 'Links on forum page',
+	'RSS_LINKS_CAT_EXPLAIN' => 'Display or not links to the rss feed of the current forum. These links are added below the forum title.<br/>This feature requires that links on forum page display is activated in the main configuration.',
 	// Reset settings
 	'RSS_ALL_RESET' => 'ALL RSS modules',
 	// Limits

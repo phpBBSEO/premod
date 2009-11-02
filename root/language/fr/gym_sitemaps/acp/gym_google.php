@@ -34,6 +34,14 @@ if (empty($lang) || !is_array($lang))
 $lang = array_merge($lang, array(
 	'GOOGLE_MAIN' => 'Paramètres des Sitemaps Google',
 	'GOOGLE_MAIN_EXPLAIN' => 'Paramètres principaux du type de rendu Sitemaps Google.<br />Par défaut, ils s’appliqueront à tous les modules du type de rendu Sitemaps Google.',
+	// Linking setup
+	'GOOGLE_LINKS_ACTIVATION' => 'Affichage des liens sitemaps sur le forum',
+	'GOOGLE_LINKS_MAIN' => 'Liens principaux',
+	'GOOGLE_LINKS_MAIN_EXPLAIN' => 'Afficher ou non les liens vers le sitemapindex en pied de page.<br/>Cette option nécéssite que l’affichage des liens principaux soit activé dans la configuration générale.',
+	'GOOGLE_LINKS_INDEX' => 'Liens sur l’index',
+	'GOOGLE_LINKS_INDEX_EXPLAIN' => 'Afficher ou non les liens vers les sitemaps de chaque forum sur l’index du forum. Ces liens sont ajoutés sous la descriptions des forums.<br/>Cette option nécéssite que l’affichage des liens sur l’index soit activé dans la configuration générale.',
+	'GOOGLE_LINKS_CAT' => 'Liens des forums',
+	'GOOGLE_LINKS_CAT_EXPLAIN' => 'Afficher ou non les liens vers le sitemaps du forum en cours. Ce liens est ajoutés sous le titre du forum.<br/>Cette option nécéssite que l’affichage des liens des forums soit activé dans la configuration générale.',
 	// Reset settings
 	'GOOGLE_ALL_RESET' => '<b>Tous<b> les modules Sitemaps Google',
 	'GOOGLE_URL' => 'URL du Sitemap Google',
