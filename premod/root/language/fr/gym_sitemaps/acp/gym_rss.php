@@ -34,6 +34,14 @@ if (empty($lang) || !is_array($lang))
 $lang = array_merge($lang, array(
 	'RSS_MAIN' => 'Paramètres des flux RSS',
 	'RSS_MAIN_EXPLAIN' => 'Il s’agit des paramètres principaux pour le module de flux RSS.<br />Ils peuvent être appliqués à l’ensemble des modules RSS selon vos paramètres d’héritage des options RSS.',
+	// Linking setup
+	'RSS_LINKS_ACTIVATION' => 'Affichage des liens RSS sur le forum',
+	'RSS_LINKS_MAIN' => 'Liens principaux',
+	'RSS_LINKS_MAIN_EXPLAIN' => 'Afficher ou non les liens vers le flux principal et la liste des flux en pied de page.<br/>Cette option nécéssite que l’affichage des liens principaux soit activé dans la configuration générale.',
+	'RSS_LINKS_INDEX' => 'Liens sur l’index',
+	'RSS_LINKS_INDEX_EXPLAIN' => 'Afficher ou non les liens vers les flux de chaque forum sur l’index du forum. Ces liens sont ajoutés sous la descriptions des forums.<br/>Cette option nécéssite que l’affichage des liens sur l’index soit activé dans la configuration générale.',
+	'RSS_LINKS_CAT' => 'Liens des forums',
+	'RSS_LINKS_CAT_EXPLAIN' => 'Afficher ou non les liens vers le flux rss du forum en cours. Ce liens est ajoutés sous le titre du forum.<br/>Cette option nécéssite que l’affichage des liens des forums soit activé dans la configuration générale.',
 	// Reset settings
 	'RSS_ALL_RESET' => 'Tous les modules RSS',
 	// Limits

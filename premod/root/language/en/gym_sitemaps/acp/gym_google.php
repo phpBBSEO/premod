@@ -33,6 +33,14 @@ if (empty($lang) || !is_array($lang))
 $lang = array_merge($lang, array(
 	'GOOGLE_MAIN' => 'Google Sitemaps Settings',
 	'GOOGLE_MAIN_EXPLAIN' => 'Main settings for the Google sitemap module.<br/>They will applied to all the Google sitemaps modules by default.',
+	// Linking setup
+	'GOOGLE_LINKS_ACTIVATION' => 'Forum Linking',
+	'GOOGLE_LINKS_MAIN' => 'Main links',
+	'GOOGLE_LINKS_MAIN_EXPLAIN' => 'Display or not sitemapindex link in footer.<br/>This feature requires that main links display is activated in the main configuration.',
+	'GOOGLE_LINKS_INDEX' => 'Links on index',
+	'GOOGLE_LINKS_INDEX_EXPLAIN' => 'Display or not links to the available sitemaps for each forum on the forum index. These links are added below the forum descritpions.<br/>This feature requires that links on index display is activated in the main configuration.',
+	'GOOGLE_LINKS_CAT' => 'Links on forum page',
+	'GOOGLE_LINKS_CAT_EXPLAIN' => 'Display or not links to the sitemap of the current forum. These links are added below the forum title.<br/>This feature requires that links on forum page display is activated in the main configuration.',
 	// Reset settings
 	'GOOGLE_ALL_RESET' => '<b>All</b> Google sitemaps modules',
 	'GOOGLE_URL' => 'Google Sitemaps URL',

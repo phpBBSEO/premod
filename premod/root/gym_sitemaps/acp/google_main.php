@@ -173,30 +173,38 @@ class google_main {
 			       	'display_vars' => array(
 					'title'	=> 'GOOGLE_MAIN',
 					'vars'	=> array(
-						// Settings
+						// URL Settings
 						'legend1'	=> 'GOOGLE_URL',
 						'google_url'	=> array('lang' => 'GOOGLE_URL', 'validate' => 'string', 'type' => 'text:35:200', 'explain' => true),
+						// Link Settings
+						'legend2'	=> 'GOOGLE_LINKS_ACTIVATION',
+						'google_link_main'	=> array('lang' => 'GOOGLE_LINKS_MAIN', 'validate' => 'bool', 'type' => 'radio:yes_no', 'explain' => true,),
+						'google_link_index' => array('lang' => 'GOOGLE_LINKS_INDEX', 'validate' => 'bool', 'type' => 'radio:yes_no', 'explain' => true,),
+						'google_link_cat' => array('lang' => 'GOOGLE_LINKS_CAT', 'validate' => 'bool', 'type' => 'radio:yes_no', 'explain' => true,),
 						// Auth settings
-						'legend2'	=> 'GOOGLE_AUTH_SETTINGS',
+						'legend3'	=> 'GOOGLE_AUTH_SETTINGS',
 						'google_allow_auth' => array('lang' => 'GOOGLE_ALLOW_AUTH', 'validate' => 'bool', 'type' => 'radio:yes_no', 'explain' => true),
 						'google_cache_auth' => array('lang' => 'GOOGLE_CACHE_AUTH', 'validate' => 'bool', 'type' => 'radio:yes_no', 'explain' => true),
 						// Ping
-						'legend3' => 'GOOGLE_PING',
+						'legend4' => 'GOOGLE_PING',
 						'google_ping' => array('lang' => 'GOOGLE_PING', 'validate' => 'bool', 'type' => 'radio:yes_no', 'explain' => true),
 						// Styling
-						'legend4' => 'GYM_STYLE',
+						'legend5' => 'GYM_STYLE',
 						'google_xslt'	=> array('lang' => 'GOOGLE_XSLT', 'validate' => 'bool', 'type' => 'radio:yes_no', 'explain' => true),
 						'google_load_phpbb_css' => array('lang' => 'GOOGLE_LOAD_PHPBB_CSS', 'validate' => 'bool', 'type' => 'radio:yes_no', 'explain' => true),
 						// Threshold
-						'legend5' => 'GOOGLE_THRESHOLD',
+						'legend6' => 'GOOGLE_THRESHOLD',
 						'google_threshold' => array('lang' => 'GOOGLE_THRESHOLD', 'validate' => 'int:1:100', 'type' => 'text:4:4', 'explain' => true),
 						// Priorities
-						'legend6' => 'GOOGLE_PRIORITIES',
+						'legend7' => 'GOOGLE_PRIORITIES',
 						'google_default_priority' => array('lang' => 'GOOGLE_DEFAULT_PRIORITY', 'type' => 'custom', 'validate' => 'string', 'method' => 'validate_num', 'params' => array('{CONFIG_VALUE}', '{KEY}', 2, 0, 1),  'explain' => true,),
 					)
 				),
 				'default' => array(
-					'google_url'	=> $phpbb_seo->seo_path['phpbb_url'],
+					'google_url' => $phpbb_seo->seo_path['phpbb_url'],
+					'google_link_main' => 1,
+					'google_link_index' => 1,
+					'google_link_cat' => 1,
 					'google_allow_auth' => 0,
 					'google_cache_auth' => 1,
 					'google_ping' => 0,
