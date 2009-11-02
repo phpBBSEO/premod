@@ -2,7 +2,7 @@
 /**
 *
 * @package phpBB3
-* @version $Id: functions_display.php 10121 2009-09-08 10:36:22Z acydburn $
+* @version $Id: functions_display.php 10243 2009-10-28 16:49:23Z rxu $
 * @copyright (c) 2005 phpBB Group
 * @license http://opensource.org/licenses/gpl-license.php GNU Public License
 *
@@ -362,7 +362,7 @@ function display_forums($root_data = '', $display_moderators = true, $return_mod
 		$forum_unread = (isset($forum_tracking_info[$forum_id]) && $row['orig_forum_last_post_time'] > $forum_tracking_info[$forum_id]) ? true : false;
 
 		// Mark the first visible forum on index as unread if there's any unread global announcement
-		if (($forum_id == $forum_ids_moderator[0]) && ($root_data['forum_id'] == 0) && $ga_unread)
+		if ($ga_unread && !empty($forum_ids_moderator) && $forum_id == $forum_ids_moderator[0])
 		{
 			$forum_unread = true;
 		}
