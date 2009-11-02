@@ -2,7 +2,7 @@
 /**
 *
 * @package phpBB3
-* @version $Id: questionnaire.php 10131 2009-09-10 13:30:47Z acydburn $
+* @version $Id: questionnaire.php 10226 2009-10-20 11:16:30Z acydburn $
 * @copyright (c) 2005 phpBB Group
 * @license http://opensource.org/licenses/gpl-license.php GNU Public License
 *
@@ -303,6 +303,7 @@ class phpbb_questionnaire_phpbb_data_provider
 			'database_gc' => true,
 			'dbms_version' => true,
 			'default_dateformat' => true,
+			'default_lang' => true,
 			'display_last_edited' => true,
 			'display_order' => true,
 			'edit_time' => true,

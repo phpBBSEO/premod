@@ -1,7 +1,7 @@
 <?php
 /**
 * @package phpBB3
-* @version $Id: feed.php 10221 2009-10-12 14:16:09Z acydburn $
+* @version $Id: feed.php 10244 2009-10-29 14:00:43Z acydburn $
 * @copyright (c) 2009 phpBB Group
 * @license http://opensource.org/licenses/gpl-license.php GNU Public License
 *
@@ -212,17 +212,7 @@ function feed_append_sid($url, $params)
 {
 	global $board_url;
 
-	$link = append_sid($board_url . $url, $params);
-
-	// Remove added sid - not as easy as it sounds. ;)
-	$link = (strpos($link, 'sid=') !== false) ? trim(preg_replace('/(&amp;|&|\?)sid=[a-z0-9]+(&amp;|&)?/', '\1', $link), '?& ') : $link;
-
-	// Now the only thing remaining could be an empty &amp;
-	$link = (substr($link, -5) === '&amp;') ? substr($link, 0, -5) : $link;
-	// And &amp;#xxx
-	$link = str_replace('&amp;#', '#', $link);
-
-	return $link;
+	return append_sid($board_url . $url, $params, true, '');
 }
 
 /**
@@ -430,7 +420,7 @@ class phpbb_feed
 	/**
 	* Default cache time of entries in seconds
 	*/
-	var $cache_time = 300;
+	var $cache_time = 0;
 
 	/**
 	* Separator for title elements to separate items (for example forum / topic)

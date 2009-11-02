@@ -2,7 +2,7 @@
 /**
 *
 * @package VC
-* @version $Id: captcha_factory.php 9891 2009-07-29 22:59:51Z bantu $
+* @version $Id: captcha_factory.php 10224 2009-10-15 10:52:41Z Kellanved $
 * @copyright (c) 2008 phpBB Group
 * @license http://opensource.org/licenses/gpl-license.php GNU Public License
 *
@@ -35,7 +35,7 @@ class phpbb_captcha_factory
 		{
 			include($phpbb_root_path . "includes/captcha/plugins/{$name}_plugin." . $phpEx);
 		}
-		$instance =& call_user_func(array($name, 'get_instance'));
+		$instance = call_user_func(array($name, 'get_instance'));
 		return $instance;
 	}
 

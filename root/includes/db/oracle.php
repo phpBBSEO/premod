@@ -2,7 +2,7 @@
 /**
 *
 * @package dbal
-* @version $Id: oracle.php 10175 2009-09-21 18:02:33Z acydburn $
+* @version $Id: oracle.php 10247 2009-10-30 17:21:20Z acydburn $
 * @copyright (c) 2005 phpBB Group
 * @license http://opensource.org/licenses/gpl-license.php GNU Public License
 *
@@ -136,7 +136,7 @@ class dbal_oracle extends dbal
 	*/
 	function _rewrite_where($where_clause)
 	{
-		preg_match_all('/\s*(AND|OR)?\s*([\w_.]++)\s*(?:(=|<[=>]?|>=?)\s*((?>\'(?>[^\']++|\'\')*+\'|[\d-.]+))|((NOT )?IN\s*\((?>\'(?>[^\']++|\'\')*+\',? ?|[\d-.]+,? ?)*+\)))/', $where_clause, $result, PREG_SET_ORDER);
+		preg_match_all('/\s*(AND|OR)?\s*([\w_.()]++)\s*(?:(=|<[=>]?|>=?|LIKE)\s*((?>\'(?>[^\']++|\'\')*+\'|[\d-.()]+))|((NOT )?IN\s*\((?>\'(?>[^\']++|\'\')*+\',? ?|[\d-.]+,? ?)*+\)))/', $where_clause, $result, PREG_SET_ORDER);
 		$out = '';
 		foreach ($result as $val)
 		{

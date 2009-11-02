@@ -2,7 +2,7 @@
 /**
 *
 * @package dbal
-* @version $Id: db_tools.php 10185 2009-09-24 15:36:05Z acydburn $
+* @version $Id: db_tools.php 10248 2009-10-30 19:19:48Z acydburn $
 * @copyright (c) 2007 phpBB Group
 * @license http://opensource.org/licenses/gpl-license.php GNU Public License
 *
@@ -453,11 +453,17 @@ class phpbb_db_tools
 
 					case 'firebird':
 					case 'mssql':
+						// We need the data here
+						$old_return_statements = $this->return_statements;
+						$this->return_statements = true;
+
 						$primary_key_stmts = $this->sql_create_primary_key($table_name, $table_data['PRIMARY_KEY']);
 						foreach ($primary_key_stmts as $pk_stmt)
 						{
 							$statements[] = $pk_stmt;
 						}
+
+						$this->return_statements = $old_return_statements;
 					break;
 
 					case 'oracle':
@@ -1867,7 +1873,7 @@ class phpbb_db_tools
 				}
 				else
 				{
-					$statements[] = 'ALTER TABLE ' . $table_name . ' ALTER COLUMN "' . strtoupper($column_name) . '" TYPE ' . ' ' . $column_data['column_type_sql'];
+					$statements[] = 'ALTER TABLE ' . $table_name . ' ALTER COLUMN "' . strtoupper($column_name) . '" TYPE ' . ' ' . $column_data['column_type_sql_type'];
 				}
 			break;
 
