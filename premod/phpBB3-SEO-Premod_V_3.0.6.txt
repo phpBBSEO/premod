@@ -107,6 +107,7 @@
 ##		- Meta tags 0.4.0 :
 ##			- Fixed : Bad path when calling search_ignore_words.php,
 ##			- Added : Various options that can be configurable in the extended acp menu when the mod is not used in standalone mode,
+##			- Meta tag class now put in its own file.
 ##	2009-06-05 - 3.0.5
 ##		- All mods Updated to comply with phpBB 3.0.5.
 ##		- GYM Sitemaps & RSS 2.0.RC5 :
