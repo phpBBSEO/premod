@@ -83,7 +83,9 @@ $lang = array_merge($lang, array(
 	'SEO_EXTERNAL_CLASSES_EXPLAIN' => 'here you can define some css classes that will activate the new window feature on links using it. Coma separated list of class names, example: postlink,external',
 	// Related Topics
 	'SEO_RELATED' => 'Related topics activation',
-	'SEO_RELATED_EXPLAIN' => 'Display or not a related topic list in topic pages..<br/><b style="color:red;">Note :</b><br/>With MYSQL >=4.1 and the topic table using MyISAM, related topics will be obtained using a FullText index on  the topic title and will be sorted by relevancy. in other cases, an SQL LIKE will be used, and results will be sorted by publication time',
+	'SEO_RELATED_EXPLAIN' => 'Display or not a related topic list in topic pages.<br/><b style="color:red;">Note :</b><br/>With MYSQL >=4.1 and the topic table using MyISAM, related topics will be obtained using a FullText index on  the topic title and will be sorted by relevancy. in other cases, an SQL LIKE will be used, and results will be sorted by publication time',
+	'SEO_RELATED_CHECK_IGNORE' => 'Ignore words filter',
+	'SEO_RELATED_CHECK_IGNORE_EXPLAIN' => 'Apply, or not, the search_ignore_words.php exclusions while searching for related topics',
 	'SEO_RELATED_LIMIT' => 'Related topics limit',
 	'SEO_RELATED_LIMIT_EXPLAIN' => 'Maximum amount of related topics to display',
 	'SEO_RELATED_ALLFORUMS' => 'Search in all forums',
