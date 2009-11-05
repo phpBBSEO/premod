@@ -213,6 +213,7 @@ class acp_phpbb_seo {
 					$display_vars['vars'] += array(
 						'legend2' => 'RELATED_TOPICS',
 						'seo_related' => array('lang' => 'SEO_RELATED', 'validate' => 'bool', 'type' => 'radio:enabled_disabled', 'explain' => true, 'default' => 0),
+						'seo_related_check_ignore' => array('lang' => 'SEO_RELATED_CHECK_IGNORE', 'validate' => 'bool', 'type' => 'radio:enabled_disabled', 'explain' => true, 'default' => 0),
 						'seo_related_limit' => array('lang' => 'SEO_RELATED_LIMIT', 'validate' => 'int:2:25', 'type' => 'text:3:4', 'explain' => true, 'default' => 5),
 						'seo_related_allforums' => array('lang' => 'SEO_RELATED_ALLFORUMS', 'validate' => 'bool', 'type' => 'radio:yes_no', 'explain' => true, 'default' => 0),
 					);

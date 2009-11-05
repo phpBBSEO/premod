@@ -24,6 +24,7 @@ class seo_related {
 	var $limit = 5;
 	var $allforums = false;
 	var $myisam = true;
+	var $check_ignore = true;
 	/**
 	* constructor
 	*/
@@ -49,6 +50,7 @@ class seo_related {
 		}
 		$this->limit = !empty($config['seo_related_limit']) ? max(0, (int) $config['seo_related_limit']) : $this->limit;
 		$this->allforums = !empty($config['seo_related_allforums']) ? true : $this->allforums;
+		$this->check_ignore = !empty($config['seo_related_check_ignore']) ? true : $this->check_ignore;
 	}
 	/**
 	* get related list
@@ -186,9 +188,23 @@ class seo_related {
 	* prepare_match
 	*/
 	function prepare_match($text, $min_lenght = 3, $max_lenght = 14) {
+		static $stop_words = array();
 		$return = '';
-		$text = explode(' ', preg_replace('`[\s]+`', ' ', trim($text)));
-		if ( !empty($text) ) {
+		$text = utf8_strtolower(trim(preg_replace('`[\s]+`', ' ', $text)));
+		$text = explode(' ', $text);
+		if (!empty($text) && $this->check_ignore) {
+			if (empty($stop_words)) {
+				global $phpbb_root_path, $user, $phpEx;
+				$words = array();
+				if (file_exists("{$user->lang_path}{$user->lang_name}/search_ignore_words.$phpEx")){
+					// include the file containing ignore words
+					include("{$user->lang_path}{$user->lang_name}/search_ignore_words.$phpEx");
+				}
+				$stop_words = & $words;
+			}
+			$text = array_diff($text, $stop_words);
+		}
+		if (!empty($text)) {
 			foreach ($text as $word) {
 				$word = trim($word);
 				if ( utf8_strlen($word) >= $min_lenght && utf8_strlen($word) <= $max_lenght) {

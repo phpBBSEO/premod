@@ -85,6 +85,8 @@ $lang = array_merge($lang, array(
 	// Related Topics
 	'SEO_RELATED' => 'Activer les articles en relation',
 	'SEO_RELATED_EXPLAIN' => 'Afficher ou non une liste de sujets en relation sur les pages de sujets.<br/><b style="color:red;">Note :</b><br/>Avec MYSQL >=4.1 et si la table des sujets utilise MyISAM, la relation sera établile via un index FullText sur le titre des sujets et les résultats seront classé par pertinence. Dans les autres cas, une requête LIKE sera utilisée et les résultats seront classés par ordre de publication',
+	'SEO_RELATED_CHECK_IGNORE' => 'Filtre mots ignorés',
+	'SEO_RELATED_CHECK_IGNORE_EXPLAIN' => 'Exclure, ou non, les mots du fichier search_ignore_words.php lors de la recherche des articles en relation',
 	'SEO_RELATED_LIMIT' => 'Nombre de résultats',
 	'SEO_RELATED_LIMIT_EXPLAIN' => 'Nombre de résultats à afficher au maximum',
 	'SEO_RELATED_ALLFORUMS' => 'Recherche sur tous les forums',
