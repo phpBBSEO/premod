@@ -179,19 +179,25 @@ class seo_meta {
 		$keywords = '';
 		$num = 0;
 		$text = $decode_entities ? html_entity_decode(strip_tags($text), ENT_COMPAT, 'UTF-8') : strip_tags($text);
-		$text = utf8_strtolower(preg_replace($filter, ' ', $text));
+		$text = utf8_strtolower(trim(preg_replace($filter, ' ', $text)));
+		if (!$text) {
+			return '';
+		}
 		$text = explode(' ', trim($text), 50);
 		if ($this->mconfig['check_ignore']) {
 			if (empty($stop_words)) {
 				global $phpbb_root_path, $user, $phpEx;
 				$words = array();
-				if (file_exists("{$user->lang_path}{$user->lang_name}/search_ignore_words.$phpEx")){
+				if (file_exists("{$user->lang_path}{$user->lang_name}/search_ignore_words.$phpEx")) {
 					// include the file containing ignore words
 					include("{$user->lang_path}{$user->lang_name}/search_ignore_words.$phpEx");
 				}
 				$stop_words = & $words;
 			}
 			$text = array_diff($text, $stop_words);
+		}
+		if (empty($text)) {
+			return '';
 		}
 		// We take the most used words first
 		$text = array_count_values($text);
