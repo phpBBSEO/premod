@@ -1853,7 +1853,13 @@ if (empty($_REQUEST['f']))
 {
 	$_REQUEST['f'] = $forum_id;
 }
-
+// www.phpBB-SEO.com SEO TOOLKIT BEGIN - Related Topics
+if ((isset($config['seo_related']) && $config['seo_related']) || !isset($config['seo_related'])) {
+	require($phpbb_root_path . "includes/phpbb_seo_related.$phpEx");
+	$seo_related = new seo_related();
+	$seo_related->get($topic_data, $forum_id);
+}
+// www.phpBB-SEO.com SEO TOOLKIT END - Related Topics
 // Output the page
 // www.phpBB-SEO.com SEO TOOLKIT BEGIN - TITLE
 $extra_title = ($start > 0) ? ' - ' . $user->lang['Page'] . ( floor( ($start / $config['posts_per_page']) ) + 1 ) : '';

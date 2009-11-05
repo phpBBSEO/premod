@@ -81,10 +81,17 @@ $lang = array_merge($lang, array(
 	'SEO_EXTERNAL_SUBDOMAIN_EXPLAIN' => 'Open, or not, sub-domains (of your forum domain) links in a new browser window / tab',
 	'SEO_EXTERNAL_CLASSES' => 'External by css class',
 	'SEO_EXTERNAL_CLASSES_EXPLAIN' => 'here you can define some css classes that will activate the new window feature on links using it. Coma separated list of class names, example: postlink,external',
+	// Related Topics
+	'SEO_RELATED' => 'Related topics activation',
+	'SEO_RELATED_EXPLAIN' => 'Display or not a related topic list in topic pages..<br/><b style="color:red;">Note :</b><br/>With MYSQL >=4.1 and the topic table using MyISAM, related topics will be obtained using a FullText index on  the topic title and will be sorted by relevancy. in other cases, an SQL LIKE will be used, and results will be sorted by publication time',
+	'SEO_RELATED_LIMIT' => 'Related topics limit',
+	'SEO_RELATED_LIMIT_EXPLAIN' => 'Maximum amount of related topics to display',
+	'SEO_RELATED_ALLFORUMS' => 'Search in all forums',
+	'SEO_RELATED_ALLFORUMS_EXPLAIN' => 'Search in all forums instead of searching in the current one.<br/><b style="color:red;">Note :</b><br/>Searching in all forums is a bit slower and does not necessarily bring better results',
 	// Titles
 	'SEO_PAGE_TITLES' => '<a href="http://www.phpbb-seo.com/en/phpbb-seo-toolkit/optimal-titles-t1289.html" title="Optimal Titles mod" onclick="window.open(this.href); return false;">Page titles</a>',
 	'SEO_APPEND_SITENAME' => 'Append site name to page titles',
-	'SEO_APPEND_SITENAME_EXPLAIN' => 'Append, or not, site name to page titles.<br/><b style="color:red;">Warning :</b><br/>This option requires that you properly edited all your overall_header.html for the Optimal titles mod, site name could be repeated in page titles otherwise.',
+	'SEO_APPEND_SITENAME_EXPLAIN' => 'Append, or not, site name to page titles.<br/><b style="color:red;">Warning :</b><br/>This option requires that you properly edited all your overall_header.html for the Optimal titles mod, site name could be repeated in page titles otherwise',
 	// Meta
 	'SEO_META' => '<a href="http://www.phpbb-seo.com/en/phpbb-seo-toolkit/seo-dynamic-meta-tags-t1308.html" title="Dynamic Meta tags mod" onclick="window.open(this.href); return false;">Meta tags</a>',
 	'SEO_META_TITLE' => 'Meta title',

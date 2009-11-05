@@ -874,4 +874,7 @@ $lang = array_merge($lang, array(
 	'GYM_RSS_SOURCE' => 'Source',
 ));
 // www.phpBB-SEO.com SEO TOOLKIT END -> GYM Sitemaps
+// www.phpBB-SEO.com SEO TOOLKIT BEGIN - Related Topics
+$lang['RELATED_TOPICS'] = 'Related topics';
+// www.phpBB-SEO.com SEO TOOLKIT END - Related Topics
 ?>

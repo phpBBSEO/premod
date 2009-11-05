@@ -1,13 +1,13 @@
 <?php
-/** 
+/**
 *
 * common [Standard french]
 * translated originally by PhpBB-fr.com <http://www.phpbb-fr.com/> and phpBB.biz <http://www.phpBB.biz>
 *
 * @package language
 * @version $Id: common.php, v1.24 2009/05/27 21:27:00 Elglobo Exp $
-* @copyright (c) 2005 phpBB Group 
-* @license http://opensource.org/licenses/gpl-license.php GNU Public License 
+* @copyright (c) 2005 phpBB Group
+* @license http://opensource.org/licenses/gpl-license.php GNU Public License
 *
 */
 
@@ -267,7 +267,7 @@ $lang = array_merge($lang, array(
 	'HOME'						=> 'Accueil',
 
 	'ICQ'						=> 'ICQ',
-	'ICQ_STATUS'				=> 'Statut ICQ',	
+	'ICQ_STATUS'				=> 'Statut ICQ',
 	'IF'						=> 'Si',
 	'IMAGE'						=> 'Image',
 	'IMAGE_FILETYPE_INVALID'	=> 'Le type de fichier image %d pour le type mime %s n’est pas supporté.',
@@ -338,7 +338,7 @@ $lang = array_merge($lang, array(
 	'MODERATORS'			=> 'Modérateurs',
 	'MONTH'					=> 'Mois',
 	'MOVE'					=> 'Déplacer',
-	'MSNM'					=> 'MSNM/WLM',	
+	'MSNM'					=> 'MSNM/WLM',
 
 	'NA'						=> 'N/A',
 	'NEWEST_USER'				=> 'L’utilisateur enregistré le plus récent est <strong>%s</strong>',
@@ -396,7 +396,7 @@ $lang = array_merge($lang, array(
 	'NO_USER'					=> 'L’utilisateur demandé n’existe pas.',
 	'NO_USERS'					=> 'Les utilisateurs demandés n’existent pas.',
 	'NO_USER_SPECIFIED'			=> 'Aucun nom d’utilisateur indiqué.',
-	
+
 	// Nullar/Singular/Plural language entry. The key numbers define the number range in which a certain grammatical expression is valid.
 	'NUM_POSTS_IN_QUEUE' => array(
 		0 => 'Aucun message en attente', // 0
@@ -512,7 +512,7 @@ $lang = array_merge($lang, array(
 	'SEARCHING_FORUMS'			=> 'Recherche dans les forums',
 	'SEARCH_ACTIVE_TOPICS'		=> 'Voir les sujets récents',
 	'SEARCH_FOR'				=> 'Rechercher',
-	'SEARCH_FORUM'				=> 'Dans ce forum…',	
+	'SEARCH_FORUM'				=> 'Dans ce forum…',
 	'SEARCH_NEW'				=> 'Voir les nouveaux messages',
 	'SEARCH_POSTS_BY'			=> 'Rechercher les messages de',
 	'SEARCH_SELF'				=> 'Voir mes messages',
@@ -688,7 +688,7 @@ $lang = array_merge($lang, array(
 	'YEAR'				=> 'Année',
 	'YEAR_MONTH_DAY'	=> '(AAAA-MM-JJ)',
 	'YES'				=> 'Oui',
-	'YIM'				=> 'YIM',	
+	'YIM'				=> 'YIM',
 	'YOU_LAST_VISIT'	=> 'Dernière visite le %s',
 	'YOU_NEW_PM'		=> 'Un nouveau message privé vous attend dans votre boîte de réception.',
 	'YOU_NEW_PMS'		=> 'De nouveaux messages privés vous attendent dans votre boîte de réception.',
@@ -863,4 +863,7 @@ $lang = array_merge($lang, array(
 	'GYM_RSS_SOURCE' => 'Source',
 ));
 // www.phpBB-SEO.com SEO TOOLKIT END -> GYM Sitemaps
+// www.phpBB-SEO.com SEO TOOLKIT BEGIN - Related Topics
+$lang['RELATED_TOPICS'] = 'Articles en relation';
+// www.phpBB-SEO.com SEO TOOLKIT END - Related Topics
 ?>

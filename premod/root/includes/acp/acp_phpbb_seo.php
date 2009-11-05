@@ -75,6 +75,7 @@ class acp_phpbb_seo {
 			$this->lengh_limit = 30;
 			$this->word_limit = 5;
 		}
+		$related_installed = false;
 		switch ($mode) {
 			case 'settings':
 				$this->write_type = 'forum';
@@ -206,11 +207,14 @@ class acp_phpbb_seo {
 						'seo_ext_classes' =>  array('lang' => 'SEO_EXTERNAL_CLASSES', 'validate' => 'string', 'type' => 'text:25:150', 'explain' => true, 'default' => ''),
 					),
 				);
-				// Optimal title
-				if (isset($user->lang['Page'])) {
+				// Related topics
+				if (file_exists($phpbb_root_path . "includes/phpbb_seo_related.$phpEx")) {
+					$related_installed = true;
 					$display_vars['vars'] += array(
-						'legend2' => 'SEO_PAGE_TITLES',
-						'seo_append_sitename' =>  array('lang' => 'SEO_APPEND_SITENAME', 'validate' => 'bool', 'type' => 'radio:yes_no', 'explain' => true, 'default' => 0),
+						'legend2' => 'RELATED_TOPICS',
+						'seo_related' => array('lang' => 'SEO_RELATED', 'validate' => 'bool', 'type' => 'radio:enabled_disabled', 'explain' => true, 'default' => 0),
+						'seo_related_limit' => array('lang' => 'SEO_RELATED_LIMIT', 'validate' => 'int:2:25', 'type' => 'text:3:4', 'explain' => true, 'default' => 5),
+						'seo_related_allforums' => array('lang' => 'SEO_RELATED_ALLFORUMS', 'validate' => 'bool', 'type' => 'radio:yes_no', 'explain' => true, 'default' => 0),
 					);
 				}
 				// dynamic meta tag mod
@@ -231,6 +235,13 @@ class acp_phpbb_seo {
 						'seo_meta_get_filter' =>  array('lang' => 'SEO_META_GET_FILTER', 'validate' => 'string:0:225', 'type' => 'text:25:150', 'explain' => true, 'default' => 'style,hilit,sid'),
 						'seo_meta_robots' =>  array('lang' => 'SEO_META_ROBOTS', 'validate' => 'string:0:225', 'type' => 'text:25:150', 'explain' => true, 'default' => 'index,follow'),
 						'seo_meta_noarchive' =>  array('lang' => 'SEO_META_NOARCHIVE', 'validate' => 'string:0:225', 'type' => 'text:25:150', 'explain' => true, 'default' => ''),
+					);
+				}
+				// Optimal title
+				if (isset($user->lang['Page'])) {
+					$display_vars['vars'] += array(
+						'legend4' => 'SEO_PAGE_TITLES',
+						'seo_append_sitename' =>  array('lang' => 'SEO_APPEND_SITENAME', 'validate' => 'bool', 'type' => 'radio:yes_no', 'explain' => true, 'default' => 0),
 					);
 				}
 				// install if necessary
@@ -342,18 +353,16 @@ class acp_phpbb_seo {
 						if (!class_exists('phpbb_db_tools')) {
 							include($phpbb_root_path . 'includes/db/db_tools.' . $phpEx);
 						}
-						$db->sql_return_on_error(true);
 						// in case we already started the phpbb_db_tools class above
 						if (empty($db_tools)) {
 							$db_tools = new phpbb_db_tools($db);
 						}
+						$db_tools->db->sql_return_on_error(true);
 						$indexes = $db_tools->sql_list_index(TOPICS_TABLE);
 						$drop_index_name = 'topic_last_post_id';
 						$add_index_name = 'topic_lpid';
 						if (in_array($drop_index_name, $indexes)) {
-							// we won't rename the index here, people can live with it
-							// $db_tools->sql_index_drop(TOPICS_TABLE, $drop_index_name);
-							continue;
+							$db_tools->sql_index_drop(TOPICS_TABLE, $drop_index_name);
 						}
 						if (!in_array($add_index_name, $indexes)) {
 							// Try to override some limits - maybe it helps some...
@@ -368,6 +377,70 @@ class acp_phpbb_seo {
 						$db_tools->db->sql_return_on_error(false);
 					}
 				} elseif ($mode == 'extended') {
+					if ($config_name === 'seo_related') {
+						if ($db->sql_layer == 'mysql4' || $db->sql_layer == 'mysqli') {
+							$add = $remove = $alter = false;
+							if ($config_value && !$config['seo_related']) {
+								$alter = $add = true;
+							}
+							if (!$config_value && $config['seo_related']) {
+								$alter = $remove = true;
+							}
+							// check engine type
+							$result = $db->sql_query('SHOW TABLE STATUS LIKE \'' . TOPICS_TABLE . '\'');
+							$info = $db->sql_fetchrow($result);
+							$db->sql_freeresult($result);
+							$engine = '';
+							if (isset($info['Engine'])) {
+								$engine = $info['Engine'];
+							} else if (isset($info['Type'])) {
+								$engine = $info['Type'];
+							}
+							if ($engine != 'MyISAM') {
+								set_config('seo_related_myisam', 0);
+								$alter = false;
+							}
+							// let's go
+							if ($alter) {
+								// Try to override some limits - maybe it helps some...
+								@set_time_limit(0);
+								@ini_set('memory_limit', '128M');
+								// use db_tools to check the index
+								if (!class_exists('phpbb_db_tools')) {
+									include($phpbb_root_path . 'includes/db/db_tools.' . $phpEx);
+								}
+								if (empty($db_tools)) {
+									$db_tools = new phpbb_db_tools($db);
+								}
+								$db_tools->db->sql_return_on_error(true);
+								$indexes = $db_tools->sql_list_index(TOPICS_TABLE);
+								$nothing_to_do = false;
+								if (in_array('topic_tft', $indexes)) {
+									$nothing_to_do = $add ? true : false;
+								} else {
+									$nothing_to_do = $remove ? true : false;
+								}
+								// do not use db_tools since it does not support to add FullText indexes
+								if (!$nothing_to_do) {
+									if ($add) {
+										$sql = 'ALTER TABLE ' . TOPICS_TABLE . '
+											ADD FULLTEXT topic_tft (topic_title)';
+									} else {
+										$sql = 'ALTER TABLE ' . TOPICS_TABLE . '
+											DROP INDEX topic_tft';
+									}
+									$db->sql_return_on_error(true);
+									$db->sql_query($sql);
+									if ($db->sql_error_triggered) {
+										$error[] = '<b>' . $user->lang['no_dupe'] . '</b> : ' . $user->lang['SEO_SQL_ERROR'] . ' [ ' . $db->sql_layer . ' ] : ' . $db->sql_error_returned['message'] . ' [' . $db->sql_error_returned['code'] . ']' . '<br/>' . $user->lang['SEO_SQL_TRY_MANUALLY'] . '<br/>' . $db->sql_error_sql;
+										$submit = false;
+										$config_value = 0;
+									}
+									$db->sql_return_on_error(false);
+								}
+							}
+						}
+					}
 					set_config($config_name, $config_value);
 				}
 			}

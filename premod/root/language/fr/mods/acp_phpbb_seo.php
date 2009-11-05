@@ -82,14 +82,21 @@ $lang = array_merge($lang, array(
 	'SEO_EXTERNAL_SUBDOMAIN_EXPLAIN' => 'Ouvrir ou non les liens pointant vers un sous domaine du domaine de votre forum dans une nouvelle fenêtre du navigateur',
 	'SEO_EXTERNAL_CLASSES' => 'Classe css externe',
 	'SEO_EXTERNAL_CLASSES_EXPLAIN' => 'Vous pouvez définir des classes css qui activeront l’ouverture dans une nouvelle fenêtre pour les liens. Liste de classes séparées par des virgules, exemple : postlink,external',
+	// Related Topics
+	'SEO_RELATED' => 'Activer les articles en relation',
+	'SEO_RELATED_EXPLAIN' => 'Afficher ou non une liste de sujets en relation sur les pages de sujets.<br/><b style="color:red;">Note :</b><br/>Avec MYSQL >=4.1 et si la table des sujets utilise MyISAM, la relation sera établile via un index FullText sur le titre des sujets et les résultats seront classé par pertinence. Dans les autres cas, une requête LIKE sera utilisée et les résultats seront classés par ordre de publication',
+	'SEO_RELATED_LIMIT' => 'Nombre de résultats',
+	'SEO_RELATED_LIMIT_EXPLAIN' => 'Nombre de résultats à afficher au maximum',
+	'SEO_RELATED_ALLFORUMS' => 'Recherche sur tous les forums',
+	'SEO_RELATED_ALLFORUMS_EXPLAIN' => 'Rechercher sur tous les forums au lieux de rechercher uniquement dans le forum en cours.<br/><b style="color:red;">Note :</b><br/>Rechercher sur tous les forums est un peu plus lent et n’apporte pas forcément de meilleurs résultats',
 	// Titles
 	'SEO_PAGE_TITLES' => '<a href="http://www.phpbb-seo.com/fr/toolkit-phpbb-seo/optimisation-titres-t1653.html" title="Mod Optimal Titles" onclick="window.open(this.href); return false;">Titre des pages</a>',
 	'SEO_APPEND_SITENAME' => 'Ajouter le nom du site au titres des pages',
-	'SEO_APPEND_SITENAME_EXPLAIN' => 'Ajouter, ou non, le nom du site à la fin du titres des pages.<br/><b style="color:red;">Attention :</b><br/>Cette option nécéssite que vous ayez convenablement modifié tous vos overall_header.html pour le mod Optimal titles, le nom du site pourrait si non apparaitre deux fois dans le titres de pages.',
+	'SEO_APPEND_SITENAME_EXPLAIN' => 'Ajouter, ou non, le nom du site à la fin du titres des pages.<br/><b style="color:red;">Attention :</b><br/>Cette option nécéssite que vous ayez convenablement modifié tous vos overall_header.html pour le mod Optimal titles, le nom du site pourrait si non apparaitre deux fois dans le titres de pages',
 	// Meta
 	'SEO_META' => '<a href="http://www.phpbb-seo.com/fr/toolkit-phpbb-seo/meta-tags-dynamiques-seo-t1678.html" title="Mod Méta tags dynamiques" onclick="window.open(this.href); return false;">Méta tags</a>',
 	'SEO_META_TITLE' => 'Méta title',
-	'SEO_META_TITLE_EXPLAIN' => 'Titre méta par défaut, utilisé sur les pages n’ayant pas de titre défini. Désactive le méta title si vide.',
+	'SEO_META_TITLE_EXPLAIN' => 'Titre méta par défaut, utilisé sur les pages n’ayant pas de titre défini. Désactive le méta title si vide',
 	'SEO_META_DESC' => 'Méta description',
 	'SEO_META_DESC_EXPLAIN' => 'Description méta par défaut, utilisé sur les pages n’ayant pas de description définie',
 	'SEO_META_DESC_LIMIT' => 'Limite Méta description',
