@@ -30,10 +30,17 @@ class seo_related {
 	*/
 	function seo_related() {
 		global $db, $config;
+		// override the above defaults when the acp is in use
+		$this->limit = !empty($config['seo_related_limit']) ? max(1, (int) $config['seo_related_limit']) : $this->limit;
+		$this->allforums = !empty($config['seo_related_allforums']) ? true : $this->allforums;
+		$this->check_ignore = !empty($config['seo_related_check_ignore']) ? true : $this->check_ignore;
+		//  better to always check, since it's fast
+		$fulltext = 0;
 		if ($db->sql_layer != 'mysql4' && $db->sql_layer != 'mysqli') {
 			$this->fulltext = false;
 		} else {
-			if (!isset($config['seo_related_myisam'])) {
+			if (!isset($config['seo_related_fulltext'])) {
+				// first time here hey, let's care about indexes
 				// check engine type
 				$result = $db->sql_query('SHOW TABLE STATUS LIKE \'' . TOPICS_TABLE . '\'');
 				$info = $db->sql_fetchrow($result);
@@ -44,17 +51,51 @@ class seo_related {
 				} else if (isset($info['Type'])) {
 					$engine = $info['Type'];
 				}
-				set_config('seo_related_myisam', ($engine == 'MyISAM') ? 1 : 0);
+				if ($engine == 'MyISAM') {
+					$fulltext = 1;
+					// we can proceed with fulltext, install the index for standalne versions
+					global $phpbb_seo;
+					if (empty($phpbb_seo->seo_opt)) {
+						// Try to override some limits - maybe it helps some...
+						@set_time_limit(0);
+						@ini_set('memory_limit', '128M');
+						global $phpbb_root_path, $phpEx;
+						if (!class_exists('phpbb_db_tools')) {
+							include($phpbb_root_path . 'includes/db/db_tools.' . $phpEx);
+						}
+						$db_tools = new phpbb_db_tools($db);
+						$indexes = $db_tools->sql_list_index(TOPICS_TABLE);
+						if (!in_array('topic_tft', $indexes)) {
+							$sql = 'ALTER TABLE ' . TOPICS_TABLE . '
+								ADD FULLTEXT topic_tft (topic_title)';
+							$db->sql_return_on_error(true);
+							$db->sql_query($sql);
+							if ($db->sql_error_triggered) {
+								$fulltext = 0;
+								$msg = '<b>phpBB SEO RELATED MOD :</b><br/> The configured db user does not have enough priviledges to alter tables, you need to run this query manually in order to use Mysql FullText :<br/>' . $db->sql_error_sql;
+								// Log this since it could help some to understand
+								add_log('admin', $msg);
+								// and throw it if it's an admin to load this
+								global $auth;
+								if ($auth->acl_get('a_')) {
+									trigger_error($msg);
+								}
+							}
+							$db->sql_return_on_error(false);
+						}
+					}
+				}
+				// Now we know ;-)
+				set_config('seo_related_fulltext', $fulltext);
 			}
-			$this->fulltext = $config['seo_related_myisam'] ? $this->fulltext : false;
+			$this->fulltext = $config['seo_related_fulltext'] ? $this->fulltext : false;
 		}
-		$this->limit = !empty($config['seo_related_limit']) ? max(0, (int) $config['seo_related_limit']) : $this->limit;
-		$this->allforums = !empty($config['seo_related_allforums']) ? true : $this->allforums;
-		$this->check_ignore = !empty($config['seo_related_check_ignore']) ? true : $this->check_ignore;
 	}
 	/**
-	* get related list
-	*/
+	* get related topic list
+	* @param	array	$topic_data	shuld at least provide with topic_id and topic_title
+	* @param 	mixed 	$forum_id 	The forum id to search in (false / 0 / null to search into all forums)
+	* */
 	function get($topic_data, $forum_id = false) {
 		global $db, $auth, $cache, $template, $user, $phpEx, $phpbb_root_path, $topic_tracking_info, $phpbb_seo;
 		$related_result = false;
@@ -142,6 +183,8 @@ class seo_related {
 	}
 	/**
 	* build_query
+	* @param	array	$topic_data	shuld at least provide with topic_id and topic_title
+	* @param 	mixed 	$forum_id 	The forum id to search in (false / 0 / null to search into all forums)
 	*/
 	function build_query($topic_data, $forum_id = false) {
 		global $db;
@@ -185,13 +228,16 @@ class seo_related {
 		return $db->sql_build_query('SELECT', $sql_array);
 	}
 	/**
-	* prepare_match
+	* prepare_match : Prepares the word list to search for
+	* @param	string	$text		the string of all words to search for, eg topic_title
+	* @param	int	$min_lenght	word with less than $min_lenght letters will be dropped
+	* @param	int	$max_lenght	word with more than $max_lenght letters will be dropped
 	*/
 	function prepare_match($text, $min_lenght = 3, $max_lenght = 14) {
 		static $stop_words = array();
 		$return = '';
 		$text = utf8_strtolower(trim(preg_replace('`[\s]+`', ' ', $text)));
-		$text = explode(' ', $text);
+		$text = array_unique(explode(' ', $text));
 		if (!empty($text) && $this->check_ignore) {
 			if (empty($stop_words)) {
 				global $phpbb_root_path, $user, $phpEx;
@@ -216,8 +262,10 @@ class seo_related {
 	}
 	/**
 	* buil_sql_like
+	* @param	string	$text		the string of all words to search for,prepared with prepare_match
+	* @param	int	$limit		maxximum number of words to use in the query
 	*/
-	function buil_sql_like($text, $min_lenght = 3, $limit = 3) {
+	function buil_sql_like($text, $limit = 3) {
 		global $db;
 		$sql_like = '';
 		$i = 0;
