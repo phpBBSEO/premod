@@ -160,7 +160,7 @@ class acp_phpbb_seo {
 						$title = '<b style="color:red">' . $forum_name . ' - ID ' . $forum_id . '</b>';
 						$status_msg = '<b style="color:red">' . $user->lang['SEO_CACHE_URL_NOT_OK'] . '</b>';
 						$status_msg .= '<br/><span style="color:red">' . $user->lang['SEO_CACHE_URL'] . '&nbsp;:</span>&nbsp;' . $this->new_config['forum_url' . $forum_id] . $phpbb_seo->seo_ext['forum'];
-						$display_vars['vars']['forum_url' . $forum_id] = array('lang' => $title, 'validate' => 'string', 'type' => 'custom', 'method' => 'forum_url_input', 'explain' => true, 'lang_explain_custom' => $status_msg,'append' => $this->seo_advices($this->new_config['forum_url' . $forum_id], $forum_id,  false, $error_cust));
+						$display_vars['vars']['forum_url' . $forum_id] = array('lang' => $title, 'validate' => 'string', 'type' => 'custom', 'method' => 'forum_url_input', 'explain' => true, 'lang_explain_custom' => $status_msg, 'append' => $this->seo_advices($this->new_config['forum_url' . $forum_id], $forum_id,  false, $error_cust));
 					} else { // Cached
 						$this->new_config['forum_url' . $forum_id] = $phpbb_seo->cache_config['forum'][$forum_id];
 						$title = '<b style="color:green">' . $forum_name . ' - ID ' . $forum_id . '</b>';
@@ -208,11 +208,12 @@ class acp_phpbb_seo {
 					),
 				);
 				// Related topics
-				if (file_exists($phpbb_root_path . "includes/phpbb_seo_related.$phpEx")) {
+				if (file_exists($phpbb_root_path . "phpbb_seo/phpbb_seo_related.$phpEx")) {
 					$related_installed = true;
+					$user->add_lang('mods/phpbb_seo_related_install');
 					$display_vars['vars'] += array(
 						'legend2' => 'RELATED_TOPICS',
-						'seo_related' => array('lang' => 'SEO_RELATED', 'validate' => 'bool', 'type' => 'radio:enabled_disabled', 'explain' => true, 'default' => 0),
+						'seo_related' => array('lang' => 'SEO_RELATED', 'validate' => 'bool', 'type' => 'radio:enabled_disabled', 'explain' => true, 'append' => !empty($config['seo_related']) ? '<br/>' . (!empty($config['seo_related_fulltext']) ? $user->lang['FULLTEXT_INSTALLED'] : $user->lang['FULLTEXT_NOT_INSTALLED']) : '', 'default' => 0),
 						'seo_related_check_ignore' => array('lang' => 'SEO_RELATED_CHECK_IGNORE', 'validate' => 'bool', 'type' => 'radio:enabled_disabled', 'explain' => true, 'default' => 0),
 						'seo_related_limit' => array('lang' => 'SEO_RELATED_LIMIT', 'validate' => 'int:2:25', 'type' => 'text:3:4', 'explain' => true, 'default' => 5),
 						'seo_related_allforums' => array('lang' => 'SEO_RELATED_ALLFORUMS', 'validate' => 'bool', 'type' => 'radio:yes_no', 'explain' => true, 'default' => 0),
@@ -379,6 +380,7 @@ class acp_phpbb_seo {
 					}
 				} elseif ($mode == 'extended') {
 					if ($related_installed && $config_name === 'seo_related') {
+						$fulltext = 0;
 						if ($db->sql_layer == 'mysql4' || $db->sql_layer == 'mysqli') {
 							$add = $remove = $alter = false;
 							if ($config_value && !$config['seo_related']) {
@@ -398,7 +400,6 @@ class acp_phpbb_seo {
 								$engine = $info['Type'];
 							}
 							if ($engine != 'MyISAM') {
-								set_config('seo_related_fulltext', 0);
 								$alter = false;
 							}
 							// let's go
@@ -413,11 +414,11 @@ class acp_phpbb_seo {
 								if (empty($db_tools)) {
 									$db_tools = new phpbb_db_tools($db);
 								}
-								$db_tools->db->sql_return_on_error(true);
 								$indexes = $db_tools->sql_list_index(TOPICS_TABLE);
 								$nothing_to_do = false;
 								if (in_array('topic_tft', $indexes)) {
 									$nothing_to_do = $add ? true : false;
+									$fulltext = 1;
 								} else {
 									$nothing_to_do = $remove ? true : false;
 								}
@@ -433,13 +434,18 @@ class acp_phpbb_seo {
 									$db->sql_return_on_error(true);
 									$db->sql_query($sql);
 									if ($db->sql_error_triggered) {
-										$error[] = '<b>' . $user->lang['no_dupe'] . '</b> : ' . $user->lang['SEO_SQL_ERROR'] . ' [ ' . $db->sql_layer . ' ] : ' . $db->sql_error_returned['message'] . ' [' . $db->sql_error_returned['code'] . ']' . '<br/>' . $user->lang['SEO_SQL_TRY_MANUALLY'] . '<br/>' . $db->sql_error_sql;
+										$error[] = '<b>' . $user->lang['RELATED_TOPICS'] . '</b> : ' . $user->lang['SEO_SQL_ERROR'] . ' [ ' . $db->sql_layer . ' ] : ' . $db->sql_error_returned['message'] . ' [' . $db->sql_error_returned['code'] . ']' . '<br/>' . $user->lang['SEO_SQL_TRY_MANUALLY'] . '<br/>' . $db->sql_error_sql;
 										$submit = false;
 										$config_value = 0;
+									} else {
+										$fulltext = 1;
 									}
 									$db->sql_return_on_error(false);
 								}
 							}
+						}
+						if ($alter) {
+							set_config('seo_related_fulltext', $fulltext);
 						}
 					}
 					set_config($config_name, $config_value);
