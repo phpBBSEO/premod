@@ -41,15 +41,17 @@ $user->session_begin();
 $auth->acl($user->data);
 $user->setup('gym_sitemaps/install');
 // Security check
+// Circumvent a potential phpbb bug with paths
+$redirect = append_sid(generate_board_url() . "/phpbb_seo/gym_install.$phpEx");
 if (!$user->data['is_registered']) {
-	login_box('', $user->lang['SEO_LOGIN'],'', false, false);
+	login_box($redirect, $user->lang['SEO_LOGIN'],'', false, false);
 }
 if (!$auth->acl_get('a_')) {
 	$user->session_kill(true);
-	login_box('', $user->lang['SEO_LOGIN_ADMIN'],'', false, false);
+	login_box($redirect, $user->lang['SEO_LOGIN_ADMIN'],'', false, false);
 }
 if ($user->data['user_type'] != USER_FOUNDER) {
-	login_box('', $user->lang['SEO_LOGIN_FOUNDER'],'', false, false);
+	login_box($redirect, $user->lang['SEO_LOGIN_FOUNDER'],'', false, false);
 }
 $user->add_lang(array('acp/common', 'acp/board', 'install', 'posting', 'acp/modules'));
 $mode = request_var('mode', 'overview');
