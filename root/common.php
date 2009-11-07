@@ -222,7 +222,7 @@ if (empty($phpbb_seo) ) {
 }
 // www.phpBB-SEO.com SEO TOOLKIT END
 // www.phpBB-SEO.com SEO TOOLKIT BEGIN - META
-require_once($phpbb_root_path . 'includes/phpbb_seo_meta.'.$phpEx);
+require_once($phpbb_root_path . 'phpbb_seo/phpbb_seo_meta.'.$phpEx);
 $seo_meta = new seo_meta();
 // www.phpBB-SEO.com SEO TOOLKIT END - META
 // Add own hook handler
