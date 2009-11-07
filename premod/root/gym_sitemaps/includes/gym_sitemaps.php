@@ -420,7 +420,7 @@ class gym_sitemaps {
 					$this->actions['robots_patterns']['date'] = $time_created;
 					$cache->put('_gym_config_robots_regex' , $this->actions['robots_patterns']);
 				} elseif ($this->actions['robots_patterns']['date'] < $time_created) { // robots.tx was updated
-					$cache->remove_file($cache->cache_dir . "data_gym_config_robots_regex.$phpEx");
+					$cache->destroy('_gym_config_robots_regex');
 					$this->obtain_robots_disallows();
 				}
 

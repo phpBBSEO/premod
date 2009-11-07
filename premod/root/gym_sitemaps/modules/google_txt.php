@@ -42,6 +42,8 @@ class google_txt {
 				'google_force_lastmod' => (boolean) $this->gym_master->gym_config['google_txt_force_lastmod'],
 			)
 		);
+		// Check cache
+		$this->gym_master->gym_output->setup_cache(); // Will exit if the cache is sent
 		// List available files
 		$this->get_source_list();
 		// Init url settngs
@@ -106,10 +108,10 @@ class google_txt {
 					}
 					// Check unique ?
 					if ($this->module_config['google_unique']) {
-						if (isset($url_check[$loc])) {
+						if (isset($url_check[$url])) {
 							continue;
 						}
-						$url_check[$loc] = 1;
+						$url_check[$url] = 1;
 					}
 					if ($this->module_config['google_force_lastmod']) {
 						$_last_mod = $last_mod - $dt;
@@ -118,13 +120,13 @@ class google_txt {
 					} else {
 						$_last_mod = $priority = $changefreq = 0;
 					}
-					$this->gym_master->parse_item($url, $priority, $changefreq, $_last_mod);
+					$this->gym_master->parse_item(utf8_htmlspecialchars($url), $priority, $changefreq, $_last_mod);
 					$dt += rand(30, 3600*12);
 					unset($txt_data[$key]);
 				}
 			} else {
 				// Clear the cache to make sure the guilty url is not shown in the sitemapIndex
-				$cache->remove_file($cache->cache_dir . "data_gym_config_google_txt.$phpEx");
+				$cache->destroy('_gym_config_google_txt');
 				$this->gym_master->gym_error(404, '', __FILE__, __LINE__);
 			}
 		} else {
