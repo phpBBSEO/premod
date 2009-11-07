@@ -381,6 +381,7 @@ class acp_phpbb_seo {
 				} elseif ($mode == 'extended') {
 					if ($related_installed && $config_name === 'seo_related') {
 						$fulltext = 0;
+						$nothing_to_do = false;
 						if ($db->sql_layer == 'mysql4' || $db->sql_layer == 'mysqli') {
 							$add = $remove = $alter = false;
 							if ($config_value && !$config['seo_related']) {
@@ -401,6 +402,7 @@ class acp_phpbb_seo {
 							}
 							if ($engine != 'MyISAM') {
 								$alter = false;
+								$fulltext = 0;
 							}
 							// let's go
 							if ($alter) {
@@ -415,12 +417,12 @@ class acp_phpbb_seo {
 									$db_tools = new phpbb_db_tools($db);
 								}
 								$indexes = $db_tools->sql_list_index(TOPICS_TABLE);
-								$nothing_to_do = false;
 								if (in_array('topic_tft', $indexes)) {
 									$nothing_to_do = $add ? true : false;
 									$fulltext = 1;
 								} else {
 									$nothing_to_do = $remove ? true : false;
+									$fulltext = 0;
 								}
 								// do not use db_tools since it does not support to add FullText indexes
 								if (!$nothing_to_do) {
@@ -437,8 +439,9 @@ class acp_phpbb_seo {
 										$error[] = '<b>' . $user->lang['RELATED_TOPICS'] . '</b> : ' . $user->lang['SEO_SQL_ERROR'] . ' [ ' . $db->sql_layer . ' ] : ' . $db->sql_error_returned['message'] . ' [' . $db->sql_error_returned['code'] . ']' . '<br/>' . $user->lang['SEO_SQL_TRY_MANUALLY'] . '<br/>' . $db->sql_error_sql;
 										$submit = false;
 										$config_value = 0;
+										$fulltext = $add ? 0 : $fulltext;
 									} else {
-										$fulltext = 1;
+										$fulltext = $add ? 1 : 0;
 									}
 									$db->sql_return_on_error(false);
 								}
