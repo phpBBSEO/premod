@@ -645,7 +645,7 @@ $maction_param =
 							$num_del++;
 						}
 					}
-					$accessed = TRUE;
+					$accessed = true;
 				}
 				closedir($res);
 				if ($accessed) {
@@ -897,7 +897,13 @@ $maction_param =
 	* Clears all the gym sitemaps cache ( acp modules, module lists and config )
 	*/
 	function clear_all_cache($option = '') {
-		global $phpbb_root_path, $phpEx;
+		global $phpbb_root_path, $phpEx, $acm_type;
+		if ($acm_type !== 'file') {
+			global $cache;
+			// Apparently, we cannot loop through cached variable using cache class in such case, purge all for now
+			$cache->purge();
+			return;
+		}
 		$cache_path = $phpbb_root_path . 'cache/';
 		$dir = opendir( $cache_path );
 		$action_from_file = '';
@@ -914,8 +920,8 @@ $maction_param =
 	* Removes/unlinks config cache file(s)
 	*/
 	function remove_cache($type = 'config', $mode = '') {
-		global $phpbb_root_path, $phpEx;
-		if ($type == 'all') {
+		global $phpbb_root_path, $phpEx, $acm_type;
+		if ($type == 'all' || $acm_type !== 'file') {
 			$this->clear_all_cache();
 			return;
 		}

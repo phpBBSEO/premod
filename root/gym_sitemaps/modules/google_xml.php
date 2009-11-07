@@ -44,6 +44,8 @@ class google_xml {
 			)
 		);
 		$this->module_config['xml_parse'] = (boolean) ($this->module_config['google_randomize'] || $this->module_config['google_unique'] || $this->module_config['google_force_limit'] || $this->module_config['google_force_lastmod']|| $this->module_config['google_check_robots']);
+		// Check cache
+		$this->gym_master->gym_output->setup_cache(); // Will exit if the cache is sent
 		// List available files
 		$this->get_source_list();
 		// Init url settngs
@@ -168,14 +170,14 @@ class google_xml {
 						unset($url_check);
 					} else {
 						// Clear the cache to make sure the guilty url is not shown in the sitemapIndex
-						$cache->remove_file($cache->cache_dir . "data_gym_config_google_xml.$phpEx");
+						$cache->destroy('_gym_config_google_xml');
 						$this->gym_master->gym_error(500, '', __FILE__, __LINE__);
 					}
 
 				}
 			} else {
 				// Clear the cache to make sure the guilty url is not shown in the sitemapIndex
-				$cache->remove_file($cache->cache_dir . "data_gym_config_google_xml.$phpEx");
+				$cache->destroy('_gym_config_google_xml');
 				$this->gym_master->gym_error(404, '', __FILE__, __LINE__);
 			}
 		} else {
