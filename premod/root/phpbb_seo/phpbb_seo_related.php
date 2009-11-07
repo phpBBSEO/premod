@@ -23,72 +23,24 @@ class seo_related {
 	var $fulltext = true;
 	var $limit = 5;
 	var $allforums = false;
-	var $myisam = true;
-	var $check_ignore = true;
+	var $check_ignore = false;
 	/**
 	* constructor
 	*/
 	function seo_related() {
 		global $db, $config;
+		if (empty($config['seo_related'])) {
+			return;
+		}
 		// override the above defaults when the acp is in use
 		$this->limit = !empty($config['seo_related_limit']) ? max(1, (int) $config['seo_related_limit']) : $this->limit;
-		$this->allforums = !empty($config['seo_related_allforums']) ? true : $this->allforums;
-		$this->check_ignore = !empty($config['seo_related_check_ignore']) ? true : $this->check_ignore;
+		$this->allforums = isset($config['seo_related_allforums']) ? max(0, (int) $config['seo_related_allforums']) : $this->allforums;
+		$this->check_ignore = isset($config['seo_related_check_ignore']) ?  max(0, (int) $config['seo_related_check_ignore']) : $this->check_ignore;
 		//  better to always check, since it's fast
-		$fulltext = 0;
 		if ($db->sql_layer != 'mysql4' && $db->sql_layer != 'mysqli') {
 			$this->fulltext = false;
 		} else {
-			if (!isset($config['seo_related_fulltext'])) {
-				// first time here hey, let's care about indexes
-				// check engine type
-				$result = $db->sql_query('SHOW TABLE STATUS LIKE \'' . TOPICS_TABLE . '\'');
-				$info = $db->sql_fetchrow($result);
-				$db->sql_freeresult($result);
-				$engine = '';
-				if (isset($info['Engine'])) {
-					$engine = $info['Engine'];
-				} else if (isset($info['Type'])) {
-					$engine = $info['Type'];
-				}
-				if ($engine == 'MyISAM') {
-					$fulltext = 1;
-					// we can proceed with fulltext, install the index for standalne versions
-					global $phpbb_seo;
-					if (empty($phpbb_seo->seo_opt)) {
-						// Try to override some limits - maybe it helps some...
-						@set_time_limit(0);
-						@ini_set('memory_limit', '128M');
-						global $phpbb_root_path, $phpEx;
-						if (!class_exists('phpbb_db_tools')) {
-							include($phpbb_root_path . 'includes/db/db_tools.' . $phpEx);
-						}
-						$db_tools = new phpbb_db_tools($db);
-						$indexes = $db_tools->sql_list_index(TOPICS_TABLE);
-						if (!in_array('topic_tft', $indexes)) {
-							$sql = 'ALTER TABLE ' . TOPICS_TABLE . '
-								ADD FULLTEXT topic_tft (topic_title)';
-							$db->sql_return_on_error(true);
-							$db->sql_query($sql);
-							if ($db->sql_error_triggered) {
-								$fulltext = 0;
-								$msg = '<b>phpBB SEO RELATED MOD :</b><br/> The configured db user does not have enough priviledges to alter tables, you need to run this query manually in order to use Mysql FullText :<br/>' . $db->sql_error_sql;
-								// Log this since it could help some to understand
-								add_log('admin', $msg);
-								// and throw it if it's an admin to load this
-								global $auth;
-								if ($auth->acl_get('a_')) {
-									trigger_error($msg);
-								}
-							}
-							$db->sql_return_on_error(false);
-						}
-					}
-				}
-				// Now we know ;-)
-				set_config('seo_related_fulltext', $fulltext);
-			}
-			$this->fulltext = $config['seo_related_fulltext'] ? $this->fulltext : false;
+			$this->fulltext = isset($config['seo_related_fulltext']) ? max(0, (int) $config['seo_related_fulltext']) : $this->fulltext;
 		}
 	}
 	/**
@@ -97,7 +49,10 @@ class seo_related {
 	* @param 	mixed 	$forum_id 	The forum id to search in (false / 0 / null to search into all forums)
 	* */
 	function get($topic_data, $forum_id = false) {
-		global $db, $auth, $cache, $template, $user, $phpEx, $phpbb_root_path, $topic_tracking_info, $phpbb_seo;
+		global $db, $auth, $cache, $template, $user, $phpEx, $phpbb_root_path, $topic_tracking_info, $config, $phpbb_seo;
+		if (empty($config['seo_related'])) {
+			return;
+		}
 		$related_result = false;
 		$enable_icons = 0;
 		$this->allforums = !$forum_id ? true : $this->allforums;
@@ -235,10 +190,18 @@ class seo_related {
 	*/
 	function prepare_match($text, $min_lenght = 3, $max_lenght = 14) {
 		static $stop_words = array();
-		$return = '';
-		$text = utf8_strtolower(trim(preg_replace('`[\s]+`', ' ', $text)));
-		$text = array_unique(explode(' ', $text));
-		if (!empty($text) && $this->check_ignore) {
+		$word_list = array();
+		$text = trim(preg_replace('`[\s]+`', ' ', $text));
+		if (!empty($text)) {
+			$word_list = array_unique(explode(' ', utf8_strtolower($text)));
+			foreach ($word_list as $k => $word) {
+				$len = utf8_strlen(trim($word));
+				if ( ($len < $min_lenght) || ($len > $max_lenght) ) {
+					unset($word_list[$k]);
+				}
+			}
+		}
+		if (!empty($word_list) && $this->check_ignore) {
 			if (empty($stop_words)) {
 				global $phpbb_root_path, $user, $phpEx;
 				$words = array();
@@ -248,17 +211,9 @@ class seo_related {
 				}
 				$stop_words = & $words;
 			}
-			$text = array_diff($text, $stop_words);
+			$word_list = array_diff($word_list, $stop_words);
 		}
-		if (!empty($text)) {
-			foreach ($text as $word) {
-				$word = trim($word);
-				if ( utf8_strlen($word) >= $min_lenght && utf8_strlen($word) <= $max_lenght) {
-					$return .= " $word";
-				}
-			}
-		}
-		return $return;
+		return !empty($word_list) ? implode(' ', $word_list) : '';
 	}
 	/**
 	* buil_sql_like
@@ -271,7 +226,7 @@ class seo_related {
 		$i = 0;
 		$text = str_replace(array('_', '%'), array("\_", "\%"), $text);
 		$text = str_replace(array(chr(0) . "\_", chr(0) . "\%"), array('_', '%'), $text);
-		$text = explode(' ', preg_replace('`[\s]+`', ' ', $text));
+		$text = explode(' ', trim(preg_replace('`[\s]+`', ' ', $text)));
 		if ( !empty($text) ) {
 			foreach ($text as $word) {
 				$word = $db->sql_escape(trim($word));

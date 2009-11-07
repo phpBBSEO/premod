@@ -1854,8 +1854,8 @@ if (empty($_REQUEST['f']))
 	$_REQUEST['f'] = $forum_id;
 }
 // www.phpBB-SEO.com SEO TOOLKIT BEGIN - Related Topics
-if ((isset($config['seo_related']) && $config['seo_related']) || !isset($config['seo_related'])) {
-	require($phpbb_root_path . "includes/phpbb_seo_related.$phpEx");
+if (!empty($config['seo_related'])) {
+	require($phpbb_root_path . "phpbb_seo/phpbb_seo_related.$phpEx");
 	$seo_related = new seo_related();
 	$seo_related->get($topic_data, $forum_id);
 }
