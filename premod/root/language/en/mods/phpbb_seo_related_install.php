@@ -34,7 +34,6 @@ if (empty($lang) || !is_array($lang))
 // in a url you again do not need to specify an order e.g., 'Click %sHERE%s' is fine
 $lang = array_merge($lang, array(
 	// ACP
-	// Related Topics
 	'SEO_RELATED' => 'Related topics activation',
 	'SEO_RELATED_EXPLAIN' => 'Display or not a related topic list in topic pages.<br/><b style="color:red;">Note :</b><br/>With MYSQL >=4.1 and the topic table using MyISAM, related topics will be obtained using a FullText index on  the topic title and will be sorted by relevancy. in other cases, an SQL LIKE will be used, and results will be sorted by publication time',
 	'SEO_RELATED_CHECK_IGNORE' => 'Ignore words filter',
