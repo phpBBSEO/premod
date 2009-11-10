@@ -77,7 +77,7 @@ $lang = array_merge($lang, array(
 	'ACP_SEO_EXTENDED_EXPLAIN' => 'Configuration additionnelle des mods phpBB SEO.',
 	// External links
 	'SEO_EXTERNAL_LINKS' => 'Liens externes',
-	'SEO_EXTERNAL_LINKS_EXPLAIN' => 'Ouvrir ou non les liens externes dans une nouvelle fenêtre du navigateur',
+	'SEO_EXTERNAL_LINKS_EXPLAIN' => 'Activer ou non l’ouverture des liens externes dans une nouvelle fenêtre du navigateur',
 	'SEO_EXTERNAL_SUBDOMAIN' => 'Liens externes sous-domaine',
 	'SEO_EXTERNAL_SUBDOMAIN_EXPLAIN' => 'Ouvrir ou non les liens pointant vers un sous domaine du domaine de votre forum dans une nouvelle fenêtre du navigateur',
 	'SEO_EXTERNAL_CLASSES' => 'Classe css externe',
