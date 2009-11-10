@@ -105,6 +105,7 @@ function get_gym_links($gym_config) {
 			}
 		}
 	}
+	$do_display_cat = $do_display_main = $do_display_index = false;
 	// Google sitemaps
 	if ($google_active) {
 		$display_google_main_links = (boolean) get_gym_option('google', 'gym', 'link_main', OVERRIDE_MODULE, $gym_config);
@@ -152,6 +153,9 @@ function get_gym_links($gym_config) {
 				'GYM_GOOGLE_THRESOLD' => (int) $links['setup']['google']['threshold'],
 			)
 		);
+		$do_display_main = $display_google_main_links ? true : $do_display_main;
+		$do_display_index = $display_google_index_links ? true : $do_display_index;
+		$do_display_cat = $display_google_cat_links ? true : $do_display_cat;
 	}
 	// RSS
 	if ($rss_active) {
@@ -213,6 +217,9 @@ function get_gym_links($gym_config) {
 				'GYM_RSS_CHAN_LINK' => $display_rss_main_links ? sprintf($gym_link_tpl, $rss_chan_url, 'feed-icon.png', $user->lang['RSS_CHAN_LIST_TITLE']) : '',
 			)
 		);
+		$do_display_main = $display_rss_main_links ? true : $do_display_main;
+		$do_display_index = $display_rss_index_links ? true : $do_display_index;
+		$do_display_cat = $display_rss_cat_links ? true : $do_display_cat;
 	}
 	// HTML
 	if ($html_active) {
@@ -284,17 +291,20 @@ function get_gym_links($gym_config) {
 				'GYM_HTML_THEFORUM_MAP_LINK' => sprintf($gym_link_tpl, $links['setup']['html']['forum_map_url'], 'maps-icon.gif', $user->lang['HTML_FORUM_MAP']),
 			)
 		);
+		$do_display_main = $display_html_main_links ? true : $do_display_main;
+		$do_display_index = $display_html_index_links ? true : $do_display_index;
+		$do_display_cat = $display_html_cat_links ? true : $do_display_cat;
 	}
 	$links['setup']['main'] = array(
-		'link_main' => (int) $gym_config['gym_link_main'],
-		'link_index' => (int) $gym_config['gym_link_index'],
-		'link_cat' => (int) $gym_config['gym_link_cat'],
+		'link_main' => ($gym_config['gym_link_main'] && $do_display_main) ? 1 : 0,
+		'link_index' => ($gym_config['gym_link_index'] && $do_display_index) ? 1 : 0,
+		'link_cat' => ($gym_config['gym_link_cat'] && $do_display_cat) ? 1 : 0,
 		'f_public_read' => array_diff_assoc($auth_guest_list['read'], $auth_guest_list['skip_pass']) + array_intersect_assoc($auth_guest_list['skip_cat'], $auth_guest_list['list']),
 	);
 	$links['main'] = array_merge( $links['main'],
 		array(
-			'GYM_LINKS' => (int) $gym_config['gym_link_main'],
-			'GYM_LINKS_CAT' => (int) $gym_config['gym_link_cat'],
+			'GYM_LINKS' => $links['setup']['main']['link_main'],
+			'GYM_LINKS_CAT' => $links['setup']['main']['link_cat'],
 		)
 	);
 	$links['alternate'] = array();

@@ -116,7 +116,7 @@ function obtain_gym_links($gym_links = array()) {
 			require($phpbb_root_path . 'gym_sitemaps/includes/gym_rss_functions.' . $phpEx);
 		}
 		$links = get_gym_links($gym_config);
-		$cache->put($cache_file, $links);
+		//$cache->put($cache_file, $links);
 	}
 	// In case one would want to manually fil the array in some file, like viewforum
 	// Would be passed here from page_header() where $gym_links is global
@@ -129,7 +129,7 @@ function obtain_gym_links($gym_links = array()) {
 	$google_setup = & $links['setup']['google'];
 	if (!empty($html_setup['forum_allow_cat_news']) || !empty($html_setup['forum_allow_cat_map']) || !empty($rss_setup['forum_rss']) || !empty($google_setup['forum_google'])) {
 		$_f_sep = $_phpbb_seo ? $phpbb_seo->seo_delim['forum'] : '';
-		$display_main_index = !empty($links['setup']['main']['link_index']) && (!empty($google_setup['link_index']) || !empty($html_setup['link_index']) || !empty($rss_setup['link_index']));
+		$display_main_index = !empty($links['setup']['main']['link_index']);
 		if ($display_main_index && !empty($template->_tpldata['forumrow'])) {
 			foreach ($template->_tpldata['forumrow'] as $k => $v) {
 				$num_topics = !empty($v['TOPICS']) ? max(0, (int) $v['TOPICS']) : 0;
@@ -161,7 +161,7 @@ function obtain_gym_links($gym_links = array()) {
 				}
 			}
 		}
-		$display_main_cat = !empty($links['setup']['main']['link_cat']) && (!empty($google_setup['link_cat']) || !empty($html_setup['link_cat']) || !empty($rss_setup['link_cat']));
+		$display_main_cat = !empty($links['setup']['main']['link_cat']);
 		if ($display_main_cat && !empty($template->_rootref['FORUM_NAME']) && !empty($template->_rootref['FORUM_ID'])) {
 			$forum_id = (int) $template->_rootref['FORUM_ID'];
 			$forum_name = $template->_rootref['FORUM_NAME'];
