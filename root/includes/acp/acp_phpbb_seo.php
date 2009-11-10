@@ -236,7 +236,7 @@ class acp_phpbb_seo {
 						'seo_meta_file_filter' =>  array('lang' => 'SEO_META_FILE_FILTER', 'validate' => 'string:0:225', 'type' => 'text:25:150', 'explain' => true, 'default' => 'ucp'),
 						'seo_meta_get_filter' =>  array('lang' => 'SEO_META_GET_FILTER', 'validate' => 'string:0:225', 'type' => 'text:25:150', 'explain' => true, 'default' => 'style,hilit,sid'),
 						'seo_meta_robots' =>  array('lang' => 'SEO_META_ROBOTS', 'validate' => 'string:0:225', 'type' => 'text:25:150', 'explain' => true, 'default' => 'index,follow'),
-						'seo_meta_noarchive' =>  array('lang' => 'SEO_META_NOARCHIVE', 'validate' => 'string:0:225', 'type' => 'text:25:150', 'explain' => true, 'default' => ''),
+						'seo_meta_noarchive' =>  array('lang' => 'SEO_META_NOARCHIVE', 'validate' => 'string:0:225', 'multiple_validate' => 'int', 'type' => 'custom', 'method' => 'select_multiple', 'params' => array('{CONFIG_VALUE}', '{KEY}', $this->forum_select()), 'explain' => true, 'default' => ''),
 					);
 				}
 				// Optimal title
@@ -276,11 +276,44 @@ class acp_phpbb_seo {
 		}
 		$additional_notes = '';
 		// We go through the display_vars to make sure no one is trying to set variables he/she is not allowed to...
-		foreach ($display_vars['vars'] as $config_name => $null) {
-			if (!isset($cfg_array[$config_name]) || strpos($config_name, 'legend') !== false) {
+		foreach ($display_vars['vars'] as $config_name => $cfg_setup) {
+			if ((!isset($cfg_array[$config_name]) && @$cfg_setup['method'] != 'select_multiple') || strpos($config_name, 'legend') !== false) {
 				continue;
 			}
-			$this->new_config[$config_name] = $config_value = $cfg_array[$config_name];
+			// Handle multiple select options
+			if (!empty($cfg_setup['method']) && $cfg_setup['method'] == 'select_multiple') {
+				if (isset($_POST['multiple_' . $config_name])) {
+					$m_values = utf8_normalize_nfc(request_var('multiple_' . $config_name, array('' => '')));
+					$validate_int = !empty($cfg_setup['multiple_validate']) && $cfg_setup['multiple_validate'] == 'int' ? true : false;
+					foreach($m_values as $k => $v) {
+						if ($validate_int) {
+							$v = max(0, (int) $v);
+						}
+						if (empty($v)) {
+							unset($m_values[$k]);
+						} else {
+							$m_values[$k] = $v;
+						}
+					}
+					sort($m_values);
+					$this->new_config[$config_name] = $m_values;
+					$config_value = implode(',', $m_values);
+					if ( strlen($config_value) > 255 ) {
+						$error[] = sprintf($user->lang['SETTING_TOO_LONG'], $user->lang[$cfg_setup['lang']], 255);
+					}
+					$submit = empty($error);
+				} else {
+					if ($submit) {
+						$this->new_config[$config_name] = array();
+						$config_value = '';
+					} else {
+						$config_value = $this->new_config[$config_name];
+						$this->new_config[$config_name] = !empty($config_value) ? explode(',', $config_value) : array();
+					}
+				}
+			} else {
+				$this->new_config[$config_name] = $config_value = $cfg_array[$config_name];
+			}
 			if ($submit) {
 				// In case we deal with forum URLs
 				if ($mode == 'forum_url' && preg_match('`^forum_url([0-9]+)$`', $config_name, $matches)) {
@@ -490,7 +523,7 @@ class acp_phpbb_seo {
 		$phpbb_seo->seo_end();
 		$l_title_explain = $user->lang[$display_vars['title'] . '_EXPLAIN'];
 		if ($mode != 'extented') {
-			$l_title_explain .= $mode == 'htaccess' ? '' : $this->check_cache_folder(SEO_CACHE_PATH);
+			$l_title_explain .= $mode == 'htaccess' ? '' : $this->check_cache_folder($phpbb_root_path . $phpbb_seo->seo_opt['cache_folder']);
 		}
 		$template->assign_vars(array(
 			'L_TITLE'			=> $user->lang[$display_vars['title']],
@@ -787,7 +820,7 @@ class acp_phpbb_seo {
 				$htaccess_tpl .= $rss_commpat_pre . ' ^{WIERD_SLASH}{RSS_LPATH}rss(/(news)+)?(/(digest)+)?(/(short|long)+)?(/([a-z0-9_-]+))?/([a-z0-9_]+)\.xml(\.gz)?$ {DEFAULT_SLASH}{RSS_RPATH}gymrss.{PHP_EX}?$9=$8&amp;$2&amp;$4&amp;$6&amp;gzip=$10 [QSA,L,NC]' . $rss_commpat_post . "\n";
 				$htaccess_tpl .= '<b style="color:blue"># Module feeds</b>' . "\n";
 				$htaccess_tpl .= $rss_commpat_note;
-				$htaccess_tpl .= $rss_commpat_pre . ' ^{WIERD_SLASH}{RSS_LPATH}[a-z0-9_-]*-[a-z]{1}([0-9]+)(/(news)+)?(/(digest)+)?(/(short|long)+)?/([a-z0-9_]+)\.xml(\.gz)?$ {DEFAULT_SLASH}{RSS_RPATH}gymrss.{PHP_EX}?$8=$1&amp;$3&amp;$5&amp;$7&amp;gzip=$9 [QSA,L,NC]' . $rss_commpat_post . "\n";
+				$htaccess_tpl .= $rss_commpat_pre . ' ^{WIERD_SLASH}{RSS_LPATH}[a-z0-9_-]*-[a-z]{1,2}([0-9]+)(/(news)+)?(/(digest)+)?(/(short|long)+)?/([a-z0-9_]+)\.xml(\.gz)?$ {DEFAULT_SLASH}{RSS_RPATH}gymrss.{PHP_EX}?$8=$1&amp;$3&amp;$5&amp;$7&amp;gzip=$9 [QSA,L,NC]' . $rss_commpat_post . "\n";
 				$htaccess_tpl .= '<b style="color:blue"># Module feeds without ids</b>' . "\n";
 				$htaccess_tpl .= $rss_commpat_note;
 				$htaccess_tpl .= $rss_commpat_pre . ' ^{WIERD_SLASH}{RSS_LPATH}([a-z0-9_-]+)(/(news)+)?(/(digest)+)?(/(short|long)+)?/([a-z0-9_]+)\.xml(\.gz)?$ {DEFAULT_SLASH}{RSS_RPATH}gymrss.{PHP_EX}?nametoid=$1&amp;$3&amp;$5&amp;$7&amp;modulename=$8&amp;gzip=$9 [QSA,L,NC]' . $rss_commpat_post . "\n";
@@ -797,7 +830,7 @@ class acp_phpbb_seo {
 				$htaccess_tpl .= $google_commpat_pre . ' ^{WIERD_SLASH}{GOOGLE_LPATH}sitemapindex\.xml(\.gz)?$ {DEFAULT_SLASH}{GOOGLE_RPATH}sitemap.{PHP_EX}?gzip=$1 [QSA,L,NC]' . $google_commpat_post . "\n";
 				$htaccess_tpl .= '<b style="color:blue"># Module cat sitemaps</b>' . "\n";
 				$htaccess_tpl .= $google_commpat_note;
-				$htaccess_tpl .= $google_commpat_pre . ' ^{WIERD_SLASH}{GOOGLE_LPATH}[a-z0-9_-]+-([a-z]{1})([0-9]+)\.xml(\.gz)?$ {DEFAULT_SLASH}{GOOGLE_RPATH}sitemap.{PHP_EX}?module_sep=$1&amp;module_sub=$2&amp;gzip=$3 [QSA,L,NC]' . $google_commpat_post . "\n";
+				$htaccess_tpl .= $google_commpat_pre . ' ^{WIERD_SLASH}{GOOGLE_LPATH}[a-z0-9_-]+-([a-z]{1,2})([0-9]+)\.xml(\.gz)?$ {DEFAULT_SLASH}{GOOGLE_RPATH}sitemap.{PHP_EX}?module_sep=$1&amp;module_sub=$2&amp;gzip=$3 [QSA,L,NC]' . $google_commpat_post . "\n";
 				$htaccess_tpl .= '<b style="color:blue"># Module sitemaps</b>' . "\n";
 				$htaccess_tpl .= $google_commpat_note;
 				$htaccess_tpl .= $google_commpat_pre . ' ^{WIERD_SLASH}{GOOGLE_LPATH}([a-z0-9_]+)-([a-z0-9_-]+)\.xml(\.gz)?$ {DEFAULT_SLASH}{GOOGLE_RPATH}sitemap.{PHP_EX}?$1=$2&amp;gzip=$3 [QSA,L,NC]' . $google_commpat_post . "\n";
@@ -1081,6 +1114,38 @@ class acp_phpbb_seo {
 		// Keep a backup of the current settings
 		@copy($file, $file . '.current');
 		return true;
+	}
+	/**
+	*  select_multiple($value, $key, $select_ary)
+	*/
+	function select_multiple($value, $key, $select_ary) {
+		$size = min(12,count($select_ary));
+		$html = '<select multiple="multiple" id="' . $key . '" name="multiple_' . $key . '[]" size="' . $size . '">';
+		foreach ($select_ary as $sel_key => $sel_data) {
+			if (empty($sel_data['disabled'])) {
+				$selected = array_search($sel_key, @$this->new_config[$key]) !== false ? 'selected="selected"' : '';
+				$disabled = '';
+			} else {
+				$disabled = 'disabled="disabled" class="disabled-option"';
+				$selected = '';
+			}
+			$sel_title = $sel_data['title'];
+			$html .= "<option value=\"$sel_key\" $disabled $selected>$sel_title</option>";
+		}
+		return $html . '</select>';
+	}
+	/**
+	*  forum_select() // custom forum select setup
+	*/
+	function forum_select($ignore_acl = true, $ignore_nonpost = false, $ignore_emptycat = false, $only_acl_post = false) {
+		$select_ary = make_forum_select(false, false, $ignore_acl, $ignore_nonpost, $ignore_emptycat, $only_acl_post, true);
+		foreach($select_ary as $f_id => $f_data) {
+			$select_ary[$f_id] = array(
+				'title' => $f_data['padding'] . $f_data['forum_name'],
+				'disabled' => $f_data['disabled'],
+			);
+		}
+		return $select_ary;
 	}
 	/**
 	* Pick a language, any language ... or no language

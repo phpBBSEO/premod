@@ -189,7 +189,6 @@ class seo_related {
 	* @param	int	$max_lenght	word with more than $max_lenght letters will be dropped
 	*/
 	function prepare_match($text, $min_lenght = 3, $max_lenght = 14) {
-		static $stop_words = array();
 		$word_list = array();
 		$text = trim(preg_replace('`[\s]+`', ' ', $text));
 		if (!empty($text)) {
@@ -202,16 +201,17 @@ class seo_related {
 			}
 		}
 		if (!empty($word_list) && $this->check_ignore) {
-			if (empty($stop_words)) {
-				global $phpbb_root_path, $user, $phpEx;
+			global $phpbb_root_path, $user, $phpEx;
+			// add stop words to $user to allow reuse
+			if (empty($user->stop_words)) {
 				$words = array();
 				if (file_exists("{$user->lang_path}{$user->lang_name}/search_ignore_words.$phpEx")){
 					// include the file containing ignore words
 					include("{$user->lang_path}{$user->lang_name}/search_ignore_words.$phpEx");
 				}
-				$stop_words = & $words;
+				$user->stop_words = & $words;
 			}
-			$word_list = array_diff($word_list, $stop_words);
+			$word_list = array_diff($word_list, $user->stop_words);
 		}
 		return !empty($word_list) ? implode(' ', $word_list) : '';
 	}

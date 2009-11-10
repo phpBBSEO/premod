@@ -20,7 +20,7 @@ require($phpbb_root_path . "phpbb_seo/includes/setup_phpbb_seo.$phpEx");
 * @package Ultimate SEO URL phpBB SEO
 */
 class phpbb_seo extends setup_phpbb_seo {
-	var	$version = '0.6.0';
+	var	$version = '0.6.2';
 	var	$modrtype = 2; // We set it to mixed as a default value
 	var	$seo_path = array();
 	var	$seo_url = array( 'forum' =>  array(), 'topic' =>  array(), 'user' => array(), 'username' => array(), 'group' => array(), 'file' => array() );

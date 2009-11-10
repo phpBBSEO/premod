@@ -72,31 +72,41 @@ class seo_meta {
 	*/
 	function seo_meta() {
 		global $config;
-		// Default values, if these are empty and no dynammic value is sent, no meta will be outputed
-		// Note that if you for example set $this->meta['description'] = '', no meta desc will show on that page,
-		// even with $this->meta_def['description'] filled
-		$this->meta_def['title'] = isset($config['seo_meta_title']) ? $config['seo_meta_title'] : $config['sitename'];
-		$this->meta_def['description'] = isset($config['seo_meta_desc']) ? $config['seo_meta_desc'] : $config['site_desc'];
-		$this->meta_def['keywords'] = isset($config['seo_meta_keywords']) ? $config['seo_meta_keywords'] : $config['site_desc'];
-		$this->meta_def['robots'] = isset($config['seo_meta_robots']) ? $config['seo_meta_robots'] : 'index,follow';
-		// Global values, if thes are empty, the corresponding meta will not show up
-		// For these an empty value will remove the corresponding tag from all pages
-		$this->meta['lang'] = isset($config['seo_meta_lang']) ? $config['seo_meta_lang'] : $config['default_lang'];
+		// default values, leave empty to only output the corresponding tag if filled
+		$this->meta_def['robots'] = 'index,follow';
+		// global values, if these are empty, the corresponding meta will not show up
 		$this->meta['category'] = 'general';
 		$this->meta['distribution'] = 'global';
 		$this->meta['resource-type'] = 'document';
-		$this->meta['copyright'] = isset($config['seo_meta_copy']) ? $config['seo_meta_copy'] : $config['sitename'];
 		// other settings that may be set through acp in cas the mod is not used standalone
 		if (isset($config['seo_meta_desc_limit'])) {
+			// defaults
+			$this->meta_def['title'] = $config['seo_meta_title'];
+			$this->meta_def['description'] = $config['seo_meta_desc'];
+			$this->meta_def['keywords'] = $config['seo_meta_keywords'];
+			$this->meta_def['robots'] = $config['seo_meta_robots'];
+			// global
+			$this->meta['lang'] = $config['seo_meta_lang'];
+			$this->meta['copyright'] = $config['seo_meta_copy'];
+			// settings
 			$this->mconfig['wordlimit'] = (int) $config['seo_meta_desc_limit'];
 			$this->mconfig['keywordlimit'] = (int) $config['seo_meta_keywords_limit'];
 			$this->mconfig['wordminlen'] = (int) $config['seo_meta_min_len'];
 			$this->mconfig['check_ignore'] = (int) $config['seo_meta_check_ignore'];
-			$this->mconfig['file_filter'] = $config['seo_meta_file_filter'];
+			$this->mconfig['file_filter'] = preg_replace('`[\s]+`', '', trim($config['seo_meta_file_filter'], ', '));
 			$this->mconfig['get_filter'] = preg_replace('`[\s]+`', '', trim($config['seo_meta_get_filter'], ', '));
 			$this->mconfig['bbcodestrip'] = str_replace(',', '|', preg_replace('`[\s]+`', '', trim($config['seo_meta_bbcode_filter'], ', ')));
+		} else {
+			// default values, leave empty to only output the corresponding tag if filled
+			$this->meta_def['title'] = $config['sitename'];
+			$this->meta_def['description'] = $config['site_desc'];
+			$this->meta_def['keywords'] = $config['site_desc'];
+			// global values, if these are empty, the corresponding meta will not show up
+			$this->meta['lang'] = $config['default_lang'];
+			$this->meta['copyright'] = $config['sitename'];
 		}
 		$this->mconfig['get_filter'] = !empty($this->mconfig['get_filter']) ? @explode(',', $this->mconfig['get_filter']) : array();
+		$this->mconfig['topic_sql'] = $config['search_type'] == 'fulltext_native' ? $this->mconfig['topic_sql'] : false;
 		return;
 	}
 	/**
@@ -174,7 +184,6 @@ class seo_meta {
 	* Returns a coma separated keyword list
 	*/
 	function make_keywords($text, $decode_entities = false) {
-		static $stop_words = array();
 		static $filter = array('`&(amp;)?[^\;]+;`i', '`[[:punct:]]+`', '`[0-9]+`',  '`[\s]+`');
 		$keywords = '';
 		$num = 0;
@@ -185,16 +194,17 @@ class seo_meta {
 		}
 		$text = explode(' ', trim($text), 50);
 		if ($this->mconfig['check_ignore']) {
-			if (empty($stop_words)) {
-				global $phpbb_root_path, $user, $phpEx;
+			global $phpbb_root_path, $user, $phpEx;
+			// add stop words to $user to allow reuse
+			if (empty($user->stop_words)) {
 				$words = array();
 				if (file_exists("{$user->lang_path}{$user->lang_name}/search_ignore_words.$phpEx")) {
 					// include the file containing ignore words
 					include("{$user->lang_path}{$user->lang_name}/search_ignore_words.$phpEx");
 				}
-				$stop_words = & $words;
+				$user->stop_words = & $words;
 			}
-			$text = array_diff($text, $stop_words);
+			$text = array_diff($text, $user->stop_words);
 		}
 		if (empty($text)) {
 			return '';
