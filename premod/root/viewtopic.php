@@ -1455,9 +1455,11 @@ for ($i = 0, $end = sizeof($post_list); $i < $end; ++$i)
 		$seo_meta->collect('description', $message);
 		if ($seo_meta->mconfig['topic_sql']) {
 			$common_sql = $seo_meta->mconfig['bypass_common'] ? '' : 'AND w.word_common = 0';
+			// collect keywords from all post in page
+			$post_id_sql = $db->sql_in_set('m.post_id', $post_list, false, true);
 			$sql = "SELECT w.word_text
 				FROM " . SEARCH_WORDMATCH_TABLE . " m, " . SEARCH_WORDLIST_TABLE . " w
-				WHERE m.post_id = " . (int) $row['post_id'] . "
+				WHERE $post_id_sql
 					AND w.word_id = m.word_id
 					$common_sql
 				ORDER BY w.word_count DESC";
