@@ -102,14 +102,17 @@
 ##			- Reorganized language pack,
 ##			- Made req_file info available in setup_phpbb_seo.php,
 ##			- parse_string is now used again, with a proper stripslahe handling and a fix for http://www.phpbb.com/bugs/phpbb3/52315
-##		- zero duplicate 0.6.2 :
+##		- Zero duplicate 0.6.2 :
 ##			- Added : Canonical element to forum index, forums, topics, posts, user, groups and leaders pages,
-##		- no duplicate 0.6.2 :
+##		- No duplicate 0.6.2 :
 ##			- Some code reorganization.
 ##		- Meta tags 0.4.0 :
 ##			- Fixed : Bad path when calling search_ignore_words.php,
-##			- Added : Various options that can be configurable in the extended acp menu when the mod is not used in standalone mode,
-##			- Meta tag class now put in its own file.
+##			- Added : keywords are now retrieved from all post on topic page when using fulltext_native and topic_sql option,
+##			- Added : Various options that can be configured in the extended acp menu when the mod is not used in standalone mode,
+##			- Meta tag class now has its own file.
+##		- Related Topics 0.2.0 :
+##			- Mod added to the SEO Premod.
 ##	2009-06-05 - 3.0.5
 ##		- All mods Updated to comply with phpBB 3.0.5.
 ##		- GYM Sitemaps & RSS 2.0.RC5 :
