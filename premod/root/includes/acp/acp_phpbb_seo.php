@@ -504,8 +504,6 @@ class acp_phpbb_seo {
 				if ( $this->write_cache($this->write_type) ) {
 					ksort($phpbb_seo->cache_config[$this->write_type]);
 					add_log('admin', 'SEO_LOG_CONFIG_' . strtoupper($mode));
-					$msg = 'phpBB SEO RELATED MOD :<br/> The configured db user does not have enough priviledges to alter tables, you need to run this query manually in order to use Mysql FullText :<br/>' . $db->sql_error_sql;
-					add_log('admin', $msg);
 					$msg = !empty($seo_msg) ? '<br /><h1 style="color:red;text-align:left;">' . $user->lang['SEO_VALIDATE_INFO'] . '</h1><ul style="text-align:left;">' . implode(' ',$seo_msg) . '</ul><br />' : '';
 					global $msg_long_text;
 					$msg_long_text = $user->lang['SEO_CACHE_MSG_OK'] . $msg . adm_back_link($this->u_action);
