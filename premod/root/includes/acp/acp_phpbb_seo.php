@@ -623,7 +623,7 @@ class acp_phpbb_seo {
 	*  seo_htaccess The evil one ;-)
 	*/
 	function seo_htaccess($html = true) {
-		global $phpbb_seo, $user, $error, $phpEx, $config, $phpbb_root_path;
+		global $phpbb_seo, $user, $error, $phpEx, $config, $phpbb_root_path, $config;
 		static $htaccess_code = '';
 		$htaccess_tpl = '';
 		// GYM Sitemaps & RSS
@@ -785,6 +785,29 @@ class acp_phpbb_seo {
 			$htaccess_tpl .= '<b style="color:blue"># TOPIC WITHOUT FORUM ID &amp; DELIM ALL MODES</b>' . "\n";
 			$htaccess_tpl .= '<b style="color:green">RewriteRule</b> ^{WIERD_SLASH}{PHPBB_LPATH}([a-z0-9_-]*)/?({STATIC_TOPIC}|[a-z0-9_-]*{DELIM_TOPIC})([0-9]+){TOPIC_PAGINATION}$ {DEFAULT_SLASH}{PHPBB_RPATH}viewtopic.{PHP_EX}?forum_uri=$1&amp;t=$3&amp;start=$5 [QSA,L,NC]' . "\n";
 			$htaccess_tpl .= $htaccess_common_tpl;
+			// annuaire mod http://www.modsphpbb3.fr/viewtopic.php?f=60&t=89
+			$annu_qmark = $htaccess_annu = '';
+			$annu_add_later = false;
+			if (!empty($config['annu_activ_rewrite'])) {
+				if (!empty($phpbb_seo->seo_path['annuaire_path'])) {
+					$annu_qmark = '?';
+					$annu_add_later = true;
+				}
+				$htaccess_annu = '<b style="color:blue">#####################################################' . "\n";
+				$htaccess_annu .= '# PHPBB ANNUAIRE' . "\n";
+				$htaccess_annu .= '# AUTHOR : ErnadoO http://www.deadzone-fr.com/' . "\n";
+				$htaccess_annu .= '# STARTED : 2009/11/03' . "\n";
+				$htaccess_annu .= '# DIRECTORY INDEX</b>' . "\n";
+				$htaccess_annu .= '<b style="color:green">RewriteRule</b> ^{WIERD_SLASH}{PHPBB_LPATH}' . $phpbb_seo->seo_path['annuaire_path'] . $annu_qmark . '{STATIC_DIR_INDEX}{EXT_DIR_INDEX}$ {DEFAULT_SLASH}{PHPBB_RPATH}annuaire.{PHP_EX} [QSA,L,NC]' . "\n";
+
+				$htaccess_annu .= '# DIRECTORY CAT ALL MODES</b>' . "\n";
+				$htaccess_annu .= '<b style="color:green">RewriteRule</b> ^{WIERD_SLASH}{PHPBB_LPATH}' . $phpbb_seo->seo_path['annuaire_path'] . '({STATIC_DIR_CAT}|[a-z0-9_-]*{DELIM_DIR_CAT})([0-9]+){DIR_CAT_PAGINATION}$ {DEFAULT_SLASH}{PHPBB_RPATH}annuaire.{PHP_EX}?mode=cat&amp;id=$2&amp;start=$4 [QSA,L,NC]' . "\n";
+				$htaccess_annu .= '<b style="color:blue"># END PHPBB ANNUAIRE' . "\n";
+				$htaccess_annu .= '#####################################################</b>' . "\n\n";
+				if (!$annu_add_later) {
+					$htaccess_tpl .= $htaccess_annu;
+				}
+			}
 			$htaccess_tpl .= '<b style="color:blue"># FORUM WITHOUT ID &amp; DELIM ALL MODES (SAME DELIM)</b>' . "\n";
 			if ($phpbb_seo->seo_ext['forum'] != '/') {
 				$htaccess_tpl .= '<b style="color:blue"># THESE FOUR LINES MUST BE LOCATED AT THE END OF YOUR HTACCESS TO WORK PROPERLY</b>' . "\n";
@@ -805,6 +828,10 @@ class acp_phpbb_seo {
 			$htaccess_tpl .= '<b style="color:green">RewriteRule</b> ^{WIERD_SLASH}{PHPBB_LPATH}.+/(styles/.*|images/.*)/$ {DEFAULT_SLASH}{PHPBB_RPATH}$1 [QSA,L,NC,R=301]' . "\n";
 			$htaccess_tpl .= '<b style="color:blue"># END PHPBB PAGES' . "\n";
 			$htaccess_tpl .= '#####################################################</b>' . "\n\n";
+			// annuaire mod http://www.modsphpbb3.fr/viewtopic.php?f=60&t=89
+			if ($annu_add_later) {
+				$htaccess_tpl .= $htaccess_annu;
+			}
 			if ($gym_installed) {
 				$htaccess_tpl .= '<b style="color:blue">#####################################################' . "\n";
 				$htaccess_tpl .= '# GYM Sitemaps &amp; RSS</b>' . "\n";
@@ -934,6 +961,22 @@ class acp_phpbb_seo {
 				'{WIERD_SLASH}' => $wierd_slash,
 				'{MOD_RTYPE}' => $modrtype[$modrtype['type']],
 			);
+			// annuaire mod http://www.modsphpbb3.fr/viewtopic.php?f=60&t=89
+			if (!empty($config['annu_activ_rewrite'])) {
+				if ($phpbb_seo->seo_ext['annuaire'] === '/') {
+					$reg_ex_dir_page = $reg_ex_page;
+				} else {
+					$reg_ex_dir_page = sprintf($tpl['pagin'], $phpbb_seo->seo_delim['start'], $seo_ext['annuaire']);
+				}
+				$htaccess_tpl_vars += array(
+					'{STATIC_DIR_INDEX}' => sprintf($tpl['static'] , $phpbb_seo->seo_static['annuaire_index']),
+					'{STATIC_DIR_CAT}' => sprintf($tpl['static'] , $phpbb_seo->seo_static['annuaire']),
+					'{EXT_DIR_INDEX}' => sprintf($tpl['static'] , $seo_ext['annuaire_index']),
+					'{EXT_DIR_CAT}' => sprintf($tpl['static'] , $seo_ext['annuaire']),
+					'{DELIM_DIR_CAT}' => sprintf($tpl['delim'] , $phpbb_seo->seo_delim['annuaire']),
+					'{DIR_CAT_PAGINATION}' => $reg_ex_dir_page,
+				);
+			}
 			// Parse .htaccess
 			$htaccess_code = str_replace(array_keys($htaccess_tpl_vars), array_values($htaccess_tpl_vars), $htaccess_tpl);
 		} // else the .htaccess is already generated
