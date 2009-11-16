@@ -623,7 +623,7 @@ class acp_phpbb_seo {
 	*  seo_htaccess The evil one ;-)
 	*/
 	function seo_htaccess($html = true) {
-		global $phpbb_seo, $user, $error, $phpEx, $config, $phpbb_root_path, $config;
+		global $phpbb_seo, $user, $error, $phpEx, $config, $phpbb_root_path, $config, $phpbb_admin_path;
 		static $htaccess_code = '';
 		$htaccess_tpl = '';
 		// GYM Sitemaps & RSS
@@ -789,6 +789,11 @@ class acp_phpbb_seo {
 			$annu_qmark = $htaccess_annu = '';
 			$annu_add_later = false;
 			if (!empty($config['annu_activ_rewrite'])) {
+				if(!empty($config['annu_root_path']) && $phpbb_admin_path != $config['annu_root_path']) {
+					$this->seo_path['annuaire_path'] = '';
+				} else {
+					$this->seo_path['annuaire_path'] = !empty($config['annu_urlR']) ? trim($config['annu_urlR'], '/ ') . '/' : '';
+				}
 				if (!empty($phpbb_seo->seo_path['annuaire_path'])) {
 					$annu_qmark = '?';
 					$annu_add_later = true;
@@ -800,7 +805,7 @@ class acp_phpbb_seo {
 				$htaccess_annu .= '# DIRECTORY INDEX</b>' . "\n";
 				$htaccess_annu .= '<b style="color:green">RewriteRule</b> ^{WIERD_SLASH}{PHPBB_LPATH}' . $phpbb_seo->seo_path['annuaire_path'] . $annu_qmark . '{STATIC_DIR_INDEX}{EXT_DIR_INDEX}$ {DEFAULT_SLASH}{PHPBB_RPATH}annuaire.{PHP_EX} [QSA,L,NC]' . "\n";
 
-				$htaccess_annu .= '# DIRECTORY CAT ALL MODES</b>' . "\n";
+				$htaccess_annu .= '<b style="color:blue"># DIRECTORY CAT ALL MODES</b>' . "\n";
 				$htaccess_annu .= '<b style="color:green">RewriteRule</b> ^{WIERD_SLASH}{PHPBB_LPATH}' . $phpbb_seo->seo_path['annuaire_path'] . '({STATIC_DIR_CAT}|[a-z0-9_-]*{DELIM_DIR_CAT})([0-9]+){DIR_CAT_PAGINATION}$ {DEFAULT_SLASH}{PHPBB_RPATH}annuaire.{PHP_EX}?mode=cat&amp;id=$2&amp;start=$4 [QSA,L,NC]' . "\n";
 				$htaccess_annu .= '<b style="color:blue"># END PHPBB ANNUAIRE' . "\n";
 				$htaccess_annu .= '#####################################################</b>' . "\n\n";
