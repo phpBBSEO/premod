@@ -33,6 +33,7 @@ class phpbb_seo {
 	var	$RegEx = array();
 	var	$sftpl = array();
 	var	$url_replace = array();
+	var	$light = true;
 	/**
 	* constuctor
 	*/
