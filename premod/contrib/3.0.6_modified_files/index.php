@@ -2,7 +2,7 @@
 /**
 *
 * @package phpBB3
-* @version $Id: index.php 8987 2008-10-09 14:17:02Z acydburn $
+* @version $Id: index.php 9614 2009-06-18 11:04:54Z nickvergessen $
 * @copyright (c) 2005 phpBB Group
 * @license http://opensource.org/licenses/gpl-license.php GNU Public License
 *
@@ -25,6 +25,9 @@ $user->session_begin();
 $auth->acl($user->data);
 $user->setup('viewforum');
 // www.phpBB-SEO.com SEO TOOLKIT BEGIN -> Zero dupe
+if (!empty($phpbb_seo->seo_opt['url_rewrite'])) {
+	$phpbb_seo->seo_path['canonical'] = $phpbb_seo->drop_sid(append_sid("{$phpbb_root_path}index.$phpEx"));
+}
 $seo_mark = request_var('mark', '');
 $keep_mark = in_array($seo_mark, array('topics', 'topic', 'forums', 'all')) ? (boolean) ($user->data['is_registered'] || $config['load_anon_lastread']) : false;
 $phpbb_seo->seo_opt['zero_dupe']['redir_def'] = array(
@@ -102,10 +105,13 @@ $birthday_list = '';
 if ($config['load_birthdays'] && $config['allow_birthdays'])
 {
 	$now = getdate(time() + $user->timezone + $user->dst - date('Z'));
-	$sql = 'SELECT user_id, username, user_colour, user_birthday
-		FROM ' . USERS_TABLE . "
-		WHERE user_birthday LIKE '" . $db->sql_escape(sprintf('%2d-%2d-', $now['mday'], $now['mon'])) . "%'
-			AND user_type IN (" . USER_NORMAL . ', ' . USER_FOUNDER . ')';
+	$sql = 'SELECT u.user_id, u.username, u.user_colour, u.user_birthday
+		FROM ' . USERS_TABLE . ' u
+		LEFT JOIN ' . BANLIST_TABLE . " b ON (u.user_id = b.ban_userid)
+		WHERE (b.ban_id IS NULL
+			OR b.ban_exclude = 1)
+			AND u.user_birthday LIKE '" . $db->sql_escape(sprintf('%2d-%2d-', $now['mday'], $now['mon'])) . "%'
+			AND u.user_type IN (" . USER_NORMAL . ', ' . USER_FOUNDER . ')';
 	$result = $db->sql_query($sql);
 
 	while ($row = $db->sql_fetchrow($result))
@@ -144,8 +150,8 @@ $template->assign_vars(array(
 
 // Output page
 // www.phpBB-SEO.com SEO TOOLKIT BEGIN - META
-$seo_meta->meta['meta_desc'] = $seo_meta->meta_filter_txt($config['sitename'] . ' : ' .  $config['site_desc']);
-$seo_meta->meta['keywords'] = $seo_meta->make_keywords($seo_meta->meta['meta_desc']);
+$seo_meta->collect('description', $config['sitename'] . ' : ' .  $config['site_desc']);
+$seo_meta->collect('keywords', $config['sitename'] . ' ' . $seo_meta->meta['description']);
 // www.phpBB-SEO.com SEO TOOLKIT END - META
 // www.phpBB-SEO.com SEO TOOLKIT BEGIN - TITLE
 page_header($config['sitename']);

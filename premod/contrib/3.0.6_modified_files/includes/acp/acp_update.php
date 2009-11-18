@@ -2,7 +2,7 @@
 /**
 *
 * @package acp
-* @version $Id: acp_update.php 8479 2008-03-29 00:22:48Z naderman $
+* @version $Id: acp_update.php 10195 2009-09-29 14:48:24Z acydburn $
 * @copyright (c) 2005 phpBB Group
 * @license http://opensource.org/licenses/gpl-license.php GNU Public License
 *
@@ -37,20 +37,18 @@ class acp_update
 		$errstr = '';
 		$errno = 0;
 
-		// PREMOD
-		$url = 'www.phpbb-seo.com';
-		$dir = (strpos($config['default_lang'], 'fr') !== false ? '/fr' : '/en') . '/updatecheck';
-		$info = get_remote_file($url, $dir, ((defined('PHPBB_SEO_QA')) ? 'test_30x.txt' : 'premod_30x.txt'), $errstr, $errno);
+		$info = obtain_latest_version_info(request_var('versioncheck_force', false), true);
 
 		if ($info === false)
 		{
-			trigger_error($errstr, E_USER_WARNING);
+			trigger_error('VERSIONCHECK_FAIL', E_USER_WARNING);
 		}
 
 		$info = explode("\n", $info);
 		$latest_version = trim($info[0]);
 
 		$announcement_url = trim($info[1]);
+		$announcement_url = (strpos($announcement_url, '&amp;') === false) ? str_replace('&', '&amp;', $announcement_url) : $announcement_url;
 		$update_link = append_sid($phpbb_root_path . 'install/index.' . $phpEx, 'mode=update');
 
 		// Determine automatic update...
@@ -65,6 +63,7 @@ class acp_update
 
 		$up_to_date_automatic = (version_compare(str_replace('rc', 'RC', strtolower($current_version)), str_replace('rc', 'RC', strtolower($latest_version)), '<')) ? false : true;
 		$up_to_date = (version_compare(str_replace('rc', 'RC', strtolower($config['version'])), str_replace('rc', 'RC', strtolower($latest_version)), '<')) ? false : true;
+		// www.phpBB-SEO.com SEO TOOLKIT BEGIN
 		$phpbb_seo_update = '';
 		if ($up_to_date) {
 			$phpbb_seo_update = trim(str_replace($current_version, '', $latest_version));
@@ -78,11 +77,13 @@ class acp_update
 				$update_instruction = '<br/><br/><hr/>' . sprintf($user->lang['ACP_PREMOD_UPDATE'], $latest_version, $announcement_url) . '<br/><hr/>';
 			}
 		}
+		// www.phpBB-SEO.com SEO TOOLKIT END
 		$template->assign_vars(array(
 			'S_UP_TO_DATE'		=> $up_to_date,
 			'S_UP_TO_DATE_AUTO'	=> $up_to_date_automatic,
 			'S_VERSION_CHECK'	=> true,
 			'U_ACTION'			=> $this->u_action,
+			'U_VERSIONCHECK_FORCE' => append_sid($this->u_action . '&amp;versioncheck_force=1'),
 
 			'LATEST_VERSION'	=> $latest_version,
 			'CURRENT_VERSION'	=> $config['version'],
