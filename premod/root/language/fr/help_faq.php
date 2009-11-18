@@ -5,7 +5,7 @@
 * translated originally by PhpBB-fr.com <http://www.phpbb-fr.com/> and phpBB.biz <http://www.phpBB.biz>
 *
 * @package language
-* @version $Id: help_faq.php, v1.24 2008/07/03 17:11:26 Elglobo Exp $
+* @version $Id: help_faq.php, v1.25 2009/10/16 13:09:00 Elglobo Exp $
 * @copyright (c) 2005 phpBB Group 
 * @license http://opensource.org/licenses/gpl-license.php GNU Public License 
 *
@@ -203,6 +203,11 @@ $help = array(
 	array(
 		0 => 'Que sont les icônes de sujet?',
 		1 => 'Les icônes de sujet sont des images qui peuvent être associées à des messages pour refléter leur contenu. La possibilité d’utiliser des icônes de sujet dépend des permissions définies par l’administrateur.'
+	),
+	// This block will switch the FAQ-Questions to the second template column
+	array(
+		0 => '--',
+		1 => '--'
 	),
 	array(
 		0 => '--',

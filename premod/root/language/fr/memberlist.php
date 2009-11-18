@@ -5,7 +5,7 @@
 * translated originally by PhpBB-fr.com <http://www.phpbb-fr.com/> and phpBB.biz <http://www.phpBB.biz>
 *
 * @package language
-* @version $Id: memberlist.php, v1.24 2009/06/01 23:15:00 Elglobo Exp $
+* @version $Id: memberlist.php, v1.25 2009/10/16 14:57:00 Elglobo Exp $
 * @copyright (c) 2005 phpBB Group 
 * @license http://opensource.org/licenses/gpl-license.php GNU Public License 
 *
@@ -119,6 +119,11 @@ $lang = array_merge($lang, array(
    'USER_ADMIN'   => 'Administrer l’utilisateur',
    'USER_BAN' 		=> 'Bannissement',
    'USER_FORUM'   => 'Statistiques de l’utilisateur',
+   'USER_LAST_REMINDED'	=> array(
+		0		=> 'Aucun rappel envoyé actuellement',
+		1		=> '%1$d rappel envoyé<br />» %2$s',
+		2		=> '%1$d rappels envoyés<br />» %2$s',
+	),
    'USER_ONLINE'   => 'En ligne',
    'USER_PRESENCE'   => 'Présence sur le forum',
    'VIEWING_PROFILE'   => 'Vue du profil - %s',

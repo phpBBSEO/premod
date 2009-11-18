@@ -5,7 +5,7 @@
 * translated originally by PhpBB-fr.com <http://www.phpbb-fr.com/> and phpBB.biz <http://www.phpBB.biz>
 *
 * @package language
-* @version $Id: prune.php, v1.24 2008/07/03 17:32:49 Elglobo Exp $
+* @version $Id: prune.php, v1.25 2008/10/08 12:23:00 Elglobo Exp $
 * @copyright (c) 2005 phpBB Group 
 * @license http://opensource.org/licenses/gpl-license.php GNU Public License 
 *
@@ -39,23 +39,23 @@ if (empty($lang) || !is_array($lang))
 
 // User pruning
 $lang = array_merge($lang, array(
-	'ACP_PRUNE_USERS_EXPLAIN'	=> 'Vous pouvez supprimer ou désactiver des utilisateurs de votre forum. Ceci peut être fait à partir de différents critères: le nombre de sujets postés, la dernière connexion, etc. Chacun de ces critères peut être combiné, par exemple vous pouvez gérer les utilisateurs actifs pour la dernière fois le 18 décembre 2007 avec moins de 10 messages postés. Vous pouvez aussi entrer une liste d’utilisateurs directement dans la zone de texte, tous les critères entrés seront alors ignorés. Soyez vigilant avec cette fonctionnalité! Une fois qu’un utilisateur est supprimé il n’y a aucun moyen de revenir en arrière.',
+	'ACP_PRUNE_USERS_EXPLAIN'	=> 'Cette section vous permet de supprimer ou désactiver des utilisateurs de votre forum. Les comptes peuvent être filtrés selon différents critères: par nombre de message, la plus récente activité, etc. Les critères peuvent être combinés de manière à limiter le nombre de comptes qui seront affectés. Par exemple, vous pouvez supprimer les utilisateurs avec moins de 10 messages, et qui sont également inactifs depuis le 01-01-2002. Autrement, Vous pouvez passer complètement la sélection de critères, en entrant une liste d’utilisateurs (chaque utilisateur sur une ligne différente) dans la zone de texte. Soyez vigilant avec cette fonctionnalité! Une fois qu’un utilisateur est supprimé il n’y a aucun moyen de revenir en arrière.',
 	
 	'DEACTIVATE_DELETE'  		=> 'Désactiver ou supprimer',
-	'DEACTIVATE_DELETE_EXPLAIN' => 'Choisissez ici de désactiver des utilisateurs ou de les supprimer définitivement. Notez que l’action de suppression est irréversible.',
+	'DEACTIVATE_DELETE_EXPLAIN' => 'Choisissez ici de désactiver des utilisateurs ou de les supprimer définitivement. Notez que la suppression d’utilisateurs est irréversible.',
 	'DELETE_USERS'   			=> 'Supprimer',
 	'DELETE_USER_POSTS'   		=> 'Supprimer les messages des utilisateurs délestés',
 	'DELETE_USER_POSTS_EXPLAIN' => 'Supprime les messages des utilisateurs délestés, n’a aucun effet sur les utilisateurs désactivés.',
 	
 	'JOINED_EXPLAIN'   			=> 'Entrez une date au format <kbd>AAAA-MM-JJ</kbd>.',
 	
-	'LAST_ACTIVE_EXPLAIN'   	=> 'Entrez une date au format <kbd>AAAA-MM-JJ</kbd>.',
+	'LAST_ACTIVE_EXPLAIN'   	=> 'Entrez une date au format <kbd>AAAA-MM-JJ</kbd>. Indiquez <kbd>0000-00-00</kbd> pour supprimer les utilisateurs qui ne se sont jamais connectés, les conditions <em>Avant</em> and <em>Aprés</em> seront ignorées.',
 	
 	'PRUNE_USERS_LIST'  			=> 'Utilisateurs à délester',
 	'PRUNE_USERS_LIST_DELETE'   	=> 'Les comptes utilisateurs répondants aux critères ci-dessous seront supprimés.',
 	'PRUNE_USERS_LIST_DEACTIVATE'   => 'Les comptes utilisateurs répondants aux critères ci-dessous seront désactivés.',
 	
-	'SELECT_USERS_EXPLAIN'   	=> 'Entrez ici des noms d’utilisateurs, ils seront utilisés sans tenir compte des critères précédents.',
+	'SELECT_USERS_EXPLAIN'   	=> 'Entrez ici des noms d’utilisateurs, ils seront utilisés sans tenir compte des critères précédents. Les fondateurs ne peuvent pas être supprimés.',
 	
 	'USER_DEACTIVATE_SUCCESS'   => 'Les utilisateurs sélectionnés ont été désactivés.',
 	'USER_DELETE_SUCCESS'   	=> 'Les utilisateurs sélectionnés ont été supprimés.',

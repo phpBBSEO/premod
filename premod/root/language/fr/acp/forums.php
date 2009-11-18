@@ -5,7 +5,7 @@
 * translated originally by PhpBB-fr.com <http://www.phpbb-fr.com/> and phpBB.biz <http://www.phpBB.biz>
 *
 * @package language
-* @version $Id: forums.php, v1.24 2009/05/27 21:11:00 Elglobo Exp $
+* @version $Id: forums.php, v1.25 2009/10/07 11:25:00 Elglobo Exp $
 * @copyright (c) 2005 phpBB Group 
 * @license http://opensource.org/licenses/gpl-license.php GNU Public License 
 *
@@ -45,9 +45,13 @@ $lang = array_merge($lang, array(
 	'AUTO_PRUNE_VIEWED'			=> 'Ancienneté des messages vus délestés automatiquement',
 	'AUTO_PRUNE_VIEWED_EXPLAIN'	=> 'Nombre de jours depuis la dernière consultation et la suppression du sujet.',
 
+	'CONTINUE'						=> 'Continuer',
+	
 	'COPY_PERMISSIONS'				=> 'Copier les permissions depuis',
+	'COPY_PERMISSIONS_EXPLAIN'		=> 'Pour faciliter la mise en place des permissions pour votre nouveau forum, vous pouvez copier les permissions d’un forum existant.',
 	'COPY_PERMISSIONS_ADD_EXPLAIN'	=> 'Une fois créé, le forum aura les mêmes permissions que celles sélectionnées ici. Si aucun forum n’est choisi, le nouveau forum ne sera pas visible tant que ses permissions n’ont pas été définies.',
 	'COPY_PERMISSIONS_EDIT_EXPLAIN'	=> 'Si vous choisissez de copier les permissions, le forum aura les mêmes permissions que celles sélectionnées ici. Elles remplaceront toutes les permissions précédemment définies pour ce forum, par les permissions du forum sélectionné. Si aucun forum n’est choisi les permissions actuelles seront conservées.',
+	'COPY_TO_ACL'					=> 'Autrement, vous êtes aussi capable de %srégler de nouvelles permissions%s pour ce forum.',
 	'CREATE_FORUM'					=> 'Créer un nouveau forum',
 
 	'DECIDE_MOVE_DELETE_CONTENT'		=> 'Supprimer ou déplacer le contenu vers un forum',
@@ -63,6 +67,8 @@ $lang = array_merge($lang, array(
 	'ENABLE_INDEXING_EXPLAIN'		=> 'Si activé, les messages du forum seront indexés pour la recherche.',
 	'ENABLE_POST_REVIEW'			=> 'Activer la révision des messages',
 	'ENABLE_POST_REVIEW_EXPLAIN'	=> 'Si activé, les utilisateurs seront avertis si de nouveaux messages ont été postés dans le sujet pendant qu’ils rédigeaient le leur. Ceci devrait être désactivé sur les forums de chat.',
+	'ENABLE_QUICK_REPLY'			=> 'Activer la réponse rapide',
+	'ENABLE_QUICK_REPLY_EXPLAIN'	=> 'Si activé, les utilisateurs auront un formulaire de réponse rapide pour ce forum. Si l’option globale de réponse rapide est désactivée ou si le forum n’accepte pas de message, le formulaire de réponse rapide ne sera pas affiché , même si réglé à Oui ici.',
 	'ENABLE_RECENT'					=> 'Afficher les sujets populaires',
 	'ENABLE_RECENT_EXPLAIN'			=> 'Si activé, les sujets de ce forum seront affichés dans la liste des sujets populaires.',
 	'ENABLE_TOPIC_ICONS'			=> 'Activer les icônes des sujets',

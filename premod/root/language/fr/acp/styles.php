@@ -5,7 +5,7 @@
 * translated originally by PhpBB-fr.com <http://www.phpbb-fr.com/> and phpBB.biz <http://www.phpBB.biz>
 *
 * @package language
-* @version $Id: styles.php, v1.24 2008/11/14 12:48:00 EricSchreiner Exp $
+* @version $Id: styles.php, v1.25 2009/10/15 12:25:00 Elglobo Exp $
 * @copyright (c) 2005 phpBB Group 
 * @license http://opensource.org/licenses/gpl-license.php GNU Public License 
 *
@@ -391,6 +391,7 @@ $lang = array_merge($lang, array(
 	'TEMPLATE_LOCATION' => 'Sauvegarder les templates vers',
 	'TEMPLATE_LOCATION_EXPLAIN' => 'Les images sont sauvegardées dans les fichiers systèmes.',
 	'TEMPLATE_NAME' => 'Nom du template',
+	'TEMPLATE_FILE_NOT_WRITABLE'=> 'Impossible décrire dans le fichier de template %s. Vérifiez les permissions du répertoire et des fichiers.',
 	'TEMPLATE_REFRESHED' => 'Le template a été rafraîchi.',
 
 	'THEME_ADDED' => 'Nouveau thème ajouté.',

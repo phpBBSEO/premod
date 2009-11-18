@@ -8,9 +8,9 @@ Conservez cet e-mail pour mémoire. Les informations de votre compte sont les su
 Nom d'utilisateur: {USERNAME}
 ----------------------------
 
-N'oubliez pas que votre mot de passe a été crypté dans notre base de données et nous ne pourrons pas vous le restituer. Cependant, si vous perdiez votre mot de passe, vous pouvez en demander un autre qui sera activé de la même façon que votre compte.
+Votre mot de passe a été stocké de manière sécurisée dans notre base de données et ne pourra pas être retrouvé. Dans le cas où vous l'avez avez oublié, vous pourrez le réinitialiser en utilisant l'adresse e-mail associée à votre compte.
 
-Votre compte est actuellement inactif. Vous ne pouvez pas l'utiliser avant d'avoir visité le lien suivant:
+Visitez le lien suivant afin d'activer votre compte:
 {U_ACTIVATE}
 
 Merci pour votre inscription.

@@ -5,7 +5,7 @@
 * translated originally by PhpBB-fr.com <http://www.phpbb-fr.com/> and phpBB.biz <http://www.phpBB.biz>
 *
 * @package language
-* @version $Id: users.php, v1.24 2008/07/03 17:19:32 Elglobo Exp $
+* @version $Id: users.php, v1.25 2009/10/15 12:35:00 Elglobo Exp $
 * @copyright (c) 2005 phpBB Group
 * @license http://opensource.org/licenses/gpl-license.php GNU Public License
 *
@@ -78,6 +78,7 @@ $lang = array_merge($lang, array(
 	'MOVE_POSTS_EXPLAIN'	=> 'Merci de sélectionner le forum où vous désirez déplacer tous les messages de cet utilisateur.',
 
 	'NO_SPECIAL_RANK'		=> 'Aucun rang spécial sélectionné',
+	'NO_WARNINGS'			=> 'Aucun avertissement.',
 	'NOT_MANAGE_FOUNDER'	=> 'Vous avez essayé de gérer un utilisateur ayant le statut de fondateur. Seuls les fondateurs peuvent gérer d’autres fondateurs.',
 
 	'QUICK_TOOLS'			=> 'Outils rapides',
@@ -103,21 +104,28 @@ $lang = array_merge($lang, array(
 	'USER_ADMIN_DEACTIVED'			=> 'Le compte a été désactivé.',
 	'USER_ADMIN_DEL_ATTACH'			=> 'Supprimer ses fichiers joints',
 	'USER_ADMIN_DEL_AVATAR'			=> 'Supprimer son avatar',
+	'USER_ADMIN_DEL_OUTBOX'			=> 'Vider la boîte d’envoi',
 	'USER_ADMIN_DEL_POSTS'			=> 'Supprimer ses messages',
 	'USER_ADMIN_DEL_SIG'			=> 'Supprimer sa signature',
 	'USER_ADMIN_EXPLAIN'			=> 'Vous pouvez modifier les informations d’un utilisateur et certaines options particulières.',
 	'USER_ADMIN_FORCE'				=> 'Forcer la réactivation',
+	'USER_ADMIN_LEAVE_NR'			=> 'Supprimer des nouveaux inscrits',
 	'USER_ADMIN_MOVE_POSTS'			=> 'Déplacer ses messages',
 	'USER_ADMIN_SIG_REMOVED'		=> 'La signature de cet utilisateur a été supprimée.',
 	'USER_ATTACHMENTS_REMOVED'		=> 'Les fichiers joints de cet utilisateur ont été supprimés.',
+	'USER_AVATAR_NOT_ALLOWED'		=> 'L’avatar ne peut pas être affiché car les avatars ont été désactivés.',
 	'USER_AVATAR_UPDATED'			=> 'Les informations avatar de cet utilisateur ont été mis à jour.',
+	'USER_AVATAR_TYPE_NOT_ALLOWED'	=> 'L’avatar actuel ne peut pas être affiché car ce type d’avatar a été désactivté.',
 	'USER_CUSTOM_PROFILE_FIELDS'	=> 'Champs de profil personnalisés',
 	'USER_DELETED'					=> 'Cet utilisateur a été supprimé.',
 	'USER_GROUP_ADD'				=> 'Ajouter cet utilisateur au groupe',
 	'USER_GROUP_NORMAL'				=> 'L’utilisateur est membre des groupes définis',
 	'USER_GROUP_PENDING'			=> 'En attente d’acceptation dans les groupes',
 	'USER_GROUP_SPECIAL'			=> 'L’utilisateur est membre des groupes prédéfinis',
+	'USER_LIFTED_NR'				=> 'Le status de nouvel inscrit a été supprimé.',
 	'USER_NO_ATTACHMENTS'			=> 'Aucun fichier joint à afficher.',
+	'USER_OUTBOX_EMPTIED'			=> 'La boîte d’envoi de l’utilisateur a été vidé.',
+	'USER_OUTBOX_EMPTY'				=> 'La boîte d’envoi de l’utilisateur était déjà vide.',
 	'USER_OVERVIEW_UPDATED'			=> 'Les informations de cet utilisateur ont été mises à jour.',
 	'USER_POSTS_DELETED'			=> 'Tous les messages de cet utilisateur ont été supprimés.',
 	'USER_POSTS_MOVED'				=> 'Tous les messages de cet utilisateur ont été déplacés vers le forum cible.',
@@ -127,6 +135,7 @@ $lang = array_merge($lang, array(
 	'USER_RANK'						=> 'Rang de l’utilisateur',
 	'USER_RANK_UPDATED'				=> 'Le rang de cet utilisateur a été mis à jour.',
 	'USER_SIG_UPDATED'				=> 'La signature de cet utilisateur a été mise à jour.',
+	'USER_WARNING_LOG_DELETED'		=> 'Aucune information disponible. La liste d’entrées a probablement été supprimée.',
 	'USER_TOOLS'					=> 'Outils de base',
 ));
 

@@ -9,7 +9,7 @@ Conservez cet e-mail dans vos archives. L'information de votre compte est la sui
 Nom d'utilisateur: {USERNAME}
 ----------------------------
 
-Votre mot de passe a été crypté dans notre base de données. Si vous oubliez votre mot de passe, vous pourrez en demander un nouveau qui sera activé de la même manière que ce compte.
+Votre mot de passe a été stocké de manière sécurisée dans notre base de données et ne pourra pas être retrouvé. Dans le cas où vous l'avez avez oublié, vous pourrez le réinitialiser en utilisant l'adresse e-mail associée à votre compte.
 
 Utilisez le lien suivant pour réactiver votre compte:
 

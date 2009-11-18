@@ -5,7 +5,7 @@
 * translated originally by PhpBB-fr.com <http://www.phpbb-fr.com/> and phpBB.biz <http://www.phpBB.biz>
 *
 * @package language
-* @version $Id: ban.php, v1.24 2008/07/03 17:16:01 Elglobo Exp $
+* @version $Id: ban.php, v1.25 2009/10/08 09:25:00 Elglobo Exp $
 * @copyright (c) 2005 phpBB Group 
 * @license http://opensource.org/licenses/gpl-license.php GNU Public License 
 *
@@ -49,6 +49,8 @@ $lang = array_merge($lang, array(
 	'BAN_REASON'			=> 'Raison du bannissement',
 	'BAN_GIVE_REASON'		=> 'Raison affichée du bannissement',
 	'BAN_UPDATE_SUCCESSFUL'	=> 'La liste des bannissements a été mise à jour.',
+	'BANNED_UNTIL_DATE'		=> 'Jusqu’au %s', // Example: "until Mon 13.Jul.2009, 14:44"
+	'BANNED_UNTIL_DURATION'	=> '%1$s (Jusqu’au %2$s)', // Example: "7 days (until Tue 14.Jul.2009, 14:44)"
 
 	'EMAIL_BAN'					=> 'Bannir une ou plusieurs adresses e-mails',
 	'EMAIL_BAN_EXCLUDE_EXPLAIN'	=> 'Si activé, permet d’exclure de toutes les interdictions courantes les adresses e-mails renseignées.',

@@ -1,13 +1,13 @@
 <?php
-/**
+/** 
 *
 * common [Standard french]
 * translated originally by PhpBB-fr.com <http://www.phpbb-fr.com/> and phpBB.biz <http://www.phpBB.biz>
 *
 * @package language
-* @version $Id: common.php, v1.24 2009/05/27 21:27:00 Elglobo Exp $
-* @copyright (c) 2005 phpBB Group
-* @license http://opensource.org/licenses/gpl-license.php GNU Public License
+* @version $Id: common.php, v1.25 2009/10/16 12:44:00 Elglobo Exp $
+* @copyright (c) 2005 phpBB Group 
+* @license http://opensource.org/licenses/gpl-license.php GNU Public License 
 *
 */
 
@@ -251,6 +251,7 @@ $lang = array_merge($lang, array(
 	'G_REGISTERED'				=> 'Utilisateurs enregistrés',
 	'G_REGISTERED_COPPA'		=> 'Utilisateurs COPPA enregistrés',
 	'G_GLOBAL_MODERATORS'		=> 'Modérateurs globaux',
+	'G_NEWLY_REGISTERED'		=> 'Nouveaux utilisateurs enregistrés',
 
 	'HIDDEN_USERS_ONLINE'		=> '%d utilisateurs invisibles en ligne',
 	'HIDDEN_USERS_TOTAL'		=> '%d invisibles',
@@ -267,7 +268,7 @@ $lang = array_merge($lang, array(
 	'HOME'						=> 'Accueil',
 
 	'ICQ'						=> 'ICQ',
-	'ICQ_STATUS'				=> 'Statut ICQ',
+	'ICQ_STATUS'				=> 'Statut ICQ',	
 	'IF'						=> 'Si',
 	'IMAGE'						=> 'Image',
 	'IMAGE_FILETYPE_INVALID'	=> 'Le type de fichier image %d pour le type mime %s n’est pas supporté.',
@@ -338,7 +339,7 @@ $lang = array_merge($lang, array(
 	'MODERATORS'			=> 'Modérateurs',
 	'MONTH'					=> 'Mois',
 	'MOVE'					=> 'Déplacer',
-	'MSNM'					=> 'MSNM/WLM',
+	'MSNM'					=> 'MSNM/WLM',	
 
 	'NA'						=> 'N/A',
 	'NEWEST_USER'				=> 'L’utilisateur enregistré le plus récent est <strong>%s</strong>',
@@ -384,6 +385,8 @@ $lang = array_merge($lang, array(
 	'NO_ONLINE_USERS'			=> 'Aucun utilisateur enregistré',
 	'NO_POSTS'					=> 'Pas de message',
 	'NO_POSTS_TIME_FRAME'		=> 'Aucun message n’a été posté dans ce sujet pour la période indiquée.',
+	'NO_FEED_ENABLED'			=> 'Les flux ne sont pas disponibles sur ce forum.',
+	'NO_FEED'					=> 'Le flux demandé n’est pas disponible.',
 	'NO_SUBJECT'				=> 'Aucun sujet indiqué',			// Used for posts having no subject defined but displayed within management pages.
 	'NO_SUCH_SEARCH_MODULE'		=> 'La recherche indiquée n’existe pas.',
 	'NO_SUPPORTED_AUTH_METHODS'	=> 'Aucune méthode d’authentification supportée.',
@@ -396,7 +399,7 @@ $lang = array_merge($lang, array(
 	'NO_USER'					=> 'L’utilisateur demandé n’existe pas.',
 	'NO_USERS'					=> 'Les utilisateurs demandés n’existent pas.',
 	'NO_USER_SPECIFIED'			=> 'Aucun nom d’utilisateur indiqué.',
-
+	
 	// Nullar/Singular/Plural language entry. The key numbers define the number range in which a certain grammatical expression is valid.
 	'NUM_POSTS_IN_QUEUE' => array(
 		0 => 'Aucun message en attente', // 0
@@ -487,6 +490,8 @@ $lang = array_merge($lang, array(
 	'RETURN_PAGE'				=> '%sRetourner à la page précédente%s',
 	'RETURN_TOPIC'				=> '%sRetourner au dernier sujet visité%s',
 	'RETURN_TO'					=> 'Retourner vers',
+	'FEED'						=> 'Flux',
+	'FEED_NEWS'					=> 'Nouvelles informations',
 	'RULES_ATTACH_CAN'			=> 'Vous <strong>pouvez</strong> joindre des fichiers',
 	'RULES_ATTACH_CANNOT'		=> 'Vous <strong>ne pouvez pas</strong> joindre des fichiers',
 	'RULES_DELETE_CAN'			=> 'Vous <strong>pouvez</strong> supprimer vos messages',
@@ -512,12 +517,13 @@ $lang = array_merge($lang, array(
 	'SEARCHING_FORUMS'			=> 'Recherche dans les forums',
 	'SEARCH_ACTIVE_TOPICS'		=> 'Voir les sujets récents',
 	'SEARCH_FOR'				=> 'Rechercher',
-	'SEARCH_FORUM'				=> 'Dans ce forum…',
+	'SEARCH_FORUM'				=> 'Dans ce forum…',	
 	'SEARCH_NEW'				=> 'Voir les nouveaux messages',
 	'SEARCH_POSTS_BY'			=> 'Rechercher les messages de',
 	'SEARCH_SELF'				=> 'Voir mes messages',
 	'SEARCH_TOPIC'				=> 'Dans ce sujet…',
 	'SEARCH_UNANSWERED'			=> 'Voir les messages sans réponses',
+	'SEARCH_UNREAD'				=> 'Voir les messages non lus',
 	'SECONDS'					=> 'secondes',
 	'SELECT'					=> 'Sélectionner',
 	'SELECT_ALL_CODE'			=> 'Tout sélectionner',
@@ -536,6 +542,7 @@ $lang = array_merge($lang, array(
 	'SORT_JOINED'				=> 'Date d’inscription',
 	'SORT_LOCATION'				=> 'Localisation',
 	'SORT_RANK'					=> 'Rang',
+	'SORT_POSTS'				=> 'Messages',
 	'SORT_TOPIC_TITLE'			=> 'Titre du sujet',
 	'SORT_USERNAME'				=> 'Nom d’utilisateur',
 	'SPLIT_TOPIC'				=> 'Diviser le sujet',
@@ -597,6 +604,7 @@ $lang = array_merge($lang, array(
 
 	'TOPIC'				=> 'Sujet',
 	'TOPICS'			=> 'Sujets',
+	'TOPICS_UNAPPROVED'	=> 'Au moins un sujet dans ce forum n’est pas approuvé.',
 	'TOPIC_ICON'		=> 'Icône de sujet',
 	'TOPIC_LOCKED'		=> 'Ce sujet est verrouillé, vous ne pouvez pas éditer de messages ou poster d’autres réponses.',
 	'TOPIC_LOCKED_SHORT'=> 'Sujet verrouillé',
@@ -642,6 +650,7 @@ $lang = array_merge($lang, array(
 	'USER_POSTS'			=> '%d Messages',
 	'USERS'					=> 'Utilisateurs',
 	'USE_PERMISSIONS'		=> 'Tester les permissions de l’utilisateur',
+	'USER_NEW_PERMISSION_DISALLOWED'	=> 'Nous sommes désolés, mais vous n’êtes pas autorisé à utiliser cette fonctionnalité. Vous venez juste de vous inscrire, et il vous est nécessaire de participer plus pour utiliser cette fonctionnalité.',
 
 	'VARIANT_DATE_SEPARATOR'	=> ' / ',	// Used in date format dropdown, eg: "Today, 13:37 / 01 Jan 2007, 13:37" ... to join a relative date with calendar date
 	'VIEWED'					=> 'Vu',
@@ -688,7 +697,7 @@ $lang = array_merge($lang, array(
 	'YEAR'				=> 'Année',
 	'YEAR_MONTH_DAY'	=> '(AAAA-MM-JJ)',
 	'YES'				=> 'Oui',
-	'YIM'				=> 'YIM',
+	'YIM'				=> 'YIM',	
 	'YOU_LAST_VISIT'	=> 'Dernière visite le %s',
 	'YOU_NEW_PM'		=> 'Un nouveau message privé vous attend dans votre boîte de réception.',
 	'YOU_NEW_PMS'		=> 'De nouveaux messages privés vous attendent dans votre boîte de réception.',
@@ -793,46 +802,46 @@ $lang = array_merge($lang, array(
 	),
 
 	'tz_zones'	=> array(
-		'-12'	=> '[UTC - 12] Ile Baker',
-		'-11'	=> '[UTC - 11] Iles Midway, Samoa',
-		'-10'	=> '[UTC - 10] Hawaii, Iles Cook',
-		'-9.5'	=> '[UTC - 9:30] Iles Marquises',
-		'-9'	=> '[UTC - 9] Alaska, Iles Gambier',
-		'-8'	=> '[UTC - 8] Pacifique (Etats-unis et Canada), Tijuana',
-		'-7'	=> '[UTC - 7] Arizona, Chihuahua, La Paz, Montagnes Rocheuses',
-		'-6'	=> '[UTC - 6] Amérique Centrale',
-		'-5'	=> '[UTC - 5] Heure pacifique (Etats-Unis, Canada), Bogota, Lima, Quito',
-		'-4.5' 	=> '[UTC - 4:30] Vénézuéla',
-		'-4'	=> '[UTC - 4] Heure atlantique (Canada), Caracas, La Paz, Santiago',
-		'-3.5'	=> '[UTC - 3:30] Terre Neuve',
-		'-3'	=> '[UTC - 3] Amazonie, Groenland central',
-		'-2'	=> '[UTC - 2] Fernando de Noronha, Géorgie du Sud &amp; Iles Sandwich',
-		'-1'	=> '[UTC - 1] Iles des Açores, Iles du Cap Vert, Groenland oriental',
-		'0'		=> '[UTC] Europe de l’Ouest, Heure de Greenwich, Dublin, Edimbourg, Lisbonne, Londres',
-		'1'		=> '[UTC + 1] Europe Centrale, Bruxelles, Copenhague, Madrid, Paris, Afrique de l’Est',
-		'2'		=> '[UTC + 2] Europe de l’Est, Bucarest, Helsinki, Kiev, Afrique Centrale, Jérusalem',
-		'3'		=> '[UTC + 3] Moscou, Afrique de l’Est, Koweït, Riyad',
+		'-12'	=> '[UTC - 12] Île Baker',
+		'-11'	=> '[UTC - 11] Niue, Samoa',
+		'-10'	=> '[UTC - 10] Hawaii-Aleutian, Île Cook',
+		'-9.5'	=> '[UTC - 9:30] Îles Marquises',
+		'-9'	=> '[UTC - 9] Alaska, Île Gambier',
+		'-8'	=> '[UTC - 8] Pacifique',
+		'-7'	=> '[UTC - 7] Montagnes Rocheuses',
+		'-6'	=> '[UTC - 6] Centre',
+		'-5'	=> '[UTC - 5] Est',
+		'-4.5'   => '[UTC - 4:30] Venezuela',
+		'-4'	=> '[UTC - 4] Atlantique',
+		'-3.5'	=> '[UTC - 3:30] Terre-Neuve',
+		'-3'	=> '[UTC - 3] Amazonie, Groenland Central',
+		'-2'	=> '[UTC - 2] Fernando de Noronha, Géorgie du Sud &amp; les Îles Sandwich du Sud',
+		'-1'	=> '[UTC - 1] Açores, Cap-Vert, Groenland de l’Est',
+		'0'		=> '[UTC] Europe de l’Ouest, Méridien de Greenwich',
+		'1'		=> '[UTC + 1] Europe Centrale, Afrique de l’Ouest',
+		'2'		=> '[UTC + 2] Europe de l’Est, Afrique Centrale',
+		'3'		=> '[UTC + 3] Moscou, Afrique de l’Est',
 		'3.5'	=> '[UTC + 3:30] Iran',
-		'4'		=> '[UTC + 4] Abu Dhabi, Samara, Seychelles',
+		'4'		=> '[UTC + 4] Gulf, Samara',
 		'4.5'	=> '[UTC + 4:30] Afghanistan',
-		'5'		=> '[UTC + 5] Pakistan',
+		'5'		=> '[UTC + 5] Pakistan, Iekaterinbourg',
 		'5.5'	=> '[UTC + 5:30] Inde, Sri Lanka',
 		'5.75'	=> '[UTC + 5:45] Népal',
-		'6'		=> '[UTC + 6] Bangladesh, Bhutan, Novossibirsk',
-		'6.5'	=> '[UTC + 6:30] Iles Cocos, Birmanie',
-		'7'		=> '[UTC + 7] Indochine, Krasnoïarsk, Jakarta',
-		'8'		=> '[UTC + 8] Chine, Australie de l’Ouest, Irkoutsk',
-		'8.75'	=> '[UTC + 8:45] Australie du Sud-ouest',
-		'9'		=> '[UTC + 9] Japon, Corée, Taïwan',
+		'6'		=> '[UTC + 6] Bangladesh, Bhoutan, Novosibirsk',
+		'6.5'	=> '[UTC + 6:30] Îles Cocos, Myanmar',
+		'7'		=> '[UTC + 7] Indochine, Krasnoyarsk',
+		'8'		=> '[UTC + 8] Chine, Australie de l’Ouest, Irkutsk',
+		'8.75'	=> '[UTC + 8:45] Australie du Sud-Est',
+		'9'		=> '[UTC + 9] Japon, Corée, Chita',
 		'9.5'	=> '[UTC + 9:30] Australie Centrale',
 		'10'	=> '[UTC + 10] Australie de l’Est, Vladivostok',
-		'10.5'	=> '[UTC + 10:30] Ile de Lord Howe',
-		'11'	=> '[UTC + 11] Iles Salomon, Nouvelle Calédonie',
-		'11.5'	=> '[UTC + 11:30] Norfolk',
-		'12'	=> '[UTC + 12] Nouvelle-Zélande, Fidji, Kamchatka',
-		'12.75'	=> '[UTC + 12:45] Iles Chatham',
-		'13'	=> '[UTC + 13] Tonga, Iles Phoenix',
-		'14'	=> '[UTC + 14] Iles de la ligne',
+		'10.5'	=> '[UTC + 10:30] Lord Howe',
+		'11'	=> '[UTC + 11] Île Solomon, Magadan',
+		'11.5'	=> '[UTC + 11:30] Île Norfolk',
+		'12'	=> '[UTC + 12] Nouvelle Zélande, Fiji, Kamchatka',
+		'12.75'	=> '[UTC + 12:45] Îles Chatham',
+		'13'	=> '[UTC + 13] Tongo, Îles Phoenix',
+		'14'	=> '[UTC + 14] Île de Wight',
 	),
 
 	// The value is only an example and will get replaced by the current time on view
