@@ -5,7 +5,7 @@
 * translated originally by PhpBB-fr.com <http://www.phpbb-fr.com/> and phpBB.biz <http://www.phpBB.biz>
 *
 * @package language
-* @version $Id: help_bbcode.php, v1.24 2008/07/03 17:36:20 Elglobo Exp $
+* @version $Id: help_bbcode.php, v1.25 2009/10/16 13:08:00 Elglobo Exp $
 * @copyright (c) 2005 phpBB Group 
 * @license http://opensource.org/licenses/gpl-license.php GNU Public License 
 *
@@ -79,6 +79,11 @@ $help = array(
 	array(
 		0 => 'Création d’une liste ordonnée',
 		1 => 'Le deuxième type de liste, la liste ordonnée, vous permet de décider de ce qui s’affiche avant chaque élément. Utilisez <strong>[list=1][/list]</strong> pour créer une liste ordonnée numérotée ou <strong>[list=a][/list]</strong> pour une liste alphabétique. Comme pour les listes non ordonnées, les éléments sont indiqués avec <strong>[*]</strong>. Par exemple:<br /><br /><strong>[list=1]</strong><br /><strong>[*]</strong>Faire les courses<br /><strong>[*]</strong>Acheter un nouvel ordinateur<br /><strong>[*]</strong>Jurer quand le PC plante<br /><strong>[/list]</strong><br /><br />affichera<ol style="list-style-type: arabic-numbers"><li>Faire les courses</li><li>Acheter un nouvel ordinateur</li><li>Jurer quand le PC plante</li></ol>Alors que pour une liste alphabétique, vous utiliserez:<br /><br /><strong>[list=a]</strong><br /><strong>[*]</strong>Réponse 1<br /><strong>[*]</strong>Réponse 2<br /><strong>[*]</strong>Réponse 3<br /><strong>[/list]</strong><br /><br />et vous obtiendrez<ol style="list-style-type: lower-alpha"><li>Réponse 1</li><li>Réponse 2</li><li>Réponse 3</li></ol>'
+	),
+	// This block will switch the FAQ-Questions to the second template column
+	array(
+		0 => '--',
+		1 => '--'
 	),
 	array(
 		0 => '--',

@@ -5,7 +5,7 @@
 * translated originally by PhpBB-fr.com <http://www.phpbb-fr.com/> and phpBB.biz <http://www.phpBB.biz>
 *
 * @package language
-* @version $Id: board.php, v1.24 2009/05/27 21:05:00 Elglobo Exp $
+* @version $Id: board.php, v1.25 2009/10/18 15:38:00 Elglobo Exp $
 * @copyright (c) 2005 phpBB Group
 * @license http://opensource.org/licenses/gpl-license.php GNU Public License
 *
@@ -71,6 +71,10 @@ $lang = array_merge($lang, array(
 	'ALLOW_NO_CENSORS'			=> 'Autoriser la désactivation de la censure',
 	'ALLOW_NO_CENSORS_EXPLAIN'	=> 'Les utilisateurs peuvent choisir de désactiver la censure automatique des messages ou messages privés.',
 	'ALLOW_PM_ATTACHMENTS'		=> 'Autoriser les fichiers joints dans les messages privés',
+	'ALLOW_PM_REPORT'			=> 'Autoriser les utilisateurs à rapporter les messages privés',
+	'ALLOW_PM_REPORT_EXPLAIN'	=> 'Si cette option est activée, les utilisateurs ont la possibilité de rapporter aux modérateurs du forum un message privé qu’ils ont reçu ou envoyé. Ces messages privés seront alors visibles dans le panneau de modération.',
+	'ALLOW_QUICK_REPLY'			=> 'Autoriser la réponse rapide',
+	'ALLOW_QUICK_REPLY_EXPLAIN'	=> 'Ce paramètre détermine si le module de réponse rapide est activé ou non. Si ce paramètre est activé, il est nécessaire que l’option de réponse rapide soit également activé pour chacun des forums.',
 	'ALLOW_SIG'					=> 'Autoriser les signatures',
 	'ALLOW_SIG_BBCODE'			=> 'Autoriser les BBCodes dans les signatures d’utilisateur',
 	'ALLOW_SIG_FLASH'			=> 'Autoriser l’utilisation du BBCode <code>[FLASH]</code> dans la signature',
@@ -87,10 +91,14 @@ $lang = array_merge($lang, array(
 // Avatar Settings
 $lang = array_merge($lang, array(
 	'ACP_AVATAR_SETTINGS_EXPLAIN'	=> 'Les avatars sont généralement de petites images uniques qu’un utilisateur choisit pour le représenter. Selon le style, ils sont normalement affichés sous le nom d’utilisateur lors de la visualisation de sujets. Vous pouvez choisir quelle méthode l’utilisateur peut utiliser pour choisir son avatar. Dans le cas où vous autorisez l’envoi d’avatar, vous devez indiquer ci-dessous le nom du répertoire en question et vous assurer des droits en écriture de ce répertoire. Notez également que les limitations de taille ne sont imposées qu’aux avatars envoyés et ne concernent pas les avatars dont on aura fourni un lien externe.',
+	'ALLOW_AVATARS'					=> 'Activer les avatars',
+	'ALLOW_AVATARS_EXPLAIN'			=> 'Autorise l’utilisation générale des avatars;<br />Si vous desactivé l’utilisation générale des avatars ou les avatars affichés selon une méthode particulière, les avatars désactivés ne seront plus affichés sur le forum, mais les utilisateurs seront toujours capable de télécharger leur propre avatar dans leur panneau d’utilisateur.',
 
 	'ALLOW_LOCAL'					=> 'Activer la galerie d’avatars',
 	'ALLOW_REMOTE'					=> 'Autoriser les avatars distants',
 	'ALLOW_REMOTE_EXPLAIN'			=> 'Avatars liés depuis un autre site',
+	'ALLOW_REMOTE_UPLOAD'			=> 'Autoriser l’envoi distant d’avatar',
+	'ALLOW_REMOTE_UPLOAD_EXPLAIN'	=> 'Autorise l’envoi d’avatars d’un autre site Internet.',
 	'ALLOW_UPLOAD'					=> 'Autoriser l’envoi d’avatar',
 	'AVATAR_GALLERY_PATH'			=> 'Répertoire de la galerie d’avatars',
 	'AVATAR_GALLERY_PATH_EXPLAIN'	=> 'Chemin d’accès depuis le répertoire racine de phpBB vers les images préchargées, exemple: <samp>images/avatars/gallery</samp>.',
@@ -140,16 +148,13 @@ $lang = array_merge($lang, array(
 	'ALLOW_POST_LINKS_EXPLAIN'			=> 'Si désactivé, le BBCode <code>[URL]</code> et la transformation automatique des textes en liens seront désactivés.',
 	'ALLOW_POST_FLASH'					=> 'Autoriser l’utilisation du BBCode <code>[FLASH]</code> dans les messages',
 	'ALLOW_POST_FLASH_EXPLAIN'			=> 'Si désactivé, le BBCode <code>[FLASH]</code> sera désactivé. Autrement, le système de permission déterminera les membres pouvant utiliser le BBCode <code>[FLASH]</code>.',
-	'ENABLE_QUEUE_TRIGGER' 				=> 'Activer la mise en attente des messages',
-	'ENABLE_QUEUE_TRIGGER_EXPLAIN'		=> 'Possibilité de mettre en attente chaque message d’un utilisateur enregistré, si son nombre de messages est plus petit que celui indiqué ci-dessous. Ce paramètre n’a pas d’effet sur le réglage de permission sur l’approbation de message et de sujet.',
-	'QUEUE_TRIGGER_POSTS' 				=> 'Compteur maximum de message pour les messages mis en attente',
-	'QUEUE_TRIGGER_POSTS_EXPLAIN' 		=> 'Si la mise en attente des messages est activée, il s’agit du seuil, en nombre de messages, que l’utilisateur doit atteindre afin de pouvoir envoyer un message sans passer par l’approbation. Si un utilisateur a un nombre de messages inférieur à ce seuil, tout message envoyé sera automatiquement mis en attente.',
-
 
 	'BUMP_INTERVAL'					=> 'Intervalle de remontée de sujet',
 	'BUMP_INTERVAL_EXPLAIN'			=> 'Nombre des minutes, d’heures, ou de jours entre la date du dernier message et la possibilité de remonter le sujet.',
 	'CHAR_LIMIT'					=> 'Nombre maximum de caractères par message',
 	'CHAR_LIMIT_EXPLAIN'			=> 'Le nombre de caractères autorisés dans un message. Mettre “0” pour illimité.',
+	'DELETE_TIME'					=> 'Limiter le temps de suppression',
+	'DELETE_TIME_EXPLAIN'			=> 'Limite le temps disponible pour effacer un nouveau message. Mettre “0” pour désactiver ce comportement.',
 	'DISPLAY_LAST_EDITED'			=> 'Afficher la raison de la dernière édition',
 	'DISPLAY_LAST_EDITED_EXPLAIN'	=> 'Choisissez si l’information sur la date de la dernière édition doit être affichée ou non dans les messages.',
 	'EDIT_TIME'						=> 'Temps limite d’édition',
@@ -167,12 +172,15 @@ $lang = array_merge($lang, array(
 	'MAX_POST_IMG_WIDTH_EXPLAIN'	=> 'Largeur maximale d’un fichier image ou flash dans un message. Mettre “0” pour illimité.',
 	'MAX_POST_URLS'					=> 'Nombre maximum de liens',
 	'MAX_POST_URLS_EXPLAIN'			=> 'Nombre maximum de liens dans un message. Mettre “0” pour illimité.',
+	'MIN_CHAR_LIMIT'				=> 'Nombre minimum de caractères par message',
+	'MIN_CHAR_LIMIT_EXPLAIN'		=> 'Nombre minimum de caractères qu’un utilisateur a besoin de taper dans un message/message privé',
 	'POSTING'						=> 'Publication',
 	'POSTS_PER_PAGE'				=> 'Messages par page',
 	'QUOTE_DEPTH_LIMIT'				=> 'Nombre maximum de citations imbriquées',
 	'QUOTE_DEPTH_LIMIT_EXPLAIN'		=> 'Nombre maximum de citations imbriquées dans un message. Mettre “0” pour illimité.',
 	'SMILIES_LIMIT'					=> 'Nombre maximum de smileys par message',
 	'SMILIES_LIMIT_EXPLAIN'			=> 'Nombre maximum de smileys dans un message. Mettre “0” pour illimité.',
+	'SMILIES_PER_PAGE'				=> 'Smileys par page',
 	'TOPICS_PER_PAGE'				=> 'Sujets par page',
 ));
 
@@ -198,8 +206,12 @@ $lang = array_merge($lang, array(
 $lang = array_merge($lang, array(
 	'ACP_REGISTER_SETTINGS_EXPLAIN'		=> 'Vous pouvez modifier les paramètres relatifs à l’inscription et aux profils d’utilisateurs.',
 
-	'ACC_ACTIVATION'			=> 'Activation du compte',
+	'ACC_ACTIVATION'			=> 'Activation de compte',
 	'ACC_ACTIVATION_EXPLAIN'	=> 'Cela détermine si les utilisateurs ont accès au forum immédiatement ou si une confirmation est requise. Vous pouvez également désactiver complètement les nouvelles inscriptions.',
+	'NEW_MEMBER_POST_LIMIT'			=> 'Limite de message d’un nouveau membre',
+	'NEW_MEMBER_POST_LIMIT_EXPLAIN'	=> 'Les nouveaux membres resteront dans le groupe <em>Nouveaux utilisateurs enregistrés</em> jusqu’à qu’ils atteignent ce nombre de messages. Vous pouvez utiliser ce groupe pour éviter qu’ils utilisent le système de messagerie privé ou la révision de leurs messages. <strong>Mettre “0” pour désactiver cette fonctionnalité.</strong>',
+	'NEW_MEMBER_GROUP_DEFAULT'		=> 'Mettre le groupe des nouveaux utilisateurs enregistrés par défaut',
+	'NEW_MEMBER_GROUP_DEFAULT_EXPLAIN'	=> 'Si ce paramètre est activé et qu’une limite de message pour les nouveaux membres est indiquée, les nouveaux utilisateurs enregistrés ne seront pas simplement placés dans le groupe <em>Nouveaux utilisateurs enregistrés</em>, mais ce groupe deviendra également leur groupe par défaut. Cela peut s’avérer pratique si vous voulez assigner un rang et/ou un avatar de groupe par défaut afin que les utilisateurs en héritent.',
 	'ACC_ADMIN'					=> 'Par l’administrateur',
 	'ACC_DISABLE'				=> 'Désactiver',
 	'ACC_NONE'					=> 'Aucun',
@@ -231,11 +243,45 @@ $lang = array_merge($lang, array(
 	'USERNAME_LENGTH'			=> 'Longueur du nom d’utilisateur',
 	'USERNAME_LENGTH_EXPLAIN'	=> 'Nombre de caractères minimum et maximum dans les noms d’utilisateur.',));
 
+// Feeds
+$lang = array_merge($lang, array(
+	'ACP_FEED_MANAGEMENT'				=> 'Paramètres généraux de publication des flux',
+	'ACP_FEED_MANAGEMENT_EXPLAIN'		=> 'Ce module rend disponible différents flux ATOM, en parsant les BBCodes dans les messages pour les rendre lisible dans des flux extérieurs.',
+
+	'ACP_FEED_ENABLE'					=> 'Activer les flux',
+	'ACP_FEED_ENABLE_EXPLAIN'			=> 'Active ou non, les flux ATOM pour le forum entier.<br />En désactivant les flux, peu importe la manière dont sont réglées les options ci-dessous.',
+	'ACP_FEED_LIMIT'					=> 'Nombre d’articles',
+	'ACP_FEED_LIMIT_EXPLAIN'			=> 'Le nombre maximum d’articles de flux à afficher.',
+
+	'ACP_FEED_OVERALL_FORUMS'			=> 'Activer le flux global des forums',
+	'ACP_FEED_OVERALL_FORUMS_EXPLAIN'	=> 'Ce flux affiche les derniers messages de tous les sujets du forum.',
+	'ACP_FEED_OVERALL_FORUMS_LIMIT'		=> 'Nombre d’articles par page à afficher dans le flux des forums',
+
+	'ACP_FEED_OVERALL_TOPIC'			=> 'Activer le flux global des sujets',
+	'ACP_FEED_OVERALL_TOPIC_EXPLAIN'	=> 'Active le flux “Tous les sujets”',
+	'ACP_FEED_OVERALL_TOPIC_LIMIT'		=> 'Nombre d’articles par page à afficher dans le flux des sujets',
+	'ACP_FEED_FORUM'					=> 'Activer les flux par forum',
+	'ACP_FEED_FORUM_EXPLAIN'			=> 'Permet de suivre les nouveaux messages d’un forum en particulier.',
+	'ACP_FEED_TOPIC'					=> 'Activer les flux par sujet',
+	'ACP_FEED_TOPIC_EXPLAIN'			=> 'Permet de suivre les nouveaux messages d’un sujet en particulier.',
+	'ACP_FEED_NEWS'						=> 'Flux des nouvelles',
+	'ACP_FEED_NEWS_EXPLAIN'				=> 'Lit le premier message de ces forums. Ne sélectionnez aucun forum pour désactiver le flux des nouvelles.<br />Sélectionner plusieurs forums en maintenant la touche <samp>CTRL</samp> et en cliquant.',
+
+	'ACP_FEED_GENERAL'					=> 'Paramètres généraux des flux',
+
+	'ACP_FEED_ITEM_STATISTICS'			=> 'Statistiques de l’article',
+	'ACP_FEED_ITEM_STATISTICS_EXPLAIN'	=> 'Affiche les statistiques indivuelles sous les articles de flux<br />(Posté par, date et heure, Réponses, Vues)',
+	'ACP_FEED_EXCLUDE_ID'				=> 'Exclure ces forums',
+	'ACP_FEED_EXCLUDE_ID_EXPLAIN'		=> 'Le contenu de ces forums <strong>se sera pas inclus dans les flux</strong>. Ne sélectionnez aucun forum pour lire les données de tous les forums.<br />Sélectionner plusieurs forums en maintenant la touche <samp>CTRL</samp> et en cliquant.',
+));
+
 // Visual Confirmation Settings
 $lang = array_merge($lang, array(
-	'ACP_VC_SETTINGS_EXPLAIN'		=> 'Vous pouvez définir les paramètres de la confirmation visuelle et les paramètres de CAPTCHA.',
-
+	'ACP_VC_SETTINGS_EXPLAIN'				=> 'Vous pouvez sélectionner et configurer les plugins CAPTCHA, qui utilisent différents moyens pour rejeter les tentatives d’inscription des robots.',
+	'AVAILABLE_CAPTCHAS'					=> 'Plugins disponibles',
+	'CAPTCHA_UNAVAILABLE'					=> 'Le CAPTCHA ne peut pas être sélectionné car les prérequis ne sont pas remplis.',
 	'CAPTCHA_GD'							=> 'GD CAPTCHA',
+	'CAPTCHA_GD_3D'							=> 'GD Captcha 3D',
 	'CAPTCHA_GD_FOREGROUND_NOISE'			=> 'GD CAPTCHA avec bruit de fond',
 	'CAPTCHA_GD_EXPLAIN'					=> 'Utilise GD pour un CAPTCHA plus avancé.',
 	'CAPTCHA_GD_FOREGROUND_NOISE_EXPLAIN'	=> 'Utiliser un bruit de fond pour faire un CAPTCHA plus difficile à déchiffrer par les robots.',
@@ -253,14 +299,23 @@ $lang = array_merge($lang, array(
 	'CAPTCHA_FONT_NEW'						=> 'Nouvelles formes',
 	'CAPTCHA_FONT_LOWER'					=> 'Utiliser également des minuscules',
 
+	'CAPTCHA_NO_GD'							=> 'CAPTCHA sans GD',
 	'CAPTCHA_PREVIEW_MSG'					=> 'Vos modifications pour les paramètres de la confirmation visuelle n’ont pas été sauvegardées. Ceci est juste un aperçu.',
-	'CAPTCHA_PREVIEW_EXPLAIN'				=> 'Voici le CAPTCHA tel qu’il apparaîtra avec vos paramètres actuels. Utilisez le bouton Aperçu pour rafraîchir. Notez que les CAPTCHA sont aléatoires et diffèrents d’un membre à l’autre.',
+	'CAPTCHA_PREVIEW_EXPLAIN'				=> 'Voici le CAPTCHA tel qu’il apparaîtrait avec vos paramètres actuels.',
+
+	'CAPTCHA_SELECT'						=> 'Plugins CAPTCHA installés',
+	'CAPTCHA_SELECT_EXPLAIN'				=> 'La liste déroulante affiche les plugins CAPTCHA reconnus par le forum. Les plugins grisés ne sont pas disponibles immédiatement et peuvent nécessiter au préalable une configuration pour être utilisés.',
+	'CAPTCHA_CONFIGURE'						=> 'Configurer les CAPTCHAs',
+	'CAPTCHA_CONFIGURE_EXPLAIN'				=> 'Change les paramètres pour le CAPTCHA sélectionné.',
+	'CONFIGURE'								=> 'Configurer',
+	'CAPTCHA_NO_OPTIONS'					=> 'Ce CAPTCHA n’a pas d’options de configuration.',
+
 	'VISUAL_CONFIRM_POST'					=> 'Activer la confirmation visuelle pour les visiteurs',
 	'VISUAL_CONFIRM_POST_EXPLAIN'			=> 'Oblige les invités à saisir un code aléatoire correspondant à une image afin d’empêcher la publication de messages en masse.',
 	'VISUAL_CONFIRM_REG'					=> 'Activer la confirmation visuelle pour les inscriptions',
 	'VISUAL_CONFIRM_REG_EXPLAIN'			=> 'Oblige les nouveaux utilisateurs à saisir un code aléatoire correspondant à une image afin d’empêcher les inscriptions en masse.',
 	'VISUAL_CONFIRM_REFRESH'				=> 'Autoriser les utilisateurs à rafraîchir l’image de confirmation',
-	'VISUAL_CONFIRM_REFRESH_EXPLAIN'		=> 'Autorise les utilisateurs à demander de nouveaux codes de confirmation s’ils sont incapables de déchiffrer la confirmation visuelle durant l’inscription.',	
+	'VISUAL_CONFIRM_REFRESH_EXPLAIN'		=> 'Autorise les utilisateurs à demander de nouveaux codes de confirmation s’ils sont incapables de déchiffrer la confirmation visuelle durant l’inscription. Certains plugins peuvent ne pas supporter cette option.',
 ));
 
 // Cookie Settings
@@ -345,7 +400,7 @@ $lang = array_merge($lang, array(
 	'ACP_SERVER_SETTINGS_EXPLAIN'	=> 'Vous pouvez définir les paramètres du serveur et du domaine. Vérifiez que les données saisies soient précises, afin d’éviter que vos e-mails ne contiennent des données erronées. Lorsque vous saisissez le nom de domaine, n’oubliez pas qu’il doit contenir http:// ou un autre protocole. Ne modifiez le numéro de port que si vous savez que votre serveur utilise une valeur différente, le port 80 est correct dans la majorité des cas.',
 
 	'ENABLE_GZIP'				=> 'Activer la compression GZip',
-	'ENABLE_GZIP_EXPLAIN'		=> 'Le contenu généré sera compressé avant d’être envoyé à l’utilisateur. Cela peut réduire le trafic mais également augmenter l’utilisation du CPU à la fois du côté serveur et client.',
+	'ENABLE_GZIP_EXPLAIN'		=> 'Le contenu généré sera compressé avant d’être envoyé à l’utilisateur. Cela peut réduire le trafic mais également augmenter l’utilisation du CPU à la fois du côté serveur et client. Cela nécessite que l’extension PHP zlib soit chargée.',
 	'FORCE_SERVER_VARS'			=> 'Forcer les paramètres URL du serveur',
 	'FORCE_SERVER_VARS_EXPLAIN'	=> 'Si “Oui” les paramètres définis ici seront utilisés à la place des valeurs déterminées automatiquement.',
 	'ICONS_PATH'				=> 'Emplacement des icônes de message',
@@ -432,7 +487,7 @@ $lang = array_merge($lang, array(
 	'EMAIL_SIG'						=> 'Signature de l’e-mail',
 	'EMAIL_SIG_EXPLAIN'				=> 'Ce texte sera inséré à la fin de tous les e-mails envoyés par le forum.',
 	'ENABLE_EMAIL'					=> 'Autoriser l’envoi d’e-mail via le forum',
-	'ENABLE_EMAIL_EXPLAIN'			=> 'Si désactivé, aucun e-mail ne sera envoyé par le forum.',
+	'ENABLE_EMAIL_EXPLAIN'			=> 'Si désactivé, aucun e-mail ne sera envoyé par le forum. <em>Notez que les paramètres d’activation de compte “par l’utilisateur” et “par l’administrateur” nécessite que ce réglage soit activé. Si vous utilisez actuellement l’un de ces deux paramètres dans les paramètres généraux d’activation, en désactivant ce réglage, les nouvelles inscriptions ne nécessiteront plus aucune activation.</em>',
 	'SMTP_AUTH_METHOD'				=> 'Méthode d’authentification SMTP',
 	'SMTP_AUTH_METHOD_EXPLAIN'		=> 'Seulement utilisé si un nom d’utilisateur et un mot de passe a été renseigné. Contactez votre fournisseur d’accès si vous n’êtes pas sûr de la méthode à utiliser.',
 	'SMTP_CRAM_MD5'					=> 'CRAM-MD5',

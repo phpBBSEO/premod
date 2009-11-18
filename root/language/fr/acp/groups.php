@@ -5,7 +5,7 @@
 * translated originally by PhpBB-fr.com <http://www.phpbb-fr.com/> and phpBB.biz <http://www.phpBB.biz>
 *
 * @package language
-* @version $Id: groups.php, v1.24 2009/06/01 23:27:00 Elglobo Exp $
+* @version $Id: groups.php, v1.25 2009/10/11 11:30:00 Elglobo Exp $
 * @copyright (c) 2005 phpBB Group
 * @license http://opensource.org/licenses/gpl-license.php GNU Public License
 *
@@ -88,6 +88,7 @@ $lang = array_merge($lang, array(
 	'GROUP_PENDING'					=> 'Membres en attente',
 	'GROUP_MAX_RECIPIENTS' 			=> 'Nombre maximum autorisé de destinataires pour un message privé',
 	'GROUP_MAX_RECIPIENTS_EXPLAIN' 	=> 'Le nombre maximum autorisé de destinataires pour un message privé. Une valeur à “0” indique que le nombre utilisé sera celui spécifié dans la configuration du forum.',
+	'GROUP_OPTIONS_SAVE'			=> 'Options du groupe',
 	'GROUP_PROMOTE'					=> 'Promouvoir en chef de groupe',
 	'GROUP_RANK'					=> 'Rang du groupe',
 	'GROUP_RECEIVE_PM'				=> 'Groupe autorisé à recevoir des messages privés',
@@ -96,6 +97,8 @@ $lang = array_merge($lang, array(
 	'GROUP_SETTINGS_SAVE'			=> 'Paramètres du groupe',
 	'GROUP_TYPE'					=> 'Type du groupe',
 	'GROUP_TYPE_EXPLAIN'			=> 'Cela détermine quels utilisateurs peuvent joindre ou voir ce groupe.',
+	'GROUP_SKIP_AUTH'				=> 'Exempte le chef de groupe des permissions',
+	'GROUP_SKIP_AUTH_EXPLAIN'		=> 'Si activé, le chef de groupe n’héritera pas des permissions de ce groupe.',
 	'GROUP_UPDATED'					=> 'Les préférences du groupe ont été mises à jour.',
 
 	'GROUP_USERS_ADDED'				=> 'De nouveaux utilisateurs ont été ajoutés.',

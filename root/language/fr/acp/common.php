@@ -1,13 +1,13 @@
 <?php
-/**
+/** 
 *
 * acp common [Standard french]
 * translated originally by PhpBB-fr.com <http://www.phpbb-fr.com/> and phpBB.biz <http://www.phpBB.biz>
 *
 * @package language
-* @version $Id: common.php, v1.24 2009/05/27 21:09:00 Elglobo Exp $
-* @copyright (c) 2005 phpBB Group
-* @license http://opensource.org/licenses/gpl-license.php GNU Public License
+* @version $Id: common.php, v1.25 2009/10/16 11:14:00 Elglobo Exp $
+* @copyright (c) 2005 phpBB Group 
+* @license http://opensource.org/licenses/gpl-license.php GNU Public License 
 *
 */
 
@@ -58,7 +58,7 @@ $lang = array_merge($lang, array(
 	'ACP_BOARD_MANAGEMENT'		=> 'Gestion du forum',
 	'ACP_BOARD_SETTINGS'		=> 'Configuration du forum',
 	'ACP_BOTS'					=> 'Robots',
-
+	
 	'ACP_CAPTCHA'				=> 'CAPTCHA',
 
 	'ACP_CAT_DATABASE'			=> 'Base de données',
@@ -76,19 +76,20 @@ $lang = array_merge($lang, array(
 	'ACP_COOKIE_SETTINGS'		=> 'Paramètres de cookie',
 	'ACP_CRITICAL_LOGS'			=> 'Journal des erreurs',
 	'ACP_CUSTOM_PROFILE_FIELDS'	=> 'Champs de profil personnalisés',
-
+	
 	'ACP_DATABASE'				=> 'Gestion de la base de données',
 	'ACP_DISALLOW'				=> 'Interdit',
 	'ACP_DISALLOW_USERNAMES'	=> 'Interdire des noms d’utilisateurs',
-
+	
 	'ACP_EMAIL_SETTINGS'		=> 'Paramètres des e-mails',
 	'ACP_EXTENSION_GROUPS'		=> 'Gérer les groupes d’extensions',
-
+	
 	'ACP_FORUM_BASED_PERMISSIONS'	=> 'Permissions basiques des forums',
 	'ACP_FORUM_LOGS'				=> 'Journaux du forum',
 	'ACP_FORUM_MANAGEMENT'			=> 'Gestion du forum',
 	'ACP_FORUM_MODERATORS'			=> 'Modérateurs des forums',
 	'ACP_FORUM_PERMISSIONS'			=> 'Permissions des forums',
+	'ACP_FORUM_PERMISSIONS_COPY'	=> 'Copier les permissions de forum',
 	'ACP_FORUM_ROLES'				=> 'Modèles de forum',
 
 	'ACP_GENERAL_CONFIGURATION'		=> 'Configuration générale',
@@ -100,20 +101,20 @@ $lang = array_merge($lang, array(
 	'ACP_GROUPS_MANAGE'				=> 'Gérer les groupes',
 	'ACP_GROUPS_MANAGEMENT'			=> 'Gestion des groupes',
 	'ACP_GROUPS_PERMISSIONS'		=> 'Permissions des groupes',
-
+	
 	'ACP_ICONS'					=> 'Icônes de sujet',
 	'ACP_ICONS_SMILIES'			=> 'Icônes et smileys de sujet',
 	'ACP_IMAGESETS'				=> 'Packs d’images',
 	'ACP_INACTIVE_USERS'		=> 'Utilisateurs inactifs',
 	'ACP_INDEX'					=> 'Index de l’administration',
-
+	
 	'ACP_JABBER_SETTINGS'		=> 'Paramètres Jabber',
-
+	
 	'ACP_LANGUAGE'				=> 'Gestion des langues',
 	'ACP_LANGUAGE_PACKS'		=> 'Langues',
 	'ACP_LOAD_SETTINGS'			=> 'Paramètres de charge',
 	'ACP_LOGGING'				=> 'Se connecte',
-
+	
 	'ACP_MAIN'					=> 'Index de l’administration',
 	'ACP_MANAGE_EXTENSIONS'		=> 'Gérer les extensions',
 	'ACP_MANAGE_FORUMS'			=> 'Gérer les forums',
@@ -126,11 +127,11 @@ $lang = array_merge($lang, array(
 	'ACP_MODULE_MANAGEMENT'		=> 'Gestion de modules',
 	'ACP_MOD_LOGS'				=> 'Journal de modération',
 	'ACP_MOD_ROLES'				=> 'Modèles de modération',
-
+	
 	'ACP_NO_ITEMS'				=> 'Il n’y a actuellement aucun élément.',
-
+	
 	'ACP_ORPHAN_ATTACHMENTS'	=> 'Fichiers joints orphelins',
-
+	
 	'ACP_PERMISSIONS'			=> 'Permissions',
 	'ACP_PERMISSION_MASKS'		=> 'Masques de permission',
 	'ACP_PERMISSION_ROLES'		=> 'Modèles de permission',
@@ -140,18 +141,21 @@ $lang = array_merge($lang, array(
 	'ACP_PRUNE_FORUMS'			=> 'Délester les forums',
 	'ACP_PRUNE_USERS'			=> 'Délester des utilisateurs',
 	'ACP_PRUNING'				=> 'Délestage',
-
+	
 	'ACP_QUICK_ACCESS'			=> 'Accès rapide',
-
+	
 	'ACP_RANKS'					=> 'Rangs',
 	'ACP_REASONS'				=> 'Rapports/raisons',
 	'ACP_REGISTER_SETTINGS'		=> 'Paramètres des inscriptions',
 
 	'ACP_RESTORE'				=> 'Restaurer',
+	'ACP_FEED'					=> 'Gestion des flux',
+	'ACP_FEED_SETTINGS'			=> 'Paramètres des flux',
 
 	'ACP_SEARCH'				=> 'Recherche',
 	'ACP_SEARCH_INDEX'			=> 'Index de recherche',
 	'ACP_SEARCH_SETTINGS'		=> 'Paramètres de recherche',
+	'ACP_SEND_STATISTICS'		=> 'Envoyer un rapport de statistiques',
 
 	'ACP_SECURITY_SETTINGS'		=> 'Paramètres de sécurité',
 	'ACP_SERVER_CONFIGURATION'	=> 'Configuration du serveur',
@@ -161,10 +165,11 @@ $lang = array_merge($lang, array(
 	'ACP_STYLE_COMPONENTS'		=> 'Composants des styles',
 	'ACP_STYLE_MANAGEMENT'		=> 'Gestion de style',
 	'ACP_STYLES'				=> 'Styles',
-
+	'ACP_SUBMIT_CHANGES'		=> 'Soumettre les changements',
+	
 	'ACP_TEMPLATES'				=> 'Templates',
 	'ACP_THEMES'				=> 'Thèmes',
-
+	
 	'ACP_UPDATE'					=> 'Mise à jour',
 	'ACP_USERS_FORUM_PERMISSIONS'	=> 'Permissions utilisateurs/forums',
 	'ACP_USERS_LOGS'				=> 'Journal d’utilisateur',
@@ -183,7 +188,9 @@ $lang = array_merge($lang, array(
 	'ACP_USER_SECURITY'				=> 'Sécurité utilisateur',
 	'ACP_USER_SIG'					=> 'Signature',
 
-	'ACP_VC_SETTINGS'					=> 'Paramètres de confirmation visuelle',
+	'ACP_USER_WARNINGS'				=> 'Avertissements',
+
+	'ACP_VC_SETTINGS'					=> 'Paramètres du module CAPTCHA',
 	'ACP_VC_CAPTCHA_DISPLAY'			=> 'Aperçu CAPTCHA',
 	'ACP_VERSION_CHECK'					=> 'Vérifier les mises à jour',
 	'ACP_VIEW_ADMIN_PERMISSIONS'		=> 'Permissions d’administration',
@@ -191,7 +198,7 @@ $lang = array_merge($lang, array(
 	'ACP_VIEW_FORUM_PERMISSIONS'		=> 'Permissions basiques des forums',
 	'ACP_VIEW_GLOBAL_MOD_PERMISSIONS'	=> 'Permissions des modérateurs globaux',
 	'ACP_VIEW_USER_PERMISSIONS'			=> 'Permissions basiques des utilisateurs',
-
+	
 	'ACP_WORDS'					=> 'Censure',
 
 	'ACTION'				=> 'Action',
@@ -241,13 +248,15 @@ $lang = array_merge($lang, array(
 
 	'MANAGE'				=> 'Gérer',
 	'MENU_TOGGLE'			=> 'Cacher ou afficher le menu latéral',
+	'MORE'					=> 'Plus',			// Not used at the moment
+	'MORE_INFORMATION'		=> 'Plus d’informations »',
 	'MOVE_DOWN'				=> 'Descendre',
 	'MOVE_UP'				=> 'Monter',
 
 	'NOTIFY'				=> 'Notification',
 	'NO_ADMIN'				=> 'Vous n’êtes pas autorisé à administrer ce forum.',
 	'NO_EMAILS_DEFINED'		=> 'Aucun e-mail valide indiquée.',
-	'NO_PASSWORD_SUPPLIED'	=> 'Vous devez indiquer votre mot de passe pour accéder au panneau d’administration',
+	'NO_PASSWORD_SUPPLIED'	=> 'Vous devez indiquer votre mot de passe pour accéder au panneau d’administration',	
 
 	'OFF'					=> 'Off',
 	'ON'					=> 'On',
@@ -256,8 +265,8 @@ $lang = array_merge($lang, array(
 	'PARSE_SMILIES'						=> 'Autoriser les smileys',
 	'PARSE_URLS'						=> 'Autoriser les liens',
 	'PERMISSIONS_TRANSFERRED'			=> 'Les permissions ont été transférées',
-	'PERMISSIONS_TRANSFERRED_EXPLAIN'	=> 'Vous utilisez actuellement les permissions de %1$s. Vous pouvez naviguer sur le forum avec ses permissions mais ne pourrait pas accéder au panneau d’administration car les permissions d’administration ne sont pas transférables. Vous pouvez <a href="%2$s"><strong>réinitialiser vos permissions</strong></a> à tout moment.',
-	'PIXEL'								=> 'px',
+	'PERMISSIONS_TRANSFERRED_EXPLAIN'	=> 'Vous utilisez actuellement les permissions de %1$s. Vous pouvez naviguer sur le forum avec ses permissions mais ne pouvez pas accéder au panneau d’administration car les permissions d’administration ne sont pas transférables. Vous pouvez <a href="%2$s"><strong>réinitialiser vos permissions</strong></a> à tout moment.',
+	'PIXEL'								=> 'px',	
 	'PROCEED_TO_ACP'					=> '%sAller au panneau d’administration%s',
 
 	'REMIND'							=> 'Rappeler',
@@ -266,11 +275,12 @@ $lang = array_merge($lang, array(
 
 	'SELECT_ANONYMOUS'		=> 'Sélectionner l’utilisateur invité',
 	'SELECT_OPTION'			=> 'Sélectionner une option',
-
-	'SETTING_TOO_LOW'		=> 'La valeur indiquée pour le paramètre “%1$s” est trop faible. La valeur minimale autorisée est de %2$d.',
-	'SETTING_TOO_BIG'		=> 'La valeur indiquée pour le paramètre “%1$s” est trop élevée. La valeur maximale autorisée est de %2$d.',
-	'SETTING_TOO_LONG'		=> 'La valeur indiquée pour le paramètre “%1$s” est trop longue. La longueur maximale autorisée est de %2$d.',
-	'SETTING_TOO_SHORT'		=> 'La valeur indiquée pour le paramètre “%1$s” est trop courte. La longueur minimale autorisée est de %2$d.',
+	
+	'SETTING_TOO_LOW'		=> 'La valeur indiquée pour le paramètre “%1$s” est trop faible. La valeur minimale acceptée est de %2$d.',
+	'SETTING_TOO_BIG'		=> 'La valeur indiquée pour le paramètre “%1$s” est trop élevée. La valeur maximale acceptée est de %2$d.',	
+	'SETTING_TOO_LONG'		=> 'La valeur indiquée pour le paramètre “%1$s” est trop longue. La longueur maximale acceptée est de %2$d.',
+	'SETTING_TOO_SHORT'		=> 'La valeur indiquée pour le paramètre “%1$s” est trop courte. La longueur minimale acceptée est de %2$d.',
+	'SHOW_ALL_OPERATIONS'	=> 'Afficher toutes les opérations',
 
 	'UCP'					=> 'Panneau de l’utilisateur',
 	'USERNAMES_EXPLAIN'		=> 'Indiquez un nom d’utilisateur par ligne',
@@ -333,6 +343,9 @@ $lang = array_merge($lang, array(
 	'PURGE_CACHE'			=> 'Vider le cache',
 	'PURGE_CACHE_CONFIRM'	=> 'Êtes-vous sûr de vouloir vider le cache?',
 	'PURGE_CACHE_EXPLAIN'	=> 'Vide tous les fichiers du cache, cela inclut tous les fichiers ou requêtes des templates mis en cache.',
+	'PURGE_SESSIONS'			=> 'Vider toutes les sessions',
+	'PURGE_SESSIONS_CONFIRM'	=> 'Êtes-vous sûr de vouloir vider toutes les sessions? Cela aura pour effet de déconnecter tous les utilisateurs.',
+	'PURGE_SESSIONS_EXPLAIN'	=> 'Vider toutes les sessions. Cela aura pour effet de déconnecter tous les utilisateurs en vidant la table des sessions.',
 
 	'RESET_DATE'					=> 'Réinitialiser la date d’ouverture du forum',
 	'RESET_DATE_CONFIRM'			=> 'Êtes-vous sûr de vouloir réinitialiser la date d’ouverture du forum?',
@@ -358,6 +371,8 @@ $lang = array_merge($lang, array(
 	'USERS_PER_DAY'		=> 'Moyenne journalière d’inscriptions',
 
 	'VALUE'					=> 'Valeur',
+	'VERSIONCHECK_FAIL'			=> 'Echec pour obtenir l’information de la dernière version.',
+	'VERSIONCHECK_FORCE_UPDATE'	=> 'Re-contrôler la version',
 	'VIEW_ADMIN_LOG'		=> 'Voir le journal d’administration',
 	'VIEW_INACTIVE_USERS'	=> 'Voir les utilisateurs inactifs',
 
@@ -380,12 +395,26 @@ $lang = array_merge($lang, array(
 
 	'NO_INACTIVE_USERS'	=> 'Aucun utilisateur inactif',
 
-	'SORT_INACTIVE'		=> 'Date',
+	'SORT_INACTIVE'		=> 'Date d’inactivité',
 	'SORT_LAST_VISIT'	=> 'Dernière visite',
 	'SORT_REASON'		=> 'Raison',
 	'SORT_REG_DATE'		=> 'Date d’inscription',
+	'SORT_LAST_REMINDER'=> 'Dernier rappel',
+	'SORT_REMINDER'		=> 'Rappel envoyé',
 
 	'USER_IS_INACTIVE'		=> 'L’utilisateur est inactif',
+));
+
+// Send statistics page
+$lang = array_merge($lang, array(
+	'EXPLAIN_SEND_STATISTICS'	=> 'Merci d’envoyer les informations au sujet de votre serveur, de la configuration de votre forum à phpBB pour une analyse statistique. Toute information qui permettrait de vous identifier vous ou votre site sera supprimée - Les données sont complètement <strong>anonymes</strong>. Nous baserons nos décisions au sujet des futures versions de phpBB sur cette information. Les statistiques seront disponibles publiquement. Nous partageons aussi ces données avec le projet PHP, language de programmation avec lequel phpBB est conçu.',
+	'EXPLAIN_SHOW_STATISTICS'	=> 'En utilisant le bouton ci-dessous, vous pouvez prévisualiser toutes les variables qui nous seront transmises.',
+	'DONT_SEND_STATISTICS'		=> 'Retourner à l’ACP si vous ne souhaitez pas envoyer de statistiques à phpBB.',
+	'GO_ACP_MAIN'				=> 'Aller à la page de démarrage de l’ACP',
+	'HIDE_STATISTICS'			=> 'Masquer les détails',
+	'SEND_STATISTICS'			=> 'Envoyer le rapport de statistiques',
+	'SHOW_STATISTICS'			=> 'Afficher les détails',
+	'THANKS_SEND_STATISTICS'	=> 'Merci de nous avoir transmis votre rapport de statistiques.',
 ));
 
 // Log Entries
@@ -415,10 +444,10 @@ $lang = array_merge($lang, array(
 
 	'LOG_ACL_TRANSFER_PERMISSIONS'		=> '<strong>Transfert des permissions de</strong><br />» %s',
 	'LOG_ACL_RESTORE_PERMISSIONS'		=> '<strong>Restauration de vos permissions après l’utilisation des permissions de</strong><br />» %s',
-
+	
 	'LOG_ADMIN_AUTH_FAIL'		=> '<strong>Echec de connexion à l’administration</strong>',
 	'LOG_ADMIN_AUTH_SUCCESS'	=> '<strong>Connexion réussie à l’administration</strong>',
-
+	
 	'LOG_ATTACHMENTS_DELETED'   => '<strong>Suppression de fichiers joints d’un utilisateur</strong><br />» %s',
 
 	'LOG_ATTACH_EXT_ADD'		=> '<strong>Ajout/modification d’extension de fichier joint</strong><br />» %s',
@@ -464,6 +493,7 @@ $lang = array_merge($lang, array(
 	'LOG_CONFIG_MESSAGE'		=> '<strong>Les paramètres de la messagerie privée ont été modifiés</strong>',
 	'LOG_CONFIG_POST'			=> '<strong>Les paramètres de messages ont été modifiés</strong>',
 	'LOG_CONFIG_REGISTRATION'	=> '<strong>Les paramètres d’inscriptions ont été modifiés</strong>',
+	'LOG_CONFIG_FEED'			=> '<strong>Les paramètres de flux ont été modifiés</strong>',
 	'LOG_CONFIG_SEARCH'			=> '<strong>Les paramètres de recherche ont été modifiés</strong>',
 	'LOG_CONFIG_SECURITY'		=> '<strong>Les paramètres de sécurité ont été modifiés</strong>',
 	'LOG_CONFIG_SERVER'			=> '<strong>Les paramètres du serveur ont été modifiés</strong>',
@@ -481,6 +511,8 @@ $lang = array_merge($lang, array(
 	'LOG_LOCK_POST' 			=> '<strong>Verrouillage d’un message</strong><br />» %s',
 	'LOG_MERGE' 				=> '<strong>Fusion de messages</strong> dans le sujet <br />»%s',
 	'LOG_MOVE' 					=> '<strong>Déplacement d’un sujet</strong><br />» de %s',
+	'LOG_PM_REPORT_CLOSED'		=> '<strong>Clôture d’un rapport de message privé</strong><br />» %s',
+	'LOG_PM_REPORT_DELETED'		=> '<strong>Suppression d’un rapport de message privé</strong><br />» %s',
 	'LOG_POST_APPROVED'			=> '<strong>Approbation d’un message</strong><br />» %s',
 	'LOG_POST_DISAPPROVED'		=> '<strong>Refus d’un message “%1$s” pour la raison suivante</strong><br />» %2$s',
 	'LOG_POST_EDITED'			=> '<strong>Edition d’un message “%1$s” écrit par</strong><br />» %2$s',
@@ -509,8 +541,9 @@ $lang = array_merge($lang, array(
 
 	'LOG_ERROR_JABBER'		=> '<strong>Erreur de compte Jabber</strong><br />» %s',
 	'LOG_ERROR_EMAIL'		=> '<strong>Erreur d’e-mail</strong><br />» %s',
-
+	
 	'LOG_FORUM_ADD'							=> '<strong>Création d’un nouveau forum</strong><br />» %s',
+	'LOG_FORUM_COPIED_PERMISSIONS'			=> '<strong>Copie de permissions de forum</strong> from %1$s<br />» %2$s',
 	'LOG_FORUM_DEL_FORUM'					=> '<strong>Suppression d’un forum</strong><br />» %s',
 	'LOG_FORUM_DEL_FORUMS'					=> '<strong>Suppression d’un forum et de ses sous-forums</strong><br />» %s',
 	'LOG_FORUM_DEL_MOVE_FORUMS'				=> '<strong>Suppression d’un forum et sous-forums déplacés</strong> vers %1$s<br />» %2$s',
@@ -524,6 +557,8 @@ $lang = array_merge($lang, array(
 	'LOG_FORUM_MOVE_DOWN'					=> '<strong>Déplacement d’un forum</strong> %1$s <strong>en dessous de</strong> %2$s',
 	'LOG_FORUM_MOVE_UP'						=> '<strong>Déplacement d’un forum</strong> %1$s <strong>au dessus de</strong> %2$s',
 	'LOG_FORUM_SYNC'						=> '<strong>Resynchronisation d’un forum</strong><br />» %s',
+	
+	'LOG_GENERAL_ERROR'	=> '<strong>Une erreur générale a été rencontrée</strong>: %1$s <br />» %2$s',
 
 	'LOG_GROUP_CREATED'		=> '<strong>Création d’un nouveau groupe</strong><br />» %s',
 	'LOG_GROUP_DEFAULTS'   => '<strong>Groupe “%1$s” par défaut pour le membre</strong><br />» %2$s',
@@ -533,8 +568,11 @@ $lang = array_merge($lang, array(
 	'LOG_GROUP_REMOVE'		=> '<strong>Suppression de membre d’un groupe</strong> %1$s<br />» %2$s',
 	'LOG_GROUP_UPDATED'		=> '<strong>Mise à jour des informations d’un groupe</strong><br />» %s',
 	'LOG_MODS_ADDED'		=> '<strong>Ajout d’un nouveau chef dans le groupe</strong> %1$s<br />» %2$s',
-	'LOG_USERS_APPROVED'	=> '<strong>Utilisateurs approuvés dans le groupe</strong> %1$s<br />» %2$s',
 	'LOG_USERS_ADDED'		=> '<strong>Ajout de nouveau membre au groupe</strong> %1$s<br />» %2$s',
+	'LOG_USERS_APPROVED'	=> '<strong>Utilisateurs approuvés dans le groupe</strong> %1$s<br />» %2$s',
+	'LOG_USERS_PENDING'		=> '<strong>Demande d’utilisateurs pour rejoindre le groupe “%1$s” et nécessite une approbation</strong><br />» %2$s',
+
+	'LOG_IMAGE_GENERATION_ERROR'	=> '<strong>Erreur pendant la création de l’image</strong><br />» Erreur dans %1$s à la ligne %2$s: %3$s',
 
 	'LOG_IMAGESET_ADD_DB'			=> '<strong>Ajout d’un pack d’images dans la base de données</strong><br />» %s',
 	'LOG_IMAGESET_ADD_FS'			=> '<strong>Ajout d’un pack d’images dans le système de fichiers</strong><br />» %s',
@@ -603,6 +641,7 @@ $lang = array_merge($lang, array(
 	'LOG_PRUNE_USER_DEL_ANON'	=> '<strong>Déléstage d’utilisateurs et conservation de leurs messages</strong><br />» %s',
 
 	'LOG_PURGE_CACHE'			=> '<strong>Vidage du cache</strong>',
+	'LOG_PURGE_SESSIONS'		=> '<strong>Vidage des sessions</strong>',
 
 	'LOG_RANK_ADDED'		=> '<strong>Ajout d’un nouveau rang</strong><br />» %s',
 	'LOG_RANK_REMOVED'		=> '<strong>Suppression d’un rang</strong><br />» %s',
@@ -654,12 +693,14 @@ $lang = array_merge($lang, array(
 	'LOG_USER_DELETED'		=> '<strong>Suppression de l’utilisateur</strong><br />» %s',
 	'LOG_USER_DEL_ATTACH'	=> '<strong>Suppression de tous les fichiers joints de l’utilisateur</strong><br />» %s',
 	'LOG_USER_DEL_AVATAR'	=> '<strong>Suppression de l’avatar de l’utilisateur</strong><br />» %s',
+	'LOG_USER_DEL_OUTBOX'	=> '<strong>Vidage de la boîte d’envoi d’un utilisateur</strong><br />» %s',
 	'LOG_USER_DEL_POSTS'	=> '<strong>Suppression des messages de l’utilisateur</strong><br />» %s',
 	'LOG_USER_DEL_SIG'		=> '<strong>Suppression de la signature de l’utilisateur</strong><br />» %s',
 	'LOG_USER_INACTIVE'		=> '<strong>Désactivation de l’utilisateur</strong><br />» %s',
 	'LOG_USER_MOVE_POSTS'	=> '<strong>Déplacement des messages de </strong><br />» “%1$s” vers le forum “%2$s”',
 	'LOG_USER_NEW_PASSWORD'	=> '<strong>Modification du mot de passe de l’utilisateur</strong><br />» %s',
 	'LOG_USER_REACTIVATE'	=> '<strong>Réactivation forcée du compte de l’utilisateur</strong><br />» %s',
+	'LOG_USER_REMOVED_NR'	=> '<strong>Suppression du status “nouvel inscrit” pour un utlisateur</strong><br />» %s',
 	'LOG_USER_UPDATE_EMAIL'	=> '<strong>Modification de l’e-mail de l’utilisateur “%1$s” </strong><br />» de “%2$s” à “%3$s”',
 	'LOG_USER_UPDATE_NAME'	=> '<strong>Modification d’un nom d’utilisateur</strong><br />» de “%1$s” à “%2$s”',
 	'LOG_USER_USER_UPDATE'	=> '<strong>Mise à jour des informations de l’utilisateur</strong><br />» %s',
@@ -682,6 +723,9 @@ $lang = array_merge($lang, array(
 	'LOG_USER_GROUP_JOIN'			=> '<strong>Adhésion à un groupe de l’utilisateur</strong><br />» %s',
 	'LOG_USER_GROUP_JOIN_PENDING'	=> '<strong>Adhésion à un groupe de l’utilisateur et demande d’approbation</strong><br />» %s',
 	'LOG_USER_GROUP_RESIGN'			=> '<strong>Désinscription à un groupe de l’utilisateur</strong><br />» %s',
+	'LOG_WARNING_DELETED'		=> '<strong>Suppresion de lavertissement de l’utilisateur</strong><br />» %s',
+	'LOG_WARNINGS_DELETED'		=> '<strong>Suppression de %2$s avertissements de l’utilisateur</strong><br />» %1$s', // Example: '<strong>Deleted 2 user warnings</strong><br />» username'
+	'LOG_WARNINGS_DELETED_ALL'	=> '<strong>Suppression de tous les avertissement de l’utilisateur</strong><br />» %s',
 
 	'LOG_WORD_ADD'			=> '<strong>Ajout d’un mot censuré</strong><br />» %s',
 	'LOG_WORD_DELETE'		=> '<strong>Suppression d’un mot censuré</strong><br />» %s',

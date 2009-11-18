@@ -5,7 +5,7 @@
 * translated originally by PhpBB-fr.com <http://www.phpbb-fr.com/> and phpBB.biz <http://www.phpBB.biz>
 *
 * @package language
-* @version $Id: permissions.php, v1.24 2008/07/03 17:41:35 Elglobo Exp $
+* @version $Id: permissions.php, v1.25 2008/10/10 11:49:00 Elglobo Exp $
 * @copyright (c) 2005 phpBB Group 
 * @license http://opensource.org/licenses/gpl-license.php GNU Public License 
 *
@@ -79,6 +79,7 @@ $lang = array_merge($lang, array(
 	'ACP_ADMINISTRATORS_EXPLAIN'				=> 'Vous pouvez attribuer des droits d’administration à des utilisateurs ou groupes. Tous les utilisateurs avec des permissions d’administration peuvent accéder au panneau d’administration.',
 	'ACP_FORUM_MODERATORS_EXPLAIN'				=> 'Vous pouvez attribuer des utilisateurs et des groupes en tant que modérateurs du forum. Pour attribuer l’accès des utilisateurs aux forums et pour définir des droits de modération globale ou d’administration, utilisez la page appropriée.',
 	'ACP_FORUM_PERMISSIONS_EXPLAIN'				=> 'Vous pouvez modifier le nombre d’utilisateurs et de groupes pouvant accéder à certains forums. Pour attribuer des modérateurs ou définir des administrateurs, utilisez la page appropriée.',
+	'ACP_FORUM_PERMISSIONS_COPY_EXPLAIN'		=> 'Vous pouvez copier les permissions d’un forum vers d’autres forums.',
 	'ACP_GLOBAL_MODERATORS_EXPLAIN'				=> 'Vous pouvez attribuer les droits de modérateur global aux utilisateurs ou aux groupes. Ces modérateurs sont des modérateurs ordinaires excepté qu’ils ont accès à tous les forums.',
 	'ACP_GROUPS_FORUM_PERMISSIONS_EXPLAIN'		=> 'Vous pouvez attribuer les permissions des forums aux groupes.',
 	'ACP_GROUPS_PERMISSIONS_EXPLAIN'			=> 'Vous pouvez attribuer les permissions globales aux groupes d’utilisateur, de modérateur global et d’administrateur. Les permissions d’utilisateur incluent des possibilités comme l’utilisation d’avatar, l’envoi de messages privés, etc. les permissions de modérateur global comme l’approbation des messages, la gestion des sujets, la gestion des bannissements, etc. et enfin les permissions d’administrateur comme la modification de permissions, la gestion des BBCodes personnalisés, la gestion des forums, etc. Les permissions individuelles des utilisateurs ne doivent être modifiées que dans de rares occasions, la méthode appropriée est l’intégration d’utilisateurs dans des groupes puis l’attribution de permissions à ces groupes.',
@@ -108,6 +109,12 @@ $lang = array_merge($lang, array(
 	'APPLY_PERMISSIONS_EXPLAIN'	=> 'Les permissions et modèles définis pour cet élément seront appliqués uniquement à cet élément et à tous les éléments cochés.',
 	'AUTH_UPDATED'				=> 'Les permissions ont été mises à jour.',
 
+	'COPY_PERMISSIONS_CONFIRM'				=> 'Êtes-vous sûr de vouloir effectuer cette opération? Attention, les permissions existantes des cibles sélectionnées seront remplacées.',
+	'COPY_PERMISSIONS_FORUM_FROM_EXPLAIN'	=> 'Le forum source dont vous copiez les permissions.',
+	'COPY_PERMISSIONS_FORUM_TO_EXPLAIN'		=> 'Les forums de destination où vous voulez que les permissions copiées s’appliquent.',
+	'COPY_PERMISSIONS_FROM'					=> 'Copier les permissions de',
+	'COPY_PERMISSIONS_TO'					=> 'Appliquer les permissions à',
+	
 	'CREATE_ROLE'				=> 'Créer un modèle',
 	'CREATE_ROLE_FROM'			=> 'Utiliser les paramètres de…',
 	'CUSTOM'					=> 'Personnaliser…',
@@ -163,6 +170,7 @@ $lang = array_merge($lang, array(
 	'ROLE_FORUM_POLLS'			=> 'Accès standard + Sondages',
 	'ROLE_FORUM_READONLY'		=> 'Accès en lecture uniquement',
 	'ROLE_FORUM_STANDARD'		=> 'Accès standard',
+	'ROLE_FORUM_NEW_MEMBER'		=> 'Nouvel utilisateur enregistré',
 	'ROLE_MOD_FULL'				=> 'Super Modérateur',
 	'ROLE_MOD_QUEUE'			=> 'Modérateur suppléant',
 	'ROLE_MOD_SIMPLE'			=> 'Modérateur simple',
@@ -172,6 +180,7 @@ $lang = array_merge($lang, array(
 	'ROLE_USER_NOAVATAR'		=> 'Aucun avatar',
 	'ROLE_USER_NOPM'			=> 'Aucun message privé',
 	'ROLE_USER_STANDARD'		=> 'Fonctionnalités standards',
+	'ROLE_USER_NEW_MEMBER'		=> 'Nouvel utilisateur enregistré',
 
 	'ROLE_DESCRIPTION_ADMIN_FORUM'			=> 'Peut accéder à la gestion et à la configuration des permissions du forum.',
 	'ROLE_DESCRIPTION_ADMIN_FULL'			=> 'A accès à toutes les fonctions administratives du forum.<br />Non recommandé.',
@@ -186,6 +195,7 @@ $lang = array_merge($lang, array(
 	'ROLE_DESCRIPTION_FORUM_POLLS'			=> 'Comme l’Accès Standard mais peut aussi créer des sondages.',
 	'ROLE_DESCRIPTION_FORUM_READONLY'		=> 'Peut lire le forum, mais ne peut pas créer de nouveaux sujets ou répondre aux messages.',
 	'ROLE_DESCRIPTION_FORUM_STANDARD'		=> 'Peut utiliser la plupart des fonctionnalités du forum y compris les fichiers joints, mais ne peut pas verrouiller ou supprimer ses propres sujets, et ne peut pas créer de sondages.',
+	'ROLE_DESCRIPTION_FORUM_NEW_MEMBER'		=> 'Un modèle pour les membres du groupe prédéfini nouveaux utilisateurs enregistrés; contient les permission <samp>JAMAIS</samp> pour verrouiller les fonctionnalités aux nouveaux utilisateurs.',
 	'ROLE_DESCRIPTION_MOD_FULL'				=> 'Peut utiliser toutes les fonctionnalités de modération, y compris le bannissement.',
 	'ROLE_DESCRIPTION_MOD_QUEUE'			=> 'Peut utiliser l’attente de modération pour valider ou éditer des messages, mais rien d’autre.',
 	'ROLE_DESCRIPTION_MOD_SIMPLE'			=> 'Peut utiliser seulement les actions de sujet de base. Ne peut pas envoyer d’avertissements ou utiliser l’attente de modération.',
@@ -195,6 +205,7 @@ $lang = array_merge($lang, array(
 	'ROLE_DESCRIPTION_USER_NOAVATAR'		=> 'A un ensemble limité de fonctionnalités et n’est pas autorisé à avoir d’avatar.',
 	'ROLE_DESCRIPTION_USER_NOPM'			=> 'A un ensemble limité de fonctionnalités et n’est pas autorisé à envoyer de messages privés.',
 	'ROLE_DESCRIPTION_USER_STANDARD'		=> 'Peut accéder à la plupart des fonctionnalités de l’utilisateur, mais pas à toutes. Par exemple, ne peut pas modifier le nom d’utilisateur ou ignorer la limite de flood.',
+	'ROLE_DESCRIPTION_USER_NEW_MEMBER'		=> 'Un modèle pour les membres du groupe prédéfini nouveaux utilisateurs enregistrés; contient les permissions <samp>JAMAIS</samp> pour verrouiller les fonctionnalités aux nouveaux utilisateurs.',
 
 	'ROLE_DESCRIPTION_EXPLAIN'		=> 'Vous avez la possibilité d’entrer une courte explication sur ce que fait le modèle ou ce qu’il signifie. Le texte que vous entrez sera aussi affiché dans l’écran des permissions.',
 	'ROLE_DESCRIPTION_LONG'			=> 'La description du modèle est trop longue. Limitez-la à 4000 caractères.',
@@ -240,7 +251,7 @@ $lang = array_merge($lang, array(
 	'TRACE_USER_GLOBAL_YES_TOTAL_NEVER'		=> 'La permission de l’utilisateur sur le forum est sur <samp>OUI</samp>, ce qui outrepasse le résultat actuel <samp>JAMAIS</samp>. %sTracer la permission globale%s',
 	'TRACE_USER_GLOBAL_NEVER_TOTAL_KEPT'	=> 'La permission de l’utilisateur sur le forum est sur <samp>JAMAIS</samp> ce qui n’influence pas la permission locale. %sTracer la permission globale%s',
 	
-	'TRACE_USER_FOUNDER'					=> 'L’utilisateur est un fondateur, c’est pourquoi les permissions d’administration sont toutes réglées sur <samp>OUI</samp> par défaut.',
+	'TRACE_USER_FOUNDER'					=> 'L’utilisateur est un fondateur, c’est pourquoi les permissions d’administration sont toujours réglées sur <samp>OUI</samp>.',
 	'TRACE_USER_KEPT'						=> 'La permission de l’utilisateur est réglée sur <samp>NON</samp>, ainsi l’ancienne valeur globale est conservée.',
 	'TRACE_USER_KEPT_LOCAL'						=> 'La permission de l’utilisateur pour ce forum est réglée sur <samp>NON</samp>, ainsi l’ancienne valeur globale est conservée.',
 	'TRACE_USER_NEVER_TOTAL_NEVER'			=> 'La permission de l’utilisateur est réglée sur <samp>JAMAIS</samp> et la valeur commune est réglée sur <samp>JAMAIS</samp>, donc rien n’est modifié.',

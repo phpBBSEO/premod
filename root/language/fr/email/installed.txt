@@ -4,20 +4,19 @@ Félicitations,
 
 Vous venez d'installer phpBB sur votre serveur.
 
-Cet e-mail contient d'importantes informations concernant votre installation que vous devriez conserver. Le mot de passe a été crypté dans la base de données et ne pourra donc être retrouvé, mais en cas de perte, vous pourrez en demander un nouveau.
+Cet e-mail contient d'importantes informations concernant votre installation que vous devriez conserver. Votre mot de passe a été stocké de manière sécurisée dans notre base de données et ne pourra pas être retrouvé. Dans le cas où vous l'avez avez oublié, vous pourrez le réinitialiser en utilisant l'adresse e-mail associée à votre compte.
 
 ----------------------------
 
 Nom d'utilisateur: {USERNAME}
 
-Mot de passe: {PASSWORD}
-
 Adresse du forum: {U_BOARD}
 
 ----------------------------
 
-Des informations utiles peuvent être consultées dans le dossier "docs" de votre installation, ou sur le forum de support officiel francophone - http://forums.phpbb-fr.com
+Des informations utiles peuvent être consultées dans le dossier "docs" de votre installation, ou sur le forum de support francophone - http://forums.phpbb-fr.com
 
-Dans le but de conserver votre forum en sécurité, il est fortement recommandé de vous tenir au courant des mises à jour du script, en vous inscrivant à la Newsletter du groupe phpBB.com - http://www.phpbb.com/support/
+Dans le but de conserver votre forum en sécurité, nous vous recommandons fortement de vous tenir au courant des mises à jour du logiciel. Pour votre convenance, une inscription à la newsletter du groupe phpBB est disponible sur la page ci-dessous.
+http://www.phpbb.com/support/
 
 {EMAIL_SIG}

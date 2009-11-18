@@ -5,7 +5,7 @@
 * translated originally by PhpBB-fr.com <http://www.phpbb-fr.com/> and phpBB.biz <http://www.phpBB.biz>
 *
 * @package language
-* @version $Id: posting.php, v1.24 2009/05/27 22:03:00 Elglobo Exp $
+* @version $Id: posting.php, v1.25 2009/10/16 15:02:00 Elglobo Exp $
 * @copyright (c) 2005 phpBB Group 
 * @license http://opensource.org/licenses/gpl-license.php GNU Public License 
 *
@@ -168,6 +168,8 @@ $lang = array_merge($lang, array(
 	'POST_ICON'					=> 'Icône de message',
 	'POST_NORMAL'				=> 'Normal',
 	'POST_REVIEW'				=> 'Revue du sujet',
+	'POST_REVIEW_EDIT'			=> 'Revue du sujet',
+	'POST_REVIEW_EDIT_EXPLAIN'	=> 'Ce message a été modifié par un autre utilisateur pendant que vous étiez entrain de l’éditer. Vous pouvez revoir la version actuelle de ce message et ajuster votre édition.',
 	'POST_REVIEW_EXPLAIN'		=> 'Au moins un nouveau message a été ajouté à ce sujet entre-temps. Vous pouvez revoir votre message en conséquence.',
 	'POST_STORED'				=> 'Votre message a été posté.',
 	'POST_STORED_MOD'			=> 'Votre message a été posté, mais requiert l’approbation d’un modérateur avant d’être rendu visible publiquement.',
@@ -185,10 +187,11 @@ $lang = array_merge($lang, array(
 	'SMILIES_ARE_ON'			=> 'Les smileys sont <em>activés</em>',
 	'STICKY_ANNOUNCE_TIME_LIMIT'=> 'Durée du post-it ou de l’annonce',
 	'STICK_TOPIC_FOR'			=> 'Epingler pendant',
-	'STICK_TOPIC_FOR_EXPLAIN'	=> 'Mettre “0” ou laissez cette case vide pour une durée illimitée des post-it/annonces.',
+	'STICK_TOPIC_FOR_EXPLAIN'	=> 'Mettre “0” ou laissez cette case vide pour une durée illimitée des post-it/annonces. Notez que ce nombre est relatif à la date du message.',
 	'STYLES_TIP'				=> 'Astuce: les mises en forme peuvent être appliquées rapidement en sélectionnant le texte.',
 
 	'TOO_FEW_CHARS'				=> 'Votre message contient trop peu de caractères.',
+	'TOO_FEW_CHARS_LIMIT'		=> 'Votre message contient %1$d caractères. Le nombre minimum de caractères à taper est de %2$d.',
 	'TOO_FEW_POLL_OPTIONS'		=> 'Vous devez entrer au moins deux options possibles au sondage.',
 	'TOO_MANY_ATTACHMENTS'		=> 'Impossible d’ajouter un nouveau fichier joint, %d est le maximum autorisé.',
 	'TOO_MANY_CHARS'			=> 'Votre message contient trop de caractères.',

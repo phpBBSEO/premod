@@ -6,12 +6,11 @@ Vous êtes prié de conserver cet e-mail dans vos archives. Voici les informatio
 
 ----------------------------
 Nom d'utilisateur: {USERNAME}
-Mot de passe: {PASSWORD}
 
 Adresse du forum: {U_BOARD}
 ----------------------------
 
-N'oubliez pas votre mot de passe étant donné qu'il est crypté dans notre base de données et que nous ne pourrons pas le retrouver pour vous. Toutefois, si vous oubliez votre mot de passe, vous pourrez en demander un nouveau qui sera activé de la même manière que ce compte.
+Votre mot de passe a été stocké de manière sécurisée dans notre base de données et ne pourra pas être retrouvé. Dans le cas où vous l'avez avez oublié, vous pourrez le réinitialiser en utilisant l'adresse e-mail associée à votre compte.
 
 Merci de vous être enregistré.
 

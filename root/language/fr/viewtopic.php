@@ -5,7 +5,7 @@
 * translated originally by PhpBB-fr.com <http://www.phpbb-fr.com/> and phpBB.biz <http://www.phpBB.biz>
 *
 * @package language
-* @version $Id: viewtopic.php, v1.24 2008/11/14 12:37:00 Elglobo Exp $
+* @version $Id: viewtopic.php, v1.25 2009/10/16 15:13:00 Elglobo Exp $
 * @copyright (c) 2005 phpBB Group 
 * @license http://opensource.org/licenses/gpl-license.php GNU Public License 
 *
@@ -49,6 +49,7 @@ $lang = array_merge($lang, array(
 	'BUMP_TOPIC'			=> 'Remonter le sujet',
 
 	'CODE'					=> 'Code',
+	'COLLAPSE_QR'			=> 'Masquer la réponse rapide',
 
 	'DELETE_TOPIC'			=> 'Supprimer le sujet',
 	'DOWNLOAD_NOTICE'		=> 'Vous n’avez pas les permissions nécessaires pour voir les fichiers joints à ce message.',
@@ -60,6 +61,7 @@ $lang = array_merge($lang, array(
 
 	'FILE_NOT_FOUND_404'	=> 'Le fichier <strong>%s</strong> n’existe pas.',
 	'FORK_TOPIC'			=> 'Copier le sujet',
+	'FULL_EDITOR'			=> 'Editeur complet',
 
 	'LINKAGE_FORBIDDEN'		=> 'Vous ne pouvez pas voir, télécharger ou joindre des fichiers à partir de ce site.',
 	'LOGIN_NOTIFY_TOPIC'	=> 'Vous avez demandé à surveiller ce sujet. Connectez-vous pour le voir.',
@@ -87,10 +89,12 @@ $lang = array_merge($lang, array(
 	'PRINT_TOPIC'			=> 'Imprimer le sujet',
 
 	'QUICK_MOD'				=> 'Actions rapides de modération',
+	'QUICKREPLY'			=> 'Réponse rapide',
 	'QUOTE'					=> 'Citation',
 
 	'REPLY_TO_TOPIC'		=> 'Répondre au sujet',
 	'RETURN_POST'			=> '%sRevenir au message%s',
+	'SHOW_QR'				=> 'Réponse rapide',
 
 	'SUBMIT_VOTE'			=> 'Voter',
 

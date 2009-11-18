@@ -5,7 +5,7 @@
 * translated originally by PhpBB-fr.com <http://www.phpbb-fr.com/> and phpBB.biz <http://www.phpBB.biz>
 *
 * @package language
-* @version $Id: permissions_phpbb.php, v1.24 2009/06/01 23:19:00 Elglobo Exp $
+* @version $Id: permissions_phpbb.php, v1.25 2009/10/10 11:51:00 Elglobo Exp $
 * @copyright (c) 2005 phpBB Group 
 * @license http://opensource.org/licenses/gpl-license.php GNU Public License 
 *
@@ -127,8 +127,8 @@ $lang = array_merge($lang, array(
 	'acl_u_pm_download'	=> array('lang'	=> 'Peut télécharger des fichiers', 'cat' => 'pm'),
 	'acl_u_pm_bbcode'	=> array('lang'	=> 'Peut utiliser des BBCodes', 'cat' => 'pm'),
 	'acl_u_pm_smilies'	=> array('lang'	=> 'Peut utiliser des smileys', 'cat' => 'pm'),
-	'acl_u_pm_img'	=> array('lang'	=> 'Peut poster des images', 'cat' => 'pm'),
-	'acl_u_pm_flash'	=> array('lang'	=> 'Peut poster des animations Flash', 'cat' => 'pm'),
+	'acl_u_pm_img'	=> array('lang'	=> 'Peut utiliser le BBCode[img]', 'cat' => 'pm'),
+	'acl_u_pm_flash'	=> array('lang'	=> 'Peut utiliser le BBCode [flash]', 'cat' => 'pm'),
 	
 	'acl_u_sendemail'	=> array('lang'	=> 'Peut envoyer des e-mails', 'cat' => 'misc'),
 	'acl_u_sendim'	=> array('lang'	=> 'Peut envoyer des messages instantanés', 'cat' => 'misc'),

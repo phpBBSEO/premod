@@ -5,7 +5,7 @@
 * translated originally by PhpBB-fr.com <http://www.phpbb-fr.com/> and phpBB.biz <http://www.phpBB.biz>
 *
 * @package language
-* @version $Id: posting.php, v1.24 2009/05/27 21:19:00 Elglobo Exp $
+* @version $Id: posting.php, v1.25 2009/10/10 12:01:00 Elglobo Exp $
 * @copyright (c) 2005 phpBB Group 
 * @license http://opensource.org/licenses/gpl-license.php GNU Public License 
 *
@@ -68,7 +68,7 @@ $lang = array_merge($lang, array(
 
 	'TOKEN'					=> 'Chaîne de symboles',
 	'TOKENS'				=> 'Chaînes de symboles',
-	'TOKENS_EXPLAIN'		=> 'Les marques sont des conteneurs pour les utilisateurs. Les entrées ne seront validées que si elles trouvent la définition correspondante. Si besoin, vous pouvez les numéroter en y ajoutant un nombre comme dernier caractère entre des accolades, exemple: {TEXT1}, {TEXT2}.<br /><br />Vous pouvez utiliser, en plus du remplacement HTML, une chaîne de langue dans votre répertoire language/ comme ceci: {L_<em>&lt;STRINGNAME&gt;</em>} où <em>&lt;STRINGNAME&gt;</em> est le nom de la chaîne traduite que vous souhaitez ajouter. Par exemple, {L_WROTE} sera affiché en tant que &quot;a écrit&quot; ou sa traduction selon la langue locale de l’utilisateur.<br /><br /><strong>Notez que seules les chaînes listées ci-dessous sont autorisées à être utilisées dans les BBCodes personnalisés.</strong>',
+	'TOKENS_EXPLAIN'		=> 'Les marques sont des conteneurs pour les utilisateurs. Les entrées ne seront validées que si elles trouvent la définition correspondante. Si besoin, vous pouvez les numéroter en y ajoutant un nombre comme dernier caractère entre des accolades, exemple: {TEXT1}, {TEXT2}.<br /><br />Vous pouvez utiliser, en plus du remplacement HTML, une chaîne de langue dans votre répertoire language/ comme ceci: {L_<em>&lt;STRINGNAME&gt;</em>} où <em>&lt;STRINGNAME&gt;</em> est le nom de la chaîne traduite que vous souhaitez ajouter. Par exemple, {L_WROTE} sera affiché en tant que “a écrit” ou sa traduction selon la langue locale de l’utilisateur.<br /><br /><strong>Notez que seules les chaînes listées ci-dessous sont autorisées à être utilisées dans les BBCodes personnalisés.</strong>',
 	'TOKEN_DEFINITION'		=> 'Que peut il être?',
 	'TOO_MANY_BBCODES'		=> 'Vous ne pouvez pas créer d’autres BBCodes. Supprimez un ou plusieurs BBCodes puis réessayez.',
 
@@ -78,7 +78,7 @@ $lang = array_merge($lang, array(
 		'IDENTIFIER'	=> 'Caractères alphabétiques latins (A-Z), chiffres, - et _',
 		'NUMBER'		=> 'Une série de chiffres',
 		'EMAIL'			=> 'Une adresse e-mail valide',
-		'URL'			=> 'Une URL valide utilisant un quelconque protocole (http, ftp, etc. ne peuvent pas être utilisés pour des exploits javascripts). Si aucun n’est donné, &quot;http://&quot; sera utilisé par défaut pour la chaîne.',
+		'URL'			=> 'Une URL valide utilisant un quelconque protocole (http, ftp, etc. ne peuvent pas être utilisés pour des exploits javascripts). Si aucun n’est donné, “http://” sera préfixé par défaut à la chaîne.',
 		'LOCAL_URL'		=> 'Une URL locale. L’URL doit être relative par rapport à la page du sujet et ne peut contenir un nom de serveur ou un protocol.',
 		'COLOR'			=> 'Une couleur HTML, peut être au choix soit une forme numérique <samp>#FF1234</samp> ou un <a href="http://www.w3.org/TR/CSS21/syndata.html#value-def-color">nom de couleur CSS</a> comme par exemple <samp>fuchsia</samp> ou <samp>InactiveBorder</samp>'
 	)
@@ -179,6 +179,7 @@ $lang = array_merge($lang, array(
 	'SMILIES_ORDER'				=> 'Classement du smiley',
 	'SMILIES_URL'				=> 'Image du smiley',
 	'SMILIES_WIDTH'				=> 'Largeur du smiley',
+	'TOO_MANY_SMILIES'			=> 'Limite de %d smileys atteinte.',
 
 	'WRONG_PAK_TYPE'	=> 'Le pack indiqué ne contient pas les données appropriées.',
 ));
@@ -217,6 +218,7 @@ $lang = array_merge($lang, array(
 	'RANK_ADDED'			=> 'Le rang a été ajouté.',
 	'RANK_IMAGE'			=> 'Image du rang',
 	'RANK_IMAGE_EXPLAIN'	=> 'Utilisez ceci pour définir une petite image à associer au rang. Le chemin est relatif par rapport au répertoire racine de phpBB.',
+	'RANK_IMAGE_IN_USE'		=> '(En service)',
 	'RANK_MINIMUM'			=> 'Messages minimums',
 	'RANK_REMOVED'			=> 'Le rang a été supprimé.',
 	'RANK_SPECIAL'			=> 'Définir comme rang spécial',

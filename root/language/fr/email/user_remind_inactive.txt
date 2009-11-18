@@ -2,7 +2,7 @@ Subject: Votre compte est toujours inactif
 
 Bonjour {USERNAME},
 
-Le {REGISTER_DATE}, vous avez créé un compte sur "{SITENAME}", et vous ne l'avez toujours pas activé ce qui est une obligation pour vous connecter au forum. Pour cela, utilisez le lien suivant:
+Cet e-mail de notification est un rappel pour vous indiquer que votre compte à "{SITENAME}", crée le {REGISTER_DATE}, reste inactif. Si vous souhaitez activer ce compte, nous vous invitons à visiter le lien suivant:
 {U_ACTIVATE}
 
 Merci pour votre inscription à "{SITENAME}", et pour votre future participation.

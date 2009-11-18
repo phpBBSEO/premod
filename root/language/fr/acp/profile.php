@@ -5,7 +5,7 @@
 * translated originally by PhpBB-fr.com <http://www.phpbb-fr.com/> and phpBB.biz <http://www.phpBB.biz>
 *
 * @package language
-* @version $Id: profile.php, v1.24 2009/05/27 21:20:00 Elglobo Exp $
+* @version $Id: profile.php, v1.25 2009/10/07 12:05:00 Elglobo Exp $
 * @copyright (c) 2005 phpBB Group
 * @license http://opensource.org/licenses/gpl-license.php GNU Public License
 */
@@ -65,6 +65,8 @@ $lang = array_merge($lang, array(
    'DISPLAY_AT_PROFILE_EXPLAIN'   		=> 'L’utilisateur peut modifier ce champ de profil dans le panneau de l’utilisateur.',
    'DISPLAY_AT_REGISTER'   				=> 'Afficher sur l’écran d’inscription',
    'DISPLAY_AT_REGISTER_EXPLAIN'   		=> 'Si cette option est activée, le champ sera affiché à l’inscription.',
+   'DISPLAY_ON_VT'						=> 'Afficher dans les sujets',
+   'DISPLAY_ON_VT_EXPLAIN'				=> 'Si cette option est activée, le champ sera affiché dans le mini-profile des sujets.',
    'DISPLAY_PROFILE_FIELD'   			=> 'Afficher publiquement le champ de profil',
    'DISPLAY_PROFILE_FIELD_EXPLAIN'   	=> 'Le champ de profil sera visible dans tous les endroits autorisés dans les paramètres de charge. Réglez cela sur “Non” masquera le champ des pages de sujets, des profils et de la liste des membres.',
    'DROPDOWN_ENTRIES_EXPLAIN'   		=> 'Saisissez vos options, chaque option doit être sur une ligne différente.',

@@ -6,14 +6,13 @@ Vous êtes prié de conserver cet e-mail dans vos archives. Les informations con
 
 ----------------------------
 Nom d'utilisateur: {USERNAME}
-Mot de passe: {PASSWORD}
 
 Adresse du forum: {U_BOARD}
 ----------------------------
 
-Votre compte est actuellement inactif, l'administrateur du forum doit tout d'abord l'activer avant que vous puissiez vous connecter avec. Vous recevrez un autre e-mail lorsque ce sera fait.
+Votre compte est actuellement inactif et devra être approuvé par un administrateur avant que vous puissiez vous connecter avec. Vous recevrez un autre e-mail lorsque cela sera fait.
 
-N'oubliez pas votre mot de passe étant donné qu'il est crypté dans notre base de données et que nous ne pourrons pas le retrouver pour vous. Toutefois, si vous oubliez votre mot de passe, vous pourrez en demander un nouveau qui sera activé de la même manière que ce compte.
+Votre mot de passe a été stocké de manière sécurisée dans notre base de données et ne pourra pas être retrouvé. Toutefois, si vous oubliez votre mot de passe, vous pourrez en demander un nouveau qui sera activé de la même manière que ce compte.
 
 Merci de vous être enregistré.
 

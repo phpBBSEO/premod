@@ -5,7 +5,7 @@
 * translated originally by PhpBB-fr.com <http://www.phpbb-fr.com/> and phpBB.biz <http://www.phpBB.biz>
 *
 * @package language
-* @version $Id: mcp.php, v1.24 2008/11/14 12:22:00 EricSchreiner Exp $
+* @version $Id: mcp.php, v1.25 2008/10/16 14:51:00 Elglobo Exp $
 * @copyright (c) 2005 phpBB Group 
 * @license http://opensource.org/licenses/gpl-license.php GNU Public License 
 *
@@ -47,6 +47,7 @@ $lang = array_merge($lang, array(
 	'ALL_NOTES_DELETED'		=> 'Les commentaires sur l’utilisateur ont été supprimés.',
 	'ALL_REPORTS'			=> 'Tous les rapports',
 	'ALREADY_REPORTED'		=> 'Ce message a déjà été rapporté.',
+	'ALREADY_REPORTED_PM'	=> 'Ce message privé a déjà été rapporté.',
 	'ALREADY_WARNED'		=> 'Un avertissement a déjà été publié pour ce message.',
 	'APPROVE'				=> 'Approuver',
 	'APPROVE_POST'			=> 'Approuver le message',
@@ -59,10 +60,18 @@ $lang = array_merge($lang, array(
 	'CANNOT_WARN_SELF'		=> 'Vous ne pouvez pas vous donner un avertissement.',
 	'CAN_LEAVE_BLANK'		=> 'Ceci peut être laissé vide.',
 	'CHANGE_POSTER'			=> 'Changer le nom du posteur',
+	'CLOSE_PM_REPORT'		=> 'Clôturer le rapport de MP',
+	'CLOSE_PM_REPORT_CONFIRM'	=> 'Êtes-vous sûr de vouloir clôturer le rapport de MP sélectionné?',
+	'CLOSE_PM_REPORTS'		=> 'Clôturer les rapports de MP',
+	'CLOSE_PM_REPORTS_CONFIRM'	=> 'Êtes-vous sûr de vouloir clôturer les rapports de MP sélectionnés?',
 	'CLOSE_REPORT'			=> 'Clôturer le rapport',
 	'CLOSE_REPORT_CONFIRM'	=> 'Êtes-vous sûr de vouloir clôturer le rapport sélectionné?',
 	'CLOSE_REPORTS'			=> 'Clôturer les rapports',
 	'CLOSE_REPORTS_CONFIRM'	=> 'Êtes-vous sûr de vouloir clôturer les rapports sélectionnés?',
+	'DELETE_PM_REPORT'			=> 'Supprimer le rapport de MP',
+	'DELETE_PM_REPORT_CONFIRM'	=> 'Êtes-vous sûr de vouloir supprimer le rapport de MP sélectionné?',
+	'DELETE_PM_REPORTS'			=> 'Supprimer les rapports de MP',
+	'DELETE_PM_REPORTS_CONFIRM'	=> 'Êtes-vous sûr de vouloir supprimer les rapports de MP sélectionnés?',
 
 	'DELETE_POSTS'				=> 'Supprimer les messages',
 	'DELETE_POSTS_CONFIRM'		=> 'Êtes-vous sûr de vouloir supprimer ces messages?',
@@ -107,6 +116,7 @@ $lang = array_merge($lang, array(
 
 	'LATEST_LOGS'				=> 'Les 5 dernières actions notées',
 	'LATEST_REPORTED'			=> 'Les 5 derniers rapports',
+	'LATEST_REPORTED_PMS'		=> 'Les 5 derniers rapport de MP',
 	'LATEST_UNAPPROVED'			=> 'Les 5 derniers messages en attente de modération',
 	'LATEST_WARNING_TIME'		=> 'Dernier avertissement donné',
 	'LATEST_WARNINGS'			=> 'Les 5 derniers avertissements',
@@ -171,6 +181,13 @@ $lang = array_merge($lang, array(
 
 	'MCP_POST_REPORTS'				=> 'Rapports issus de ce message',
 
+	'MCP_PM_REPORTS'				=> 'MPs rapportés',
+	'MCP_PM_REPORT_DETAILS'			=> 'Détails du rapport de MP',
+	'MCP_PM_REPORTS_CLOSED'			=> 'Rapports de MP cloturés',
+	'MCP_PM_REPORTS_CLOSED_EXPLAIN'	=> 'Voici une liste de tous les rapports de messages privés qui ont été résolus.',
+	'MCP_PM_REPORTS_OPEN'			=> 'Rapports de MP ouverts',
+	'MCP_PM_REPORTS_OPEN_EXPLAIN'	=> 'Voici une liste de tous les rapports de messages privés qui doivent toujours être pris en charge.',
+	
 	'MCP_REPORTS'					=> 'Messages rapportés',
 	'MCP_REPORT_DETAILS'			=> 'Détails du rapport',
 	'MCP_REPORTS_CLOSED'			=> 'Rapports clôturés',
@@ -232,6 +249,14 @@ $lang = array_merge($lang, array(
 
 	'ONLY_TOPIC'			=> 'Seulement le sujet “%s”',
 	'OTHER_USERS'			=> 'Autres utilisateurs postant à partir de cette IP',
+	
+	'PM_REPORT_CLOSED_SUCCESS'	=> 'Le rapport de MP sélectionné a été clôturé.',
+	'PM_REPORT_DELETED_SUCCESS'	=> 'Le rapport de MP sélectionné a été supprimé.',
+	'PM_REPORTED_SUCCESS'		=> 'Le message privé a été rapporté.',
+	'PM_REPORT_TOTAL'			=> 'Au total, il y a <strong>1</strong> rapport de MP à revoir.',
+	'PM_REPORTS_TOTAL'			=> 'Au total, il y a <strong>%d</strong> rapports de MP à revoir.',
+	'PM_REPORTS_ZERO_TOTAL'		=> 'Aucun rapport de MP à revoir.',
+	'PM_REPORT_DETAILS'			=> 'Détails du rapport de message privé',
 
 	'POSTER'					=> 'Posteur',
 	'POSTS_APPROVED_SUCCESS'	=> 'Les messages sélectionnés ont été approuvés.',
@@ -265,7 +290,7 @@ $lang = array_merge($lang, array(
 	'REPORT_DELETED_SUCCESS'	=> 'Le rapport sélectionné a été supprimé.',
 	'REPORT_DETAILS'			=> 'Détails du rapport',
 	'REPORT_MESSAGE'			=> 'Rapporter ce message',
-	'REPORT_MESSAGE_EXPLAIN'	=> 'Utilisez ce formulaire pour rapporter le message sélectionné. En général, le rapport ne devra être utilisé que si le message ne respecte pas les règles du forum.',
+	'REPORT_MESSAGE_EXPLAIN'	=> 'Utilisez ce formulaire pour rapporter le message privé sélectionné. En général, le rapport ne devra être utilisé que si le message ne respecte pas les règles du forum. <strong>En rapportant un message privé, son contenu sera visible à tous les modérateurs.</strong>',
 	'REPORT_NOTIFY'				=> 'M’informer',
 	'REPORT_NOTIFY_EXPLAIN'		=> 'Vous informer quand votre rapport a été traité.',
 	'REPORT_POST_EXPLAIN'		=> 'Utilisez ce formulaire pour rapporter le message sélectionné aux modérateurs du forum et aux administrateurs. En général, le rapport ne devra être utilisé que si le message ne respecte pas les règles du forum.',
@@ -276,6 +301,7 @@ $lang = array_merge($lang, array(
 	'RETURN_MESSAGE'			=> '%sRetourner au message%s',
 	'RETURN_NEW_FORUM'			=> '%sAller au nouveau forum%s',
 	'RETURN_NEW_TOPIC'			=> '%sAller au nouveau sujet%s',
+	'RETURN_PM'					=> '%sRetourner au message privé%s',
 	'RETURN_POST'				=> '%sRetourner au message%s',
 	'RETURN_QUEUE'				=> '%sRetourner à l’attente de modération%s',
 	'RETURN_REPORTS'			=> '%sRetourner aux rapports%s',
@@ -347,6 +373,7 @@ $lang = array_merge($lang, array(
 	'USER_WARNING_ADDED'			=> 'L’utilisateur a été averti.',
 
 	'VIEW_DETAILS'			=> 'Voir les détails',
+	'VIEW_PM'				=> 'Voir le message privé',
 	'VIEW_POST' 			=> 'Voir le message',
 
 	'WARNED_USERS'			=> 'Utilisateurs avertis',

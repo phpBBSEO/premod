@@ -5,7 +5,7 @@
 * translated originally by PhpBB-fr.com <http://www.phpbb-fr.com/> and phpBB.biz <http://www.phpBB.biz>
 *
 * @package language
-* @version $Id: ucp.php, v1.24 2009/05/27 22:51:00 Elglobo Exp $
+* @version $Id: ucp.php, v1.25 2009/10/16 15:12:00 Elglobo Exp $
 * @copyright (c) 2005 phpBB Group 
 * @license http://opensource.org/licenses/gpl-license.php GNU Public License 
 *
@@ -79,6 +79,7 @@ $lang = array_merge($lang, array(
 	'ADD_NEW_RULE'   				=> 'Créer un nouveau filtre de messages',
 	'ADD_RULE'   					=> 'Appliquer le filtre',
 	'ADD_TO'   						=> 'Ajout [A]',
+	'ADD_USERS_UCP_EXPLAIN'			=> 'Vous pouvez ajouter de nouveaux utilisateurs au groupe. Vous pouvez choisir si ce groupe devient le nouveau groupe par défaut pour les utilisateurs sélectionnés. Entrez chaque nom d’utilisateur sur une ligne différente.',
 	'ADMIN_EMAIL'   				=> 'Recevoir les e-mails des administrateurs',
 	'AGREE'   						=> 'J’accepte ces conditions',
 	'ALLOW_PM'   					=> 'Recevoir les messages privés des utilisateurs',
@@ -92,7 +93,9 @@ $lang = array_merge($lang, array(
 	'AVATAR_FEATURES_DISABLED'   	=> 'La fonctionnalité des avatars est actuellement désactivée.',
 	'AVATAR_GALLERY'   				=> 'Galerie locale',
 	'AVATAR_GENERAL_UPLOAD_ERROR'   => 'Impossible de transférer l’avatar vers %s',
+	'AVATAR_NOT_ALLOWED'			=> 'Votre avatar ne peut pas être affiché car les avatars sont désactivés.',
 	'AVATAR_PAGE'   				=> 'Page',
+	'AVATAR_TYPE_NOT_ALLOWED'		=> 'Votre avatar actuel ne peut pas être affiché car ce type d’avatar a été désactivé.',
 
 	'BACK_TO_DRAFTS'   			=> 'Retour aux brouillons',
 	'BACK_TO_LOGIN'   			=> 'Retour à l’écran de connexion',
@@ -196,6 +199,7 @@ $lang = array_merge($lang, array(
 	'FOES_UPDATED'   			=> 'Votre liste d’ignorés a été mise à jour.',
 	'FOLDER_ADDED'   			=> 'Le dossier a été ajouté.',
 	'FOLDER_MESSAGE_STATUS'   	=> '%1$d sur %2$d messages enregistrés',
+	'FOLDER_NAME_EMPTY'			=> 'Vous devez taper un nom pour ce répertoire.',
 	'FOLDER_NAME_EXIST'   		=> 'Le dossier <strong>%s</strong> existe déjà.',
 	'FOLDER_OPTIONS'   			=> 'Options du dossier',
 	'FOLDER_RENAMED'   			=> 'Le dossier a été renommé.',
@@ -272,10 +276,12 @@ $lang = array_merge($lang, array(
 	'NOTIFY_METHOD_IM'   			=> 'Jabber uniquement',
 	'NOTIFY_ON_PM'   				=> 'M’avertir des nouveaux messages privés',
 	'NOT_ADDED_FRIENDS_ANONYMOUS'  	=> 'Vous ne pouvez pas ajouter un invité à votre liste d’amis.',
+	'NOT_ADDED_FRIENDS_BOTS'		=> 'Vous ne pouvez pas ajouter de robots à votre liste d’amis.',
 	'NOT_ADDED_FRIENDS_FOES'   		=> 'Vous ne pouvez pas ajouter à votre liste d’amis des utilisateurs qui sont sur votre liste d’ignorés.',
 	'NOT_ADDED_FRIENDS_SELF'   		=> 'Vous ne pouvez pas vous ajouter à votre liste d’amis.',
 	'NOT_ADDED_FOES_MOD_ADMIN'   	=> 'Vous ne pouvez pas ajouter d’administrateurs ni de modérateurs à votre liste d’ignorés.',
 	'NOT_ADDED_FOES_ANONYMOUS'   	=> 'Vous ne pouvez pas ajouter un invité à votre liste d’ignorés.',
+	'NOT_ADDED_FOES_BOTS'			=> 'Vous ne pouvez pas ajouter de robots à votre liste d’ignorés.',
 	'NOT_ADDED_FOES_FRIENDS'   		=> 'Vous ne pouvez pas ajouter à votre liste d’ignorés des utilisateurs qui sont sur votre liste d’amis.',
 	'NOT_ADDED_FOES_SELF'   		=> 'Vous ne pouvez pas vous ajouter à votre liste d’ignorés.',
 	'NOT_AGREE'   					=> 'Je n’accepte pas ces conditions',
@@ -345,7 +351,7 @@ $lang = array_merge($lang, array(
 	'POST_EDIT_PM'   			=> 'Editer le message',
 	'POST_FORWARD_PM'   		=> 'Transmettre le message',
 	'POST_NEW_PM'   			=> 'Envoyer',
-	'POST_PM_LOCKED'   			=> 'La messagerie privée est verrouillée',
+	'POST_PM_LOCKED'   			=> 'La messagerie privée est verrouillée.',
 	'POST_PM_POST'   			=> 'Poster le message',
 	'POST_QUOTE_PM'   			=> 'Citer le message',
 	'POST_REPLY_PM'   			=> 'Répondre au message',
@@ -367,6 +373,8 @@ $lang = array_merge($lang, array(
 	'RENAME'   							=> 'Renommer',
 	'RENAME_FOLDER'   					=> 'Renommer le dossier',
 	'REPLIED_MESSAGE'   				=> 'Réponse au message',
+	'REPLY_TO_ALL'						=> 'Répondre à l’expéditeur et à tous les destinataires.',
+	'REPORT_PM'							=> 'Rapporter le message privé',
 	'RESIGN_SELECTED'   				=> 'Démissionner de la sélection',
 	'RETURN_FOLDER'   					=> '%1$sRetour au dossier précédent%2$s',
 	'RETURN_UCP'   						=> '%sRetour au panneau de l’utilisateur%s',
@@ -416,7 +424,7 @@ $lang = array_merge($lang, array(
 	'UCP_MAIN_FRONT'   		=> 'Page principale',
 	'UCP_MAIN_SUBSCRIBED'   => 'Gestion des surveillances',
 
-	'UCP_MSNM'   			=> 'MSN Messenger',
+	'UCP_MSNM'   			=> 'WL/MSN Messenger',
 	'UCP_NO_ATTACHMENTS'   	=> 'Aucun fichier envoyé.',
 
 	'UCP_PREFS'   			=> 'Préférences du forum',
@@ -427,7 +435,7 @@ $lang = array_merge($lang, array(
 	'UCP_PM'   				=> 'Messages privés',
 	'UCP_PM_COMPOSE'   		=> 'Rédiger un message',
 	'UCP_PM_DRAFTS'   		=> 'Gestion des brouillons de MP',
-	'UCP_PM_OPTIONS'   		=> 'Paramètre des options',
+	'UCP_PM_OPTIONS'   		=> 'Paramètres des options',
 	'UCP_PM_POPUP'   		=> 'Messages privés',
 	'UCP_PM_POPUP_TITLE'   	=> 'Messages privés pop-up',
 	'UCP_PM_UNREAD'   		=> 'Messages non lus',

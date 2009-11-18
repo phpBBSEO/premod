@@ -5,7 +5,7 @@
 * translated originally by PhpBB-fr.com <http://www.phpbb-fr.com/> and phpBB.biz <http://www.phpBB.biz>
 *
 * @package language
-* @version $Id: language.php, v1.24 2008/07/03 17:20:46 Elglobo Exp $
+* @version $Id: language.php, v1.25 2008/10/07 11:36:00 Elglobo Exp $
 * @copyright (c) 2005 phpBB Group
 * @license http://opensource.org/licenses/gpl-license.php GNU Public License
 *
@@ -38,7 +38,7 @@ if (empty($lang) || !is_array($lang))
 
 $lang = array_merge($lang, array(
 	'ACP_FILES'						=> 'Fichiers de langue de l’administration',
-	'ACP_LANGUAGE_PACKS_EXPLAIN'	=> 'Vous pouvez installer/supprimer des packs de langue',
+	'ACP_LANGUAGE_PACKS_EXPLAIN'	=> 'Vous pouvez installer/supprimer des packs de langue. Le pack de langue par défaut est marqué d’une astérisque (*).',
 
 	'EMAIL_FILES'			=> 'Modèles d’e-mail',
 
