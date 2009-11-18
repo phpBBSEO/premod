@@ -2,7 +2,7 @@
 /**
 *
 * @package phpBB3
-* @version $Id: viewforum.php 9459 2009-04-17 15:08:09Z acydburn $
+* @version $Id: viewforum.php 10067 2009-08-30 17:13:28Z acydburn $
 * @copyright (c) 2005 phpBB Group
 * @license http://opensource.org/licenses/gpl-license.php GNU Public License
 *
@@ -131,6 +131,9 @@ if ($forum_data['forum_topics_per_page']) {
 	$config['topics_per_page'] = $forum_data['forum_topics_per_page'];
 }
 $phpbb_seo->seo_opt['zero_dupe']['start'] = $phpbb_seo->seo_chk_start( $start, $config['topics_per_page'] );
+if (!empty($phpbb_seo->seo_opt['url_rewrite'])) {
+	$phpbb_seo->seo_path['canonical'] = $phpbb_seo->drop_sid(append_sid("{$phpbb_root_path}viewforum.$phpEx", "f=$forum_id&amp;start=$start"));
+}
 $seo_watch = request_var('watch', '');
 $seo_unwatch = request_var('unwatch', '');
 $keep_watch = (boolean) ($seo_watch == 'forum' && $user->data['is_registered']);
@@ -155,7 +158,7 @@ if ($seo_uid) { // Reorder vars a bit as required
 	// but the handling as well acts as a poweful security shield so, it's worth it ;)
 	$_hash_tmp = $phpbb_seo->seo_opt['zero_dupe']['redir_def']['hash'];
 	unset($phpbb_seo->seo_opt['zero_dupe']['redir_def']['hash']);
-	$phpbb_seo->seo_opt['zero_dupe']['redir_def']['hash'] = $_hash_tmp; 
+	$phpbb_seo->seo_opt['zero_dupe']['redir_def']['hash'] = $_hash_tmp;
 } else {
 	unset($phpbb_seo->seo_opt['zero_dupe']['redir_def']['uid']);
 }
@@ -180,17 +183,20 @@ if ($forum_data['left_id'] != $forum_data['right_id'] - 1)
 else
 {
 	$template->assign_var('S_HAS_SUBFORUM', false);
-	get_moderators($moderators, $forum_id);
+	if ($config['load_moderators'])
+	{
+		get_moderators($moderators, $forum_id);
+	}
 }
 
 // Dump out the page header and load viewforum template
 // www.phpBB-SEO.com SEO TOOLKIT BEGIN - TITLE
 $extra_title = ($start > 0) ? ' - ' . $user->lang['Page'] . ( floor( $start / $config['topics_per_page'] ) + 1 ) : '';
 // www.phpBB-SEO.com SEO TOOLKIT BEGIN - META
-$seo_meta->meta['meta_desc'] = $seo_meta->meta_filter_txt($forum_data['forum_name'] . ' : ' . (!empty($forum_data['forum_desc']) ? $forum_data['forum_desc'] : $config['site_desc']));
-$seo_meta->meta['keywords'] = $seo_meta->make_keywords($seo_meta->meta['meta_desc']);
+$seo_meta->collect('description', $forum_data['forum_name'] . ' : ' . (!empty($forum_data['forum_desc']) ? $forum_data['forum_desc'] : $seo_meta->meta_def['description']));
+$seo_meta->collect('keywords', $forum_data['forum_name'] . ' ' . $seo_meta->meta['description']);
 // www.phpBB-SEO.com SEO TOOLKIT END - META
-page_header($forum_data['forum_name'] . $extra_title);
+page_header($forum_data['forum_name'] . $extra_title, true, $forum_id);
 // www.phpBB-SEO.com SEO TOOLKIT END - TITLE
 
 $template->set_filenames(array(
@@ -215,8 +221,6 @@ if (!$auth->acl_get('f_read', $forum_id))
 {
 	$template->assign_vars(array(
 		'S_NO_READ_ACCESS'		=> true,
-		'S_AUTOLOGIN_ENABLED'	=> ($config['allow_autologin']) ? true : false,
-		'S_LOGIN_ACTION'		=> append_sid("{$phpbb_root_path}ucp.$phpEx", 'mode=login') . '&amp;redirect=' . urlencode(str_replace('&amp;', '&', build_url())),
 	));
 
 	page_footer();
@@ -228,7 +232,8 @@ if ($mark_read == 'topics')
 	$token = request_var('hash', '');
 	if (check_link_hash($token, 'global'))
 	{
-		markread('topics', $forum_id);
+		// Add 0 to forums array to mark global announcements correctly
+		markread('topics', array($forum_id, 0));
 	}
 	$redirect_url = append_sid("{$phpbb_root_path}viewforum.$phpEx", 'f=' . $forum_id);
 	meta_refresh(3, $redirect_url);
@@ -650,9 +655,19 @@ if (sizeof($topic_list))
 	{
 		$row = &$rowset[$topic_id];
 		// www.phpBB-SEO.com SEO TOOLKIT BEGIN
-		$cur_forum_id = ($row['forum_id']) ? (int) $row['forum_id'] : $forum_id;
-		$phpbb_seo->prepare_iurl($row, 'topic', $row['topic_type'] == POST_GLOBAL ? $phpbb_seo->seo_static['global_announce'] : $phpbb_seo->seo_url['forum'][$cur_forum_id]);
-		// www.phpBB-SEO.com SEO TOOLKIT BEGIN
+		if (!empty($row['topic_url'])) {
+			$phpbb_seo->prepare_iurl($row, 'topic', '');
+		} else {
+			if ($phpbb_seo->modrtype > 2) {
+				$row['topic_title'] = censor_text($row['topic_title']);
+			}
+			$cur_forum_id = ($row['forum_id']) ? (int) $row['forum_id'] : $forum_id;
+			$parent_forum = $row['topic_type'] == POST_GLOBAL ? $phpbb_seo->seo_static['global_announce'] : (!empty($phpbb_seo->seo_url['forum'][$cur_forum_id]) ? $phpbb_seo->seo_url['forum'][$cur_forum_id] : false);
+			if ($parent_forum) {
+				$phpbb_seo->prepare_iurl($row, 'topic', $parent_forum);
+			}
+		}
+		// www.phpBB-SEO.com SEO TOOLKIT END
 		// This will allow the style designer to output a different header
 		// or even separate the list of announcements from sticky and normal topics
 		$s_type_switch_test = ($row['topic_type'] == POST_ANNOUNCE || $row['topic_type'] == POST_GLOBAL) ? 1 : 0;
@@ -678,11 +693,11 @@ if (sizeof($topic_list))
 		$view_topic_url_params = 'f=' . (($row['forum_id']) ? $row['forum_id'] : $forum_id) . '&amp;t=' . $topic_id;
 		$view_topic_url = append_sid("{$phpbb_root_path}viewtopic.$phpEx", $view_topic_url_params);
 
-		$topic_unapproved = (!$row['topic_approved'] && $auth->acl_get('m_approve', $forum_id)) ? true : false;
-		$posts_unapproved = ($row['topic_approved'] && $row['topic_replies'] < $row['topic_replies_real'] && $auth->acl_get('m_approve', $forum_id)) ? true : false;
+		$topic_unapproved = (!$row['topic_approved'] && $auth->acl_get('m_approve', (($row['forum_id']) ? $row['forum_id'] : $forum_id))) ? true : false;
+		$posts_unapproved = ($row['topic_approved'] && $row['topic_replies'] < $row['topic_replies_real'] && $auth->acl_get('m_approve', (($row['forum_id']) ? $row['forum_id'] : $forum_id))) ? true : false;
 		$u_mcp_queue = ($topic_unapproved || $posts_unapproved) ? append_sid("{$phpbb_root_path}mcp.$phpEx", 'i=queue&amp;mode=' . (($topic_unapproved) ? 'approve_details' : 'unapproved_posts') . "&amp;t=$topic_id", true, $user->session_id) : '';
 		// www.phpBB-SEO.com SEO TOOLKIT BEGIN -> no dupe
-		if ($phpbb_seo->seo_opt['no_dupe']['on']) {
+		if (@$phpbb_seo->seo_opt['no_dupe']['on']) {
 			if (($replies + 1) > $phpbb_seo->seo_opt['topic_per_page']) {
 				$phpbb_seo->seo_opt['topic_last_page'][$topic_id] = floor($replies / $phpbb_seo->seo_opt['topic_per_page']) * $phpbb_seo->seo_opt['topic_per_page'];
 			}
