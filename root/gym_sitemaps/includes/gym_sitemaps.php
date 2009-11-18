@@ -208,30 +208,6 @@ class gym_sitemaps {
 		return !empty($this->gym_auth[$value]);
 	}
 	/**
-	* username_string()
-	* a wrapper for get_username_string()
-	* @access private
-	*/
-	function username_string($user_id, $user_name, $user_color, $link = false) {
-		global $phpbb_root_path, $phpEx;
-		$profile_url = '';
-		$user_color = ($user_color) ? '#' . $user_color : '';
-		if ($link && $user_id) {
-			$profile_url = append_sid($phpbb_root_path . 'memberlist.' . $phpEx . '?mode=viewprofile&amp;u=' . (int) $user_id);
-		}
-		$tpl = '';
-		if (!$profile_url && !$user_color) {
-			$tpl = '<b>{USERNAME}</b>';
-		} elseif (!$profile_url && $user_color) {
-			$tpl = '<span style="color: {USERNAME_COLOUR};"><b>{USERNAME}</b></span>';
-		} elseif ($profile_url && !$user_color) {
-			$tpl = '<a href="{PROFILE_URL}"><b>{USERNAME}</b></a>';
-		} elseif ($profile_url && $user_color) {
-			$tpl = '<a href="{PROFILE_URL}" style="color: {USERNAME_COLOUR};"><b>{USERNAME}</b></a>';
-		}
-		return str_replace(array('{PROFILE_URL}', '{USERNAME_COLOUR}', '{USERNAME}'), array($profile_url, $user_color, $user_name), $tpl);
-	}
-	/**
 	* set_module_option($config_key, $override ='')
 	* will check if a module config value is available
 	* Set it or use the main type default value or the main global value

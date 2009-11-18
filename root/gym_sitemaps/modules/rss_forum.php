@@ -147,7 +147,7 @@ class rss_forum {
 			$forum_stats = '<b>' . $user->lang['STATISTICS'] . '</b> : ' . sprintf($user->lang['TOTAL_USERS_OTHER'], $config['num_users']) . ' || ' . "\n";
 			$forum_stats .= sprintf($user->lang['TOTAL_TOPICS_OTHER'], $config['num_topics']) . ' || ';
 			$forum_stats .= sprintf($user->lang['TOTAL_POSTS_OTHER'], $config['num_posts']) . "\n";
-			$forum_stats .= ($this->module_config['rss_allow_profile'] ? "\n" . sprintf($user->lang['NEWEST_USER'], $this->gym_master->username_string($config['newest_user_id'], $config['newest_username'], $config['newest_user_colour'], $this->module_config['rss_allow_profile_links']) ) : '') . "\n\n";
+			$forum_stats .= ($this->module_config['rss_allow_profile'] ? "\n" . sprintf($user->lang['NEWEST_USER'], get_username_string($this->module_config['rss_profile_mode'], $config['newest_user_id'], $config['newest_username'], $config['newest_user_colour']) ) : '') . "\n\n";
 			$item_desc .= $forum_stats;
 			$this->gym_master->parse_item($item_tile, $item_desc, $chan_link, $chan_source, $item_tile, $this->output_data['last_mod_time']);
 			// Grabb the forum data
@@ -216,7 +216,7 @@ class rss_forum {
 			$site_stats .= sprintf($user->lang['TOTAL_TOPICS_OTHER'], $config['num_topics']) . ' || ';
 			$site_stats .= sprintf($user->lang['TOTAL_POSTS_OTHER'], $config['num_posts']);
 
-			$site_stats .= ($this->module_config['rss_allow_profile'] ? "\n" . sprintf($user->lang['NEWEST_USER'], $this->gym_master->username_string($config['newest_user_id'], $config['newest_username'], $config['newest_user_colour'], $this->module_config['rss_allow_profile_links']) ) : '') . "\n";
+			$site_stats .= ($this->module_config['rss_allow_profile'] ? "\n" . sprintf($user->lang['NEWEST_USER'], get_username_string($this->module_config['rss_profile_mode'], $config['newest_user_id'], $config['newest_username'], $config['newest_user_colour']) ) : '') . "\n";
 			$chan_title_full = $chan_title . ' ' . $user->lang['RSS_CHAN_LIST_TITLE'];
 			$this->gym_master->parse_channel($chan_title_full, $chan_desc, $chan_link,  $this->output_data['last_mod_time'], $this->module_config['rss_image_url'], $chan_source);
 			// Add main forum feed to the list only when not requesting a news channel list
@@ -356,7 +356,7 @@ class rss_forum {
 					// Profiles
 					$lastposter = '';
 					if ($this->module_config['rss_allow_profile'] ) {
-						$lastposter = "\n" . $user->lang['GYM_LAST_POST_BY'] . $this->gym_master->username_string($forum_data['forum_last_poster_id'], $forum_data['forum_last_poster_name'], $forum_data['forum_last_poster_colour'], $this->module_config['rss_allow_profile_links']);
+						$lastposter = "\n" . $user->lang['GYM_LAST_POST_BY'] . get_username_string($this->module_config['rss_profile_mode'], $forum_data['forum_last_poster_id'], $forum_data['forum_last_poster_name'], $forum_data['forum_last_poster_colour']);
 					}
 					$chan_desc = $forum_desc . $forum_rules . "\n" . $forum_stats . $lastposter;
 					$chan_image = !empty($forum_data['forum_image']) ? $phpbb_seo->seo_path['phpbb_url'] . trim($forum_data['forum_image'], '/') : $this->module_config['rss_image_url'];
@@ -373,7 +373,7 @@ class rss_forum {
 				$forum_stats .= sprintf($user->lang['TOTAL_TOPICS_OTHER'], $config['num_topics']) . ' || ';
 				$forum_stats .= sprintf($user->lang['TOTAL_POSTS_OTHER'], $config['num_posts']);
 
-				$forum_stats .= ($this->module_config['rss_allow_profile'] ? "\n" . sprintf($user->lang['NEWEST_USER'], $this->gym_master->username_string($config['newest_user_id'], $config['newest_username'], $config['newest_user_colour'])) : '')  . "\n";
+				$forum_stats .= ($this->module_config['rss_allow_profile'] ? "\n" . sprintf($user->lang['NEWEST_USER'], get_username_string($this->module_config['rss_profile_mode'], $config['newest_user_id'], $config['newest_username'], $config['newest_user_colour'])) : '')  . "\n";
 				// Chan info
 				$chan_title = $this->module_config['rss_sitename'];
 				$chan_link = $phpbb_seo->seo_path['phpbb_urlR'] . $this->url_config['forum_index'];
@@ -448,7 +448,7 @@ class rss_forum {
 			// Profiles
 			$lastposter = '';
 			if ($this->module_config['rss_allow_profile'] && !empty($forum_data['forum_last_poster_id'])) {
-				$lastposter =  "\n" . $user->lang['GYM_LAST_POST_BY'] . $this->gym_master->username_string($forum_data['forum_last_poster_id'], $forum_data['forum_last_poster_name'], $forum_data['forum_last_poster_colour'], $this->module_config['rss_allow_profile_links']) . "\n";
+				$lastposter =  "\n" . $user->lang['GYM_LAST_POST_BY'] . get_username_string($this->module_config['rss_profile_mode'], $forum_data['forum_last_poster_id'], $forum_data['forum_last_poster_name'], $forum_data['forum_last_poster_colour']) . "\n";
 			}
 			// Build URLs
 			$forum_rss_url = $this->module_config['rss_url'] .  ( !empty($this->url_config['rss_forum_pre']) ? $this->url_config['rss_forum_pre'] . $forum_id : $this->gym_master->forum_rss_url( $forum_data['forum_name'] , $forum_id)  . '/' ) . $this->url_config['extra_paramsE'] . $this->url_config['rss_forum_file'];
@@ -543,14 +543,17 @@ class rss_forum {
 						}
 					}
 					// Profiles
-					$lastposter = '';
+					$lastposter = $author = '';
 					if ($this->module_config['rss_allow_profile']  && !empty($topic['topic_poster'])) {
-						$lastposter = "\n" . $user->lang['GYM_FIRST_POST_BY'] . $this->gym_master->username_string($topic['topic_poster'], $topic['topic_first_poster_name'], $topic['topic_first_poster_colour'], $this->module_config['rss_allow_profile_links']) . "\n\n";
+						if ($this->module_config['rss_display_author']) {
+							$author = $topic['topic_first_poster_name'];
+						}
+						$lastposter = "\n" . $user->lang['GYM_FIRST_POST_BY'] . get_username_string($this->module_config['rss_profile_mode'], $topic['topic_poster'], $topic['topic_first_poster_name'], $topic['topic_first_poster_colour']) . "\n\n";
 					}
 					$item_desc = $this->forum_cache[$forum_id]['forum_url_full'] . "\n\n" .  $first_message. "\n" . $topic_stats . $lastposter;
 					// DBK use topic time if news
 					$time_key = $this->actions['rss_news_list'] ? 'topic_time' : 'topic_last_post_time';
-					$this->gym_master->parse_item($topic['topic_title'], $item_desc, $topic['topic_urlF'],  $this->forum_cache[$forum_id]['forum_rss_url'], $this->forum_cache[$forum_id]['forum_name'] . $this->module_config['extra_title'], $topic[$time_key]);
+					$this->gym_master->parse_item($topic['topic_title'], $item_desc, $topic['topic_urlF'],  $this->forum_cache[$forum_id]['forum_rss_url'], $this->forum_cache[$forum_id]['forum_name'] . $this->module_config['extra_title'], $topic[$time_key], $author);
 				}
 				// Do we output the last post URL
 				if ( $this->module_config['rss_last'] || !$has_reply) {
@@ -580,14 +583,17 @@ class rss_forum {
 						}
 					}
 					// Profiles
-					$lastposter = '';
+					$lastposter = $author = '';
 					if ($this->module_config['rss_allow_profile'] && !empty($topic[$user_id_key]) ) {
-						$lastposter = "\n" . $user->lang['GYM_' . strtoupper($profile_key) . '_POST_BY'] . $this->gym_master->username_string($topic[$user_id_key], $topic['topic_' . $profile_key . '_poster_name'], $topic['topic_' . $profile_key . '_poster_colour'], $this->module_config['rss_allow_profile_links']);
+						if ($this->module_config['rss_display_author']) {
+							$author = $topic['topic_' . $profile_key . '_poster_name'];
+						}
+						$lastposter = "\n" . $user->lang['GYM_' . strtoupper($profile_key) . '_POST_BY'] . get_username_string($this->module_config['rss_profile_mode'], $topic[$user_id_key], $topic['topic_' . $profile_key . '_poster_name'], $topic['topic_' . $profile_key . '_poster_colour']);
 					}
 					$item_desc = $this->forum_cache[$forum_id]['forum_url_full'] .  $last_message . "\n" . $topic_stats .  $lastposter;
 					// DBK use topic time if news
 					$time_key = $this->actions['rss_news_list'] ? 'topic_time' : 'topic_last_post_time';
-					$this->gym_master->parse_item($item_title, $item_desc, $topic['topic_url' . $first_last],  $this->forum_cache[$forum_id]['forum_rss_url'], $this->forum_cache[$forum_id]['forum_name'] . $this->module_config['extra_title'], $topic[$time_key]);
+					$this->gym_master->parse_item($item_title, $item_desc, $topic['topic_url' . $first_last],  $this->forum_cache[$forum_id]['forum_rss_url'], $this->forum_cache[$forum_id]['forum_name'] . $this->module_config['extra_title'], $topic[$time_key], $author);
 				}
 			}// End topic loop
 			// Used to separate query
