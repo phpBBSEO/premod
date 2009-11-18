@@ -440,7 +440,7 @@ _________
 		$this->url_replace = array(
 			// Purely cosmetic replace
 			'$' => 'dollar', '€' => 'euro',
-			'\'s' => 's', // it's => its / mary's => marys ...
+			"'s" => 's', // it's => its / mary's => marys ...
 			// Language specific replace (German example)
 			'ß' => 'ss',
 			'Ä' => 'Ae', 'ä' => 'ae',
