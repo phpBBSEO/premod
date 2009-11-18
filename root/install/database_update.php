@@ -2,13 +2,13 @@
 /**
 *
 * @package install
-* @version $Id: database_update.php 10248 2009-10-30 19:19:48Z acydburn $
+* @version $Id: database_update.php 10270 2009-11-14 23:00:30Z acydburn $
 * @copyright (c) 2006 phpBB Group
 * @license http://opensource.org/licenses/gpl-license.php GNU Public License
 *
 */
 
-$updates_to_version = '3.0.6-RC4';
+$updates_to_version = '3.0.6';
 
 // Enter any version to update from to test updates. The version within the db will not be updated.
 $debug_from_version = false;
@@ -417,7 +417,7 @@ if ($debug_from_version === false)
 		WHERE config_name = 'version'";
 	_sql($sql, $errored, $error_ary);
 	// SEO premod
-	set_config('seo_premod_version', '3.0.6-RC4');
+	set_config('seo_premod_version', '3.0.6');
 }
 
 // Reset permissions
@@ -906,6 +906,8 @@ function database_update_info()
 		'3.0.6-RC2'		=> array(),
 		// No changes from 3.0.6-RC3 to 3.0.6-RC4
 		'3.0.6-RC3'		=> array(),
+		// No changes from 3.0.6-RC4 to 3.0.6
+		'3.0.6-RC4'		=> array(),
 	);
 }
 
@@ -1582,6 +1584,10 @@ function change_database_data(&$no_updates, $version)
 
 		// No changes from 3.0.6-RC3 to 3.0.6-RC4
 		case '3.0.6-RC3':
+		break;
+
+		// No changes from 3.0.6-RC4 to 3.0.6
+		case '3.0.6-RC4':
 		break;
 	}
 }

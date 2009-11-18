@@ -2,7 +2,7 @@
 /**
 *
 * @package acp
-* @version $Id: acp_forums.php 10233 2009-10-25 09:03:05Z acydburn $
+* @version $Id: acp_forums.php 10258 2009-11-08 11:17:32Z acydburn $
 * @copyright (c) 2005 phpBB Group
 * @license http://opensource.org/licenses/gpl-license.php GNU Public License
 *
@@ -73,13 +73,6 @@ class acp_forums
 				if (!$auth->acl_get('a_forumadd'))
 				{
 					trigger_error($user->lang['NO_PERMISSION_FORUM_ADD'] . adm_back_link($this->u_action . '&amp;parent_id=' . $this->parent_id), E_USER_WARNING);
-				}
-
-			case 'copy_perm':
-
-				if (!(($auth->acl_get('a_fauth') && $auth->acl_get('a_authusers') && $auth->acl_get('a_authgroups') && $auth->acl_get('a_mauth'))))
-				{
-					trigger_error($user->lang['NO_PERMISSION_COPY'] . adm_back_link($this->u_action . '&amp;parent_id=' . $this->parent_id), E_USER_WARNING);
 				}
 
 			break;
