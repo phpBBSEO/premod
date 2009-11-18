@@ -154,7 +154,7 @@
 ##	2008-11-20 - 3.0.3
 ##		- All mods Updated to comply with phpBB 3.0.3.
 ##		- Re-enabled search_ignore_words.php for Fulltext Native indexing :
-##		  http://www.phpbb-seo.com/boards/phpbb3-seo-toolkit/meta-keyword-optimization-vt3472.html
+##		  http://www.phpbb-seo.com/en/phpbb-seo-toolkit/meta-keyword-optimization-t3472.html
 ##		- GYM Sitemaps & RSS 2.0.RC1 :
 ##			- Added html sitemaps and news pages,
 ##			- Added dynamic linking to sitemaps, feeds, maps and news on the forum,
@@ -244,7 +244,7 @@
 ##		- Updated to phpbb3.0.RC7.
 ##	2007-09-20 - 3.0.RC5a
 ##		- Fixed typos in the language file,
-##		- Enhanced the premod sud-version checking.
+##		- Enhanced the premod version checking.
 ##	2007-09-11 - 3.0.RC5
 ##		- First public Version, versioned following the phpBB version
 ##
