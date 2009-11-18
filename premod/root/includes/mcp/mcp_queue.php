@@ -2,7 +2,7 @@
 /**
 *
 * @package mcp
-* @version $Id: mcp_queue.php 10053 2009-08-25 09:07:26Z acydburn $
+* @version $Id: mcp_queue.php 10252 2009-11-03 14:51:07Z acydburn $
 * @copyright (c) 2005 phpBB Group
 * @license http://opensource.org/licenses/gpl-license.php GNU Public License
 *
@@ -105,6 +105,7 @@ class mcp_queue
 				{
 					$template->assign_vars(array(
 						'S_TOPIC_REVIEW'	=> true,
+						'S_BBCODE_ALLOWED'	=> $post_info['enable_bbcode'],
 						'TOPIC_TITLE'		=> $post_info['topic_title'])
 					);
 				}

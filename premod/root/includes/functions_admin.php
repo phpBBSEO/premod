@@ -2,7 +2,7 @@
 /**
 *
 * @package acp
-* @version $Id: functions_admin.php 10240 2009-10-28 15:10:32Z acydburn $
+* @version $Id: functions_admin.php 10261 2009-11-09 16:29:30Z acydburn $
 * @copyright (c) 2005 phpBB Group
 * @license http://opensource.org/licenses/gpl-license.php GNU Public License
 *
@@ -2361,8 +2361,8 @@ function cache_moderators()
 			'FROM'		=> array(
 				ACL_OPTIONS_TABLE	=> 'o',
 				USER_GROUP_TABLE	=> 'ug',
-				ACL_GROUPS_TABLE	=> 'a',
 				GROUPS_TABLE		=> 'g',
+				ACL_GROUPS_TABLE	=> 'a',
 			),
 
 			'LEFT_JOIN'	=> array(

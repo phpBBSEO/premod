@@ -2,7 +2,7 @@
 /**
 *
 * @package phpBB3
-* @version $Id: constants.php 10241 2009-10-28 16:05:17Z acydburn $
+* @version $Id: constants.php 10268 2009-11-14 20:15:50Z acydburn $
 * @copyright (c) 2005 phpBB Group
 * @license http://opensource.org/licenses/gpl-license.php GNU Public License
 *
@@ -25,7 +25,7 @@ if (!defined('IN_PHPBB'))
 */
 
 // phpBB Version
-define('PHPBB_VERSION', '3.0.6-RC4');
+define('PHPBB_VERSION', '3.0.6');
 
 // QA-related
 // define('PHPBB_SEO_QA', 1);
