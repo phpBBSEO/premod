@@ -108,6 +108,236 @@ Tout manquement à ces règles contribuera à mettre le support et le développe
 			<time><![CDATA[900]]></time>
 			<target-version><![CDATA[3.0.6]]></target-version>
 		</installation>
+		<history>
+			<entry>
+				<date><![CDATA[2009-10-20]]></date>
+				<rev-version><![CDATA[3.0.6]]></rev-version>
+				<changelog lang="en">
+					<change><![CDATA[All mods Updated to comply with phpBB 3.0.6.]]></change>
+					<change><![CDATA[GYM Sitemaps & RSS 2.0.0]]></change>
+					<change><![CDATA[Fixed : Profile link not rewritten on news pages,]]></change>
+					<change><![CDATA[Fixed : GYM linking when used standalone,]]></change>
+					<change><![CDATA[Fixed : Typos in language paks,]]></change>
+					<change><![CDATA[Fixed : Bug in the last topic listing dealing with global announcements,]]></change>
+					<change><![CDATA[Fixed : Bad calls to gym_sitemaps::gym_error,]]></change>
+					<change><![CDATA[Fixed : Topic tracking on last active topics,]]></change>
+					<change><![CDATA[Fixed : minor issue with passworded forums,]]></change>
+					<change><![CDATA[Fixed : Send a 404 when no forum are readable / viewable by the user,]]></change>
+					<change><![CDATA[Fixed : Standalone usage bug dealing with the no duplicate display,]]></change>
+					<change><![CDATA[Fixed : RSS parser when html is activated (preserve double escaped as escaped),]]></change>
+					<change><![CDATA[Added : Bot auth support for sitemaps,]]></change>
+					<change><![CDATA[Added : Last post link on last topic view,]]></change>
+					<change><![CDATA[Added : No html option for rss feeds,]]></change>
+					<change><![CDATA[Added : Option for displaying each type of links among the forum,]]></change>
+					<change><![CDATA[Reorganized language pack,]]></change>
+					<change><![CDATA[SEOed the prosilver templates, left col comes first now, + other display enhancements,]]></change>
+					<change><![CDATA[Removed deprecated & usage (php5.3.0) when starting the module classes.]]></change>
+					<change><![CDATA[Utlimate SEO URL 0.6.2]]></change>
+					<change><![CDATA[Fixed : Issue with user name with dot pagination when common search rewriting if off,]]></change>
+					<change><![CDATA[Fixed : PM pop up with virtual root option,]]></change>
+					<change><![CDATA[Fixed : Paginated search when searching on several forums,]]></change>
+					<change><![CDATA[Fixed : For real the port != 80 case!,]]></change>
+					<change><![CDATA[Fixed : Issues with global announcements on active topic listing,]]></change>
+					<change><![CDATA[Fixed : $custom_profile_url usage,]]></change>
+					<change><![CDATA[Added : Extended ACP menu for new $config based options,]]></change>
+					<change><![CDATA[Added : Open external links in new windows (configurable in the extended menu),]]></change>
+					<change><![CDATA[Added : Append site name to page title when the Optimal title mod is installed,]]></change>
+					<change><![CDATA[Added : Error message for when the db user does not have enough right to alter tables (sql rewriting & no dupe),]]></change>
+					<change><![CDATA[Added : Rewriterules to handle dummy clients who do not understand base href tags in addition to the new PHPBB_USE_BOARD_URL_PATH constant activation,]]></change>
+					<change><![CDATA[Reorganized language pack,]]></change>
+					<change><![CDATA[Made req_file info available in setup_phpbb_seo.php,]]></change>
+					<change><![CDATA[parse_string is now used again, with a proper stripslahe handling and a fix for http://www.phpbb.com/bugs/phpbb3/52315]]></change>
+					<change><![CDATA[Zero duplicate 0.6.2]]></change>
+					<change><![CDATA[Added : Canonical element to forum index, forums, topics, posts, user, groups and leaders pages,]]></change>
+					<change><![CDATA[No duplicate 0.6.2]]></change>
+					<change><![CDATA[Some code reorganization.]]></change>
+					<change><![CDATA[Meta tags 0.4.0]]></change>
+					<change><![CDATA[Fixed : Bad path when calling search_ignore_words.php,]]></change>
+					<change><![CDATA[Added : keywords are now retrieved from all post on topic page when using fulltext_native and topic_sql option,]]></change>
+					<change><![CDATA[Added : Various options that can be configured in the extended acp menu when the mod is not used in standalone mode,]]></change>
+					<change><![CDATA[Meta tag class now has its own file.]]></change>
+					<change><![CDATA[Related Topics 0.2.0]]></change>
+					<change><![CDATA[Mod added to the SEO Premod.]]></change>
+				</changelog>
+			</entry>
+			<entry>
+				<date><![CDATA[2009-06-05]]></date>
+				<rev-version><![CDATA[3.0.5]]></rev-version>
+				<changelog lang="en">
+					<change><![CDATA[All mods Updated to comply with phpBB 3.0.5.]]></change>
+					<change><![CDATA[GYM Sitemaps & RSS 2.0.RC5]]></change>
+					<change><![CDATA[Fixed : Glitch in gym_sitemaps/includes/gym_sitemaps.php,]]></change>
+					<change><![CDATA[Added : more option for displaying RSS links among the forum,]]></change>
+					<change><![CDATA[Fixed : News feeds ordering,]]></change>
+					<change><![CDATA[Added : subsilver2 html templates,]]></change>
+					<change><![CDATA[Fixed : Google ping again!,]]></change>
+					<change><![CDATA[Fixed : RSS channel validation,]]></change>
+					<change><![CDATA[Fixed : Google XML and TXT modules,]]></change>
+					<change><![CDATA[Various bug fixes and enhancement.]]></change>
+					<change><![CDATA[mod rewrite 0.6.0]]></change>
+					<change><![CDATA[Complete rewrite of the phpbb_seo class, URL rewriting never was this fast,]]></change>
+					<change><![CDATA[Added : SQL Rewriting for topic urls, allowing per case URLs for each topics (optional),]]></change>
+					<change><![CDATA[Added : Attachment Rewriting (optional),]]></change>
+					<change><![CDATA[All types of URL rewritings are now merged into a single mod: Ultimate SEO URL.]]></change>
+					<change><![CDATA[zero duplicate 0.6.0]]></change>
+					<change><![CDATA[Fixed : URL hash kept upon redirection (for browsers supporting it),]]></change>
+					<change><![CDATA[Better SID handling (SID are never added when they are not present in request).]]></change>
+					<change><![CDATA[no duplicate 0.6.0]]></change>
+					<change><![CDATA[Fixed : possibly wrong forum id on index.]]></change>
+					<change><![CDATA[Meta tags 0.2.8]]></change>
+					<change><![CDATA[Fixed : Enabling search_ignore_words.php filtering (optional),]]></change>
+					<change><![CDATA[Added  : File based filtering.]]></change>
+					<change><![CDATA[Optimal titles 1.0.6]]></change>
+					<change><![CDATA[Index page title is now built using the phpBB sitename.]]></change>
+				</changelog>
+			</entry>
+			<entry>
+				<date><![CDATA[2008-12-20]]></date>
+				<rev-version><![CDATA[3.0.4]]></rev-version>
+				<changelog lang="en">
+					<change><![CDATA[All mods Updated to comply with phpBB 3.0.4.]]></change>
+					<change><![CDATA[GYM Sitemaps & RSS 2.0.RC3]]></change>
+					<change><![CDATA[Added more option for displaying links on the forum,]]></change>
+					<change><![CDATA[Fixed Google ping again,]]></change>
+					<change><![CDATA[Various bug fixes and enhancement.]]></change>
+					<change><![CDATA[mod rewrite 0.4.8]]></change>
+					<change><![CDATA[Added : topic and forum url are now rewritten in notification emails,]]></change>
+					<change><![CDATA[Added : topic url in print view is now rewritten.]]></change>
+					<change><![CDATA[zero duplicate 0.4.8]]></change>
+					<change><![CDATA[Fixed : ' character in highlights,]]></change>
+					<change><![CDATA[Fixed : No redirecting when marking / bookmarking / subscribing.]]></change>
+				</changelog>
+			</entry>
+			<entry>
+				<date><![CDATA[2008-11-20]]></date>
+				<rev-version><![CDATA[3.0.3]]></rev-version>
+				<changelog lang="en">
+					<change><![CDATA[All mods Updated to comply with phpBB 3.0.3.]]></change>
+					<change><![CDATA[Re-enabled search_ignore_words.php for Fulltext Native indexing :]]></change>
+					<change><![CDATA[Re-enabled search_ignore_words.php for Fulltext Native indexing : http://www.phpbb-seo.com/en/phpbb-seo-toolkit/meta-keyword-optimization-t3472.html]]></change>
+					<change><![CDATA[GYM Sitemaps & RSS 2.0.RC1]]></change>
+					<change><![CDATA[Added html sitemaps and news pages,]]></change>
+					<change><![CDATA[Added dynamic linking to sitemaps, feeds, maps and news on the forum,]]></change>
+					<change><![CDATA[Fixed Google and Yahoo pinging (RSS & Google),]]></change>
+					<change><![CDATA[Improved bbcode handling and generally, message filtering,]]></change>
+					<change><![CDATA[Many minor bug fixes and enhancements.]]></change>
+					<change><![CDATA[mod rewrite 0.4.6]]></change>
+					<change><![CDATA[Complete rewrite of the phpbb_seo::url_rewrite method, the phpbb_seo class is now path aware.]]></change>
+					<change><![CDATA[Fixed : global annoucement display when the lowest forum id is not public,]]></change>
+					<change><![CDATA[Fixed : possibly wrong forum id in active topic last posts links,]]></change>
+					<change><![CDATA[Many minor bug fixes and enhancements in phpbb_seo_class.php.]]></change>
+					<change><![CDATA[zero duplicate 0.4.6]]></change>
+					<change><![CDATA[Fixed : Viewpoll result redirect,]]></change>
+					<change><![CDATA[Added support for the new hash _GET var.]]></change>
+					<change><![CDATA[no duplicate 0.4.6]]></change>
+					<change><![CDATA[Fixed : possibly wrong forum id in active topic last posts links.]]></change>
+					<change><![CDATA[Meta tags 0.2.6]]></change>
+					<change><![CDATA[Enabled search_ignore_words.php filtering (optional),]]></change>
+					<change><![CDATA[Added few yet useful options in the meta class.]]></change>
+					<change><![CDATA[Fixed tiny glitch in overall_header.html.]]></change>
+				</changelog>
+			</entry>
+			<entry>
+				<date><![CDATA[2008-07-14]]></date>
+				<rev-version><![CDATA[3.0.2]]></rev-version>
+				<changelog lang="en">
+					<change><![CDATA[Updated to comply with phpBB 3.0.2.]]></change>
+					<change><![CDATA[Added GYM sitemaps & RSS 2.0.B2]]></change>
+					<change><![CDATA[mod rewrite 0.4.4]]></change>
+					<change><![CDATA[Fixed the update bug caused by the empty phpbb_seo class,]]></change>
+					<change><![CDATA[Fixed pagination rewriterules for forum url without id and with a suffixe different that "/",]]></change>
+					<change><![CDATA[Fixed install script for non MYSQL DB,]]></change>
+					<change><![CDATA[Fixed search for word startting / ending with a,m or p,]]></change>
+					<change><![CDATA[Fixed various virtual root wrong links,]]></change>
+					<change><![CDATA[Various optimization in phpbb_seo_class.php]]></change>
+					<change><![CDATA[zero duplicate 0.4.4]]></change>
+					<change><![CDATA[Fixed : view=next/previous links,]]></change>
+					<change><![CDATA[Fixed : post redirecting when post is not on first page,]]></change>
+					<change><![CDATA[Meta tags 0.2.4]]></change>
+					<change><![CDATA[Fixed common words filtering in viewtopic,]]></change>
+					<change><![CDATA[Added noindex tag based on GET vars to exclude many annoying URLs]]></change>
+				</changelog>
+			</entry>
+			<entry>
+				<date><![CDATA[2008-04-12]]></date>
+				<rev-version><![CDATA[3.0.1]]></rev-version>
+				<changelog lang="en">
+					<change><![CDATA[Updated to comply with phpBB 3.0.1.]]></change>
+					<change><![CDATA[mod rewrite 0.4.2]]></change>
+					<change><![CDATA[Updated : User messages pages URLs structure,]]></change>
+					<change><![CDATA[Added : virtual folder option for user messages pages,]]></change>
+					<change><![CDATA[Added : copyright link formatting options,]]></change>
+					<change><![CDATA[Added : support for active_topics link,]]></change>
+					<change><![CDATA[Added : support for active_topics link,]]></change>
+					<change><![CDATA[Added : support for unanswered link,]]></change>
+					<change><![CDATA[Added : support for newposts link,]]></change>
+					<change><![CDATA[Added : support for egosearch link,]]></change>
+					<change><![CDATA[Added : support for most active topic link on profile view,]]></change>
+					<change><![CDATA[Fixed : group sort option links,]]></change>
+					<change><![CDATA[Fixed : unread link it topic view,]]></change>
+					<change><![CDATA[Fixed : Session tracking : Sessions tracking is now fully fixed for viewforum, but will only work with virtual folder trick in viewtopic,]]></change>
+					<change><![CDATA[Various optimizations in phpbb_seo_class.php and acp_phpbb_seo.php.]]></change>
+					<change><![CDATA[zero duplicate 0.4.2]]></change>
+					<change><![CDATA[Added : support for new URL rewritten pages,]]></change>
+					<change><![CDATA[Added : FF default iso encoding workaround,]]></change>
+					<change><![CDATA[Fixed : ignored posts,]]></change>
+					<change><![CDATA[Fixed : highlights,]]></change>
+					<change><![CDATA[Fixed : jumpto post link in emails,]]></change>
+					<change><![CDATA[Fixed : style preview,]]></change>
+					<change><![CDATA[Fixed : viewpoll topic links.]]></change>
+					<change><![CDATA[no duplicate 0.4.2]]></change>
+					<change><![CDATA[Fixed : moved topic links on forum indexes.]]></change>
+					<change><![CDATA[Optimal titles 1.0.2]]></change>
+					<change><![CDATA[Updated : Minor additions.]]></change>
+					<change><![CDATA[Meta tags 0.2.2]]></change>
+					<change><![CDATA[Added : now filter code bbcode tag by default,]]></change>
+					<change><![CDATA[Fixed : reference misuse,]]></change>
+					<change><![CDATA[Fixed : use of sql_query_limit to grab keywords in topic view.]]></change>
+				</changelog>
+			</entry>
+			<entry>
+				<date><![CDATA[2007-12-21]]></date>
+				<rev-version><![CDATA[3.0.0]]></rev-version>
+				<changelog lang="en">
+					<change><![CDATA[Added : Link to the last topic title above the last post link on forum listing view,]]></change>
+					<change><![CDATA[Added : Group URL rewriting, with optional group name injection,]]></change>
+					<change><![CDATA[Added : profile URL can use nickname injection (optional),]]></change>
+					<change><![CDATA[Added : profile URL can use nickname injection without ID (optional),]]></change>
+					<change><![CDATA[Added : User messages URL can use nickname injection (optional),]]></change>
+					<change><![CDATA[Added : User messages URL can use nickname injection without ID (optional),]]></change>
+					<change><![CDATA[Added : 404 header is now returned for forums that do not exist (both rewritten and vanilla URLs),]]></change>
+					<change><![CDATA[Updated : zero duplicate handles the new rewriting for profiles, user messages and groups,]]></change>
+					<change><![CDATA[Fixed : Sub forum last post link from the no duplicate on forum listing view,]]></change>
+					<change><![CDATA[Fixed : Usage of a slash as a suffix is now fully supported for all rewritten URLs,]]></change>
+					<change><![CDATA[Fixed : Base href handling (bug with virtual root option),]]></change>
+					<change><![CDATA[Fixed : 100% XHTML valid output,]]></change>
+					<change><![CDATA[Updated to comply with phpBB3.0.0.]]></change>
+				</changelog>
+			</entry>
+			<entry>
+				<date><![CDATA[2007-10-16]]></date>
+				<rev-version><![CDATA[3.0.RC7]]></rev-version>
+				<changelog lang="en">
+					<change><![CDATA[Updated the mod rewrites,]]></change>
+					<change><![CDATA[Updated to phpbb3.0.RC7.]]></change>
+				</changelog>
+			</entry>
+			<entry>
+				<date><![CDATA[2007-09-20]]></date>
+				<rev-version><![CDATA[3.0.RC5a]]></rev-version>
+				<changelog lang="en">
+					<change><![CDATA[Fixed typos in the language file,]]></change>
+					<change><![CDATA[Enhanced the premod version checking.]]></change>
+				</changelog>
+			</entry>
+			<entry>
+				<date><![CDATA[2007-09-11]]></date>
+				<rev-version><![CDATA[3.0.RC5]]></rev-version>
+				<changelog lang="en">
+					<change><![CDATA[First public Version, versioned following the phpBB version]]></change>
+				</changelog>
+			</entry>
+		</history>
 	</header>
 	<action-group>
 		<copy>
@@ -297,7 +527,7 @@ _________
 		$this->url_replace = array(
 			// Purely cosmetic replace
 			'$' => 'dollar', '€' => 'euro',
-			'\'s' => 's', // it's => its / mary's => marys ...
+			"'s" => 's', // it's => its / mary's => marys ...
 			// Language specific replace (German example)
 			'ß' => 'ss',
 			'Ä' => 'Ae', 'ä' => 'ae',
