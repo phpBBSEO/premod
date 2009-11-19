@@ -25,7 +25,7 @@ class seo_meta {
 	var $filters = array('description' => 'meta_filter_txt', 'keywords' => 'make_keywords');
 	// here you can comment a tag line to deactivate it
 	var $tpl = array(
-		'lang' => '<meta lang="%s" />',
+		'lang' => '<meta name="content-language" content="%s" />',
 		'title' => '<meta name="title" content="%s" />',
 		'description' => '<meta name="description" content="%s" />',
 		'keywords' => '<meta name="keywords" content="%s" />',
