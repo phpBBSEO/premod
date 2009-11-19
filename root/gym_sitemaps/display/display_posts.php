@@ -227,15 +227,15 @@ class display_posts {
 			$result = $db->sql_query($sql);
 			while ($row = $db->sql_fetchrow($result)) {
 				$poster_id = (int) $row['poster_id'];
-				// www.phpBB-SEO.com SEO TOOLKIT BEGIN
-				$phpbb_seo->set_user_url( $row['username'], $poster_id );
-				// www.phpBB-SEO.com SEO TOOLKIT END
 				$forum_id = (int) $row['forum_id'];
 				$topic_id = (int) $row['topic_id'];
 				// Define the global bbcode bitfield, will be used to load bbcodes
 				$bbcode_bitfield = $bbcode_bitfield | base64_decode($row['bbcode_bitfield']);
 				// Only compute profile data if required
 				if ($display_user_info) {
+					// www.phpBB-SEO.com SEO TOOLKIT BEGIN
+					$phpbb_seo->set_user_url( $row['username'], $poster_id );
+					// www.phpBB-SEO.com SEO TOOLKIT END
 					// Is a signature attached? Are we going to display it?
 					if ($display_sig && $row['enable_sig']) {
 						$bbcode_bitfield = $bbcode_bitfield | base64_decode($row['user_sig_bbcode_bitfield']);
@@ -245,6 +245,9 @@ class display_posts {
 					$row['user_id'] = $topic_datas[$forum_id][$topic_id]['topic_poster'];
 					$row['username'] = $topic_datas[$forum_id][$topic_id]['topic_first_poster_name'];
 					$row['user_colour'] = $topic_datas[$forum_id][$topic_id]['topic_first_poster_colour'];
+					// www.phpBB-SEO.com SEO TOOLKIT BEGIN
+					$phpbb_seo->set_user_url( $row['username'], $row['user_id'] );
+					// www.phpBB-SEO.com SEO TOOLKIT END
 				}
 				$post_datas[$forum_id][$topic_id] = array(
 						'hide_post' => false,
