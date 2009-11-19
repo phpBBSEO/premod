@@ -497,7 +497,7 @@ class acp_phpbb_seo {
 					$this->write_cache($this->write_type);
 					add_log('admin', 'SEO_LOG_CONFIG_' . strtoupper($mode));
 				}
-			} elseif ($mode == 'extented') {
+			} elseif ($mode == 'extended') {
 				add_log('admin', 'SEO_LOG_CONFIG_' . strtoupper($mode));
 				trigger_error($user->lang['CONFIG_UPDATED'] . adm_back_link($this->u_action));
 			} else {
@@ -520,7 +520,7 @@ class acp_phpbb_seo {
 		$this->page_title = $display_vars['title'];
 		$phpbb_seo->seo_end();
 		$l_title_explain = $user->lang[$display_vars['title'] . '_EXPLAIN'];
-		if ($mode != 'extented') {
+		if ($mode != 'extended') {
 			$l_title_explain .= $mode == 'htaccess' ? '' : $this->check_cache_folder($phpbb_root_path . $phpbb_seo->seo_opt['cache_folder']);
 		}
 		$template->assign_vars(array(
