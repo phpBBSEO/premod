@@ -331,7 +331,7 @@ class phpbb_seo extends setup_phpbb_seo {
 	* Prepare profile url
 	*/
 	function set_user_url( $username, $user_id = 0 ) {
-		if (empty($this->seo_url['user'][$user_id])) {
+		if ($user_id != ANONYMOUS && empty($this->seo_url['user'][$user_id])) {
 			$username = strip_tags($username);
 			$this->seo_url['username'][$username] = $user_id;
 			if ( $this->seo_opt['profile_inj'] ) {
@@ -534,7 +534,7 @@ class phpbb_seo extends setup_phpbb_seo {
 			return;
 		}
 		$this->path = $this->seo_path['phpbb_urlR'];
-		$user_id = !empty($this->get_vars['author_id']) ? $this->get_vars['author_id'] : ( isset($this->seo_url['username'][rawurldecode(@$this->get_vars['author'])]) ? $this->seo_url['username'][rawurldecode($this->get_vars['author'])] : 0);
+		$user_id = !empty($this->get_vars['author_id']) ? $this->get_vars['author_id'] : ( isset($this->seo_url['username'][rawurldecode(@$this->get_vars['author'])]) ? $this->seo_url['username'][rawurldecode(@$this->get_vars['author'])] : 0);
 		if ( $user_id && isset($this->seo_url['user'][$user_id]) ) {
 			// Filter default params
 			$this->filter_get_var($this->phpbb_filter['search']);

@@ -226,7 +226,6 @@ class display_posts {
 			$sql = $db->sql_build_query('SELECT', $sql_array);
 			$result = $db->sql_query($sql);
 			while ($row = $db->sql_fetchrow($result)) {
-				$poster_id = (int) $row['poster_id'];
 				$forum_id = (int) $row['forum_id'];
 				$topic_id = (int) $row['topic_id'];
 				// Define the global bbcode bitfield, will be used to load bbcodes
@@ -234,7 +233,7 @@ class display_posts {
 				// Only compute profile data if required
 				if ($display_user_info) {
 					// www.phpBB-SEO.com SEO TOOLKIT BEGIN
-					$phpbb_seo->set_user_url( $row['username'], $poster_id );
+					$phpbb_seo->set_user_url( $row['username'], $row['poster_id'] );
 					// www.phpBB-SEO.com SEO TOOLKIT END
 					// Is a signature attached? Are we going to display it?
 					if ($display_sig && $row['enable_sig']) {
@@ -242,13 +241,11 @@ class display_posts {
 					}
 				} else {
 					// @TODO deal with last post case ?
-					$row['user_id'] = $topic_datas[$forum_id][$topic_id]['topic_poster'];
+					$row['user_id'] = $row['poster_id'];
 					$row['username'] = $topic_datas[$forum_id][$topic_id]['topic_first_poster_name'];
 					$row['user_colour'] = $topic_datas[$forum_id][$topic_id]['topic_first_poster_colour'];
-					// www.phpBB-SEO.com SEO TOOLKIT BEGIN
-					$phpbb_seo->set_user_url( $row['username'], $row['user_id'] );
-					// www.phpBB-SEO.com SEO TOOLKIT END
 				}
+				$poster_id = (int) $row['poster_id'];
 				$post_datas[$forum_id][$topic_id] = array(
 						'hide_post' => false,
 						'post_id' => $row['post_id'],
@@ -341,7 +338,7 @@ class display_posts {
 							'msn' => ($row['user_msnm'] && $auth->acl_get('u_sendim')) ? append_sid("{$phpbb_root_path}memberlist.$phpEx", "mode=contact&amp;action=msnm&amp;u=$poster_id") : '',
 							'yim' => ($row['user_yim']) ? 'http://edit.yahoo.com/config/send_webmesg?.target=' . urlencode($row['user_yim']) . '&amp;.src=pg' : '',
 							'jabber' => ($row['user_jabber'] && $auth->acl_get('u_sendim')) ? append_sid("{$phpbb_root_path}memberlist.$phpEx", "mode=contact&amp;action=jabber&amp;u=$poster_id") : '',
-							'search' => ($auth->acl_get('u_search')) ? append_sid("{$phpbb_root_path}search.$phpEx", 'search_author=' . urlencode($row['username']) .'&amp;sr=posts') : '',
+							'search' => ($auth->acl_get('u_search')) ? append_sid("{$phpbb_root_path}search.$phpEx", "author_id=$poster_id&amp;sr=posts") : '',
 						);
 						$master->gym_master->get_user_rank($row['user_rank'], $row['user_posts'], $user_cache[$poster_id]['rank_title'], $user_cache[$poster_id]['rank_image'], $user_cache[$poster_id]['rank_image_src']);
 						if (!empty($row['user_allow_viewemail']) || $auth->acl_get('a_email')) {
