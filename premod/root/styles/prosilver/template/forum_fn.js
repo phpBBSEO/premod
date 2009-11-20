@@ -61,7 +61,7 @@ function phpbb_seo_href() {
 		current_domain = current_domain.replace(new RegExp(/^[a-z0-9_-]+\.([a-z0-9_-]+\.([a-z]{2,6}|[a-z]{2,3}\.[a-z]{2,3}))$/i), '$1');
 	}
 	if (seo_ext_classes) {
-		var extclass = new RegExp("(^|\\s)(" + seo_ext_classes + ")(\\s|$)");
+		var extclass = new RegExp("(^|\s)(" + seo_ext_classes + ")(\s|$)");
 	}
 	if (seo_hashfix) {
 		var basehref = document.getElementsByTagName('base')[0];

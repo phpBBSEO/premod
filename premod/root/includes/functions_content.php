@@ -938,6 +938,7 @@ function parse_attachments($forum_id, &$message, &$attachments, &$update_count, 
 			{
 				$display_cat = ATTACHMENT_CATEGORY_NONE;
 			}
+
 			// www.phpBB-SEO.com SEO TOOLKIT BEGIN
 			//$download_link = append_sid("{$phpbb_root_path}download/file.$phpEx", 'id=' . $attachment['attach_id']);
 			$download_link = "{$phpbb_root_path}download/file.$phpEx?id=" . $attachment['attach_id'];

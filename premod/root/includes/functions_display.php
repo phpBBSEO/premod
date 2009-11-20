@@ -90,7 +90,7 @@ function display_forums($root_data = '', $display_moderators = true, $return_mod
 		$sql_array['SELECT'] .= ', fa.user_id';
 	}
 	// www.phpBB-SEO.com SEO TOOLKIT BEGIN -> no dupe
-	if ($phpbb_seo->seo_opt['no_dupe']['on']) {
+	if (@$phpbb_seo->seo_opt['no_dupe']['on']) {
 		$sql_array['SELECT'] .= ', t.topic_id, t.topic_title, t.topic_replies, t.topic_replies_real, t.topic_status, t.topic_type, t.topic_moved_id' . (!empty($phpbb_seo->seo_opt['sql_rewrite']) ? ', t.topic_url ' : ' ');
 		$sql_array['LEFT_JOIN'][] = array(
 			'FROM'	=> array(TOPICS_TABLE => 't'),
@@ -1102,11 +1102,11 @@ function display_user_activity(&$userdata)
 		);
 		$result = $db->sql_query($db->sql_build_query('SELECT', $sql_array));
 		$seo_active_t_row = $db->sql_fetchrow($result);
+		$db->sql_freeresult($result);
 		if ($seo_active_t_row) {
 			$active_t_row = array_merge($active_t_row, $seo_active_t_row);
 		}
 		// www.phpBB-SEO.com SEO TOOLKIT END
-		$db->sql_freeresult($result);
 	}
 
 	$userdata['active_t_row'] = $active_t_row;
