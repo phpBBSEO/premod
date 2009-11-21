@@ -393,10 +393,10 @@ class phpbb_seo extends setup_phpbb_seo {
 			$qs .= ($qs ? $amp_delim : '') . implode($amp_delim, $_EXTRA_URL);
 		}
 		// Sid ?
-		if ($session_id) {
-			$qs .= ($qs ? $amp_delim : '') . "sid=$session_id";
-		} elseif (!empty($_SID)) {
+		if ($session_id === false && !empty($_SID)) {
 			$qs .= ($qs ? $amp_delim : '') . "sid=$_SID";
+		} else if ($session_id) {
+			$qs .= ($qs ? $amp_delim : '') . "sid=$session_id";
 		}
 		// Build vanilla URL
 		if (preg_match("`\.[a-z0-9]+$`i", $this->path) ) {
