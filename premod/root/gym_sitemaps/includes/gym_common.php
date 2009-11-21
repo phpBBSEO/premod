@@ -151,7 +151,7 @@ function obtain_gym_links($gym_links = array()) {
 						$url = sprintf($rss_setup['forum_cat_rss'], $_phpbb_seo ? $phpbb_seo->seo_url['forum'][$forum_id] : '', $forum_id );
 						$link .= ' ' . sprintf($gym_link_tpl, $url, 'feed-icon.png', sprintf($rss_setup['l_rss_feed_of'], $forum_name), $rss_setup['l_rss_feed']);
 					}
-					if (!empty($google_setup['link_index']) && isset($google_setup['auth_guest'][$forum_id]) && ($num_topics > $google_setup['threshold'])) {
+					if (!empty($google_setup['link_index']) && isset($google_setup['auth_guest'][$forum_id]) && ($num_topics >= $google_setup['threshold'])) {
 							$url = sprintf($google_setup['forum_cat_google'], $_phpbb_seo ? str_replace($_f_sep . $forum_id, '', $phpbb_seo->seo_url['forum'][$forum_id]) . $_f_sep . $forum_id : '', $forum_id );
 							$link .= ' ' . sprintf($gym_link_tpl, $url, 'sitemap-icon.gif', sprintf($google_setup['l_google_sitemap_of'], $forum_name), $google_setup['l_google_sitemap']);
 					}

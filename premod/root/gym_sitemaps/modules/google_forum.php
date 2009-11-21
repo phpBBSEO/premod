@@ -137,7 +137,7 @@ class google_forum {
 				$forum_sitemap_url = sprintf($this->url_config['google_forum_tpl'], $forum_id, str_replace($phpbb_seo->seo_delim['forum'] . $forum_id, '', $phpbb_seo->set_url($forum_data['forum_name'], $forum_id)));
 				// Approval and pagination
 				$paginated = $config['posts_per_page'];
-				$forum_data['topic_count'] = $forum_data['forum_topics'];
+				$forum_data['topic_count'] = (int) $forum_data['forum_topics'];
 				$forum_data['replies_key'] = 'topic_replies';
 				// Do not serve content if there is no topic in the forum
 				if ( $forum_data['topic_count'] < $this->module_config['google_threshold'] ) {
