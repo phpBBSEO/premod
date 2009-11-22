@@ -670,11 +670,11 @@ if ($submit || $preview || $refresh)
 		if ($mode == 'post' || ($mode == 'edit' && $post_data['topic_first_post_id'] == $post_id)) {
 			$phpbb_seo->set_url($post_data['forum_name'], $forum_id, $phpbb_seo->seo_static['forum']);
 			$_parent = $post_data['topic_type'] == POST_GLOBAL ? $phpbb_seo->seo_static['global_announce'] : $phpbb_seo->seo_url['forum'][$forum_id];
-			$_t = !empty($post_data['topic_id']) ? max(0, (int) $post_data['topic_id'] ) : 0;		
+			$_t = !empty($post_data['topic_id']) ? max(0, (int) $post_data['topic_id'] ) : 0;
 			$_url = $phpbb_seo->url_can_edit($forum_id) ? utf8_normalize_nfc(request_var('url', '', true)) : ( isset($post_data['topic_url']) ? $post_data['topic_url'] : '' );
 			if (!$phpbb_seo->check_url('topic', $_url, $_parent)) {
 				if (!empty($_url)) {
-					// Here we get rid of the seo delim (-t) and put it back even in simple mod 
+					// Here we get rid of the seo delim (-t) and put it back even in simple mod
 					// to be able to handle all cases at once
 					$_url = preg_replace('`' . $phpbb_seo->seo_delim['topic'] . '$`i', '', $_url);
 					$_title = $phpbb_seo->get_url_info('topic', $_url . $phpbb_seo->seo_delim['topic'] . $_t);
