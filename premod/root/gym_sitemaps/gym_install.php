@@ -42,7 +42,7 @@ $auth->acl($user->data);
 $user->setup('gym_sitemaps/install');
 // Security check
 // Circumvent a potential phpbb bug with paths
-$redirect = append_sid(generate_board_url() . "/phpbb_seo/gym_install.$phpEx");
+$redirect = append_sid(generate_board_url() . "/gym_sitemaps/gym_install.$phpEx");
 if (!$user->data['is_registered']) {
 	login_box($redirect, $user->lang['SEO_LOGIN'],'', false, false);
 }
