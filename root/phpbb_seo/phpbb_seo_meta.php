@@ -229,18 +229,20 @@ class seo_meta {
 	function meta_filter_txt($text, $bbcode = true) {
 		if ($bbcode) {
 			static $RegEx = array();
-			static $replace = array(' ', ' ', ' ', '', ' ');
+			static $replace = array();
 			if (empty($RegEx)) {
 				$RegEx = array('`&(amp;)?[^\;]+;`i', // HTML entitites
 					'`<[^>]*>(.*<[^>]*>)?`Usi', // HTML code
 				);
+				$replace = array(' ', ' ');
 				if (!empty($this->mconfig['bbcodestrip'])) {
 					$RegEx[] = '`\[(' . $this->mconfig['bbcodestrip'] . ')[^\[\]]*\].*\[/\1[^\[\]]*\]`Usi'; // bbcode to strip
+					$replace[] = ' ';
 				}
-				$RegEx += array(
-					'`\[\/?[^\]\[]*\]`Ui', // Strip all bbcode tags
-					'`[\s]+`' // Multiple spaces
-				);
+				$RegEx[] = '`\[\/?[^\]\[]*\]`Ui'; // Strip all bbcode tags
+				$replace[] = '';
+				$RegEx[] = '`[\s]+`'; // Multiple spaces
+				$replace[] = ' ';
 			}
 			return $this->word_limit(preg_replace($RegEx, $replace, $text));
 		}
