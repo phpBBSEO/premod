@@ -1264,7 +1264,11 @@ function get_username_string($mode, $user_id, $username, $username_colour = '', 
 				// $profile_url = ($custom_profile_url !== false) ? $custom_profile_url . '&amp;u=' . (int) $user_id : str_replace(array('={USER_ID}', '=%7BUSER_ID%7D'), '=' . (int) $user_id, $_profile_cache['base_url']);
 				global $phpbb_seo, $phpbb_root_path, $phpEx;
 				$phpbb_seo->set_user_url( $username, $user_id );
-				$profile_url = ($custom_profile_url !== false) ? reapply_sid($custom_profile_url,'u=' . (int) $user_id) : append_sid("{$phpbb_root_path}memberlist.$phpEx", 'mode=viewprofile&amp;u=' . (int) $user_id);
+				if ($custom_profile_url !== false) {
+					$profile_url = reapply_sid($custom_profile_url . (strpos($custom_profile_url, '?') !== false ?  '&amp;' : '?' ) . 'u=' . (int) $user_id);
+				} else {
+					$profile_url = append_sid("{$phpbb_root_path}memberlist.$phpEx", 'mode=viewprofile&amp;u=' . (int) $user_id);
+				}
 				// www.phpBB-SEO.com SEO TOOLKIT END
 			}
 			else
