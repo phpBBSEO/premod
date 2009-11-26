@@ -116,7 +116,7 @@ function obtain_gym_links($gym_links = array()) {
 			require($phpbb_root_path . 'gym_sitemaps/includes/gym_rss_functions.' . $phpEx);
 		}
 		$links = get_gym_links($gym_config);
-		//$cache->put($cache_file, $links);
+		$cache->put($cache_file, $links);
 	}
 	// In case one would want to manually fil the array in some file, like viewforum
 	// Would be passed here from page_header() where $gym_links is global
