@@ -197,7 +197,6 @@ class acp_gym_sitemaps {
 		$this->page_title = $display_vars['title'];
 		// add the maitenance links
 		$maintenance_links = '';
-$maction_param =
 		$maintenance_links .= '<a href="' . $this->u_action . '&amp;maction=maintenance&amp;action=' . $action . '&amp;module=' . $module . '"><b style="color:red;">' . $user->lang['GYM_MAINTENANCE'] . '</b></a><b> &bull; </b>';
 		$maintenance_links .= '<a href="' . $this->u_action . '&amp;maction=settings&amp;action=' . $action . '&amp;module=' . $module . '"><b style="color:red;">' . $user->lang['GYM_SETTINGS'] . '</b></a>';
 		$install_link = ($mode !== 'main') ? '<b> &bull; </b><a href="' . $this->u_action . '&amp;maction=install&amp;action=' . $action . '&amp;module=' . $module . '"><b style="color:red;">' . $user->lang['GYM_INSTALL'] . '</b></a>' : '';
