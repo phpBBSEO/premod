@@ -119,7 +119,7 @@ class phpbb_seo extends setup_phpbb_seo {
 		}
 		// Load settings from phpbb_seo/includes/phpbb_seo_modules.php
 		$this->init_phpbb_seo();
-		$this->seo_path['phpbb_filesR'] = $this->seo_path['phpbb_url'] . $this->seo_static['file_index'] . $this->seo_delim['file'];
+		$this->seo_path['phpbb_filesR'] = $this->seo_path['phpbb_urlR'] . $this->seo_static['file_index'] . $this->seo_delim['file'];
 		// see if we have some custom replacement
 		if (!empty($this->url_replace)) {
 			$this->url_replace = array(
