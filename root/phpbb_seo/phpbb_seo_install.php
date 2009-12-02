@@ -430,7 +430,7 @@ class install_phpbb_seo extends module {
 	function add_modules($mode, $sub) {
 		global $db, $user, $phpbb_root_path, $phpEx;
 		include_once($phpbb_root_path . 'includes/acp/acp_modules.' . $phpEx);
-		$_module = &new acp_modules();
+		$_module = new acp_modules();
 		if ( $this->get_module_id('ACP_MOD_REWRITE')  > 0 ) {
 			$url_mod = !empty($sub) ? '?mode=' . $mode : '';
 			$this->p_master->error(sprintf($user->lang['SEO_ERROR_INSTALLED'], $user->lang['ACP_CAT_PHPBB_SEO'] ) . '<br /><br />' . sprintf($user->lang['RETURN_PAGE'], '<a href="' . $this->p_master->module_url . $url_mod . '">', '</a>'), '', '', false, $user->lang['SEO_ERROR_INFO']);
@@ -525,7 +525,7 @@ class install_phpbb_seo extends module {
 	function remove_modules($mode, $sub) {
 		global $db, $user, $phpbb_root_path, $phpEx;
 		include_once($phpbb_root_path . 'includes/acp/acp_modules.' . $phpEx);
-		$_module = &new acp_modules();
+		$_module = new acp_modules();
 		// Set the module class
 		$module_classes = array_keys($this->module_categories);
 		$_module->u_action = "phpbb_seo_install.$phpEx";
