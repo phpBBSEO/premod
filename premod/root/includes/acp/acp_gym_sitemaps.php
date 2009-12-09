@@ -526,14 +526,17 @@ class acp_gym_sitemaps {
 				}
 			} else { // Only reset this module config
 				$this->gym_module_acp($mode, $module);
-				foreach ($this->gym_modules_acp[$mode][$module]['info']['actions'] as $module_action ) {
-					foreach ($this->gym_modules_acp[$mode][$module][$module_action]['default'] as $module_config => $default_value ) {
-						if (!empty($post_array[$mode . '_' . $module . '_' . $module_action . '_reset']) || $reset_all) {
-							// Update config
-							if ($uninstall) {
-								rem_gym_config($module_config, $this->gym_config);
-							} else {
-								set_gym_config($module_config, $default_value, $mode, $this->gym_config);
+				// Allow modules with no acp
+				if (!empty($this->gym_modules_acp[$mode][$module]['info'])) {
+					foreach ($this->gym_modules_acp[$mode][$module]['info']['actions'] as $module_action ) {
+						foreach ($this->gym_modules_acp[$mode][$module][$module_action]['default'] as $module_config => $default_value ) {
+							if (!empty($post_array[$mode . '_' . $module . '_' . $module_action . '_reset']) || $reset_all) {
+								// Update config
+								if ($uninstall) {
+									rem_gym_config($module_config, $this->gym_config);
+								} else {
+									set_gym_config($module_config, $default_value, $mode, $this->gym_config);
+								}
 							}
 						}
 					}
