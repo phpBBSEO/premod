@@ -192,7 +192,7 @@ class seo_meta {
 		if (!$text) {
 			return '';
 		}
-		$text = explode(' ', trim($text), 50);
+		$text = explode(' ', trim($text));
 		if ($this->mconfig['check_ignore']) {
 			global $phpbb_root_path, $user, $phpEx;
 			// add stop words to $user to allow reuse
