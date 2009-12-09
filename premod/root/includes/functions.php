@@ -2093,8 +2093,8 @@ function generate_pagination($base_url, $num_items, $per_page, $start_item, $add
 		static $pagin_replace = array();
 		static $prev_find = array();
 		if (empty($pagin_replace)) {
-			$pagin_find = array('`\<a href="(https?\://[a-z0-9_/\.-]+/[a-z0-9_\.-]+)(\.(?!' . $phpEx . ')[a-z0-9]+)(\?([\w\#$%&~\-;:=,@+\.]+))?(&amp;|\?)start=([0-9]+)"\>`i', '`\<a href="(https?\://[a-z0-9_/\.-]+/[a-z0-9_\.-]+)/(\?([\w\#$%&~\-;:=,@+\.]+))?(&amp;|\?)start=([0-9]+)"\>`i' );
-			$pagin_replace = array( '<a href="\1' . $phpbb_seo->seo_delim['start'] . '\6\2\3">', '<a href="\1/' . $phpbb_seo->seo_static['pagination'] . '\5' . $phpbb_seo->seo_ext['pagination'] . '\2">' );
+			$pagin_find = array('`\<a href="(https?\://[a-z0-9_/\.-]+/[a-z0-9_\.-]+)(\.(?!' . $phpEx . ')[a-z0-9]+)(\?([\w\#$%&~\-;:=,@+\.]+))?(&amp;|\?)start=([0-9]+)"\>`i', '`\<a href="(https?\://[a-z0-9_/\.-]+/[a-z0-9_\.-]+)/(\??([\w\#$%&~\-;:=,@+\.]+))?(&amp;|\?)start=([0-9]+)"\>`i' );
+			$pagin_replace = array( '<a href="\1' . $phpbb_seo->seo_delim['start'] . '\6\2\3">', '<a href="\1/' . $phpbb_seo->seo_static['pagination'] . '\5' . $phpbb_seo->seo_ext['pagination'] . '\3">' );
 			$prev_find = array($phpbb_seo->seo_delim['start'] . '0', $phpbb_seo->seo_static['pagination'] . '0' . $phpbb_seo->seo_ext['pagination']);
 		}
 		$page_string = str_replace($url_delim . 'start=0', '', $page_string);
@@ -3970,7 +3970,7 @@ function page_header($page_title = '', $display_online_list = true, $item_id = 0
 		'SEO_EXT_CLASSES' => !empty($config['seo_ext_classes']) ? "'" . preg_replace('`[^a-z0-9_|-]+`', '', str_replace(',', '|', trim($config['seo_ext_classes'], ', '))) . "'" : 'false',
 		'SEO_HASHFIX' => $phpbb_seo->seo_opt['url_rewrite'] && $phpbb_seo->seo_opt['virtual_folder'] ? 'true' : 'false',
 	));
-	if (isset($user->lang['Page']) && !empty($config['seo_append_sitename'])) {
+	if (isset($user->lang['Page']) && !empty($config['seo_append_sitename']) && !empty($config['sitename'])) {
 		$page_title = $page_title && strpos($page_title, $config['sitename']) === false ? $page_title . ' - ' . $config['sitename'] : $page_title;
 	}
 	// www.phpBB-SEO.com SEO TOOLKIT END
