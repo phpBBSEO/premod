@@ -35,15 +35,17 @@ $user->session_begin();
 $auth->acl($user->data);
 $user->setup('mods/acp_phpbb_seo');
 // Security check
+// Circumvent a potential phpbb bug with paths
+$redirect = append_sid(generate_board_url() . "/phpbb_seo/sync_url.$phpEx");
 if (!$user->data['is_registered']) {
-	login_box('', $user->lang['SEO_LOGIN'],'', false, false);
+	login_box($redirect, $user->lang['SEO_LOGIN'],'', false, false);
 }
 if (!$auth->acl_get('a_')) {
 	$user->session_kill(true);
-	login_box('', $user->lang['SEO_LOGIN_ADMIN'],'', false, false);
+	login_box($redirect, $user->lang['SEO_LOGIN_ADMIN'],'', false, false);
 }
 if ($user->data['user_type'] != USER_FOUNDER) {
-	login_box('', $user->lang['SEO_LOGIN_FOUNDER'],'', false, false);
+	login_box($redirect, $user->lang['SEO_LOGIN_FOUNDER'],'', false, false);
 }
 $start = max(0, request_var('start', 0));
 $limit = max(100, request_var('limit', 0));
