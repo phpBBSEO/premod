@@ -51,7 +51,7 @@ $lang = array_merge($lang, array(
 	'GOOGLE_TXT_CACHE_RESET_EXPLAIN' => 'Reset to default all the caching options of the TXT Sitemap module.',
 	'GOOGLE_TXT_GZIP_RESET' => 'TXT Sitemap Gunzip',
 	'GOOGLE_TXT_GZIP_RESET_EXPLAIN' => 'Reset to default all the Gunzip options of the TXT Sitemap module.',
-	'GOOGLE_TXT_LIMIT_RESET' => 'TXT Sitemap Limite',
+	'GOOGLE_TXT_LIMIT_RESET' => 'TXT Sitemap Limit',
 	'GOOGLE_TXT_LIMIT_RESET_EXPLAIN' => 'Reset to default all the Limit options of the TXT Sitemap module.',
 ));
 ?>

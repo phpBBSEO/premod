@@ -38,7 +38,7 @@ $lang = array_merge($lang, array(
 	'RSS_LINKS_MAIN' => 'Main links',
 	'RSS_LINKS_MAIN_EXPLAIN' => 'Display or not rss and rss list links in footer.<br/>This feature requires that main links display is activated in the main configuration.',
 	'RSS_LINKS_INDEX' => 'Links on index',
-	'RSS_LINKS_INDEX_EXPLAIN' => 'Display or not links to the available rss feed for each forum on the forum index. These links are added below the forum descritpions.<br/>This feature requires that links on index display is activated in the main configuration.',
+	'RSS_LINKS_INDEX_EXPLAIN' => 'Display or not links to the available rss feed for each forum on the forum index. These links are added below the forum descriptions.<br/>This feature requires that links on index display is activated in the main configuration.',
 	'RSS_LINKS_CAT' => 'Links on forum page',
 	'RSS_LINKS_CAT_EXPLAIN' => 'Display or not links to the rss feed of the current forum. These links are added below the forum title.<br/>This feature requires that links on forum page display is activated in the main configuration.',
 	// Reset settings
@@ -73,7 +73,7 @@ $lang = array_merge($lang, array(
 	'RSS_LANG' => 'RSS Language',
 	'RSS_LANG_EXPLAIN' => 'The language to declare as the main language in the rss feeds. Default is the phpBB default language.',
 	'RSS_URL' => 'RSS feed URL',
-	'RSS_URL_EXPLAIN' => 'Enter the full URL to your gymrss.php file, eg http://www.example.com/eventual_dir/ if gymrss.php is installed in http://www.example.com/eventual_dir/.<br/>This option is useful when phpBB is not installed in the domain’s root and you would like put the gymrss.php file in the root level.',
+	'RSS_URL_EXPLAIN' => 'Enter the full URL to your gymrss.php file, e.g. http://www.example.com/eventual_dir/ if gymrss.php is installed in http://www.example.com/eventual_dir/.<br/>This option is useful when phpBB is not installed in the domain’s root and you would like put the gymrss.php file in the root level.',
 	// Auth settings
 	'RSS_AUTH_SETTINGS' => 'Authorization settings',
 	'RSS_ALLOW_AUTH' => 'Authorizations',
@@ -101,10 +101,10 @@ $lang = array_merge($lang, array(
 	'RSS_FORCE_XSLT' => 'Force Styling',
 	'RSS_FORCE_XSLT_EXPLAIN' => 'Isn’t this a bit stupid, we need to trick browsers to allow xlst usage. We do it by adding some space chars at the beginning of the xml code.<br/>FF 2 and IE7 only look for the first 500 chars to decide it’s rss or not and impose their private handling',
 	'RSS_LOAD_PHPBB_CSS' => 'Load phpBB CSS',
-	'RSS_LOAD_PHPBB_CSS_EXPLAIN' => 'The GYM sitemap module fully uses the phpBB3 powerful templating system. The XSL stylesheets used to build the html output is compatible with phpBB3 styling.<btr/>With this option, you can decide to apply the phpBB CSS on the XSL stylesheet instead of the default one. This way, all your theme personalisations such as background and font color or even images will be used in the RSS styled ouptut.<br/>This will only have effect after you will have cleared the RSS cache in the "Maintenance" menu.<br/>If the RSS style file are not present in the current style, the default style (always available, based on prosilver) will be used.<br/>Do not try to use prosilver templates with another style, the CSS most likely won’t match.',
+	'RSS_LOAD_PHPBB_CSS_EXPLAIN' => 'The GYM sitemap module fully uses the phpBB3 powerful templating system. The XSL stylesheets used to build the html output is compatible with phpBB3 styling.<btr/>With this option, you can decide to apply the phpBB CSS on the XSL stylesheet instead of the default one. This way, all your theme personalisations such as background and font color or even images will be used in the RSS styled output.<br/>This will only have effect after you will have cleared the RSS cache in the "Maintenance" menu.<br/>If the RSS style file are not present in the current style, the default style (always available, based on prosilver) will be used.<br/>Do not try to use prosilver templates with another style, the CSS most likely won’t match.',
 	// Content
 	'RSS_CONTENT' => 'Content settings',
-	'RSS_CONTENT_EXPLAIN' => 'Here you can set up various content filtering / formating options. <br/>They can be applied to all the RSS modules depending on your RSS override settings.',
+	'RSS_CONTENT_EXPLAIN' => 'Here you can set up various content filtering / formatting options. <br/>They can be applied to all the RSS modules depending on your RSS override settings.',
 	'RSS_ALLOW_CONTENT' => 'Allow Item Content',
 	'RSS_ALLOW_CONTENT_EXPLAIN' => 'You may choose here to allow the message content to be fully or partially displayed in the RSS feeds. <br/><u>NOTE :</u> This option means a bit more work for the server. Limits with content output should be set smaller than the ones without it.',
 	'RSS_SUMARIZE' => 'Digest Items',
@@ -116,11 +116,11 @@ $lang = array_merge($lang, array(
 	'RSS_ALLOW_PROFILE_LINKS' => 'Profile link',
 	'RSS_ALLOW_PROFILE_LINKS_EXPLAIN' => 'If author name is included in the output, you can decide to link it or not to the corresponding phpBB profile page.',
 	'RSS_ALLOW_BBCODE' => 'Allow BBcodes',
-	'RSS_ALLOW_BBCODE_EXPLAIN' => 'You may choose here to either parse and output or omit the bbcode.',
+	'RSS_ALLOW_BBCODE_EXPLAIN' => 'You may choose here to either parse and output or omit the BBcode.',
 	'RSS_STRIP_BBCODE' => 'Strip BBcodes',
-	'RSS_STRIP_BBCODE_EXPLAIN' => 'You can here set up a list of bbcodes to exclude from parsing.<br/>The format is simple : <br/><ul><li> <u>Comma separated list of bbcodes :</u> Delete bbcode tags, keep the content. <br/><u>Example :</u> <b>img,b,quote</b> <br/> In this example img, bold and quote bbcode won’t be parsed, the bbcode tags themselves will be deleted and the content inside the bbcode tags kept.</li><li> <u>Comma separated list of bbcodes with colon option :</u> Delete bbcode tags and decide about their content. <br/><u>Example :</u> <b>img:1,b:0,quote,code:1</b> <br/> In this example, img bbcode and the img link will be deleted, bold won’t be processed, but the bold-ed text will be kept, quote won’t be parsed, but their content will be kept, code bbcode and their content will be deleted from the output.</ul>The filter will work even if bbcode is empty. Handy to delete code tags content and img links from output for example.<br/>The filtering occurs before summarizing.<br/> The Magic parameter "all" (can be all:0 or all:1 to strip bbcode tags content as well) will take care of all at once.',
+	'RSS_STRIP_BBCODE_EXPLAIN' => 'You can here set up a list of BBcodes to exclude from parsing.<br/>The format is simple : <br/><ul><li> <u>Comma separated list of BBcodes :</u> Delete BBcode tags, keep the content. <br/><u>Example :</u> <b>img,b,quote</b> <br/> In this example img, bold and quote BBcode won’t be parsed, the BBcode tags themselves will be deleted and the content inside the BBcode tags kept.</li><li> <u>Comma separated list of BBcodes with colon option :</u> Delete BBcode tags and decide about their content. <br/><u>Example :</u> <b>img:1,b:0,quote,code:1</b> <br/> In this example, img BBcode and the img link will be deleted, bold won’t be processed, but the bold text will be kept, quote won’t be parsed, but their content will be kept, code BBcode and their content will be deleted from the output.</ul>The filter will work even if BBcode is empty. Handy to delete code tags content and img links from output for example.<br/>The filtering occurs before summarizing.<br/> The Magic parameter "all" (can be all:0 or all:1 to strip BBcode tags content as well) will take care of all at once.',
 	'RSS_ALLOW_LINKS' => 'Allow active links',
-	'RSS_ALLOW_LINKS_EXPLAIN' => 'You may choose here to either activate or not links used in items content.<br/> If desactivated, links and emails will be included in the content but won’t be clickable.',
+	'RSS_ALLOW_LINKS_EXPLAIN' => 'You may choose here to either activate or not links used in items content.<br/> If deactivated, links and emails will be included in the content but won’t be clickable.',
 	'RSS_ALLOW_EMAILS' => 'Allow Emails',
 	'RSS_ALLOW_EMAILS_EXPLAIN' => 'You chose here to output "email AT domain DOT com" instead of "email@domain.com" in the items content.',
 	'RSS_ALLOW_SMILIES' => 'Allow Smilies',
@@ -128,7 +128,7 @@ $lang = array_merge($lang, array(
 	'RSS_NOHTML' => 'HTML filter',
 	'RSS_NOHTML_EXPLAIN' => 'Filter, or not, html in rss feeds. If you activate this option, rss feeds will only contain plain text.',
 	// Old URL handling
-	'RSS_1XREDIR' => 'Handle GYM 1x rewriten URL',
-	'RSS_1XREDIR_EXPLAIN' => 'Activate the GYM 1x rewriten URLs detection. The module will display a custom feed providing with the new URL of the requested feed.<br/><u>Note :</u><br/>This option requires the compatibility rewriterules as explained in the install file.',
+	'RSS_1XREDIR' => 'Handle GYM 1x rewritten URL',
+	'RSS_1XREDIR_EXPLAIN' => 'Activate the GYM 1x rewritten URLs detection. The module will display a custom feed providing with the new URL of the requested feed.<br/><u>Note :</u><br/>This option requires the compatibility rewriterules as explained in the install file.',
 ));
 ?>

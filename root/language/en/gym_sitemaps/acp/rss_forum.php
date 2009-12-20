@@ -47,7 +47,7 @@ $lang = array_merge($lang, array(
 	'RSS_FORUM_RULES_EXPLAIN' => 'Display or not the Forum Rules in the RSS feeds.',
 	// Reset settings
 	'RSS_FORUM_RESET' => 'Forum RSS module',
-	'RSS_FORUM_RESET_EXPLAIN' => 'Reset all the Forum RSS module otpions to default values.',
+	'RSS_FORUM_RESET_EXPLAIN' => 'Reset all the Forum RSS module options to default values.',
 	'RSS_FORUM_MAIN_RESET' => 'Forums RSS Main',
 	'RSS_FORUM_MAIN_RESET_EXPLAIN' => 'Reset to default all the options in the "RSS Feeds Settings" (main) tab of the forum RSS module.',
 	'RSS_FORUM_CONTENT_RESET' => 'Forums RSS Content',
