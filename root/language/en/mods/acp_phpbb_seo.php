@@ -1,7 +1,7 @@
 <?php
 /**
 *
-* phpbb_seo [English]
+* acp_phpbb_seo [English]
 *
 * @package Ultimate SEO URL phpBB SEO
 * @version $Id$
@@ -36,7 +36,7 @@ $lang = array_merge($lang, array(
 	// ACP Main CAT
 	'ACP_CAT_PHPBB_SEO'	=> 'phpBB SEO',
 	'ACP_MOD_REWRITE'	=> 'URL Rewriting settings',
-	// ACP phpbb seo class
+	// ACP phpBB seo class
 	'ACP_PHPBB_SEO_CLASS'	=> 'phpBB SEO Class settings',
 	'ACP_PHPBB_SEO_CLASS_EXPLAIN'	=> 'You can here set up various options of the phpBB SEO %1$s mod (%2$s).<br/>The various default settings such as the delimiters and suffixes still must be set up in <b>phpbb_seo/includes/setup_phpbb_seo.php</b>, since changing these implies an .htaccess update and most likely appropriate redirections.%3$s',
 	'ACP_PHPBB_SEO_VERSION' => 'Version',
@@ -48,7 +48,7 @@ $lang = array_merge($lang, array(
 	'ACP_NO_FORUM_URL'	=> '<b>Forum URL Management disabled<b><br/>The forum URL management is only available in advanced and Mixed mode and when Forum URL caching is activated.<br/>Forum URLs already configured will stay active in advanced and Mixed mode.',
 	// ACP .htaccess
 	'ACP_HTACCESS'	=> '.htaccess',
-	'ACP_HTACCESS_EXPLAIN'	=> 'This tool will help you out building your .htacess.<br/>The version proposed bellow is based on your phpbb_seo/phpbb_seo_class.php settings.<br/>You can edit the $seo_ext and $seo_static values before you install the .htaccess to get personalized URLs.<br/>You can for example choose to use .htm instead of .html, "message" instead of "post" "mysite-team" instead of "the-team" and so on.<br/>If you edit these while they where already indexed in SE, you’ll need personalized redirections.<br/>The default settings are not bad at all, you can skip this step without worries if you prefer.<br/>It’s though the best time to do it, doing it after a while will require some personalized redirections.<br/>By default the following .htaccess shall be uploaded in the domain’s root (eg where www.example.com is linked).<br/>If phpBB is installed in a sub folder, hitting the more option below will add an option to upload it in the phpBB folder instead.',
+	'ACP_HTACCESS_EXPLAIN'	=> 'This tool will help you out building your .htacess.<br/>The version proposed bellow is based on your phpbb_seo/phpbb_seo_class.php settings.<br/>You can edit the $seo_ext and $seo_static values before you install the .htaccess to get personalized URLs.<br/>You can for example choose to use .htm instead of .html, "message" instead of "post" "mysite-team" instead of "the-team" and so on.<br/>If you edit these while they were already indexed in SE, you’ll need personalized redirections.<br/>The default settings are not bad at all, you can skip this step without worries if you prefer.<br/>It’s though the best time to do it, doing it after a while will require some personalized redirections.<br/>By default the following .htaccess shall be uploaded in the domain’s root (eg where www.example.com is linked).<br/>If phpBB is installed in a sub folder, hitting the more option below will add an option to upload it in the phpBB folder instead.',
 	'SEO_HTACCESS_RBASE'	=> '.htaccess location',
 	'SEO_HTACCESS_RBASE_EXPLAIN' => 'Put the .htaccess in the phpBB folder ?<br/>The RewriteBase setting allow to put the forum’s .htaccess in it’s folder. It’s usually more convenient to put the .htaccess in the domain’s root folder even when phpBB is installed in a sub-folder, but you may prefer to put it in the forum folder instead.',
 	'SEO_HTACCESS_SLASH'	=> 'RegEx Right Slash',
@@ -88,13 +88,13 @@ $lang = array_merge($lang, array(
 	// Meta
 	'SEO_META' => '<a href="http://www.phpbb-seo.com/en/phpbb-seo-toolkit/seo-dynamic-meta-tags-t1308.html" title="Dynamic Meta tags mod" onclick="window.open(this.href); return false;">Meta tags</a>',
 	'SEO_META_TITLE' => 'Meta title',
-	'SEO_META_TITLE_EXPLAIN' => 'Default Meta title, used on page not defining a page title. Unactivates the meta title tag if empty',
+	'SEO_META_TITLE_EXPLAIN' => 'Default Meta title, used on page not defining a page title. Inactivates the meta title tag if empty',
 	'SEO_META_DESC' => 'Meta description',
 	'SEO_META_DESC_EXPLAIN' => 'Default Meta description, used on page not defining a meta description',
 	'SEO_META_DESC_LIMIT' => 'Meta description limit',
 	'SEO_META_DESC_LIMIT_EXPLAIN' => 'Limit in words for the Meta description tag',
 	'SEO_META_BBCODE_FILTER' => 'Bbcodes Filter',
-	'SEO_META_BBCODE_FILTER_EXPLAIN' => 'Coma separated list of bbcodes which will be fully filtered in meta tags. Others will simply be deactivated and their content may apear in meta tags.<br/> Default filtered bbcodes are : <b>img,url,flash,code</b>.<br/><b style="color:red;">Attention :</b><br/>Not filtering img, url and flash bbcode is not a good idea, as well as the code one in most cases. Generally speaking, only keep bbcode’s content for bbcodes having interesting content for metas',
+	'SEO_META_BBCODE_FILTER_EXPLAIN' => 'Coma separated list of BBcodes which will be fully filtered in meta tags. Others will simply be deactivated and their content may apear in meta tags.<br/> Default filtered BBcodes are : <b>img,url,flash,code</b>.<br/><b style="color:red;">Attention :</b><br/>Not filtering img, url and flash BBcode is not a good idea, as well as the code one in most cases. Generally speaking, only keep BBcode’s content for BBcodes having interesting content for metas',
 	'SEO_META_KEYWORDS' => 'Meta keywords',
 	'SEO_META_KEYWORDS_EXPLAIN' => 'Default Meta keywords, used on page not defining meta keywords. Simply enter a list of keywords',
 	'SEO_META_KEYWORDS_LIMIT' => 'Meta keywords limit',
@@ -106,13 +106,13 @@ $lang = array_merge($lang, array(
 	'SEO_META_LANG' => 'Meta lang',
 	'SEO_META_LANG_EXPLAIN' => 'Lang code used in meta tags',
 	'SEO_META_COPY' => 'Meta copyright',
-	'SEO_META_COPY_EXPLAIN' => 'Copyright used in meta tags. Unactivates the meta copyright tag if empty',
+	'SEO_META_COPY_EXPLAIN' => 'Copyright used in meta tags. Inactivates the meta copyright tag if empty',
 	'SEO_META_FILE_FILTER' => 'File filter',
 	'SEO_META_FILE_FILTER_EXPLAIN' => 'Coma separated list of physical php script file name that should not be indexed (robots:noindex,follow). Example : ucp,mcp',
 	'SEO_META_GET_FILTER' => '_GET filter',
 	'SEO_META_GET_FILTER_EXPLAIN' => 'Coma separated list of _GET variable that should not be indexed (robots:noindex,follow). Example : style,hilit,sid',
 	'SEO_META_ROBOTS' => 'Meta Robots',
-	'SEO_META_ROBOTS_EXPLAIN' => 'The Meta Robots tag tells bots how to index your pages. It is set by default to "index,follow", which allow bots to index and cache your pages and to follow links in them. Unactivates the meta Robots tag if empty.<br/><b style="color:red;">Warning :</b><br/>This tag is sensible, if you where to use "noindex", none of your pages would be indexed',
+	'SEO_META_ROBOTS_EXPLAIN' => 'The Meta Robots tag tells bots how to index your pages. It is set by default to "index,follow", which allow bots to index and cache your pages and to follow links in them. Inactivates the meta Robots tag if empty.<br/><b style="color:red;">Warning :</b><br/>This tag is sensible, if you were to use "noindex", none of your pages would be indexed',
 	'SEO_META_NOARCHIVE' => 'Noarchive Meta Robots',
 	'SEO_META_NOARCHIVE_EXPLAIN' => 'The Noarchive Meta Robots tag tells bots if they can or not cache the page. It only concern caching, it has no relation with indexing and SERPs of the page.<br/>You can here select a list of forum that will have the "noarchive" option added to theire meta robots.<br/>This feature can be handy for example when you have some forums opened to bots but closed to guests. Adding the "noarchive" option to them will prevent guest from accessing content through the search engine cache, while the forum and its topic will still appear in SERPs',
 	// Install
@@ -154,7 +154,7 @@ $lang = array_merge($lang, array(
 	'SEO_INSTALL'		=> 'Install',
 	'UN_SEO_INSTALL_INTRO'		=> 'Welcome to the phpBB SEO uninstall Wizard',
 	'UN_SEO_INSTALL_INTRO_BODY'	=> '<p>You are about to uninstall the %1$s phpBB SEO mod rewrite %2$s ACP module.</p>
-	<p><strong>Note:</strong> This will not desactivate URL rewriting on your board as long as the phpBB files are still modded.</p>',
+	<p><strong>Note:</strong> This will not deactivate URL rewriting on your board as long as the phpBB files are still modded.</p>',
 	'UN_SEO_INSTALL'		=> 'Uninstall',
 	'SEO_INSTALL_CONGRATS'			=> 'Congratulations!',
 	'SEO_INSTALL_CONGRATS_EXPLAIN'	=> '<p>You have now successfully installed the %1$s phpBB3 SEO mod rewrite %2$s. You should now go to phpBB ACP and proceed with the mod rewrite settings.<p>
@@ -167,7 +167,7 @@ $lang = array_merge($lang, array(
 	<p>Once you will have set up the above options, you will be able to generate a personalized .htaccess within no time and save it directly on the server.</p>',
 	'UN_SEO_INSTALL_CONGRATS'	=> 'The phpBB SEO ACP module was removed.',
 	'UN_SEO_INSTALL_CONGRATS_EXPLAIN'	=> '<p>You have now successfully uninstalled the %1$s phpBB3 SEO mod rewrite %2$s.<p>
-	<p>This will not desactivate URL rewriting on your board as long as the phpBB files are still modded.</p>',
+	<p>This will not deactivate URL rewriting on your board as long as the phpBB files are still modded.</p>',
 	'SEO_VALIDATE_INFO'	=> 'Validation Info :',
 	'SEO_SQL_ERROR' => 'SQL error',
 	'SEO_SQL_TRY_MANUALLY' => 'The db user does not seems to have enough rights to run the required SQL query, please run it manually (phpMyadmin) :',
@@ -182,7 +182,7 @@ $lang = array_merge($lang, array(
 	'SEO_CACHE_FOUND'	=> 'The cache directory was successfully found.',
 	'SEO_CACHE_NOT_FOUND'	=> 'The cache directory was not found.',
 	'SEO_CACHE_WRITABLE'	=> 'The cache directory is writable.',
-	'SEO_CACHE_UNWRITABLE'	=> 'The cache directory is unwritable. You need to CHMOD it to 0777.',
+	'SEO_CACHE_UNWRITABLE'	=> 'The cache directory is not writable. You need to CHMOD it to 0777.',
 	'SEO_CACHE_INNER_UNWRITABLE' => 'Some files within the cache directory may not be writable, make sure you properly CHMOD the cache directory AND all files in it.',
 	'SEO_CACHE_FORUM_NAME'	=> 'Forum name',
 	'SEO_CACHE_URL_OK'	=> 'URL Cached',
@@ -198,8 +198,8 @@ $lang = array_merge($lang, array(
 	'SEO_ADVICE_DELIM'	=> 'The URL cached contains the SEO delimiter and ID.<br/>Consider setting up an original one.',
 	'SEO_ADVICE_WORDS'	=> 'The URL cached contains a bit too many words.<br/>Consider setting up an better one.',
 	'SEO_ADVICE_DEFAULT'	=> 'The ending URL, after formatting, is the default.<br/>Consider setting up an original one.',
-	'SEO_ADVICE_START'	=> 'Forum URLs cannot end with a pagination parameter.<br/>They where thus removed from the one submitted.',
-	'SEO_ADVICE_DELIM_REM'	=> 'Submitted forum URLs cannot end with a forum delimiter.<br/>They where thus removed from one submitted.',
+	'SEO_ADVICE_START'	=> 'Forum URLs cannot end with a pagination parameter.<br/>They were thus removed from the one submitted.',
+	'SEO_ADVICE_DELIM_REM'	=> 'Submitted forum URLs cannot end with a forum delimiter.<br/>They were thus removed from one submitted.',
 	// Mod Rewrite type
 	'ACP_SEO_SIMPLE'	=> 'Simple',
 	'ACP_SEO_MIXED'		=> 'Mixed',
@@ -238,16 +238,16 @@ $lang = array_merge($lang, array(
 	'rem_hilit' => 'Highlights Removing',
 	'rem_hilit_explain' => 'Highlights will be removed from 100% of the URLs passing through the phpbb_seo class, for guests thus bots.<br/>This ensure bots won’t see any Highlights on forum, topic and post URLs.<br/>The Zero duplicate will automatically follow this setting, eg http 301 redirect url with highlights for guest and bots.',
 	'rem_small_words' => 'Remove small words',
-	'rem_small_words_explain' => 'Allow to remove all words of less than three letters in rewritten URLs.<br/><br/><b style="color:red">Please Note</b><br/><em>The filtering will change potentially a lot of URLs in your web site.<br/>Even though the zero duplicate mod would take care of all the required redirecting when changing this option, starting to use it with an already indexed web site should thus be considered	with as much care as when migrating and not to often.<br/>So you’d better be decided to go for it or not.</em>',
+	'rem_small_words_explain' => 'Allow to remove all words of less than three letters in rewritten URLs.<br/><br/><b style="color:red">Please Note</b><br/><em>The filtering will change potentially a lot of URLs in your web site.<br/>Even though the zero duplicate mod would take care of all the required redirecting when changing this option, starting to use it with an already indexed web site should thus be considered	with as much care as when migrating and not too often.<br/>So you’d better be decided to go for it or not.</em>',
 	'virtual_folder' => 'Virtual Folder',
-	'virtual_folder_explain' => 'Allow to add the forum URL as a virtual folder in topic URLs.<br/><br/><b>Example :</b><br/><em><b>forum-title-fxx/topic-title-txx.html</b> VS <b>topic-title-txx.html</b> for a topic URL.</em><br/><br/><b style="color:red">Please Note</b><br/><em>The Virtual folder injection option can change all your web site’s URLs almost too easily.<br/>Starting to use it with an already indexed web site should thus be considered with as much care as when migrating and not to often.<br/>So you’d better be decided to go for it or not.<br/>Changing this option requires and .htaccess update.</em>',
+	'virtual_folder_explain' => 'Allow to add the forum URL as a virtual folder in topic URLs.<br/><br/><b>Example :</b><br/><em><b>forum-title-fxx/topic-title-txx.html</b> VS <b>topic-title-txx.html</b> for a topic URL.</em><br/><br/><b style="color:red">Please Note</b><br/><em>The Virtual folder injection option can change all your web site’s URLs almost too easily.<br/>Starting to use it with an already indexed web site should thus be considered with as much care as when migrating and not too often.<br/>So you’d better be decided to go for it or not.<br/>Changing this option requires and .htaccess update.</em>',
 	'virtual_root' => 'Virtual Root',
-	'virtual_root_explain' => 'If phpBB is installed in a sub folder (example phpBB3/), you can simulate a root install for rewritten links.<br/><br/><b>Example :</b><br/><em><b>phpBB3/forum-title-fxx/topic-title-txx.html</b> VS <b>forum-title-fxx/topic-title-txx.html</b> for a topic URL.</em><br/><br/>This can be handy to shorten URLs a bit, especially if you are using the "Virtual Folder" feature. UnRewritten links will continue to appear and work in the phpBB folder.<br/><br/><b style="color:red">Please Note :</b><br/><em>Using this option requires to use a home page for the forum index (like forum.html).<br/> This option can change all your web site’s URLs almost too easily.<br/>Starting to use it with an already indexed web site should thus be considered with as much care as when migrating and not to often.<br/>So you’d better be decided to go for it or not.<br/>Changing this option requires and .htaccess update.</em>',
+	'virtual_root_explain' => 'If phpBB is installed in a sub folder (example phpBB3/), you can simulate a root install for rewritten links.<br/><br/><b>Example :</b><br/><em><b>phpBB3/forum-title-fxx/topic-title-txx.html</b> VS <b>forum-title-fxx/topic-title-txx.html</b> for a topic URL.</em><br/><br/>This can be handy to shorten URLs a bit, especially if you are using the "Virtual Folder" feature. UnRewritten links will continue to appear and work in the phpBB folder.<br/><br/><b style="color:red">Please Note :</b><br/><em>Using this option requires to use a home page for the forum index (like forum.html).<br/> This option can change all your web site’s URLs almost too easily.<br/>Starting to use it with an already indexed web site should thus be considered with as much care as when migrating and not too often.<br/>So you’d better be decided to go for it or not.<br/>Changing this option requires and .htaccess update.</em>',
 	'cache_layer' => 'Forum URL caching',
 	'cache_layer_explain' => 'Turns on the cache for forum URLs and allow to separate forum titles from their URL<br/><br/><b>Example :</b><br/><em><b>forum-title-fxx/</b> VS <b>any-title-fxx/</b> for a forum URL.</em><br/><br/><b style="color:red">Please Note</b><br/><em>This option will allow you to change your forum URL, thus potentially many topic URLS if you are using the Virtual Folder option.<br/>The topic URLs will always be redirected properly with the Zero Duplicate.<br/>It will as well be the case for forum URL as long as you keep the delimiter and IDs, see below.</em>',
 	'rem_ids' => 'Forum ID Removing',
 	'rem_ids_explain' => 'Get rid of the IDs and delimiters in forum URLs. Only apply if Forum URL caching is activated.<br/><br/><b>Example :</b><br/><em><b>any-title-fxx/</b> VS <b>any-title/</b> for a forum URL.</em><br/><br/><b style="color:red">Please Note :</b><br/><em>This option will allow you to change your forum URL, thus potentially many topic URLS if you are using the Virtual Folder option.<br/>The topic URLs will always be redirected properly with the Zero Duplicate.<br/><b>It will not always be the case with the forum URLs :</b><br/><b>any-title-fxx/</b> will always be properly redirected with the Zero Duplicate but it won’t be the case if you edit <b>any-title/</b> to <b>something-else/</b>.<br/> In such case, <b>any-title/</b> will for now be treated as a forum that does not exist.<br/>So you’d better be decided to go for it or not, but it can really be powerful SEO wise.</em>',
-	// copytrights
+	// copyrights
 	'copyrights' => 'Copyrights',
 	'copyrights_img' => 'Link image',
 	'copyrights_img_explain' => 'You can here chose to display the phpBB SEO copyright link as an image or as a text links.',
@@ -261,17 +261,17 @@ $lang = array_merge($lang, array(
 	'ACP_ZERO_DUPE_MSG' => 'Post',
 	'ACP_ZERO_DUPE_GUEST' => 'Guest',
 	'ACP_ZERO_DUPE_ALL' => 'All',
-	'zero_dupe' =>'Zero duplictate',
+	'zero_dupe' =>'Zero duplicate',
 	'zero_dupe_explain' => 'The following settings concerns the Zero duplicate, you can modify them upon your needs.<br/>These do not imply any .htacess update.',
-	'zero_dupe_on' => 'Activate the Zero duplictate',
-	'zero_dupe_on_explain' => 'Allow to activate and desactivate the Zero duplicate redirections.',
+	'zero_dupe_on' => 'Activate the Zero duplicate',
+	'zero_dupe_on_explain' => 'Allow to activate and deactivate the Zero duplicate redirections.',
 	'zero_dupe_strict' => 'Strict Mode',
 	'zero_dupe_strict_explain' => 'When activated, the zero dupe will check if the requested URL exactly matches the one attended.<br/>When set to no, the zero dupe will make sure the attended url is the fist part of the one requested.<br/>The interest is to make it easier to deal with mods that could interfere with the zero dupe by adding GET vars.',
 	'zero_dupe_post_redir' => 'Posts Redirections',
 	'zero_dupe_post_redir_explain' => 'This option will determine how to handle post urls; it can take four values :<br/><b>&nbsp;off</b>, do not redirect post url, whatever the case,<br/><b>&nbsp;post</b>, only make sure postxx.html is used for a post url,<br/><b>&nbsp;guest</b>, redirect guests if required to the corresponding topic url rather than to the postxx.html, and only make sure postxx.html is used for logged users,<br/><b>&nbsp;all</b>, redirect if required to the corresponding topic url.<br/><br/><b style="color:red">Please Note</b><br/><em>Keeping the <b>postxx.html</b> URLs is harmless SEO wise as long as you keep the disallow on post urls in your robots.txt.<br/>Redirecting them all will most likely produce the most redirections among all.<br/>If you redirect postxx.html in all cases, this as well mean that a message that would be posted in a thread and then moved in another one will see it’s url changing, which thanks to the zero duplicate mod is of no harm SEO wise, but the previous link to the post won’t link to it anymore in such case.</em>.',
 	// no duplicate
-	'no_dupe' => 'No duplictate',
-	'no_dupe_on' => 'Activate The No duplictate',
-	'no_dupe_on_explain' => 'The No duplicate mod remplaces posts URLs with the corresponding Topic URL (with pagination).<br/>It does not add any SQL, just a LEFT JOIN on a query already being performed, this could still mean a bit more work but should not be a problem for server load.',
+	'no_dupe' => 'No duplicate',
+	'no_dupe_on' => 'Activate The No duplicate',
+	'no_dupe_on_explain' => 'The No duplicate mod replaces posts URLs with the corresponding Topic URL (with pagination).<br/>It does not add any SQL, just a LEFT JOIN on a query already being performed, this could still mean a bit more work but should not be a problem for server load.',
 ));
 ?>
