@@ -45,7 +45,7 @@ $lang = array_merge($lang, array(
 	'SEO_FINAL_UPDATE_GYM_SITEMAPS'	=> 'Login to ACP',
 	'SEO_FINAL_UNINSTALL_GYM_SITEMAPS'	=> 'Return to forum index',
 	'SEO_OVERVIEW_TITLE'	=> 'GYM sitemaps &amp; RSS Overview',
-	'SEO_OVERVIEW_BODY'	=> '<p>Welcome to the phpBB SEO GYM sitemaps &amp; RSS %1$s installer.</p><p>Please read <a href="%3$s" title="Check the release thread" target="_phpBBSEO"><b>the release thread</b></a> for more information</p><p><strong style="text-transform: uppercase;">Note:</strong> You must have already perfomed the required code changes and uploaded all the new files before you can proceed with this install wizard.</p><p>This installation system will guide you through the process of installing the GYM sitemaps &amp; RSS admin control panel (ACP). It will allow you generate efficient and Search Engine Optimized Google Sitemaps and RSS feeds. Its modular design will allow you to generate Google Sitemaps and RSS feeds for any php/SQL application installed on your site, using dedicated plug-ins. Let’s meet in the <a href="%3$s" title="Support forum" target="_phpBBSEO"><b>support forum</b></a> for anything regarding the GYM Siteamps &amp; RSS module.</p> ',
+	'SEO_OVERVIEW_BODY'	=> '<p>Welcome to the phpBB SEO GYM sitemaps &amp; RSS %1$s installer.</p><p>Please read <a href="%3$s" title="Check the release thread" target="_phpBBSEO"><b>the release thread</b></a> for more information</p><p><strong style="text-transform: uppercase;">Note:</strong> You must have already performed the required code changes and uploaded all the new files before you can proceed with this install wizard.</p><p>This installation system will guide you through the process of installing the GYM sitemaps &amp; RSS admin control panel (ACP). It will allow you generate efficient and Search Engine Optimized Google Sitemaps and RSS feeds. Its modular design will allow you to generate Google Sitemaps and RSS feeds for any php/SQL application installed on your site, using dedicated plug-ins. Let’s meet in the <a href="%3$s" title="Support forum" target="_phpBBSEO"><b>support forum</b></a> for anything regarding the GYM Sitemaps &amp; RSS module.</p> ',
 	'CAT_SEO_PREMOD'	=> 'GYM Sitemaps &amp; RSS',
 	'SEO_INSTALL_INTRO'		=> 'Welcome to the phpBB SEO GYM sitemaps &amp; RSS installer.',
 	'SEO_INSTALL_INTRO_BODY'	=> '<p>You are about to install the %1$s %2$s mod. This install tool will activate the GYM Sitemaps &amp; RSS admin control panel in the phpBB ACP.</p><p>Once installed, you will need to go to the ACP to choose the appropriate settings.</p>
@@ -87,7 +87,7 @@ $lang = array_merge($lang, array(
 	'SEO_CACHE_FOUND'	=> 'The cache folder was successfully found.',
 	'SEO_CACHE_NOT_FOUND'	=> 'The cache folder was not found.',
 	'SEO_CACHE_WRITABLE'	=> 'The cache folder is writable.',
-	'SEO_CACHE_UNWRITABLE'	=> 'The cache folder is unwritable. You need to CHMOD it to 0777.',
+	'SEO_CACHE_not writeable'	=> 'The cache folder is not writeable. You need to CHMOD it to 0777.',
 	'SEO_CACHE_FORUM_NAME'	=> 'Forum name',
 	'SEO_CACHE_URL_OK'	=> 'URL Cached',
 	'SEO_CACHE_URL_NOT_OK'	=> 'This Forum URL is not cached',
@@ -102,6 +102,6 @@ $lang = array_merge($lang, array(
 	'UPDATE_SEO_INSTALL'		=> 'Update',
 	'SEO_ERROR_NOTINSTALLED'	=> 'GYM Sitemaps &amp; RSS is not installed!',
 	'SEO_UPDATE_CONGRATS_EXPLAIN'	=> '<p>You have now successfully updated %1$s to %2$s.<p>
-	<p><strong>Note:</strong> This script does not update GYM Sitemaps &amp; RSS physical files.</p><br/><b>Please</b> implement the code changes listed bellow.<br/><h3>Update report :</h3>',
+	<p><strong>Note:</strong> This script does not update GYM Sitemaps &amp; RSS physical files.</p><br/><b>Please</b> implement the code changes listed  below.<br/><h3>Update report :</h3>',
 ));
 ?>
