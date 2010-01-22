@@ -111,7 +111,7 @@ function phpbb_seo_href() {
 	for (var i = 0; i < hrefelslen; i++) {
 		var el = hrefels[i];
 		var hrefinner = el.innerHTML.toLowerCase();
-		if (el.onclick || (el.href == '') || (el.href.indexOf('javascript') >=0 ) || (hrefinner.indexOf('<a') >= 0) ) {
+		if (el.onclick || (el.href == '') || (el.href.indexOf('javascript') >=0 ) || (el.href.indexOf('mailto') >=0 ) || (hrefinner.indexOf('<a') >= 0) ) {
 			continue;
 		}
 		if (seo_hashfix && el.hash && hashtest.test(el.href)) {
