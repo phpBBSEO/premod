@@ -4,7 +4,7 @@
 * help_faq [English]
 *
 * @package language
-* @version $Id: help_faq.php 9623 2009-06-18 18:12:28Z nickvergessen $
+* @version $Id: help_faq.php 10341 2009-12-16 08:04:41Z rxu $
 * @copyright (c) 2005 phpBB Group
 * @license http://opensource.org/licenses/gpl-license.php GNU Public License
 *
@@ -95,8 +95,8 @@ $help = array(
 		1 => 'Either the administrator has not installed your language or nobody has translated this board into your language. Try asking the board administrator if they can install the language pack you need. If the language pack does not exist, feel free to create a new translation. More information can be found at the phpBB website (see link at the bottom of board pages).'
 	),
 	array(
-		0 => 'How do I show an image below my username?',
-		1 => 'There are two images that may appear below a username when viewing posts. Depending on the used style, the first may be an image associated with your rank, generally in the form of stars, blocks or dots, indicating how many posts you have made or your status on the board. The second, usually a larger image, is known as an avatar and is generally unique or personal to each user. It is up to the board administrator to enable avatars and to choose the way in which avatars can be made available. If you are unable to use avatars, contact a board administrator and ask them for their reasons.'
+		0 => 'How do I show an image along with my username?',
+		1 => 'There are two images which may appear along with a username when viewing posts. One of them may be an image associated with your rank, generally in the form of stars, blocks or dots, indicating how many posts you have made or your status on the board. Another, usually a larger image, is known as an avatar and is generally unique or personal to each user. It is up to the board administrator to enable avatars and to choose the way in which avatars can be made available. If you are unable to use avatars, contact a board administrator and ask them for their reasons.'
 	),
 	array(
 		0 => 'What is my rank and how do I change it?',

@@ -4,7 +4,7 @@
 * acp_forums [English]
 *
 * @package language
-* @version $Id: forums.php 9896 2009-07-31 12:46:15Z Kellanved $
+* @version $Id: forums.php 10424 2010-01-17 19:14:01Z toonarmy $
 * @copyright (c) 2005 phpBB Group
 * @license http://opensource.org/licenses/gpl-license.php GNU Public License
 *
@@ -99,7 +99,7 @@ $lang = array_merge($lang, array(
 	'FORUM_PASSWORD_EXPLAIN'			=> 'Defines a password for this forum, use the permission system in preference.',
 	'FORUM_PASSWORD_UNSET'				=> 'Remove forum password',
 	'FORUM_PASSWORD_UNSET_EXPLAIN'		=> 'Check here if you want to remove the forum password.',
-	'FORUM_PASSWORD_OLD'				=> 'The forum password is using an old encryption and should be changed.',
+	'FORUM_PASSWORD_OLD'				=> 'The forum password is using an old hashing method and should be changed.',
 	'FORUM_PASSWORD_MISMATCH'			=> 'The passwords you entered did not match.',
 	'FORUM_PRUNE_SETTINGS'				=> 'Forum prune settings',
 	'FORUM_RESYNCED'					=> 'Forum “%s” successfully resynced',

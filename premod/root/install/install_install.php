@@ -2,7 +2,7 @@
 /**
 *
 * @package install
-* @version $Id: install_install.php 10070 2009-08-31 08:58:44Z bantu $
+* @version $Id: install_install.php 10300 2009-12-07 12:56:17Z bantu $
 * @copyright (c) 2005 phpBB Group
 * @license http://opensource.org/licenses/gpl-license.php GNU Public License
 *
@@ -113,7 +113,7 @@ class install_install extends module
 				$db_tools = new phpbb_db_tools($db);
 				$db_tools->sql_column_add(TOPICS_TABLE, 'topic_url', array('VCHAR', ''));
 				$db_tools->sql_create_index(TOPICS_TABLE, 'topic_lpid', array('topic_last_post_id'));
-				set_config('seo_premod_version', '3.0.6');
+				set_config('seo_premod_version', '3.0.7-RC1');
 				// Remove the lock file
 				@unlink($phpbb_root_path . 'cache/install_lock');
 
@@ -1220,7 +1220,7 @@ class install_install extends module
 		}
 
 		// Change prefix
-		$sql_query = preg_replace('#phpbb_#i', $data['table_prefix'], $sql_query);
+		$sql_query = preg_replace('# phpbb_([^\s]*) #i', ' ' . $data['table_prefix'] . '\1 ', $sql_query);
 
 		// Change language strings...
 		$sql_query = preg_replace_callback('#\{L_([A-Z0-9\-_]*)\}#s', 'adjust_language_keys_callback', $sql_query);

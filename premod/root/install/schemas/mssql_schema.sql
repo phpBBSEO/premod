@@ -1,6 +1,6 @@
 /*
 
- $Id: mssql_schema.sql 10107 2009-09-04 17:27:13Z bantu $
+ $Id: mssql_schema.sql 10462 2010-01-28 23:15:25Z bantu $
 
 */
 
@@ -637,9 +637,6 @@ ALTER TABLE [phpbb_log] WITH NOCHECK ADD
 GO
 
 CREATE  INDEX [log_type] ON [phpbb_log]([log_type]) ON [PRIMARY]
-GO
-
-CREATE  INDEX [log_time] ON [phpbb_log]([log_time]) ON [PRIMARY]
 GO
 
 CREATE  INDEX [forum_id] ON [phpbb_log]([forum_id]) ON [PRIMARY]
@@ -1507,6 +1504,9 @@ ALTER TABLE [phpbb_topics_track] WITH NOCHECK ADD
 		[user_id],
 		[topic_id]
 	)  ON [PRIMARY] 
+GO
+
+CREATE  INDEX [topic_id] ON [phpbb_topics_track]([topic_id]) ON [PRIMARY]
 GO
 
 CREATE  INDEX [forum_id] ON [phpbb_topics_track]([forum_id]) ON [PRIMARY]

@@ -2,7 +2,7 @@
 /**
 *
 * @package install
-* @version $Id: index.php 9527 2009-06-02 22:12:37Z toonarmy $
+* @version $Id: index.php 10299 2009-12-06 02:30:24Z naderman $
 * @copyright (c) 2005 phpBB Group
 * @license http://opensource.org/licenses/gpl-license.php GNU Public License
 *
@@ -18,8 +18,12 @@ define('IN_INSTALL', true);
 $phpbb_root_path = (defined('PHPBB_ROOT_PATH')) ? PHPBB_ROOT_PATH : './../';
 $phpEx = substr(strrchr(__FILE__, '.'), 1);
 
-// Report all errors, except notices
-error_reporting(E_ALL ^ E_NOTICE);
+// Report all errors, except notices and deprecation messages
+if (!defined('E_DEPRECATED'))
+{
+	define('E_DEPRECATED', 8192);
+}
+error_reporting(E_ALL ^ E_NOTICE ^ E_DEPRECATED);
 
 // @todo Review this test and see if we can find out what it is which prevents PHP 4.2.x from even displaying the page with requirements on it
 if (version_compare(PHP_VERSION, '4.3.3') < 0)

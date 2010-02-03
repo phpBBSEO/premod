@@ -184,7 +184,7 @@ class seo_meta {
 	* Returns a coma separated keyword list
 	*/
 	function make_keywords($text, $decode_entities = false) {
-		static $filter = array('`&(amp;)?[^\;]+;`i', '`[[:punct:]]+`', '`[0-9]+`',  '`[\s]+`');
+		static $filter = array('`&(amp;)?[^;]+;`i', '`[[:punct:]]+`', '`[0-9]+`',  '`[\s]+`');
 		$keywords = '';
 		$num = 0;
 		$text = $decode_entities ? html_entity_decode(strip_tags($text), ENT_COMPAT, 'UTF-8') : strip_tags($text);
@@ -231,7 +231,7 @@ class seo_meta {
 			static $RegEx = array();
 			static $replace = array();
 			if (empty($RegEx)) {
-				$RegEx = array('`&(amp;)?[^\;]+;`i', // HTML entitites
+				$RegEx = array('`&(amp;)?[^;]+;`i', // HTML entitites
 					'`<[^>]*>(.*<[^>]*>)?`Usi', // HTML code
 				);
 				$replace = array(' ', ' ');
