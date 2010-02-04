@@ -95,39 +95,27 @@ class seo_related_install {
 		$msg = $user->lang['INSTALLED'];
 		if (!isset($config['seo_related']) || $this->force_check) {
 			if ($db->sql_layer == 'mysql4' || $db->sql_layer == 'mysqli') {
-				// check engine type
-				$result = $db->sql_query('SHOW TABLE STATUS LIKE \'' . TOPICS_TABLE . '\'');
-				$info = $db->sql_fetchrow($result);
-				$db->sql_freeresult($result);
-				$engine = '';
-				if (isset($info['Engine'])) {
-					$engine = $info['Engine'];
-				} else if (isset($info['Type'])) {
-					$engine = $info['Type'];
+				$fulltext = 1;
+				// we can proceed with trying to add fulltext
+				global $phpbb_root_path, $phpEx;
+				if (!class_exists('phpbb_db_tools')) {
+					include($phpbb_root_path . 'includes/db/db_tools.' . $phpEx);
 				}
-				if ($engine == 'MyISAM') {
-					$fulltext = 1;
-					// we can proceed with fulltext
-					global $phpbb_root_path, $phpEx;
-					if (!class_exists('phpbb_db_tools')) {
-						include($phpbb_root_path . 'includes/db/db_tools.' . $phpEx);
+				$db_tools = new phpbb_db_tools($db);
+				$indexes = $db_tools->sql_list_index(TOPICS_TABLE);
+				if (!in_array('topic_tft', $indexes)) {
+					$sql = 'ALTER TABLE ' . TOPICS_TABLE . '
+						ADD FULLTEXT topic_tft (topic_title)';
+					$db->sql_return_on_error(true);
+					$db->sql_query($sql);
+					if ($db->sql_error_triggered) {
+						$fulltext = 0;
+						$no_error = 0;
+						$errno = E_USER_WARNING;
+						$msg = $user->lang['INSTALLATION'];
+						$msg .= '<br/>' . sprintf($user->lang['SQL_REQUIRED'], $db->sql_error_sql);
 					}
-					$db_tools = new phpbb_db_tools($db);
-					$indexes = $db_tools->sql_list_index(TOPICS_TABLE);
-					if (!in_array('topic_tft', $indexes)) {
-						$sql = 'ALTER TABLE ' . TOPICS_TABLE . '
-							ADD FULLTEXT topic_tft (topic_title)';
-						$db->sql_return_on_error(true);
-						$db->sql_query($sql);
-						if ($db->sql_error_triggered) {
-							$fulltext = 0;
-							$no_error = 0;
-							$errno = E_USER_WARNING;
-							$msg = $user->lang['INSTALLATION'];
-							$msg .= '<br/>' . sprintf($user->lang['SQL_REQUIRED'], $db->sql_error_sql);
-						}
-						$db->sql_return_on_error(false);
-					}
+					$db->sql_return_on_error(false);
 				}
 			}
 		} else {
