@@ -423,20 +423,6 @@ class acp_phpbb_seo {
 							if (!$config_value && $config['seo_related']) {
 								$alter = $remove = true;
 							}
-							// check engine type
-							$result = $db->sql_query('SHOW TABLE STATUS LIKE \'' . TOPICS_TABLE . '\'');
-							$info = $db->sql_fetchrow($result);
-							$db->sql_freeresult($result);
-							$engine = '';
-							if (isset($info['Engine'])) {
-								$engine = $info['Engine'];
-							} else if (isset($info['Type'])) {
-								$engine = $info['Type'];
-							}
-							if ($engine != 'MyISAM') {
-								$alter = false;
-								$fulltext = 0;
-							}
 							// let's go
 							if ($alter) {
 								// Try to override some limits - maybe it helps some...
@@ -459,6 +445,7 @@ class acp_phpbb_seo {
 								}
 								// do not use db_tools since it does not support to add FullText indexes
 								if (!$nothing_to_do) {
+									// Here we use quite a basic approach to make sure that the index is not refused for bad reasons
 									if ($add) {
 										$sql = 'ALTER TABLE ' . TOPICS_TABLE . '
 											ADD FULLTEXT topic_tft (topic_title)';
