@@ -2091,17 +2091,40 @@ function generate_pagination($base_url, $num_items, $per_page, $start_item, $add
 	if (!empty($phpbb_seo->seo_opt['url_rewrite'])) {
 		static $pagin_find = array();
 		static $pagin_replace = array();
-		static $prev_find = array();
 		if (empty($pagin_replace)) {
-			$pagin_find = array('`(https?\://[a-z0-9_/\.-]+/[a-z0-9_\.-]+)(\.(?!' . $phpEx . ')[a-z0-9]+)(\?([\w\#$%&~\-;:=,@+\.]+))?(&amp;|\?)start=([0-9]+)`i', '`(https?\://[a-z0-9_/\.-]+/[a-z0-9_\.-]+)/(\??([\w\#$%&~\-;:=,@+\.]+))?(&amp;|\?)start=([0-9]+)`i' );
-			$pagin_replace = array( '\1' . $phpbb_seo->seo_delim['start'] . '\6\2\3', '\1/' . $phpbb_seo->seo_static['pagination'] . '\5' . $phpbb_seo->seo_ext['pagination'] . '\3' );
-			$prev_find = array($phpbb_seo->seo_delim['start'] . '0', $phpbb_seo->seo_static['pagination'] . '0' . $phpbb_seo->seo_ext['pagination']);
+			$pagin_find = array('`(https?\://[a-z0-9_/\.-]+/[a-z0-9_\.-]+)(\.[a-z0-9]+)(\?[\w$%&~\-;:=,@+\.]+)?(#[a-z0-9_\.-]+)?(&amp;|\?)start=([0-9]+)`i', '`(https?\://[a-z0-9_/\.-]+/[a-z0-9_\-]+)/(\?[\w$%&~\-;:=,@+\.]+)?(#[a-z0-9_\.-]+)?(&amp;|\?)start=([0-9]+)`i');
+			$pagin_replace = array( '\1' . $phpbb_seo->seo_delim['start'] . '\6\2\3\4', '\1/' . $phpbb_seo->seo_static['pagination'] . '\5' . $phpbb_seo->seo_ext['pagination'] . '\2\3');
 		}
+		$rewrite_pagination = false;
+		// here we rewrite rewritten urls only, and they do hold the full url with http
+		if (preg_match('`^https?://[a-z0-9_\.-]+/(.*)$`i', $base_url, $match)) {
+			$rewrite_pagination = true;
+			if (!empty($match[1])) {
+				// though, we won't do it for .php files.
+				if (preg_match('`^.*\.' . $phpEx . '(|\?.*|#.*)$`i', trim($match[1]))) {
+					$rewrite_pagination = false;
+
+				}
+			}
+
+		}
+		// in all cases remove the start=0 dupe
 		$page_string = str_replace($url_delim . 'start=0', '', $page_string);
-		$page_string = preg_replace($pagin_find, $pagin_replace, $page_string);
-		$prev = preg_replace($pagin_find, $pagin_replace, $prev);
-		$prev = str_replace($prev_find, '', $prev);
-		$next = preg_replace( $pagin_find, $pagin_replace, $next);
+		$prev = str_replace($url_delim . 'start=0', '', $prev);
+		if ($rewrite_pagination) {
+			$page_string = preg_replace($pagin_find, $pagin_replace, $page_string);
+			$prev = $prev ? preg_replace($pagin_find, $pagin_replace, $prev) : '';
+			$next = $next ? preg_replace( $pagin_find, $pagin_replace, $next) : '';
+		} else {
+			// take care about eventual hashes
+			if (strpos($base_url, '#') !== false) {
+				static $hash_find = '`((https?\://)?[a-z0-9_/\.-]+\.[a-z0-9]+)(\?[\w$%&~\-;:=,@+\.]+)?(#[a-z0-9_\.-]+)((&amp;|\?)start=[0-9]+)`';
+				static $hash_replace = '\1\3\5\4';
+				$page_string = preg_replace($hash_find, $hash_replace, $page_string);
+				$prev = $prev ? preg_replace($hash_find, $hash_replace, $prev) : '';
+				$next = $next ? preg_replace($hash_find, $hash_replace, $next) : '';
+			}
+		}
 	}
 	$template->assign_vars(array(
 		$tpl_prefix . 'BASE_URL'	=> $base_url,
