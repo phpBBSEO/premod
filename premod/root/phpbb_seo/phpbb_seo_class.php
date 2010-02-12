@@ -422,7 +422,7 @@ class phpbb_seo extends setup_phpbb_seo {
 		parse_str(str_replace('&amp;', '&', $qs), $this->get_vars);
 		// strp slashes if necessary
 		if (defined('SEO_STRIP')) {
-			$this->get_vars = array_map('stripslashes_deep', $this->get_vars);
+			$this->get_vars = array_map(array(&$this, 'stripslashes'), $this->get_vars);
 		}
 		if (empty($user->data['is_registered'])) {
 			if ( $this->seo_opt['rem_sid'] ) {
@@ -839,6 +839,13 @@ class phpbb_seo extends setup_phpbb_seo {
 		// non-overlong 2-byte|excluding overlongs|straight 3-byte|excluding surrogates|planes 1-3|planes 4-15|plane 16
 		return preg_match('%(?:[\xC2-\xDF][\x80-\xBF]|\xE0[\xA0-\xBF][\x80-\xBF]|[\xE1-\xEC\xEE\xEF][\x80-\xBF]{2}|\xED[\x80-\x9F][\x80-\xBF] |\xF0[\x90-\xBF][\x80-\xBF]{2}|[\xF1-\xF3][\x80-\xBF]{3}|\xF4[\x80-\x8F][\x80-\xBF]{2})+%xs', $string);
 	}
+	/**
+	* stripslashes($value)
+	* Borrowed from php.net : http://www.php.net/stripslashes
+	*/
+	function stripslashes($value) {
+		return is_array($value) ? array_map(array(&$this, 'stripslashes'), $value) : stripslashes($value);
+	}
 	// --> Add on Functions <--
 	// --> Gen stats
 	/**
@@ -849,10 +856,4 @@ class phpbb_seo extends setup_phpbb_seo {
 		return array_sum(explode(' ',microtime()));
 	}
 } // End of the phpbb_seo class
-// Borrowed from php.net : http://www.php.net/stripslashes
-if (!function_exists('stripslashes_deep')) {
-	function stripslashes_deep($value) {
-		return is_array($value) ? array_map('stripslashes_deep', $value) : stripslashes($value);
-	}
-}
 ?>
