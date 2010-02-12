@@ -98,6 +98,7 @@ class setup_phpbb_seo {
 			$this->seo_static['atopic'] = 'sujets-actifs';
 			$this->seo_static['utopic'] = 'sans-reponses';
 			$this->seo_static['npost'] = 'nouveaux-messages';
+			$this->seo_static['urpost'] = 'non-lu';
 			$this->seo_static['file_index'] = 'ressources';
 		}
 		// <== Special for lazy French, others may delete this part
@@ -247,5 +248,5 @@ class setup_phpbb_seo {
 		return 0;
 	}
 	// <-- Zero Duplicate
-} // End of the phpbb_seo_modules class
+}
 ?>
