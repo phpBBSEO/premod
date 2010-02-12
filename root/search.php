@@ -406,6 +406,14 @@ if ($keywords || $author || $author_id || $search_id || $submit)
 				$l_search_title = $user->lang['SEARCH_UNREAD'];
 				// force sorting
 				$show_results = 'topics';
+				// www.phpBB-SEO.com SEO TOOLKIT BEGIN - Zero dupe
+				$phpbb_seo->seo_opt['zero_dupe']['redir_def'] = array(
+					'search_id' => array('val' => 'unreadposts', 'keep' => true),
+					'sr' => array('val' => $show_results, 'keep' => (boolean) ($show_results != 'topics') ),
+					'start' => array('val' => $phpbb_seo->seo_chk_start( $start, ($show_results == 'posts' ? $config['posts_per_page'] : $config['topics_per_page']) ), 'keep' => true),
+				);
+				$phpbb_seo->seo_chk_dupe();
+				// www.phpBB-SEO.com SEO TOOLKIT END - Zero dupe
 				$sort_key = 't';
 				$sort_by_sql['t'] = 't.topic_last_post_time';
 				$sql_sort = 'ORDER BY ' . $sort_by_sql[$sort_key] . (($sort_dir == 'a') ? ' ASC' : ' DESC');

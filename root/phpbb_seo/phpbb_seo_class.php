@@ -592,6 +592,9 @@ class phpbb_seo extends setup_phpbb_seo {
 					$this->{$this->paginate_method['urpost']}($this->seo_ext['urpost']);
 					$this->url = $this->seo_static['urpost'] . $this->start;
 					unset($this->get_vars['search_id']);
+					if (@$this->get_vars['sr'] == 'topics') {
+						unset($this->get_vars['sr']);
+					}
 					return;
 			}
 		}
