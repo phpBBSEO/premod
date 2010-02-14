@@ -20,7 +20,7 @@ require($phpbb_root_path . "phpbb_seo/includes/setup_phpbb_seo.$phpEx");
 * @package Ultimate SEO URL phpBB SEO
 */
 class phpbb_seo extends setup_phpbb_seo {
-	var	$version = '0.6.2';
+	var	$version = '0.6.4';
 	var	$modrtype = 2; // We set it to mixed as a default value
 	var	$seo_path = array();
 	var	$seo_url = array( 'forum' =>  array(), 'topic' =>  array(), 'user' => array(), 'username' => array(), 'group' => array(), 'file' => array() );
@@ -29,7 +29,7 @@ class phpbb_seo extends setup_phpbb_seo {
 			'topic' => array('st' => 0, 'sk' => 't', 'sd' => 'a', 'hilit' => ''),
 			'search' => array('st' => 0, 'sk' => 't', 'sd' => 'd', 'ch' => ''),
 		);
-	var	$seo_stop_files = array('posting' => 1, 'faq' => 1, 'ucp' => 1, 'swatch' => 1, 'mcp' => 1);
+	var	$seo_stop_files = array('posting' => 1, 'faq' => 1, 'ucp' => 1, 'swatch' => 1, 'mcp' => 1, 'style' => 1);
 	var	$seo_stop_vars = array('view=', 'mark=', 'watch=', 'hash=');
 	var	$seo_stop_dirs = array();
 	var	$seo_delim = array( 'forum' => '-f', 'topic' => '-t', 'user' => '-u', 'group' => '-g', 'start' => '-', 'sr' => '-', 'file' => '/');
@@ -417,6 +417,8 @@ class phpbb_seo extends setup_phpbb_seo {
 		}
 		$this->filename = trim(str_replace(".$phpEx", '', $this->file));
 		if ( isset($this->seo_stop_files[$this->filename]) ) {
+			// add full url
+			$url = $this->path == $phpbb_root_path ? $this->seo_path['phpbb_url'] . ltrim($url, './') : $url;
 			return ($this->seo_cache[$url] = $url);
 		}
 		parse_str(str_replace('&amp;', '&', $qs), $this->get_vars);
