@@ -29,7 +29,7 @@ class phpbb_seo extends setup_phpbb_seo {
 			'topic' => array('st' => 0, 'sk' => 't', 'sd' => 'a', 'hilit' => ''),
 			'search' => array('st' => 0, 'sk' => 't', 'sd' => 'd', 'ch' => ''),
 		);
-	var	$seo_stop_files = array('posting' => 1, 'faq' => 1, 'ucp' => 1, 'swatch' => 1, 'mcp' => 1, 'style' => 1);
+	var	$seo_stop_files = array('posting' => 1, 'faq' => 1, 'ucp' => 1, 'swatch' => 1, 'mcp' => 1, 'style' => 1, 'cron' => 1);
 	var	$seo_stop_vars = array('view=', 'mark=', 'watch=', 'hash=');
 	var	$seo_stop_dirs = array();
 	var	$seo_delim = array( 'forum' => '-f', 'topic' => '-t', 'user' => '-u', 'group' => '-g', 'start' => '-', 'sr' => '-', 'file' => '/');
