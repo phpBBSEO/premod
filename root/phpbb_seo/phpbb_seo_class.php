@@ -418,7 +418,7 @@ class phpbb_seo extends setup_phpbb_seo {
 		$this->filename = trim(str_replace(".$phpEx", '', $this->file));
 		if ( isset($this->seo_stop_files[$this->filename]) ) {
 			// add full url
-			$url = $this->path == $phpbb_root_path ? $this->seo_path['phpbb_url'] . ltrim($url, './') : $url;
+			$url = $this->path == $phpbb_root_path ? $this->seo_path['phpbb_url'] . preg_replace('`^' . $phpbb_root_path . '`', '', $url) : $url;
 			return ($this->seo_cache[$url] = $url);
 		}
 		parse_str(str_replace('&amp;', '&', $qs), $this->get_vars);
