@@ -95,7 +95,6 @@ class seo_related_install {
 		$msg = $user->lang['INSTALLED'];
 		if (!isset($config['seo_related']) || $this->force_check) {
 			if ($db->sql_layer == 'mysql4' || $db->sql_layer == 'mysqli') {
-				$fulltext = 1;
 				// we can proceed with trying to add fulltext
 				global $phpbb_root_path, $phpEx;
 				if (!class_exists('phpbb_db_tools')) {
@@ -109,7 +108,6 @@ class seo_related_install {
 					$db->sql_return_on_error(true);
 					$db->sql_query($sql);
 					if ($db->sql_error_triggered) {
-						$fulltext = 0;
 						$no_error = 0;
 						$errno = E_USER_WARNING;
 						$msg = $user->lang['INSTALLATION'];
@@ -117,6 +115,9 @@ class seo_related_install {
 					}
 					$db->sql_return_on_error(false);
 				}
+				// make *sure* we have the index !
+				$indexes = $db_tools->sql_list_index(TOPICS_TABLE);
+				$fulltext = in_array('topic_tft', $indexes) ? 1 : 0;
 			}
 		} else {
 			$msg = $user->lang['ALREADY_INSTALLED'];

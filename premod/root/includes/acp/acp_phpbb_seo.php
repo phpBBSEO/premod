@@ -459,10 +459,10 @@ class acp_phpbb_seo {
 										$error[] = '<b>' . $user->lang['RELATED_TOPICS'] . '</b> : ' . $user->lang['SEO_SQL_ERROR'] . ' [ ' . $db->sql_layer . ' ] : ' . $db->sql_error_returned['message'] . ' [' . $db->sql_error_returned['code'] . ']' . '<br/>' . $user->lang['SEO_SQL_TRY_MANUALLY'] . '<br/>' . $db->sql_error_sql;
 										$submit = false;
 										$config_value = 0;
-										$fulltext = $add ? 0 : $fulltext;
-									} else {
-										$fulltext = $add ? 1 : 0;
 									}
+									// make *sure* about the index !
+									$indexes = $db_tools->sql_list_index(TOPICS_TABLE);
+									$fulltext = in_array('topic_tft', $indexes) ? 1 : 0;
 									$db->sql_return_on_error(false);
 								}
 							}
