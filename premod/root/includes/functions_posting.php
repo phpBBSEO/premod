@@ -2,7 +2,7 @@
 /**
 *
 * @package phpBB3
-* @version $Id: functions_posting.php 10436 2010-01-24 22:30:43Z nickvergessen $
+* @version $Id: functions_posting.php 10486 2010-02-08 16:54:39Z bantu $
 * @copyright (c) 2005 phpBB Group
 * @license http://opensource.org/licenses/gpl-license.php GNU Public License
 *
@@ -46,7 +46,7 @@ function generate_smilies($mode, $forum_id)
 
 		page_header($user->lang['SMILIES']);
 
-		$sql = 'SELECT COUNT(smiley_id) AS count
+		$sql = 'SELECT COUNT(smiley_id) AS item_count
 			FROM ' . SMILIES_TABLE . '
 			GROUP BY smiley_url';
 		$result = $db->sql_query($sql, 3600);

@@ -2,7 +2,7 @@
 /**
 *
 * @package VC
-* @version $Id: phpbb_captcha_qa_plugin.php 10459 2010-01-26 15:34:21Z kellanved $
+* @version $Id: phpbb_captcha_qa_plugin.php 10486 2010-02-08 16:54:39Z bantu $
 * @copyright (c) 2006, 2008 phpBB Group
 * @license http://opensource.org/licenses/gpl-license.php GNU Public License
 *
@@ -137,14 +137,14 @@ class phpbb_captcha_qa
 			return false;
 		}
 
-		$sql = 'SELECT COUNT(question_id) as count
+		$sql = 'SELECT COUNT(question_id) AS question_count
 			FROM ' . CAPTCHA_QUESTIONS_TABLE . "
 			WHERE lang_iso = '" . $db->sql_escape($config['default_lang']) . "'";
 		$result = $db->sql_query($sql);
 		$row = $db->sql_fetchrow($result);
 		$db->sql_freeresult($result);
 
-		return ((bool) $row['count']);
+		return ((bool) $row['question_count']);
 	}
 
 	/**

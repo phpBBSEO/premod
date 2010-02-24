@@ -2,7 +2,7 @@
 /**
 *
 * @package phpBB3
-* @version $Id: viewtopic.php 10414 2010-01-17 16:49:23Z rxu $
+* @version $Id: viewtopic.php 10510 2010-02-20 00:15:35Z toonarmy $
 * @copyright (c) 2005 phpBB Group
 * @license http://opensource.org/licenses/gpl-license.php GNU Public License
 *
@@ -198,6 +198,13 @@ $sql_array = array(
 
 	'FROM'		=> array(FORUMS_TABLE => 'f'),
 );
+
+// Firebird handles two columns of the same name a little differently, this
+// addresses that by forcing the forum_id to come from the forums table.
+if ($db->sql_layer === 'firebird')
+{
+	$sql_array['SELECT'] = 'f.forum_id AS forum_id, ' . $sql_array['SELECT'];
+}
 
 // The FROM-Order is quite important here, else t.* columns can not be correctly bound.
 if ($post_id)
