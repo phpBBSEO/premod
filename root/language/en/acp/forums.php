@@ -4,7 +4,7 @@
 * acp_forums [English]
 *
 * @package language
-* @version $Id: forums.php 10424 2010-01-17 19:14:01Z toonarmy $
+* @version $Id: forums.php 10531 2010-02-23 23:50:36Z naderman $
 * @copyright (c) 2005 phpBB Group
 * @license http://opensource.org/licenses/gpl-license.php GNU Public License
 *
@@ -66,7 +66,7 @@ $lang = array_merge($lang, array(
 	'ENABLE_POST_REVIEW'			=> 'Enable post review',
 	'ENABLE_POST_REVIEW_EXPLAIN'	=> 'If set to yes users are able to review their post if new posts were made to the topic while users wrote theirs. This should be disabled for chat forums.',
 	'ENABLE_QUICK_REPLY'			=> 'Enable quick reply',
-	'ENABLE_QUICK_REPLY_EXPLAIN'	=> 'If set to yes users get a quick reply box for this forum. If the global option for quick reply is disabled or the forum not postable to the quick reply box will not be displayed, even if set to yes here.',
+	'ENABLE_QUICK_REPLY_EXPLAIN'	=> 'Enables the quick reply in this forum. This setting is not considered if the quick reply is disabled board wide. The quick reply will only be displayed for users who have permission to post in this forum.',
 	'ENABLE_RECENT'					=> 'Display active topics',
 	'ENABLE_RECENT_EXPLAIN'			=> 'If set to yes topics made to this forum will be shown in the active topics list.',
 	'ENABLE_TOPIC_ICONS'			=> 'Enable topic icons',
