@@ -5,7 +5,7 @@
 * translated originally by PhpBB-fr.com <http://www.phpbb-fr.com/> and phpBB.biz <http://www.phpBB.biz>
 *
 * @package language
-* @version $Id: language.php, v1.25 2008/10/07 11:36:00 Elglobo Exp $
+* @version $Id: language.php, v1.27 2010/02/09 19:13:00 Elglobo Exp $
 * @copyright (c) 2005 phpBB Group
 * @license http://opensource.org/licenses/gpl-license.php GNU Public License
 *
@@ -38,7 +38,7 @@ if (empty($lang) || !is_array($lang))
 
 $lang = array_merge($lang, array(
 	'ACP_FILES'						=> 'Fichiers de langue de l’administration',
-	'ACP_LANGUAGE_PACKS_EXPLAIN'	=> 'Vous pouvez installer/supprimer des packs de langue. Le pack de langue par défaut est marqué d’une astérisque (*).',
+	'ACP_LANGUAGE_PACKS_EXPLAIN'	=> 'Vous pouvez installer/supprimer des packs de langue. Le pack de langue par défaut est marqué d’un astérisque (*).',
 
 	'EMAIL_FILES'			=> 'Modèles d’e-mail',
 
@@ -48,12 +48,12 @@ $lang = array_merge($lang, array(
 	'HELP_FILES'				=> 'Fichiers d’aide',
 
 	'INSTALLED_LANGUAGE_PACKS'	=> 'Packs de langue installés',
-	'INVALID_LANGUAGE_PACK'		=> 'Le pack sélectionné semble invalide. Vérifiez-le et recommencer le transfert si nécessaire.',
-	'INVALID_UPLOAD_METHOD'		=> 'La méthode de transfert choisie est invalide, choisissez-en une autre.',
+	'INVALID_LANGUAGE_PACK'		=> 'Le pack sélectionné semble invalide. Vérifiez-le et recommencez le chargement si nécessaire.',
+	'INVALID_UPLOAD_METHOD'		=> 'La méthode de chargement choisie est invalide, choisissez-en une autre.',
 
 	'LANGUAGE_DETAILS_UPDATED'			=> 'Informations de langue mises à jour.',
 	'LANGUAGE_ENTRIES'					=> 'Entrées de langue',
-	'LANGUAGE_ENTRIES_EXPLAIN'			=> 'Vous pouvez modifier les entrées de pack de langue existantes ou non encore traduites. <br /><strong>Note:</strong> Une fois le fichier de langue modifié, les modifications seront enregistrées dans un dossier séparé que vous pourrez télécharger. Les modifications ne seront pas visibles par les utilisateurs jusqu’à ce que vous remplaciez les fichiers originaux sur votre espace Web (en les transférant).',
+	'LANGUAGE_ENTRIES_EXPLAIN'			=> 'Vous pouvez modifier les entrées de pack de langue existantes ou non encore traduites. <br /><strong>Note:</strong> Une fois le fichier de langue modifié, les modifications seront enregistrées dans un dossier séparé que vous pourrez télécharger. Les modifications ne seront pas visibles par les utilisateurs jusqu’à ce que vous remplaciez les fichiers originaux sur votre espace Web (en les chargeant).',
 	'LANGUAGE_FILES'					=> 'Fichiers de langue',
 	'LANGUAGE_KEY'						=> 'Clé de langue',
 	'LANGUAGE_PACK_ALREADY_INSTALLED'	=> 'Ce pack de langue est déjà installé.',
@@ -84,7 +84,7 @@ $lang = array_merge($lang, array(
 
 	'SELECT_DOWNLOAD_FORMAT'	=> 'Choisissez le format de téléchargement',
 	'SUBMIT_AND_DOWNLOAD'		=> 'Soumettre et télécharger le fichier',
-	'SUBMIT_AND_UPLOAD'			=> 'Soumettre et transférer le fichier',
+	'SUBMIT_AND_UPLOAD'			=> 'Soumettre et charger le fichier',
 
 	'THOSE_MISSING_LANG_FILES'			=> 'Les fichiers de langue suivants sont absents du dossier de langue %s',
 	'THOSE_MISSING_LANG_VARIABLES'		=> 'Les variables de langue suivantes sont absentes du pack <strong>%s</strong>',
@@ -92,10 +92,10 @@ $lang = array_merge($lang, array(
 	'UNINSTALLED_LANGUAGE_PACKS'	=> 'Packs non installés',
 
 	'UNABLE_TO_WRITE_FILE'		=> 'Le fichier n’a pas pu être enregistré dans %s.',
-	'UPLOAD_COMPLETED'			=> 'Le transfert est terminé',
-	'UPLOAD_FAILED'				=> 'L’upload a échoué pour une raison inconnue. Remplacez le fichier manuellement.',
-	'UPLOAD_METHOD'				=> 'Méthode de transfert',
-	'UPLOAD_SETTINGS'			=> 'Paramètres de transfert',
+	'UPLOAD_COMPLETED'			=> 'Le chargement est terminé',
+	'UPLOAD_FAILED'				=> 'Le chargement a échoué pour une raison inconnue. Remplacez le fichier manuellement.',
+	'UPLOAD_METHOD'				=> 'Méthode de chargement',
+	'UPLOAD_SETTINGS'			=> 'Paramètres de chargement',
 
 	'WRONG_LANGUAGE_FILE'		=> 'Le fichier de langue choisi est invalide.',
 ));

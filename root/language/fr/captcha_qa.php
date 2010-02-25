@@ -5,7 +5,7 @@
 * translated by PhpBB-fr.com <http://www.phpbb-fr.com/>
 *
 * @package language
-* @version $Id: captcha_qa.php v1.25 2009-10-16 15:47:00 Elglobo $
+* @version $Id: captcha_qa.php v1.26 2010/02/09 18:26:00 Elglobo $
 * @copyright (c) 2009 phpBB Group
 * @license http://opensource.org/licenses/gpl-license.php GNU Public License
 *
@@ -59,6 +59,7 @@ $lang = array_merge($lang, array(
 	'QUESTION_TEXT_EXPLAIN'		=> 'La question qui sera demandée à l’inscription.',
 
 	'QA_ERROR_MSG'				=> 'Complétez tous les champs et écrivez au moins une réponse.',
+	'QA_LAST_QUESTION'			=> 'Vous ne pouvez pas supprimer toutes les questions tant que le plugin est actif.',
 ));
 
 ?>

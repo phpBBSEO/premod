@@ -5,7 +5,7 @@
 * translated originally by PhpBB-fr.com <http://www.phpbb-fr.com/> and phpBB.biz <http://www.phpBB.biz>
 *
 * @package language
-* @version $Id: common.php, v1.25 2009/10/16 12:44:00 Elglobo Exp $
+* @version $Id: common.php, v1.27 2010/02/09 19:28:00 Elglobo Exp $
 * @copyright (c) 2005 phpBB Group 
 * @license http://opensource.org/licenses/gpl-license.php GNU Public License 
 *
@@ -79,16 +79,16 @@ $lang = array_merge($lang, array(
 	'ATTACHED_IMAGE_NOT_IMAGE'		=> 'Le fichier image que vous essayez de joindre n’est pas valide.',
 	'AUTHOR'						=> 'Auteur',
 	'AUTH_NO_PROFILE_CREATED'		=> 'Impossible de créer le nouveau profil de l’utilisateur.',
-	'AVATAR_DISALLOWED_CONTENT' 	=> 'L’envoi a été rejeté car le fichier envoyé a été identifié comme un vecteur éventuel d’attaque.',
+	'AVATAR_DISALLOWED_CONTENT' 	=> 'Le chargement a été rejeté car le fichier chargé a été identifié comme un vecteur éventuel d’attaque.',
 	'AVATAR_DISALLOWED_EXTENSION'	=> 'Ce fichier ne peut pas être affiché car l’extension <strong>%s</strong> n’est pas autorisée.',
-	'AVATAR_EMPTY_REMOTE_DATA'		=> 'L’avatar indiqué n’a pas pu être transféré car les données distantes semblent être invalides ou corrompues.',
-	'AVATAR_EMPTY_FILEUPLOAD'		=> 'Le fichier avatar transféré est vide.',
+	'AVATAR_EMPTY_REMOTE_DATA'		=> 'L’avatar indiqué n’a pas pu être chargé car les données distantes semblent être invalides ou corrompues.',
+	'AVATAR_EMPTY_FILEUPLOAD'		=> 'Le fichier avatar chargé est vide.',
 	'AVATAR_INVALID_FILENAME'		=> '%s est un nom de fichier invalide.',
-	'AVATAR_NOT_UPLOADED'			=> 'L’avatar n’a pas pu être transféré.',
+	'AVATAR_NOT_UPLOADED'			=> 'L’avatar n’a pas pu être chargé.',
 	'AVATAR_NO_SIZE'				=> 'Impossible de déterminer la largeur ou la hauteur de l’avatar lié, entrez-les manuellement',
-	'AVATAR_PARTIAL_UPLOAD'			=> 'Le fichier n’a pu être que partiellement transféré.',
+	'AVATAR_PARTIAL_UPLOAD'			=> 'Le fichier n’a pu être que partiellement chargé.',
 	'AVATAR_PHP_SIZE_NA'			=> 'La taille de l’avatar est trop importante.<br />La taille maximum réglée dans php.ini n’a pas pu être déterminée.',
-	'AVATAR_PHP_SIZE_OVERRUN'		=> 'La taille de l’avatar est trop importante. La taille maximum de transfert autorisée est %1$d %2$s.<br />Notez que ce paramètre est inscrit dans php.ini et ne peut pas être dépassé.',
+	'AVATAR_PHP_SIZE_OVERRUN'		=> 'La taille de l’avatar est trop importante. La taille maximum de chargement autorisée est %1$d %2$s.<br />Notez que ce paramètre est inscrit dans php.ini et ne peut pas être dépassé.',
 	'AVATAR_URL_INVALID'			=> 'L’URL indiquée est invalide.',
 	'AVATAR_URL_NOT_FOUND'			=> 'Le fichier indiqué est introuvable.',
 	'AVATAR_WRONG_FILESIZE'			=> 'La taille de l’avatar doit être comprise entre 0 et %1d %2s.',
@@ -395,7 +395,7 @@ $lang = array_merge($lang, array(
 	'NO_TOPICS'					=> 'Il n’y a aucun sujet ou message dans ce forum.',
 	'NO_TOPICS_TIME_FRAME'		=> 'Aucun sujet n’a été posté dans ce forum pour la période indiquée.',
 	'NO_UNREAD_PM'				=> '<strong>0</strong> message non lu',
-	'NO_UPLOAD_FORM_FOUND'		=> 'Le transfert a commencé mais aucun fichier valide n’a été trouvé.',
+	'NO_UPLOAD_FORM_FOUND'		=> 'Le chargement a commencé mais aucun fichier valide n’a été trouvé.',
 	'NO_USER'					=> 'L’utilisateur demandé n’existe pas.',
 	'NO_USERS'					=> 'Les utilisateurs demandés n’existent pas.',
 	'NO_USER_SPECIFIED'			=> 'Aucun nom d’utilisateur indiqué.',
@@ -418,6 +418,7 @@ $lang = array_merge($lang, array(
 
 	'PAGE_OF'				=> 'Page <strong>%1$d</strong> sur <strong>%2$d</strong>',
 	'PASSWORD'				=> 'Mot de passe',
+	'PIXEL'					=> 'px',
 	'PLAY_QUICKTIME_FILE'	=> 'Jouer le fichier Quicktime',
 	'PM'					=> 'MP',
 	'POSTING_MESSAGE'		=> 'Poste un message dans %s',
@@ -492,6 +493,8 @@ $lang = array_merge($lang, array(
 	'RETURN_TO'					=> 'Retourner vers',
 	'FEED'						=> 'Flux',
 	'FEED_NEWS'					=> 'Nouvelles informations',
+	'FEED_TOPICS_ACTIVE'		=> 'Sujets actifs',
+ 	'FEED_TOPICS_NEW'			=> 'Nouveaux sujets',
 	'RULES_ATTACH_CAN'			=> 'Vous <strong>pouvez</strong> joindre des fichiers',
 	'RULES_ATTACH_CANNOT'		=> 'Vous <strong>ne pouvez pas</strong> joindre des fichiers',
 	'RULES_DELETE_CAN'			=> 'Vous <strong>pouvez</strong> supprimer vos messages',
@@ -515,7 +518,7 @@ $lang = array_merge($lang, array(
 	'SEARCH_ADV_EXPLAIN'		=> 'Voir les options de recherche avancée',
 	'SEARCH_KEYWORDS'			=> 'Recherche par mots-clés',
 	'SEARCHING_FORUMS'			=> 'Recherche dans les forums',
-	'SEARCH_ACTIVE_TOPICS'		=> 'Voir les sujets récents',
+	'SEARCH_ACTIVE_TOPICS'		=> 'Voir les sujets actifs',
 	'SEARCH_FOR'				=> 'Rechercher',
 	'SEARCH_FORUM'				=> 'Dans ce forum…',	
 	'SEARCH_NEW'				=> 'Voir les nouveaux messages',
@@ -639,7 +642,7 @@ $lang = array_merge($lang, array(
 	'UNWATCHED_TOPICS'		=> 'Vous ne surveillez plus les sujets sélectionnés.',
 	'UNWATCHED_FORUMS_TOPICS'=> 'Vous ne surveillez plus les entrées sélectionnées.',
 	'UPDATE'				=> 'Mise à jour',
-	'UPLOAD_IN_PROGRESS'	=> 'Le transfert est actuellement en cours.',
+	'UPLOAD_IN_PROGRESS'	=> 'Le chargement est actuellement en cours.',
 	'URL_REDIRECT'			=> 'Si votre navigateur ne vous redirige pas automatiquement dans quelques instants, %scliquez ici pour être redirigé%s.',
 	'USERGROUPS'			=> 'Groupes d’utilisateurs',
 	'USERNAME'				=> 'Nom d’utilisateur',

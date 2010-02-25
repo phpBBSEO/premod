@@ -5,7 +5,7 @@
 * translated originally by PhpBB-fr.com <http://www.phpbb-fr.com/> and phpBB.biz <http://www.phpBB.biz>
 *
 * @package language
-* @version $Id: board.php, v1.25 2009/10/18 15:38:00 Elglobo Exp $
+* @version $Id: board.php, v1.29 2010/02/24 16:10:00 Elglobo Exp $
 * @copyright (c) 2005 phpBB Group
 * @license http://opensource.org/licenses/gpl-license.php GNU Public License
 *
@@ -74,7 +74,8 @@ $lang = array_merge($lang, array(
 	'ALLOW_PM_REPORT'			=> 'Autoriser les utilisateurs à rapporter les messages privés',
 	'ALLOW_PM_REPORT_EXPLAIN'	=> 'Si cette option est activée, les utilisateurs ont la possibilité de rapporter aux modérateurs du forum un message privé qu’ils ont reçu ou envoyé. Ces messages privés seront alors visibles dans le panneau de modération.',
 	'ALLOW_QUICK_REPLY'			=> 'Autoriser la réponse rapide',
-	'ALLOW_QUICK_REPLY_EXPLAIN'	=> 'Ce paramètre détermine si le module de réponse rapide est activé ou non. Si ce paramètre est activé, il est nécessaire que l’option de réponse rapide soit également activé pour chacun des forums.',
+	'ALLOW_QUICK_REPLY_EXPLAIN'	=> 'Cette option vous permet de désactiver le module de réponse rapide sur l’ensemble du forum. Si activé, les paramètres spécifiques de forum seront utilisés pour déterminer si la réponse rapide est affichée pour chacun des forums.',
+	'ALLOW_QUICK_REPLY_BUTTON'	=> 'Soumettre et activer la réponse rapide dans tous les forums',
 	'ALLOW_SIG'					=> 'Autoriser les signatures',
 	'ALLOW_SIG_BBCODE'			=> 'Autoriser les BBCodes dans les signatures d’utilisateur',
 	'ALLOW_SIG_FLASH'			=> 'Autoriser l’utilisation du BBCode <code>[FLASH]</code> dans la signature',
@@ -90,16 +91,16 @@ $lang = array_merge($lang, array(
 
 // Avatar Settings
 $lang = array_merge($lang, array(
-	'ACP_AVATAR_SETTINGS_EXPLAIN'	=> 'Les avatars sont généralement de petites images uniques qu’un utilisateur choisit pour le représenter. Selon le style, ils sont normalement affichés sous le nom d’utilisateur lors de la visualisation de sujets. Vous pouvez choisir quelle méthode l’utilisateur peut utiliser pour choisir son avatar. Dans le cas où vous autorisez l’envoi d’avatar, vous devez indiquer ci-dessous le nom du répertoire en question et vous assurer des droits en écriture de ce répertoire. Notez également que les limitations de taille ne sont imposées qu’aux avatars envoyés et ne concernent pas les avatars dont on aura fourni un lien externe.',
+	'ACP_AVATAR_SETTINGS_EXPLAIN'	=> 'Les avatars sont généralement de petites images uniques qu’un utilisateur choisit pour le représenter. Selon le style, ils sont normalement affichés sous le nom d’utilisateur lors de la visualisation de sujets. Vous pouvez choisir quelle méthode l’utilisateur peut utiliser pour choisir son avatar. Dans le cas où vous autorisez l’envoi d’avatar, vous devez indiquer ci-dessous le nom du répertoire en question et vous assurer des droits en écriture de ce répertoire. Notez également que les limitations de taille ne sont imposées qu’aux avatars chargés et ne concernent pas les avatars dont on aura fourni un lien externe.',
 	'ALLOW_AVATARS'					=> 'Activer les avatars',
-	'ALLOW_AVATARS_EXPLAIN'			=> 'Autorise l’utilisation générale des avatars;<br />Si vous desactivé l’utilisation générale des avatars ou les avatars affichés selon une méthode particulière, les avatars désactivés ne seront plus affichés sur le forum, mais les utilisateurs seront toujours capable de télécharger leur propre avatar dans leur panneau d’utilisateur.',
+	'ALLOW_AVATARS_EXPLAIN'			=> 'Autorise l’utilisation générale des avatars;<br />Si vous désactivez l’utilisation générale des avatars ou les avatars affichés selon une méthode particulière, les avatars désactivés ne seront plus affichés sur le forum, mais les utilisateurs seront toujours capables de télécharger leur propre avatar dans leur panneau d’utilisateur.',
 
 	'ALLOW_LOCAL'					=> 'Activer la galerie d’avatars',
 	'ALLOW_REMOTE'					=> 'Autoriser les avatars distants',
 	'ALLOW_REMOTE_EXPLAIN'			=> 'Avatars liés depuis un autre site',
-	'ALLOW_REMOTE_UPLOAD'			=> 'Autoriser l’envoi distant d’avatar',
-	'ALLOW_REMOTE_UPLOAD_EXPLAIN'	=> 'Autorise l’envoi d’avatars d’un autre site Internet.',
-	'ALLOW_UPLOAD'					=> 'Autoriser l’envoi d’avatar',
+	'ALLOW_REMOTE_UPLOAD'			=> 'Autoriser le chargement distant d’avatar',
+	'ALLOW_REMOTE_UPLOAD_EXPLAIN'	=> 'Autorise le chargement d’avatars d’un autre site Internet.',
+	'ALLOW_UPLOAD'					=> 'Autoriser le chargement d’avatar',
 	'AVATAR_GALLERY_PATH'			=> 'Répertoire de la galerie d’avatars',
 	'AVATAR_GALLERY_PATH_EXPLAIN'	=> 'Chemin d’accès depuis le répertoire racine de phpBB vers les images préchargées, exemple: <samp>images/avatars/gallery</samp>.',
 	'AVATAR_STORAGE_PATH'			=> 'Dossier de stockage des avatars',
@@ -150,7 +151,7 @@ $lang = array_merge($lang, array(
 	'ALLOW_POST_FLASH_EXPLAIN'			=> 'Si désactivé, le BBCode <code>[FLASH]</code> sera désactivé. Autrement, le système de permission déterminera les membres pouvant utiliser le BBCode <code>[FLASH]</code>.',
 
 	'BUMP_INTERVAL'					=> 'Intervalle de remontée de sujet',
-	'BUMP_INTERVAL_EXPLAIN'			=> 'Nombre des minutes, d’heures, ou de jours entre la date du dernier message et la possibilité de remonter le sujet.',
+	'BUMP_INTERVAL_EXPLAIN'			=> 'Nombre des minutes, d’heures, ou de jours entre la date du dernier message et la possibilité de remonter le sujet. Mettre “0” pour illimité.',
 	'CHAR_LIMIT'					=> 'Nombre maximum de caractères par message',
 	'CHAR_LIMIT_EXPLAIN'			=> 'Le nombre de caractères autorisés dans un message. Mettre “0” pour illimité.',
 	'DELETE_TIME'					=> 'Limiter le temps de suppression',
@@ -241,41 +242,50 @@ $lang = array_merge($lang, array(
 	'USERNAME_CHARS_ANY'		=> 'N’importe quel caractère',
 	'USERNAME_CHARS_EXPLAIN'	=> 'Restreint du type de caractères qui peut être utilisé dans les noms d’utilisateur, les espaces comprennent: espace, -, +, _, [ et ].',
 	'USERNAME_LENGTH'			=> 'Longueur du nom d’utilisateur',
-	'USERNAME_LENGTH_EXPLAIN'	=> 'Nombre de caractères minimum et maximum dans les noms d’utilisateur.',));
+	'USERNAME_LENGTH_EXPLAIN'	=> 'Nombre de caractères minimum et maximum dans les noms d’utilisateur.',
+));
 
 // Feeds
 $lang = array_merge($lang, array(
 	'ACP_FEED_MANAGEMENT'				=> 'Paramètres généraux de publication des flux',
 	'ACP_FEED_MANAGEMENT_EXPLAIN'		=> 'Ce module rend disponible différents flux ATOM, en parsant les BBCodes dans les messages pour les rendre lisible dans des flux extérieurs.',
-
+	 
+	'ACP_FEED_GENERAL'					=> 'Paramètres de flux général',
+ 	'ACP_FEED_POST_BASED'				=> 'Paramètres de flux de message',
+	'ACP_FEED_TOPIC_BASED'				=> 'Paramètres de flux de sujet',
+ 	'ACP_FEED_SETTINGS_OTHER'			=> 'Autres flux et paramétrages',
+	 
 	'ACP_FEED_ENABLE'					=> 'Activer les flux',
 	'ACP_FEED_ENABLE_EXPLAIN'			=> 'Active ou non, les flux ATOM pour le forum entier.<br />En désactivant les flux, peu importe la manière dont sont réglées les options ci-dessous.',
 	'ACP_FEED_LIMIT'					=> 'Nombre d’articles',
 	'ACP_FEED_LIMIT_EXPLAIN'			=> 'Le nombre maximum d’articles de flux à afficher.',
-
-	'ACP_FEED_OVERALL_FORUMS'			=> 'Activer le flux global des forums',
-	'ACP_FEED_OVERALL_FORUMS_EXPLAIN'	=> 'Ce flux affiche les derniers messages de tous les sujets du forum.',
-	'ACP_FEED_OVERALL_FORUMS_LIMIT'		=> 'Nombre d’articles par page à afficher dans le flux des forums',
-
-	'ACP_FEED_OVERALL_TOPIC'			=> 'Activer le flux global des sujets',
-	'ACP_FEED_OVERALL_TOPIC_EXPLAIN'	=> 'Active le flux “Tous les sujets”',
-	'ACP_FEED_OVERALL_TOPIC_LIMIT'		=> 'Nombre d’articles par page à afficher dans le flux des sujets',
+	 
+	'ACP_FEED_OVERALL'					=> 'Activer les flux sur l’ensemble du forum',
+	'ACP_FEED_OVERALL_EXPLAIN'			=> 'Permet de suivre les nouveaux messages sur l’ensemble du forum.',
 	'ACP_FEED_FORUM'					=> 'Activer les flux par forum',
-	'ACP_FEED_FORUM_EXPLAIN'			=> 'Permet de suivre les nouveaux messages d’un forum en particulier.',
+	'ACP_FEED_FORUM_EXPLAIN'			=> 'Permet de suivre les nouveaux messages d’un forum et ses sous-forums.',
 	'ACP_FEED_TOPIC'					=> 'Activer les flux par sujet',
 	'ACP_FEED_TOPIC_EXPLAIN'			=> 'Permet de suivre les nouveaux messages d’un sujet en particulier.',
+	 
+	'ACP_FEED_TOPICS_NEW'				=> 'Activer le flux des nouveaux sujets',
+	'ACP_FEED_TOPICS_NEW_EXPLAIN'		=> 'Active le flux des “nouveaux sujets”, qui affiche les derniers sujets créés, y compris le premier message.',
+	'ACP_FEED_TOPICS_ACTIVE'			=> 'Activer le flux des sujets actifs',
+	'ACP_FEED_TOPICS_ACTIVE_EXPLAIN'	=> 'Active le flux des “sujet actifs”, qui affiche les derniers sujets actifs, y compris le dernier message.',
 	'ACP_FEED_NEWS'						=> 'Flux des nouvelles',
-	'ACP_FEED_NEWS_EXPLAIN'				=> 'Lit le premier message de ces forums. Ne sélectionnez aucun forum pour désactiver le flux des nouvelles.<br />Sélectionner plusieurs forums en maintenant la touche <samp>CTRL</samp> et en cliquant.',
-
-	'ACP_FEED_GENERAL'					=> 'Paramètres généraux des flux',
-
+	'ACP_FEED_NEWS_EXPLAIN'				=> 'Sélectionne le premier message depuis ces forums. Ne sélectionnez aucun forum pour désactiver le flux des nouvelles.<br />Sélectionner plusieurs forums en maintenant la touche <samp>CTRL</samp> et en cliquant.',
+	  
+	'ACP_FEED_OVERALL_FORUMS'			=> 'Activer le flux des forums',
+	'ACP_FEED_OVERALL_FORUMS_EXPLAIN'	=> 'Active le flux de “tous les forums”, ce qui affiche une liste des forums.',
+	 
+	'ACP_FEED_HTTP_AUTH'				=> 'Autoriser l’authentification HTTP',
+	'ACP_FEED_HTTP_AUTH_EXPLAIN'		=> 'Active l’authentification HTTP, ce qui autorise les utilisateurs à recevoir le contenu qui est masqué aux invités en ajoutant le paramètre <samp>auth=http</samp> à l’URL du flux. Notez que certaines installations de PHP nécessite d’effectuer des modifications additionnelles sur le fichier .htaccess. Toutes les instructions sont contenues dans ce fichier.',
 	'ACP_FEED_ITEM_STATISTICS'			=> 'Statistiques de l’article',
-	'ACP_FEED_ITEM_STATISTICS_EXPLAIN'	=> 'Affiche les statistiques indivuelles sous les articles de flux<br />(Posté par, date et heure, Réponses, Vues)',
+	'ACP_FEED_ITEM_STATISTICS_EXPLAIN'	=> 'Affiche les statistiques indivuelles sous les articles de flux<br />(Exemple: Posté par, date et heure, Réponses, Vues)',
 	'ACP_FEED_EXCLUDE_ID'				=> 'Exclure ces forums',
 	'ACP_FEED_EXCLUDE_ID_EXPLAIN'		=> 'Le contenu de ces forums <strong>se sera pas inclus dans les flux</strong>. Ne sélectionnez aucun forum pour lire les données de tous les forums.<br />Sélectionner plusieurs forums en maintenant la touche <samp>CTRL</samp> et en cliquant.',
 ));
 
-// Visual Confirmation Settings
+ // Visual Confirmation Settings
 $lang = array_merge($lang, array(
 	'ACP_VC_SETTINGS_EXPLAIN'				=> 'Vous pouvez sélectionner et configurer les plugins CAPTCHA, qui utilisent différents moyens pour rejeter les tentatives d’inscription des robots.',
 	'AVAILABLE_CAPTCHAS'					=> 'Plugins disponibles',
@@ -494,7 +504,7 @@ $lang = array_merge($lang, array(
 	'SMTP_DIGEST_MD5'				=> 'DIGEST-MD5',
 	'SMTP_LOGIN'					=> 'LOGIN',
 	'SMTP_PASSWORD'					=> 'Mot de passe SMTP',
-	'SMTP_PASSWORD_EXPLAIN'			=> 'Saisissez un mot de passe uniquement si votre serveur SMTP en requiert un.',
+	'SMTP_PASSWORD_EXPLAIN'			=> 'Saisissez un mot de passe uniquement si votre serveur SMTP en requiert un. <em><strong>Attention:</strong> ce mot de passe est stocké en clair dans la base de données.</em>',
 	'SMTP_PLAIN'					=> 'PLAIN',
 	'SMTP_POP_BEFORE_SMTP'			=> 'POP-AVANT-SMTP',
 	'SMTP_PORT'						=> 'Port du serveur SMTP',
@@ -517,6 +527,7 @@ $lang = array_merge($lang, array(
 	'JAB_PACKAGE_SIZE'			=> 'Taille des paquets Jabber',
 	'JAB_PACKAGE_SIZE_EXPLAIN'	=> 'Nombre de messages envoyés dans un paquet. Si mis à “0”, le message est envoyé immédiatement et ne sera pas placé en file d’attente.',
 	'JAB_PASSWORD'				=> 'Mot de passe Jabber',
+	'JAB_PASSWORD_EXPLAIN'		=> '<em><strong>Attention:</strong> ce mot de passe est stocké en clair dans la base de données.</em>',
 	'JAB_PORT'					=> 'Port Jabber',
 	'JAB_PORT_EXPLAIN'			=> 'Laissez cette case vide à moins que vous sachiez qu’il ne s’agisse pas du port 5222.',
 	'JAB_SERVER'				=> 'Serveur Jabber',

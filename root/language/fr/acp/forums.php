@@ -5,7 +5,7 @@
 * translated originally by PhpBB-fr.com <http://www.phpbb-fr.com/> and phpBB.biz <http://www.phpBB.biz>
 *
 * @package language
-* @version $Id: forums.php, v1.25 2009/10/07 11:25:00 Elglobo Exp $
+* @version $Id: forums.php, v1.28 2010/02/24 15:34:00 Elglobo Exp $
 * @copyright (c) 2005 phpBB Group 
 * @license http://opensource.org/licenses/gpl-license.php GNU Public License 
 *
@@ -59,8 +59,8 @@ $lang = array_merge($lang, array(
 	'DEFAULT_STYLE'						=> 'Style par défaut',
 	'DELETE_ALL_POSTS'					=> 'Supprimer les messages',
 	'DELETE_SUBFORUMS'					=> 'Supprimer les sous-forums et les messages',
-	'DISPLAY_ACTIVE_TOPICS'				=> 'Activer les sujets populaires',
-	'DISPLAY_ACTIVE_TOPICS_EXPLAIN'		=> 'Si activé, les sujets populaires des sous-forums choisis seront affichés dans cette catégorie.',
+	'DISPLAY_ACTIVE_TOPICS'				=> 'Activer les sujets actifs',
+	'DISPLAY_ACTIVE_TOPICS_EXPLAIN'		=> 'Si activé, les sujets actifs des sous-forums choisis seront affichés dans cette catégorie.',
 
 	'EDIT_FORUM'					=> 'Editer un forum',
 	'ENABLE_INDEXING'				=> 'Activer l’indexation de recherche',
@@ -68,9 +68,9 @@ $lang = array_merge($lang, array(
 	'ENABLE_POST_REVIEW'			=> 'Activer la révision des messages',
 	'ENABLE_POST_REVIEW_EXPLAIN'	=> 'Si activé, les utilisateurs seront avertis si de nouveaux messages ont été postés dans le sujet pendant qu’ils rédigeaient le leur. Ceci devrait être désactivé sur les forums de chat.',
 	'ENABLE_QUICK_REPLY'			=> 'Activer la réponse rapide',
-	'ENABLE_QUICK_REPLY_EXPLAIN'	=> 'Si activé, les utilisateurs auront un formulaire de réponse rapide pour ce forum. Si l’option globale de réponse rapide est désactivée ou si le forum n’accepte pas de message, le formulaire de réponse rapide ne sera pas affiché , même si réglé à Oui ici.',
-	'ENABLE_RECENT'					=> 'Afficher les sujets populaires',
-	'ENABLE_RECENT_EXPLAIN'			=> 'Si activé, les sujets de ce forum seront affichés dans la liste des sujets populaires.',
+	'ENABLE_QUICK_REPLY_EXPLAIN'	=> 'Active la réponse rapide dans ce forum. Ce paramètre est ignoré si la réponse rapide est désactivée sur l’ensemble du forum. La réponse rapide sera uniquement affichée aux utilisateurs ayant la permission de poster dans ce forum.',
+	'ENABLE_RECENT'					=> 'Afficher les sujets actifs',
+	'ENABLE_RECENT_EXPLAIN'			=> 'Si activé, les sujets de ce forum seront affichés dans la liste des sujets actifs.',
 	'ENABLE_TOPIC_ICONS'			=> 'Activer les icônes des sujets',
 
 	'FORUM_ADMIN'						=> 'Administration des forums',
@@ -100,7 +100,7 @@ $lang = array_merge($lang, array(
 	'FORUM_PASSWORD_EXPLAIN'			=> 'Indique un mot de passe pour ce forum, utilisez de préférence le système de permissions.',
 	'FORUM_PASSWORD_UNSET'				=> 'Supprimer le mot de passe du forum',
 	'FORUM_PASSWORD_UNSET_EXPLAIN'		=> 'Cochez cette case si vous souhaitez supprimer le mot de passe du forum.',
-	'FORUM_PASSWORD_OLD'				=> 'Le mot de passe du forum utilise un ancien encryptage et doit être modifié.',
+	'FORUM_PASSWORD_OLD'				=> 'Le mot de passe du forum utilise un ancien type de hash et devrait être modifié.',
 	'FORUM_PASSWORD_MISMATCH'			=> 'Les mots de passe saisis ne concordent pas.',
 	'FORUM_PRUNE_SETTINGS'				=> 'Paramètres du délestage des forums',
 	'FORUM_RESYNCED'					=> 'Le forum “%s” a été resynchronisé',

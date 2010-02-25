@@ -5,7 +5,7 @@
 * translated originally by PhpBB-fr.com <http://www.phpbb-fr.com/> and phpBB.biz <http://www.phpBB.biz>
 *
 * @package language
-* @version $Id: permissions_phpbb.php, v1.25 2009/10/10 11:51:00 Elglobo Exp $
+* @version $Id: permissions_phpbb.php, v1.26 2010/02/24 16:14:00 Elglobo Exp $
 * @copyright (c) 2005 phpBB Group 
 * @license http://opensource.org/licenses/gpl-license.php GNU Public License 
 *
@@ -141,8 +141,8 @@ $lang = array_merge($lang, array(
 // Forum Permissions
 $lang = array_merge($lang, array(
 	'acl_f_list'	=> array('lang'	=> 'Peut voir ce forum', 'cat' => 'post'),
-	'acl_f_read'	=> array('lang'	=> 'Peut lire un message', 'cat' => 'post'),
-	'acl_f_post'	=> array('lang'	=> 'Peut poster un message', 'cat' => 'post'),
+	'acl_f_read'	=> array('lang'	=> 'Peut consulter ce forum', 'cat' => 'post'),
+	'acl_f_post'	=> array('lang'	=> 'Peut créer de nouveaux sujets', 'cat' => 'post'),
 	'acl_f_announce'	=> array('lang'	=> 'Peut poster une annonce', 'cat' => 'post'),
 	'acl_f_sticky'	=> array('lang'	=> 'Peut poster un post-It', 'cat' => 'post'),
 	'acl_f_reply'	=> array('lang'	=> 'Peut répondre à un message', 'cat' => 'post'),

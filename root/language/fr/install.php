@@ -5,7 +5,7 @@
 * translated originally by PhpBB-fr.com <http://www.phpbb-fr.com/> and phpBB.biz <http://www.phpBB.biz>
 *
 * @package language
-* @version $Id: install.php, v1.25 2009/10/16 14:33:00 Elglobo Exp $
+* @version $Id: install.php, v1.26 2010/02/09 19:43:00 Elglobo Exp $
 * @copyright (c) 2005 phpBB Group 
 * @license http://opensource.org/licenses/gpl-license.php GNU Public License 
 *
@@ -89,7 +89,7 @@ $lang = array_merge($lang, array(
 	'CONVERT_SETTINGS_VERIFIED'	=> 'Les informations saisies ont été vérifiées. Pour commencer la conversion, cliquez sur le bouton ci-dessous.',
 	'CONV_ERR_FATAL'			=> 'Erreur fatale lors de la conversion',
 
-	'CONV_ERROR_ATTACH_FTP_DIR'			=> 'L’envoi par FTP des fichiers joints est activé sur votre ancien forum. Copiez tous les fichiers joints dans un répertoire, désactivez l’envoi FTP, et vérifiez que le répertoire indiqué est correct. Vous devrez ensuite redémarrer la conversion.',
+	'CONV_ERROR_ATTACH_FTP_DIR'			=> 'Le chargement par FTP des fichiers joints est activé sur votre ancien forum. Copiez tous les fichiers joints dans un répertoire, désactivez le chargement FTP, et vérifiez que le répertoire de chargement indiqué est correct. Vous devrez ensuite redémarrer la conversion.',
 	'CONV_ERROR_CONFIG_EMPTY'			=> 'Il n’y a aucune information de configuration disponible pour la conversion.',
 	'CONV_ERROR_FORUM_ACCESS'			=> 'Impossible d’obtenir les informations d’accès au forum.',
 	'CONV_ERROR_GET_CATEGORIES'			=> 'Impossible d’obtenir les catégories.',
@@ -156,7 +156,7 @@ $lang = array_merge($lang, array(
 	'DLL_XML'					=> 'Support du XML [ Jabber ]',
 	'DLL_ZLIB'					=> 'Support de la compression zlib [ gz, .tar.gz, .zip ]',
 	'DL_CONFIG'					=> 'Télécharger la configuration',
-	'DL_CONFIG_EXPLAIN'			=> 'Vous pouvez télécharger le fichier config.php sur votre ordinateur. Vous devrez ensuite transférer ce fichier manuellement sur votre FTP, en écrasant le fichier config.php existant à la racine du répertoire de phpBB 3.0. Veillez à transférer le fichier au format ASCII (consultez la documentation de votre logiciel FTP si vous ne savez pas faire cela). Lorsque vous aurez transféré le fichier config.php, cliquez sur “Terminé” pour passer à l’étape suivante.',
+	'DL_CONFIG_EXPLAIN'			=> 'Vous pouvez télécharger le fichier config.php sur votre ordinateur. Vous devrez ensuite charger ce fichier manuellement sur votre FTP, en écrasant le fichier config.php existant à la racine du répertoire de phpBB 3.0. Veillez à charger le fichier au format ASCII (consultez la documentation de votre logiciel FTP si vous ne savez pas faire cela). Lorsque vous aurez chargé le fichier config.php, cliquez sur “Terminé” pour passer à l’étape suivante.',
 	'DL_DOWNLOAD'				=> 'Télécharger',
 	'DONE'						=> 'Terminé',
 
@@ -179,7 +179,7 @@ $lang = array_merge($lang, array(
 	'FTP_CONFIG_EXPLAIN'		=> 'phpBB a détecté la présence d’un module FTP sur ce serveur. Vous pouvez essayer de transférer le fichier config.php par ce moyen si vous le désirez. Vous devrez fournir les informations demandées ci-dessous. Les noms et mots de passe sont ceux du serveur FTP! (Contactez votre fournisseur d’hébergement si vous ne les connaissez pas)',
 	'FTP_PATH'					=> 'Chemin FTP',
 	'FTP_PATH_EXPLAIN'			=> 'Chemin relatif vers votre forum phpBB depuis la racine FTP, par exemple: htdocs/phpBB3/',
-	'FTP_UPLOAD'				=> 'Transférer',
+	'FTP_UPLOAD'				=> 'Charger',
 
 	'GPL'						=> 'Licence publique générale',
 
@@ -393,7 +393,7 @@ $lang = array_merge($lang, array(
 	'CURRENT_VERSION'   			=> 'Version actuelle',
 
 	'DATABASE_TYPE'						=> 'Type de base de données',
-	'DATABASE_UPDATE_INFO_OLD'			=> 'Le fichier de mise à jour de la base dans votre dossier d’installation est obsolète. Vérifiez que vous avez transféré la bonne version du fichier.',
+	'DATABASE_UPDATE_INFO_OLD'			=> 'Le fichier de mise à jour de la base dans votre dossier d’installation est obsolète. Vérifiez que vous avez chargé la bonne version du fichier.',
 	'DELETE_USER_REMOVE'				=> 'Supprimer l’utilisateur et ses messages',
 	'DELETE_USER_RETAIN'				=> 'Supprimer l’utilisateur mais conserver ses messages',
 	'DESTINATION'						=> 'Fichier de destination',
@@ -410,7 +410,7 @@ $lang = array_merge($lang, array(
 	'DOWNLOAD_CONFLICTS'				=> 'Télécharger les conflits de ce fichier',
 	'DOWNLOAD_CONFLICTS_EXPLAIN'		=> 'Rechercher &lt;&lt;&lt; afin de repérer les conflits',
 	'DOWNLOAD_UPDATE_METHOD'			=> 'Télécharger une archive de fichiers modifiés',
-	'DOWNLOAD_UPDATE_METHOD_EXPLAIN'	=> 'Une fois téléchargée, vous devez décompresser l’archive. Vous y trouverez les fichiers modifiés que vous devez transférer dans votre répertoire à la racine de phpBB. Transférez les fichiers à leur emplacement respectif. Après avoir transféré tous les fichiers, vérifiez à nouveau les fichiers avec l’autre bouton ci-dessous.',
+	'DOWNLOAD_UPDATE_METHOD_EXPLAIN'	=> 'Une fois téléchargée, vous devez décompresser l’archive. Vous y trouverez les fichiers modifiés que vous devez charger dans votre répertoire à la racine de phpBB. Chargez les fichiers à leur emplacement respectif. Après avoir chargé tous les fichiers, vérifiez à nouveau les fichiers avec l’autre bouton ci-dessous.',
 
 	'ERROR'		=> 'Erreur',
 	'EDIT_USERNAME'	=> 'Editer le nom d’utilisateur',
@@ -431,7 +431,7 @@ $lang = array_merge($lang, array(
 	'FILES_UP_TO_DATE'				=> 'Fichiers déjà à jour',
 	'FILES_UP_TO_DATE_EXPLAIN'		=> 'Les fichiers suivants sont déjà à jour et ne nécessitent pas d’être mis à jour.',
 	'FTP_SETTINGS'					=> 'Paramètres FTP',
-	'FTP_UPDATE_METHOD'				=> 'Transfert FTP',
+	'FTP_UPDATE_METHOD'				=> 'Chargement FTP',
 
 	'INCOMPATIBLE_UPDATE_FILES'		=> 'Les fichiers de mise à jour trouvés sont incompatibles avec votre version installée. Votre version installée est la %1$s et les fichiers de mise à jour sont pour la mise à jour de phpBB %2$s vers %3$s.',
 	'INCOMPLETE_UPDATE_FILES'		=> 'Les fichiers de mise à jour sont incomplets.',
@@ -447,7 +447,7 @@ $lang = array_merge($lang, array(
 	'LINE_UNMODIFIED'		=> 'Non modifiée',
 	'LOGIN_UPDATE_EXPLAIN'	=> 'Afin de mettre à jour votre installation, vous devez d’abord vous connecter.',
 
-	'MAPPING_FILE_STRUCTURE'	=> 'Pour faciliter le transfert, vous avez ici les emplacements des fichiers qui conduisent à votre installation de phpBB.',
+	'MAPPING_FILE_STRUCTURE'	=> 'Pour faciliter le chargement, vous avez ici les emplacements des fichiers qui conduisent à votre installation de phpBB.',
 	
 	'MERGE_MODIFICATIONS_OPTION'   => 'Modifications de la fusion',
 	
@@ -465,8 +465,8 @@ $lang = array_merge($lang, array(
 	'NO_ERRORS'						=> 'Aucune erreur',
 	'NO_UPDATE_FILES'				=> 'Ne pas mettre à jour les fichiers suivants',
 	'NO_UPDATE_FILES_EXPLAIN'		=> 'Les fichiers suivants sont nouveaux ou modifiés, mais leur répertoire est introuvable dans votre installation. Si cette liste contient des fichiers vers d’autres répertoires que language/ ou styles/ que vous pouvez avoir à modifier, votre structure de répertoire et la mise à jour peuvent être incomplètes.',
-	'NO_UPDATE_FILES_OUTDATED'		=> 'Aucun répertoire de mise à jour valide n’a été trouvé, assurez-vous de bien avoir transféré les fichiers nécessaires.<br /><br />Votre installation ne semble <strong>pas</strong> à jour. Des mises à jour sont disponibles pour votre version de phpBB %1$s, visitez <a href="http://www.phpbb.com/downloads/" rel="external">http://www.phpbb.com/downloads/</a> afin d’obtenir le pack correct pour mettre à jour votre Version %2$s vers la Version %3$s.',
-	'NO_UPDATE_FILES_UP_TO_DATE'	=> 'Votre version est à jour. Il n’est pas nécessaire d’utiliser l’outil de mise à jour. Si vous souhaitez faire une vérification intégrale de vos fichiers, assurez-vous d’avoir transféré les fichiers de mise à jour corrects.',
+	'NO_UPDATE_FILES_OUTDATED'		=> 'Aucun répertoire de mise à jour valide n’a été trouvé, assurez-vous de bien avoir chargé les fichiers nécessaires.<br /><br />Votre installation ne semble <strong>pas</strong> à jour. Des mises à jour sont disponibles pour votre version de phpBB %1$s, visitez <a href="http://www.phpbb.com/downloads/" rel="external">http://www.phpbb.com/downloads/</a> afin d’obtenir le pack correct pour mettre à jour votre Version %2$s vers la Version %3$s.',
+	'NO_UPDATE_FILES_UP_TO_DATE'	=> 'Votre version est à jour. Il n’est pas nécessaire d’utiliser l’outil de mise à jour. Si vous souhaitez faire une vérification intégrale de vos fichiers, assurez-vous d’avoir chargé les fichiers de mise à jour corrects.',
 	'NO_UPDATE_INFO'				=> 'Les informations du fichier de mise à jour sont introuvables.',
 	'NO_UPDATES_REQUIRED'			=> 'Aucune mise à jour nécessaire',
 	'NO_VISIBLE_CHANGES'			=> 'Aucune modification visible',
@@ -519,7 +519,7 @@ $lang = array_merge($lang, array(
 	'UPDATE_FILES'					=> 'Mettre à jour les fichiers',
 	'UPDATE_FILES_NOTICE'			=> 'Assurez-vous d’avoir mis également à jour tous les fichiers de votre forum, ce fichier met uniquement à jour la base de données.',
 	'UPDATE_INSTALLATION'			=> 'Mettre à jour l’installation de phpBB',
-	'UPDATE_INSTALLATION_EXPLAIN'	=> 'Avec cette option, il est possible de mettre à jour votre installation de phpBB vers la dernière version.<br />Pendant le processus, tous vos fichiers seront vérifiés dans leur intégralité. Vous pouvez revoir toutes les différences et les fichiers avant la mise à jour.<br /><br />Le fichier de mise à jour lui-même peut être réalisé de deux manières différentes.</p><h2>Mise à jour manuelle</h2><p>Avec cette mise à jour, vous ne téléchargez que vos paramètres personnels des fichiers modifiés pour être sûr de ne pas perdre les modifications du fichier que vous avez apportées. Après avoir téléchargé ce pack, vous devez mettre à jour manuellement les fichiers à leur emplacement correct à la racine de votre répertoire phpBB. Une fois terminé, vous pouvez recommencer l’étape de vérification du fichier pour vérifier si vous avez déplacé les fichiers correctement.</p><h2>Mise à jour automatique par FTP</h2><p>Cette méthode est similaire à la première, mais sans la nécessité de télécharger les fichiers modifiés et de les transférer vous-même. Cela sera fait à votre place. Afin d’utiliser cette méthode, vous devez connaître les informations de votre connexion FTP car elles vous seront demandées. Une fois terminé, vous serez redirigé à la vérification du fichier une fois de plus pour savoir si tout a été mis à jour correctement.<br /><br />',
+	'UPDATE_INSTALLATION_EXPLAIN'	=> 'Avec cette option, il est possible de mettre à jour votre installation de phpBB vers la dernière version.<br />Pendant le processus, tous vos fichiers seront vérifiés dans leur intégralité. Vous pouvez revoir toutes les différences et les fichiers avant la mise à jour.<br /><br />Le fichier de mise à jour lui-même peut être réalisé de deux manières différentes.</p><h2>Mise à jour manuelle</h2><p>Avec cette mise à jour, vous ne téléchargez que vos paramètres personnels des fichiers modifiés pour être sûr de ne pas perdre les modifications du fichier que vous avez apportées. Après avoir téléchargé ce pack, vous devez charger manuellement les fichiers à leur emplacement correct à la racine de votre répertoire phpBB. Une fois terminé, vous pouvez recommencer l’étape de vérification du fichier pour vérifier si vous avez déplacé les fichiers correctement.</p><h2>Mise à jour automatique par FTP</h2><p>Cette méthode est similaire à la première, mais sans la nécessité de télécharger les fichiers modifiés et de les charger vous-même. Cela sera fait à votre place. Afin d’utiliser cette méthode, vous devez connaître les informations de votre connexion FTP car elles vous seront demandées. Une fois terminé, vous serez redirigé à la vérification du fichier une fois de plus pour savoir si tout a été mis à jour correctement.<br /><br />',
 	'UPDATE_INSTRUCTIONS'         => '
 
       <h1>Annonce de mise à jour</h1>
@@ -535,10 +535,10 @@ $lang = array_merge($lang, array(
       <ul style="margin-left: 20px; font-size: 1.1em;">
          <li>Allez sur la page <a href="http://www.phpbb.com/downloads/" title="http://www.phpbb.com/downloads/">de téléchargement de phpBB.com</a> et téléchargez l’archive de mise à jour automatique du forum: “Automatic Update Package”.<br /><br /></li>
          <li>Décompressez l’archive.<br /><br /></li>
-         <li>Transférez le répertoire install sur votre serveur FTP, à la racine de votre forum (où votre fichier config.php est situé).<br /><br /></li>
+         <li>Chargez le répertoire install sur votre serveur FTP, à la racine de votre forum (où votre fichier config.php est situé).<br /><br /></li>
       </ul>
 
-      <p>Une fois le dossier install transféré, votre forum sera inaccessible pour les utilisateurs normaux.<br /><br />
+      <p>Une fois le dossier install chargé, votre forum sera inaccessible pour les utilisateurs normaux.<br /><br />
       <strong><a href="%2$s" title="%2$s">Vous pouvez maintenant démarrer la mise à jour en pointant votre navigateur sur le répertoire install</a>.</strong><br />
       <br />
      Vous serez alors guidé dans le processus de mise à jour. Vous serez averti une fois la mise à jour effectuée.
@@ -551,7 +551,7 @@ $lang = array_merge($lang, array(
 		<p>phpBB a détecté une mise à jour automatique incomplète. Assurez-vous que vous avez suivi chaque étape avec l’outil de mise à jour automatique. Vous trouverez ci-dessous le lien pour recommencer, ou allez directement dans votre répertoire install.</p>
  ',
 	'UPDATE_METHOD'					=> 'Méthode de mise à jour',
-	'UPDATE_METHOD_EXPLAIN'			=> 'Vous pouvez maintenant choisir votre méthode de mise à jour préférée. En utilisant le transfert FTP, vous devrez entrer les informations de votre compte FTP dans un formulaire. Avec cette méthode, les fichiers seront déplacés automatiquement vers le nouvel emplacement et des sauvegardes des anciens fichiers seront créées en ajoutant .bak au nom du fichier. Si vous choisissez de télécharger les fichiers modifiés, vous pourrez les décompresser et les transférer manuellement vers leur emplacement correct plus tard.',
+	'UPDATE_METHOD_EXPLAIN'			=> 'Vous pouvez maintenant choisir votre méthode de mise à jour préférée. En utilisant le chargement FTP, vous devrez entrer les informations de votre compte FTP dans un formulaire. Avec cette méthode, les fichiers seront déplacés automatiquement vers le nouvel emplacement et des sauvegardes des anciens fichiers seront créées en ajoutant .bak au nom du fichier. Si vous choisissez de télécharger les fichiers modifiés, vous pourrez les décompresser et les charger manuellement vers leur emplacement correct plus tard.',
 	'UPDATE_REQUIRES_FILE'			=> 'L’outil de mise à jour nécessite que le fichier suivant soit présent: %s',
 	'UPDATE_SUCCESS'				=> 'La mise à jour a été effectuée.',
 	'UPDATE_SUCCESS_EXPLAIN'		=> 'Tous les fichiers ont été mis à jour. La prochaine étape implique de vérifier tous les fichiers une fois de plus pour vous assurer qu’ils ont été mis à jour correctement.',
@@ -559,7 +559,7 @@ $lang = array_merge($lang, array(
 	'UPDATING_DATA'					=> 'Mise à jour des données',
 	'UPDATING_TO_LATEST_STABLE'		=> 'Mise à jour de la base de données vers la dernière version stable',
 	'UPDATED_VERSION'				=> 'Version mise à jour',
-	'UPLOAD_METHOD'					=> 'Méthode de transfert',
+	'UPLOAD_METHOD'					=> 'Méthode de chargement',
 
 	'UPDATE_DB_SUCCESS'				=> 'La mise à jour de la base de données a été effectuée.',
 	'USER_ACTIVE'					=> 'Utilisateur actif',

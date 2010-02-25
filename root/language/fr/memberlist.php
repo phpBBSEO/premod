@@ -5,7 +5,7 @@
 * translated originally by PhpBB-fr.com <http://www.phpbb-fr.com/> and phpBB.biz <http://www.phpBB.biz>
 *
 * @package language
-* @version $Id: memberlist.php, v1.25 2009/10/16 14:57:00 Elglobo Exp $
+* @version $Id: memberlist.php, v1.26 2009/12/16 16:36:00 Elglobo Exp $
 * @copyright (c) 2005 phpBB Group 
 * @license http://opensource.org/licenses/gpl-license.php GNU Public License 
 *
@@ -38,8 +38,8 @@ if (empty($lang) || !is_array($lang))
 
 $lang = array_merge($lang, array(
    'ABOUT_USER'   => 'Profil',
-   'ACTIVE_IN_FORUM'   => 'Forum le plus populaire',
-   'ACTIVE_IN_TOPIC'   => 'Sujet le plus populaire',
+   'ACTIVE_IN_FORUM'   => 'Forum le plus actif',
+   'ACTIVE_IN_TOPIC'   => 'Sujet le plus actif',
    'ADD_FOE'   => 'Ajouter à ma liste d’ignorés',
    'ADD_FRIEND'   => 'Ajouter à ma liste d’amis',
    'AFTER'   => 'Après',

@@ -5,7 +5,7 @@
 * translated originally by PhpBB-fr.com <http://www.phpbb-fr.com/> and phpBB.biz <http://www.phpBB.biz>
 *
 * @package language
-* @version $Id: ucp.php, v1.25 2009/10/16 15:12:00 Elglobo Exp $
+* @version $Id: ucp.php, v1.26 2010/02/09 19:49:00 Elglobo Exp $
 * @copyright (c) 2005 phpBB Group 
 * @license http://opensource.org/licenses/gpl-license.php GNU Public License 
 *
@@ -92,7 +92,7 @@ $lang = array_merge($lang, array(
 	'AVATAR_EXPLAIN'   				=> 'Dimensions maximales; largeur: %1$d pixels, hauteur: %2$d pixels, taille: %3$.2f Kio.',
 	'AVATAR_FEATURES_DISABLED'   	=> 'La fonctionnalité des avatars est actuellement désactivée.',
 	'AVATAR_GALLERY'   				=> 'Galerie locale',
-	'AVATAR_GENERAL_UPLOAD_ERROR'   => 'Impossible de transférer l’avatar vers %s',
+	'AVATAR_GENERAL_UPLOAD_ERROR'   => 'Impossible de charger l’avatar vers %s',
 	'AVATAR_NOT_ALLOWED'			=> 'Votre avatar ne peut pas être affiché car les avatars sont désactivés.',
 	'AVATAR_PAGE'   				=> 'Page',
 	'AVATAR_TYPE_NOT_ALLOWED'		=> 'Votre avatar actuel ne peut pas être affiché car ce type d’avatar a été désactivé.',
@@ -459,10 +459,11 @@ $lang = array_merge($lang, array(
 	'UCP_ZEBRA'   							=> 'Amis &amp; Ignorés',
 	'UCP_ZEBRA_FOES'   						=> 'Gestion des ignorés',
 	'UCP_ZEBRA_FRIENDS'   					=> 'Gestion des amis',
+	'UNDISCLOSED_RECIPIENT'					=> 'Destinataire non divulgué',
 	'UNKNOWN_FOLDER'   						=> 'Dossier inconnu',
 	'UNWATCH_MARKED'   						=> 'Ne plus surveiller',
-	'UPLOAD_AVATAR_FILE'   					=> 'Transférer depuis votre ordinateur',
-	'UPLOAD_AVATAR_URL'   					=> 'Transférer depuis une URL',
+	'UPLOAD_AVATAR_FILE'   					=> 'Charger depuis votre ordinateur',
+	'UPLOAD_AVATAR_URL'   					=> 'Charger depuis une URL',
 	'UPLOAD_AVATAR_URL_EXPLAIN'   			=> 'Saisissez l’URL de l’image. L’image sera copiée vers ce site.',
 	'USERNAME_ALPHA_ONLY_EXPLAIN'   		=> 'Le nom d’utilisateur doit contenir de %1$d à %2$d caractères et uniquement des caractères alphanumériques.',
 	'USERNAME_ALPHA_SPACERS_EXPLAIN' 		=> 'Le nom d’utilisateur doit contenir de %1$d à %2$d caractères et uniquement des caractères alphanumériques, espaces ou des caractères -+_[].',

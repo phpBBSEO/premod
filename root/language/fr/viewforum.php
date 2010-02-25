@@ -5,7 +5,7 @@
 * translated originally by PhpBB-fr.com <http://www.phpbb-fr.com/> and phpBB.biz <http://www.phpBB.biz>
 *
 * @package language
-* @version $Id: viewforum.php, v1.24 2007/11/22 13:10:24 lolovoisin Exp $
+* @version $Id: viewforum.php, v1.25 2009/12/16 16:36:00 Elglobo Exp $
 * @copyright (c) 2005 phpBB Group 
 * @license http://opensource.org/licenses/gpl-license.php GNU Public License 
 *
@@ -37,7 +37,7 @@ if (empty($lang) || !is_array($lang))
 // in a url you again do not need to specify an order e.g., 'Click %sHERE%s' is fine
 
 $lang = array_merge($lang, array(
-   'ACTIVE_TOPICS'   => 'Sujets populaires',
+   'ACTIVE_TOPICS'   => 'Sujets actifs',
    'ANNOUNCEMENTS'   => 'Annonces',
 
    'FORUM_PERMISSIONS' => 'Permissions du forum',
