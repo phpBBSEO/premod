@@ -5,7 +5,7 @@
 * translated originally by PhpBB-fr.com <http://www.phpbb-fr.com/> and phpBB.biz <http://www.phpBB.biz>
 *
 * @package language
-* @version $Id: posting.php, v1.25 2009/10/16 15:02:00 Elglobo Exp $
+* @version $Id: posting.php, v1.26 2010/02/09 19:46:00 Elglobo Exp $
 * @copyright (c) 2005 phpBB Group 
 * @license http://opensource.org/licenses/gpl-license.php GNU Public License 
 *
@@ -46,7 +46,7 @@ $lang = array_merge($lang, array(
 	'ATTACH_QUOTA_REACHED'		=> 'Désolé, le quota de fichiers joints a été atteint.',
 	'ATTACH_SIG'				=> 'Attacher ma signature (les signatures peuvent être modifiées dans le panneau de l’utilisateur)',
 
-	'BBCODE_A_HELP'				=> 'Fichier joint transféré en ligne: [attachment=]nom_du_fichier.ext[/attachment]',
+	'BBCODE_A_HELP'				=> 'Fichier joint chargé en ligne: [attachment=]nom_du_fichier.ext[/attachment]',
 	'BBCODE_B_HELP'				=> 'Texte gras: [b]texte[/b]',
 	'BBCODE_C_HELP'				=> 'Code: [code]code[/code]',
 	'BBCODE_E_HELP'				=> 'Liste: Ajouter une liste d’éléments',
@@ -79,7 +79,7 @@ $lang = array_merge($lang, array(
 	'DELETE_MESSAGE_CONFIRM'	=> 'Êtes-vous sûr de vouloir supprimer ce message?',
 	'DELETE_OWN_POSTS'			=> 'Désolé, vous ne pouvez supprimer que vos propres messages.',
 	'DELETE_POST_CONFIRM'		=> 'Êtes-vous sûr de vouloir supprimer ce message?',
-	'DISALLOWED_CONTENT' 		=> 'L’envoi a été rejeté car le fichier envoyé a été identifié comme un éventuel vecteur d’attaque.',
+	'DISALLOWED_CONTENT' 		=> 'Le chargement a été rejeté car le fichier envoyé a été identifié comme un éventuel vecteur d’attaque.',
 	'DELETE_POST_WARN'			=> 'Une fois supprimé, le message ne pourra pas être récupéré',
 	'DISABLE_BBCODE'			=> 'Désactiver les BBCodes',
 	'DISABLE_MAGIC_URL'			=> 'Désactiver les liens',
@@ -91,9 +91,9 @@ $lang = array_merge($lang, array(
 	'DRAFT_TITLE'				=> 'Titre du brouillon',
 
 	'EDIT_REASON'				=> 'Raison de l’édition du message',
-	'EMPTY_FILEUPLOAD'			=> 'Le fichier transféré est vide ou n’existe pas.',
+	'EMPTY_FILEUPLOAD'			=> 'Le fichier chargé est vide ou n’existe pas.',
 	'EMPTY_MESSAGE'				=> 'Votre message est vide!',
-	'EMPTY_REMOTE_DATA'			=> 'Le fichier n’a pas pu être transféré, essayez de le transférer manuellement.',
+	'EMPTY_REMOTE_DATA'			=> 'Le fichier n’a pas pu être chargé, essayez de le charger manuellement.',
 
 	'FLASH_IS_OFF'				=> '[flash] est <em>désactivé</em>',
 	'FLASH_IS_ON'				=> '[flash] est <em>activé</em>',
@@ -107,7 +107,7 @@ $lang = array_merge($lang, array(
 	'FONT_SMALL'				=> 'Petite',
 	'FONT_TINY'					=> 'Très petite',
 
-	'GENERAL_UPLOAD_ERROR'		=> 'Impossible de transférer le fichier joint de %s.',
+	'GENERAL_UPLOAD_ERROR'		=> 'Impossible de charger le fichier joint de %s.',
 
 	'IMAGES_ARE_OFF'			=> '[img] est <em>désactivé</em>',
 	'IMAGES_ARE_ON'				=> '[img] est <em>activé</em>',
@@ -133,16 +133,16 @@ $lang = array_merge($lang, array(
 	'MORE_SMILIES'				=> 'Voir plus de smileys',
 
 	'NOTIFY_REPLY'				=> 'M’avertir lorsqu’une réponse est postée.',
-	'NOT_UPLOADED'				=> 'Le fichier ne peut pas être transféré.',
+	'NOT_UPLOADED'				=> 'Le fichier ne peut pas être chargé.',
 	'NO_DELETE_POLL_OPTIONS'	=> 'Vous ne pouvez pas supprimer les options du sondage existantes.',
 	'NO_PM_ICON'				=> 'Aucune',
 	'NO_POLL_TITLE'				=> 'Vous devez entrer un titre de sondage.',
 	'NO_POST'					=> 'Le message demandé n’existe pas.',
 	'NO_POST_MODE'				=> 'Aucun type de message n’est indiqué.',
 
-	'PARTIAL_UPLOAD'			=> 'Le fichier n’a été que partiellement transféré.',
+	'PARTIAL_UPLOAD'			=> 'Le fichier n’a été que partiellement chargé.',
 	'PHP_SIZE_NA'				=> 'La taille du fichier joint est trop grande.<br />Impossible de déterminer la taille maximale définie par PHP dans php.ini.',
-	'PHP_SIZE_OVERRUN'			=> 'La taille du fichier joint est trop grande, la taille maximale est de %1$d %2$s.<br />Notez que ce paramètre se trouve dans php.ini et ne peut pas être outrepassé.',
+	'PHP_SIZE_OVERRUN'			=> 'La taille du fichier joint est trop grande, la taille maximale de chargement est de %1$d %2$s.<br />Notez que ce paramètre se trouve dans php.ini et ne peut pas être outrepassé.',
 	'PLACE_INLINE'				=> 'Insérer dans le message',
 	'POLL_DELETE'				=> 'Supprimer le sondage',
 	'POLL_FOR'					=> 'Durée du sondage',

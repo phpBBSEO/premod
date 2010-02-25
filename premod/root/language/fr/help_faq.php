@@ -5,7 +5,7 @@
 * translated originally by PhpBB-fr.com <http://www.phpbb-fr.com/> and phpBB.biz <http://www.phpBB.biz>
 *
 * @package language
-* @version $Id: help_faq.php, v1.25 2009/10/16 13:09:00 Elglobo Exp $
+* @version $Id: help_faq.php, v1.27 2010/02/25 15:58:00 Elglobo Exp $
 * @copyright (c) 2005 phpBB Group 
 * @license http://opensource.org/licenses/gpl-license.php GNU Public License 
 *
@@ -97,8 +97,8 @@ $help = array(
 		1 => 'La raison la plus probable est que l’administrateur n’a pas installé votre langue ou bien que personne n’a encore traduit phpBB3 dans votre langue. Essayez de demander à l’administrateur d’installer la langue désirée. Si elle n’existe pas, vous êtes alors libre de créer une nouvelle traduction. Vous trouverez plus d’informations sur le site du groupe phpBB (voir le lien en bas de page).'
 	),
 	array(
-		0 => 'Comment afficher une image sous mon nom?',
-		1 => 'Il peut y avoir deux images sous chaque nom d’utilisateur sur la page de consultation des messages. La première est associée à votre rang, généralement des étoiles ou des blocs indiquant votre nombre de messages ou votre statut sur le forum. La seconde, une image plus grande, connue sous le nom d’avatar est généralement unique et personnelle à chaque utilisateur. C’est à l’administrateur d’activer les avatars et de décider de la manière dont ils sont mis à disposition. Si vous ne pouvez pas utiliser d’avatar, c’est peut-être une décision de l’administrateur. Vous pouvez le contacter pour lui demander ses raisons.'
+		0 => 'Comment puis-je afficher une image avec mon nom d’utilisateur?',
+		1 => 'Il peut y avoir deux images avec un nom d’utilisateur sur la page de consultation des messages. La première est associée à votre rang, généralement des étoiles ou des blocs indiquant votre nombre de messages ou votre statut sur le forum. La seconde, une image plus grande, connue sous le nom d’avatar est généralement unique et personnelle à chaque utilisateur. C’est à l’administrateur d’activer les avatars et de décider de la manière dont ils sont mis à disposition. Si vous ne pouvez pas utiliser d’avatar, c’est peut-être une décision de l’administrateur. Vous pouvez le contacter pour lui demander ses raisons.'
 	),
 	array(
 		0 => 'Qu’est-ce que mon rang et comment le modifier?',
@@ -118,7 +118,7 @@ $help = array(
 	),
 	array(
 		0 => 'Comment modifier ou supprimer un message?',
-		1 => 'A moins d’être administrateur ou modérateur, vous ne pouvez modifier ou supprimer que vos propres messages. Vous pouvez modifier un message (quelquefois dans une durée limitée après sa publication) en cliquant sur le bouton <em>éditer</em> du message correspondant. Si quelqu’un a déjà répondu au message, un petit texte s’affichera en bas du message indiquant qu’il a été édité, le nombre de fois qu’il a été modifié ainsi que la date et l’heure de la dernière édition. Ce message n’apparaîtra pas si un modérateur ou un administrateur modifie le message, cependant ils ont la possibilité de laisser une note indiquant qu’ils ont modifié le message. Notez que les utilisateurs ne peuvent pas supprimer un message une fois que quelqu’un y a répondu.'
+		1 => 'A moins d’être administrateur ou modérateur, vous ne pouvez modifier ou supprimer que vos propres messages. Vous pouvez modifier un message (quelquefois dans une durée limitée après sa publication) en cliquant sur le bouton <em>éditer</em> du message correspondant. Si quelqu’un a déjà répondu au message, un petit texte s’affichera en bas du message indiquant qu’il a été édité, le nombre de fois qu’il a été modifié ainsi que la date et l’heure de la dernière édition. Ce message n’apparaîtra pas si un modérateur ou un administrateur modifie le message, cependant ils ont la possibilité de laisser une note indiquant qu’ils ont modifié le message de leur propre initiative. Notez que les utilisateurs ne peuvent pas supprimer un message une fois que quelqu’un y a répondu.'
 	),
 	array(
 		0 => 'Comment ajouter une signature à mes messages?',
@@ -182,7 +182,7 @@ $help = array(
 	),
 	array(
 		0 => 'Puis-je publier des images?',
-		1 => 'Oui, vous pouvez afficher des images dans vos messages. Par ailleurs, si l’administrateur a autorisé les fichiers joints, vous pouvez transférer une image sur le forum. Autrement, vous devez lier une image placée sur un serveur Web public, exemple: http://www.exemple.com/mon-image.gif. Vous ne pouvez pas lier des images de votre ordinateur (sauf si c’est un serveur Web public) ni des images placées derrière des mécanismes d’authentification, exemple: Boîtes e-mail Hotmail ou Yahoo!, sites protégés par un mot de passe, etc. Pour afficher l’image, utilisez la balise BBCode [img].'
+		1 => 'Oui, vous pouvez afficher des images dans vos messages. Par ailleurs, si l’administrateur a autorisé les fichiers joints, vous pouvez charger une image sur le forum. Autrement, vous devez lier une image placée sur un serveur Web public, exemple: http://www.exemple.com/mon-image.gif. Vous ne pouvez pas lier des images de votre ordinateur (sauf si c’est un serveur Web public) ni des images placées derrière des mécanismes d’authentification, exemple: Boîtes e-mail Hotmail ou Yahoo!, sites protégés par un mot de passe, etc. Pour afficher l’image, utilisez la balise BBCode [img].'
 	),
 	array(
 		0 => 'Que sont les annonces globales?',
@@ -319,11 +319,11 @@ $help = array(
 	),
 	array(
 		0 => 'Quels fichiers joints sont autorisés sur ce forum?',
-		1 => 'L’administrateur peut autoriser ou interdire certains types de fichiers joints. Si vous n’êtes pas sûr de ce qui est autorisé à être transféré, contactez l’administrateur pour plus d’informations.'
+		1 => 'L’administrateur peut autoriser ou interdire certains types de fichiers joints. Si vous n’êtes pas sûr de ce qui est autorisé à être chargé, contactez l’administrateur pour plus d’informations.'
 	),
 	array(
 		0 => 'Comment trouver tous mes fichiers joints?',
-		1 => 'Pour trouver la liste des fichiers joints que vous avez transférés, allez dans votre panneau de l’utilisateur puis <em>Gestion des fichiers joints</em>.'
+		1 => 'Pour trouver la liste des fichiers joints que vous avez chargés, allez dans votre panneau de l’utilisateur puis <em>Gestion des fichiers joints</em>.'
 	),
 	array(
 		0 => '--',

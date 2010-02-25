@@ -5,7 +5,7 @@
 * translated originally by PhpBB-fr.com <http://www.phpbb-fr.com/> and phpBB.biz <http://www.phpBB.biz>
 *
 * @package language
-* @version $Id: mcp.php, v1.25 2008/10/16 14:51:00 Elglobo Exp $
+* @version $Id: mcp.php, v1.26 2010/02/09 18:37:00 Elglobo Exp $
 * @copyright (c) 2005 phpBB Group 
 * @license http://opensource.org/licenses/gpl-license.php GNU Public License 
 *
@@ -255,6 +255,8 @@ $lang = array_merge($lang, array(
 	'PM_REPORTED_SUCCESS'		=> 'Le message privé a été rapporté.',
 	'PM_REPORT_TOTAL'			=> 'Au total, il y a <strong>1</strong> rapport de MP à revoir.',
 	'PM_REPORTS_TOTAL'			=> 'Au total, il y a <strong>%d</strong> rapports de MP à revoir.',
+	'PM_REPORTS_CLOSED_SUCCESS'	=> 'Les rapports de MP sélectionnés ont été clôturés.',
+	'PM_REPORTS_DELETED_SUCCESS'=> 'Les rapports de MP sélectionnés ont été supprimés.',
 	'PM_REPORTS_ZERO_TOTAL'		=> 'Aucun rapport de MP à revoir.',
 	'PM_REPORT_DETAILS'			=> 'Détails du rapport de message privé',
 
@@ -329,6 +331,7 @@ $lang = array_merge($lang, array(
 	'SPLIT_TOPIC_BEYOND_CONFIRM'		=> 'Êtes-vous sûr de vouloir diviser ce sujet au message sélectionné?',
 	'SPLIT_TOPIC_EXPLAIN'				=> 'L’utilisation du formulaire ci-dessous vous permet de diviser un sujet en deux, soit en sélectionnant les messages individuellement, soit en divisant au message sélectionné.',
 
+	'THIS_PM_IP'				=> 'IP de ce message privé',
 	'THIS_POST_IP'				=> 'IP de ce message',
 	'TOPICS_APPROVED_SUCCESS'	=> 'Les sujets sélectionnés ont été approuvés.',
 	'TOPICS_DELETED_SUCCESS'	=> 'Les sujets sélectionnés ont été supprimés de la base de données.',

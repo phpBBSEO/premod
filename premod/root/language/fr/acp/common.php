@@ -5,7 +5,7 @@
 * translated originally by PhpBB-fr.com <http://www.phpbb-fr.com/> and phpBB.biz <http://www.phpBB.biz>
 *
 * @package language
-* @version $Id: common.php, v1.25 2009/10/16 11:14:00 Elglobo Exp $
+* @version $Id: common.php, v1.27 2010/02/09 19:07:00 Elglobo Exp $
 * @copyright (c) 2005 phpBB Group 
 * @license http://opensource.org/licenses/gpl-license.php GNU Public License 
 *
@@ -266,7 +266,6 @@ $lang = array_merge($lang, array(
 	'PARSE_URLS'						=> 'Autoriser les liens',
 	'PERMISSIONS_TRANSFERRED'			=> 'Les permissions ont été transférées',
 	'PERMISSIONS_TRANSFERRED_EXPLAIN'	=> 'Vous utilisez actuellement les permissions de %1$s. Vous pouvez naviguer sur le forum avec ses permissions mais ne pouvez pas accéder au panneau d’administration car les permissions d’administration ne sont pas transférables. Vous pouvez <a href="%2$s"><strong>réinitialiser vos permissions</strong></a> à tout moment.',
-	'PIXEL'								=> 'px',	
 	'PROCEED_TO_ACP'					=> '%sAller au panneau d’administration%s',
 
 	'REMIND'							=> 'Rappeler',
@@ -337,6 +336,8 @@ $lang = array_merge($lang, array(
 	'NUMBER_TOPICS'   	=> 'Nombre de sujets',
 	'NUMBER_USERS'   	=> 'Nombre d’utilisateurs',
 	'NUMBER_ORPHAN'   	=> 'Nombre de fichiers joints orphelins',
+	
+	'PHP_VERSION_OLD'	=> 'La version de PHP utilisée sur ce serveur ne sera plus supportée par les futures versions de phpBB. %sPlus d’informations%s',
 
 	'POSTS_PER_DAY'		=> 'Moyenne journalière de messages',
 
@@ -377,7 +378,7 @@ $lang = array_merge($lang, array(
 	'VIEW_INACTIVE_USERS'	=> 'Voir les utilisateurs inactifs',
 
 	'WELCOME_PHPBB'			=> 'Bienvenue dans phpBB',
-	'WRITABLE_CONFIG' 		=> 'Votre fichier de configuration (config.php) est actuellement accessible en écriture par tout le monde. Nous vous recommandons fortement de modifier les permissions en 640, ou au moins 644 (par exemple <a href="http://en.wikipedia.org/wiki/Chmod" rel="external">chmod</a> 640 config.php).',
+	'WRITABLE_CONFIG' 		=> 'Votre fichier de configuration (config.php) est actuellement accessible en écriture par tout le monde. Nous vous recommandons fortement de modifier les permissions en 640, ou au moins 644 (par exemple <a href="http://fr.wikipedia.org/wiki/Chmod" rel="external">chmod</a> 640 config.php).',
 ));
 
 // Inactive Users
@@ -456,7 +457,7 @@ $lang = array_merge($lang, array(
 	'LOG_ATTACH_EXTGROUP_ADD'	=> '<strong>Ajout d’un groupe d’extensions de fichier joint</strong><br />» %s',
 	'LOG_ATTACH_EXTGROUP_EDIT'	=> '<strong>Modification d’un groupe d’extensions de fichier joint</strong><br />» %s',
 	'LOG_ATTACH_EXTGROUP_DEL'	=> '<strong>Suppression d’un groupe d’extensions de fichier joint</strong><br />» %s',
-	'LOG_ATTACH_FILEUPLOAD'		=> '<strong>Transfert d’un fichier joint orphelin au message</strong><br />» ID %1$d - %2$s',
+	'LOG_ATTACH_FILEUPLOAD'		=> '<strong>Chargement d’un fichier joint orphelin au message</strong><br />» ID %1$d - %2$s',
 	'LOG_ATTACH_ORPHAN_DEL'		=> '<strong>Suppression d’un fichier joint orphelin</strong><br />» %s',
 
 	'LOG_BAN_EXCLUDE_USER'	=> '<strong>Débannissement d’un utilisateur</strong> pour la raison suivante: “<em>%1$s</em>”<br />» %2$s',

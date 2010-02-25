@@ -5,7 +5,7 @@
 * translated originally by PhpBB-fr.com <http://www.phpbb-fr.com/> and phpBB.biz <http://www.phpBB.biz>
 *
 * @package language
-* @version $Id: posting.php, v1.25 2009/10/10 12:01:00 Elglobo Exp $
+* @version $Id: posting.php, v1.26 2010/02/24 15:51:00 Elglobo Exp $
 * @copyright (c) 2005 phpBB Group 
 * @license http://opensource.org/licenses/gpl-license.php GNU Public License 
 *
@@ -41,6 +41,9 @@ if (empty($lang) || !is_array($lang))
 $lang = array_merge($lang, array(
 	'ACP_BBCODES_EXPLAIN'		=> 'Le BBCode est une implémentation spéciale du HTML qui offre un plus grand contrôle sur l’affichage des messages. Depuis cette page, vous pouvez ajouter, supprimer ou éditer des BBCodes personnalisés.',
 	'ADD_BBCODE'				=> 'Ajouter un nouveau BBCode',
+	
+	'BBCODE_DANGER'				=> 'Le BBcode que vous tentez d’ajouter semble utiliser un champs {TEXT} à l’intèrieur d’un attribut HTML. Ceci est une éventuelle faille de sécurité XSS. Essayez d’utiliser à la place des variables plus restrictives comme {SIMPLETEXT} ou {INTEXT}. Procédez uniquement si vous comprenez les risques potentiels et que vous jugez l’utilisation de {TEXT} absolument inévitable.',
+	'BBCODE_DANGER_PROCEED'		=> 'Procédez', //'I understand the risk',
 
 	'BBCODE_ADDED'				=> 'BBCode ajouté.',
 	'BBCODE_EDITED'				=> 'BBCode édité.',
@@ -73,8 +76,9 @@ $lang = array_merge($lang, array(
 	'TOO_MANY_BBCODES'		=> 'Vous ne pouvez pas créer d’autres BBCodes. Supprimez un ou plusieurs BBCodes puis réessayez.',
 
 	'tokens'	=>	array(
-		'TEXT'			=> 'Du texte, incluant des caractères étrangers, chiffres, etc. Vous ne devriez pas utiliser cette marque dans les tags HTML. Essayez d’utiliser à la place les marques IDENTIFIER ou SIMPLETEXT.',
+		'TEXT'			=> 'Du texte, incluant des caractères étrangers, chiffres, etc. Vous ne devriez pas utiliser cette marque dans les tags HTML. Essayez d’utiliser à la place les marques IDENTIFIER, INTTEXT ou SIMPLETEXT.',
 		'SIMPLETEXT'	=> 'Caractères alphabétiques latins (A-Z), chiffres, espaces, virgules, points, -, +, et _',
+		'INTTEXT'		=> 'Caractères à lettre unicode, nombres, espaces, virgules, points, -, +, _ et espaces.',
 		'IDENTIFIER'	=> 'Caractères alphabétiques latins (A-Z), chiffres, - et _',
 		'NUMBER'		=> 'Une série de chiffres',
 		'EMAIL'			=> 'Une adresse e-mail valide',

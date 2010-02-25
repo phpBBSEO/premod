@@ -5,7 +5,7 @@
 * translated originally by PhpBB-fr.com <http://www.phpbb-fr.com/> and phpBB.biz <http://www.phpBB.biz>
 *
 * @package language
-* @version $Id: styles.php, v1.25 2009/10/15 12:25:00 Elglobo Exp $
+* @version $Id: styles.php, v1.26 2010/02/09 19:22:00 Elglobo Exp $
 * @copyright (c) 2005 phpBB Group 
 * @license http://opensource.org/licenses/gpl-license.php GNU Public License 
 *
@@ -42,13 +42,13 @@ $lang = array_merge($lang, array(
 	'ACP_TEMPLATES_EXPLAIN' => 'Un template est une page HTML qui comprend toutes les balises utilisées pour gérer la mise en page de votre forum. Vous pouvez éditer, supprimer, exporter, importer et prévisualiser l’ensemble du template. Vous pouvez également modifier le code du template utilisé pour produire des BBCodes.',
 	'ACP_THEMES_EXPLAIN' => 'Un thème est l’ensemble des couleurs et images appliqué à un template pour définir l’aspect de votre forum. Le nombre d’options disponibles dépend de la configuration de votre serveur et de l’installation de phpBB, reportez-vous au manuel d’utilisation pour plus de détails. Notez que l’utilisation d’un style différent comme base de travail est optionnel.',
 	'ADD_IMAGESET' => 'Ajouter un pack d’images',
-	'ADD_IMAGESET_EXPLAIN' => 'Vous pouvez créer un pack d’images. Selon la configuration du serveur et vos accès aux permissions des fichiers, vous aurez plus ou moins d’options disponibles. Par exemple, vous pouvez vous baser sur un pack d’images existant. Vous pouvez également télécharger ou envoyer un pack disponible (dans le dossier de sauvegarde) depuis une archive de pack d’images. Si vous téléchargez ou importez un pack, il peut prendre le même nom que celui de l’archive dont il est extrait, pour cela, laissez le nom du pack d’images vide.',
+	'ADD_IMAGESET_EXPLAIN' => 'Vous pouvez créer un pack d’images. Selon la configuration du serveur et vos accès aux permissions des fichiers, vous aurez plus ou moins d’options disponibles. Par exemple, vous pouvez vous baser sur un pack d’images existant. Vous pouvez également charger ou importer (depuis le répertoire <em>store</em>) une archive de pack d’images. Si vous chargez ou importez un pack, il peut prendre le même nom que celui de l’archive dont il est extrait, pour cela, laissez le nom du pack d’images vide.',
 	'ADD_STYLE' => 'Créer un style',
-	'ADD_STYLE_EXPLAIN' => 'Vous pouvez créer un nouveau style. Selon la configuration du serveur et vos accès aux permissions des fichiers, vous aurez plus ou moins d’options disponibles. Par exemple, il vous est peut-être possible de baser un style sur un style existant, vous pouvez également télécharger ou importer un style disponible (dans le dossier de sauvegarde) depuis une archive de style. Si vous téléchargez ou importez un style, il sera renommé automatiquement.',
+	'ADD_STYLE_EXPLAIN' => 'Vous pouvez créer un nouveau style. Selon la configuration du serveur et vos accès aux permissions des fichiers, vous aurez plus ou moins d’options disponibles. Par exemple, il vous est peut-être possible de baser un style sur un style existant, vous pouvez également charger ou importer (depuis le répertoire <em>store</em>) une archive de style. Si vous chargez ou importez un style, il sera renommé automatiquement.',
 	'ADD_TEMPLATE' => 'Créer un template',
-	'ADD_TEMPLATE_EXPLAIN' => 'Vous pouvez ajouter un nouveau template. Selon la configuration du serveur et vos accès aux permissions des fichiers, vous aurez plus ou moins d’options disponibles. Par exemple, vous pouvez baser un template sur un template existant, vous pouvez également télécharger ou envoyer un template disponible dans le dossier de sauvegarde depuis une archive de template. Si vous téléchargez ou importez un template, il peut prendre le même nom que celui de l’archive dont il est extrait, pour cela, laissez le nom du template vide.',
+	'ADD_TEMPLATE_EXPLAIN' => 'Vous pouvez ajouter un nouveau template. Selon la configuration du serveur et vos accès aux permissions des fichiers, vous aurez plus ou moins d’options disponibles. Par exemple, vous pouvez baser un template sur un template existant, vous pouvez également charger ou importer (depuis le répertoire <em>store</em>) une archive de template. Si vous chargez ou importez un template, il peut prendre le même nom que celui de l’archive dont il est extrait, pour cela, laissez le nom du template vide.',
 	'ADD_THEME' => 'Créer un thème',
-	'ADD_THEME_EXPLAIN' => 'Vous pouvez ajouter un nouveau thème. Selon la configuration du serveur et vos accès aux permissions des fichiers, vous aurez plus ou moins d’options disponibles. Par exemple, vous pouvez baser un thème sur un thème existant, vous pouvez également télécharger ou envoyer un thème disponible dans le dossier de sauvegarde depuis une archive de thème. Si vous téléchargez ou importez un thème, il peut prendre le même nom que celui de l’archive dont il est extrait, pour cela, laissez le nom du thème vide.',
+	'ADD_THEME_EXPLAIN' => 'Vous pouvez ajouter un nouveau thème. Selon la configuration du serveur et vos accès aux permissions des fichiers, vous aurez plus ou moins d’options disponibles. Par exemple, vous pouvez baser un thème sur un thème existant, vous pouvez également charger ou importer (depuis le répertoire <em>store</em>) une archive de thème. Si vous chargez ou importez un thème, il peut prendre le même nom que celui de l’archive dont il est extrait, pour cela, laissez le nom du thème vide.',
 	'ARCHIVE_FORMAT' => 'Type d’archive',
 	'AUTOMATIC_EXPLAIN'      => 'Laissez cette case vide pour tenter une détection automatique.',
 
@@ -136,7 +136,7 @@ $lang = array_merge($lang, array(
 	'IMAGESET_ERR_NOT_IMAGESET' => 'L’archive indiquée ne contient pas de pack d’images valide.',
 	'IMAGESET_ERR_STYLE_NAME' => 'Vous devez choisir un nom pour ce pack d’images.',
 	'IMAGESET_EXPORT' => 'Exporter le pack d’images',
-	'IMAGESET_EXPORT_EXPLAIN' => 'Vous pouvez exporter un pack d’images sous la forme d’une archive. Cette archive contiendra tous les fichiers nécessaires pour l’installation du pack d’images sur un autre forum. Vous devez choisir entre télécharger le fichier directement ou le placer dans un répertoire de sauvegarde pour le télécharger ultérieurement ou à partir d’un FTP.',
+	'IMAGESET_EXPORT_EXPLAIN' => 'Vous pouvez exporter un pack d’images sous la forme d’une archive. Cette archive contiendra tous les fichiers nécessaires pour l’installation du pack d’images sur un autre forum. Vous devez choisir entre télécharger le fichier directement ou le placer dans le répertoire <em>store</em> pour le télécharger plus tard par FTP.',
 	'IMAGESET_EXPORTED' => 'Le pack d’images a été exporté et stocké dans %s.',
 	'IMAGESET_NAME' => 'Nom du pack d’images',
 	'IMAGESET_REFRESHED' => 'Le pack d’images a été rechargé.',
@@ -353,7 +353,7 @@ $lang = array_merge($lang, array(
 	'STYLE_ERR_NOT_STYLE' => 'Le fichier importé ou exporté ne contient pas d’archive de style valide.',
 	'STYLE_ERR_STYLE_NAME' => 'Vous devez donner un nom à ce style.',
 	'STYLE_EXPORT' => 'Exporter un Style',
-	'STYLE_EXPORT_EXPLAIN' => 'Vous pouvez exporter un style sous la forme d’une archive. Un style peut ne pas contenir tous les éléments mais doit en comporter au moins un. Par exemple si vous avez créé un nouveau thème et un pack d’images pour un template utilisé couramment vous pouvez simplement exporter le thème et le pack d’images sans exporter le template. Vous pouvez choisir entre télécharger le fichier directement ou le placer dans votre répertoire de stockage pour le télécharger plus tard par FTP.',
+	'STYLE_EXPORT_EXPLAIN' => 'Vous pouvez exporter un style sous la forme d’une archive. Un style peut ne pas contenir tous les éléments mais doit en comporter au moins un. Par exemple si vous avez créé un nouveau thème et un pack d’images pour un template utilisé couramment vous pouvez simplement exporter le thème et le pack d’images sans exporter le template. Vous pouvez choisir entre télécharger le fichier directement ou le placer dans votre répertoire <em>store</em> pour le télécharger plus tard par FTP.',
 	'STYLE_EXPORTED' => 'Style exporté et sauvegardé dans %s.',
 	'STYLE_IMAGESET' => 'Pack d’images',
 	'STYLE_NAME' => 'Nom du style',
@@ -383,7 +383,7 @@ $lang = array_merge($lang, array(
 	'TEMPLATE_ERR_REQUIRED_OR_INCOMPLETE' => 'Le nouveau jeu de templates requiert l’installation du template %s, lui-même sans héritage.',
 	'TEMPLATE_ERR_STYLE_NAME' => 'Vous devez choisir un nom pour ce template.',
 	'TEMPLATE_EXPORT' => 'Exporter les templates',
-	'TEMPLATE_EXPORT_EXPLAIN' => 'Vous pouvez exporter un template sous la forme d’une archive. L’archive contiendra tous les fichiers nécessaires pour installer le template sur un autre forum. Vous pouvez choisir entre télécharger le fichier directement ou le placer dans votre répertoire de stockage pour le télécharger plus tard par FTP.',
+	'TEMPLATE_EXPORT_EXPLAIN' => 'Vous pouvez exporter un template sous la forme d’une archive. L’archive contiendra tous les fichiers nécessaires pour installer le template sur un autre forum. Vous pouvez choisir entre télécharger le fichier directement ou le placer dans le répertoire <em>store</em> pour le télécharger plus tard par FTP.',
 	'TEMPLATE_EXPORTED' => 'Templates exportés et stockés dans %s.',
 	'TEMPLATE_FILE' => 'Fichiers du template',
 	'TEMPLATE_FILE_UPDATED' => 'Fichiers du template modifiés.',
@@ -412,7 +412,7 @@ $lang = array_merge($lang, array(
 	'THEME_ERR_REFRESH_FS' => 'Ce thème est déjà présent sur le système, nul besoin de le rafraîchir.',
 	'THEME_ERR_STYLE_NAME' => 'Vous devez indiquer un nom pour ce thème.',
 	'THEME_EXPORT' => 'Exporter un thème',
-	'THEME_EXPORT_EXPLAIN' => 'Vous pouvez exporter un thème sous la forme d’une archive. Cette archive contiendra tous les fichiers nécessaires pour installer le thème sur un autre forum. Vous pouvez choisir entre télécharger le fichier directement ou le placer dans votre répertoire de stockage pour le télécharger plus tard par FTP.',
+	'THEME_EXPORT_EXPLAIN' => 'Vous pouvez exporter un thème sous la forme d’une archive. Cette archive contiendra tous les fichiers nécessaires pour installer le thème sur un autre forum. Vous pouvez choisir entre télécharger le fichier directement ou le placer dans le répertoire <em>store</em> pour le télécharger plus tard par FTP.',
 	'THEME_EXPORTED' => 'Thème exporté et stocké dans %s.',
 	'THEME_FILE' => 'Thème',
 	'THEME_LOCATION' => 'Sauvegarder la feuille de style dans',
