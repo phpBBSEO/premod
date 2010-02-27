@@ -86,6 +86,9 @@ class acp_phpbb_seo {
 				$display_vars['vars']['legend1'] = 'ACP_PHPBB_SEO_CLASS';
 				foreach($phpbb_seo->cache_config['dynamic_options'] as $optionname => $optionvalue) {
 					if ( @is_bool($phpbb_seo->seo_opt[$optionvalue]) ) {
+						if ($optionvalue == 'virtual_root' && !$phpbb_seo->seo_path['phpbb_script']) {
+							continue;
+						}
 						$display_vars['vars'][$optionvalue] = array('lang' => $optionvalue, 'validate' => 'bool', 'type' => 'radio:yes_no', 'explain' => true, 'lang_explain' => $optionvalue . '_explain');
 						$this->new_config[$optionvalue] = $phpbb_seo->seo_opt[$optionvalue];
 					} elseif ( @isset($this->multiple_options[$optionvalue . '_values']) ) {
@@ -188,8 +191,7 @@ class acp_phpbb_seo {
 				if ($this->new_config['more_options']) {
 					$display_vars['vars']['slash'] = array('lang' => 'SEO_HTACCESS_SLASH', 'validate' => 'bool', 'type' => 'radio:yes_no', 'explain' => true,);
 					$display_vars['vars']['wslash'] = array('lang' => 'SEO_HTACCESS_WSLASH', 'validate' => 'bool', 'type' => 'radio:yes_no', 'explain' => true,);
-					$phpbb_path = trim($phpbb_seo->seo_path['phpbb_script'], '/');
-					if (!empty($phpbb_path ) && !$phpbb_seo->seo_opt['virtual_root']) {
+					if ($phpbb_seo->seo_path['phpbb_script'] && !$phpbb_seo->seo_opt['virtual_root']) {
 						$display_vars['vars']['rbase'] = array('lang' => 'SEO_HTACCESS_RBASE', 'validate' => 'bool', 'type' => 'radio:yes_no', 'explain' => true,);
 					}
 				}
