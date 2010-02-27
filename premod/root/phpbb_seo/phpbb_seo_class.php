@@ -90,7 +90,7 @@ class phpbb_seo extends setup_phpbb_seo {
 		$server_name = trim($config['server_name'], '/ ');
 		$server_port = max(0, (int) $config['server_port']);
 		$server_port = ($server_port && $server_port <> 80) ? ':' . $server_port : '';
-		$script_path = trim($config['script_path'], '/ ');
+		$script_path = trim($config['script_path'], './ ');
 		$script_path = (empty($script_path) ) ? '' : $script_path . '/';
 		$this->seo_path['root_url'] = strtolower($server_protocol . $server_name . $server_port . '/');
 		$this->seo_path['phpbb_urlR'] = $this->seo_path['phpbb_url'] =  $this->seo_path['root_url'] . $script_path;
@@ -232,10 +232,14 @@ class phpbb_seo extends setup_phpbb_seo {
 			$this->seo_opt['rem_ids'] = false;
 		}
 		// virtual root option
-		if ($this->seo_opt['virtual_root']) {
+		if ($this->seo_opt['virtual_root'] && $phpbb_seo->seo_path['phpbb_script']) {
+			// virtual root is available and activated
 			$this->seo_path['phpbb_urlR'] = $this->seo_path['root_url'];
 			$this->file_hbase['index'] = $this->seo_path['phpbb_url'];
 			$this->seo_static['index'] = empty($this->seo_static['index']) ? 'forum' : $this->seo_static['index'];
+		} else {
+			// virtual root is not used or usable
+			$this->seo_opt['virtual_root'] = false;
 		}
 		$this->seo_ext['index'] = empty($this->seo_static['index']) ? '' : ( empty($this->seo_ext['index']) ? '.html' : $this->seo_ext['index']);
 		// In case url rewriting is deactivated
