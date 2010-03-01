@@ -110,6 +110,38 @@ Tout manquement à ces règles contribuera à mettre le support et le développe
 		</installation>
 		<history>
 			<entry>
+				<date><![CDATA[2010-03-01]]></date>
+				<rev-version><![CDATA[3.0.7]]></rev-version>
+				<changelog lang="en">
+					<change><![CDATA[All mods Updated to comply with phpBB 3.0.7.]]></change>
+					<change><![CDATA[Utlimate SEO URL 0.6.4]]></change>
+					<change><![CDATA[Fixed : php5.3 deprecated references in install_phpbb_seo]]></change>
+					<change><![CDATA[Fixed : Broken image rewriterule with virtual root]]></change>
+					<change><![CDATA[Fixed : Attachement with virtual root]]></change>
+					<change><![CDATA[Fixed : Empty $config['sitename'] case]]></change>
+					<change><![CDATA[Fixed : Pagination with hashes in url and next/previous]]></change>
+					<change><![CDATA[Fixed : .htaccess generator fix for custom post extensions]]></change>
+					<change><![CDATA[Fixed : Do only show virtual root option when actually usable.]]></change>
+					<change><![CDATA[Fixed : Email links when opening external links in a new window.]]></change>
+					<change><![CDATA[Added : Full url to pretty much all phpBB URLs]]></change>
+					<change><![CDATA[Added : URL rewriting for unread posts]]></change>
+					<change><![CDATA[Moved stripslashes_deep to phpbb_seo::stripslashes to keep all it inside the phpbb_seo class]]></change>
+					<change><![CDATA[En language pack fixes from sevenalive (@phpBB SEO)]]></change>
+					<change><![CDATA[GYM Sitemaps & RSS 2.0.1]]></change>
+					<change><![CDATA[Fixed : Allow to add modules with no acp]]></change>
+					<change><![CDATA[En language pack fixes from sevenalive (@phpBB SEO)]]></change>
+					<change><![CDATA[Meta tags 0.4.2]]></change>
+					<change><![CDATA[Fixed : 50th keyword holding the whole string.]]></change>
+					<change><![CDATA[Related Topics 0.2.2]]></change>
+					<change><![CDATA[En language pack fixes from sevenalive (@phpBB SEO)]]></change>
+					<change><![CDATA[Use a more direct approach when trying to add the mysql fulltext index]]></change>
+					<change><![CDATA[Zero duplicate 0.6.4]]></change>
+					<change><![CDATA[Extend redirections to unreadposts]]></change>
+					<change><![CDATA[No duplicate 0.6.4]]></change>
+					<change><![CDATA[Fixed : Wrong topic_url used when freshest topic in a sub forum and using SQL rewriting]]></change>
+				</changelog>
+			</entry>
+			<entry>
 				<date><![CDATA[2009-11-22]]></date>
 				<rev-version><![CDATA[3.0.6]]></rev-version>
 				<changelog lang="en">
@@ -335,37 +367,6 @@ Tout manquement à ces règles contribuera à mettre le support et le développe
 				<rev-version><![CDATA[3.0.RC5]]></rev-version>
 				<changelog lang="en">
 					<change><![CDATA[First public Version, versioned following the phpBB version]]></change>
-				</changelog>
-			</entry>
-			<entry>
-				<date><![CDATA[2010-03-01]]></date>
-				<rev-version><![CDATA[3.0.7]]></rev-version>
-				<changelog lang="en">
-					<change><![CDATA[Utlimate SEO URL 0.6.4]]></change>
-					<change><![CDATA[Fixed : php5.3 deprecated references in install_phpbb_seo]]></change>
-					<change><![CDATA[Fixed : Broken image rewriterule with virtual root]]></change>
-					<change><![CDATA[Fixed : Attachement with virtual root]]></change>
-					<change><![CDATA[Fixed : Empty $config['sitename'] case]]></change>
-					<change><![CDATA[Fixed : Pagination with hashes in url and next/previous]]></change>
-					<change><![CDATA[Fixed : .htaccess generator fix for custom post extensions]]></change>
-					<change><![CDATA[Fixed : Do only show virtual root option when actually usable.]]></change>
-					<change><![CDATA[Fixed : Email links when opening external links in a new window.]]></change>
-					<change><![CDATA[Added : Full url to pretty much all phpBB URLs]]></change>
-					<change><![CDATA[Added : URL rewriting for unread posts]]></change>
-					<change><![CDATA[Moved stripslashes_deep to phpbb_seo::stripslashes to keep all it inside the phpbb_seo class]]></change>
-					<change><![CDATA[En language pack fixes from sevenalive (@phpBB SEO)]]></change>
-					<change><![CDATA[GYM Sitemaps & RSS 2.0.1]]></change>
-					<change><![CDATA[Fixed : Allow to add modules with no acp]]></change>
-					<change><![CDATA[En language pack fixes from sevenalive (@phpBB SEO)]]></change>
-					<change><![CDATA[Meta tags 0.4.2]]></change>
-					<change><![CDATA[Fixed : 50th keyword holding the whole string.]]></change>
-					<change><![CDATA[Related Topics 0.2.2]]></change>
-					<change><![CDATA[En language pack fixes from sevenalive (@phpBB SEO)]]></change>
-					<change><![CDATA[Use a more direct approach when trying to add the mysql fulltext index]]></change>
-					<change><![CDATA[Zero duplicate 0.6.4]]></change>
-					<change><![CDATA[Extend redirections to unreadposts]]></change>
-					<change><![CDATA[No duplicate 0.6.4]]></change>
-					<change><![CDATA[Fixed : Wrong topic_url used when freshest topic in a sub forum and using SQL rewriting]]></change>
 				</changelog>
 			</entry>
 		</history>
