@@ -2,7 +2,7 @@
 /**
 *
 * @package phpBB3
-* @version $Id: functions_display.php 10243 2009-10-28 16:49:23Z rxu $
+* @version $Id: functions_display.php 10405 2010-01-12 21:15:32Z bantu $
 * @copyright (c) 2005 phpBB Group
 * @license http://opensource.org/licenses/gpl-license.php GNU Public License
 *
@@ -94,7 +94,7 @@ function display_forums($root_data = '', $display_moderators = true, $return_mod
 		$sql_array['SELECT'] .= ', t.topic_id, t.topic_title, t.topic_replies, t.topic_replies_real, t.topic_status, t.topic_type, t.topic_moved_id' . (!empty($phpbb_seo->seo_opt['sql_rewrite']) ? ', t.topic_url ' : ' ');
 		$sql_array['LEFT_JOIN'][] = array(
 			'FROM'	=> array(TOPICS_TABLE => 't'),
-			'ON'	=> "t.topic_last_post_id = f.forum_last_post_id"
+			'ON'	=> "f.forum_last_post_id = t.topic_last_post_id"
 		);
 	}
 	// www.phpBB-SEO.com SEO TOOLKIT END -> no dupe
@@ -286,6 +286,9 @@ function display_forums($root_data = '', $display_moderators = true, $return_mod
 					$forum_rows[$parent_id]['topic_title'] = $row['topic_title'];
 					$forum_rows[$parent_id]['topic_type'] = $row['topic_type'];
 					$forum_rows[$parent_id]['forum_password'] = $row['forum_password'];
+					if (!empty($row['topic_url'])) {
+						$forum_rows[$parent_id]['topic_url'] = $row['topic_url'];
+					}
 				}
 				// www.phpBB-SEO.com SEO TOOLKIT END -> no dupe
 			}
@@ -654,7 +657,7 @@ function generate_forum_nav(&$forum_data)
 		'FORUM_NAME'	=> $forum_data['forum_name'],
 		'FORUM_DESC'	=> generate_text_for_display($forum_data['forum_desc'], $forum_data['forum_desc_uid'], $forum_data['forum_desc_bitfield'], $forum_data['forum_desc_options']),
 
-		'S_ENABLE_FEEDS_FORUM'	=> ($config['feed_forum'] && !phpbb_optionget(FORUM_OPTION_FEED_EXCLUDE, $forum_data['forum_options'])) ? true : false,
+		'S_ENABLE_FEEDS_FORUM'	=> ($config['feed_forum'] && $forum_data['forum_type'] == FORUM_POST && !phpbb_optionget(FORUM_OPTION_FEED_EXCLUDE, $forum_data['forum_options'])) ? true : false,
 	));
 
 	return;
@@ -742,8 +745,8 @@ function topic_generate_pagination($replies, $url)
 			static $pagin_find = array();
 			static $pagin_replace = array();
 			if (empty($pagin_find)) {
-				$pagin_find = array('`\<a href="(https?\://[a-z0-9_/\.-]+/[a-z0-9_\.-]+)(\.(?!' . $phpEx . ')[a-z0-9]+)(\?([\w\#$%&~\-;:=,@+\.]+))?(&amp;|\?)start=([0-9]+)"\>`i', '`\<a href="(https?\://[a-z0-9_/\.-]+/[a-z0-9_\.-]+)/(\?([\w\#$%&~\-;:=,@+\.]+))?(&amp;|\?)start=([0-9]+)"\>`i' );
-				$pagin_replace = array( '<a href="\1' . $phpbb_seo->seo_delim['start'] . '\6\2\3">', '<a href="\1/' . $phpbb_seo->seo_static['pagination'] . '\5' . $phpbb_seo->seo_ext['pagination'] . '\2">' );
+				$pagin_find = array('`(https?\://[a-z0-9_/\.-]+/[a-z0-9_\.-]+)(\.(?!' . $phpEx . ')[a-z0-9]+)(\?[\w\#$%&~\-;:=,@+\.]+)?(&amp;|\?)start=([0-9]+)`i', '`(https?\://[a-z0-9_/\.-]+/[a-z0-9_\.-]+)/(\?[\w\#$%&~\-;:=,@+\.]+)?(&amp;|\?)start=([0-9]+)`i' );
+				$pagin_replace = array( '\1' . $phpbb_seo->seo_delim['start'] . '\5\2\3', '\1/' . $phpbb_seo->seo_static['pagination'] . '\4' . $phpbb_seo->seo_ext['pagination'] . '\2' );
 			}
 			$pagination = str_replace( '&amp;start=0', '', $pagination );
 			$pagination = preg_replace( $pagin_find, $pagin_replace, $pagination );
