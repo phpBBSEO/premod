@@ -5,7 +5,7 @@
 * translated originally by PhpBB-fr.com <http://www.phpbb-fr.com/> and phpBB.biz <http://www.phpBB.biz>
 *
 * @package language
-* @version $Id: board.php, v1.29 2010/02/24 16:10:00 Elglobo Exp $
+* @version $Id: board.php, v1.29 2010/03/01 00:34:00 Elglobo Exp $
 * @copyright (c) 2005 phpBB Group
 * @license http://opensource.org/licenses/gpl-license.php GNU Public License
 *
@@ -392,7 +392,7 @@ $lang = array_merge($lang, array(
 	'LDAP_NO_EMAIL'					=> 'Cet attribut d’adresse e-mail n’existe pas.',
 	'LDAP_NO_IDENTITY'				=> 'Impossible de trouver un identifiant de connexion pour %s',
 	'LDAP_PASSWORD'					=> 'Mot de passe LDAP',
-	'LDAP_PASSWORD_EXPLAIN'			=> 'Laissez cette case vide pour utiliser une connexion anonyme. Sinon, indiquez le mot de passe pour l’utilisateur indiqué ci-dessus. Ceci est obligatoire pour les serveurs possédant un Active Directory. <strong>ATTENTION:</strong> Ce mot de passe sera stocké en clair dans votre de base de données et sera visible par n’importe qui ayant accès à votre base de données ou à cette page de configuration.',
+	'LDAP_PASSWORD_EXPLAIN'			=> 'Laissez cette case vide pour utiliser une connexion anonyme. Sinon, indiquez le mot de passe pour l’utilisateur indiqué ci-dessus. Ceci est obligatoire pour les serveurs possédant un Active Directory.<br /><em><strong>ATTENTION:</strong> Ce mot de passe sera stocké en clair dans votre de base de données et sera visible par n’importe qui ayant accès à votre base de données ou à cette page de configuration.</em>',
 	'LDAP_PORT'						=> 'Port du serveur LDAP',
 	'LDAP_PORT_EXPLAIN'				=> 'Si vous le souhaitez, vous pouvez indiquer un port qui devrait être employé pour se connecter au serveur LDAP au lieu du port par défaut 389.',
 	'LDAP_SERVER'					=> 'Nom du serveur LDAP',
@@ -504,7 +504,7 @@ $lang = array_merge($lang, array(
 	'SMTP_DIGEST_MD5'				=> 'DIGEST-MD5',
 	'SMTP_LOGIN'					=> 'LOGIN',
 	'SMTP_PASSWORD'					=> 'Mot de passe SMTP',
-	'SMTP_PASSWORD_EXPLAIN'			=> 'Saisissez un mot de passe uniquement si votre serveur SMTP en requiert un. <em><strong>Attention:</strong> ce mot de passe est stocké en clair dans la base de données.</em>',
+	'SMTP_PASSWORD_EXPLAIN'			=> 'Saisissez un mot de passe uniquement si votre serveur SMTP en requiert un.<br /><em><strong>Attention:</strong> ce mot de passe sera stocké en clair dans la base de données, visible de toute personne ayant accès à votre base de données ou à cette page de configuration.</em>',
 	'SMTP_PLAIN'					=> 'PLAIN',
 	'SMTP_POP_BEFORE_SMTP'			=> 'POP-AVANT-SMTP',
 	'SMTP_PORT'						=> 'Port du serveur SMTP',
@@ -527,7 +527,7 @@ $lang = array_merge($lang, array(
 	'JAB_PACKAGE_SIZE'			=> 'Taille des paquets Jabber',
 	'JAB_PACKAGE_SIZE_EXPLAIN'	=> 'Nombre de messages envoyés dans un paquet. Si mis à “0”, le message est envoyé immédiatement et ne sera pas placé en file d’attente.',
 	'JAB_PASSWORD'				=> 'Mot de passe Jabber',
-	'JAB_PASSWORD_EXPLAIN'		=> '<em><strong>Attention:</strong> ce mot de passe est stocké en clair dans la base de données.</em>',
+	'JAB_PASSWORD_EXPLAIN'		=> '<em><strong>Attention:</strong> ce mot de passe sera stocké en clair dans la base de données, visible de toute personne ayant accès à votre base de données ou à cette page de configuration.</em>',
 	'JAB_PORT'					=> 'Port Jabber',
 	'JAB_PORT_EXPLAIN'			=> 'Laissez cette case vide à moins que vous sachiez qu’il ne s’agisse pas du port 5222.',
 	'JAB_SERVER'				=> 'Serveur Jabber',

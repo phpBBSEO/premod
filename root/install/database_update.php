@@ -2,13 +2,13 @@
 /**
 *
 * @package install
-* @version $Id: database_update.php 10521 2010-02-22 19:37:09Z bantu $
+* @version $Id: database_update.php 10555 2010-02-28 19:30:58Z naderman $
 * @copyright (c) 2006 phpBB Group
 * @license http://opensource.org/licenses/gpl-license.php GNU Public License
 *
 */
 
-$updates_to_version = '3.0.7-RC2';
+$updates_to_version = '3.0.7';
 
 // Enter any version to update from to test updates. The version within the db will not be updated.
 $debug_from_version = false;
@@ -421,7 +421,7 @@ if ($debug_from_version === false)
 		WHERE config_name = 'version'";
 	_sql($sql, $errored, $error_ary);
 	// SEO premod
-	set_config('seo_premod_version', '3.0.7-RC2');
+	set_config('seo_premod_version', '3.0.7');
 }
 
 // Reset permissions
