@@ -5,7 +5,7 @@
 <mod xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.phpbb.com/mods/xml/modx-1.2.3.xsd">
 	<header>
 		<meta name="generator" content="MODX file generated with PP MODX Creator by tumba25"/>
-		<license><![CDATA[http://opensource.org/licenses/gpl-license.php GNU General Public License v2]]></license>
+		<license><![CDATA[http://opensource.org/osi3.0/licenses/lgpl-license.php GNU Lesser General Public License]]></license>
 		<title lang="en"><![CDATA[phpBB SEO Premod]]></title>
 		<title lang="fr"><![CDATA[Premod phpBB SEO]]></title>
 		<description lang="en"><![CDATA[This Package is a fully SEOed phpBB Premod
@@ -48,7 +48,7 @@ ________
 
 phpBB is released under the GPL General Public License v2 ( http://opensource.org/licenses/gpl-license.php ) 
 The Premod includes the phpBB SEO mod Rewrites and the zero duplicate which are released under the 
-RPL Licence ( http://www.opensource.org/licenses/rpl.php ) which states you cannot remove the phpBB SEO credits and if you make any modifications you have to resubmit them to phpBB SEO for inclusion into this package again. You can read the license for yourself for further info.
+RPL Licence ( http://www.opensource.org/licenses/rpl1.5.txt Reciprocal Public License 1.5 ) which states you cannot remove the phpBB SEO credits and if you make any modifications you have to resubmit them to phpBB SEO for inclusion into this package again. You can read the license for yourself for further info.
 
 You can of course use this mod without any more limitations than those stated here and in the licence.
 
@@ -89,7 +89,7 @@ LICENSE:
  _______
 
 phpBB est diffusé sous la licence GPL General Public License v2 ( http://opensource.org/licenses/gpl-license.php ) 
-La premod inclus les mods Rewrite phpBB SEO et le zéro duplicate diffusés sous la licence RPL ( http://www.opensource.org/licenses/rpl.php ) qui indique que vous ne pouvez pas retirer les crédits phpBB SEO, et que vos améliorations et changements doivent être soumis à l'équipe de phpBB SEO avant d'être éventuellement ajoutés au package. 
+La premod inclus les mods Rewrite phpBB SEO et le zéro duplicate diffusés sous la licence RPL ( http://www.opensource.org/licenses/rpl1.5.txt Reciprocal Public License 1.5 ) qui indique que vous ne pouvez pas retirer les crédits phpBB SEO, et que vos améliorations et changements doivent être soumis à l'équipe de phpBB SEO avant d'être éventuellement ajoutés au package. 
 
 Bien entendu, l'utilisation selon les présents critères de ce mod est totalement libre, gratuite et sans autres limitations.
 
@@ -102,11 +102,11 @@ Tout manquement à ces règles contribuera à mettre le support et le développe
 				<homepage><![CDATA[http://www.phpbb-seo.com/]]></homepage>
 			</author>
 		</author-group>
-		<mod-version><![CDATA[3.0.6]]></mod-version>
+		<mod-version><![CDATA[3.0.7]]></mod-version>
 		<installation>
 			<level><![CDATA[easy]]></level>
 			<time><![CDATA[900]]></time>
-			<target-version><![CDATA[3.0.6]]></target-version>
+			<target-version><![CDATA[3.0.7]]></target-version>
 		</installation>
 		<history>
 			<entry>
@@ -337,6 +337,37 @@ Tout manquement à ces règles contribuera à mettre le support et le développe
 					<change><![CDATA[First public Version, versioned following the phpBB version]]></change>
 				</changelog>
 			</entry>
+			<entry>
+				<date><![CDATA[2010-03-01]]></date>
+				<rev-version><![CDATA[3.0.7]]></rev-version>
+				<changelog lang="en">
+					<change><![CDATA[Utlimate SEO URL 0.6.4]]></change>
+					<change><![CDATA[Fixed : php5.3 deprecated references in install_phpbb_seo]]></change>
+					<change><![CDATA[Fixed : Broken image rewriterule with virtual root]]></change>
+					<change><![CDATA[Fixed : Attachement with virtual root]]></change>
+					<change><![CDATA[Fixed : Empty $config['sitename'] case]]></change>
+					<change><![CDATA[Fixed : Pagination with hashes in url and next/previous]]></change>
+					<change><![CDATA[Fixed : .htaccess generator fix for custom post extensions]]></change>
+					<change><![CDATA[Fixed : Do only show virtual root option when actually usable.]]></change>
+					<change><![CDATA[Fixed : Email links when opening external links in a new window.]]></change>
+					<change><![CDATA[Added : Full url to pretty much all phpBB URLs]]></change>
+					<change><![CDATA[Added : URL rewriting for unread posts]]></change>
+					<change><![CDATA[Moved stripslashes_deep to phpbb_seo::stripslashes to keep all it inside the phpbb_seo class]]></change>
+					<change><![CDATA[En language pack fixes from sevenalive (@phpBB SEO)]]></change>
+					<change><![CDATA[GYM Sitemaps & RSS 2.0.1]]></change>
+					<change><![CDATA[Fixed : Allow to add modules with no acp]]></change>
+					<change><![CDATA[En language pack fixes from sevenalive (@phpBB SEO)]]></change>
+					<change><![CDATA[Meta tags 0.4.2]]></change>
+					<change><![CDATA[Fixed : 50th keyword holding the whole string.]]></change>
+					<change><![CDATA[Related Topics 0.2.2]]></change>
+					<change><![CDATA[En language pack fixes from sevenalive (@phpBB SEO)]]></change>
+					<change><![CDATA[Use a more direct approach when trying to add the mysql fulltext index]]></change>
+					<change><![CDATA[Zero duplicate 0.6.4]]></change>
+					<change><![CDATA[Extend redirections to unreadposts]]></change>
+					<change><![CDATA[No duplicate 0.6.4]]></change>
+					<change><![CDATA[Fixed : Wrong topic_url used when freshest topic in a sub forum and using SQL rewriting]]></change>
+				</changelog>
+			</entry>
 		</history>
 	</header>
 	<action-group>
@@ -347,21 +378,21 @@ Tout manquement à ces règles contribuera à mettre le support et le développe
 >>>>   UPDATE INSTRUCTION   	   <<<<<
 ________________________________________
 
-Update 3.0.5 => 3.0.6 :
+Update 3.0.6 => 3.0.7 :
 First, go to http://downloads.phpbb-seo.com/seo-url-premod-12/
 where you'll be able to download the update packages
 You can update using two method :
-	1) Auto updating : "3.0.5 to 3.0.6 Auto update"
+	1) Auto updating : "3.0.6 to 3.0.7 Auto update"
 		- Upload the auto_update/install/*.* folder of the update package to install/*.*
 		- Go to ACP => SYSTEM and follow instructions.
 		The auto update method will take the eventual code change you have made into account, 
 		and will attempt to merge the new files with your online modified ones.
 		It's the safest method for most, the installer will tel you if it has trouble to update some files.
-	2) Manual updating : "3.0.5 to 3.0.6 Changed Files"
+	2) Manual updating : "3.0.6 to 3.0.7 Changed Files"
 		You'll find the modified file list in the modified/ folder of the update package.
 		- Upload / merge / overwrite all file,
 		- Upload the modified/install/*.* to install/*.*,
-		- Run www.example.com/phpbb/install/database_update.php to update the DB.
+		- Run example.com/phpbb/install/database_update.php to update the DB.
 
 This update will not change any of your current URL settings, but it will add some new one.
 You WILL have to update you .htaccess once done.
@@ -374,7 +405,7 @@ See bellow to install.
 
 To update GYM from all 2.0.x (phpBB3) versions you will have to upload all files in the root/ directory of the archive to your phpBB/ ftp directory, after you will have taken care manually of the eventual code change you would have implemented in the template files (directory phpBB/styles/, .html, .js and .xsl) added by the module.
 Once done, just lunch the update script (example.com/phpBB/gym_sitemaps/gym_install.php).
-Your settings will be kept during the update porcess.
+Your settings will be kept during the update process.
 
 IMPORTANT :
 GYM sitemaps and RSS is likely to be updated before the premod, it will be up to you to
@@ -406,7 +437,7 @@ Settings :
 __________
 
 The settings must be done before step 4 above for the generated .htaccess to be up to date.
-Later modification will most likey require a new .htaccess as well as personalized redirections.
+Later modification will most likely require a new .htaccess as well as personalized redirections.
 
 IMPORTANT :
 	A new option was added staring from v0.6.0 : SQL rewriting.
@@ -561,7 +592,7 @@ _________________
 
 On the phpBB SEO ACP module, go to the ".htaccess" page.
 A personalised .htaccess will be generated. It's the first one to consider trying.
-You will have too put it where the red bolded messages of the .htaccess generator tells you to.
+You will have too put it where the red bold messages of the .htaccess generator tells you to (and NOT anywhere else).
 If you cannot find the location mentioned, it means that you did not properly set your phpBB server settings in the ACP.
 If the default suggestion does not work, you will be to try more options, and generate several alternative.
 You'll find an empty .htaccess file in this mod's archive contrib/ folder, you can use it to paste the .htaccess content generated on the htaccess page or save it directly on the server (saved .htaccess will be found in the phpbb/cache/ directory).
@@ -622,7 +653,7 @@ _________________________
 The GYM sitemap & RSS module is now included in the phpBB SEO premod. 
 This module will create United Sitemaps (Aka Google sitemaps), RSS 2.0 feeds, site maps and news pages for for phpBB3.
 It fully supports Gun-zip cache for all types of outputs and some XSL-Transform styling for Sitemaps and RSS feeds. 
-Please visit the relase thread for updates and further information : 
+Please visit the release thread for updates and further information : 
 http://www.phpbb-seo.com/en/gym-sitemaps-rss/google-yahoo-msn-sitemaps-rss-t2734.html
 
 PLEASE NOTE : 
@@ -649,7 +680,7 @@ and change it to :
 $phpbb_root_path = './phpbb/';
 
 Obviously replacing phpbb/ with the real folder name where phpBB would be installed.
-Then you would need to go ACP and update the "Google Sitemaps URL" paramter, in the Google sitemaps main panel, to match your
+Then you would need to go ACP and update the "Google Sitemaps URL" parameter, in the Google sitemaps main panel, to match your
 domain's root location instead of the phpBB url : "http://www.example.com/" instead of "http://www.example.com/phpbb/"
 Links to the forum will of course stay valid.
 You can do the same with gymrss.php and map.php if you wish.
@@ -668,14 +699,14 @@ And if your phpBB's .htaccess was in the phpBB/ directory, to move them to the d
 
 	=> Connect yourself as admin and go to yourdomain.com/phpbb_folder/gym_sitemaps/gym_install.php to install
 
-!!!!! The SQL involved in the install script where tested for all mysql versions, but unfrotunately 
+!!!!! The SQL involved in the install script where tested for all mysql versions, but unfortunately 
 not with the other possible DBAL (oracle, sqlite, postgresql etc ...), 
 chances are great that it will work though !!!!!
 
 GYM sitemaps & RSS should work with all DBAL supported by phpBB.
 
 ======> The ONLY url to submit for all your sitemaps is "http://www.yourdomain.com/phpbb/sitemap.php" 
-======> or "http://www.yourdomain.com/phpbb/sitemapindex.xml" with URL rewritting. 
+======> or "http://www.yourdomain.com/phpbb/sitemapindex.xml" with URL rewriting. 
 ======> You should make sure that the url is valid before you submit, just load the url in your browser to see the mod in action.
 
 
@@ -696,22 +727,22 @@ for GYM sitemaps & RSS. Just generate a new .htaccess once you have installed th
 >>>>   MISE A JOUR	                <<<<<
 _____________________________________________
 
-Mise à jour : 3.0.5 => 3.0.6 : 
+Mise à jour : 3.0.6 => 3.0.7 : 
 Tout d'abord, rendez vous sur http://telecharger.phpbb-seo.com/premod-referencement-phpbb-10/
-poour télécharger un des pack de mise à jour.
+pour télécharger un des pack de mise à jour.
 Vous pouvez mettre à jour en suivant deux méthodes :
-	1) Mise à jour automatique : "3.0.5 vers 3.0.6 MAJ automatique"
+	1) Mise à jour automatique : "3.0.6 vers 3.0.7 MAJ automatique"
 		- Uplodez le contenu du dossier auto_update/install/*.* vers install/*.*,
 		- Rendez vous à l'ACP => SYSTEM et suivez les instructions.
 		L'auto updateur prendra vos éventuelles modifications en compte et tentera
 		de merger les nouveaux fichiers avec ceux que vous auriez modifié.
 		C'est la methode la plus sûre dans la plupart des cas, l'updateur vous dira
 		s'il a des problème pour modifier certain fichiers.
-	2) Mise à jour manuelle : "3.0.5 vers 3.0.6 Fichiers modifiés"
+	2) Mise à jour manuelle : "3.0.6 vers 3.0.7 Fichiers modifiés"
 		Vous trouverez les fichiers modifiés dans le dossier modified/ de l'archive.
 		- Uploadez / mergez / écrasez tous les fichiers,
 		- Uploadez le dossier modified/install/*.* vers install/*.*,
-		- Lancez www.example.com/phpbb/install/database_update.php pour mettre à jour la base de données.
+		- Lancez example.com/phpbb/install/database_update.php pour mettre à jour la base de données.
 
 Vos réglages d'urls de la classe phpbb_seo ne seront pas altérés par la MAJ, mais de nouvelle options sont ajoutés.
 Vous DEVREZ mettre à jour votre .htaccess un fois cette mise à jour effectuée.
@@ -763,7 +794,7 @@ et pourront nécessiter des redirections personnalisées.
 IMPORTANT :
 	Une nouvelle option a été introduite depuis la version 0.6.0 : Le stockage des URL de sujets dans la base de donnée.
 	
-	Cette opiton permet d’activer les url personnalisées pour les sujets. Vous pourrez alors choisir une url précise pour 	
+	Cette option permet d’activer les url personnalisées pour les sujets. Vous pourrez alors choisir une url précise pour 	
 	chaque sujet, soit au moment de le créer, soit en éditant simplement celui-ci. Cette possibilité est toutefois réservée 
 	aux administrateurs et modérateurs du forum.
 	L’activation de cette option est sans conséquence sur vos url existantes, elles seront stockées telles qu’elles dans la 
@@ -858,9 +889,9 @@ Si vous créez de nouveaux forums par la suite, vous devrez simplement vous rend
 sur la page "Gestion des URL des Forums" pour personnaliser l'url de votre forum.
 Si non, l'url ne sera pas en cache, et celle par défaut sera utilisée pour ce forum (titre-forum-fxx).
 
-_______________________________________
+_______________________________
 Customisation des injections de titre :
-_______________________________________
+_______________________________
 
 La classe phpbb_seo prend en charge la dés-accentuation de la plupart des caractères occidentaux, mais il se peut que cela ne suffise pas pour votre projet.
 A partir de la version 0.6.0, nous avons introduit une méthode simple pour mettre en place des remplacements spéciaux.
@@ -900,12 +931,12 @@ NOTE: Cache
 ___________
 
 Les fichiers cachés se trouve dans le dossier phpbb_seo_/cache/.
-phpbb_cache.php est le fichier contenant vos réglages ainsi que les URL personalisés de vos forums.
+phpbb_cache.php est le fichier contenant vos réglages ainsi que les URL personnalisés de vos forums.
 
 Le mod crée toujours un backup du fichier cache en cours : 
 	=> phpbb_cache.php.current est une copie de phpbb_cache.php.
 	Elle sera utilisée automatiquement si jamais phpbb_cache.php venait à être effacé ou corrompu (ce qui e devrait pas arriver, mais ...).
-	=> phpbb_cache.php.old est une copie de vos précédent régalges, avant la dernière modification que vous avez faite.
+	=> phpbb_cache.php.old est une copie de vos précédent réglages, avant la dernière modification que vous avez faite.
 
 Vous devriez sauvegarder ces fichiers après les avoir modifier, ils sont aussi important que
 votre base de donnée pour vos forums, vu qu'il sont requis pour le fonctionnement de leur URLs.
@@ -918,11 +949,12 @@ ____________
 
 Dans le module d'administration phpBB SEO, rendez vous sur la page "htaccess".
 Un .htaccess adapté à vos réglages y sera affiché. C'est le premier .htaccess à essayer.
+Vous devrez le placer à l'endroit indiqué en  rouge par le générateur (et à AUCUN autre endroit). Si vous ne trouvez pas l'emplacement, vous devez avoir un souci de configuration serveur phpBB (domaine, chemin etc).
 Si la suggestion par défaut ne fonctionne pas, vous pourrez afficher des options supplémentaires, et générer plusieurs variantes.
 Vous trouverez un fichier .htaccess vide dans le dossier contrib/ de l'archive du mod. 
 Vous pouvez l'utilisez pour y copier le contenu du .htaccess généré par la page de réglage ou l'enregistré directement sur le serveur (le .htaccess est alors sauvegarder dans phpbb_seo/cache/).
 
-Le generateur de .htaccess va ajouter les rewriterules nécéssaires pour vous assurer de l'unicité de votre domaine, 
+Le générateur de .htaccess va ajouter les rewriterules nécessaires pour vous assurer de l'unicité de votre domaine, 
 mais elles seront au départ commentées (inactives), car c'est le genre de chose qui requiert une intervention humaine.
 Veuillez vous rendre sur : http://www.phpbb-seo.com/fr/techniques-referencement/forcer-www-dans-un-domaine-t31.html
 pour voir comment forcer l'utilisation ou l'absence du préfixe www dans l'URL de votre domaine.
@@ -948,8 +980,8 @@ _____________________________________________________
 phpBB/member/pseudo VS  phpBB/pseudo-uxx.html
 
 Si vous utilisez les URL de profil et de messages de membre sans ID, vous devez noter que de l'urlencodage 
-va entrer en jeux pour prevenir un bug de mod_rewrite. 
-Ceci impleque que certains cas particuliers, comme "&", "/", "#" et les espaces seront doublement encodés dans un pseudo.
+va entrer en jeux pour prévenir un bug de mod_rewrite. 
+Ceci implique que certains cas particuliers, comme "&", "/", "#" et les espaces seront doublement encodés dans un pseudo.
 Par exemple, un membre dont le pseudo serait rock&roll devrait être doublement urlencodé pour être utilisable : rock%2526roll
 ( http://www.php.net/urlencode => http://issues.apache.org/bugzilla/show_bug.cgi?id=34602 )
 
@@ -985,7 +1017,7 @@ pour obtenir du support et vérifier l'existence de mise à jour.
 NOTA BENE : 
 
 	L'installation est séparée de celle de la premod, c'est a vous de décider de l'utiliser ou non.
-	GYM sitemaps and RSS a des chances d'être mis à jour avant la premod, vous devrez donc le maintenir à jour
+	GYM sitemaps & RSS a des chances d'être mis à jour avant la premod, vous devrez donc le maintenir à jour
 	entre temps. 
 	Vous pouvez être tenu au courant des mise a jour en souscrivant au sujet de mise à disposition en étant connecté :
 	http://www.phpbb-seo.com/fr/gym-sitemaps-rss/sitemaps-rss-google-yahoo-msn-t3136.html
