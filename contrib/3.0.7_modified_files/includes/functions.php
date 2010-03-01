@@ -2,7 +2,7 @@
 /**
 *
 * @package phpBB3
-* @version $Id: functions.php 10172 2009-09-20 18:50:35Z acydburn $
+* @version $Id: functions.php 10519 2010-02-22 00:59:27Z toonarmy $
 * @copyright (c) 2005 phpBB Group
 * @license http://opensource.org/licenses/gpl-license.php GNU Public License
 *
@@ -556,11 +556,11 @@ function _hash_crypt_private($password, $setting, &$itoa64)
 *
 * @param string $email		Email address
 *
-* @return string			Big Integer
+* @return string			Unsigned Big Integer
 */
 function phpbb_email_hash($email)
 {
-	return crc32(strtolower($email)) . strlen($email);
+	return sprintf('%u', crc32(strtolower($email))) . strlen($email);
 }
 
 /**
@@ -2091,17 +2091,40 @@ function generate_pagination($base_url, $num_items, $per_page, $start_item, $add
 	if (!empty($phpbb_seo->seo_opt['url_rewrite'])) {
 		static $pagin_find = array();
 		static $pagin_replace = array();
-		static $prev_find = array();
 		if (empty($pagin_replace)) {
-			$pagin_find = array('`\<a href="(https?\://[a-z0-9_/\.-]+/[a-z0-9_\.-]+)(\.(?!' . $phpEx . ')[a-z0-9]+)(\?([\w\#$%&~\-;:=,@+\.]+))?(&amp;|\?)start=([0-9]+)"\>`i', '`\<a href="(https?\://[a-z0-9_/\.-]+/[a-z0-9_\.-]+)/(\?([\w\#$%&~\-;:=,@+\.]+))?(&amp;|\?)start=([0-9]+)"\>`i' );
-			$pagin_replace = array( '<a href="\1' . $phpbb_seo->seo_delim['start'] . '\6\2\3">', '<a href="\1/' . $phpbb_seo->seo_static['pagination'] . '\5' . $phpbb_seo->seo_ext['pagination'] . '\2">' );
-			$prev_find = array($phpbb_seo->seo_delim['start'] . '0', $phpbb_seo->seo_static['pagination'] . '0' . $phpbb_seo->seo_ext['pagination']);
+			$pagin_find = array('`(https?\://[a-z0-9_/\.-]+/[a-z0-9_\.-]+)(\.[a-z0-9]+)(\?[\w$%&~\-;:=,@+\.]+)?(#[a-z0-9_\.-]+)?(&amp;|\?)start=([0-9]+)`i', '`(https?\://[a-z0-9_/\.-]+/[a-z0-9_\-]+)/(\?[\w$%&~\-;:=,@+\.]+)?(#[a-z0-9_\.-]+)?(&amp;|\?)start=([0-9]+)`i');
+			$pagin_replace = array( '\1' . $phpbb_seo->seo_delim['start'] . '\6\2\3\4', '\1/' . $phpbb_seo->seo_static['pagination'] . '\5' . $phpbb_seo->seo_ext['pagination'] . '\2\3');
 		}
+		$rewrite_pagination = false;
+		// here we rewrite rewritten urls only, and they do hold the full url with http
+		if (preg_match('`^https?://[a-z0-9_\.-]+/(.*)$`i', $base_url, $match)) {
+			$rewrite_pagination = true;
+			if (!empty($match[1])) {
+				// though, we won't do it for .php files.
+				if (preg_match('`^.*\.' . $phpEx . '(|\?.*|#.*)$`i', trim($match[1]))) {
+					$rewrite_pagination = false;
+
+				}
+			}
+
+		}
+		// in all cases remove the start=0 dupe
 		$page_string = str_replace($url_delim . 'start=0', '', $page_string);
-		$page_string = preg_replace($pagin_find, $pagin_replace, $page_string);
-		$prev = preg_replace($pagin_find, $pagin_replace, $prev);
-		$prev = str_replace($prev_find, '', $prev);
-		$next = preg_replace( $pagin_find, $pagin_replace, $next);
+		$prev = str_replace($url_delim . 'start=0', '', $prev);
+		if ($rewrite_pagination) {
+			$page_string = preg_replace($pagin_find, $pagin_replace, $page_string);
+			$prev = $prev ? preg_replace($pagin_find, $pagin_replace, $prev) : '';
+			$next = $next ? preg_replace( $pagin_find, $pagin_replace, $next) : '';
+		} else {
+			// take care about eventual hashes
+			if (strpos($base_url, '#') !== false) {
+				static $hash_find = '`((https?\://)?[a-z0-9_/\.-]+\.[a-z0-9]+)(\?[\w$%&~\-;:=,@+\.]+)?(#[a-z0-9_\.-]+)((&amp;|\?)start=[0-9]+)`';
+				static $hash_replace = '\1\3\5\4';
+				$page_string = preg_replace($hash_find, $hash_replace, $page_string);
+				$prev = $prev ? preg_replace($hash_find, $hash_replace, $prev) : '';
+				$next = $next ? preg_replace($hash_find, $hash_replace, $next) : '';
+			}
+		}
 	}
 	$template->assign_vars(array(
 		$tpl_prefix . 'BASE_URL'	=> $base_url,
@@ -3557,7 +3580,7 @@ function msg_handler($errno, $msg_text, $errfile, $errline)
 				}
 			}
 
-			if (defined('DEBUG') || defined('IN_CRON') || defined('IMAGE_OUTPUT'))
+			if ((defined('DEBUG') || defined('IN_CRON') || defined('IMAGE_OUTPUT')) && isset($db))
 			{
 				// let's avoid loops
 				$db->sql_return_on_error(true);
@@ -3947,6 +3970,108 @@ function phpbb_optionset($bit, $set, $data)
 }
 
 /**
+* Login using http authenticate.
+*
+* @param array	$param		Parameter array, see $param_defaults array.
+*
+* @return void
+*/
+function phpbb_http_login($param)
+{
+	global $auth, $user;
+	global $config;
+
+	$param_defaults = array(
+		'auth_message'	=> '',
+
+		'autologin'		=> false,
+		'viewonline'	=> true,
+		'admin'			=> false,
+	);
+
+	// Overwrite default values with passed values
+	$param = array_merge($param_defaults, $param);
+
+	// User is already logged in
+	// We will not overwrite his session
+	if (!empty($user->data['is_registered']))
+	{
+		return;
+	}
+
+	// $_SERVER keys to check
+	$username_keys = array(
+		'PHP_AUTH_USER',
+		'Authorization',
+		'REMOTE_USER', 'REDIRECT_REMOTE_USER',
+		'HTTP_AUTHORIZATION', 'REDIRECT_HTTP_AUTHORIZATION',
+		'REMOTE_AUTHORIZATION', 'REDIRECT_REMOTE_AUTHORIZATION',
+		'AUTH_USER',
+	);
+
+	$password_keys = array(
+		'PHP_AUTH_PW',
+		'REMOTE_PASSWORD',
+		'AUTH_PASSWORD',
+	);
+
+	$username = null;
+	foreach ($username_keys as $k)
+	{
+		if (isset($_SERVER[$k]))
+		{
+			$username = $_SERVER[$k];
+			break;
+		}
+	}
+
+	$password = null;
+	foreach ($password_keys as $k)
+	{
+		if (isset($_SERVER[$k]))
+		{
+			$password = $_SERVER[$k];
+			break;
+		}
+	}
+
+	// Decode encoded information (IIS, CGI, FastCGI etc.)
+	if (!is_null($username) && is_null($password) && strpos($username, 'Basic ') === 0)
+	{
+		list($username, $password) = explode(':', base64_decode(substr($username, 6)), 2);
+    }
+
+	if (!is_null($username) && !is_null($password))
+	{
+		set_var($username, $username, 'string', true);
+		set_var($password, $password, 'string', true);
+
+		$auth_result = $auth->login($username, $password, $param['autologin'], $param['viewonline'], $param['admin']);
+
+		if ($auth_result['status'] == LOGIN_SUCCESS)
+		{
+			return;
+		}
+		else if ($auth_result['status'] == LOGIN_ERROR_ATTEMPTS)
+		{
+			header('HTTP/1.0 401 Unauthorized');
+			trigger_error('NOT_AUTHORISED');
+		}
+	}
+
+	// Prepend sitename to auth_message
+	$param['auth_message'] = ($param['auth_message'] === '') ? $config['sitename'] : $config['sitename'] . ' - ' . $param['auth_message'];
+
+	// We should probably filter out non-ASCII characters - RFC2616
+	$param['auth_message'] = preg_replace('/[\x80-\xFF]/', '?', $param['auth_message']);
+
+	header('WWW-Authenticate: Basic realm="' . $param['auth_message'] . '"');
+	header('HTTP/1.0 401 Unauthorized');
+
+	trigger_error('NOT_AUTHORISED');
+}
+
+/**
 * Generate page header
 */
 function page_header($page_title = '', $display_online_list = true, $item_id = 0, $item = 'forum')
@@ -3970,7 +4095,7 @@ function page_header($page_title = '', $display_online_list = true, $item_id = 0
 		'SEO_EXT_CLASSES' => !empty($config['seo_ext_classes']) ? "'" . preg_replace('`[^a-z0-9_|-]+`', '', str_replace(',', '|', trim($config['seo_ext_classes'], ', '))) . "'" : 'false',
 		'SEO_HASHFIX' => $phpbb_seo->seo_opt['url_rewrite'] && $phpbb_seo->seo_opt['virtual_folder'] ? 'true' : 'false',
 	));
-	if (isset($user->lang['Page']) && !empty($config['seo_append_sitename'])) {
+	if (isset($user->lang['Page']) && !empty($config['seo_append_sitename']) && !empty($config['sitename'])) {
 		$page_title = $page_title && strpos($page_title, $config['sitename']) === false ? $page_title . ' - ' . $config['sitename'] : $page_title;
 	}
 	// www.phpBB-SEO.com SEO TOOLKIT END
@@ -4013,7 +4138,7 @@ function page_header($page_title = '', $display_online_list = true, $item_id = 0
 	$s_last_visit = ($user->data['user_id'] != ANONYMOUS) ? $user->format_date($user->data['session_last_visit']) : '';
 
 	// Get users online list ... if required
-	$l_online_users = $online_userlist = $l_online_record = '';
+	$l_online_users = $online_userlist = $l_online_record = $l_online_time = '';
 
 	if ($config['load_online'] && $config['load_online_time'] && $display_online_list)
 	{
@@ -4036,14 +4161,10 @@ function page_header($page_title = '', $display_online_list = true, $item_id = 0
 			set_config('record_online_date', time(), true);
 		}
 
-		$l_online_record = sprintf($user->lang['RECORD_ONLINE_USERS'], $config['record_online_users'], $user->format_date($config['record_online_date']));
+		$l_online_record = sprintf($user->lang['RECORD_ONLINE_USERS'], $config['record_online_users'], $user->format_date($config['record_online_date'], false, true));
 
 		$l_online_time = ($config['load_online_time'] == 1) ? 'VIEW_ONLINE_TIME' : 'VIEW_ONLINE_TIMES';
 		$l_online_time = sprintf($user->lang[$l_online_time], $config['load_online_time']);
-	}
-	else
-	{
-		$l_online_time = '';
 	}
 
 	$l_privmsgs_text = $l_privmsgs_text_unread = '';
@@ -4195,11 +4316,14 @@ function page_header($page_title = '', $display_online_list = true, $item_id = 0
 		'S_FORUM_ID'			=> $forum_id,
 		'S_TOPIC_ID'			=> $topic_id,
 
-		'S_LOGIN_ACTION'		=> (!defined('ADMIN_START')) ? append_sid("{$phpbb_root_path}ucp.$phpEx", 'mode=login') . '&amp;redirect=' . urlencode(str_replace('&amp;', '&', build_url())) : append_sid("index.$phpEx", false, true, $user->session_id) . '&amp;redirect=' . urlencode(str_replace('&amp;', '&', build_url())),
+		'S_LOGIN_ACTION'		=> ((!defined('ADMIN_START')) ? append_sid("{$phpbb_root_path}ucp.$phpEx", 'mode=login') : append_sid("index.$phpEx", false, true, $user->session_id)),
+		'S_LOGIN_REDIRECT'		=> build_hidden_fields(array('redirect' => str_replace('&amp;', '&', build_url()))),
 
 		'S_ENABLE_FEEDS'			=> ($config['feed_enable']) ? true : false,
+		'S_ENABLE_FEEDS_OVERALL'	=> ($config['feed_overall']) ? true : false,
 		'S_ENABLE_FEEDS_FORUMS'		=> ($config['feed_overall_forums']) ? true : false,
-		'S_ENABLE_FEEDS_TOPICS'		=> ($config['feed_overall_topics']) ? true : false,
+		'S_ENABLE_FEEDS_TOPICS'		=> ($config['feed_topics_new']) ? true : false,
+		'S_ENABLE_FEEDS_TOPICS_ACTIVE'	=> ($config['feed_topics_active']) ? true : false,
 		'S_ENABLE_FEEDS_NEWS'		=> ($s_feed_news) ? true : false,
 
 		'T_THEME_PATH'			=> "{$web_path}styles/" . $user->theme['theme_path'] . '/theme',
@@ -4214,7 +4338,7 @@ function page_header($page_title = '', $display_online_list = true, $item_id = 0
 		'T_ICONS_PATH'			=> "{$web_path}{$config['icons_path']}/",
 		'T_RANKS_PATH'			=> "{$web_path}{$config['ranks_path']}/",
 		'T_UPLOAD_PATH'			=> "{$web_path}{$config['upload_path']}/",
-		'T_STYLESHEET_LINK'		=> (!$user->theme['theme_storedb']) ? "{$web_path}styles/" . $user->theme['theme_path'] . '/theme/stylesheet.css' : append_sid("{$phpbb_root_path}style.$phpEx", 'id=' . $user->theme['style_id'] . '&amp;lang=' . $user->data['user_lang']),
+		'T_STYLESHEET_LINK'		=> (!$user->theme['theme_storedb']) ? "{$web_path}styles/" . $user->theme['theme_path'] . '/theme/stylesheet.css' : append_sid("{$phpbb_root_path}style.$phpEx", 'id=' . $user->theme['style_id'] . '&amp;lang=' . $user->data['user_lang'], true, $user->session_id),
 		'T_STYLESHEET_NAME'		=> $user->theme['theme_name'],
 
 		'T_THEME_NAME'			=> $user->theme['theme_path'],
