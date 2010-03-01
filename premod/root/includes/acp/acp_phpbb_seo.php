@@ -946,7 +946,9 @@ class acp_phpbb_seo {
 		global $phpEx, $config, $phpbb_root_path, $phpbb_seo;
 		$all_ht_tpl = array('pos1' => '', 'pos2' => '');
 		$path = $phpbb_root_path . 'phpbb_seo/includes/htmods';
-		$dir = opendir($path);
+		if (!($dir = @opendir($path))) {
+			return false;
+		}
 		while( ($file = @readdir($dir)) !== false ) {
 			if (!trim($file, '. ')) {
 				continue;
@@ -1029,23 +1031,19 @@ class acp_phpbb_seo {
 			// check if the config cache file is here already and writeable
 			$check = $cache_dir . "phpbb_cache.$phpEx";
 			$checks = array("$check.old", "$check.current", "$cache_dir.htaccess", "$cache_dir.htaccess.old", "$cache_dir.htaccess.current");
-			if (file_exists($check)) {
-				if (!is_writeable($check)) {
-					$inner_write = false;
-					phpbb_chmod($check, CHMOD_READ | CHMOD_WRITE);
-					$fp = @fopen($check, 'wb');
-					if ($fp !== false) {
-						$inner_write = true;
-					}
-					@fclose($fp);
-					if ($inner_write) {
-						// chmod worked, apply it to all other files in there
-						foreach($checks as $cfile) {
-							phpbb_chmod($cfile, CHMOD_READ | CHMOD_WRITE);
+			// let's check all files
+			$inner_write = true;
+			foreach($checks as $check) {
+				if (file_exists($check)) {
+					if (!is_writeable($check)) {
+						$inner_write = false;
+						phpbb_chmod($check, CHMOD_READ | CHMOD_WRITE);
+						$fp = @fopen($check, 'wb');
+						if ($fp !== false) {
+							$inner_write = true;
 						}
+						@fclose($fp);
 					}
-				} else {
-					$inner_write = true;
 				}
 			}
 		}
