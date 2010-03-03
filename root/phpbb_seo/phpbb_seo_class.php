@@ -232,7 +232,7 @@ class phpbb_seo extends setup_phpbb_seo {
 			$this->seo_opt['rem_ids'] = false;
 		}
 		// virtual root option
-		if ($this->seo_opt['virtual_root'] && $phpbb_seo->seo_path['phpbb_script']) {
+		if ($this->seo_opt['virtual_root'] && $this->seo_path['phpbb_script']) {
 			// virtual root is available and activated
 			$this->seo_path['phpbb_urlR'] = $this->seo_path['root_url'];
 			$this->file_hbase['index'] = $this->seo_path['phpbb_url'];
@@ -244,7 +244,7 @@ class phpbb_seo extends setup_phpbb_seo {
 		$this->seo_ext['index'] = empty($this->seo_static['index']) ? '' : ( empty($this->seo_ext['index']) ? '.html' : $this->seo_ext['index']);
 		// In case url rewriting is deactivated
 		if (!$this->seo_opt['url_rewrite'] || $this->modrtype == 0) {
-			$phpbb_seo->seo_opt['sql_rewrite'] = false;
+			$this->seo_opt['sql_rewrite'] = false;
 			$this->seo_opt['zero_dupe']['on'] = false;
 		}
 	}
