@@ -702,6 +702,10 @@ class acp_phpbb_seo {
 			$htaccess_tpl .= '# Options -MultiViews' . "\n";
 			$htaccess_tpl .= '# REMEBER YOU ONLY NEED TO STARD MOD REWRITE ONCE</b>' . "\n";
 			$htaccess_tpl .= '<b style="color:green">RewriteEngine</b> <b style="color:#FF00FF">On</b>' . "\n";
+			$htaccess_tpl .= '<b style="color:blue"># Uncomment the statement below if you want to make use of' . "\n";
+			$htaccess_tpl .= '# HTTP authentication and it does not already work.' . "\n";
+			$htaccess_tpl .= '# This could be required if you are for example using PHP via Apache CGI.' . "\n";
+			$htaccess_tpl .= '# RewriteRule .* - [E=HTTP_AUTHORIZATION:%{HTTP:Authorization},L]</b>' . "\n";
 			$htaccess_tpl .= '<b style="color:blue"># REWRITE BASE</b>' . "\n";
 			$htaccess_tpl .= '<b style="color:green">RewriteBase</b> <b>/{REWRITEBASE}</b>' . "\n";
 			$htaccess_tpl .= '<b style="color:blue"># HERE IS A GOOD PLACE TO FORCE CANONICAL DOMAIN</b>' . "\n";
