@@ -10,7 +10,7 @@ http://www.phpbb-seo.com/fr/premod-phpbb-seo/premod-referencement-phpbb-t1951.ht
 
 #
 #-----[ OPEN ]------------------------------------------
-## MOD Title:		 Advanced phpBB3 SEO mod Rewrite
+## MOD Title:		 phpBB SEO Ultimate SEO URL
 #
 
 styles/prosilver/template/attachment.html
@@ -53,7 +53,7 @@ styles/prosilver/template/attachment.html
 
 #
 #-----[ OPEN ]------------------------------------------
-## MOD Title:		 Advanced phpBB3 SEO mod Rewrite
+## MOD Title:		 phpBB SEO Ultimate SEO URL
 #
 
 styles/prosilver/template/forum_fn.js
@@ -142,7 +142,7 @@ function phpbb_seo_href() {
 	for (var i = 0; i < hrefelslen; i++) {
 		var el = hrefels[i];
 		var hrefinner = el.innerHTML.toLowerCase();
-		if (el.onclick || (el.href == '') || (el.href.indexOf('javascript') >=0 ) || (hrefinner.indexOf('<a') >= 0) ) {
+		if (el.onclick || (el.href == '') || (el.href.indexOf('javascript') >=0 ) || (el.href.indexOf('mailto') >=0 ) || (hrefinner.indexOf('<a') >= 0) ) {
 			continue;
 		}
 		if (seo_hashfix && el.hash && hashtest.test(el.href)) {
@@ -182,7 +182,7 @@ styles/prosilver/template/forumlist_body.html
 
 #
 #-----[ OPEN ]------------------------------------------
-## MOD Title:		 Advanced phpBB3 SEO mod Rewrite
+## MOD Title:		 phpBB SEO Ultimate SEO URL
 ## MOD Title:		 phpBB3 SEO Dynamic Meta tags
 ## MOD Title:		 phpBB3 SEO Optimal titles
 ## MOD Title:		 GYM Sitempas & RSS
@@ -230,7 +230,7 @@ styles/prosilver/template/overall_header.html
 
 #
 #-----[ FIND ]------------------------------------------
-## MOD Title:		 Advanced phpBB3 SEO mod Rewrite
+## MOD Title:		 phpBB SEO Ultimate SEO URL
 #
 
 	var onload_functions = new Array();
@@ -290,7 +290,7 @@ styles/prosilver/template/overall_footer.html
 		<!-- ENDIF -->
 #
 #-----[ OPEN ]------------------------------------------
-## MOD Title:		 Advanced phpBB3 SEO mod Rewrite
+## MOD Title:		 phpBB SEO Ultimate SEO URL
 #
 
 styles/prosilver/template/posting_editor.html
@@ -317,7 +317,7 @@ styles/prosilver/template/posting_editor.html
 
 #
 #-----[ OPEN ]------------------------------------------
-## MOD Title:		 Advanced phpBB3 SEO mod Rewrite
+## MOD Title:		 phpBB SEO Ultimate SEO URL
 #
 
 styles/prosilver/template/simple_header.html
@@ -378,9 +378,34 @@ styles/prosilver/template/viewforum_body.html
 #
 #-----[ OPEN ]------------------------------------------
 ## MOD Title:		 phpBB SEO Related Topics
+## MOD Title:		 phpBB SEO Ultimate SEO URL
 #
 
 styles/prosilver/template/viewtopic_body.html
+
+#
+#-----[ FIND ]------------------------------------------
+#
+
+<a href="#p{postrow.POST_ID}">
+
+#
+#-----[ REPLACE WITH ]------------------------------------------
+#
+
+<a href="{U_VIEW_TOPIC}#p{postrow.POST_ID}">
+
+#
+#-----[ FIND ]------------------------------------------
+#
+
+<a href="#wrap" class="top" title="{L_BACK_TO_TOP}">
+
+#
+#-----[REPLACE WITH ]------------------------------------------
+#
+
+<a href="{U_VIEW_TOPIC}#wrap" class="top" title="{L_BACK_TO_TOP}">
 
 #
 #-----[ FIND ]------------------------------------------
@@ -485,7 +510,7 @@ div.gymsublist ul li {
 
 #
 #-----[ OPEN ]------------------------------------------
-## MOD Title:		 Advanced phpBB3 SEO mod Rewrite
+## MOD Title:		 phpBB SEO Ultimate SEO URL
 #
 
 styles/subsilver2/template/attachment.html
@@ -549,7 +574,7 @@ styles/subsilver2/template/forumlist_body.html
 					
 #
 #-----[ OPEN ]------------------------------------------
-## MOD Title:		 Advanced phpBB3 SEO mod Rewrite
+## MOD Title:		 phpBB SEO Ultimate SEO URL
 ## MOD Title:		 phpBB3 SEO Dynamic Meta tags
 ## MOD Title:		 phpBB3 SEO Optimal titles
 ## MOD Title:		 GYM Sitempas & RSS
@@ -597,7 +622,7 @@ styles/subsilver2/template/overall_header.html
 
 #
 #-----[ FIND ]------------------------------------------
-## MOD Title:		 Advanced phpBB3 SEO mod Rewrite
+## MOD Title:		 phpBB SEO Ultimate SEO URL
 #
 
 function jumpto()
@@ -689,7 +714,7 @@ function phpbb_seo_href() {
 	for (var i = 0; i < hrefelslen; i++) {
 		var el = hrefels[i];
 		var hrefinner = el.innerHTML.toLowerCase();
-		if (el.onclick || (el.href == '') || (el.href.indexOf('javascript') >=0 ) || (hrefinner.indexOf('<a') >= 0) ) {
+		if (el.onclick || (el.href == '') || (el.href.indexOf('javascript') >=0 ) || (el.href.indexOf('mailto') >=0 ) || (hrefinner.indexOf('<a') >= 0) ) {
 			continue;
 		}
 		if (seo_hashfix && el.hash && hashtest.test(el.href)) {
@@ -732,7 +757,7 @@ styles/subsilver2/template/overall_footer.html
 
 #
 #-----[ OPEN ]------------------------------------------
-## MOD Title:		 Advanced phpBB3 SEO mod Rewrite
+## MOD Title:		 phpBB SEO Ultimate SEO URL
 #
 
 styles/subsilver2/template/posting_body.html
@@ -759,7 +784,7 @@ styles/subsilver2/template/posting_body.html
 
 #
 #-----[ OPEN ]------------------------------------------
-## MOD Title:		 Advanced phpBB3 SEO mod Rewrite
+## MOD Title:		 phpBB SEO Ultimate SEO URL
 #
 
 styles/subsilver2/template/simple_header.html
@@ -798,9 +823,22 @@ styles/subsilver2/template/viewforum_body.html
 #
 #-----[ OPEN ]------------------------------------------
 ## MOD Title:		 phpBB SEO Related Topics
+## MOD Title:		 phpBB SEO Ultimate SEO URL
 #
 
 styles/subsilver2/template/viewtopic_body.html
+
+#
+#-----[ FIND ]------------------------------------------
+#
+
+<a href="#wrapheader">
+
+#
+#-----[ REPLACE WITH ]------------------------------------------
+#
+
+<a href="{U_VIEW_TOPIC}#wrapheader">
 
 #
 #-----[ FIND ]------------------------------------------
