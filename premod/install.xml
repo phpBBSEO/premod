@@ -128,6 +128,7 @@ Tout manquement à ces règles contribuera à mettre le support et le développe
 					<change><![CDATA[Moved stripslashes_deep to phpbb_seo::stripslashes to keep all it inside the phpbb_seo class]]></change>
 					<change><![CDATA[En language pack fixes from sevenalive (@phpBB SEO)]]></change>
 					<change><![CDATA[GYM Sitemaps & RSS 2.0.1]]></change>
+					<change><![CDATA[Fixed : Global announcement feed]]></change>
 					<change><![CDATA[Fixed : Allow to add modules with no acp]]></change>
 					<change><![CDATA[En language pack fixes from sevenalive (@phpBB SEO)]]></change>
 					<change><![CDATA[Meta tags 0.4.2]]></change>
