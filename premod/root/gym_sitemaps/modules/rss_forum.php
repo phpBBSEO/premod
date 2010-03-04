@@ -250,7 +250,7 @@ class rss_forum {
 
 			// it's the announces sitemap
 			// We want to list all the global announces from the forum
-			$forum_sql = ' t.forum_id = 0 AND t.topic_type = ' . POST_GLOBAL . ' AND ';
+			$forum_sql = ' t.forum_id = 0 AND t.topic_type = ' . POST_GLOBAL;
 			// Count items
 			$sql = "SELECT COUNT(topic_id) AS topic
 				FROM " . TOPICS_TABLE . " t
@@ -273,12 +273,13 @@ class rss_forum {
 			$chan_desc =  sprintf($user->lang['RSS_ANNOUCES_DESC'], $this->module_config['rss_sitename']) . "\n\n" . $this->module_config['rss_site_desc'];
 			// Forum announces location
 			$this->gym_master->parse_channel($chan_title . $this->module_config['extra_title'], $chan_desc . "\n", $chan_link,  $this->output_data['last_mod_time'], $this->module_config['rss_image_url'], $chan_source);
-			// Dirty but efficient workarround for annouces
+			// Dirty but efficient workarround for announces
 			$this->forum_cache[0]['forum_url'] = $phpbb_seo->seo_opt['virtual_folder'] ? $phpbb_seo->seo_static['global_announce'] . $phpbb_seo->seo_ext['global_announce'] : '';
 			$this->forum_cache[0]['forum_url_full'] = $this->forum_cache[0]['forum_name'] = $chan_title;
 			$this->forum_cache[0]['replies_key'] = 'topic_replies';
 			$this->forum_cache[0]['approve'] = 0;
 			$this->forum_cache[0]['forum_rss_url'] = $chan_source;
+			$this->actions['auth_view_read'][0] = 0;
 			$this->list_topics($forum_sql . ' AND ' , $forum_data);
 
 		} else { // Module feeds
