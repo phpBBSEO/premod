@@ -564,6 +564,15 @@ Index: styles/subsilver2/template/attachment.html
  			</span><br />
  			<span class="gensmall">{_file.L_DOWNLOAD_COUNT}</span>
  		<!-- ENDIF -->
+@@ -72,7 +72,7 @@
+ 				<param name="controller" value="true">
+ 				<param name="autoplay" value="false" />
+ 				<param name="type" value="video/quicktime">
+-				<embed name="qtstream_{_file.ATTACH_ID}" src="{_file.U_DOWNLOAD_LINK}" pluginspage="http://www.apple.com/quicktime/download/" enablejavascript="true" controller="true" width="0" height="16" type="video/quicktime" autoplay="false"> 
++				<embed name="qtstream_{_file.ATTACH_ID}" src="{_file.U_DOWNLOAD_LINK}" pluginspage="http://www.apple.com/quicktime/download/" enablejavascript="true" controller="true" width="0" height="16" type="video/quicktime" autoplay="false">
+ 			</object>
+ 		<!-- ELSEIF _file.S_RM_FILE -->
+ 			<object id="rmstream_{_file.ATTACH_ID}" classid="clsid:CFCDAA03-8BE4-11cf-B84B-0020AFBBCCFA" width="200" height="50">
 Index: styles/prosilver/theme/common.css
 ===================================================================
 --- styles/prosilver/theme/common.css	(phpBB 3.0.7)
@@ -671,7 +680,7 @@ Index: styles/prosilver/template/forumlist_body.html
 -						<!-- IF forumrow.LAST_POST_TIME --><dfn>{L_LAST_POST}</dfn> {L_POST_BY_AUTHOR} {forumrow.LAST_POSTER_FULL}
 -						<!-- IF not S_IS_BOT --><a href="{forumrow.U_LAST_POST}">{LAST_POST_IMG}</a> <!-- ENDIF --><br />{forumrow.LAST_POST_TIME}<!-- ELSE -->{L_NO_POSTS}<br />&nbsp;<!-- ENDIF --></span>
 +						<!-- IF forumrow.LAST_POST_TIME --><dfn>{L_LAST_POST}</dfn><!-- IF forumrow.LAST_POST_LINK --><i>{forumrow.LAST_POST_LINK}</i><br/><!-- ENDIF --> {L_POST_BY_AUTHOR} {forumrow.LAST_POSTER_FULL}
-+						<a href="{forumrow.U_LAST_POST}">{LAST_POST_IMG}</a><br />{forumrow.LAST_POST_TIME}<!-- ELSE -->{L_NO_POSTS}<!-- ENDIF --></span>
++						<a href="{forumrow.U_LAST_POST}">{LAST_POST_IMG}</a><br />{forumrow.LAST_POST_TIME}<!-- ELSE -->{L_NO_POSTS}<br />&nbsp;<!-- ENDIF --></span>
  					</dd>
  				<!-- ENDIF -->
  			</dl>
@@ -2191,6 +2200,17 @@ Index: includes/acp/acp_update.php
  		));
  	}
  }
+Index: includes/acp/acp_profile.php
+===================================================================
+--- includes/acp/acp_profile.php	(phpBB 3.0.7)
++++ includes/acp/acp_profile.php	(phpBB SEO 3.0.7)
+@@ -1622,4 +1622,4 @@
+ 	}
+ }
+ 
+-?>
++?>
+\ No newline at end of file
 Index: includes/search/fulltext_native.php
 ===================================================================
 --- includes/search/fulltext_native.php	(phpBB 3.0.7)
