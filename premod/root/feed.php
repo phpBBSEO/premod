@@ -1,7 +1,7 @@
 <?php
 /**
 * @package phpBB3
-* @version $Id: feed.php 10435 2010-01-24 16:06:23Z bantu $
+* @version $Id$
 * @copyright (c) 2009 phpBB Group
 * @license http://opensource.org/licenses/gpl-license.php GNU Public License
 *
@@ -522,7 +522,7 @@ class phpbb_feed_base
 
 		if (!isset($forum_ids))
 		{
-			$forum_ids = array_keys($auth->acl_getf('f_read'));
+			$forum_ids = array_keys($auth->acl_getf('f_read', true));
 		}
 
 		return $forum_ids;
