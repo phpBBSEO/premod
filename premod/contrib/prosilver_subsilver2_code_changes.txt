@@ -4,7 +4,7 @@
 
 Once you will have updated, you will have to refresh your theme's cache as well as phpBB's cache (ACP => STYLE, Themes => Refresh).
 
-Code change for prosilver and subsilver templates with the phpBB SEO premod 3.0.6 :
+Code change for prosilver and subsilver templates with the phpBB SEO premod 3.0.7 :
 http://www.phpbb-seo.com/en/phpbb-seo-premod/seo-url-premod-t1549.html (en)
 http://www.phpbb-seo.com/fr/premod-phpbb-seo/premod-referencement-phpbb-t1951.html (fr)
 

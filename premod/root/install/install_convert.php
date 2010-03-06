@@ -2,7 +2,7 @@
 /**
 *
 * @package install
-* @version $Id: install_convert.php 9936 2009-08-07 12:50:25Z bantu $
+* @version $Id$
 * @copyright (c) 2006 phpBB Group
 * @license http://opensource.org/licenses/gpl-license.php GNU Public License
 *
