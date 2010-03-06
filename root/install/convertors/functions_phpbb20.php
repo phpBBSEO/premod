@@ -2,7 +2,7 @@
 /**
 *
 * @package install
-* @version $Id: functions_phpbb20.php 10028 2009-08-20 12:19:12Z acydburn $
+* @version $Id$
 * @copyright (c) 2006 phpBB Group
 * @license http://opensource.org/licenses/gpl-license.php GNU Public License
 *

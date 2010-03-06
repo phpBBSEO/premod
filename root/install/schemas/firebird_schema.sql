@@ -1,5 +1,5 @@
 #
-# $Id: firebird_schema.sql 10462 2010-01-28 23:15:25Z bantu $
+# $Id$
 #
 
 

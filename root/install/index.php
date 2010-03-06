@@ -2,7 +2,7 @@
 /**
 *
 * @package install
-* @version $Id: index.php 10299 2009-12-06 02:30:24Z naderman $
+* @version $Id$
 * @copyright (c) 2005 phpBB Group
 * @license http://opensource.org/licenses/gpl-license.php GNU Public License
 *

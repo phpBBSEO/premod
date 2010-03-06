@@ -2,13 +2,13 @@
 /**
 *
 * @package install
-* @version $Id: database_update.php 10555 2010-02-28 19:30:58Z naderman $
+* @version $Id$
 * @copyright (c) 2006 phpBB Group
 * @license http://opensource.org/licenses/gpl-license.php GNU Public License
 *
 */
 
-$updates_to_version = '3.0.7';
+$updates_to_version = '3.0.7-PL1';
 
 // Enter any version to update from to test updates. The version within the db will not be updated.
 $debug_from_version = false;
@@ -926,6 +926,8 @@ function database_update_info()
 		'3.0.7-RC1'		=> array(),
 		// No changes from 3.0.7-RC2 to 3.0.7
 		'3.0.7-RC2'		=> array(),
+		// No changes from 3.0.7 to 3.0.7-PL1
+		'3.0.7'		=> array(),
 	);
 }
 
@@ -1664,6 +1666,10 @@ function change_database_data(&$no_updates, $version)
 
 		// No changes from 3.0.7-RC2 to 3.0.7
 		case '3.0.7-RC2':
+		break;
+
+		// No changes from 3.0.7 to 3.0.7-PL1
+		case '3.0.7':
 		break;
 	}
 }

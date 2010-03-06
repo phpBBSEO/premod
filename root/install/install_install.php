@@ -2,7 +2,7 @@
 /**
 *
 * @package install
-* @version $Id: install_install.php 10300 2009-12-07 12:56:17Z bantu $
+* @version $Id$
 * @copyright (c) 2005 phpBB Group
 * @license http://opensource.org/licenses/gpl-license.php GNU Public License
 *
