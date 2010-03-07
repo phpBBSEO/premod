@@ -110,6 +110,13 @@ Tout manquement à ces règles contribuera à mettre le support et le développe
 		</installation>
 		<history>
 			<entry>
+				<date><![CDATA[2010-03-07]]></date>
+				<rev-version><![CDATA[3.0.7-PL1]]></rev-version>
+				<changelog lang="en">
+					<change><![CDATA[Base Updated to phpBB 3.0.7-PL1 with no change in the phpBB SEO mods]]></change>
+				</changelog>
+			</entry>
+			<entry>
 				<date><![CDATA[2010-03-04]]></date>
 				<rev-version><![CDATA[3.0.7]]></rev-version>
 				<changelog lang="en">
@@ -380,27 +387,26 @@ Tout manquement à ces règles contribuera à mettre le support et le développe
 >>>>   UPDATE INSTRUCTION   	   <<<<<
 ________________________________________
 
-Update 3.0.6 => 3.0.7 :
+Update 3.0.7 => 3.0.7-PL1 :
 First, go to http://downloads.phpbb-seo.com/seo-url-premod-12/
 where you'll be able to download the update packages
 You can update using two method :
-	1) Auto updating : "3.0.6 to 3.0.7 Auto update"
+	1) Auto updating : "3.0.7 to 3.0.7-PL1 Auto update"
 		- Upload the auto_update/install/*.* folder of the update package to install/*.*
 		- Go to ACP => SYSTEM and follow instructions.
 		The auto update method will take the eventual code change you have made into account, 
 		and will attempt to merge the new files with your online modified ones.
 		It's the safest method for most, the installer will tel you if it has trouble to update some files.
-	2) Manual updating : "3.0.6 to 3.0.7 Changed Files"
+	2) Manual updating : "3.0.7 to 3.0.7-PL1 Changed Files"
 		You'll find the modified file list in the modified/ folder of the update package.
 		- Upload / merge / overwrite all file,
 		- Upload the modified/install/*.* to install/*.*,
 		- Run example.com/phpbb/install/database_update.php to update the DB.
 
-This update will not change any of your current URL settings, but it will add some new one.
-You WILL have to update you .htaccess once done.
+This update will not change any of your current URL settings and will not change anything in the phpBB SEO mods.
+
 The phpbb_seo_class.php file does not hold static part and delimiters customisation any more, these are now set in the phpbb_seo/includes/setup_phpbb_seo.php. If you customized your default delimiters, static part etc, you will have to set them up in that file. Please read what's said bellow for more details about how to do it.
 
-Once you will have updated, you will have to refresh your theme's cache as well as phpBB's cache (ACP => STYLE, Themes => Refresh).
 
 We have included the mod GYM Sitemap & RSS, but we kept the install separated.
 See bellow to install.
@@ -729,28 +735,26 @@ for GYM sitemaps & RSS. Just generate a new .htaccess once you have installed th
 >>>>   MISE A JOUR	                <<<<<
 _____________________________________________
 
-Mise à jour : 3.0.6 => 3.0.7 : 
+Mise à jour : 3.0.7 => 3.0.7-PL1 : 
 Tout d'abord, rendez vous sur http://telecharger.phpbb-seo.com/premod-referencement-phpbb-10/
 pour télécharger un des pack de mise à jour.
 Vous pouvez mettre à jour en suivant deux méthodes :
-	1) Mise à jour automatique : "3.0.6 vers 3.0.7 MAJ automatique"
+	1) Mise à jour automatique : "3.0.7 vers 3.0.7-PL1 MAJ automatique"
 		- Uplodez le contenu du dossier auto_update/install/*.* vers install/*.*,
 		- Rendez vous à l'ACP => SYSTEM et suivez les instructions.
 		L'auto updateur prendra vos éventuelles modifications en compte et tentera
 		de merger les nouveaux fichiers avec ceux que vous auriez modifié.
 		C'est la methode la plus sûre dans la plupart des cas, l'updateur vous dira
 		s'il a des problème pour modifier certain fichiers.
-	2) Mise à jour manuelle : "3.0.6 vers 3.0.7 Fichiers modifiés"
+	2) Mise à jour manuelle : "3.0.7 vers 3.0.7-PL1 Fichiers modifiés"
 		Vous trouverez les fichiers modifiés dans le dossier modified/ de l'archive.
 		- Uploadez / mergez / écrasez tous les fichiers,
 		- Uploadez le dossier modified/install/*.* vers install/*.*,
 		- Lancez example.com/phpbb/install/database_update.php pour mettre à jour la base de données.
 
-Vos réglages d'urls de la classe phpbb_seo ne seront pas altérés par la MAJ, mais de nouvelle options sont ajoutés.
-Vous DEVREZ mettre à jour votre .htaccess un fois cette mise à jour effectuée.
-Le fichier phpbb_seo_class.php ne contient plus les personnalisation des parties statiques et des délimiteurs de vos URLs, ces réglages se font désormais dans phpbb_seo/includes/setup_phpbb_seo.php. Si vous aviez personnalisé les réglages par défaut pour les parties statiques et les délimiteurs, vous DEVREZ reporter ces modification dans ce fichier. Veuillez vous reporter à ce qui est dit plus bas pour plus de détails.
+Vos réglages d'urls de la classe phpbb_seo ne seront pas altérés par la MAJ qui ne modifie en rien les mods phpBB SEO.
 
-Enfin, une fois les nouveaux fichiers en place, il vous faudra vider le cache de phpBB et rafraîchir vos thèmes (ACP => STYLE => Thèmes => Rafraîchir).
+Le fichier phpbb_seo_class.php ne contient plus les personnalisation des parties statiques et des délimiteurs de vos URLs, ces réglages se font désormais dans phpbb_seo/includes/setup_phpbb_seo.php. Si vous aviez personnalisé les réglages par défaut pour les parties statiques et les délimiteurs, vous DEVREZ reporter ces modification dans ce fichier. Veuillez vous reporter à ce qui est dit plus bas pour plus de détails.
 
 Nous avons inclus le mod GYM Sitemap & RSS, mais nous avons séparé l'installation
 reportez vous aux instructions plus bas pour plus de détails.
