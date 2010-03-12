@@ -101,7 +101,7 @@ class display_forums {
 			$is_cat = $row['parent_id'] == 0 ? true : false;
 			if (empty($master->forum_datas[$forum_id])) {
 				// www.phpBB-SEO.com SEO TOOLKIT BEGIN
-				$phpbb_seo->seo_url['forum'][$forum_id] = $phpbb_seo->set_url($row['forum_name'], $forum_id, $phpbb_seo->seo_static['forum']);
+				$phpbb_seo->seo_url['forum'][$forum_id] = $phpbb_seo->set_url($row['forum_name'], $forum_id, 'forum');
 				// www.phpBB-SEO.com SEO TOOLKIT END
 				$master->forum_datas[$forum_id] = array_merge($row,
 					array(

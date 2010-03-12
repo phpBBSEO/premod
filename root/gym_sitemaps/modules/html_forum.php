@@ -332,7 +332,7 @@ class html_forum {
 						$result = $db->sql_query($sql);
 						if ($row = $db->sql_fetchrow($result)) {
 							// www.phpBB-SEO.com SEO TOOLKIT BEGIN
-							$phpbb_seo->set_url($row['forum_name'], $forum_id, $phpbb_seo->seo_static['forum']);
+							$phpbb_seo->set_url($row['forum_name'], $forum_id, 'forum');
 							// www.phpBB-SEO.com SEO TOOLKIT END
 							$this->forum_datas[$forum_id] = array_merge($row,  array(
 								'forum_url' => append_sid("{$phpbb_root_path}viewforum.$phpEx", "f=$forum_id"),
@@ -566,7 +566,7 @@ class html_forum {
 				if (empty($this->forum_datas[$forum_id])) {
 					$row = & $forum_datas[$forum_id];
 					// www.phpBB-SEO.com SEO TOOLKIT BEGIN
-					$phpbb_seo->set_url($row['forum_name'], $forum_id, $phpbb_seo->seo_static['forum']);
+					$phpbb_seo->set_url($row['forum_name'], $forum_id, 'forum');
 					// www.phpBB-SEO.com SEO TOOLKIT END
 					$this->forum_datas[$forum_id] = array_merge($row,  array(
 						'forum_url' => append_sid("{$phpbb_root_path}viewforum.$phpEx", "f=$forum_id"),

@@ -141,7 +141,7 @@ class display_topics {
 			// Start with the forum
 			if (!$s_global && empty($master->forum_datas[$forum_id])) {
 				// www.phpBB-SEO.com SEO TOOLKIT BEGIN
-				$phpbb_seo->set_url($forum_datas[$forum_id]['forum_name'], $forum_id, $phpbb_seo->seo_static['forum']);
+				$phpbb_seo->set_url($forum_datas[$forum_id]['forum_name'], $forum_id, 'forum');
 				// www.phpBB-SEO.com SEO TOOLKIT END
 				$master->forum_datas[$forum_id] = array_merge($forum_datas[$forum_id],  array(
 					'forum_url' => append_sid("{$phpbb_root_path}viewforum.$phpEx", "f=$forum_id"),
