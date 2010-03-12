@@ -168,7 +168,7 @@ class gym_rss extends gym_sitemaps {
 		// Let's now check out if it's a GYM 1.x URL
 		if ($this->gym_config['rss_1xredir'] && !empty($_GET['gym1x'])) {
 			$this->actions['gym1x_newurl'] = '/' . (isset($_GET['m']) ? 'digest/' : '' ) . (isset($_GET['l']) ? 'long/' : (isset($_GET['s']) ? 'short/' : '' ) );
-			$this->actions['gym1x_newurl'] = empty($this->actions['module_main']) ? 'rss' . $this->actions['gym1x_newurl'] . 'rss.xml' : (empty($_GET['gymtitle']) ? 'rss' .  $this->actions['gym1x_newurl'] . (!empty($this->actions['module_sub']) ? $this->actions['module_sub'] . '/' : '' ) . $this->actions['module_main'] . '.xml' : $phpbb_seo->set_url($_GET['gymtitle'], (int) $this->actions['module_sub'], $phpbb_seo->seo_static['forum']) . $this->actions['gym1x_newurl'] . $this->actions['module_main'] . '.xml');
+			$this->actions['gym1x_newurl'] = empty($this->actions['module_main']) ? 'rss' . $this->actions['gym1x_newurl'] . 'rss.xml' : (empty($_GET['gymtitle']) ? 'rss' .  $this->actions['gym1x_newurl'] . (!empty($this->actions['module_sub']) ? $this->actions['module_sub'] . '/' : '' ) . $this->actions['module_main'] . '.xml' : $phpbb_seo->set_url($_GET['gymtitle'], (int) $this->actions['module_sub'], 'forum') . $this->actions['gym1x_newurl'] . $this->actions['module_main'] . '.xml');
 			// nothing else needed for this
 			return;
 

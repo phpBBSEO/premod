@@ -499,7 +499,7 @@ class gym_sitemaps {
 	*/
 	function forum_url($forum_name, $forum_id) {
 		global $phpbb_seo;
-		return $phpbb_seo->seo_opt['url_rewrite'] ? $phpbb_seo->set_url($forum_name, $forum_id, $phpbb_seo->seo_static['forum']) : sprintf($this->url_config['forum_tpl'], $forum_id);
+		return $phpbb_seo->seo_opt['url_rewrite'] ? $phpbb_seo->set_url($forum_name, $forum_id, 'forum') : sprintf($this->url_config['forum_tpl'], $forum_id);
 	}
 	/**
 	* topic_url($topic_title, $topic_id, $forum_url, $forum_id) builds forum url with proper options

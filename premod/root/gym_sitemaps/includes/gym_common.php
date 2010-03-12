@@ -171,7 +171,7 @@ function obtain_gym_links($gym_links = array()) {
 			}
 			if (!empty($forum_data) ) {
 				if ($_phpbb_seo && empty($phpbb_seo->seo_url['forum'][$forum_id])) {
-					$phpbb_seo->seo_url['forum'][$forum_id] = $phpbb_seo->set_url($forum_name, $forum_id, $phpbb_seo->seo_static['forum']);
+					$phpbb_seo->seo_url['forum'][$forum_id] = $phpbb_seo->set_url($forum_name, $forum_id, 'forum');
 				}
 				if (!empty($html_setup['link_cat']) && (isset($html_setup['auth_guest'][$forum_id]) || (!empty($html_setup['forum_allow_auth']) && !isset($html_setup['forum_exclude'][$forum_id]))) ) {
 					if ($html_setup['forum_allow_cat_news']) {
