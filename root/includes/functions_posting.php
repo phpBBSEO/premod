@@ -1321,7 +1321,7 @@ function user_notification($mode, $subject, $topic_title, $forum_name, $forum_id
 
 				// www.phpBB-SEO.com SEO TOOLKIT BEGIN
 				global $phpbb_seo;
-				$phpbb_seo->set_url(htmlspecialchars_decode($forum_name), $forum_id, $phpbb_seo->seo_static['forum']);
+				$phpbb_seo->set_url(htmlspecialchars_decode($forum_name), $forum_id, 'forum');
 				$phpbb_seo->prepare_iurl(array('topic_id' => $topic_id, 'topic_title' => htmlspecialchars_decode($topic_title)), 'topic', $phpbb_seo->seo_url['forum'][$forum_id]);
 				$messenger->assign_vars(array(
 					'USERNAME'		=> htmlspecialchars_decode($addr['name']),
@@ -2620,7 +2620,7 @@ function submit_post($mode, $subject, $username, $topic_type, &$poll, &$data, $u
 		$params .= '&amp;t=' . $data['topic_id'];
 	}
 	// www.phpBB-SEO.com SEO TOOLKIT BEGIN
-	$phpbb_seo->set_url($data['forum_name'], $data['forum_id'], $phpbb_seo->seo_static['forum']);
+	$phpbb_seo->set_url($data['forum_name'], $data['forum_id'], 'forum');
 	if ( $params ) {
 		$phpbb_seo->prepare_iurl($data, 'topic', $topic_type == POST_GLOBAL ? $phpbb_seo->seo_static['global_announce'] : $phpbb_seo->seo_url['forum'][$data['forum_id']]);
 	}

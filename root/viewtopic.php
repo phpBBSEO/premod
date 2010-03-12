@@ -344,7 +344,7 @@ if ($post_id)
 
 $topic_id = (int) $topic_data['topic_id'];
 // www.phpBB-SEO.com SEO TOOLKIT BEGIN
-$phpbb_seo->set_url($topic_data['forum_name'], $forum_id, $phpbb_seo->seo_static['forum']);
+$phpbb_seo->set_url($topic_data['forum_name'], $forum_id, 'forum');
 if ($topic_data['topic_type'] == POST_GLOBAL) {
 	// Let's make sure user will see global annoucements
 	$auth->cache[$forum_id]['f_read'] = 1;
