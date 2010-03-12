@@ -239,14 +239,14 @@ class seo_meta {
 					$RegEx[] = '`\[(' . $this->mconfig['bbcodestrip'] . ')[^\[\]]*\].*\[/\1[^\[\]]*\]`Usi'; // bbcode to strip
 					$replace[] = ' ';
 				}
-				$RegEx[] = '`\[\/?[^\]\[]*\]`Ui'; // Strip all bbcode tags
+				$RegEx[] = '`\[\/?[a-z0-9\*\+\-]+(?:=(?:&quot;.*&quot;|[^\]]*))?(?::[a-z])?(\:[0-9a-z]{5,})\]`'; // Strip all bbcode tags
 				$replace[] = '';
 				$RegEx[] = '`[\s]+`'; // Multiple spaces
 				$replace[] = ' ';
 			}
 			return $this->word_limit(preg_replace($RegEx, $replace, $text));
 		}
-		return $this->word_limit(preg_replace(array('`<[^>]*>(.*<[^>]*>)?`Usi', '`\[\/?[^\]\[]*\]`Ui', '`[\s]+`'), ' ', $text));
+		return $this->word_limit(preg_replace(array('`<[^>]*>(.*<[^>]*>)?`Usi', '`\[\/?[a-z0-9\*\+\-]+(?:=(?:&quot;.*&quot;|[^\]]*))?(?::[a-z])?(\:[0-9a-z]{5,})\]`', '`[\s]+`'), ' ', $text));
 	}
 	/**
 	* Cut the text according to the number of words.
