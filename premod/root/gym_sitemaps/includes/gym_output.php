@@ -310,6 +310,10 @@ class gym_output {
 	function init_gzip() {
 		global $config;
 		$this->gzip_config['gzip'] = $config['gzip_compress'] ? 1 : intval($this->gym_master->set_module_option('gzip', $this->gym_master->override['gzip']));
+		// if gunzip is only activated for GYM, we turn it on for phpBB also
+		if ($this->gzip_config['gzip'] && !$config['gzip_compress']) {
+			$config['gzip_compress'] = 1;
+		}
 		if (!$this->check_gzip() && $this->gzip_config['gzip']) {
 			$this->gzip_config['gzip'] = false;
 		}
