@@ -863,7 +863,9 @@ class acp_phpbb_seo {
 			$htaccess_tpl_vars['{PAGE_PAGINATION}'] = sprintf($tpl['paginpage'], $phpbb_seo->seo_static['pagination'], $seo_ext['pagination']);
 			// static bits
 			foreach ( $phpbb_seo->seo_static as $type => $value) {
-				$htaccess_tpl_vars['{STATIC_' . strtoupper($type) . '}'] = sprintf($tpl['static'] , $phpbb_seo->seo_static[$type]);
+				if (!is_array($phpbb_seo->seo_static[$type])) {
+					$htaccess_tpl_vars['{STATIC_' . strtoupper($type) . '}'] = sprintf($tpl['static'] , $phpbb_seo->seo_static[$type]);
+				}
 			}
 			// delim bits
 			foreach ( $phpbb_seo->seo_delim as $type => $value) {
