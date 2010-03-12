@@ -668,7 +668,7 @@ if ($submit || $preview || $refresh)
 	// www.phpBB-SEO.com SEO TOOLKIT BEGIN
 	if (!empty($phpbb_seo->seo_opt['sql_rewrite'])) {
 		if ($mode == 'post' || ($mode == 'edit' && $post_data['topic_first_post_id'] == $post_id)) {
-			$phpbb_seo->set_url($post_data['forum_name'], $forum_id, $phpbb_seo->seo_static['forum']);
+			$phpbb_seo->set_url($post_data['forum_name'], $forum_id, 'forum');
 			$_parent = $post_data['topic_type'] == POST_GLOBAL ? $phpbb_seo->seo_static['global_announce'] : $phpbb_seo->seo_url['forum'][$forum_id];
 			$_t = !empty($post_data['topic_id']) ? max(0, (int) $post_data['topic_id'] ) : 0;
 			$_url = $phpbb_seo->url_can_edit($forum_id) ? utf8_normalize_nfc(request_var('url', '', true)) : ( isset($post_data['topic_url']) ? $post_data['topic_url'] : '' );

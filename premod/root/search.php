@@ -927,7 +927,7 @@ if ($keywords || $author || $author_id || $search_id || $submit)
 				$u_forum_id = $forum_id;
 			}
 			// www.phpBB-SEO.com SEO TOOLKIT BEGIN
-			$phpbb_seo->set_url($row['forum_name'], $u_forum_id, $phpbb_seo->seo_static['forum']);
+			$phpbb_seo->set_url($row['forum_name'], $u_forum_id, 'forum');
 			$phpbb_seo->prepare_iurl($row, 'topic', $row['topic_type'] == POST_GLOBAL ? $phpbb_seo->seo_static['global_announce'] : $phpbb_seo->seo_url['forum'][$u_forum_id]);
 			// www.phpBB-SEO.com SEO TOOLKIT END
 			$view_topic_url_params = "f=$u_forum_id&amp;t=$result_topic_id" . (($u_hilit) ? "&amp;hilit=$u_hilit" : '');
