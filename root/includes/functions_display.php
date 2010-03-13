@@ -286,9 +286,7 @@ function display_forums($root_data = '', $display_moderators = true, $return_mod
 					$forum_rows[$parent_id]['topic_title'] = $row['topic_title'];
 					$forum_rows[$parent_id]['topic_type'] = $row['topic_type'];
 					$forum_rows[$parent_id]['forum_password'] = $row['forum_password'];
-					if (!empty($row['topic_url'])) {
-						$forum_rows[$parent_id]['topic_url'] = $row['topic_url'];
-					}
+					$forum_rows[$parent_id]['topic_url'] = isset($row['topic_url']) ? $row['topic_url'] : '';
 				}
 				// www.phpBB-SEO.com SEO TOOLKIT END -> no dupe
 			}
