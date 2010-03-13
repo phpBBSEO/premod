@@ -156,7 +156,7 @@
 								</dt>
 								<dd> </dd>
 							</dl>
-							<div class="back2top"><a href="#wrap" class="top" title="{L_BACK_TO_TOP}"></a>{L_BACK_TO_TOP}&#160;</div>
+							<div class="back2top"><a href="{$rss_link}#wrap" class="top" title="{L_BACK_TO_TOP}"></a>{L_BACK_TO_TOP}&#160;</div>
 							<span class="corners-bottom"><span></span></span>
 						</div>
 					</div>
