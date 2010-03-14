@@ -462,6 +462,7 @@ class html_forum {
 		// Wee need to check auth here
 		$this->module_config['last_topics_exclude_list'] = $this->gym_master->set_exclude_list($this->module_config['html_ltopic_exclude']);
 		$forum_auth_ids = array_diff_assoc($this->module_auth['forum']['read_post'], $this->module_config['last_topics_exclude_list']);
+		$all_forum_datas = $forum_datas = array();
 		if (!empty($forum_auth_ids)) {
 			$topic_sql_auth = $db->sql_in_set('t.forum_id', $forum_auth_ids, false, true);
 			$template->assign_vars(array(
@@ -509,7 +510,6 @@ class html_forum {
 				}
 				$sql_array['WHERE'] = $forum_sql_auth;
 				$result = $db->sql_query($db->sql_build_query('SELECT', $sql_array));
-				$all_forum_datas = $forum_datas = array();
 				while ($row = $db->sql_fetchrow($result)) {
 					$forum_id = (int) $row['forum_id'];
 					$forum_datas[$forum_id] = $row;
