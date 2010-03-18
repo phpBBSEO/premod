@@ -94,7 +94,7 @@ class acp_gym_sitemaps {
 		// Populate the $this->gym_modules_acp[$mode][$module] array
 		$this->gym_module_acp($mode, $module);
 		// Acp options array for this case
-		$display_vars = array();
+		$display_vars = $error = array();
 		// Cache management
 		if ($maction === 'maintenance') {
 			$display_vars = $this->gym_maintenance( $mode, $module, $action, $submit );
@@ -109,8 +109,13 @@ class acp_gym_sitemaps {
 			if ( !in_array($mode, $this->modes) || !in_array($module, $this->gym_modules[$mode])) {
 				trigger_error('NO_MODE', E_USER_ERROR);
 			} else {
+				$script_to_check = array();
 				if (empty($this->gym_modules_acp[$mode][$module][$action]['display_vars'])) {
 					$action = $this->action = 'main';
+				}
+				// here we'll check if the GYM script urls are consistent
+				if (!$submit) {
+					$this->check_scripts(&$error, $mode);
 				}
 				$display_vars = $this->gym_modules_acp[$mode][$module][$action]['display_vars'];
 				// Check if we do not have a new module needing a new config key
@@ -128,16 +133,15 @@ class acp_gym_sitemaps {
 					$this->remove_cache('config');
 				}
 			}
-		}
 
+		}
 		// Load the module's language files
 		foreach ($this->gym_modules_acp[$mode] as $active_modules => $null) {
 			if (!empty($this->gym_modules_acp[$mode][$active_modules]['info']['lang_file'])) {
 				$user->add_lang('gym_sitemaps/acp/' . $this->gym_modules_acp[$mode][$active_modules]['info']['lang_file']);
 			}
 		}
-
-		$error = array();
+		//nice_print($error);
 		$cfg_array = (isset($_REQUEST['config'])) ? utf8_normalize_nfc(request_var('config', array('' => ''), true)) : $this->new_config;
 		// We validate the complete config if whished
 		validate_config_vars($display_vars['vars'], $cfg_array, $error);
@@ -838,7 +842,6 @@ class acp_gym_sitemaps {
 	*  select_multiple_string($value, $key) custom select string
 	*/
 	function select_multiple_string($value, $key) {
-		global $phpbb_seo;
 		$select_ary = $this->gym_modules_acp[$this->mode][$this->module][$this->action]['select'][$key];
 		$size = min(12,count($select_ary));
 		$html = '<select multiple="multiple" id="' . $key . '" name="multiple_' . $key . '[]" size="' . $size . '">';
@@ -859,7 +862,6 @@ class acp_gym_sitemaps {
 	*  select_string($value, $key) custom select string
 	*/
 	function select_string($value, $key) {
-		global $phpbb_seo;
 		$select_ary = $this->gym_modules_acp[$this->mode][$this->module][$this->action]['select'][$key];
 		$html = '';
 		foreach ($select_ary as $sel_key => $sel_lang) {
@@ -964,6 +966,238 @@ class acp_gym_sitemaps {
 			$user->lang['MAIN_MAIN_EXPLAIN'] = sprintf( $user->lang['MAIN_MAIN_EXPLAIN'], $this->support_link['release_full'], $this->support_link['support_full'], $this->support_link['seo_forum_full'], $this->support_link['update_msg'] );
 		}
 		return;
+	}
+	/**
+	*  check_scripts Validates GYM scripts (gymrss, sitemap & map) locations
+	*/
+	function check_scripts(&$error, $only_mode = '') {
+		global $phpbb_root_path, $phpEx, $user, $phpbb_seo, $phpbb_admin_path;
+		$allowed_protocols = array('http', 'https'/*, 'ftp', 'ftps'*/);
+		$error = is_array($error) ? $error : array();
+		// check file_get_contents availability
+		$file_get = function_exists('file_get_contents');
+		if (!$file_get) {
+			// file_get_contents is not available, we won't be able to check everything
+		}
+		$scripts = array(
+			'rss' => array('file' => 'gymrss', 'url_config' => $this->gym_config['rss_url']),
+			'google' => array('file' => 'sitemap', 'url_config' => $this->gym_config['google_url']),
+			'html' => array('file' => 'map', 'url_config' => $this->gym_config['html_url']),
+		);
+		$only_mode = $only_mode && isset($scripts[$only_mode]) ? $only_mode : false;
+		if ($only_mode) {
+			foreach ($scripts as $k => $v) {
+				if ($only_mode !== $k) {
+					unset($scripts[$k]);
+				}
+			}
+		}
+		$phpbb_url_config_url = append_sid($phpbb_admin_path . "index.$phpEx", "i=board&amp;mode=server#force_server_vars");
+		// all script should be placed in the same domain as phpBB
+		$root_url = $phpbb_seo->seo_path['root_url'];
+		if (($root_url_parts = @parse_url($root_url)) === false || empty($root_url_parts['scheme']) || !in_array($root_url_parts['scheme'], $allowed_protocols) || empty($root_url_parts['host'])) {
+			// the root url as set is wrong in phpbb config
+			$error[] = sprintf($user->lang['GYM_WRONG_PHPBB_URL'], $phpbb_url_config_url);
+			return false;
+		}
+		// deal with paths
+		$phpbb_url = $phpbb_seo->seo_path['phpbb_url'];
+		// the path from domain root to phpBB
+		$phpbb_clean_root_path = $phpbb_seo->seo_path['phpbb_script'];
+		$phpbb_root_path_parts = trim($phpbb_clean_root_path, '/ ');
+		$phpbb_root_path_parts = $phpbb_root_path_parts ? explode('/', $phpbb_root_path_parts) : false;
+		$phpbb_root_path_levels = 0;
+		if ($phpbb_root_path_parts) {
+			// the number of sub directory starting from domain's root
+			$phpbb_root_path_levels = count($phpbb_root_path_parts);
+		}
+		// form here to domain's root and then to domains root to phpBB directory should be a way to hit common.php
+		// from phpBB to domain's root
+		$phpbb_test_path = str_repeat('../', $phpbb_root_path_levels);
+		// from domain's root to phpBB
+		$phpbb_test_path .= $phpbb_clean_root_path;
+		if (!file_exists($phpbb_root_path . $phpbb_test_path)) {
+			// the root url as set is wrong in phpbb config
+			$error[] = sprintf($user->lang['GYM_WRONG_PHPBB_URL'], $phpbb_url_config_url);
+			return false;
+		}
+		foreach ($scripts as $mode => $setup) {
+			$error[$mode] = '<h2>' . $user->lang[strtoupper($mode) . '_URL'] . '</h2>';
+			$url_config_url = append_sid($phpbb_admin_path . "index.$phpEx", "i=gym_sitemaps&amp;mode=$mode#{$mode}_url");
+			$script_file = $setup['file'] . ".$phpEx";
+			if (($url_parts = @parse_url($setup['url_config'])) === false || empty($root_url_parts['scheme']) || !in_array($root_url_parts['scheme'], $allowed_protocols) || empty($root_url_parts['host'])) {
+				// the scritp url is wrong
+				$error[] = sprintf($user->lang['GYM_WRONG_SCRIPT_URL'], $user->lang[strtoupper($mode)], $script_file);
+				$error[] = sprintf($user->lang['GYM_GO_CONFIG_SCRIPT_URL'], $user->lang[strtoupper($mode) . '_URL'], $url_config_url);
+				continue;
+			}
+			if (strpos($setup['url_config'], $root_url) === false ) {
+				// the script domain is wrong
+				$error[] = sprintf($user->lang['GYM_WRONG_SCRIPT_DOMAIN'], $user->lang[strtoupper($mode)], $root_url, $script_file);
+				$error[] = sprintf($user->lang['GYM_GO_CONFIG_SCRIPT_URL'], $user->lang[strtoupper($mode) . '_URL'], $url_config_url);
+				continue;
+			}
+			// current gym script is configured in the phpBB domain
+			// let's check paths, start with something simple
+			if (strpos($setup['url_config'], $phpbb_url) !== false ) {
+				// script is (well should be) inside phpBB directory
+				$script_path = str_replace($phpbb_url, '', $setup['url_config']);
+				// if this is a sitemap, it would be wrong to put it within a sub directory inside the phpBB directory
+				if ($mode === 'google') {
+					if ($script_path) {
+						// sitemap is not usable for phpBB in there
+						$error[] = sprintf($user->lang['GYM_WRONG_SITEMAP_LOCATION'], $phpbb_url . $script_path, $root_url . $phpbb_clean_root_path);
+						$error[] = sprintf($user->lang['GYM_GO_CONFIG_SCRIPT_URL'], $user->lang[strtoupper($mode) . '_URL'], $url_config_url);
+						continue;
+					}
+				}
+				if (file_exists($phpbb_root_path . $script_path . $script_file)) {
+					// the script is where it should
+					if ($file_get) {
+						// let's go further and check $phpbb_root_path in the script
+						if ($content = @file_get_contents($phpbb_root_path . $script_path . $script_file)) {
+							// expected pattern : $phpbb_root_path = './(some/thing/|../)';
+							if (preg_match('`^[\s]*\$phpbb_root_path[\s]*\=[\s]*(\'|")([a-z0-9_\./-]+)\1[\s]*\;[\s]*$`im', $content, $match)) {
+								// we have a match
+								$file_phpbb_root_path = $match[2];
+								unset($match, $content);
+								// since we're here inside phpBB directory
+								$file_phpbb_root_path_valid = $file_phpbb_root_path === './' . $script_path ? true : false;
+								if (!$file_phpbb_root_path_valid) {
+									// file_phpbb_root_path is not valid
+									$error[] = sprintf($user->lang['GYM_WRONG_SCRIPT2_PHPBB'], $user->lang[strtoupper($mode)], $phpbb_url . $script_path, $script_file, './' . $script_path);
+									$error[] = sprintf($user->lang['GYM_GO_CONFIG_SCRIPT_URL'], $user->lang[strtoupper($mode) . '_URL'], $url_config_url);
+									continue;
+								}
+							}
+						}
+					}
+				} else {
+					// the script is not located where the config claims it is
+					$error[] = sprintf($user->lang['GYM_WRONG_SCRIPT_URL'], $user->lang[strtoupper($mode)], $script_file);
+					$error[] = sprintf($user->lang['GYM_GO_CONFIG_SCRIPT_URL'], $user->lang[strtoupper($mode) . '_URL'], $url_config_url);
+					continue;
+				}
+
+			} else {
+				// The script is (well should be) somewhere outside the phpBB directory
+				$script_path = str_replace($root_url, '', $setup['url_config']);
+				$script_path_parts = trim($script_path, '/ ');
+				$script_path_parts = $script_path_parts ? explode('/', $script_path_parts) : false;
+				$script_path_levels = 0;
+				if ($script_path_parts) {
+					// the number of sub directory starting from domain's root
+					$script_path_levels = count($script_path_parts);
+				}
+				// path from here to the script
+				// from phpBB to root
+				$path_from_phpbb = str_repeat('../', $phpbb_root_path_levels);
+				// from root to script
+				$path_from_phpbb .= $script_path;
+				// and from adm
+				$path_from_here = $phpbb_root_path . $path_from_phpbb;
+				// if this is a sitemap, it would be wrong to put it where it would not be useful
+				// Example : example.com/phpBB/ or example.com/ with example.com/dir/sitemap.php
+				if ($mode === 'google') {
+					if ($script_path_levels > 1) {
+						// we are not in domain's root where everything is always ok
+						$script_path_is_ok = true;
+						if (!$phpbb_root_path_levels) {
+							// for sure, this is wrong
+							$script_path_is_ok = false;
+						} else {
+							// $script_path_parts should be < $phpbb_root_path_parts
+							if ($script_path_levels < $phpbb_root_path_levels) {
+								// check if path is ok, $phpbb_clean_root_path must contain $script_path
+								foreach ($script_path_parts as $k => $v) {
+									// must match all the way
+									if ($v !== $phpbb_root_path_parts[$k]) {
+										$script_path_is_ok = false;
+										break;
+									}
+								}
+							} else {
+								// script path configured is deeper than phpBB one
+								$script_path_is_ok = false;
+							}
+						}
+						if (!$script_path_is_ok) {
+							// sitemap is not usable for phpBB in there
+							$error[] = sprintf($user->lang['GYM_WRONG_SITEMAP_LOCATION'], $phpbb_url . $script_path, $root_url . $phpbb_clean_root_path);
+							$error[] = sprintf($user->lang['GYM_GO_CONFIG_SCRIPT_URL'], $user->lang[strtoupper($mode) . '_URL'], $url_config_url);
+							continue;
+						}
+					}
+				}
+				if (file_exists($path_from_here . $script_file)) {
+					// the script is where it should
+					if ($file_get) {
+						// let's go further and check $phpbb_root_path in the script
+						if ($content = @file_get_contents($path_from_here . $script_file)) {
+							// expected pattern : $phpbb_root_path = './(some/thing/|../)';
+							if (preg_match('`^[\s]*\$phpbb_root_path[\s]*\=[\s]*(\'|")([a-z0-9_\./-]+)\1[\s]*\;[\s]*$`im', $content, $match)) {
+								// we have a match
+								$file_phpbb_root_path = $match[2];
+								unset($match, $content);
+								// expected path
+								// we need to filter any common parts in paths
+								// eg for the *wierd* example.com/dir/phpBB/ with example.com/dir/otherdir/script.php case,
+								// $phpbb_root_path should not go all the way to domain's root in script.php
+								if ($phpbb_root_path_levels > 1 && $script_path_levels > 1) {
+									if ($phpbb_root_path_parts[0] == $script_path_parts[0]) {
+										// these two indeed chares some parts
+										$_phpbb_root_path_parts = $phpbb_root_path_parts;
+										$_script_path_parts = $script_path_parts;
+										foreach ($_phpbb_root_path_parts as $k => $v) {
+											if ($v == $_script_path_parts[$k]) {
+												unset($_phpbb_root_path_parts[$k], $_script_path_parts[$k]);
+											} else {
+												break;
+											}
+										}
+										// since the script can only be outside phpBB directory here
+										$_script_path_levels = count($_script_path_parts);
+										$_phpbb_root_path_parts = count($_phpbb_root_path_parts);
+										// from script to first common dir
+										$path_from_script = str_repeat('../', $_script_path_levels);
+										// and from first common dir to phpBB
+										$path_from_script .= trim(implode('/', $_phpbb_root_path_parts), ' /') . '/';
+										$file_phpbb_root_path_valid = $file_phpbb_root_path === './' . $path_from_script ? true : false;
+										if (!$file_phpbb_root_path_valid) {
+											// file_phpbb_root_path is not valid
+											$error[] = sprintf($user->lang['GYM_WRONG_SCRIPT2_PHPBB'], $user->lang[strtoupper($mode)], $root_url . $script_path, $script_file, './' . $path_from_script);
+											$error[] = sprintf($user->lang['GYM_GO_CONFIG_SCRIPT_URL'], $user->lang[strtoupper($mode) . '_URL'], $url_config_url);
+											continue;
+										}
+										// we're done here
+										continue;
+									}
+								}
+								// so we do not share paths ...
+								// from script to root
+								$path_from_script = str_repeat('../', $script_path_levels);
+								// and from root to phpBB
+								$path_from_script .= $phpbb_clean_root_path;
+								$file_phpbb_root_path_valid = $file_phpbb_root_path === './' . $path_from_script ? true : false;
+								if (!$file_phpbb_root_path_valid) {
+									// file_phpbb_root_path is not valid
+									$error[] = sprintf($user->lang['GYM_WRONG_SCRIPT2_PHPBB'], $user->lang[strtoupper($mode)], $root_url . $script_path, $script_file, './' . $path_from_script);
+									$error[] = sprintf($user->lang['GYM_GO_CONFIG_SCRIPT_URL'], $user->lang[strtoupper($mode) . '_URL'], $url_config_url);
+									continue;
+								}
+							}
+						}
+					}
+				} else {
+					// the script is not located where the config claims it is
+					$error[] = sprintf($user->lang['GYM_WRONG_SCRIPT_URL'], $user->lang[strtoupper($mode)], $script_file);
+					$error[] = sprintf($user->lang['GYM_GO_CONFIG_SCRIPT_URL'], $user->lang[strtoupper($mode) . '_URL'], $url_config_url);
+					continue;
+				}
+			}
+			// if we reach here, no error where found, unset the title
+			unset($error[$mode]);
+		}
 	}
 	/**
 	*  check_cache_folder Validates the cache folder status

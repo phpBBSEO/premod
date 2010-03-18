@@ -73,7 +73,6 @@ $lang = array_merge($lang, array(
 	'RSS_IMAGE_URL_EXPLAIN' => 'Le fichier image à utiliser comme logo RSS dans les flux RSS, à placer dans le dossier gym_sitemaps/images/.',
 	'RSS_LANG' => 'Langue du flux RSS',
 	'RSS_LANG_EXPLAIN' => 'La langue déclarée comme langue principale dans les flux RSS. Par défaut il s’agit de la langue par défaut de phpBB.',
-	'RSS_URL' => 'URL du flux RSS',
 	'RSS_URL_EXPLAIN' => 'Entrez l’URL complète vers votre fichier gymrss.php, par exemple http://www.example.com/eventual_dir/ si le fichier gymrss.php est installé dans http://www.example.com/eventual_dir/.<br />Cette option est utile lorsque phpBB n’est pas installé à la racine de votre domaine et que vous désirez placer le fichier gymrss.php à la racine.',
 	// Auth settings
 	'RSS_AUTH_SETTINGS' => 'Paramètres liés aux autorisations',

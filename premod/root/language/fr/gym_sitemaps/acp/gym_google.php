@@ -44,7 +44,6 @@ $lang = array_merge($lang, array(
 	'GOOGLE_LINKS_CAT_EXPLAIN' => 'Afficher ou non les liens vers le sitemaps du forum en cours. Ce liens est ajoutés sous le titre du forum.<br/>Cette option nécéssite que l’affichage des liens des forums soit activé dans la configuration générale.',
 	// Reset settings
 	'GOOGLE_ALL_RESET' => '<b>Tous<b> les modules Sitemaps Google',
-	'GOOGLE_URL' => 'URL du Sitemap Google',
 	'GOOGLE_URL_EXPLAIN' => 'Entrez l’URL complète de votre SitemapIndex, par exemple http://www.example.com/eventual_dir/ si le fichier sitemap.php est installé dans http://www.example.com/eventual_dir/.<br />Cette option est utile lorsque phpBB n’est pas installé à la racine de votre domaine et que vous désirez lister dans vos Sitemaps Google des URLs situées à la racine du domaine.',
 	'GOOGLE_PING' => 'Ping Google',
 	'GOOGLE_PING_EXPLAIN' => 'Prévient Google (ping) chaque fois qu’un Sitemap est rafraîchi.',

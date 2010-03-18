@@ -85,7 +85,6 @@ $lang = array_merge($lang, array(
 	'HTML_SITE_DESC_EXPLAIN' => 'The Site description to show in the site maps and news pages. Default is the phpBB site description.',
 	'HTML_LOGO_URL' => 'Site logo',
 	'HTML_LOGO_URL_EXPLAIN' => 'The image file to use as the site logo in the RSS feeds, in the gym_sitemaps/images/ directory.',
-	'HTML_URL' => 'HTML URL',
 	'HTML_URL_EXPLAIN' => 'Enter the full URL to your map.php file, e.g. http://www.example.com/eventual_dir/ if map.php is installed in http://www.example.com/eventual_dir/.<br/>This option is useful when phpBB is not installed in the domain’s root and you would like put the map.php file in the root level.',
 	'HTML_RSS_NEWS_URL' => 'Mains news page RSS source',
 	'HTML_RSS_NEWS_URL_EXPLAIN' => 'Enter here the full url to the RSS feed you want to display on the main news page, example http://www.example.com/gymrss.php?news&amp;digest to display all news from all RSS modules installed on the main HTML news page.<br />You can use an RSS 2.0 feed as a source for this page.',
