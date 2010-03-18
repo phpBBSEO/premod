@@ -412,7 +412,7 @@ function get_match($pattern, $string, $encoding = 'utf-8') {
   		if( strtolower($encoding) != 'utf-8') {
 			$out[1] = utf8_recode($out[1], $encoding);
 		}
-  		return html_entity_decode(trim($out[1]), ENT_COMPAT, 'UTF-8');
+  		return @html_entity_decode(trim($out[1]), ENT_COMPAT, 'UTF-8');
 	} else {
 		return '';
 	}
