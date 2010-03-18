@@ -47,11 +47,13 @@ $lang = array_merge($lang, array(
 	'GYM_LINKS_CAT_EXPLAIN' => 'Afficher ou non les liens vers les différent plans, flux, news et sitemaps du forum en cours. Ces liens sont ajoutés sous le titre du forum.',
 	// Google sitemaps
 	'GOOGLE' => 'Sitemaps Google',
+	'GOOGLE_URL' => 'URL du Sitemap Google',
 	// Reset settings
 	'GOOGLE_MAIN_RESET' => 'Options globales Sitemaps Google',
 	'GOOGLE_MAIN_RESET_EXPLAIN' => 'Rétablir toutes les options par défaut des Sitemaps Google.',
 	// RSS feeds
 	'RSS' => 'Flux RSS',
+	'RSS_URL' => 'URL du flux RSS',
 	'RSS_ALTERNATE' => 'Liens alternate RSS',
 	'RSS_ALTERNATE_EXPLAIN' => 'Afficher ou nons les liens alternate RSS dans la barre de navigation des navigateurs',
 	'RSS_LINKING_TYPE' => 'Type de Liens RSS',
@@ -68,6 +70,7 @@ $lang = array_merge($lang, array(
 	'HTML_MAIN_RESET' => 'Options globales HTML',
 	'HTML_MAIN_RESET_EXPLAIN' => 'Rétablir toutes les options par défaut des plan et news HTML',
 	'HTML' => 'Html',
+	'HTML_URL' => 'URL de la page du module HTML',
 
 	// GYM authorisation array
 	'GYM_AUTH_ADMIN' => 'Admin',
@@ -249,5 +252,13 @@ $lang = array_merge($lang, array(
 	'GYM_METHOD_CHARS' => 'Par nombre de lettres',
 	'GYM_METHOD_WORDS' => 'Par nombre de mots',
 	'GYM_METHOD_LINES' => 'Par nombre de lignes',
+
+	// script location checking
+	'GYM_WRONG_PHPBB_URL' => 'Les paramètres serveur de phpBB ne sont pas correct. Vous devez configurer vos <a href="%1$s"><b>Paramètres des URLs du serveur</b></a> convenablement.<br/><a href="http://www.phpbb-seo.com/fr/forum-phpbb/parametres-serveur-cookie-t4464.html" onclick ="window.open(this.href); return false;">Plus d’explications à ce sujet</a>',
+	'GYM_WRONG_SCRIPT_URL' => 'L’URL configurée pour le mode <b>%1$s</b> n’est pas correcte. Elle doit normallement permettre d’atteindre le fichier <b>%2$s</b> sur votre serveur.',
+	'GYM_WRONG_SCRIPT_DOMAIN' => 'L’URL configurée pour le mode <b>%1$s</b> n’est pas compatible avec celle de phpBB. Elle doit utiliser le même domaine ou sous domaine et le même protocol (http:// ou https://) que phpBB. Elle doit contenir <b>%2$s</b> et permettre d’atteindre le dossier dans lequel se trouve <b>%3$s</b> sur votre serveur.',
+	'GYM_WRONG_SCRIPT2_PHPBB' => 'Bien que l’URL configurée pour le mode <b>%1$s</b> soit correcte, le chemin vers phpbb ($phpbb_root_path) configuré dans le fichier <b>%2$s%3$s</b> ne l’est pas. Cela arrive uniquement quand la valeur de $phpbb_root_path est modifiée manuellement et / ou que le fichier est déplacé.<br/>Notez que $phpbb_root_path doit être un chemin relatif valide depuis le dossier de <b>%3$s</b>  vers le dossier de phpBB et qu’il doit commencer par "./".<br/>D’après vos réglages actuels, $phpbb_root_path devrait prendre la valeur <b>%4$s</b> dans <b>%3$s</b>.',
+	'GYM_WRONG_SITEMAP_LOCATION' => 'Votre fichier <b>sitemap.php</b> se trouve à un endroit ou il ne peut être utilisé pour lister les URL de votre forum.<br/>Il doit en effet se trouver <b>à l’interieur ou au dessus</b> du dossier de phpBB pour être valide.<br/>Emplacement configuré : <b>%1$s</b><br/>Emplacement de phpBB : <b>%2$s</b>',
+	'GYM_GO_CONFIG_SCRIPT_URL' => 'Modifier la configuration : <a href="%2$s"><b>%1$s</b></a>',
 ));
 ?>

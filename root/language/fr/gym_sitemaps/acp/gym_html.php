@@ -86,7 +86,6 @@ $lang = array_merge($lang, array(
 	'HTML_SITE_DESC_EXPLAIN' => 'La description du site à utiliser dans les plans HTML et les news. Par défaut correspond à la description du site phpBB.',
 	'HTML_LOGO_URL' => 'Logo du site',
 	'HTML_LOGO_URL_EXPLAIN' => 'Le fichier image à utiliser comme logo du site dans plans HTML et les news, à placer dans le dossier gym_sitemaps/images/.',
-	'HTML_URL' => 'URL de la page du module HTML',
 	'HTML_URL_EXPLAIN' => 'Entrez l’URL complète vers votre fichier map.php, par exemple http://www.example.com/eventual_dir/ si le fichier map.php est installé dans http://www.example.com/eventual_dir/.<br />Cette option est utile lorsque phpBB n’est pas installé à la racine de votre domaine et que vous désirez placer le fichier map.php à la racine.',
 	'HTML_RSS_NEWS_URL' => 'URL de la source rss de la page news principale',
 	'HTML_RSS_NEWS_URL_EXPLAIN' => 'Entrez l’URL complète vers le flux RSS de votre choix, par exemple http://www.example.com/gymrss.php?news&amp;digest pour afficher les news de tous les modules RSS installés sur la page de new principale.<br />Vous pouvez utiliser n’importe quelle flux RSS 2.0 comme source de cette page de news.',

@@ -46,11 +46,13 @@ $lang = array_merge($lang, array(
 	'GYM_LINKS_CAT_EXPLAIN' => 'Display or not links to the available GYM pages on a forum page. These links are added below the forum title.',
 	// Google sitemaps
 	'GOOGLE' => 'Google',
+	'GOOGLE_URL' => 'Google Sitemaps URL',
 	// Reset settings
 	'GOOGLE_MAIN_RESET' => 'Google Sitemap main options',
 	'GOOGLE_MAIN_RESET_EXPLAIN' => 'Reset all the Google Sitemap main options to default values.',
 	// RSS feeds
 	'RSS' => 'RSS',
+	'RSS_URL' => 'RSS feed URL',
 	'RSS_ALTERNATE' => 'RSS alternate links',
 	'RSS_ALTERNATE_EXPLAIN' => 'Display or not RSS alternate links in browsers navigation bar',
 	'RSS_LINKING_TYPE' => 'RSS Linking Type',
@@ -67,6 +69,7 @@ $lang = array_merge($lang, array(
 	'HTML_MAIN_RESET' => 'Global HTML options',
 	'HTML_MAIN_RESET_EXPLAIN' => 'Reset all the HTML maps and news main options to default values.',
 	'HTML' => 'Html',
+	'HTML_URL' => 'HTML URL',
 
 	// GYM authorisation array
 	'GYM_AUTH_ADMIN' => 'Admin',
@@ -100,7 +103,7 @@ $lang = array_merge($lang, array(
 	// Maintenance
 	'GYM_MAINTENANCE' => 'Maintenance',
 	'GYM_MODULE_MAINTENANCE' => '%1$s maintenance',
-	'GYM_MODULE_MAINTENANCE_EXPLAIN' => 'Here you can manage the cached files used by the %1$s modules.<br/> There are two types: the one used to store the data outputted on the public pages, and the ones used to build each module’s ACP. You can delete the module’s ACP cache if you check the clear cache option; default is clearing the content cache for the selected modules.',
+	'GYM_MODULE_MAINTENANCE_EXPLAIN' => 'Here you can manage the cached files used by the %1$s modules.<br/> There are two types: the one used to store the data outputted on the public pages, and the ones used to build each moduleÃƒÂ¢Ã¢â€šÂ¬Ã¢â€žÂ¢s ACP. You can delete the moduleÃƒÂ¢Ã¢â€šÂ¬Ã¢â€žÂ¢s ACP cache if you check the clear cache option; default is clearing the content cache for the selected modules.',
 	'GYM_CLEAR_CACHE' => 'Clear %1$s cache',
 	'GYM_CLEAR_CACHE_EXPLAIN' => 'You can here clear the cached files for the %1$s module. These cached files contains the data used to build the %1$s .<br/>It can be useful if you want to force the cache update.',
 	'GYM_CLEAR_ACP_CACHE' => 'Clear %1$s ACP',
@@ -109,7 +112,7 @@ $lang = array_merge($lang, array(
 	'GYM_CACHE_NOT_CLEARED' => 'An error occurred while clearing the cache, please check the folder permissions (CHMOD 0666 or 0777).<br/>The folder currently set up for caching is : ',
 	'GYM_FILE_CLEARED' => 'File(s) erased: ',
 	'GYM_CACHE_ACCESSED' => 'The caching folder was properly accessed, but no files were deleted: ',
-	'MODULE_CACHE_CLEARED' => 'ACP module cache cleared with success, if you just uploaded a module, it’s ACP will show up now.',
+	'MODULE_CACHE_CLEARED' => 'ACP module cache cleared with success, if you just uploaded a module, itÃƒÂ¢Ã¢â€šÂ¬Ã¢â€žÂ¢s ACP will show up now.',
 
 	// set defaults
 	'GYM_SETTINGS' => 'Settings',
@@ -120,7 +123,7 @@ $lang = array_merge($lang, array(
 
 	'GYM_INSTALL' => 'Install',
 	'GYM_MODULE_INSTALL' => 'Install %1$s module',
-	'GYM_MODULE_INSTALL_EXPLAIN' => 'Below you can activate / deactivate the %1$s module.<br/>If you just uploaded a module, you need to activate it before you will be able to use it.<br/>If you cannot see new module, try clearing the ACP module’s cache in the maintenance page.',
+	'GYM_MODULE_INSTALL_EXPLAIN' => 'Below you can activate / deactivate the %1$s module.<br/>If you just uploaded a module, you need to activate it before you will be able to use it.<br/>If you cannot see new module, try clearing the ACP moduleÃƒÂ¢Ã¢â€šÂ¬Ã¢â€žÂ¢s cache in the maintenance page.',
 
 	// Titles
 	'GYM_MAIN' => 'GYM Sitemaps Settings',
@@ -148,7 +151,7 @@ $lang = array_merge($lang, array(
 	'GYM_OVERRIDED_MODULE' => 'This option is currently overridden at the module level',
 	'GYM_OVERRIDED_VALUE' => 'The value currently taken into account is : ',
 	'GYM_OVERRIDED_VALUE_NOTHING' => 'nothing',
-	'GYM_COULD_OVERRIDE' => 'This option could be overridden but currently isn’t.',
+	'GYM_COULD_OVERRIDE' => 'This option could be overridden but currently isnÃƒÂ¢Ã¢â€šÂ¬Ã¢â€žÂ¢t.',
 
 	// Overridable / common options
 	'GYM_CACHE' => 'Cache',
@@ -171,7 +174,7 @@ $lang = array_merge($lang, array(
 	'GYM_MODREWRITE' => 'URL rewriting',
 	'GYM_MODREWRITE_EXPLAIN' => 'Here you can set up various URL rewriting options. Remember that these settings may be overridden depending on your override settings.',
 	'GYM_MODREWRITE_ON' => 'Activate URL rewriting',
-	'GYM_MODREWRITE_ON_EXPLAIN' => 'This activates URL rewriting for the module links.<br /><u>NOTE :</u> You MUST use an Apache server with the mod_rewrite module loaded or an IIS server running the isapi_rewrite module AND to properly set up the module’s rewrite rules in your .htaccess (or httpd.ini with IIS ).',
+	'GYM_MODREWRITE_ON_EXPLAIN' => 'This activates URL rewriting for the module links.<br /><u>NOTE :</u> You MUST use an Apache server with the mod_rewrite module loaded or an IIS server running the isapi_rewrite module AND to properly set up the moduleÃƒÂ¢Ã¢â€šÂ¬Ã¢â€žÂ¢s rewrite rules in your .htaccess (or httpd.ini with IIS ).',
 	'GYM_ZERO_DUPE_ON' => 'Activate the Zero Duplicate',
 	'GYM_ZERO_DUPE_ON_EXPLAIN' => 'This activates the Zero Duplicate for the module links.<br /><u>NOTE :</u> Redirections will only occur when (re)generating the cache in this version.',
 	'GYM_MODRTYPE' => 'URL rewriting type',
@@ -186,7 +189,7 @@ $lang = array_merge($lang, array(
 	'GYM_GZIP_EXT' => 'Gunzip suffix',
 	'GYM_GZIP_EXT_EXPLAIN' => 'You can here chose to use or not the .gz suffix in the module URLs. This only applies when gunzip and URL rewriting are activated.',
 	'GYM_GZIP_LEVEL' => 'Gunzip Compression level',
-	'GYM_GZIP_LEVEL_EXPLAIN' => 'Integer between 1 and 9, 9 being the most compression. It’s usually not worth it to go over 6.<br /><u>NOTE :</u> This option will concern all types of output.',
+	'GYM_GZIP_LEVEL_EXPLAIN' => 'Integer between 1 and 9, 9 being the most compression. ItÃƒÂ¢Ã¢â€šÂ¬Ã¢â€žÂ¢s usually not worth it to go over 6.<br /><u>NOTE :</u> This option will concern all types of output.',
 
 	'GYM_LIMIT' => 'Limits',
 	'GYM_LIMIT_EXPLAIN' => 'Here you can set the limit to apply when building the output : number of url outputted, SQL cycling (amount of item queried at once) and age of items listed.<br/>Remember that these settings may be overridden depending on your override settings.',
@@ -205,16 +208,16 @@ $lang = array_merge($lang, array(
 	'GYM_PAGINATION' => 'Pagination',
 	'GYM_PAGINATION_EXPLAIN' => 'Here you can set up various pagination options. Remember that these settings may be overridden depending on your override settings.',
 	'GYM_PAGINATION_ON' => 'Activate Pagination',
-	'GYM_PAGINATION_ON_EXPLAIN' => 'You can here decide to output paginated links (when available) for the listed items. For example, the module can additionally output links of the forum’s topic pages.',
+	'GYM_PAGINATION_ON_EXPLAIN' => 'You can here decide to output paginated links (when available) for the listed items. For example, the module can additionally output links of the forumÃƒÂ¢Ã¢â€šÂ¬Ã¢â€žÂ¢s topic pages.',
 	'GYM_LIMITDOWN' => 'Pagination: Lower Limit',
 	'GYM_LIMITDOWN_EXPLAIN' => 'Enter here how many paginated pages, starting from the first page, to output.',
 	'GYM_LIMITUP' => 'Pagination: Upper Limit',
 	'GYM_LIMITUP_EXPLAIN' => 'Enter here how many paginated pages, starting from the last one, to output.',
 
 	'GYM_OVERRIDE' => 'Override',
-	'GYM_OVERRIDE_EXPLAIN' => 'GYM sitemaps is fully modular. Each output type (Google, RSS ...) uses its own output modules corresponding to the type of item to list. For example, the first module for all types of output is the forum module, listing items from the forum.<br/> Many options, such as URL rewriting, caching, gunzip compression etc ..., are repeated on several levels of the GYM sitemaps ACP. This allow you to use different settings for the same option depending on the type of output and the output module. But it can occur that you would prefer to, for example, activate URL rewriting on all the GYM sitemaps module at once (all outputs types and all modules).<br/> That’s what the Override setting will allow you to do for many types of settings. <br/>The inheritance process goes from the highest level of settings (Main configuration) to the output type level (Google, RSS ...) and ends at the lowest level : the output modules (forum, album ...)<br/>Overrinding settings can take three values :<br/><ul><li><b>Global :</b> The Main settings will be used;<br></li><li><b>Output Type :</b> The output type settings will be used for its modules;<br></li><li><b>Module :</b> The lowest available setting will be used, e.g., the module’s one first, and if not set, the output type one and so on up to the global setting if available.</li></ul>',
+	'GYM_OVERRIDE_EXPLAIN' => 'GYM sitemaps is fully modular. Each output type (Google, RSS ...) uses its own output modules corresponding to the type of item to list. For example, the first module for all types of output is the forum module, listing items from the forum.<br/> Many options, such as URL rewriting, caching, gunzip compression etc ..., are repeated on several levels of the GYM sitemaps ACP. This allow you to use different settings for the same option depending on the type of output and the output module. But it can occur that you would prefer to, for example, activate URL rewriting on all the GYM sitemaps module at once (all outputs types and all modules).<br/> ThatÃƒÂ¢Ã¢â€šÂ¬Ã¢â€žÂ¢s what the Override setting will allow you to do for many types of settings. <br/>The inheritance process goes from the highest level of settings (Main configuration) to the output type level (Google, RSS ...) and ends at the lowest level : the output modules (forum, album ...)<br/>Overrinding settings can take three values :<br/><ul><li><b>Global :</b> The Main settings will be used;<br></li><li><b>Output Type :</b> The output type settings will be used for its modules;<br></li><li><b>Module :</b> The lowest available setting will be used, e.g., the moduleÃƒÂ¢Ã¢â€šÂ¬Ã¢â€žÂ¢s one first, and if not set, the output type one and so on up to the global setting if available.</li></ul>',
 	'GYM_OVERRIDE_ON' => 'Activate Main Override',
-	'GYM_OVERRIDE_ON_EXPLAIN' => 'You can here Activate / Deactivate the main overrinding. Deactivating is the same as setting all overrides to "module", letting the output type’s override settings to set the module override.',
+	'GYM_OVERRIDE_ON_EXPLAIN' => 'You can here Activate / Deactivate the main overrinding. Deactivating is the same as setting all overrides to "module", letting the output typeÃƒÂ¢Ã¢â€šÂ¬Ã¢â€žÂ¢s override settings to set the module override.',
 	'GYM_OVERRIDE_MAIN' => 'Default Overriding',
 	'GYM_OVERRIDE_MAIN_EXPLAIN' => 'Set override level for the other types of settings a module could use.',
 	'GYM_OVERRIDE_CACHE' => 'Cache Overriding',
@@ -248,5 +251,13 @@ $lang = array_merge($lang, array(
 	'GYM_METHOD_CHARS' => 'By characters',
 	'GYM_METHOD_WORDS' => 'By words',
 	'GYM_METHOD_LINES' => 'By lines',
+
+	// script location checking
+	'GYM_WRONG_PHPBB_URL' => 'phpBB server settings are not correct. You must proprely configure your <a href="%1$s"><b>Server URL settings</b></a>.<br/><a href="http://www.phpbb-seo.com/en/phpbb-forum/server-and-cookie-settings-t4451.html" onclick ="window.open(this.href); return false;">More details about this</a>',
+	'GYM_WRONG_SCRIPT_URL' => 'The configured URL for <b>%1$s</b> mode is wrong. It must lead to where the <b>%2$s</b> file is located on your server.',
+	'GYM_WRONG_SCRIPT_DOMAIN' => 'The configured URL for <b>%1$s</b> mode is not consistant with phpBB one. The URL must use the same domain or sub-domain and the same protocol (http:// or https://) as phpBB. It must contain <b>%2$s</b> and lead to the directory containing <b>%3$s</b> on your server.',
+	'GYM_WRONG_SCRIPT2_PHPBB' => 'Even though the configured URL for <b>%1$s</b> mode is correct, the path to phpBB ($phpbb_root_path) set in <b>%2$s%3$s</b> is wrong. This can only occur when $phpbb_root_path was manually modified and / or the file was moved.<br/>Note that $phpbb_root_path must be a valide relative path from the directory where <b>%3$s</b> is to the directory where phpBB is installed, and that it must start with "./".<br/>According to your settings, $phpbb_root_path should be set to <b>%4$s</b> in <b>%3$s</b>.',
+	'GYM_WRONG_SITEMAP_LOCATION' => 'Your <b>sitemap.php</b> file is located in a place from where it cannot be used to list forum URLs.<br/>It must be placed <b>inside or above</b> the phpBB directory to be valid.<br/>Configured location : <b>%1$s</b><br/>phpBB location : <b>%2$s</b>',
+	'GYM_GO_CONFIG_SCRIPT_URL' => 'Go fix configuration : <a href="%2$s"><b>%1$s</b></a>',
 ));
 ?>
