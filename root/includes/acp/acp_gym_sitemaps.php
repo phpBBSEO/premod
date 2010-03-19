@@ -115,7 +115,7 @@ class acp_gym_sitemaps {
 				}
 				// here we'll check if the GYM script urls are consistent
 				if (!$submit) {
-					$this->check_scripts(&$error, $mode);
+					$this->check_scripts($error, $this->gym_config, $mode);
 				}
 				$display_vars = $this->gym_modules_acp[$mode][$module][$action]['display_vars'];
 				// Check if we do not have a new module needing a new config key
@@ -141,10 +141,14 @@ class acp_gym_sitemaps {
 				$user->add_lang('gym_sitemaps/acp/' . $this->gym_modules_acp[$mode][$active_modules]['info']['lang_file']);
 			}
 		}
-		//nice_print($error);
 		$cfg_array = (isset($_REQUEST['config'])) ? utf8_normalize_nfc(request_var('config', array('' => ''), true)) : $this->new_config;
 		// We validate the complete config if whished
 		validate_config_vars($display_vars['vars'], $cfg_array, $error);
+		// check script urls if necessary
+		if ($submit && isset($cfg_array[$mode . '_url'])) {
+			// will enforce trailing slashes automatically
+			$this->check_scripts($error, $cfg_array, $mode);
+		}
 		// Do not write values if there is an error
 		if (sizeof($error)) {
 			$submit = false;
@@ -939,8 +943,8 @@ class acp_gym_sitemaps {
 	*/
 	function set_phpbb_seo_links() {
 		global $config, $user, $template;
-		$this->support_link['links_en'] = array( 'release' =>  'http://www.phpbb-seo.com/en/gym-sitemaps-rss/google-yahoo-msn-sitemaps-rss-t2734.html', 'support' =>  'http://www.phpbb-seo.com/en/gym-sitemaps-rss/', 'seo_forum' =>  'http://www.phpbb-seo.com/en/', 'subscribe' => 'http://www.phpbb-seo.com/boards/viewtopic.php?t=2734&watch=topic' );
-		$this->support_link['links_fr'] = array( 'release' =>  'http://www.phpbb-seo.com/fr/gym-sitemaps-rss/sitemaps-rss-google-yahoo-msn-t3136.html', 'support' =>  'http://www.phpbb-seo.com/fr/gym-sitemaps-rss/', 'seo_forum' =>  'http://www.phpbb-seo.com/fr/', 'subscribe' => 'http://www.phpbb-seo.com/forums/viewtopic.php?t=3136&watch=topic' );
+		$this->support_link['links_en'] = array( 'release' =>  'http://www.phpbb-seo.com/en/gym-sitemaps-rss/google-yahoo-msn-sitemaps-rss-t2734.html', 'support' =>  'http://www.phpbb-seo.com/en/gym-sitemaps-rss/', 'seo_forum' =>  'http://www.phpbb-seo.com/en/', 'subscribe' => 'http://www.phpbb-seo.com/en/gym-sitemaps-rss/google-yahoo-msn-sitemaps-rss-t2734.html' );
+		$this->support_link['links_fr'] = array( 'release' =>  'http://www.phpbb-seo.com/fr/gym-sitemaps-rss/sitemaps-rss-google-yahoo-msn-t3136.html', 'support' =>  'http://www.phpbb-seo.com/fr/gym-sitemaps-rss/', 'seo_forum' =>  'http://www.phpbb-seo.com/fr/', 'subscribe' => 'http://www.phpbb-seo.com/fr/gym-sitemaps-rss/sitemaps-rss-google-yahoo-msn-t3136.html' );
 		if (strpos($config['default_lang'], 'fr') !== false ) {
 			$this->support_link['release'] = $this->support_link['links_fr']['release'];
 			$this->support_link['support'] = $this->support_link['links_fr']['support'];
@@ -970,7 +974,7 @@ class acp_gym_sitemaps {
 	/**
 	*  check_scripts Validates GYM scripts (gymrss, sitemap & map) locations
 	*/
-	function check_scripts(&$error, $only_mode = '') {
+	function check_scripts(&$error, &$cfg_array, $only_mode = '') {
 		global $phpbb_root_path, $phpEx, $user, $phpbb_seo, $phpbb_admin_path;
 		$allowed_protocols = array('http', 'https'/*, 'ftp', 'ftps'*/);
 		$error = is_array($error) ? $error : array();
@@ -978,16 +982,24 @@ class acp_gym_sitemaps {
 		$file_get = function_exists('file_get_contents');
 		if (!$file_get) {
 			// file_get_contents is not available, we won't be able to check everything
+			// @TODO find out how (we won't thgouh an error just for this),
+			// and also if it would be useful, to warn user about this
 		}
 		$scripts = array(
-			'rss' => array('file' => 'gymrss', 'url_config' => $this->gym_config['rss_url']),
-			'google' => array('file' => 'sitemap', 'url_config' => $this->gym_config['google_url']),
-			'html' => array('file' => 'map', 'url_config' => $this->gym_config['html_url']),
+			'rss' => array('file' => 'gymrss',),
+			'google' => array('file' => 'sitemap',),
+			'html' => array('file' => 'map',),
 		);
 		$only_mode = $only_mode && isset($scripts[$only_mode]) ? $only_mode : false;
 		if ($only_mode) {
+			$scripts[$only_mode]['url_config'] = isset($cfg_array[$only_mode . '_url']) ? ($cfg_array[$only_mode . '_url'] = trim($cfg_array[$only_mode . '_url'], ' /') . '/') : '';
+			$scripts = array($only_mode => $scripts[$only_mode]);
+		} else {
 			foreach ($scripts as $k => $v) {
-				if ($only_mode !== $k) {
+				if (isset($cfg_array[$k . '_url'])) {
+					$scripts[$k]['url_config'] = isset($cfg_array[$k . '_url']) ? ($cfg_array[$k . '_url'] = trim($cfg_array[$k . '_url'], ' /') . '/') : '';
+				} else {
+					// do not check without a reference
 					unset($scripts[$k]);
 				}
 			}
@@ -1145,7 +1157,7 @@ class acp_gym_sitemaps {
 								// $phpbb_root_path should not go all the way to domain's root in script.php
 								if ($phpbb_root_path_levels > 1 && $script_path_levels > 1) {
 									if ($phpbb_root_path_parts[0] == $script_path_parts[0]) {
-										// these two indeed chares some parts
+										// these two indeed share some parts
 										$_phpbb_root_path_parts = $phpbb_root_path_parts;
 										$_script_path_parts = $script_path_parts;
 										foreach ($_phpbb_root_path_parts as $k => $v) {
