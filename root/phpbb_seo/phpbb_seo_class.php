@@ -61,7 +61,7 @@ class phpbb_seo extends setup_phpbb_seo {
 		// and apparently, the bug is still here in php5.3
 		@ini_set("mbstring.internal_encoding", 'UTF-8');
 		// Nothing should be edited here, please do your custom settings in the
-		// phpbb_seo/includes/phpbb_seo_modules.php instead to make your updates easier.
+		// phpbb_seo/includes/setup_phpbb_seo.php instead to make your updates easier.
 		// reset the rewrite_method for $phpbb_root_path
 		$this->rewrite_method[$phpbb_root_path] = array();
 		// phpBB files must be treated a bit differently
@@ -117,7 +117,7 @@ class phpbb_seo extends setup_phpbb_seo {
 			// basenamed page name (for example: index)
 			$this->seo_opt['req_file'] = urlencode(htmlspecialchars(str_replace(".$phpEx", '', basename($this->seo_opt['req_self']))));
 		}
-		// Load settings from phpbb_seo/includes/phpbb_seo_modules.php
+		// Load settings from phpbb_seo/includes/setup_phpbb_seo.php
 		$this->init_phpbb_seo();
 		$this->seo_path['phpbb_filesR'] = $this->seo_path['phpbb_urlR'] . $this->seo_static['file_index'] . $this->seo_delim['file'];
 		// see if we have some custom replacement
