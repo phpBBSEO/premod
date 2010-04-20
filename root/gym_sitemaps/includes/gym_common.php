@@ -3,7 +3,7 @@
 *
 * @package phpBB SEO GYM Sitemaps
 * @version $Id$
-* @copyright (c) 2006 - 2009 www.phpbb-seo.com
+* @copyright (c) 2006 - 2010 www.phpbb-seo.com
 * @license http://opensource.org/osi3.0/licenses/lgpl-license.php GNU Lesser General Public License
 *
 */
@@ -107,7 +107,8 @@ function obtain_gym_links($gym_links = array()) {
 	$_phpbb_seo = !empty($phpbb_seo);
 	$board_url = $_phpbb_seo ? $phpbb_seo->seo_path['phpbb_url'] : generate_board_url() . '/';
 	$gym_config = array();
-	$cache_file = '_gym_links_' . $user->data['user_lang'];
+	$ssl_bit = $phpbb_seo->ssl['use'] ? 'ssl_' : '';
+	$cache_file = '_gym_links_' . $ssl_bit . $user->data['user_lang'];
 	$gym_link_tpl = '<a href="%1$s" title="%3$s" class="gym"><img src="' . $board_url . 'gym_sitemaps/images/%2$s" alt="%3$s"/>&nbsp;%4$s</a>&nbsp;';
 	if (($links = $cache->get($cache_file)) === false) {
 		obtain_gym_config('main', $gym_config);
@@ -243,7 +244,7 @@ function display_feed($params, $tpl_prefix = '') {
 		'striptags' => !empty($params['striptags']),
 	);
 	if (empty($_params['url'])) {
-		return;
+		return false;
 	}
 	$cache_file = '_gym_links_' . md5($user->data['user_lang'] . $_params['url']);
 	if (($feed_data = $cache->get($cache_file)) === false) {
@@ -277,7 +278,9 @@ function display_feed($params, $tpl_prefix = '') {
 			$i++;
 		}
 		unset($feed_data);
+		return true;
 	}
+	return false;
 }
 /**
 * get_override($mode, $key, $gym_config)

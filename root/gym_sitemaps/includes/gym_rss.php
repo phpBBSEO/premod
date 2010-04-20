@@ -3,7 +3,7 @@
 *
 * @package phpBB SEO GYM Sitemaps
 * @version $Id$
-* @copyright (c) 2006 - 2009 www.phpbb-seo.com
+* @copyright (c) 2006 - 2010 www.phpbb-seo.com
 * @license http://opensource.org/osi3.0/licenses/lgpl-license.php GNU Lesser General Public License
 *
 */
@@ -96,7 +96,7 @@ class gym_rss extends gym_sitemaps {
 			'rss_xslt' => ( $this->gym_config['rss_xslt'] ) ? true : false,
 			'rss_force_xslt' => ( $this->gym_config['rss_xslt'] && $this->gym_config['rss_force_xslt'] ) ? true : false,
 			'rss_lang' => ( !empty($rss_lang) ) ? "\n\t\t" . '<language>' . $this->xml_encode($rss_lang) . '</language>' : '',
-			'rss_url' => $this->gym_config['rss_url'],
+			'rss_url' => $phpbb_seo->sslify($this->gym_config['rss_url'], $phpbb_seo->ssl['use'], false),
 			'rss_yahoo_appid' => ( !empty($this->gym_config['rss_yahoo_appid']) ) ? trim($this->gym_config['rss_yahoo_appid']) : '',
 			// module specific settings we should often need in module
 			// Some are used here to filter the allowed actions, will go to main default if unset in the module

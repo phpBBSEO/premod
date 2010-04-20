@@ -52,6 +52,7 @@ class phpbb_seo extends setup_phpbb_seo {
 	var	$RegEx = array();
 	var	$sftpl = array();
 	var	$url_replace = array();
+	var	$ssl = array('requested' => false, 'forced' => false);
 	/**
 	* constuctor
 	*/
@@ -85,8 +86,14 @@ class phpbb_seo extends setup_phpbb_seo {
 		$this->cache_config['topic'] = array(); // do not change
 		$this->cache_config['settings'] = array(); // do not change
 		// --> DOMAIN SETTING <-- //
-		// Path Settings, only rely on DB
-		$server_protocol = ($config['server_protocol']) ? $config['server_protocol'] : (($config['cookie_secure']) ? 'https://' : 'http://');
+		// SSL, beware with cookie secure, it won't force ssl here,
+		// so you will need to switch to ssl for your user to use cookie based session (no sid)
+		// could be done by using an https link to login form (or within the redirect after login)
+		$this->ssl['requested'] = (bool) ((isset($_SERVER['HTTPS']) && (string) $_SERVER['HTTPS'] === 'on') || (isset($_SERVER['SERVER_PORT']) && (int) $_SERVER['SERVER_PORT'] === 443));
+		$this->ssl['forced'] = (bool) (($config['server_protocol'] === 'https//'));
+		$this->ssl['use'] = (bool) ($this->ssl['requested'] || $this->ssl['forced']);
+		// Server Settings, rely on DB
+		$server_protocol = $this->ssl['use'] ? 'https://' : 'http://';
 		$server_name = trim($config['server_name'], '/ ');
 		$server_port = max(0, (int) $config['server_port']);
 		$server_port = ($server_port && $server_port <> 80) ? ':' . $server_port : '';
@@ -836,6 +843,20 @@ class phpbb_seo extends setup_phpbb_seo {
 			$this->cache_config['cached'] = false;
 			return false;
 		}
+	}
+	/**
+	* sslify($url, $ssl = true,  $proto_check = true)
+	* properly set http protocol (eg http or https)
+	* if no protocol is specified, will return false with $proto_check set to true
+	*/
+	function sslify($url, $ssl = true, $proto_check = true) {
+		static $mask = '`^https?://`i';
+		$url = trim($url);
+		if ($url && preg_match($mask, $url)) {
+			$replace = $ssl ? 'https://' : 'http://';
+			return preg_replace($mask, $replace, $url);
+		}
+		return $proto_check ? false : $url;
 	}
 	/**
 	* is_utf8($string)
