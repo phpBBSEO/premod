@@ -3,7 +3,7 @@
 *
 * @package phpBB SEO GYM Sitemaps
 * @version $Id$
-* @copyright (c) 2006 - 2009 www.phpbb-seo.com
+* @copyright (c) 2006 - 2010 www.phpbb-seo.com
 * @license http://opensource.org/osi3.0/licenses/lgpl-license.php GNU Lesser General Public License
 *
 */
@@ -72,7 +72,7 @@ class gym_google extends gym_sitemaps {
 		);
 		$this->google_config = array(
 			'google_default_priority' => $this->set_module_option('default_priority', $this->gym_config['google_override']),
-			'google_url' => $this->gym_config['google_url'],
+			'google_url' => $phpbb_seo->sslify($this->gym_config['google_url'], $phpbb_seo->ssl['forced'], false),
 			// module specific settings we should often need in module
 			'google_modrewrite' => (int) $this->set_module_option('modrewrite', $this->override['modrewrite']),
 			'google_modrtype' => (int) $this->set_module_option('modrtype', $this->override['modrewrite']),
@@ -88,10 +88,16 @@ class gym_google extends gym_sitemaps {
 			'google_allow_auth' => (int) $this->set_module_option('allow_auth', $this->gym_config['google_override']),
 			'google_cache_auth' => (int) $this->set_module_option('cache_auth', $this->gym_config['google_override']),
 		);
+		// SSL
+		// in sitemaps we only want to issue https urls if ssl is actually forced
+		// otherwise, http links are considered as canonical
+		foreach ($phpbb_seo->seo_path as $k => $v) {
+			$phpbb_seo->seo_path[$k] = $phpbb_seo->sslify($v, $phpbb_seo->ssl['forced'], false);
+		}
 		$this->google_config['google_auth_guest'] = ($this->google_config['google_allow_auth'] && ($user->data['is_bot'] || $user->data['is_registered'])) ? false : true;
 		$this->cache_config['do_cache'] = $this->google_config['google_auth_guest'] ? true :  $this->google_config['google_cache_auth'];
 		if ($this->gym_config['google_xslt']) {
-			$this->style_config['xslt_style'] = "\n" . '<?xml-stylesheet type="text/xsl" href="' . $phpbb_seo->seo_path['phpbb_url'] . 'gym_sitemaps/gym_style.' . $phpEx . '?action-google,type-xsl,lang-' . $config['default_lang'] . ',theme_id-' . $config['default_style'] . '" ?'.'>';
+			$this->style_config['xslt_style'] = "\n" . '<?xml-stylesheet type="text/xsl" href="' . $phpbb_seo->sslify($phpbb_seo->seo_path['phpbb_url'], $phpbb_seo->ssl['use']) . 'gym_sitemaps/gym_style.' . $phpEx . '?action-google,type-xsl,lang-' . $config['default_lang'] . ',theme_id-' . $config['default_style'] . '" ?'.'>';
 		}
 		// Take care about module categorie urls, assuming that they are of the proper form
 		// title-sepXX.xml

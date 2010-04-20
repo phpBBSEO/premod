@@ -247,6 +247,16 @@ class setup_phpbb_seo {
 		$this->start = '';
 		return 0;
 	}
+	/**
+	* get_canonical
+	* Returns the canonical url if ever built
+	* Beware with ssl :
+	* 	Since we want zero duplicate, the canonical element will only use https when ssl is forced
+	* 	(eg set as THE server protocol in config) and will use http in other cases.
+	*/
+	function get_canonical() {
+		return $this->sslify($this->seo_path['canonical'], $this->ssl['forced'], true);
+	}
 	// <-- Zero Duplicate
 }
 ?>

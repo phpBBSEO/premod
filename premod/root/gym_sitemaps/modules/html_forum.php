@@ -3,7 +3,7 @@
 *
 * @package phpBB SEO GYM Sitemaps
 * @version $Id$
-* @copyright (c) 2006 - 2009 www.phpbb-seo.com
+* @copyright (c) 2006 - 2010 www.phpbb-seo.com
 * @license http://opensource.org/osi3.0/licenses/lgpl-license.php GNU Lesser General Public License
 *
 */
@@ -169,8 +169,7 @@ class html_forum {
 			$pre_set = true;
 		case 'announce':
 			if (!$pre_set) {
-				$this->actions['is_public'] = $this->gym_master->gym_auth['reg'];
-				$this->actions['is_auth'] = $this->actions['is_active'] = !empty($this->module_auth['forum']['read_post']);
+				$this->actions['is_public'] = $this->actions['is_auth'] = $this->actions['is_active'] = !empty($this->module_auth['forum']['read_post']);
 				if (empty($this->actions['auth_view_read'])) {
 					$this->gym_master->gym_error(404, '', __FILE__, __LINE__);
 				}
@@ -181,8 +180,7 @@ class html_forum {
 			}
 		case 'sticky':
 			if (!$pre_set) {
-				$this->actions['is_public'] = $this->gym_master->gym_auth['reg'];
-				$this->actions['is_auth'] = $this->actions['is_active'] = !empty($this->module_auth['forum']['read_post']);
+				$this->actions['is_public'] = $this->actions['is_auth'] = $this->actions['is_active'] = !empty($this->module_auth['forum']['read_post']);
 				if (empty($this->actions['auth_view_read'])) {
 					$this->gym_master->gym_error(404, '', __FILE__, __LINE__);
 				}
@@ -273,8 +271,7 @@ class html_forum {
 				$this->call['display_file'] = $this->url_settings['current'];
 				$this->outputs['left_col_tpl'] = 'gym_sitemaps/display_forums_list.html';
 				$this->outputs['left_col_cache_file'] = "forum_map";
-				$this->actions['is_public'] = $this->gym_master->gym_auth['reg'];
-				$this->actions['is_auth'] = true;
+				$this->actions['is_public'] = $this->actions['is_auth'] = true;
 				$this->actions['is_active'] = (boolean) ($this->module_config['html_allow_cat_news'] || $this->module_config['html_allow_cat_map'] );
 				$this->outputs['right_col'] = $this->call['display_last_topic'] = $this->module_config['html_forum_ltopic'];
 				$this->outputs['page_title'] = sprintf($user->lang['HTML_MAP_OF'], $this->module_config['html_sitename']);
@@ -367,7 +364,7 @@ class html_forum {
 							$nav_url = $this->url_settings['html_forum_' . $key];
 							$nav_title = sprintf($user->lang['HTML_' . strtoupper($key) . '_OF'], $this->module_config['html_sitename']);
 						}
-						$this->outputs['left_col_cache_file'] = "forum_$forum_id$key";
+						$this->outputs['left_col_cache_file'] = "forum_$key" . "_$forum_id";
 						// Enable forum tracking
 						$_REQUEST['f'] = $this->call['forum_id'];
 						// Track user viewing this forum
