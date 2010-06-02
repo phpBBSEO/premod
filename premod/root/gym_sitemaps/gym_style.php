@@ -60,7 +60,7 @@ $theme = false;
 // Let's go
 if (!empty($action) && !empty($gym_style_type) && !empty($language) && !empty($theme_id)) {
 	// detect ssl
-	$ssl_requested = (bool) ((isset($_SERVER['HTTPS']) && (string) $_SERVER['HTTPS'] === 'on') || (isset($_SERVER['SERVER_PORT']) && (int) $_SERVER['SERVER_PORT'] === 443));
+	$ssl_requested = (bool) ((isset($_SERVER['HTTPS']) && ($_SERVER['HTTPS'] === 'on' || $_SERVER['HTTPS'] === true)) || (isset($_SERVER['SERVER_PORT']) && (int) $_SERVER['SERVER_PORT'] === 443));
 	$ssl_bit = $ssl_requested ? 'ssl_' : '';
 	// build cache file name
 	$cached_file = "{$phpbb_root_path}gym_sitemaps/cache/style_{$action}_{$ssl_bit}{$language}_$theme_id.$gym_style_type";
