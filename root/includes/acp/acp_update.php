@@ -2,7 +2,7 @@
 /**
 *
 * @package acp
-* @version $Id: acp_update.php 10195 2009-09-29 14:48:24Z acydburn $
+* @version $Id$
 * @copyright (c) 2005 phpBB Group
 * @license http://opensource.org/licenses/gpl-license.php GNU Public License
 *
@@ -51,6 +51,14 @@ class acp_update
 		$announcement_url = (strpos($announcement_url, '&amp;') === false) ? str_replace('&', '&amp;', $announcement_url) : $announcement_url;
 		$update_link = append_sid($phpbb_root_path . 'install/index.' . $phpEx, 'mode=update');
 
+		// next feature release
+		$next_feature_version = $next_feature_announcement_url = false;
+		if (isset($info[2]) && trim($info[2]) !== '')
+		{
+			$next_feature_version = trim($info[2]);
+			$next_feature_announcement_url = trim($info[3]);
+		}
+
 		// Determine automatic update...
 		$sql = 'SELECT config_value
 			FROM ' . CONFIG_TABLE . "
@@ -88,8 +96,10 @@ class acp_update
 			'LATEST_VERSION'	=> $latest_version,
 			'CURRENT_VERSION'	=> $config['version'],
 			'AUTO_VERSION'		=> $version_update_from,
+			'NEXT_FEATURE_VERSION'	=> $next_feature_version,
 
-			'UPDATE_INSTRUCTIONS'	=> $update_instruction,
+			'UPDATE_INSTRUCTIONS'	=> sprintf($user->lang['UPDATE_INSTRUCTIONS'], $announcement_url, $update_link),
+			'UPGRADE_INSTRUCTIONS'	=> $next_feature_version ? $user->lang('UPGRADE_INSTRUCTIONS', $next_feature_version, $next_feature_announcement_url) : false,
 		));
 	}
 }

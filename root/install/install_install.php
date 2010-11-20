@@ -113,7 +113,7 @@ class install_install extends module
 				$db_tools = new phpbb_db_tools($db);
 				$db_tools->sql_column_add(TOPICS_TABLE, 'topic_url', array('VCHAR', ''));
 				$db_tools->sql_create_index(TOPICS_TABLE, 'topic_lpid', array('topic_last_post_id'));
-				set_config('seo_premod_version', '3.0.7-PL1');
+				set_config('seo_premod_version', '3.0.8-RC1');
 				// Remove the lock file
 				@unlink($phpbb_root_path . 'cache/install_lock');
 
@@ -432,7 +432,7 @@ class install_install extends module
 			'LEGEND'			=> $lang['FILES_REQUIRED'],
 			'LEGEND_EXPLAIN'	=> $lang['FILES_REQUIRED_EXPLAIN'],
 		));
-
+		// SEO premod
 		$directories = array('cache/', 'files/', 'store/', 'phpbb_seo/cache/', 'gym_sitemaps/cache/');
 
 		umask(0);
@@ -494,7 +494,7 @@ class install_install extends module
 			$write = $exists = true;
 			if (file_exists($phpbb_root_path . $dir))
 			{
-				if (!@is_writable($phpbb_root_path . $dir))
+				if (!phpbb_is_writable($phpbb_root_path . $dir))
 				{
 					$write = false;
 				}
@@ -914,7 +914,7 @@ class install_install extends module
 		$config_data .= '?' . '>'; // Done this to prevent highlighting editors getting confused!
 
 		// Attempt to write out the config file directly. If it works, this is the easiest way to do it ...
-		if ((file_exists($phpbb_root_path . 'config.' . $phpEx) && is_writable($phpbb_root_path . 'config.' . $phpEx)) || is_writable($phpbb_root_path))
+		if ((file_exists($phpbb_root_path . 'config.' . $phpEx) && phpbb_is_writable($phpbb_root_path . 'config.' . $phpEx)) || phpbb_is_writable($phpbb_root_path))
 		{
 			// Assume it will work ... if nothing goes wrong below
 			$written = true;
@@ -1211,6 +1211,7 @@ class install_install extends module
 		{
 			case 'mssql':
 			case 'mssql_odbc':
+			case 'mssqlnative':
 				$sql_query = preg_replace('#\# MSSQL IDENTITY (phpbb_[a-z_]+) (ON|OFF) \##s', 'SET IDENTITY_INSERT \1 \2;', $sql_query);
 			break;
 
@@ -1243,6 +1244,7 @@ class install_install extends module
 		$current_time = time();
 
 		$user_ip = (!empty($_SERVER['REMOTE_ADDR'])) ? htmlspecialchars($_SERVER['REMOTE_ADDR']) : '';
+		$user_ip = (stripos($user_ip, '::ffff:') === 0) ? substr($user_ip, 7) : $user_ip;
 
 		if ($data['script_path'] !== '/')
 		{
@@ -1383,7 +1385,7 @@ class install_install extends module
 			$sql_ary[] = 'UPDATE ' . $data['table_prefix'] . "config
 				SET config_value = 'phpbb_captcha_gd'
 				WHERE config_name = 'captcha_plugin'";
-			
+
 			$sql_ary[] = 'UPDATE ' . $data['table_prefix'] . "config
 				SET config_value = '1'
 				WHERE config_name = 'captcha_gd'";
@@ -2115,6 +2117,7 @@ class install_install extends module
 		'Alta Vista [Bot]'			=> array('Scooter/', ''),
 		'Ask Jeeves [Bot]'			=> array('Ask Jeeves', ''),
 		'Baidu [Spider]'			=> array('Baiduspider+(', ''),
+		'Bing [Bot]'                => array('bingbot/', ''),
 		'Exabot [Bot]'				=> array('Exabot/', ''),
 		'FAST Enterprise [Crawler]'	=> array('FAST Enterprise Crawler', ''),
 		'FAST WebCrawler [Crawler]'	=> array('FAST-WebCrawler/', ''),
@@ -2207,6 +2210,7 @@ class install_install extends module
 				'ACP_MODULE_MANAGEMENT',
 			),
 			'ACP_CAT_DOT_MODS'		=> null,
+			// SEO premod
 			'ACP_CAT_PHPBB_SEO'		=> array(
 				'ACP_MOD_REWRITE',
 			),
