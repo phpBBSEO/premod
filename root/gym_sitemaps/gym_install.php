@@ -737,6 +737,7 @@ class install_gym_sitemaps extends module {
 					$sql[] = "CREATE INDEX gym_config_type ON " . GYM_CONFIG_TABLE . " (config_type)";
 					break;
 				case 'mssql':
+				case 'mssqlnative':
 				case 'mssql_odbc':
 					$sql[] = "CREATE TABLE [" . GYM_CONFIG_TABLE . "] (
 							[config_name] [varchar] (255) DEFAULT ('') NOT NULL ,

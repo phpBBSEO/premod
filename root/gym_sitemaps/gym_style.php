@@ -12,15 +12,20 @@
 define('IN_PHPBB', true);
 $phpbb_root_path = (defined('PHPBB_ROOT_PATH')) ? PHPBB_ROOT_PATH : './../';
 $phpEx = substr(strrchr(__FILE__, '.'), 1);
+$gym_cache_path = $phpbb_root_path . 'gym_sitemaps/cache/';
 
-// Report all errors, except notices
-error_reporting(E_ALL ^ E_NOTICE);
+// Report all errors, except notices and deprecation messages
+if (!defined('E_DEPRECATED'))
+{
+	define('E_DEPRECATED', 8192);
+}
+error_reporting(E_ALL ^ E_NOTICE ^ E_DEPRECATED);
 
 if (version_compare(PHP_VERSION, '6.0.0-dev', '<')) {
 	@set_magic_quotes_runtime(0);
 }
 // Load Extensions
-if (!empty($load_extensions)) {
+if (!empty($load_extensions) && function_exists('dl')) {
 	$load_extensions = explode(',', $load_extensions);
 	foreach ($load_extensions as $extension) {
 		@dl(trim($extension));
@@ -63,7 +68,7 @@ if (!empty($action) && !empty($gym_style_type) && !empty($language) && !empty($t
 	$ssl_requested = (bool) ((isset($_SERVER['HTTPS']) && ($_SERVER['HTTPS'] === 'on' || $_SERVER['HTTPS'] === true)) || (isset($_SERVER['SERVER_PORT']) && (int) $_SERVER['SERVER_PORT'] === 443));
 	$ssl_bit = $ssl_requested ? 'ssl_' : '';
 	// build cache file name
-	$cached_file = "{$phpbb_root_path}gym_sitemaps/cache/style_{$action}_{$ssl_bit}{$language}_$theme_id.$gym_style_type";
+	$cached_file = "{$gym_cache_path }style_{$action}_{$ssl_bit}{$language}_$theme_id.$gym_style_type";
 	if (file_exists($cached_file)) {
 		$cached_time = filemtime($cached_file);
 		$expire_time = $cached_time + $cache_ttl;
@@ -148,7 +153,7 @@ if (!empty($action) && !empty($gym_style_type) && !empty($language) && !empty($t
 			require($phpbb_root_path . 'language/' . $language . '/common.' . $phpEx);
 		}
 		// Do not recache if up to date, recompile only if the source stylesheet was updated
-		$cached_file = "{$phpbb_root_path}gym_sitemaps/cache/style_{$action}_{$ssl_bit}{$language}_$theme_id.$gym_style_type";
+		$cached_file = "{$gym_cache_path}style_{$action}_{$ssl_bit}{$language}_$theme_id.$gym_style_type";
 		if (file_exists($cached_file)) {
 			$cached_time = filemtime($cached_file);
 			$expire_time = $cached_time + $cache_ttl;
