@@ -50,14 +50,16 @@ class acp_update
 		$announcement_url = trim($info[1]);
 		$announcement_url = (strpos($announcement_url, '&amp;') === false) ? str_replace('&', '&amp;', $announcement_url) : $announcement_url;
 		$update_link = append_sid($phpbb_root_path . 'install/index.' . $phpEx, 'mode=update');
-
+		// www.phpBB-SEO.com SEO TOOLKIT BEGIN
+		// moved a little bellow
 		// next feature release
-		$next_feature_version = $next_feature_announcement_url = false;
+		/*$next_feature_version = $next_feature_announcement_url = false;
 		if (isset($info[2]) && trim($info[2]) !== '')
 		{
 			$next_feature_version = trim($info[2]);
 			$next_feature_announcement_url = trim($info[3]);
-		}
+		}*/
+		// www.phpBB-SEO.com SEO TOOLKIT BEGIN
 
 		// Determine automatic update...
 		$sql = 'SELECT config_value
@@ -84,6 +86,13 @@ class acp_update
 			if (!$auto_update) {
 				$update_instruction = '<br/><br/><hr/>' . sprintf($user->lang['ACP_PREMOD_UPDATE'], $latest_version, $announcement_url) . '<br/><hr/>';
 			}
+		}
+		// next feature release
+		$next_feature_version = $next_feature_announcement_url = false;
+		if (isset($info[3]) && trim($info[3]) !== '')
+		{
+			$next_feature_version = trim($info[3]);
+			$next_feature_announcement_url = trim($info[4]);
 		}
 		// www.phpBB-SEO.com SEO TOOLKIT END
 		$template->assign_vars(array(
