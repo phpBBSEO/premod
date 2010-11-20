@@ -904,19 +904,17 @@ class acp_gym_sitemaps {
 	* Clears all the gym sitemaps cache ( acp modules, module lists and config )
 	*/
 	function clear_all_cache($option = '') {
-		global $phpbb_root_path, $phpEx, $acm_type;
+		global $phpbb_root_path, $phpEx, $acm_type, $cache;
 		if ($acm_type !== 'file') {
-			global $cache;
 			// Apparently, we cannot loop through cached variable using cache class in such case, purge all for now
 			$cache->purge();
 			return;
 		}
-		$cache_path = $phpbb_root_path . 'cache/';
-		$dir = opendir( $cache_path );
+		$dir = opendir( $cache->cache_dir );
 		$action_from_file = '';
 		while( ($file = @readdir($dir)) !== false ) {
 			if(preg_match('`^data_gym_' . $option . '[a-z0-9_-]+\.' . $phpEx . '$`i', $file)) {
-				@unlink($cache_path. $file);
+				@unlink($cache->cache_dir . $file);
 			}
 		}
 		@closedir($dir);
