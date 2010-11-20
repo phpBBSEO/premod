@@ -620,10 +620,8 @@ class session
 		else
 		{
 			// www.phpBB-SEO.com SEO TOOLKIT BEGIN
-			// Commented out since redirect will output an
-			// http 302 header, or worst a 200 with meta http-equiv="refresh"
-			// on so called PITA webservers. This is NOT a good idea.
-			// sid are anyway taken care of by the zero duplicate.
+			// This part will be fixed in 3.0.9 (see http://tracker.phpbb.com/browse/PHPBB3-9908)
+			// But as is or updated, it will not mix well with USU and Zero Duplicate (which already removes them)
 			// Bot user, if they have a SID in the Request URI we need to get rid of it
 			// otherwise they'll index this page with the SID, duplicate content oh my!
 			/*if (isset($_GET['sid']))

@@ -746,7 +746,6 @@ function topic_generate_pagination($replies, $url)
 				$pagin_find = array('`(https?\://[a-z0-9_/\.-]+/[a-z0-9_\.-]+)(\.(?!' . $phpEx . ')[a-z0-9]+)(\?[\w\#$%&~\-;:=,@+\.]+)?(&amp;|\?)start=([0-9]+)`i', '`(https?\://[a-z0-9_/\.-]+/[a-z0-9_\.-]+)/(\?[\w\#$%&~\-;:=,@+\.]+)?(&amp;|\?)start=([0-9]+)`i' );
 				$pagin_replace = array( '\1' . $phpbb_seo->seo_delim['start'] . '\5\2\3', '\1/' . $phpbb_seo->seo_static['pagination'] . '\4' . $phpbb_seo->seo_ext['pagination'] . '\2' );
 			}
-			//$pagination = str_replace( '&amp;start=0', '', $pagination );
 			$pagination = preg_replace( $pagin_find, $pagin_replace, $pagination );
 		}
 		// www.phpBB-SEO.com SEO TOOLKIT END
