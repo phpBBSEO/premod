@@ -554,6 +554,8 @@ class gym_sitemaps {
 	function seo_kill_dupes($url) {
 		global $user, $auth, $_SID, $phpbb_seo;
 		$url = str_replace('&amp;', '&', $url);
+		// if an https request lead us here or if it is forced, then use it as a reference
+		$url = $phpbb_seo->sslify($url, $phpbb_seo->ssl['use']);
 		if ($this->url_config['zero_dupe']) {
 			$requested_url = $this->url_config['uri'];
 			if (!empty($_REQUEST['explain']) && (boolean) ($auth->acl_get('a_') && defined('DEBUG_EXTRA'))) {

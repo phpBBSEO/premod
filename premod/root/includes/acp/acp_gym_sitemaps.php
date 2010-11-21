@@ -95,6 +95,14 @@ class acp_gym_sitemaps {
 		$this->gym_module_acp($mode, $module);
 		// Acp options array for this case
 		$display_vars = $error = array();
+		// salt the form
+		$form_key = 'acp_gym';
+		add_form_key($form_key);
+		// check form salt
+		if ($submit && !check_form_key($form_key)) {
+			$error[] = $user->lang['FORM_INVALID'];
+			$submit = false;
+		}
 		// Cache management
 		if ($maction === 'maintenance') {
 			$display_vars = $this->gym_maintenance( $mode, $module, $action, $submit );
@@ -143,6 +151,7 @@ class acp_gym_sitemaps {
 		$cfg_array = (isset($_REQUEST['config'])) ? utf8_normalize_nfc(request_var('config', array('' => ''), true)) : $this->new_config;
 		// We validate the complete config if whished
 		validate_config_vars($display_vars['vars'], $cfg_array, $error);
+
 		// check script urls if necessary
 		if ($submit && isset($cfg_array[$mode . '_url'])) {
 			// will enforce trailing slashes automatically
@@ -639,34 +648,33 @@ class acp_gym_sitemaps {
 			$message = '';
 			if ($acp_modules) {
 				$this->remove_cache('acp', $cache_action);
-				$message = $user->lang['MODULE_CACHE_CLEARED'];
-			} else {
-				$accessed = false;
-				$deleted = '';
-				$res = opendir($cache_dir);
-				if($res) {
-					$num_del = 0;
-					while(($file = readdir($res))) {
-						// includes CSS and XSL cache
-						if(preg_match('`^(style_' . $style_regex . '|' . $cache_regex . ')[a-z0-9_-]+\.(xml|xml\.gz|css|xsl)$`i', $file)) {
-							@unlink($cache_dir . $file);
-							$deleted .=  "<li>$file</li>";
-							$num_del++;
-						}
+				$message = $user->lang['MODULE_CACHE_CLEARED'] . '<br/><br/>';
+			}
+			$accessed = false;
+			$deleted = '';
+			$res = opendir($cache_dir);
+			if($res) {
+				$num_del = 0;
+				while(($file = readdir($res))) {
+					// includes CSS and XSL cache
+					if(preg_match('`^(style_' . $style_regex . '|' . $cache_regex . ')[a-z0-9_-]+\.(xml|xml\.gz|css|xsl)$`i', $file)) {
+						@unlink($cache_dir . $file);
+						$deleted .=  "<li>$file</li>";
+						$num_del++;
 					}
-					$accessed = true;
 				}
-				closedir($res);
-				if ($accessed) {
-					if ($deleted !='') {
-						$message = $user->lang['GYM_CACHE_CLEARED'] . $cache_dir . '<br/><br/>';
-						$message .= '<div align="left">' . $user->lang['GYM_FILE_CLEARED'] . " $num_del<ul>$deleted</ul></div>";
-					} else {
-						$message = $user->lang['GYM_CACHE_ACCESSED'] . $cache_dir;
-					}
+				$accessed = true;
+			}
+			closedir($res);
+			if ($accessed) {
+				if ($deleted !='') {
+					$message .= $user->lang['GYM_CACHE_CLEARED'] . $cache_dir . '<br/><br/>';
+					$message .= '<div align="left">' . $user->lang['GYM_FILE_CLEARED'] . " $num_del<ul>$deleted</ul></div>";
 				} else {
-					$message = $user->lang['GYM_CACHE_NOT_CLEARED'] . $cache_dir;
+					$message .= $user->lang['GYM_CACHE_ACCESSED'] . $cache_dir;
 				}
+			} else {
+				$message .= $user->lang['GYM_CACHE_NOT_CLEARED'] . $cache_dir;
 			}
 			trigger_error($message . $this->back_to_prev());
 		}
@@ -1000,6 +1008,10 @@ class acp_gym_sitemaps {
 					unset($scripts[$k]);
 				}
 			}
+		}
+		// let's not show a warning for a proto matter (since they are dealt with runtime)
+		foreach ($scripts as $k => $v) {
+			$scripts[$k]['url_config'] = $scripts[$k]['url_config'] ? $phpbb_seo->sslify($scripts[$k]['url_config'], $phpbb_seo->ssl['use']) : '';
 		}
 		$phpbb_url_config_url = append_sid($phpbb_admin_path . "index.$phpEx", "i=board&amp;mode=server#force_server_vars");
 		// all script should be placed in the same domain as phpBB
