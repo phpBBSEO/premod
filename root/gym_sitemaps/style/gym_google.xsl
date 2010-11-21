@@ -63,7 +63,7 @@
 <body id="phpbb">
 <!--
 	GYM Sitemaps and RSS XSLTransform
-	(C) 2006, 2010 phpBB SEO - http://www.phpbb-seo.com/
+	(C) phpBB SEO - http://www.phpbb-seo.com/
 -->
 		<div id="wrap">
 			<a id="top" name="top" accesskey="t"></a>
@@ -143,7 +143,7 @@
 	If you cannot (for good reason) retain the full copyright we request you at least leave in place the
 	"Copyright phpBB SEO" line, with "phpBB SEO" linked to www.phpbb-seo.com.
 	If you refuse to include even this, then support and further development on our forums may be affected.
-	The phpBB SEO Team : 2006.
+	The phpBB SEO Team.
 -->
 <div class="copyright">{L_COPY}</div>
 </body>
@@ -214,7 +214,7 @@
 		</li>
 	</ul>
 </xsl:template>
-<!-- http template to preserve SSL when used in generated href ! -->
+<!-- http template to preserve SSL navigation when ssl is not forced (if so, the xml source only uses http) -->
 <xsl:template name="http">
 	<xsl:param name="input" />
 	<xsl:choose>
