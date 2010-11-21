@@ -655,6 +655,7 @@ if (sizeof($topic_list))
 	foreach ($topic_list as $topic_id)
 	{
 		$row = &$rowset[$topic_id];
+
 		$topic_forum_id = ($row['forum_id']) ? (int) $row['forum_id'] : $forum_id;
 		// www.phpBB-SEO.com SEO TOOLKIT BEGIN
 		if (!empty($row['topic_url'])) {
@@ -663,7 +664,6 @@ if (sizeof($topic_list))
 			if ($phpbb_seo->modrtype > 2) {
 				$row['topic_title'] = censor_text($row['topic_title']);
 			}
-			$topic_forum_id = ($row['forum_id']) ? (int) $row['forum_id'] : $forum_id;
 			$parent_forum = $row['topic_type'] == POST_GLOBAL ? $phpbb_seo->seo_static['global_announce'] : (!empty($phpbb_seo->seo_url['forum'][$topic_forum_id]) ? $phpbb_seo->seo_url['forum'][$topic_forum_id] : false);
 			if ($parent_forum) {
 				$phpbb_seo->prepare_iurl($row, 'topic', $parent_forum);
