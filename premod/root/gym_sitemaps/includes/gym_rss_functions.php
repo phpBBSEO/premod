@@ -140,7 +140,7 @@ function get_gym_links($gym_config) {
 			$links['setup']['google'] = array_merge( $links['setup']['google'],
 				array(
 					'forum_google' => true,
-					'forum_cat_google' => $gym_config['google_url'] . ($google_forum_mod_rewrite && $_phpbb_seo ? "%1\$s.xml$google_gzip_ext" : "sitemap.$phpEx?forum=%2\$s"),
+					'forum_cat_google' => $google_url . ($google_forum_mod_rewrite && $_phpbb_seo ? "%1\$s.xml$google_gzip_ext" : "sitemap.$phpEx?forum=%2\$s"),
 					'auth_guest' => $google_auth_guest,
 					'forum_exclude' => $google_forum_exclude,
 			));
