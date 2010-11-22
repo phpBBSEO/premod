@@ -51,7 +51,8 @@ $lang = array_merge($lang, array(
 	'SITE_DESC'						=> 'Description du site',
 	'SITE_NAME'						=> 'Nom du site',
 	'SYSTEM_DST'					=> 'Activer l’heure d’été',
-	'SYSTEM_TIMEZONE'				=> 'Fuseau horaire',
+	'SYSTEM_TIMEZONE'				=> 'Fuseau horaire des invités',
+	'SYSTEM_TIMEZONE_EXPLAIN'		=> 'Fuseau horaire à utiliser pour l’affichage des heures quand les utilisateurs ne sont pas connectés (visiteurs, robots). Les membres le définissent pendant leur inscription et peuvent le changer via le panneau de l’utilisateur.',
 	'WARNINGS_EXPIRE'				=> 'Durée de l’avertissement',
 	'WARNINGS_EXPIRE_EXPLAIN'		=> 'Nombre de jours qui s’écoulera avant que l’avertissement expire automatiquement.',
 ));
@@ -86,7 +87,7 @@ $lang = array_merge($lang, array(
 	'ALLOW_SMILIES'				=> 'Autoriser les smileys',
 	'ALLOW_TOPIC_NOTIFY'		=> 'Autoriser la surveillance des sujets',
 	'BOARD_PM'					=> 'Messagerie privée',
-	'BOARD_PM_EXPLAIN'			=> 'Activer ou désactiver la messagerie privée pour tous les utilisateurs.',
+	'BOARD_PM_EXPLAIN'			=> 'Activer la messagerie privée pour tous les utilisateurs.',
 ));
 
 // Avatar Settings
@@ -212,7 +213,7 @@ $lang = array_merge($lang, array(
 	'NEW_MEMBER_POST_LIMIT'			=> 'Limite de message d’un nouveau membre',
 	'NEW_MEMBER_POST_LIMIT_EXPLAIN'	=> 'Les nouveaux membres resteront dans le groupe <em>Nouveaux utilisateurs enregistrés</em> jusqu’à qu’ils atteignent ce nombre de messages. Vous pouvez utiliser ce groupe pour éviter qu’ils utilisent le système de messagerie privé ou la révision de leurs messages. <strong>Mettre “0” pour désactiver cette fonctionnalité.</strong>',
 	'NEW_MEMBER_GROUP_DEFAULT'		=> 'Mettre le groupe des nouveaux utilisateurs enregistrés par défaut',
-	'NEW_MEMBER_GROUP_DEFAULT_EXPLAIN'	=> 'Si ce paramètre est activé et qu’une limite de message pour les nouveaux membres est indiquée, les nouveaux utilisateurs enregistrés ne seront pas simplement placés dans le groupe <em>Nouveaux utilisateurs enregistrés</em>, mais ce groupe deviendra également leur groupe par défaut. Cela peut s’avérer pratique si vous voulez assigner un rang et/ou un avatar de groupe par défaut afin que les utilisateurs en héritent.',
+	'NEW_MEMBER_GROUP_DEFAULT_EXPLAIN'	=> 'Si ce paramètre est activé, et qu’une limite de message pour les nouveaux membres est indiquée, les nouveaux utilisateurs enregistrés ne seront pas simplement placés dans le groupe <em>Nouveaux utilisateurs enregistrés</em>, mais ce groupe deviendra également leur groupe par défaut. Cela peut s’avérer pratique si vous voulez assigner un rang et/ou un avatar de groupe par défaut afin que les utilisateurs en héritent.',
 	'ACC_ADMIN'					=> 'Par l’administrateur',
 	'ACC_DISABLE'				=> 'Désactiver',
 	'ACC_NONE'					=> 'Aucun',
@@ -287,41 +288,41 @@ $lang = array_merge($lang, array(
 
  // Visual Confirmation Settings
 $lang = array_merge($lang, array(
-	'ACP_VC_SETTINGS_EXPLAIN'				=> 'Vous pouvez sélectionner et configurer les plugins CAPTCHA, qui utilisent différents moyens pour rejeter les tentatives d’inscription des robots.',
+	'ACP_VC_SETTINGS_EXPLAIN'				=> 'Vous pouvez sélectionner et configurer les plugins, qui sont conçus pour bloquer les soumissions automatisées de formulaires par des robots. Ces plugins fonctionnent généralement en défiant l’utilisateur via un <em>CAPTCHA</em>, un test conçu pour être complexe à résoudre pour les ordinateurs.',
 	'AVAILABLE_CAPTCHAS'					=> 'Plugins disponibles',
-	'CAPTCHA_UNAVAILABLE'					=> 'Le CAPTCHA ne peut pas être sélectionné car les prérequis ne sont pas remplis.',
-	'CAPTCHA_GD'							=> 'GD CAPTCHA',
-	'CAPTCHA_GD_3D'							=> 'GD Captcha 3D',
-	'CAPTCHA_GD_FOREGROUND_NOISE'			=> 'GD CAPTCHA avec bruit de fond',
-	'CAPTCHA_GD_EXPLAIN'					=> 'Utilise GD pour un CAPTCHA plus avancé.',
-	'CAPTCHA_GD_FOREGROUND_NOISE_EXPLAIN'	=> 'Utiliser un bruit de fond pour faire un CAPTCHA plus difficile à déchiffrer par les robots.',
-	'CAPTCHA_GD_X_GRID'						=> 'GD CAPTCHA avec bruit de fond x-axis',
+	'CAPTCHA_UNAVAILABLE'					=> 'Le plugin ne peut pas être sélectionné car les prérequis ne sont pas remplis.',
+	'CAPTCHA_GD'							=> 'Image GD',
+	'CAPTCHA_GD_3D'							=> 'Image 3D GD',
+	'CAPTCHA_GD_FOREGROUND_NOISE'			=> 'Bruit de fond',
+	'CAPTCHA_GD_EXPLAIN'					=> 'Utilise GD pour faire une image plus difficile à déchiffrer par les robots.',
+	'CAPTCHA_GD_FOREGROUND_NOISE_EXPLAIN'	=> 'Utiliser un bruit de fond pour faire une image plus difficile à déchiffrer par les robots.',
+	'CAPTCHA_GD_X_GRID'						=> 'Bruit de fond x-axis',
 	'CAPTCHA_GD_X_GRID_EXPLAIN'				=> 'Utiliser le paramètre ci-dessous pour rendre la confirmation visuelle plus difficile à déchiffrer. Mettre “0” pour désactiver le bruit de fond x-axis.',
-	'CAPTCHA_GD_Y_GRID'						=> 'GD CAPTCHA avec bruit de fond y-axis',
+	'CAPTCHA_GD_Y_GRID'						=> 'Bruit de fond y-axis',
 	'CAPTCHA_GD_Y_GRID_EXPLAIN'				=> 'Utiliser le paramètre ci-dessous pour rendre la confirmation visuelle plus difficile à déchiffrer. Mettre “0” pour désactiver le bruit de fond y-axis.',
-	'CAPTCHA_GD_WAVE'						=> 'Distorsion ondulatoire du GD CAPTCHA',
-	'CAPTCHA_GD_WAVE_EXPLAIN'				=> 'Cela appliquera une distorsion ondulatoire au CAPTCHA.',
+	'CAPTCHA_GD_WAVE'						=> 'Distorsion ondulatoire',
+	'CAPTCHA_GD_WAVE_EXPLAIN'				=> 'Cela appliquera une distorsion ondulatoire à l’image.',
  	'CAPTCHA_GD_3D_NOISE'					=> 'Ajouter des objets de bruit en 3D',
-	'CAPTCHA_GD_3D_NOISE_EXPLAIN'			=> 'Cela ajoutera des objets supplémentaires au CAPTCHA, par-dessus les lettres.',
+	'CAPTCHA_GD_3D_NOISE_EXPLAIN'			=> 'Cela ajoutera des objets supplémentaires à l’image, par-dessus les lettres.',
 	'CAPTCHA_GD_FONTS'						=> 'Utiliser différentes polices',
 	'CAPTCHA_GD_FONTS_EXPLAIN'				=> 'Ce paramètre contrôle le nombre différent de formes de lettres qui sont utilisées. Vous pouvez seulement utiliser les formes par défaut ou introduire des lettres modifiées. L’ajout de lettres en minuscule est également possible.',
 	'CAPTCHA_FONT_DEFAULT'					=> 'Défaut',
 	'CAPTCHA_FONT_NEW'						=> 'Nouvelles formes',
 	'CAPTCHA_FONT_LOWER'					=> 'Utiliser également des minuscules',
 
-	'CAPTCHA_NO_GD'							=> 'CAPTCHA sans GD',
-	'CAPTCHA_PREVIEW_MSG'					=> 'Vos modifications pour les paramètres de la confirmation visuelle n’ont pas été sauvegardées. Ceci est juste un aperçu.',
-	'CAPTCHA_PREVIEW_EXPLAIN'				=> 'Voici le CAPTCHA tel qu’il apparaîtrait avec vos paramètres actuels.',
+	'CAPTCHA_NO_GD'							=> 'Image simple',
+	'CAPTCHA_PREVIEW_MSG'					=> 'Vos modifications n’ont pas été sauvegardées, ceci est juste un aperçu.',
+	'CAPTCHA_PREVIEW_EXPLAIN'				=> 'Voici le plugin tel qu’il apparaîtrait avec vos paramètres actuels.',
 
-	'CAPTCHA_SELECT'						=> 'Plugins CAPTCHA installés',
-	'CAPTCHA_SELECT_EXPLAIN'				=> 'La liste déroulante affiche les plugins CAPTCHA reconnus par le forum. Les plugins grisés ne sont pas disponibles immédiatement et peuvent nécessiter au préalable une configuration pour être utilisés.',
-	'CAPTCHA_CONFIGURE'						=> 'Configurer les CAPTCHAs',
-	'CAPTCHA_CONFIGURE_EXPLAIN'				=> 'Change les paramètres pour le CAPTCHA sélectionné.',
+	'CAPTCHA_SELECT'						=> 'Plugins installés',
+	'CAPTCHA_SELECT_EXPLAIN'				=> 'La liste déroulante affiche les plugins reconnus par le forum. Les plugins grisés ne sont pas disponibles immédiatement et peuvent nécessiter au préalable une configuration pour être utilisés.',
+	'CAPTCHA_CONFIGURE'						=> 'Configurer les plugins',
+	'CAPTCHA_CONFIGURE_EXPLAIN'				=> 'Change les paramètres pour le plugin sélectionné.',
 	'CONFIGURE'								=> 'Configurer',
-	'CAPTCHA_NO_OPTIONS'					=> 'Ce CAPTCHA n’a pas d’options de configuration.',
+	'CAPTCHA_NO_OPTIONS'					=> 'Ce plugin n’a pas d’options de configuration.',
 
 	'VISUAL_CONFIRM_POST'					=> 'Activer la confirmation visuelle pour les visiteurs',
-	'VISUAL_CONFIRM_POST_EXPLAIN'			=> 'Oblige les invités à saisir un code aléatoire correspondant à une image afin d’empêcher la publication de messages en masse.',
+	'VISUAL_CONFIRM_POST_EXPLAIN'			=> 'Oblige les invités à passer le test de vérification humaine afin d’empêcher la publication automatisée de messages.',
 	'VISUAL_CONFIRM_REG'					=> 'Activer la confirmation visuelle pour les inscriptions',
 	'VISUAL_CONFIRM_REG_EXPLAIN'			=> 'Oblige les nouveaux utilisateurs à saisir un code aléatoire correspondant à une image afin d’empêcher les inscriptions en masse.',
 	'VISUAL_CONFIRM_REFRESH'				=> 'Autoriser les utilisateurs à rafraîchir l’image de confirmation',
@@ -374,7 +375,9 @@ $lang = array_merge($lang, array(
 	'YES_POST_MARKING'				=> 'Activer les sujets pointés',
 	'YES_POST_MARKING_EXPLAIN'		=> 'Indique si le membre a participé au sujet.',
 	'YES_READ_MARKING'				=> 'Activer l’indicateur de lecture par le serveur',
-	'YES_READ_MARKING_EXPLAIN'		=> 'Enregistre l’état lu/non lu dans la base plutôt que dans un cookie.',));
+	'YES_READ_MARKING_EXPLAIN'		=> 'Enregistre l’état lu/non lu dans la base plutôt que dans un cookie.',
+	'YES_UNREAD_SEARCH'				=> 'Activer la recherche des messages non lus',
+));
 
 // Auth settings
 $lang = array_merge($lang, array(
@@ -473,7 +476,7 @@ $lang = array_merge($lang, array(
 	'REF_HOST' 						=> 'Valider uniquement l’hôte',
 	'REF_PATH' 						=> 'Valider également le chemin',
 	'REFERER_VALID' 				=> 'Valider le référant',
-	'REFERER_VALID_EXPLAIN'  => 'Si activé, le référant des requêtes POST sera comparé au paramétrage effectué pour le chemin de l’hôte ou du script. Ceci peut entraîner certains problèmes avec les forums utilisant plusieurs domaines ou des connexions externes.',
+	'REFERER_VALID_EXPLAIN'  		=> 'Si activé, le référant des requêtes POST sera comparé au paramétrage effectué pour le chemin de l’hôte ou du script. Ceci peut entraîner certains problèmes avec les forums utilisant plusieurs domaines ou des connexions externes.',
 	'TPL_ALLOW_PHP'					=> 'Autoriser le PHP dans les templates',
 	'TPL_ALLOW_PHP_EXPLAIN'			=> 'Si cette option est activée, les instructions <code>PHP</code> et <code>INCLUDEPHP</code> seront reconnues et analysées dans les templates.',
 ));

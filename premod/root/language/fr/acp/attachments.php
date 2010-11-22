@@ -86,7 +86,7 @@ $lang = array_merge($lang, array(
 	'DISPLAY_INLINED_EXPLAIN'		=> 'Si “Non”, les images jointes seront affichées en tant que liens.',
 	'DISPLAY_ORDER'					=> 'Ordre d’affichage des fichiers joints',
 	'DISPLAY_ORDER_EXPLAIN'			=> 'Classer les fichiers joints par date.',
-	
+
 	'EDIT_EXTENSION_GROUP'			=> 'Modifier le groupe d’extensions',
 	'EXCLUDE_ENTERED_IP'			=> 'Activez ceci pour exclure l’IP/nom d’hôte entré.',
 	'EXCLUDE_FROM_ALLOWED_IP'		=> 'Exclure une IP des IP/noms d’hôtes autorisés',
@@ -95,8 +95,18 @@ $lang = array_merge($lang, array(
 	'EXTENSION_EXIST'				=> 'L’extension %s existe déjà.',
 	'EXTENSION_GROUP'				=> 'Groupe d’extensions',
 	'EXTENSION_GROUPS'				=> 'Groupes d’extensions',
-	'EXTENSION_GROUP_DELETED'		=> 'Le groupe d’extension a été supprimé.',
-	'EXTENSION_GROUP_EXIST'			=> 'Le groupe d’extension %s existe déjà.',
+	'EXTENSION_GROUP_DELETED'		=> 'Le groupe d’extensions a été supprimé.',
+	'EXTENSION_GROUP_EXIST'			=> 'Le groupe d’extensions %s existe déjà.',
+
+	'EXT_GROUP_ARCHIVES'			=> 'Archives',
+	'EXT_GROUP_DOCUMENTS'			=> 'Documents',
+	'EXT_GROUP_DOWNLOADABLE_FILES'	=> 'Fichiers téléchargeables',
+	'EXT_GROUP_FLASH_FILES'			=> 'Fichiers Flash',
+	'EXT_GROUP_IMAGES'				=> 'Images',
+	'EXT_GROUP_PLAIN_TEXT'			=> 'Texte',
+	'EXT_GROUP_QUICKTIME_MEDIA'		=> 'Quicktime Media',
+	'EXT_GROUP_REAL_MEDIA'			=> 'Real Media',
+	'EXT_GROUP_WINDOWS_MEDIA'		=> 'Windows Media',
 
 	'GO_TO_EXTENSIONS'		=> 'Aller à l’écran de gestion des extensions',
 	'GROUP_NAME'			=> 'Nom du groupe',

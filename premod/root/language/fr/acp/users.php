@@ -43,6 +43,7 @@ $lang = array_merge($lang, array(
 	'BAN_ALREADY_ENTERED'	=> 'Ce bannissement a déjà été effectué. Aucune mise à jour n’a été effectuée.',
 	'BAN_SUCCESSFUL'		=> 'Le bannissement a été ajouté.',
 
+	'CANNOT_BAN_ANONYMOUS'			=> 'Vous n’êtes pas autorisé à bannir le compte de l’utilisateur invité. Les permissions des visiteurs peuvent être définies depuis l’onglet “Permissions”.',
 	'CANNOT_BAN_FOUNDER'			=> 'Vous n’êtes pas autorisé à bannir les comptes des administrateurs fondateurs.',
 	'CANNOT_BAN_YOURSELF'			=> 'Vous n’êtes pas autorisé à vous bannir.',
 	'CANNOT_DEACTIVATE_BOT'			=> 'Vous n’êtes pas autorisé à désactiver les comptes de robots. Désactivez plutôt le robot dans la page des robots.',

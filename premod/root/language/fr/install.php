@@ -129,7 +129,7 @@ $lang = array_merge($lang, array(
 	'DB_ERR_QUERY_FIRST_TABLE'	=> 'Erreur pendant l’exécution de <var>query_first</var>, %s (“%s”).',
 	'DB_ERR_SELECT'				=> 'Erreur pendant l’exécution d’une requête <code>SELECT</code>.',
 	'DB_HOST'					=> 'Serveur de base de données ou DSN',
-	'DB_HOST_EXPLAIN'			=> 'DSN signifie Data Source Name (source de données) et n’est utilisé que pour une installation ODBC.',
+	'DB_HOST_EXPLAIN'			=> 'DSN signifie Data Source Name (source de données) et n’est utilisé que pour une installation ODBC. Avec PostgreSQL, utilisez “localhost” pour vous connecter au serveur local via le socket de domaine UNIX et “127.0.0.1” pour vous connecter via TCP.',
 	'DB_NAME'					=> 'Nom de la base',
 	'DB_PASSWORD'				=> 'Mot de passe',
 	'DB_PORT'					=> 'Port du serveur',
@@ -148,6 +148,7 @@ $lang = array_merge($lang, array(
 	'DLL_MBSTRING'				=> 'Support des caractères multi-octets',
 	'DLL_MSSQL'					=> 'MSSQL Server 2000+',
 	'DLL_MSSQL_ODBC'			=> 'MSSQL Server 2000+ via ODBC',
+	'DLL_MSSQLNATIVE'			=> 'MSSQL Server 2005+ [ Natif ]',
 	'DLL_MYSQL'					=> 'MySQL',
 	'DLL_MYSQLI'				=> 'MySQL avec l’extension MySQLi',
 	'DLL_ORACLE'				=> 'Oracle',
@@ -213,6 +214,7 @@ $lang = array_merge($lang, array(
       <li>SQLite 2.8.2+</li>
       <li>Firebird 2.1+</li>
       <li>MS SQL Server 2000 ou supérieur (directement ou via ODBC)</li>
+      <li>MS SQL Server 2005 ou supérieur (natif)</li>
       <li>Oracle</li>
    </ul>
 
@@ -559,6 +561,7 @@ $lang = array_merge($lang, array(
 	'UPDATING_DATA'					=> 'Mise à jour des données',
 	'UPDATING_TO_LATEST_STABLE'		=> 'Mise à jour de la base de données vers la dernière version stable',
 	'UPDATED_VERSION'				=> 'Version mise à jour',
+	'UPGRADE_INSTRUCTIONS'			=> 'Une nouvelle version <strong>%1$s</strong> est disponible. Veuillez consulter <a href="%2$s" title="%2$s"><strong>l’annonce de mise à jour</strong></a> afin d’en savoir plus, et comment mettre à jour votre installation.',
 	'UPLOAD_METHOD'					=> 'Méthode de chargement',
 
 	'UPDATE_DB_SUCCESS'				=> 'La mise à jour de la base de données a été effectuée.',
@@ -585,16 +588,6 @@ $lang = array_merge($lang, array(
 	'CONFIG_SITENAME'				=> 'votredomaine.com',
 
 	'DEFAULT_INSTALL_POST'			=> 'Ceci est un exemple de message de votre installation phpBB3. Tout semble fonctionner. Vous pouvez si vous le voulez supprimer ce message et continuer à configurer votre forum. Durant le processus d’installation, votre première catégorie et votre premier forum sont assignés à un ensemble de permissions appropriées aux groupes d’utilisateurs que sont les administrateurs, les robots, les modérateurs globaux, les invités, les utilisateurs inscrits et les utilisateurs COPPA inscrits. Si vous choisissez de supprimer également votre première catégorie et votre premier forum, n’oubliez pas de régler les permissions à tous les groupes d’utilisateurs, pour toutes les nouvelles catégories et forums que vous allez créer. Il est recommandé de renommer votre première catégorie et votre premier forum et de copier leurs permissions sur chaque nouvelle catégorie et nouveau forum lors de leur création. Amusez-vous bien!',
-
-	'EXT_GROUP_ARCHIVES'			=> 'Archives',
-	'EXT_GROUP_DOCUMENTS'			=> 'Documents',
-	'EXT_GROUP_DOWNLOADABLE_FILES'	=> 'Fichiers téléchargeables',
-	'EXT_GROUP_FLASH_FILES'			=> 'Fichiers Flash',
-	'EXT_GROUP_IMAGES'				=> 'Images',
-	'EXT_GROUP_PLAIN_TEXT'			=> 'Texte',
-	'EXT_GROUP_QUICKTIME_MEDIA'		=> 'Quicktime Media',
-	'EXT_GROUP_REAL_MEDIA'			=> 'Real Media',
-	'EXT_GROUP_WINDOWS_MEDIA'		=> 'Windows Media',
 
 	'FORUMS_FIRST_CATEGORY'			=> 'Votre première catégorie',
 	'FORUMS_TEST_FORUM_DESC'		=> 'Description de votre premier forum.',
