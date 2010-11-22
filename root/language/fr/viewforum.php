@@ -37,32 +37,36 @@ if (empty($lang) || !is_array($lang))
 // in a url you again do not need to specify an order e.g., 'Click %sHERE%s' is fine
 
 $lang = array_merge($lang, array(
-   'ACTIVE_TOPICS'   => 'Sujets actifs',
-   'ANNOUNCEMENTS'   => 'Annonces',
+	'ACTIVE_TOPICS'			=> 'Sujets actifs',
+	'ANNOUNCEMENTS'			=> 'Annonces',
 
-   'FORUM_PERMISSIONS' => 'Permissions du forum',
+	'FORUM_PERMISSIONS'		=> 'Permissions du forum',
 
-   'ICON_ANNOUNCEMENT'   => 'Annonce',
-   'ICON_STICKY' => 'Post-it',
+	'ICON_ANNOUNCEMENT'		=> 'Annonce',
+	'ICON_STICKY'			=> 'Post-it',
 
-   'LOGIN_NOTIFY_FORUM' => 'Vous avez été averti de la présence d’un nouveau message dans ce forum, connectez-vous pour y accéder.',
+	'LOGIN_NOTIFY_FORUM'	=> 'Vous avez été averti de la présence d’un nouveau message dans ce forum, connectez-vous pour y accéder.',
 
-   'MARK_TOPICS_READ' => 'Marquer tous les sujets comme lus',
+	'MARK_TOPICS_READ'		=> 'Marquer tous les sujets comme lus',
 
-   'NEW_POSTS_HOT' => 'Nouveaux messages [ Populaires ]',
-   'NEW_POSTS_LOCKED' => 'Nouveaux messages [ Verrouillés ]',
-   'NO_NEW_POSTS_HOT' => 'Pas de nouveaux messages [ Populaires ]',
-   'NO_NEW_POSTS_LOCKED' => 'Pas de nouveaux messages [ Verrouillés ]',
-   'NO_READ_ACCESS'      => 'Vous n’avez pas les permissions requises pour lire les sujets de ce forum.',
+	'NEW_POSTS_HOT'			=> 'Nouveaux messages [ Populaires ]',	// Not used anymore
+	'NEW_POSTS_LOCKED'		=> 'Nouveaux messages [ Verrouillés ]',	// Not used anymore
+	'NO_NEW_POSTS_HOT'		=> 'Pas de nouveaux messages [ Populaires ]',	// Not used anymore
+	'NO_NEW_POSTS_LOCKED'	=> 'Pas de nouveaux messages [ Verrouillés ]',	// Not used anymore
+	'NO_READ_ACCESS'		=> 'Vous n’avez pas les permissions requises pour lire les sujets de ce forum.',
+	'NO_UNREAD_POSTS_HOT'		=> 'Pas de messages non lus [ Populaires ]',
+	'NO_UNREAD_POSTS_LOCKED'	=> 'Pas de messages non lus [ Verrouillés ]',
 
+	'POST_FORUM_LOCKED'		=> 'Le forum est verrouillé',
 
-   'POST_FORUM_LOCKED' => 'Le forum est verrouillé',
+	'TOPICS_MARKED'			=> 'Les sujets de ce forum ont été marqués comme lus.',
 
-   'TOPICS_MARKED' => 'Les sujets de ce forum ont été marqués comme lus.',
+	'UNREAD_POSTS_HOT'		=> 'Messages non lus [ Populaires ]',
+	'UNREAD_POSTS_LOCKED'	=> 'Messages non lus [ Verrouillés ]',
 
-   'VIEW_FORUM' => 'Voir le forum',
-   'VIEW_FORUM_TOPIC' => '1 sujet',
-   'VIEW_FORUM_TOPICS' => '%d sujets',
+	'VIEW_FORUM'			=> 'Voir le forum',
+	'VIEW_FORUM_TOPIC'		=> '1 sujet',
+	'VIEW_FORUM_TOPICS'		=> '%d sujets',
 ));
 
 ?>

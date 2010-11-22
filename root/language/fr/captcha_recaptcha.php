@@ -5,7 +5,7 @@
 * translated by PhpBB-fr.com <http://www.phpbb-fr.com/>
 *
 * @package language
-* @version $Id: captcha_recaptcha.php v1.25 2009-10-16 16:01:00 Elglobo $
+* @version $Id: captcha_recaptcha.php v1.26 2010-11-12 23:31:00 ABDev $
 * @copyright (c) 2009 phpBB Group
 * @license http://opensource.org/licenses/gpl-license.php GNU Public License
 *
@@ -47,7 +47,7 @@ $lang = array_merge($lang, array(
 	'RECAPTCHA_PRIVATE'				=> 'Clé privée reCaptcha',
 	'RECAPTCHA_PRIVATE_EXPLAIN'		=> 'Votre clé privée reCaptcha. Des clés peuvent être obtenus sur <a href="http://recaptcha.net">reCaptcha.net</a>.',
 
-	'RECAPTCHA_EXPLAIN'				=> 'Afin d’empêcher les inscriptions automatisées, nous vous demandons de taper les deux mots affichés ci-dessous dans le champ texte ci-contre.',
+	'RECAPTCHA_EXPLAIN'				=> 'Afin d’empêcher les inscriptions automatisées, nous vous demandons de taper les deux mots affichés dans le champ texte ci-contre.',
 ));
 
 ?>

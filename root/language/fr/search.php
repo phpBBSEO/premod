@@ -62,6 +62,7 @@ $lang = array_merge($lang, array(
 	'NO_SEARCH'   => 'Désolé mais vous n’êtes pas autorisé à utiliser le système de recherche.',
 	'NO_SEARCH_RESULTS'   => 'Aucun sujet ou message ne correspond à vos critères de recherche.',
 	'NO_SEARCH_TIME'   => 'Désolé mais vous ne pouvez pas utiliser la fonction recherche actuellement. Merci de réessayer dans quelques instants.',
+	'NO_SEARCH_UNREADS'		=> 'Désolé mais la recherche des messages non lus a été désactivée sur ce forum.',
 	'WORD_IN_NO_POST'   => 'Aucun résultat trouvé pour le mot <strong>%s</strong>.',
 	'WORDS_IN_NO_POST'   => 'Aucun résultat trouvé pour les mots <strong>%s</strong>.',
 

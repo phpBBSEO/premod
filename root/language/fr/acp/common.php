@@ -190,7 +190,7 @@ $lang = array_merge($lang, array(
 
 	'ACP_USER_WARNINGS'				=> 'Avertissements',
 
-	'ACP_VC_SETTINGS'					=> 'Paramètres du module CAPTCHA',
+	'ACP_VC_SETTINGS'					=> 'Paramètres de la confirmation visuelle',
 	'ACP_VC_CAPTCHA_DISPLAY'			=> 'Aperçu CAPTCHA',
 	'ACP_VERSION_CHECK'					=> 'Vérifier les mises à jour',
 	'ACP_VIEW_ADMIN_PERMISSIONS'		=> 'Permissions d’administration',

@@ -5,7 +5,7 @@
 * translated originally by PhpBB-fr.com <http://www.phpbb-fr.com/> and phpBB.biz <http://www.phpBB.biz>
 *
 * @package language
-* @version $Id: help_faq.php, v1.27 2010/02/25 15:58:00 Elglobo Exp $
+* @version $Id: help_faq.php, v1.27 2010/11/22 10:49:00 Lolovoisin Exp $
 * @copyright (c) 2005 phpBB Group 
 * @license http://opensource.org/licenses/gpl-license.php GNU Public License 
 *
@@ -130,7 +130,7 @@ $help = array(
 	),
 	array(
 		0 => 'Pourquoi ne puis-je pas ajouter plus d’options à mon sondage?',
-		1 => 'Le nombre d’options maximum par sondage est défini par l’administrateur. Si vous avez besoin de indiquer plus d’options, contactez-le.'
+		1 => 'Le nombre d’options maximum par sondage est défini par l’administrateur. Si vous avez besoin d’indiquer plus d’options, contactez-le.'
 	),
 	array(
 		0 => 'Comment modifier ou supprimer un sondage?',
