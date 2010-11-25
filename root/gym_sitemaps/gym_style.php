@@ -68,7 +68,7 @@ if (!empty($action) && !empty($gym_style_type) && !empty($language) && !empty($t
 	$ssl_requested = (bool) ((isset($_SERVER['HTTPS']) && ($_SERVER['HTTPS'] === 'on' || $_SERVER['HTTPS'] === true)) || (isset($_SERVER['SERVER_PORT']) && (int) $_SERVER['SERVER_PORT'] === 443));
 	$ssl_bit = $ssl_requested ? 'ssl_' : '';
 	// build cache file name
-	$cached_file = "{$gym_cache_path }style_{$action}_{$ssl_bit}{$language}_$theme_id.$gym_style_type";
+	$cached_file = "{$gym_cache_path}style_{$action}_{$ssl_bit}{$language}_$theme_id.$gym_style_type";
 	if (file_exists($cached_file)) {
 		$cached_time = filemtime($cached_file);
 		$expire_time = $cached_time + $cache_ttl;
