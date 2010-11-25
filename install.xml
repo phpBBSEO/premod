@@ -122,6 +122,7 @@ Tout manquement à ces règles contribuera à mettre le support et le développe
 					<change><![CDATA[Utlimate SEO URL 0.6.6]]></change>
 					<change><![CDATA[Added : Full ssl support]]></change>
 					<change><![CDATA[Fix : phpbb_seo::set_url calls breaking custom static forum]]></change>
+					<change><![CDATA[Fix : Tiny issue with .htaccess and .htaccess optimization]]></change>
 					<change><![CDATA[Few minor fixes and enhancements]]></change>
 					<change><![CDATA[Zero duplicate 0.6.6]]></change>
 					<change><![CDATA[Added : Full ssl support]]></change>

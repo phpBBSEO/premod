@@ -810,7 +810,7 @@ class phpbb_seo extends setup_phpbb_seo {
 			$forum_uri = request_var('forum_uri', '');
 			unset($_GET['forum_uri'], $_REQUEST['forum_uri']);
 		}
-		if (empty($forum_uri)) {
+		if (empty($forum_uri) || $forum_uri == $this->seo_static['global_announce']) {
 			return 0;
 		}
 		if ($id = @array_search($forum_uri, $this->cache_config['forum']) ) {
