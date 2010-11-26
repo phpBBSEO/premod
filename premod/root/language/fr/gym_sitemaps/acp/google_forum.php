@@ -39,9 +39,9 @@ $lang = array_merge($lang, array(
 	'GOOGLE_FORUM_STICKY_PRIORITY' => 'Priorité des Post-It',
 	'GOOGLE_FORUM_STICKY_PRIORITY_EXPLAIN' => 'Priorité des Post-It (le nombre doit être compris entre 0.0 &amp; 1.0 inclus).',
 	'GOOGLE_FORUM_ANNOUCE_PRIORITY' => 'Priorité des annonces',
-	'GOOGLE_FORUM_ANNOUCE_PRIORITY_EXPLAIN' => 'Priorité des annonces (le nombre doit être compris entre 0.0 & 1.0 inclus).',
+	'GOOGLE_FORUM_ANNOUCE_PRIORITY_EXPLAIN' => 'Priorité des annonces (le nombre doit être compris entre 0.0 &amp; 1.0 inclus).',
 	'GOOGLE_FORUM_GLOBAL_PRIORITY' => 'Priorité des annonces générales',
-	'GOOGLE_FORUM_GLOBAL_PRIORITY_EXPLAIN' => 'Priorité des annonces générales (le nombre doit être compris entre 0.0 & 1.0 inclus).',
+	'GOOGLE_FORUM_GLOBAL_PRIORITY_EXPLAIN' => 'Priorité des annonces générales (le nombre doit être compris entre 0.0 &amp; 1.0 inclus).',
 	'GOOGLE_FORUM_EXCLUDE' => 'Exclusion de forums',
 	'GOOGLE_FORUM_EXCLUDE_EXPLAIN' => 'Sélectionnez les forums pour lesquels vous ne souhaitez pas de plan de sitemap<br /><u>Note</u> :<br />Si ce champ est laissé vide, tous les forums publics seront listés.',
 	// Reset settings
