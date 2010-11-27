@@ -98,7 +98,7 @@ Pour plus de détails concernant les exceptions possibles, merci de contacter un
 Tout manquement à ces règles contribuera à mettre le support et le développement sur www.phpbb-seo.com en péril.]]></author-notes>
 		<author-group>
 			<author>
-				<username><![CDATA[dcz]]></username>
+				<username phpbbcom="no"><![CDATA[phpBB SEO Team]]></username>
 				<homepage><![CDATA[http://www.phpbb-seo.com/]]></homepage>
 			</author>
 		</author-group>
