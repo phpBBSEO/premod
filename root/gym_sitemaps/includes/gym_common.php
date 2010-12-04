@@ -109,7 +109,7 @@ function obtain_gym_links($gym_links = array()) {
 	$gym_config = array();
 	$ssl_bit = $phpbb_seo->ssl['use'] ? 'ssl_' : '';
 	$cache_file = '_gym_links_' . $ssl_bit . $user->data['user_lang'];
-	$gym_link_tpl = '<a href="%1$s" title="%3$s" class="gym"><img src="' . $board_url . 'gym_sitemaps/images/%2$s" alt="%3$s" width="14", height="14"/>&nbsp;%4$s</a>&nbsp;';
+	$gym_link_tpl = '<a href="%1$s" title="%3$s" class="gym"><img src="' . $board_url . 'gym_sitemaps/images/%2$s" alt="%3$s" width="14" height="14"/>&nbsp;%4$s</a>&nbsp;';
 	if (($links = $cache->get($cache_file)) === false) {
 		obtain_gym_config('main', $gym_config);
 		$user->add_lang('gym_sitemaps/gym_common');
