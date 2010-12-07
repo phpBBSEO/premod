@@ -2107,8 +2107,18 @@ function generate_pagination($base_url, $num_items, $per_page, $start_item, $add
 		static $pagin_find = array();
 		static $pagin_replace = array();
 		if (empty($pagin_replace)) {
-			$pagin_find = array('`(https?\://[a-z0-9_/\.-]+/[a-z0-9_\.-]+)(\.[a-z0-9]+)(\?[\w$%&~\-;:=,@+\.]+)?(#[a-z0-9_\.-]+)?(&amp;|\?)start=([0-9]+)`i', '`(https?\://[a-z0-9_/\.-]+/[a-z0-9_\-]+)/(\?[\w$%&~\-;:=,@+\.]+)?(#[a-z0-9_\.-]+)?(&amp;|\?)start=([0-9]+)`i');
-			$pagin_replace = array( '\1' . $phpbb_seo->seo_delim['start'] . '\6\2\3\4', '\1/' . $phpbb_seo->seo_static['pagination'] . '\5' . $phpbb_seo->seo_ext['pagination'] . '\2\3');
+			$pagin_find = array(
+				// http://example.com/a_n-y/d.i.r/with.ext
+				'`(https?\://[a-z0-9_/\.-]+/[a-z0-9_\.-]+)(\.[a-z0-9]+)(\?[\w$%&~\-;:=,@+\.]+)?(#[a-z0-9_\.-]+)?(&amp;|\?)start=([0-9]+)`i',
+				// http://example.com/a_n-y/d.i.r/withoutext
+				'`(https?\://[a-z0-9_/\.-]+/[a-z0-9_-]+)/?(\?[\w$%&~\-;:=,@+\.]+)?(#[a-z0-9_\.-]+)?(&amp;|\?)start=([0-9]+)`i'
+			);
+			$pagin_replace = array(
+				// http://example.com/a_n-y/d.i.r/with-xx.ext
+				'\1' . $phpbb_seo->seo_delim['start'] . '\6\2\3\4',
+				// http://example.com/a_n-y/d.i.r/withoutext/pagexx.html
+				'\1/' . $phpbb_seo->seo_static['pagination'] . '\5' . $phpbb_seo->seo_ext['pagination'] . '\2\3'
+			);
 		}
 		$rewrite_pagination = false;
 		// here we rewrite rewritten urls only, and they do hold the full url with http
@@ -2133,6 +2143,8 @@ function generate_pagination($base_url, $num_items, $per_page, $start_item, $add
 		} else {
 			// take care about eventual hashes
 			if (strpos($base_url, '#') !== false) {
+				// since hashes are not originally handled,
+				// we need to make sure we put it at the end of the url
 				static $hash_find = '`((https?\://)?[a-z0-9_/\.-]+\.[a-z0-9]+)(\?[\w$%&~\-;:=,@+\.]+)?(#[a-z0-9_\.-]+)((&amp;|\?)start=[0-9]+)`';
 				static $hash_replace = '\1\3\5\4';
 				$page_string = preg_replace($hash_find, $hash_replace, $page_string);
