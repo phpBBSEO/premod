@@ -159,8 +159,8 @@ class gym_html extends gym_sitemaps {
 		// Set up module's urls : Pagination
 		$this->url_config['html_start_ext'] = '';
 		if ($this->html_config['html_modrewrite']) {
-			$page = !empty($phpbb_seo->seo_static['page']) ? $phpbb_seo->seo_static['page'] : 'page';
-			$html = !empty($phpbb_seo->seo_ext['page']) ? $phpbb_seo->seo_ext['page'] : '.html';
+			$page = !empty($phpbb_seo->seo_static['pagination']) ? $phpbb_seo->seo_static['pagination'] : 'page';
+			$html = !empty($phpbb_seo->seo_ext['pagination']) ? $phpbb_seo->seo_ext['pagination'] : '.html';
 			$this->url_config['html_start'] = "$page%1\$s$html";
 			$this->url_config['html_default'] = 'maps/';
 			$this->url_config['html_news_default'] = 'news/';
