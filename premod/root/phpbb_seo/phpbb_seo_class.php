@@ -825,8 +825,7 @@ class phpbb_seo extends setup_phpbb_seo {
 	* @access private
 	*/
 	function check_cache( $type = 'forum', $from_bkp = false ) {
-		$file = SEO_CACHE_PATH . @$this->cache_config['files'][$type];
-		if( !$this->cache_config['cache_enable'] || !isset($this->cache_config['files'][$type]) || !file_exists($file) ) {
+		if( !$this->cache_config['cache_enable'] || !isset($this->cache_config['files'][$type]) || !file_exists($file = SEO_CACHE_PATH . $this->cache_config['files'][$type]) ) {
 			$this->cache_config['cached'] = false;
 			return false;
 		}
