@@ -3562,7 +3562,7 @@ function phpbb_checkdnsrr($host, $type = 'MX')
 	// but until 5.3.3 it only works for MX records
 	// See: http://bugs.php.net/bug.php?id=51844
 
-	// Call checkdnsrr() if 
+	// Call checkdnsrr() if
 	// we're looking for an MX record or
 	// we're not on Windows or
 	// we're running a PHP version where #51844 has been fixed
@@ -3582,7 +3582,7 @@ function phpbb_checkdnsrr($host, $type = 'MX')
 	// dns_get_record() is available since PHP 5; since PHP 5.3 also on Windows,
 	// but on Windows it does not work reliable for AAAA records before PHP 5.3.1
 
-	// Call dns_get_record() if 
+	// Call dns_get_record() if
 	// we're not looking for an AAAA record or
 	// we're not on Windows or
 	// we're running a PHP version where AAAA lookups work reliable
@@ -3612,7 +3612,7 @@ function phpbb_checkdnsrr($host, $type = 'MX')
 		foreach ($resultset as $result)
 		{
 			if (
-				isset($result['host']) && $result['host'] == $host && 
+				isset($result['host']) && $result['host'] == $host &&
 				isset($result['type']) && $result['type'] == $type
 			)
 			{
@@ -4315,24 +4315,29 @@ function page_header($page_title = '', $display_online_list = true, $item_id = 0
 	}
 	// www.phpBB-SEO.com SEO TOOLKIT BEGIN
 	global $phpbb_seo;
-	$template->assign_vars( array( 'PHPBB_FULL_URL' => $phpbb_seo->seo_path['phpbb_url'],
-		'SEO_BASE_HREF' => $phpbb_seo->seo_opt['seo_base_href'],
-		'SEO_START_DELIM' => $phpbb_seo->seo_delim['start'],
-		'SEO_SATIC_PAGE' => $phpbb_seo->seo_static['pagination'],
-		'SEO_EXT_PAGE' => $phpbb_seo->seo_ext['pagination'],
-		'SEO_CANONICAL_URL' => !empty($phpbb_seo->seo_opt['no_dupe']['on']) ? $phpbb_seo->get_canonical() : '',
-		'SEO_EXTERNAL' => !empty($config['seo_ext_links']) ? 'true' : 'false',
-		'SEO_EXTERNAL_SUB' => !empty($config['seo_ext_subdomain']) ? 'true' : 'false',
-		'SEO_EXT_CLASSES' => !empty($config['seo_ext_classes']) ? "'" . preg_replace('`[^a-z0-9_|-]+`', '', str_replace(',', '|', trim($config['seo_ext_classes'], ', '))) . "'" : 'false',
-		'SEO_HASHFIX' => $phpbb_seo->seo_opt['url_rewrite'] && $phpbb_seo->seo_opt['virtual_folder'] ? 'true' : 'false',
-	));
+	if (!empty($phpbb_seo)) {
+		$template->assign_vars( array(
+			'PHPBB_FULL_URL' => $phpbb_seo->seo_path['phpbb_url'],
+			'SEO_BASE_HREF' => $phpbb_seo->seo_opt['seo_base_href'],
+			'SEO_START_DELIM' => $phpbb_seo->seo_delim['start'],
+			'SEO_SATIC_PAGE' => $phpbb_seo->seo_static['pagination'],
+			'SEO_EXT_PAGE' => $phpbb_seo->seo_ext['pagination'],
+			'SEO_CANONICAL_URL' => !empty($phpbb_seo->seo_opt['no_dupe']['on']) ? $phpbb_seo->get_canonical() : '',
+			'SEO_EXTERNAL' => !empty($config['seo_ext_links']) ? 'true' : 'false',
+			'SEO_EXTERNAL_SUB' => !empty($config['seo_ext_subdomain']) ? 'true' : 'false',
+			'SEO_EXT_CLASSES' => !empty($config['seo_ext_classes']) ? "'" . preg_replace('`[^a-z0-9_|-]+`', '', str_replace(',', '|', trim($config['seo_ext_classes'], ', '))) . "'" : 'false',
+			'SEO_HASHFIX' => $phpbb_seo->seo_opt['url_rewrite'] && $phpbb_seo->seo_opt['virtual_folder'] ? 'true' : 'false',
+		));
+	}
 	if (isset($user->lang['Page']) && !empty($config['seo_append_sitename']) && !empty($config['sitename'])) {
 		$page_title = $page_title && strpos($page_title, $config['sitename']) === false ? $page_title . ' - ' . $config['sitename'] : $page_title;
 	}
 	// www.phpBB-SEO.com SEO TOOLKIT END
 	// www.phpBB-SEO.com SEO TOOLKIT BEGIN  - META
 	global $seo_meta;
-	$seo_meta->build_meta($page_title);
+	if (!empty($seo_meta)) {
+		$seo_meta->build_meta($page_title);
+	}
 	// www.phpBB-SEO.com SEO TOOLKIT END  - META
 	// www.phpBB-SEO.com SEO TOOLKIT BEGIN - GYM LINKS
 	if (!empty($config['gym_installed'])) {
@@ -4501,7 +4506,7 @@ function page_header($page_title = '', $display_online_list = true, $item_id = 0
 		'U_RETURN_INBOX'		=> append_sid("{$phpbb_root_path}ucp.$phpEx", 'i=pm&amp;folder=inbox'),
 		'U_POPUP_PM'			=> append_sid("{$phpbb_root_path}ucp.$phpEx", 'i=pm&amp;mode=popup'),
 		// www.phpBB-SEO.com SEO TOOLKIT BEGIN
-		'UA_POPUP_PM'			=> addslashes(append_sid($phpbb_seo->seo_path['phpbb_url'] . "ucp.$phpEx", 'i=pm&amp;mode=popup')),
+		'UA_POPUP_PM'			=> addslashes(append_sid((!empty($phpbb_seo) ? $phpbb_seo->seo_path['phpbb_url'] : $phpbb_root_path) . "ucp.$phpEx", 'i=pm&amp;mode=popup')),
 		// www.phpBB-SEO.com SEO TOOLKIT END
 		'U_MEMBERLIST'			=> append_sid("{$phpbb_root_path}memberlist.$phpEx"),
 		'U_VIEWONLINE'			=> ($auth->acl_gets('u_viewprofile', 'a_user', 'a_useradd', 'a_userdel')) ? append_sid("{$phpbb_root_path}viewonline.$phpEx") : '',
