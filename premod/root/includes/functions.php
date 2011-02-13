@@ -4322,7 +4322,7 @@ function page_header($page_title = '', $display_online_list = true, $item_id = 0
 			'SEO_START_DELIM' => $phpbb_seo->seo_delim['start'],
 			'SEO_SATIC_PAGE' => $phpbb_seo->seo_static['pagination'],
 			'SEO_EXT_PAGE' => $phpbb_seo->seo_ext['pagination'],
-			'SEO_CANONICAL_URL' => !empty($phpbb_seo->seo_opt['no_dupe']['on']) ? $phpbb_seo->get_canonical() : '',
+			'SEO_CANONICAL_URL' => !empty($phpbb_seo->seo_opt['zero_dupe']['on']) ? $phpbb_seo->get_canonical() : '',
 			'SEO_EXTERNAL' => !empty($config['seo_ext_links']) ? 'true' : 'false',
 			'SEO_EXTERNAL_SUB' => !empty($config['seo_ext_subdomain']) ? 'true' : 'false',
 			'SEO_EXT_CLASSES' => !empty($config['seo_ext_classes']) ? "'" . preg_replace('`[^a-z0-9_|-]+`', '', str_replace(',', '|', trim($config['seo_ext_classes'], ', '))) . "'" : 'false',
