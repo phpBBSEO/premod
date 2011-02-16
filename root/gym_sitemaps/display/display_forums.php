@@ -22,7 +22,7 @@ class display_forums {
 		global $phpbb_seo;
 		static $tpl = array(
 			'link' => '<a href="%1$s" title="%3$s">%2$s</a>',
-			'img' => '<img src="%1$s" alt="%2$s"/>'
+			'img' => '<img src="%1$s" alt="%2$s" width="14" height="14"/>'
 		);
 		// Usefull for multi bb topic & forum tracking
 		// Leave default for single forum eg : '_track'

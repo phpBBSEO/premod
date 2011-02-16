@@ -204,7 +204,7 @@ if (!empty($action) && !empty($gym_style_type) && !empty($language) && !empty($t
 				'{HTTP_PROTO_REQUEST}'	=> $server_protocol,
 				'{PHPBB_URL}'		=> $phpbb_url,
 				// Do not remove !
-				'{L_COPY}'		=>  '<a href="http://www.phpbb-seo.com/" title="GYM Sitemaps &amp; RSS &#169; 2006, ' . date('Y') . ' phpBB SEO" class="copyright"><img src="' . $phpbb_url . 'gym_sitemaps/images/phpbb-seo.png" alt="' . $lang['GYM_SEO'] . '"/></a>',
+				'{L_COPY}'		=>  '<a href="http://www.phpbb-seo.com/" title="GYM Sitemaps &amp; RSS &#169; 2006, ' . date('Y') . ' phpBB SEO" class="copyright"><img src="' . $phpbb_url . 'gym_sitemaps/images/phpbb-seo.png" width="80" height="15" alt="' . $lang['GYM_SEO'] . '"/></a>',
 				'{L_SEARCH_ADV_EXPLAIN}' => $lang['SEARCH_ADV_EXPLAIN'],
 				'{L_CHANGE_FONT_SIZE}'  => $lang['CHANGE_FONT_SIZE'],
 				'{L_SEARCH_ADV}' 	=> $lang['SEARCH_ADV'],
