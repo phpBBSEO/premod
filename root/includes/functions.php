@@ -2109,9 +2109,9 @@ function generate_pagination($base_url, $num_items, $per_page, $start_item, $add
 		if (empty($pagin_replace)) {
 			$pagin_find = array(
 				// http://example.com/a_n-y/d.i.r/with.ext
-				'`(https?\://[a-z0-9_/\.-]+/[a-z0-9_\.-]+)(\.[a-z0-9]+)(\?[\w$%&~\-;:=,@+\.]+)?(#[a-z0-9_\.-]+)?(&amp;|\?)start=([0-9]+)`i',
+				'`(https?\://[a-z0-9_/\.-]+/[a-z0-9_\.-]+)(\.[a-z0-9]+)(\?[\w$%&~\-;:=,@+\. ]+)?(#[a-z0-9_\.-]+)?(&amp;|\?)start=([0-9]+)`i',
 				// http://example.com/a_n-y/d.i.r/withoutext
-				'`(https?\://[a-z0-9_/\.-]+/[a-z0-9_-]+)/?(\?[\w$%&~\-;:=,@+\.]+)?(#[a-z0-9_\.-]+)?(&amp;|\?)start=([0-9]+)`i'
+				'`(https?\://[a-z0-9_/\.-]+/[a-z0-9_-]+)/?(\?[\w$%&~\-;:=,@+\. ]+)?(#[a-z0-9_\.-]+)?(&amp;|\?)start=([0-9]+)`i'
 			);
 			$pagin_replace = array(
 				// http://example.com/a_n-y/d.i.r/with-xx.ext

@@ -743,7 +743,7 @@ function topic_generate_pagination($replies, $url)
 			static $pagin_find = array();
 			static $pagin_replace = array();
 			if (empty($pagin_find)) {
-				$pagin_find = array('`(https?\://[a-z0-9_/\.-]+/[a-z0-9_\.-]+)(\.(?!' . $phpEx . ')[a-z0-9]+)(\?[\w\#$%&~\-;:=,@+\.]+)?(&amp;|\?)start=([0-9]+)`i', '`(https?\://[a-z0-9_/\.-]+/[a-z0-9_\.-]+)/(\?[\w\#$%&~\-;:=,@+\.]+)?(&amp;|\?)start=([0-9]+)`i' );
+				$pagin_find = array('`(https?\://[a-z0-9_/\.-]+/[a-z0-9_\.-]+)(\.(?!' . $phpEx . ')[a-z0-9]+)(\?[\w\#$%&~\-;:=,@+\. ]+)?(&amp;|\?)start=([0-9]+)`i', '`(https?\://[a-z0-9_/\.-]+/[a-z0-9_\.-]+)/(\?[\w\#$%&~\-;:=,@+\. ]+)?(&amp;|\?)start=([0-9]+)`i' );
 				$pagin_replace = array( '\1' . $phpbb_seo->seo_delim['start'] . '\5\2\3', '\1/' . $phpbb_seo->seo_static['pagination'] . '\4' . $phpbb_seo->seo_ext['pagination'] . '\2' );
 			}
 			$pagination = preg_replace( $pagin_find, $pagin_replace, $pagination );
