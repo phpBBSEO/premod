@@ -107,7 +107,7 @@ function obtain_gym_links($gym_links = array()) {
 	$_phpbb_seo = !empty($phpbb_seo);
 	$board_url = $_phpbb_seo ? $phpbb_seo->seo_path['phpbb_url'] : generate_board_url() . '/';
 	$gym_config = array();
-	$ssl_bit = $phpbb_seo->ssl['use'] ? 'ssl_' : '';
+	$ssl_bit = ($_phpbb_seo ? $phpbb_seo->ssl['use'] : (bool) ((isset($_SERVER['HTTPS']) && ($_SERVER['HTTPS'] === 'on' || $_SERVER['HTTPS'] === true)) || (isset($_SERVER['SERVER_PORT']) && (int) $_SERVER['SERVER_PORT'] === 443))) ? 'ssl_' : '';
 	$cache_file = '_gym_links_' . $ssl_bit . $user->data['user_lang'];
 	$gym_link_tpl = '<a href="%1$s" title="%3$s" class="gym"><img src="' . $board_url . 'gym_sitemaps/images/%2$s" alt="%3$s" width="14" height="14"/>&nbsp;%4$s</a>&nbsp;';
 	if (($links = $cache->get($cache_file)) === false) {
