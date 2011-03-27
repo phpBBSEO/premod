@@ -79,7 +79,7 @@ $lang = array_merge($lang, array(
 	'SEO_EXTERNAL_LINKS' => 'Liens externes',
 	'SEO_EXTERNAL_LINKS_EXPLAIN' => 'Activer ou non l’ouverture des liens externes dans une nouvelle fenêtre du navigateur',
 	'SEO_EXTERNAL_SUBDOMAIN' => 'Liens externes sous-domaine',
-	'SEO_EXTERNAL_SUBDOMAIN_EXPLAIN' => 'Ouvrir ou non les liens pointant vers un sous domaine du domaine de votre forum dans une nouvelle fenêtre du navigateur',
+	'SEO_EXTERNAL_SUBDOMAIN_EXPLAIN' => 'Considerer ou non les liens vers d’autres sous domaines du domaine de votre forum comme des liens internes à ne pas ouvrir dans une nouvelle fenêtre',
 	'SEO_EXTERNAL_CLASSES' => 'Classe css externe',
 	'SEO_EXTERNAL_CLASSES_EXPLAIN' => 'Vous pouvez définir des classes css qui activeront l’ouverture dans une nouvelle fenêtre pour les liens. Liste de classes séparées par des virgules, exemple : postlink,external',
 	// Titles
