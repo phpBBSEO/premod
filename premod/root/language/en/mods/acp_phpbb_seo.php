@@ -78,7 +78,7 @@ $lang = array_merge($lang, array(
 	'SEO_EXTERNAL_LINKS' => 'External links',
 	'SEO_EXTERNAL_LINKS_EXPLAIN' => 'Open, or not, external links in a new browser window / tab',
 	'SEO_EXTERNAL_SUBDOMAIN' => 'Sub-domain links',
-	'SEO_EXTERNAL_SUBDOMAIN_EXPLAIN' => 'Open, or not, sub-domains (of your forum domain) links in a new browser window / tab',
+	'SEO_EXTERNAL_SUBDOMAIN_EXPLAIN' => 'Treat, or not, links to eventual sub-domains of your forum’s domain as internal links to open in the same window',
 	'SEO_EXTERNAL_CLASSES' => 'External by css class',
 	'SEO_EXTERNAL_CLASSES_EXPLAIN' => 'here you can define some css classes that will activate the new window feature on links using it. Coma separated list of class names, example: postlink,external',
 	// Titles
