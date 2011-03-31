@@ -171,11 +171,11 @@ class seo_related {
 			$sql_array['WHERE'] .= " AND MATCH (t.topic_title) AGAINST ('" . $db->sql_escape($match) . "')";
 			$sql_array['ORDER_BY'] = 'relevancy DESC';
 		} else {
-			$sql_like = $this->buil_sql_like($match);
+			$sql_like = $this->buil_sql_like($match, 't.topic_title');
 			if (!$sql_like) {
 				return false;
 			}
-			$sql_array['WHERE'] .= " AND t.topic_title $sql_like";
+			$sql_array['WHERE'] .= " AND $sql_like";
 			$sql_array['ORDER_BY'] = 't.topic_id DESC';
 		}
 		$sql_array['WHERE'] .= " AND t.topic_status <> " . ITEM_MOVED . "
@@ -217,27 +217,66 @@ class seo_related {
 	}
 	/**
 	* buil_sql_like
-	* @param	string	$text		the string of all words to search for,prepared with prepare_match
+	* @param	string	$text		the string of all words to search for, prepared with prepare_match
+	* @param	string	$text		the table field we are matching against
 	* @param	int	$limit		maxximum number of words to use in the query
 	*/
-	function buil_sql_like($text, $limit = 3) {
+	function buil_sql_like($text, $field, $limit = 3) {
 		global $db;
-		$sql_like = '';
+		$sql_like = array();
 		$i = 0;
-		$text = str_replace(array('_', '%'), array("\_", "\%"), $text);
-		$text = str_replace(array(chr(0) . "\_", chr(0) . "\%"), array('_', '%'), $text);
 		$text = explode(' ', trim(preg_replace('`[\s]+`', ' ', $text)));
 		if ( !empty($text) ) {
 			foreach ($text as $word) {
-				$word = $db->sql_escape(trim($word));
-				$sql_like .= empty($sql_like) ? " LIKE '%$word%'" : " OR  '%$word%'";
+				$sql_like[] = "'%" . $db->sql_escape(trim($word)) . "%'";
 				$i++;
 				if ($i >= $limit) {
-					return $sql_like;
+					break;
 				}
 			}
 		}
-		return $sql_like;
+		$result = false;
+		$escape = '';
+		$operator = 'LIKE';
+		if (!empty($sql_like)) {
+			switch ($db->sql_layer) {
+				case 'mysql':
+				case 'mysql4':
+				case 'mysqli':
+					$result = '(t.topic_title LIKE ' . implode(' OR ', $sql_like) . ')';
+					break;
+				case 'oracle': // untested
+				case 'mssql': // untested
+				case 'mssql_odbc': // untested
+				case 'mssqlnative': // untested
+				case 'firebird': // untested
+					$escape = " ESCAPE '\\'";
+					// no break;
+				case 'postgres':
+					if ($db->sql_layer === 'postgres') {
+						$operator = 'ILIKE';
+					}
+					// no break;
+				case 'sqlite': // untested
+					$result = '(' . implode(' OR ', $this->sql_like_field($sql_like, $field, $operator, $escape)) . ')';
+					break;
+			}
+		}
+		return $result;
+	}
+	/**
+	* sql_like_field
+	* @param	array	$sql_like	the escaped words to match
+	* @param	string	$field		the field to match against
+	* @param	string	$operator	the operator to use
+	* @param	string	$escape		the optional escape string
+	*/
+	function sql_like_field($sql_like, $field, $operator = 'LIKE', $escape = '') {
+		$result = array();
+		foreach ($sql_like as $word) {
+			$result[] = "($field $operator $word $escape)";
+		}
+		return $result;
 	}
 }
 ?>
