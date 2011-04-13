@@ -203,7 +203,8 @@ if (!empty($action) && !empty($gym_style_type) && !empty($language) && !empty($t
 			'{T_IMAGE_PATH}'	=> "{$phpbb_url}gym_sitemaps/images/",
 			'{T_STYLE_PATH}'	=> "{$phpbb_url}gym_sitemaps/style/",
 			'{S_CONTENT_DIRECTION}'	=> gym_style_lang('DIRECTION', 'ltr'),
-			'{S_USER_LANG}'		=> $language
+			'{S_USER_LANG}'		=> $language,
+			'{NO_LANGUAGE_FILES}'	=> empty($lang) ? '<div style="padding:10px;color:red;font-weight:bold;font-size:2em;text-align:center">Required language files for GYM sitemaps are missing in this language pack !!</div>' : '',
 		);
 		if ($gym_style_type == 'xsl') {
 			$replace = array_merge($replace, array(
