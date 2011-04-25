@@ -24,6 +24,7 @@ class seo_related {
 	var $limit = 5;
 	var $allforums = false;
 	var $check_ignore = false;
+	var $forum_exclude = array();
 	/**
 	* constructor
 	*/
@@ -148,14 +149,21 @@ class seo_related {
 		}
 		if (!$forum_id || $this->allforums) {
 			global $auth;
-			// Do not include those forums the user is not having read access to...
-			$related_read_ary = $auth->acl_getf('f_read', true);
-			$related_forum_ids = array();
-			foreach ($related_read_ary as $_forum_id => $null) {
-				$related_forum_ids[$_forum_id] = (int) $_forum_id;
+			// Only include those forums the user is having read access to...
+			$related_forum_ids = $auth->acl_getf('f_read', true);
+			if (!empty($related_forum_ids)) {
+				$related_forum_ids = array_keys($related_forum_ids);
+				if (!empty($this->forum_exclude)) {
+					$related_forum_ids = array_diff($related_forum_ids, $this->forum_exclude);
+				}
+				$forum_sql = !empty($related_forum_ids) ? $db->sql_in_set('t.forum_id', $related_forum_ids, false) . ' AND ' : '';
+			} else {
+				$forum_sql = !empty($this->forum_exclude) ? $db->sql_in_set('t.forum_id', $this->forum_exclude, true) . ' AND ' : '';
 			}
-			$forum_sql = sizeof($related_forum_ids) ? $db->sql_in_set('t.forum_id', $related_forum_ids, false, true) . ' AND ' : '';
 		} else {
+			if (in_array($forum_id, $this->forum_exclude)) {
+				return false;
+			}
 			$forum_sql = ' t.forum_id = ' . (int) $forum_id . ' AND ';
 		}
 		$sql_array = array(
