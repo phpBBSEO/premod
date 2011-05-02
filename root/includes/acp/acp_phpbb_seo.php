@@ -206,7 +206,7 @@ class acp_phpbb_seo {
 						'legend1' => 'SEO_EXTERNAL_LINKS',
 						'seo_ext_links' => array('lang' => 'SEO_EXTERNAL_LINKS', 'validate' => 'bool', 'type' => 'radio:enabled_disabled', 'explain' => true, 'default' => 1),
 						'seo_ext_subdomain' => array('lang' => 'SEO_EXTERNAL_SUBDOMAIN', 'validate' => 'bool', 'type' => 'radio:yes_no', 'explain' => true, 'default' => 0),
-						'seo_ext_classes' =>  array('lang' => 'SEO_EXTERNAL_CLASSES', 'validate' => 'string', 'type' => 'text:25:150', 'explain' => true, 'default' => ''),
+						'seo_ext_classes' =>  array('lang' => 'SEO_EXTERNAL_CLASSES', 'validate' => 'string', 'type' => 'text:40:250', 'explain' => true, 'default' => ''),
 					),
 				);
 				// Related topics
@@ -225,18 +225,18 @@ class acp_phpbb_seo {
 				if (class_exists('seo_meta')) {
 					$display_vars['vars'] += array(
 						'legend3' => 'SEO_META',
-						'seo_meta_title' =>  array('lang' => 'SEO_META_TITLE', 'validate' => 'string:0:225', 'type' => 'text:25:150', 'explain' => true, 'default' => $config['sitename']),
-						'seo_meta_desc' =>  array('lang' => 'SEO_META_DESC', 'validate' => 'string:0:225', 'type' => 'text:40:255', 'explain' => true, 'default' => $config['site_desc']),
+						'seo_meta_title' =>  array('lang' => 'SEO_META_TITLE', 'validate' => 'string:0:225', 'type' => 'text:40:250', 'explain' => true, 'default' => $config['sitename']),
+						'seo_meta_desc' =>  array('lang' => 'SEO_META_DESC', 'validate' => 'string:0:225', 'type' => 'text:40:250', 'explain' => true, 'default' => $config['site_desc']),
 						'seo_meta_desc_limit' => array('lang' => 'SEO_META_DESC_LIMIT', 'validate' => 'int:5:40', 'type' => 'text:3:4', 'explain' => true, 'default' => 25),
-						'seo_meta_bbcode_filter' =>  array('lang' => 'SEO_META_BBCODE_FILTER', 'validate' => 'string:0:225', 'type' => 'text:25:150', 'explain' => true, 'default' => 'img|url|flash|code'),
-						'seo_meta_keywords' =>  array('lang' => 'SEO_META_KEYWORDS', 'validate' => 'string:0:225', 'type' => 'text:40:150', 'explain' => true, 'default' => $config['site_desc']),
+						'seo_meta_bbcode_filter' =>  array('lang' => 'SEO_META_BBCODE_FILTER', 'validate' => 'string:0:225', 'type' => 'text:40:250', 'explain' => true, 'default' => 'img|url|flash|code'),
+						'seo_meta_keywords' =>  array('lang' => 'SEO_META_KEYWORDS', 'validate' => 'string:0:225', 'type' => 'text:40:250', 'explain' => true, 'default' => $config['site_desc']),
 						'seo_meta_keywords_limit' => array('lang' => 'SEO_META_KEYWORDS_LIMIT', 'validate' => 'int:5:40', 'type' => 'text:3:4', 'explain' => true, 'default' => 15),
 						'seo_meta_min_len' => array('lang' => 'SEO_META_MIN_LEN', 'validate' => 'int:0:10', 'type' => 'text:3:4', 'explain' => true, 'default' => 2),
 						'seo_meta_check_ignore' => array('lang' => 'SEO_META_CHECK_IGNORE', 'validate' => 'bool', 'type' => 'radio:enabled_disabled', 'explain' => true, 'default' => 0),
 						'seo_meta_lang' =>  array('lang' => 'SEO_META_LANG', 'validate' => 'lang', 'type' => 'select', 'method' => 'language_select', 'params' => array('{CONFIG_VALUE}'), 'explain' => true,  'default' => $config['default_lang']),
-						'seo_meta_copy' =>  array('lang' => 'SEO_META_COPY', 'validate' => 'string:0:225', 'type' => 'text:25:150', 'explain' => true, 'default' => $config['sitename']),
-						'seo_meta_file_filter' =>  array('lang' => 'SEO_META_FILE_FILTER', 'validate' => 'string:0:225', 'type' => 'text:25:150', 'explain' => true, 'default' => 'ucp'),
-						'seo_meta_get_filter' =>  array('lang' => 'SEO_META_GET_FILTER', 'validate' => 'string:0:225', 'type' => 'text:25:150', 'explain' => true, 'default' => 'style,hilit,sid'),
+						'seo_meta_copy' =>  array('lang' => 'SEO_META_COPY', 'validate' => 'string:0:225', 'type' => 'text:40:250', 'explain' => true, 'default' => $config['sitename']),
+						'seo_meta_file_filter' =>  array('lang' => 'SEO_META_FILE_FILTER', 'validate' => 'string:0:225', 'type' => 'text:40:250', 'explain' => true, 'default' => 'ucp'),
+						'seo_meta_get_filter' =>  array('lang' => 'SEO_META_GET_FILTER', 'validate' => 'string:0:225', 'type' => 'text:40:250', 'explain' => true, 'default' => 'style,hilit,sid'),
 						'seo_meta_robots' =>  array('lang' => 'SEO_META_ROBOTS', 'validate' => 'string:0:225', 'type' => 'text:25:150', 'explain' => true, 'default' => 'index,follow'),
 						'seo_meta_noarchive' =>  array('lang' => 'SEO_META_NOARCHIVE', 'validate' => 'string:0:225', 'multiple_validate' => 'int', 'type' => 'custom', 'method' => 'select_multiple', 'params' => array('{CONFIG_VALUE}', '{KEY}', $this->forum_select()), 'explain' => true, 'default' => ''),
 					);
