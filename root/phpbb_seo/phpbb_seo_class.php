@@ -53,6 +53,7 @@ class phpbb_seo extends setup_phpbb_seo {
 	var	$sftpl = array();
 	var	$url_replace = array();
 	var	$ssl = array('requested' => false, 'forced' => false);
+	var	$forum_redirect = array();
 	/**
 	* constuctor
 	*/
@@ -815,8 +816,12 @@ class phpbb_seo extends setup_phpbb_seo {
 		}
 		if ($id = @array_search($forum_uri, $this->cache_config['forum']) ) {
 			$forum_id = max(0, (int) $id);
-		} elseif ( $id = $this->get_url_info('forum', $forum_uri, 'id')) {
+		} else if ( $id = $this->get_url_info('forum', $forum_uri, 'id')) {
 			$forum_id = max(0, (int) $id);
+		} else if (!empty($this->forum_redirect)) {
+			if (isset($this->forum_redirect[$forum_uri])) {
+				$forum_id = max(0, (int) $this->forum_redirect[$forum_uri]);
+			}
 		}
 		return $forum_id;
 	}
