@@ -76,8 +76,7 @@ function set_gym_config($config_name, $config_value, $mode, &$cfg_array) {
 			'config_name'	=> (string) $config_name,
 			'config_value'	=> (string) $config_value,
 			'config_type'	=> (string) $mode,
-			)
-		);
+		));
 		$db->sql_query($sql);
 	}
 	$cfg_array[$config_name] = $config_value;
@@ -235,13 +234,13 @@ function display_feed($params, $tpl_prefix = '') {
 	}
 	$_params = array(
 		'url' => trim(str_replace('&amp;', '&', $params['url'])),
-		'slide' => !empty($params['slide']),
-		'speed' => !empty($params['speed']) ? max((int) $params['speed'], 1) : 30,
-		'ttl' => !empty($params['ttl']) ? max((int) $params['ttl'], 0) : 3600,
-		'limit' => !empty($params['limit']) ? max((int) $params['limit'], 1) : 5,
-		'desc' => !empty($params['desc']),
-		'html' => !empty($params['html']),
-		'striptags' => !empty($params['striptags']),
+		'slide' => isset($params['slide']) ? max(0, (int) $params['slide']) : 0,
+		'speed' => !empty($params['speed']) ? max(1, (int) $params['speed']) : 30,
+		'ttl' => !empty($params['ttl']) ? max(0, (int) $params['ttl']) : 3600,
+		'limit' => !empty($params['limit']) ? max(1, (int) $params['limit']) : 5,
+		'desc' => isset($params['desc']) ? max(0, (int) $params['desc']) : 0,
+		'html' => isset($params['html']) ? max(0, (int) $params['html']) : 0,
+		'striptags' => isset($params['striptags']) ? max(0, (int) $params['striptags']) : 1,
 	);
 	if (empty($_params['url'])) {
 		return false;

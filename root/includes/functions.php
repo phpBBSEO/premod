@@ -175,8 +175,13 @@ function set_config_count($config_name, $increment, $is_dynamic = false)
 	switch ($db->sql_layer)
 	{
 		case 'firebird':
+			// Precision must be from 1 to 18
+			$sql_update = 'CAST(CAST(config_value as DECIMAL(18, 0)) + ' . (int) $increment . ' as VARCHAR(255))';
+		break;
+
 		case 'postgres':
-			$sql_update = 'CAST(CAST(config_value as DECIMAL(255, 0)) + ' . (int) $increment . ' as VARCHAR(255))';
+			// Need to cast to text first for PostgreSQL 7.x
+			$sql_update = 'CAST(CAST(config_value::text as DECIMAL(255, 0)) + ' . (int) $increment . ' as VARCHAR(255))';
 		break;
 
 		// MySQL, SQlite, mssql, mssql_odbc, oracle
@@ -236,12 +241,28 @@ function unique_id($extra = 'c')
 
 	if ($dss_seeded !== true && ($config['rand_seed_last_update'] < time() - rand(1,10)))
 	{
-		set_config('rand_seed', $config['rand_seed'], true);
 		set_config('rand_seed_last_update', time(), true);
+		set_config('rand_seed', $config['rand_seed'], true);
 		$dss_seeded = true;
 	}
 
 	return substr($val, 4, 16);
+}
+
+/**
+* Wrapper for mt_rand() which allows swapping $min and $max parameters.
+*
+* PHP does not allow us to swap the order of the arguments for mt_rand() anymore.
+* (since PHP 5.3.4, see http://bugs.php.net/46587)
+*
+* @param int $min		Lowest value to be returned
+* @param int $max		Highest value to be returned
+*
+* @return int			Random integer between $min and $max (or $max and $min)
+*/
+function phpbb_mt_rand($min, $max)
+{
+	return ($min > $max) ? mt_rand($max, $min) : mt_rand($min, $max);
 }
 
 /**
@@ -512,7 +533,7 @@ function _hash_crypt_private($password, $setting, &$itoa64)
 	$output = '*';
 
 	// Check for correct hash
-	if (substr($setting, 0, 3) != '$H$')
+	if (substr($setting, 0, 3) != '$H$' && substr($setting, 0, 3) != '$P$')
 	{
 		return $output;
 	}
@@ -1698,7 +1719,7 @@ function get_unread_topics($user_id = false, $sql_extra = '', $sql_sort = '', $s
 	if ($config['load_db_lastread'] && $user->data['is_registered'])
 	{
 		// Get list of the unread topics
-		$last_mark = $user->data['user_lastmark'];
+		$last_mark = (int) $user->data['user_lastmark'];
 
 		$sql_array = array(
 			'SELECT'		=> 't.topic_id, t.topic_last_post_time, tt.mark_time as topic_mark_time, ft.mark_time as forum_mark_time',
@@ -1717,10 +1738,11 @@ function get_unread_topics($user_id = false, $sql_extra = '', $sql_sort = '', $s
 			),
 
 			'WHERE'			=> "
+				 t.topic_last_post_time > $last_mark AND
 				(
 				(tt.mark_time IS NOT NULL AND t.topic_last_post_time > tt.mark_time) OR
 				(tt.mark_time IS NULL AND ft.mark_time IS NOT NULL AND t.topic_last_post_time > ft.mark_time) OR
-				(tt.mark_time IS NULL AND ft.mark_time IS NULL AND t.topic_last_post_time > $last_mark)
+				(tt.mark_time IS NULL AND ft.mark_time IS NULL)
 				)
 				$sql_extra
 				$sql_sort",
@@ -2309,7 +2331,10 @@ function append_sid($url, $params = false, $is_amp = true, $session_id = false)
 
 /**
 * Generate board url (example: http://www.example.com/phpBB)
+*
 * @param bool $without_script_path if set to true the script path gets not appended (example: http://www.example.com)
+*
+* @return string the generated board url
 */
 function generate_board_url($without_script_path = false)
 {
@@ -2414,12 +2439,12 @@ function redirect($url, $return = false, $disable_cd_check = false)
 		// Relative uri
 		$pathinfo = pathinfo($url);
 
-		if (!$disable_cd_check && !file_exists($pathinfo['dirname']))
+		if (!$disable_cd_check && !file_exists($pathinfo['dirname'] . '/'))
 		{
 			$url = str_replace('../', '', $url);
 			$pathinfo = pathinfo($url);
 
-			if (!file_exists($pathinfo['dirname']))
+			if (!file_exists($pathinfo['dirname'] . '/'))
 			{
 				// fallback to "last known user page"
 				// at least this way we know the user does not leave the phpBB root
@@ -2691,8 +2716,14 @@ function send_status_line($code, $message)
 	}
 	else
 	{
-		if (isset($_SERVER['HTTP_VERSION']))
+		if (!empty($_SERVER['SERVER_PROTOCOL']))
 		{
+			$version = $_SERVER['SERVER_PROTOCOL'];
+		}
+		else if (!empty($_SERVER['HTTP_VERSION']))
+		{
+			// I cannot remember where I got this from.
+			// This code path may never be reachable in reality.
 			$version = $_SERVER['HTTP_VERSION'];
 		}
 		else
@@ -3490,6 +3521,48 @@ function get_preg_expression($mode)
 }
 
 /**
+* Generate regexp for naughty words censoring
+* Depends on whether installed PHP version supports unicode properties
+*
+* @param string	$word			word template to be replaced
+* @param bool	$use_unicode	whether or not to take advantage of PCRE supporting unicode
+*
+* @return string $preg_expr		regex to use with word censor
+*/
+function get_censor_preg_expression($word, $use_unicode = true)
+{
+	static $unicode_support = null;
+
+	// Check whether PHP version supports unicode properties
+	if (is_null($unicode_support))
+	{
+		$unicode_support = ((version_compare(PHP_VERSION, '5.1.0', '>=') || (version_compare(PHP_VERSION, '5.0.0-dev', '<=') && version_compare(PHP_VERSION, '4.4.0', '>='))) && @preg_match('/\p{L}/u', 'a') !== false) ? true : false;
+	}
+
+	// Unescape the asterisk to simplify further conversions
+	$word = str_replace('\*', '*', preg_quote($word, '#'));
+
+	if ($use_unicode && $unicode_support)
+	{
+		// Replace asterisk(s) inside the pattern, at the start and at the end of it with regexes
+		$word = preg_replace(array('#(?<=[\p{Nd}\p{L}_])\*+(?=[\p{Nd}\p{L}_])#iu', '#^\*+#', '#\*+$#'), array('([\x20]*?|[\p{Nd}\p{L}_-]*?)', '[\p{Nd}\p{L}_-]*?', '[\p{Nd}\p{L}_-]*?'), $word);
+
+		// Generate the final substitution
+		$preg_expr = '#(?<![\p{Nd}\p{L}_-])(' . $word . ')(?![\p{Nd}\p{L}_-])#iu';
+	}
+	else
+	{
+		// Replace the asterisk inside the pattern, at the start and at the end of it with regexes
+		$word = preg_replace(array('#(?<=\S)\*+(?=\S)#iu', '#^\*+#', '#\*+$#'), array('(\x20*?\S*?)', '\S*?', '\S*?'), $word);
+
+		// Generate the final substitution
+		$preg_expr = '#(?<!\S)(' . $word . ')(?!\S)#iu';
+	}
+
+	return $preg_expr;
+}
+
+/**
 * Returns the first block of the specified IPv6 address and as many additional
 * ones as specified in the length paramater.
 * If length is zero, then an empty string is returned.
@@ -3747,7 +3820,7 @@ function msg_handler($errno, $msg_text, $errfile, $errline)
 			if (strpos($errfile, 'cache') === false && strpos($errfile, 'template.') === false)
 			{
 				// flush the content, else we get a white page if output buffering is on
-				if ((int) @ini_get('output_buffering') === 1 || strtolower(@ini_get('output_buffering')) === 'on')
+				if (ob_get_level() > 0)
 				{
 					@ob_flush();
 				}
@@ -3853,7 +3926,7 @@ function msg_handler($errno, $msg_text, $errfile, $errline)
 			echo '	</div>';
 			echo '	</div>';
 			echo '	<div id="page-footer">';
-			echo '		Powered by phpBB &copy; 2000, 2002, 2005, 2007 <a href="http://www.phpbb.com/">phpBB Group</a>';
+			echo '		Powered by <a href="http://www.phpbb.com/">phpBB</a> &copy; phpBB Group';
 			echo '	</div>';
 			echo '</div>';
 			echo '</body>';
@@ -4269,7 +4342,7 @@ function phpbb_http_login($param)
 	if (!is_null($username) && is_null($password) && strpos($username, 'Basic ') === 0)
 	{
 		list($username, $password) = explode(':', base64_decode(substr($username, 6)), 2);
-    }
+	}
 
 	if (!is_null($username) && !is_null($password))
 	{
@@ -4473,6 +4546,12 @@ function page_header($page_title = '', $display_online_list = true, $item_id = 0
 		$user_lang = substr($user_lang, 0, strpos($user_lang, '-x-'));
 	}
 
+	$s_search_hidden_fields = array();
+	if ($_SID)
+	{
+		$s_search_hidden_fields['sid'] = $_SID;
+	}
+
 	// The following assigns all _common_ variables that may be used at any point in a template.
 	$template->assign_vars(array(
 		'SITENAME'						=> $config['sitename'],
@@ -4564,11 +4643,13 @@ function page_header($page_title = '', $display_online_list = true, $item_id = 0
 
 		'S_LOAD_UNREADS'			=> ($config['load_unreads_search'] && ($config['load_anon_lastread'] || $user->data['is_registered'])) ? true : false,
 
+		'S_SEARCH_HIDDEN_FIELDS'	=> build_hidden_fields($s_search_hidden_fields),
+
 		'T_THEME_PATH'			=> "{$web_path}styles/" . $user->theme['theme_path'] . '/theme',
 		'T_TEMPLATE_PATH'		=> "{$web_path}styles/" . $user->theme['template_path'] . '/template',
 		'T_SUPER_TEMPLATE_PATH'	=> (isset($user->theme['template_inherit_path']) && $user->theme['template_inherit_path']) ? "{$web_path}styles/" . $user->theme['template_inherit_path'] . '/template' : "{$web_path}styles/" . $user->theme['template_path'] . '/template',
 		'T_IMAGESET_PATH'		=> "{$web_path}styles/" . $user->theme['imageset_path'] . '/imageset',
-		'T_IMAGESET_LANG_PATH'	=> "{$web_path}styles/" . $user->theme['imageset_path'] . '/imageset/' . $user->data['user_lang'],
+		'T_IMAGESET_LANG_PATH'	=> "{$web_path}styles/" . $user->theme['imageset_path'] . '/imageset/' . $user->lang_name,
 		'T_IMAGES_PATH'			=> "{$web_path}images/",
 		'T_SMILIES_PATH'		=> "{$web_path}{$config['smilies_path']}/",
 		'T_AVATAR_PATH'			=> "{$web_path}{$config['avatar_path']}/",
@@ -4576,7 +4657,7 @@ function page_header($page_title = '', $display_online_list = true, $item_id = 0
 		'T_ICONS_PATH'			=> "{$web_path}{$config['icons_path']}/",
 		'T_RANKS_PATH'			=> "{$web_path}{$config['ranks_path']}/",
 		'T_UPLOAD_PATH'			=> "{$web_path}{$config['upload_path']}/",
-		'T_STYLESHEET_LINK'		=> (!$user->theme['theme_storedb']) ? "{$web_path}styles/" . $user->theme['theme_path'] . '/theme/stylesheet.css' : append_sid("{$phpbb_root_path}style.$phpEx", 'id=' . $user->theme['style_id'] . '&amp;lang=' . $user->data['user_lang']),
+		'T_STYLESHEET_LINK'		=> (!$user->theme['theme_storedb']) ? "{$web_path}styles/" . $user->theme['theme_path'] . '/theme/stylesheet.css' : append_sid("{$phpbb_root_path}style.$phpEx", 'id=' . $user->theme['style_id'] . '&amp;lang=' . $user->lang_name),
 		'T_STYLESHEET_NAME'		=> $user->theme['theme_name'],
 
 		'T_THEME_NAME'			=> $user->theme['theme_path'],
@@ -4659,7 +4740,7 @@ function page_footer($run_cron = true)
 
 	// Call cron-type script
 	$call_cron = false;
-	if (!defined('IN_CRON') && $run_cron && !$config['board_disable'])
+	if (!defined('IN_CRON') && $run_cron && !$config['board_disable'] && !$user->data['is_bot'])
 	{
 		$call_cron = true;
 		$time_now = (!empty($user->time_now) && is_int($user->time_now)) ? $user->time_now : time();
@@ -4763,7 +4844,7 @@ function exit_handler()
 	}
 
 	// As a pre-caution... some setups display a blank page if the flush() is not there.
-	(empty($config['gzip_compress'])) ? @flush() : @ob_flush();
+	(ob_get_level() > 0) ? @ob_flush() : @flush();
 
 	exit;
 }
