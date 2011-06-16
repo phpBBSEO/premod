@@ -9,7 +9,6 @@
 <meta http-equiv="content-style-type" content="text/css" />
 <meta http-equiv="imagetoolbar" content="no" />
 {META_TAG}
-<meta http-equiv="X-UA-Compatible" content="IE=EmulateIE7; IE=EmulateIE9" />
 {META}
 <!-- BEGIN gym_rsslinks -->
 <link rel="alternate" type="application/rss+xml" title="{gym_rsslinks.TITLE}" href="{gym_rsslinks.URL}" />
@@ -28,11 +27,8 @@
 
 <script type="text/javascript">
 // <![CDATA[
-<!-- IF S_USER_PM_POPUP -->
-	if ({S_NEW_PM})
-	{
-		popup('{UA_POPUP_PM}', 400, 225, '_phpbbprivmsg');
-	}
+<!-- IF S_USER_PM_POPUP and S_NEW_PM -->
+	popup('{UA_POPUP_PM}', 400, 225, '_phpbbprivmsg');
 <!-- ENDIF -->
 
 function popup(url, width, height, name)
