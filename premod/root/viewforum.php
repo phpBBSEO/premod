@@ -666,7 +666,6 @@ if (sizeof($topic_list))
 		$topic_forum_id = ($row['forum_id']) ? (int) $row['forum_id'] : $forum_id;
 		// www.phpBB-SEO.com SEO TOOLKIT BEGIN
 		if (!empty($row['topic_url'])) {
-		//	nice_print($row['topic_url']);
 			$phpbb_seo->prepare_iurl($row, 'topic', '');
 		} else {
 			if ($phpbb_seo->modrtype > 2) {
