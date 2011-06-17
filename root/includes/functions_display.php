@@ -742,8 +742,18 @@ function topic_generate_pagination($replies, $url)
 			static $pagin_find = array();
 			static $pagin_replace = array();
 			if (empty($pagin_find)) {
-				$pagin_find = array('`(https?\://[a-z0-9_/\.-]+/[a-z0-9_\.-]+)(\.(?!' . $phpEx . ')[a-z0-9]+)(\?[\w\#$%&~\-;:=,@+\. ]+)?(&amp;|\?)start=([0-9]+)`i', '`(https?\://[a-z0-9_/\.-]+/[a-z0-9_\.-]+)/(\?[\w\#$%&~\-;:=,@+\. ]+)?(&amp;|\?)start=([0-9]+)`i' );
-				$pagin_replace = array( '\1' . $phpbb_seo->seo_delim['start'] . '\5\2\3', '\1/' . $phpbb_seo->seo_static['pagination'] . '\4' . $phpbb_seo->seo_ext['pagination'] . '\2' );
+				$pagin_find = array(
+					// http://example.com/a_n-y/d.i.r/with.ext
+					'`(https?\://[a-z0-9_/\.-]+/[a-z0-9_\.-]+)(\.[a-z0-9]+)(\?[\w$%&~\-;:=,@+\. ]+)?(#[a-z0-9_\.-]+)?(&amp;|\?)start=([0-9]+)`i',
+					// http://example.com/a_n-y/d.i.r/withoutext
+					'`(https?\://[a-z0-9_/\.-]+/[a-z0-9_-]+)/?(\?[\w$%&~\-;:=,@+\. ]+)?(#[a-z0-9_\.-]+)?(&amp;|\?)start=([0-9]+)`i'
+				);
+				$pagin_replace = array(
+					// http://example.com/a_n-y/d.i.r/with-xx.ext
+					'\1' . $phpbb_seo->seo_delim['start'] . '\6\2\3\4',
+					// http://example.com/a_n-y/d.i.r/withoutext/pagexx.html
+					'\1/' . $phpbb_seo->seo_static['pagination'] . '\5' . $phpbb_seo->seo_ext['pagination'] . '\2\3'
+				);
 			}
 			$pagination = preg_replace( $pagin_find, $pagin_replace, $pagination );
 		}
