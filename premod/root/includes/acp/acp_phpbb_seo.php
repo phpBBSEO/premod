@@ -790,7 +790,7 @@ class acp_phpbb_seo {
 				$htaccess_tpl .= $mods_ht['pos1'];
 			}
 			$htaccess_tpl .= '<b style="color:blue"># FORUM WITHOUT ID &amp; DELIM ALL MODES</b>' . "\n";
-			if ($phpbb_seo->seo_ext['forum'] != '/') {
+			if (trim($phpbb_seo->seo_ext['forum'],'/')) {
 				$htaccess_tpl .= '<b style="color:blue"># THESE FOUR LINES MUST BE LOCATED AT THE END OF YOUR HTACCESS TO WORK PROPERLY</b>' . "\n";
 				$htaccess_tpl .= '<b style="color:green">RewriteCond</b> %{REQUEST_FILENAME} !-f' . "\n";
 				$htaccess_tpl .= '<b style="color:green">RewriteRule</b> ^{WIERD_SLASH}{PHPBB_LPATH}([a-z0-9_-]+)(-([0-9]+)){EXT_FORUM}$ {DEFAULT_SLASH}{PHPBB_RPATH}viewforum.{PHP_EX}?forum_uri=$1&amp;start=$3 [QSA,L,NC]' . "\n";
@@ -853,14 +853,18 @@ class acp_phpbb_seo {
 			// handle the suffixes proper in the RegEx
 			// set up pagination reg ex
 			// set up ext bits
-			$seo_ext = array('pagination' => str_replace('.', '\\.', $phpbb_seo->seo_ext['pagination']));
+			$seo_ext = array(
+				// force '/' for both / and empty ext to add /? in RegEx (which allows both cases)
+				'pagination' => trim($phpbb_seo->seo_ext['pagination'], '/') ? str_replace('.', '\\.', $phpbb_seo->seo_ext['pagination']) : '/'
+			);
 			$reg_ex_page = sprintf($tpl['paginpage'], $phpbb_seo->seo_static['pagination'], $seo_ext['pagination'] . ($seo_ext['pagination'] === '/' ? '?' : '') );
 			foreach ( $phpbb_seo->seo_ext as $type => $value) {
-				$seo_ext[$type] = str_replace('.', '\\.', $value);
-				$htaccess_tpl_vars['{' . strtoupper($type) . '_PAGINATION}'] = ($value === '/') ? $reg_ex_page : sprintf($tpl['pagin'], $phpbb_seo->seo_delim['start'], $seo_ext[$type]);
+				$_value = trim($value, '/');
+				// force '/' for both / and empty ext to add /? in RegEx (which allows both cases)
+				$seo_ext[$type] = $_value ? str_replace('.', '\\.', $value) : '/';
+				$htaccess_tpl_vars['{' . strtoupper($type) . '_PAGINATION}'] = $_value ? sprintf($tpl['pagin'], $phpbb_seo->seo_delim['start'], $seo_ext[$type]) : $reg_ex_page;
 				// use url/? to allow both url and url/ to work as expected
-				$htaccess_tpl_vars['{EXT_' . strtoupper($type) . '}'] = sprintf($tpl['ext'] , $seo_ext[$type]) . ($value === '/' ? '?' : '');
-
+				$htaccess_tpl_vars['{EXT_' . strtoupper($type) . '}'] = sprintf($tpl['ext'] , $seo_ext[$type]) . ($_value ? '' : '?');
 			}
 			$htaccess_tpl_vars['{PAGE_PAGINATION}'] = $reg_ex_page;
 			// static bits

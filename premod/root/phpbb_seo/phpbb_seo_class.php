@@ -33,7 +33,7 @@ class phpbb_seo extends setup_phpbb_seo {
 	var	$seo_stop_vars = array('view=', 'mark=', 'watch=', 'hash=');
 	var	$seo_stop_dirs = array();
 	var	$seo_delim = array( 'forum' => '-f', 'topic' => '-t', 'user' => '-u', 'group' => '-g', 'start' => '-', 'sr' => '-', 'file' => '/');
-	var	$seo_ext = array( 'forum' => '.html', 'topic' => '.html', 'post' => '.html', 'user' => '.html', 'group' => '.html',  'index' => '', 'global_announce' => '/', 'leaders' => '.html', 'atopic' => '.html', 'utopic' => '.html', 'npost' => '.html', 'urpost' => '.html', 'pagination' => '.html', 'gz_ext' => '');
+	var	$seo_ext = array( 'forum' => '.html', 'topic' => '.html', 'post' => '.html', 'user' => '.html', 'group' => '.html',  'index' => '', 'global_announce' => '/', 'leaders' => '', 'atopic' => '.html', 'utopic' => '.html', 'npost' => '.html', 'urpost' => '.html', 'pagination' => '.html', 'gz_ext' => '');
 	var	$seo_static = array( 'forum' => 'forum', 'topic' => 'topic', 'post' => 'post', 'user' => 'member', 'group' => 'group', 'index' => '', 'global_announce' => 'announces', 'leaders' => 'the-team', 'atopic' => 'active-topics', 'utopic' => 'unanswered', 'npost' => 'newposts', 'urpost' => 'unreadposts', 'pagination' => 'page', 'gz_ext' => '.gz' );
 	var	$file_hbase = array();
 	var	$get_vars = array();
@@ -154,17 +154,13 @@ class phpbb_seo extends setup_phpbb_seo {
 			$this->rewrite_method[$phpbb_root_path]
 		);
 		$this->rewrite_method[$phpbb_root_path . 'download/']['file'] = $this->seo_opt['rewrite_files'] ? 'phpbb_files' : '';
+		// allow empty ext
+		$pag_mtds = array();
+		foreach ($this->seo_ext as $key => $ext) {
+			$pag_mtds[$key] = trim($ext, '/') ? 'rewrite_pagination' : 'rewrite_pagination_page';
+		}
 		$this->paginate_method = array_merge(
-			array(
-				'topic' => $this->seo_ext['topic'] === '/' ? 'rewrite_pagination_page' : 'rewrite_pagination',
-				'forum' => $this->seo_ext['forum'] === '/' ? 'rewrite_pagination_page' : 'rewrite_pagination',
-				'group' => $this->seo_ext['group'] === '/' ? 'rewrite_pagination_page' : 'rewrite_pagination',
-				'user' => $this->seo_ext['user'] === '/' ? 'rewrite_pagination_page' : 'rewrite_pagination',
-				'atopic' => $this->seo_ext['atopic'] === '/' ? 'rewrite_pagination_page' : 'rewrite_pagination',
-				'utopic' => $this->seo_ext['utopic'] === '/' ? 'rewrite_pagination_page' : 'rewrite_pagination',
-				'npost' => $this->seo_ext['npost'] === '/' ? 'rewrite_pagination_page' : 'rewrite_pagination',
-				'urpost' => $this->seo_ext['urpost'] === '/' ? 'rewrite_pagination_page' : 'rewrite_pagination',
-			),
+			$pag_mtds,
 			$this->paginate_method
 		);
 		$this->RegEx = array_merge(
@@ -222,18 +218,14 @@ class phpbb_seo extends setup_phpbb_seo {
 		$this->modrtype = max(0, (int) $this->modrtype);
 		// For profiles and user messages pages, if we do not inject, we do not get rid of ids
 		$this->seo_opt['profile_noids'] = $this->seo_opt['profile_inj'] ? $this->seo_opt['profile_noids'] : false;
-		// If profile noids ...
-		if ($this->seo_opt['profile_noids']) {
-			$this->seo_ext['user'] = '/';
+		// If profile noids ... or user messages virtual folder
+		if ($this->seo_opt['profile_noids'] || $this->seo_opt['profile_vfolder']) {
+			$this->seo_ext['user'] = trim($this->seo_ext['user'], '/') ? '/' : $this->seo_ext['user'];
 		}
-		// Profile ans user messages virtual folder
-		if ($this->seo_opt['profile_vfolder']) {
-			$this->seo_ext['user'] = '/';
-		}
-		$this->seo_delim['sr'] = $this->seo_ext['user'] == '/' ? '/' : $this->seo_delim['sr'];
-		// If we use virtual folder, we need '/' at the end of the forum URLs
+		$this->seo_delim['sr'] = trim($this->seo_ext['user'], '/') ? $this->seo_delim['sr'] : $this->seo_ext['user'];
+		// If we use virtual folder ...
 		if ($this->seo_opt['virtual_folder']) {
-			$this->seo_ext['forum'] = $this->seo_ext['global_announce'] = '/';
+			$this->seo_ext['forum'] = $this->seo_ext['global_announce'] = trim($this->seo_ext['forum'], '/') ? '/' : $this->seo_ext['forum'];
 		}
 		// If the forum cache is not activated
 		if (!$this->seo_opt['cache_layer']) {
@@ -735,8 +727,8 @@ class phpbb_seo extends setup_phpbb_seo {
 	* rewrite pagination, virtual folder
 	* /pagexx.html
 	*/
-	function rewrite_pagination_page() {
-		$this->start = '/' . $this->seo_start_page( @$this->get_vars['start'] );
+	function rewrite_pagination_page($suffix) {
+		$this->start = $this->seo_start_page( @$this->get_vars['start'], $suffix );
 		unset($this->get_vars['start']);
 	}
 	/**
@@ -751,8 +743,8 @@ class phpbb_seo extends setup_phpbb_seo {
 	* pagexx.html
 	* Only used in virtual folder mode
 	*/
-	function seo_start_page($start) {
-		return ($start >=1 ) ? $this->seo_static['pagination'] . (int) $start . $this->seo_ext['pagination'] : '';
+	function seo_start_page($start, $suffix = '/') {
+		return ($start >=1 ) ? '/' . $this->seo_static['pagination'] . (int) $start . $this->seo_ext['pagination'] : $suffix;
 	}
 	/**
 	* Returns the full REQUEST_URI
