@@ -33,7 +33,7 @@ class phpbb_seo extends setup_phpbb_seo {
 	var	$seo_stop_vars = array('view=', 'mark=', 'watch=', 'hash=');
 	var	$seo_stop_dirs = array();
 	var	$seo_delim = array( 'forum' => '-f', 'topic' => '-t', 'user' => '-u', 'group' => '-g', 'start' => '-', 'sr' => '-', 'file' => '/');
-	var	$seo_ext = array( 'forum' => '.html', 'topic' => '.html', 'post' => '.html', 'user' => '.html', 'group' => '.html',  'index' => '', 'global_announce' => '/', 'leaders' => '', 'atopic' => '.html', 'utopic' => '.html', 'npost' => '.html', 'urpost' => '.html', 'pagination' => '.html', 'gz_ext' => '');
+	var	$seo_ext = array( 'forum' => '.html', 'topic' => '.html', 'post' => '.html', 'user' => '.html', 'group' => '.html',  'index' => '', 'global_announce' => '/', 'leaders' => '.html', 'atopic' => '.html', 'utopic' => '.html', 'npost' => '.html', 'urpost' => '.html', 'pagination' => '.html', 'gz_ext' => '');
 	var	$seo_static = array( 'forum' => 'forum', 'topic' => 'topic', 'post' => 'post', 'user' => 'member', 'group' => 'group', 'index' => '', 'global_announce' => 'announces', 'leaders' => 'the-team', 'atopic' => 'active-topics', 'utopic' => 'unanswered', 'npost' => 'newposts', 'urpost' => 'unreadposts', 'pagination' => 'page', 'gz_ext' => '.gz' );
 	var	$file_hbase = array();
 	var	$get_vars = array();
