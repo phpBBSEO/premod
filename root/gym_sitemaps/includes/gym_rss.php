@@ -459,7 +459,6 @@ class gym_rss extends gym_sitemaps {
 	* Beware, bo not reduce $bbcodelist without knowing what you are doing
 	*/
 	function close_bbcode_tags(&$message, $uid, $bbcodelist = 'quote|b|u|i|color|*|list') {
-		global $config, $user, $phpbb_seo;
 		$open_lists = $close_lists = array();
 		$bbcodelist = str_replace('|*', '|\*', $bbcodelist);
 		$open_count = preg_match_all('`\[(' . $bbcodelist . ')(\=([a-z0-9]{1}))?[^\]\[]*\:' . $uid . '\]`i', $message, $open_matches);
