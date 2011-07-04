@@ -5,7 +5,7 @@
 * translated originally by PhpBB-fr.com <http://www.phpbb-fr.com/> and phpBB.biz <http://www.phpBB.biz>
 *
 * @package language
-* @version $Id: mcp.php, v1.26 2010/02/09 18:37:00 Elglobo Exp $
+* @version $Id: mcp.php, v1.26 10:28 14/06/2011 lolovoisin Exp $
 * @copyright (c) 2005 phpBB Group 
 * @license http://opensource.org/licenses/gpl-license.php GNU Public License 
 *
@@ -210,9 +210,8 @@ $lang = array_merge($lang, array(
 	'MCP_WARN_POST'			=> 'Avertir pour un message en particulier',
 	'MCP_WARN_USER'			=> 'Avertir le membre',
 
-	'MERGE_POSTS'			=> 'Fusionner les messages',
-	'MERGE_POSTS_CONFIRM'	=> 'Êtes-vous sûr de vouloir fusionner les messages sélectionnés?',
-	'MERGE_TOPIC_EXPLAIN'	=> 'L’utilisation du formulaire ci-dessous vous permet de fusionner les messages sélectionnés dans un autre sujet. Ces messages ne seront pas réordonnés et apparaîtront comme si les utilisateurs les avaient postés dans le nouveau sujet.<br />Entrez l’id du sujet de destination ou cliquez sur “Sélectionner le sujet” pour en rechercher un.',
+	'MERGE_POSTS_CONFIRM'	=> 'Êtes-vous sûr de vouloir déplacer les messages sélectionnés?',
+	'MERGE_TOPIC_EXPLAIN'	=> 'L’utilisation du formulaire ci-dessous vous permet de déplacer les messages sélectionnés dans un autre sujet. Ces messages seront déplacés de ce sujet et fusionnés dans l’autre sujet. Ces messages ne seront pas réordonnés et apparaîtront comme si les utilisateurs les avaient postés dans le nouveau sujet.<br />Entrez l’id du sujet de destination ou cliquez sur “Sélectionner le sujet” pour en rechercher un.',
 	'MERGE_TOPIC_ID'		=> 'Id du sujet de destination',
 	'MERGE_TOPICS'			=> 'Fusionner les sujets',
 	'MERGE_TOPICS_CONFIRM'	=> 'Êtes-vous sûr de vouloir fusionner les sujets sélectionnés?',

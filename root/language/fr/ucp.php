@@ -5,7 +5,7 @@
 * translated originally by PhpBB-fr.com <http://www.phpbb-fr.com/> and phpBB.biz <http://www.phpBB.biz>
 *
 * @package language
-* @version $Id: ucp.php, v1.26 2010/02/09 19:49:00 Elglobo Exp $
+* @version $Id: ucp.php, v1.26 10:35 14/06/2011 Lolovoisin Exp $
 * @copyright (c) 2005 phpBB Group 
 * @license http://opensource.org/licenses/gpl-license.php GNU Public License 
 *
@@ -119,6 +119,7 @@ $lang = array_merge($lang, array(
 	'CANNOT_REMOVE_FOLDER'   	=> 'Ce dossier ne peut pas être supprimé.',
 	'CHANGE_DEFAULT_GROUP'   	=> 'Changer de groupe par défaut',
 	'CHANGE_PASSWORD'   		=> 'Changer de mot de passe',
+	'CLICK_GOTO_FOLDER'     	=> '%1$s Aller à votre dossier “%3$s” %2$s',
 	'CLICK_RETURN_FOLDER'   	=> '%1$s Retour à votre dossier “%3$s” %2$s',
 	'CONFIRMATION'   			=> 'Confirmation d’inscription',
 	'CONFIRM_CHANGES'   		=> 'Confirmation des modifications',
@@ -193,6 +194,7 @@ $lang = array_merge($lang, array(
 	'FIELD_INVALID_CHARS_ALPHA_ONLY'   	=> 'Le champ “%s” comporte des caractères invalides, seuls les caractères alphanumériques sont permis.',
 	'FIELD_INVALID_CHARS_SPACERS_ONLY'  => 'Le champ “%s” comporte des caractères invalides, seuls les alphanumériques, espaces ou les caractères -+_[] sont permis.',
 	'FIELD_INVALID_DATE'   				=> 'Le champ “%s” a une date invalide.',
+	'FIELD_INVALID_VALUE'       		=> 'Le champ “%s” a une valeur invalide.',
 
 	'FOE_MESSAGE'   			=> 'Message d’un ignoré',
 	'FOES_EXPLAIN'   			=> 'Les ignorés sont les membres dont les messages ne seront pas entièrement visibles, mais ils peuvent toujours vous envoyer des messages privés. Notez que vous ne pouvez pas ignorer les modérateurs ou les administrateurs.',
@@ -424,7 +426,7 @@ $lang = array_merge($lang, array(
 	'UCP_MAIN_FRONT'   		=> 'Page principale',
 	'UCP_MAIN_SUBSCRIBED'   => 'Gestion des surveillances',
 
-	'UCP_MSNM'   			=> 'WL/MSN Messenger',
+	'UCP_MSNM'   			=> 'Windows Live Messenger',
 	'UCP_NO_ATTACHMENTS'   	=> 'Aucun fichier envoyé.',
 
 	'UCP_PREFS'   			=> 'Préférences du forum',

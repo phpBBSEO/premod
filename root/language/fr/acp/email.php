@@ -5,7 +5,7 @@
 * translated originally by PhpBB-fr.com <http://www.phpbb-fr.com/> and phpBB.biz <http://www.phpBB.biz>
 *
 * @package language
-* @version $Id: email.php, v1.24 2008/07/03 17:07:24 Elglobo Exp $
+* @version $Id: email.php, v1.24 10:00 14/06/2011 Lolovoisin Exp $
 * @copyright (c) 2005 phpBB Group 
 * @license http://opensource.org/licenses/gpl-license.php GNU Public License 
 *
@@ -54,6 +54,8 @@ $lang = array_merge($lang, array(
 	'SEND_TO_USERS'			=> 'Envoyer aux utilisateurs',
 	'SEND_TO_USERS_EXPLAIN'	=> 'Entrer des noms ici écrasera tout groupe sélectionné ci-dessus. Entrez chaque nom d’utilisateur sur une ligne différente.',
 	
+	'MAIL_BANNED'      		=> 'Envoyer aux utilisateurs bannis',
+    'MAIL_BANNED_EXPLAIN'  	=> 'Si vous cochez cette case, les utilisateurs bannis recevront aussi cet e-mail de masse.',
 	'MAIL_HIGH_PRIORITY'	=> 'Haute',
 	'MAIL_LOW_PRIORITY'		=> 'Basse',
 	'MAIL_NORMAL_PRIORITY'	=> 'Normale',

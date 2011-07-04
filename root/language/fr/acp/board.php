@@ -5,7 +5,7 @@
 * translated originally by PhpBB-fr.com <http://www.phpbb-fr.com/> and phpBB.biz <http://www.phpBB.biz>
 *
 * @package language
-* @version $Id: board.php, v1.29 2010/03/01 00:34:00 Elglobo Exp $
+* @version $Id: board.php, v1.29 09:59 14/06/2011 lolovoisin Exp $
 * @copyright (c) 2005 phpBB Group
 * @license http://opensource.org/licenses/gpl-license.php GNU Public License
 *
@@ -52,7 +52,7 @@ $lang = array_merge($lang, array(
 	'SITE_NAME'						=> 'Nom du site',
 	'SYSTEM_DST'					=> 'Activer l’heure d’été',
 	'SYSTEM_TIMEZONE'				=> 'Fuseau horaire des invités',
-	'SYSTEM_TIMEZONE_EXPLAIN'		=> 'Fuseau horaire à utiliser pour l’affichage des heures quand les utilisateurs ne sont pas connectés (visiteurs, robots). Les membres le définissent pendant leur inscription et peuvent le changer via le panneau de l’utilisateur.',
+	'SYSTEM_TIMEZONE_EXPLAIN'		=> 'Fuseau horaire à utiliser pour l’affichage des heures quand les utilisateurs ne sont pas connectés (visiteurs, robots). Les membres le définissent pendant leur inscription et peuvent le changer dans leur panneau de l’utilisateur.',
 	'WARNINGS_EXPIRE'				=> 'Durée de l’avertissement',
 	'WARNINGS_EXPIRE_EXPLAIN'		=> 'Nombre de jours qui s’écoulera avant que l’avertissement expire automatiquement.',
 ));
@@ -152,7 +152,7 @@ $lang = array_merge($lang, array(
 	'ALLOW_POST_FLASH_EXPLAIN'			=> 'Si désactivé, le BBCode <code>[FLASH]</code> sera désactivé. Autrement, le système de permission déterminera les membres pouvant utiliser le BBCode <code>[FLASH]</code>.',
 
 	'BUMP_INTERVAL'					=> 'Intervalle de remontée de sujet',
-	'BUMP_INTERVAL_EXPLAIN'			=> 'Nombre des minutes, d’heures, ou de jours entre la date du dernier message et la possibilité de remonter le sujet. Mettre “0” pour illimité.',
+	'BUMP_INTERVAL_EXPLAIN'			=> 'Nombre des minutes, d’heures, ou de jours entre la date du dernier message et la possibilité de remonter le sujet. Mettre “0” pour désactiver complètement la remontée des sujets.',
 	'CHAR_LIMIT'					=> 'Nombre maximum de caractères par message',
 	'CHAR_LIMIT_EXPLAIN'			=> 'Le nombre de caractères autorisés dans un message. Mettre “0” pour illimité.',
 	'DELETE_TIME'					=> 'Limiter le temps de suppression',
@@ -209,16 +209,16 @@ $lang = array_merge($lang, array(
 	'ACP_REGISTER_SETTINGS_EXPLAIN'		=> 'Vous pouvez modifier les paramètres relatifs à l’inscription et aux profils d’utilisateurs.',
 
 	'ACC_ACTIVATION'			=> 'Activation de compte',
-	'ACC_ACTIVATION_EXPLAIN'	=> 'Cela détermine si les utilisateurs ont accès au forum immédiatement ou si une confirmation est requise. Vous pouvez également désactiver complètement les nouvelles inscriptions.',
+	'ACC_ACTIVATION_EXPLAIN'	=> 'Cela détermine si les utilisateurs ont accès au forum immédiatement ou si une confirmation est requise. Vous pouvez également désactiver complètement les nouvelles inscriptions. “L’envoi d’e-mail” doit être autorisé afin de pouvoir choisir entre l’activation par l’utilisateur ou par l’administrateur.',
 	'NEW_MEMBER_POST_LIMIT'			=> 'Limite de message d’un nouveau membre',
 	'NEW_MEMBER_POST_LIMIT_EXPLAIN'	=> 'Les nouveaux membres resteront dans le groupe <em>Nouveaux utilisateurs enregistrés</em> jusqu’à qu’ils atteignent ce nombre de messages. Vous pouvez utiliser ce groupe pour éviter qu’ils utilisent le système de messagerie privé ou la révision de leurs messages. <strong>Mettre “0” pour désactiver cette fonctionnalité.</strong>',
 	'NEW_MEMBER_GROUP_DEFAULT'		=> 'Mettre le groupe des nouveaux utilisateurs enregistrés par défaut',
 	'NEW_MEMBER_GROUP_DEFAULT_EXPLAIN'	=> 'Si ce paramètre est activé, et qu’une limite de message pour les nouveaux membres est indiquée, les nouveaux utilisateurs enregistrés ne seront pas simplement placés dans le groupe <em>Nouveaux utilisateurs enregistrés</em>, mais ce groupe deviendra également leur groupe par défaut. Cela peut s’avérer pratique si vous voulez assigner un rang et/ou un avatar de groupe par défaut afin que les utilisateurs en héritent.',
 	'ACC_ADMIN'					=> 'Par l’administrateur',
-	'ACC_DISABLE'				=> 'Désactiver',
-	'ACC_NONE'					=> 'Aucun',
-	'ACC_USER'					=> 'Par l’utilisateur',
-//	'ACC_USER_ADMIN'			=> 'User + Admin',
+	'ACC_DISABLE'				=> 'Désactiver l’inscription',
+	'ACC_NONE'					=> 'Pas de vérification (accès immédiat)',
+	'ACC_USER'					=> 'Par l’utilisateur (vérification de l’e-mail)',
+//	'ACC_USER_ADMIN'				=> 'User + Admin',
 	'ALLOW_EMAIL_REUSE'			=> 'Autoriser les adresses e-mail à être réutilisées',
 	'ALLOW_EMAIL_REUSE_EXPLAIN'	=> 'Plusieurs utilisateurs peuvent s’enregistrer avec la même adresse e-mail.',
 	'COPPA'						=> 'COPPA',
@@ -354,6 +354,7 @@ $lang = array_merge($lang, array(
 	'LIMIT_SESSIONS'				=> 'Nombre de sessions',
 	'LIMIT_SESSIONS_EXPLAIN'		=> 'Si le nombre de sessions dépasse cette valeur durant une minute, le forum sera indisponible. Mettre “0” pour illimité.',
 	'LOAD_CPF_MEMBERLIST'			=> 'Autoriser les styles à afficher les champs personnalisés dans la liste des membres',
+	'LOAD_CPF_PM'          			=> 'Afficher les champs personnalisés dans les messages privés',
 	'LOAD_CPF_VIEWPROFILE'			=> 'Afficher les champs personnalisés dans les profils d’utilisateur',
 	'LOAD_CPF_VIEWTOPIC'			=> 'Afficher les champs personnalisés dans les pages de sujet',
 	'LOAD_USER_ACTIVITY'			=> 'Afficher l’activité des utilisateurs',
@@ -395,7 +396,7 @@ $lang = array_merge($lang, array(
 	'LDAP_NO_EMAIL'					=> 'Cet attribut d’adresse e-mail n’existe pas.',
 	'LDAP_NO_IDENTITY'				=> 'Impossible de trouver un identifiant de connexion pour %s',
 	'LDAP_PASSWORD'					=> 'Mot de passe LDAP',
-	'LDAP_PASSWORD_EXPLAIN'			=> 'Laissez cette case vide pour utiliser une connexion anonyme. Sinon, indiquez le mot de passe pour l’utilisateur indiqué ci-dessus. Ceci est obligatoire pour les serveurs possédant un Active Directory.<br /><em><strong>ATTENTION:</strong> Ce mot de passe sera stocké en clair dans votre de base de données et sera visible par n’importe qui ayant accès à votre base de données ou à cette page de configuration.</em>',
+	'LDAP_PASSWORD_EXPLAIN'			=> 'Laissez cette case vide pour utiliser une connexion anonyme, sinon, indiquez le mot de passe pour l’utilisateur indiqué ci-dessus. Ceci est obligatoire pour les serveurs possédant un Active Directory.<br /><em><strong>ATTENTION:</strong> Ce mot de passe sera stocké en clair dans votre de base de données et sera visible par n’importe qui ayant accès à votre base de données ou à cette page de configuration.</em>',
 	'LDAP_PORT'						=> 'Port du serveur LDAP',
 	'LDAP_PORT_EXPLAIN'				=> 'Si vous le souhaitez, vous pouvez indiquer un port qui devrait être employé pour se connecter au serveur LDAP au lieu du port par défaut 389.',
 	'LDAP_SERVER'					=> 'Nom du serveur LDAP',
@@ -459,12 +460,18 @@ $lang = array_merge($lang, array(
 	'FORM_TIME_MAX_EXPLAIN'			=> 'Détermine le temps dont un utilisateur dispose pour envoyer un formulaire. Mettre “-1” pour désactiver. Notez qu’un formulaire peut devenir invalide si la session expire, et cela indépendamment de ce paramètre.',
 	'FORM_SID_GUESTS'				=> 'Lier les formulaires aux sessions des invités',
 	'FORM_SID_GUESTS_EXPLAIN'		=> 'Si activé, les formulaires émis aux invités seront exclusifs à leur session. Cela peut entraîner quelques problèmes avec certains fournisseurs d’accès.',
-	'FORWARDED_FOR_VALID'			=> 'Entête <var>X_FORWARDED_FOR</var> validée',
+	'FORWARDED_FOR_VALID'			=> 'En-tête <var>X_FORWARDED_FOR</var> valide',
 	'FORWARDED_FOR_VALID_EXPLAIN'	=> 'Les sessions seront seulement continuées si l’entête <var> X_FORWARDED_FOR </var> envoyée est égale à celle envoyée avec la requête précédente. L’en-tête <var>X_FORWARDED_FOR</var> vérifiera également si les adresses IP n’ont pas été bannies.',
 	'IP_VALID'						=> 'Validation de session IP',
 	'IP_VALID_EXPLAIN'				=> 'Détermine quelle partie de l’adresse IP des utilisateurs sera utilisée pour valider une session : <samp>Tous</samp> compare l’adresse complète, <samp>A.B.C</samp> les premiers x.x.x, <samp>A.B</samp> les premiers x.x, <samp>Aucune</samp> désactive la vérification. Pour les adresses IPv6, <samp>A.B.C</samp> compare les 4 premiers blocs et <samp>A.B</samp> les 3 premiers blocs.',
-	'MAX_LOGIN_ATTEMPTS'			=> 'Nombre maximal de tentatives de connexion',
-	'MAX_LOGIN_ATTEMPTS_EXPLAIN'	=> 'Après ce nombre d’échecs de connexion, l’utilisateur devra également confirmer sa connexion visuellement (confirmation visuelle).',
+	'IP_LOGIN_LIMIT_MAX' 			=> 'Nombre maximal de tentatives de connexion par addresse IP',
+	'IP_LOGIN_LIMIT_MAX_EXPLAIN'  	=> 'Seuil du nombre de tentavies de connexion autorisé pour une adresse IP address avant d’activer la confirmation visuelle. Mettre 0 pour désactiver la confirmation visuelle par addresses IP.',
+	'IP_LOGIN_LIMIT_TIME' 			=> 'Expiration des tentatives de connexion par adresse IP',
+	'IP_LOGIN_LIMIT_TIME_EXPLAIN' 	=> 'Temps d’expiration des tentatives de connexion par adresse IP.',
+	'IP_LOGIN_LIMIT_USE_FORWARDED' 	=> 'Limite des tentatives de connexions par en-tête <var>X_FORWARDED_FOR</var>',
+	'IP_LOGIN_LIMIT_USE_FORWARDED_EXPLAIN' => 'Au lieu de limiter les tentatives de connexions par addresse IP, elles seront limitées par la valeur <var>X_FORWARDED_FOR</var>. <br /><em><strong>Attention:</strong> A activer seulement si le serveur proxy à des valeurs <var>X_FORWARDED_FOR</var> digne de confiance.</em>',
+	'MAX_LOGIN_ATTEMPTS' 			=> 'Nombre maximal de tentatives de connexion par nom d’utilisateur',
+	'MAX_LOGIN_ATTEMPTS_EXPLAIN'  	=> 'Nombre maximal de tentatives de connexion autorisé par nom d’utilisateur avant d’activer la confirmation visuelle. Mettre 0 pour désactiver la confirmation visuelle par nom d’utilisateur.',
 	'NO_IP_VALIDATION'				=> 'Aucune',
 	'NO_REF_VALIDATION' 			=> 'Aucune',
 	'PASSWORD_TYPE'					=> 'Complexité du mot de passe',

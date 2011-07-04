@@ -5,7 +5,7 @@
 * translated by PhpBB-fr.com <http://www.phpbb-fr.com/>
 *
 * @package language
-* @version $Id: captcha_recaptcha.php v1.26 2010-11-12 23:31:00 ABDev $
+* @version $Id: captcha_recaptcha.php v1.26 13:52 10:17 14/06/2011 Lolovoisin $
 * @copyright (c) 2009 phpBB Group
 * @license http://opensource.org/licenses/gpl-license.php GNU Public License
 *
@@ -38,14 +38,14 @@ if (empty($lang) || !is_array($lang))
 
 $lang = array_merge($lang, array(
 	'RECAPTCHA_LANG'				=> 'fr',
-	'RECAPTCHA_NOT_AVAILABLE'		=> 'Afin d’utiliser reCaptcha, vous devez créer un compte sur <a href="http://recaptcha.net">reCaptcha.net</a>.',
+	'RECAPTCHA_NOT_AVAILABLE'		=> 'Afin d’utiliser reCaptcha, vous devez créer un compte sur <a href="http://www.google.com/recaptcha">www.google.com/recaptcha</a>.',
 	'CAPTCHA_RECAPTCHA'				=> 'reCaptcha',
 	'RECAPTCHA_INCORRECT'			=> 'Le code de confirmation visuelle soumis était incorrect',
 
 	'RECAPTCHA_PUBLIC'				=> 'Clé publique reCaptcha',
-	'RECAPTCHA_PUBLIC_EXPLAIN'		=> 'Votre clé publique reCaptcha. Des clés peuvent être obtenus sur <a href="http://recaptcha.net">reCaptcha.net</a>.',
+	'RECAPTCHA_PUBLIC_EXPLAIN'		=> 'Votre clé publique reCaptcha. Des clés peuvent être obtenues sur <a href="http://www.google.com/recaptcha">www.google.com/recaptcha</a>.',
 	'RECAPTCHA_PRIVATE'				=> 'Clé privée reCaptcha',
-	'RECAPTCHA_PRIVATE_EXPLAIN'		=> 'Votre clé privée reCaptcha. Des clés peuvent être obtenus sur <a href="http://recaptcha.net">reCaptcha.net</a>.',
+	'RECAPTCHA_PRIVATE_EXPLAIN'		=> 'Votre clé privée reCaptcha. Des clés peuvent être obtenues sur <a href="http://www.google.com/recaptcha">www.google.com/recaptcha</a>.',
 
 	'RECAPTCHA_EXPLAIN'				=> 'Afin d’empêcher les inscriptions automatisées, nous vous demandons de taper les deux mots affichés dans le champ texte ci-contre.',
 ));

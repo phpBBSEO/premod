@@ -132,7 +132,7 @@ $lang = array_merge($lang, array(
 	'MOVE_POSTS_TO'					=> 'Déplacer les messages',
 	'MOVE_SUBFORUMS_TO'				=> 'Déplacer les sous-forums',
 
-	'NO_DESTINATION_FORUM'			=> 'Vous n’avez pas indiquer de forum pour déplacer le contenu',
+	'NO_DESTINATION_FORUM'			=> 'Vous n’avez pas indiqué de forum pour déplacer le contenu',
 	'NO_FORUM_ACTION'				=> 'Aucune action définie pour ce qui se produit avec le contenu du forum',
 	'NO_PARENT'						=> 'Aucun parent',
 	'NO_PERMISSIONS'				=> 'Ne pas copier les permissions',

@@ -5,7 +5,7 @@
 * translated originally by PhpBB-fr.com <http://www.phpbb-fr.com/> and phpBB.biz <http://www.phpBB.biz>
 *
 * @package language
-* @version $Id: users.php, v1.25 2009/10/15 12:35:00 Elglobo Exp $
+* @version $Id: users.php, v1.25 13:53 17/01/2011 Lolovoisin Exp $
 * @copyright (c) 2005 phpBB Group
 * @license http://opensource.org/licenses/gpl-license.php GNU Public License
 *
@@ -123,9 +123,9 @@ $lang = array_merge($lang, array(
 	'USER_GROUP_NORMAL'				=> 'L’utilisateur est membre des groupes définis',
 	'USER_GROUP_PENDING'			=> 'En attente d’acceptation dans les groupes',
 	'USER_GROUP_SPECIAL'			=> 'L’utilisateur est membre des groupes prédéfinis',
-	'USER_LIFTED_NR'				=> 'Le status de nouvel inscrit a été supprimé.',
+	'USER_LIFTED_NR'				=> 'Le statut de nouvel inscrit a été supprimé.',
 	'USER_NO_ATTACHMENTS'			=> 'Aucun fichier joint à afficher.',
-	'USER_OUTBOX_EMPTIED'			=> 'La boîte d’envoi de l’utilisateur a été vidé.',
+	'USER_OUTBOX_EMPTIED'			=> 'La boîte d’envoi de l’utilisateur a été vidée.',
 	'USER_OUTBOX_EMPTY'				=> 'La boîte d’envoi de l’utilisateur était déjà vide.',
 	'USER_OVERVIEW_UPDATED'			=> 'Les informations de cet utilisateur ont été mises à jour.',
 	'USER_POSTS_DELETED'			=> 'Tous les messages de cet utilisateur ont été supprimés.',
