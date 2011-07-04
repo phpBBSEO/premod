@@ -5,7 +5,7 @@
 * translated originally by PhpBB-fr.com <http://www.phpbb-fr.com/> and phpBB.biz <http://www.phpBB.biz>
 *
 * @package language
-* @version $Id: install.php, v1.26 2010/02/09 19:43:00 Elglobo Exp $
+* @version $Id: install.php, v1.26 13:53 10:25 14/06/2011 Lolovoisin Exp $
 * @copyright (c) 2005 phpBB Group 
 * @license http://opensource.org/licenses/gpl-license.php GNU Public License 
 *
@@ -129,7 +129,7 @@ $lang = array_merge($lang, array(
 	'DB_ERR_QUERY_FIRST_TABLE'	=> 'Erreur pendant l’exécution de <var>query_first</var>, %s (“%s”).',
 	'DB_ERR_SELECT'				=> 'Erreur pendant l’exécution d’une requête <code>SELECT</code>.',
 	'DB_HOST'					=> 'Serveur de base de données ou DSN',
-	'DB_HOST_EXPLAIN'			=> 'DSN signifie Data Source Name (source de données) et n’est utilisé que pour une installation ODBC. Avec PostgreSQL, utilisez “localhost” pour vous connecter au serveur local via le socket de domaine UNIX et “127.0.0.1” pour vous connecter via TCP.',
+	'DB_HOST_EXPLAIN'			=> 'DSN signifie Data Source Name (source de données) et n’est utilisé que pour une installation ODBC. Avec PostgreSQL, utilisez “localhost” pour vous connecter au serveur local via le socket de domaine UNIX et “127.0.0.1” pour vous connecter via TCP. Pour SQLite, vous devrez entrer le chemin complet d’accès à votre base de données. ',
 	'DB_NAME'					=> 'Nom de la base',
 	'DB_PASSWORD'				=> 'Mot de passe',
 	'DB_PORT'					=> 'Port du serveur',
@@ -323,6 +323,7 @@ $lang = array_merge($lang, array(
 	'SERVER_CONFIG'   			=> 'Configuration du serveur',
 	'SEARCH_INDEX_UNCONVERTED'  => 'L’index de recherche n’a pas été converti',
 	'SEARCH_INDEX_UNCONVERTED_EXPLAIN'   => 'Votre ancien index de recherche n’a pas été converti. La recherche ne fonctionnera plus jusqu’à ce que vous réindexiez votre recherche via le panneau d’administration, sélectionnez Maintenance puis Index de recherche dans le sous-menu.',
+	'SELECT_FORUM_GA' 			=> 'Dans phpBB 3.1 les annonces globales sont liées aux forums. Sélectionnez un forum pour votre annonce globale (Elle pourra être déplacée plus tard):', 
 	'SOFTWARE'   				=> 'Logiciel de forum',
 	'SPECIFY_OPTIONS'   		=> 'Indiquer les options de conversion',
 	'STAGE_ADMINISTRATOR'   	=> 'Informations sur l’administrateur',
@@ -371,7 +372,7 @@ $lang = array_merge($lang, array(
 
 // Updater
 $lang = array_merge($lang, array(
-	'ALL_FILES_UP_TO_DATE'      => 'Tous les fichiers ont été mis à jour. Vous devriez maintenant <a href="../ucp.php?mode=login&amp;redirect=adm/index.php%3Fi=send_statistics%26mode=send_statistics">vous connecter à votre forum</a> afin de vérifier que tout fonctionne correctement. N’oubliez pas de supprimer, renommer ou déplacer le répertoire install de votre système! Merci de nous envoyer les informations mises à jour au sujet de votre serveur et des configurations de votre forum depuis le module <a href="../ucp.php?mode=login&amp;redirect=adm/index.php%3Fi=send_statistics%26mode=send_statistics">d’envoi du rapport de statistiques</a> dans votre ACP.',
+	'ALL_FILES_UP_TO_DATE'      => 'Tous les fichiers ont été mis à jour. Vous devriez maintenant <a href="../ucp.php?mode=login">vous connecter à votre forum</a> afin de vérifier que tout fonctionne correctement. N’oubliez pas de supprimer, renommer ou déplacer le répertoire install de votre système! Merci de nous envoyer les informations mises à jour au sujet de votre serveur et des configurations de votre forum depuis le module <a href="../ucp.php?mode=login&amp;redirect=adm/index.php%3Fi=send_statistics%26mode=send_statistics">d’envoi du rapport de statistiques</a> dans le panneau d’administration.',
 	'ARCHIVE_FILE'  			=> 'Fichier source dans l’archive',
 
 	'BACK'				=> 'Retour',
@@ -529,7 +530,16 @@ $lang = array_merge($lang, array(
       <p>Lisez <a href="%1$s" title="%1$s"><strong>cette annonce pour la dernière mise à jour</strong></a> avant de continuer le processus de mise à jour, celle-ci pourrait contenir des informations utiles. Elle contient aussi plusieurs liens ainsi que le détail des changements effectués depuis la dernière version.</p>
 
       <br />
-
+	  
+	  <h1>Utilisateurs de la traduction de phpBB-fr</h1>
+	  
+	  <p>Pour les administrateurs utilisant la traduction de phpBB-fr, nous vous recommandons auparavant la lecture de nos tutoriels, vous trouverez :<p>
+      <ul style="margin-left: 20px; font-size: 1.1em;">
+		 <li><a href="http://forums.phpbb-fr.com/telechargement-maj-phpbb3/sujet145376.html" title="http://forums.phpbb-fr.com/telechargement-maj-phpbb3/sujet145376.html">Le tutoriel de mise à jour de phpBB-fr</a>.<br /><br /></li>
+		 <li><a href="http://forums.phpbb-fr.com/telechargement-maj-phpbb3/" title="http://forums.phpbb-fr.com/telechargement-maj-phpbb3/">Le pack de mise à jour de phpBB-fr et le pack officiel</a>.<br /></li>
+      </ul>
+	  
+	  <p>Vous trouverez aussi dans le tutoriel de mise à jour toutes les instructions pour mettre vos styles autre que Prosilver ou Subsilver2 à jour.</p><br />
       <h1>Comment mettre à jour votre installation avec le pack de mise à jour automatique?</h1>
 
       <p>Les recommandations de mise à jour pour votre installation indiquées ici ne sont valables que pour le pack de mise à jour automatique. Vous pouvez également mettre à jour votre installation en utilisant les méthodes énumérées dans le document INSTALL.html. Les étapes pour mettre à jour automatiquement phpBB3 sont:</p>

@@ -5,7 +5,7 @@
 * translated originally by PhpBB-fr.com <http://www.phpbb-fr.com/> and phpBB.biz <http://www.phpBB.biz>
 *
 * @package language
-* @version $Id: posting.php, v1.26 2010/02/24 15:51:00 Elglobo Exp $
+* @version $Id: posting.php, v1.26 10:07 14/06/2011 15:51:00 Lolovoisin Exp $
 * @copyright (c) 2005 phpBB Group 
 * @license http://opensource.org/licenses/gpl-license.php GNU Public License 
 *
@@ -83,7 +83,7 @@ $lang = array_merge($lang, array(
 		'NUMBER'		=> 'Une série de chiffres',
 		'EMAIL'			=> 'Une adresse e-mail valide',
 		'URL'			=> 'Une URL valide utilisant un quelconque protocole (http, ftp, etc. ne peuvent pas être utilisés pour des exploits javascripts). Si aucun n’est donné, “http://” sera préfixé par défaut à la chaîne.',
-		'LOCAL_URL'		=> 'Une URL locale. L’URL doit être relative par rapport à la page du sujet et ne peut contenir un nom de serveur ou un protocol.',
+		'LOCAL_URL'		=> 'Une URL locale. L’URL doit être relative à la page du sujet et ne peut contenir un nom de serveur ou un protocole.',
 		'COLOR'			=> 'Une couleur HTML, peut être au choix soit une forme numérique <samp>#FF1234</samp> ou un <a href="http://www.w3.org/TR/CSS21/syndata.html#value-def-color">nom de couleur CSS</a> comme par exemple <samp>fuchsia</samp> ou <samp>InactiveBorder</samp>'
 	)
 ));
@@ -170,6 +170,7 @@ $lang = array_merge($lang, array(
 	'SMILIES_EDIT'				=> 'Editer le smiley',
 	'SMILIE_NO_CODE'			=> 'Le smiley “%s” a été ignoré car aucun code n’a été saisi.',
 	'SMILIE_NO_EMOTION'			=> 'Le smiley “%s” a été ignoré car aucun smiley n’a été indiqué.',
+	'SMILIE_NO_FILE'      		=> 'Le smiley “%s” a été ignoré car le fichier est manquant.',
 	'SMILIES_NONE_EDITED'		=> 'Aucun smiley n’a été mis à jour.',
 	'SMILIES_ONE_EDITED'		=> 'Le smiley a été mis à jour.',
 	'SMILIES_EDITED'			=> 'Les smileys ont été mis à jour.',
@@ -232,9 +233,9 @@ $lang = array_merge($lang, array(
 
 // Disallow Usernames
 $lang = array_merge($lang, array(
-	'ACP_DISALLOW_EXPLAIN'	=> 'Vous pouvez contrôler les noms d’utilisateurs qui ne sont pas autorisés à être utilisés. Les noms d’utilisateurs interdits sont autorisés à contenir un joker *. Notez que vous ne serez pas autorisé à indiquer tout nom d’utilisateur étant déjà inscrit, vous devez d’abord supprimer ce nom, puis l’interdire.',
+	'ACP_DISALLOW_EXPLAIN'	=> 'Vous pouvez contrôler les noms d’utilisateurs qui ne sont pas autorisés à être utilisés. Les noms d’utilisateurs interdits sont autorisés à contenir un joker *.',
 	'ADD_DISALLOW_EXPLAIN'	=> 'Vous pouvez utiliser le caractère * pour faire une correspondance avec n’importe quel caractère.',
-	'ADD_DISALLOW_TITLE'	=> 'Ajouter un nom interdit',
+	'ADD_DISALLOW_TITLE'	=> 'Ajouter un nom interdit.',
 
 	'DELETE_DISALLOW_EXPLAIN'	=> 'Vous pouvez retirer un nom de la liste en le sélectionnant puis en cliquant sur envoyer.',
 	'DELETE_DISALLOW_TITLE'		=> 'Supprimer un nom interdit',

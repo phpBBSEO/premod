@@ -5,7 +5,7 @@
 * translated originally by PhpBB-fr.com <http://www.phpbb-fr.com/> and phpBB.biz <http://www.phpBB.biz>
 *
 * @package language
-* @version $Id: attachments.php, v1.25 2010/02/09 19:04:00 Elglobo Exp $
+* @version $Id: attachments.php, v1.25 12:50 25/04/2011 lolovoisin Exp $
 * @copyright (c) 2005 phpBB Group 
 * @license http://opensource.org/licenses/gpl-license.php GNU Public License 
 *
@@ -63,6 +63,7 @@ $lang = array_merge($lang, array(
 	'ATTACH_MAX_PM_FILESIZE_EXPLAIN' 	=> 'Taille maximale de chaque fichier joint à un message privé, mettre “0” pour illimité.',
 	'ATTACH_ORPHAN_URL'					=> 'Fichiers orphelins',
 	'ATTACH_POST_ID'					=> 'ID du message',
+	'ATTACH_POST_TYPE'          		=> 'Type du message',
 	'ATTACH_QUOTA'						=> 'Quota total de fichiers joints',
 	'ATTACH_QUOTA_EXPLAIN'				=> 'Espace disque maximum disponible pour les fichiers joints de tout le forum, mettre “0” pour illimité.',
 	'ATTACH_TO_POST'					=> 'Joindre le fichier au message',

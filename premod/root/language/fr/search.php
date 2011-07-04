@@ -5,7 +5,7 @@
 * translated originally by PhpBB-fr.com <http://www.phpbb-fr.com/> and phpBB.biz <http://www.phpBB.biz>
 *
 * @package language
-* @version $Id: search.php, v1.25 2009/10/16 15:03:00 Elglobo Exp $
+* @version $Id: search.php, v1.25 10:33 14/06/2011 Lolovoisin Exp $
 * @copyright (c) 2005 phpBB Group 
 * @license http://opensource.org/licenses/gpl-license.php GNU Public License 
 *
@@ -55,6 +55,7 @@ $lang = array_merge($lang, array(
 
 	'LOGIN_EXPLAIN_EGOSEARCH'			=> 'Vous devez être enregistré et connecté afin de voir vos propres messages.',
 	'LOGIN_EXPLAIN_UNREADSEARCH'=> 'Vous devez être enregistré et connecté pour voir les messages non lus.',
+	'LOGIN_EXPLAIN_NEWPOSTS'	=> 'Vous devez être enregistré et connecté pour voir les nouveaux messages depuis votre dernière visite.',
 	'MAX_NUM_SEARCH_KEYWORDS_REFINE'	=> 'Vous avez spécifié un nombre de mots trop important à rechercher. N’entrez pas plus de %1$d mots.',
 	
 	'NO_KEYWORDS'   => 'Vous devez indiquer au moins un mot pour effectuer une recherche. Chaque mot doit se composer d’au moins %d caractères et ne doit pas en contenir plus de %d en excluant les jokers.',

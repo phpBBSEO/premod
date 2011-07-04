@@ -5,7 +5,7 @@
 * translated originally by PhpBB-fr.com <http://www.phpbb-fr.com/> and phpBB.biz <http://www.phpBB.biz>
 *
 * @package language
-* @version $Id: memberlist.php, v1.26 2009/12/16 16:36:00 Elglobo Exp $
+* @version $Id: memberlist.php, v1.26 10:30 14/06/2011 Lolovoisin Exp $
 * @copyright (c) 2005 phpBB Group 
 * @license http://opensource.org/licenses/gpl-license.php GNU Public License 
 *
@@ -71,9 +71,9 @@ $lang = array_merge($lang, array(
    'IM_JABBER'   => 'Notez que les membres ont pu choisir de ne pas recevoir de messages instantanés non sollicités.',
    'IM_JABBER_SUBJECT'   => 'Ceci est un message automatique, merci de ne pas y répondre! Message de l’utilisateur %1$s le %2$s.',
    'IM_MESSAGE'   => 'Votre message',
-   'IM_MSNM'   => 'Notez que pour utiliser cette fonction vous devez avoir installé Windows Messenger.',
+   'IM_MSNM'   => 'Notez que pour utiliser cette fonction vous devez avoir installé Windows Live Messenger.',
    'IM_MSNM_BROWSER'   => 'Votre navigateur ne supporte pas cela.',
-   'IM_MSNM_CONNECT'   => 'Windows Messenger n’est pas connecté.\nVous devez vous connecter pour continuer.',
+   'IM_MSNM_CONNECT'   => 'Windows Live Messenger n’est pas connecté.\nVous devez vous connecter pour continuer.',
    'IM_NAME'   => 'Votre nom',
    'IM_NO_DATA'			=> 'Aucune information de contact pour cet utilisateur.',
    'IM_NO_JABBER'   => 'Désolé, la transmission de messages instantanés des utilisateurs Jabber n’est pas supportée sur ce forum. Votre devez avoir un client Jabber installé sur votre système pour contacter le destinataire ci-dessus.',
@@ -102,7 +102,6 @@ $lang = array_merge($lang, array(
    'RECIPIENT'   => 'Destinataire',
    'REMOVE_FOE'   => 'Supprimer de ma liste d’ignorés',
    'REMOVE_FRIEND'   => 'Supprimer de ma liste d’amis',
-   'SEARCH_USER_POSTS'   => 'Rechercher les messages de l’utilisateur',
    'SELECT_MARKED'   => 'Valider la sélection',
    'SELECT_SORT_METHOD'   => 'Choisir la méthode de tri',
    'SEND_AIM_MESSAGE'   => 'Envoyer un message AIM',
@@ -110,7 +109,7 @@ $lang = array_merge($lang, array(
    'SEND_IM'   => 'Messagerie instantanée',
    'SEND_JABBER_MESSAGE'   => 'Envoyer un message Jabber',
    'SEND_MESSAGE'   => 'Message',
-   'SEND_MSNM_MESSAGE'   => 'Envoyer un message MSN/WLM',
+   'SEND_MSNM_MESSAGE'   => 'Envoyer un message WLM',
    'SEND_YIM_MESSAGE'   => 'Envoyer un message YIM',
    'SORT_EMAIL'   => 'E-mail',
    'SORT_LAST_ACTIVE'   => 'Dernière visite',

@@ -5,7 +5,7 @@
 * translated originally by PhpBB-fr.com <http://www.phpbb-fr.com/> and phpBB.biz <http://www.phpBB.biz>
 *
 * @package language
-* @version $Id: modules.php, v1.24 2008/07/03 17:55:10 Elglobo Exp $
+* @version $Id: modules.php, v1.24 13:52 17/01/2011 Lolovoisin Exp $
 * @copyright (c) 2005 phpBB Group
 * @license http://opensource.org/licenses/gpl-license.php GNU Public License
 *
@@ -43,7 +43,7 @@ $lang = array_merge($lang, array(
 	'ADD_MODULE_TITLE'				=> 'Ajouter un module',
 
 	'CANNOT_REMOVE_MODULE'	=> 'Impossible de supprimer le module parent. Supprimez ou déplacer les modules enfants avant de tenter cette action.',
-	'CATEGORY'				=> 'Categorie',
+	'CATEGORY'				=> 'Catégorie',
 	'CHOOSE_MODE'			=> 'Choisissez un mode de module',
 	'CHOOSE_MODE_EXPLAIN'	=> 'Indiquez le mode qui doit être utilisé.',
 	'CHOOSE_MODULE'			=> 'Choisissez un module',

@@ -5,7 +5,7 @@
 * translated originally by PhpBB-fr.com <http://www.phpbb-fr.com/> and phpBB.biz <http://www.phpBB.biz>
 *
 * @package language
-* @version $Id: common.php, v1.27 2010/02/09 19:28:00 Elglobo Exp $
+* @version $Id: common.php, v1.27 13:53 10:21 14/06/2011 Lolovoisin Exp $
 * @copyright (c) 2005 phpBB Group 
 * @license http://opensource.org/licenses/gpl-license.php GNU Public License 
 *
@@ -191,7 +191,7 @@ $lang = array_merge($lang, array(
 	'FORM_INVALID'			=> 'Le formulaire envoyé est invalide. Essayez à nouveau.',
 	'FORUM'					=> 'Forums',
 	'FORUMS'				=> 'Forums',
-	'FORUMS_MARKED'			=> 'Tous les forums ont été marqués comme lus.',
+	'FORUMS_MARKED'			=> 'Les forums sélectionnés ont été marqués comme lus.',
 	'FORUM_CAT'				=> 'Catégorie du forum',
 	'FORUM_INDEX'			=> 'Index du forum',
 	'FORUM_LINK'			=> 'Forum-lien',
@@ -323,13 +323,14 @@ $lang = array_merge($lang, array(
 	'MARK'					=> 'Cocher',
 	'MARK_ALL'				=> 'Tout cocher',
 	'MARK_FORUMS_READ'		=> 'Marquer tous les forums comme lus',
+	'MARK_SUBFORUMS_READ' 	=> 'Marquer tous les sous-forums comme lus',
 	'MB'					=> 'Mo',
 	'MIB'					=> 'Mio',
 	'MCP'					=> 'Panneau de modération',
 	'MEMBERLIST'			=> 'Membres',
 	'MEMBERLIST_EXPLAIN'	=> 'Voir la liste complète des membres',
 	'MERGE'					=> 'Fusionner',
-	'MERGE_POSTS'			=> 'Fusionner les messages',
+	'MERGE_POSTS'			=> 'Déplacer les messages',
 	'MERGE_TOPIC'			=> 'Fusionner le sujet',
 	'MESSAGE'				=> 'Message',
 	'MESSAGES'				=> 'Messages',
@@ -340,7 +341,7 @@ $lang = array_merge($lang, array(
 	'MODERATORS'			=> 'Modérateurs',
 	'MONTH'					=> 'Mois',
 	'MOVE'					=> 'Déplacer',
-	'MSNM'					=> 'MSNM/WLM',	
+	'MSNM'					=> 'WLM',	
 
 	'NA'						=> 'N/A',
 	'NEWEST_USER'				=> 'L’utilisateur enregistré le plus récent est <strong>%s</strong>',
@@ -419,6 +420,7 @@ $lang = array_merge($lang, array(
 	'OPTIONS'					=> 'Options',
 
 	'PAGE_OF'				=> 'Page <strong>%1$d</strong> sur <strong>%2$d</strong>',
+	'PAGE_TITLE_NUMBER'		=> 'Page %s',
 	'PASSWORD'				=> 'Mot de passe',
 	'PIXEL'					=> 'px',
 	'PLAY_QUICKTIME_FILE'	=> 'Jouer le fichier Quicktime',
@@ -530,6 +532,7 @@ $lang = array_merge($lang, array(
 	'SEARCH_TOPIC'				=> 'Dans ce sujet…',
 	'SEARCH_UNANSWERED'			=> 'Voir les messages sans réponses',
 	'SEARCH_UNREAD'				=> 'Voir les messages non lus',
+	'SEARCH_USER_POSTS'  		=> 'Rechercher les messages de l’utilisateur',
 	'SECONDS'					=> 'secondes',
 	'SELECT'					=> 'Sélectionner',
 	'SELECT_ALL_CODE'			=> 'Tout sélectionner',
@@ -580,7 +583,7 @@ $lang = array_merge($lang, array(
 	'TOO_LONG_INTERESTS'			=> 'Les centres d’intérêts indiqués sont trop longs.',
 	'TOO_LONG_JABBER'				=> 'Le nom de compte Jabber indiqué est trop long.',
 	'TOO_LONG_LOCATION'				=> 'La localisation indiquée est trop longue.',
-	'TOO_LONG_MSN'					=> 'Le compte MSNM/WLM indiqué est trop long.',
+	'TOO_LONG_MSN'					=> 'Le compte WLM indiqué est trop long.',
 	'TOO_LONG_NEW_PASSWORD'			=> 'Le mot de passe indiqué est trop long.',
 	'TOO_LONG_OCCUPATION'			=> 'Les loisirs indiqués sont trop longs.',
 	'TOO_LONG_PASSWORD_CONFIRM'		=> 'Le mot de passe de confirmation indiqué est trop long.',
@@ -601,7 +604,7 @@ $lang = array_merge($lang, array(
 	'TOO_SHORT_INTERESTS'			=> 'Les centres d’intérêts indiqués sont trop courts.',
 	'TOO_SHORT_JABBER'				=> 'Le nom de compte Jabber indiqué est trop court.',
 	'TOO_SHORT_LOCATION'			=> 'La localisation indiquée est trop courte.',
-	'TOO_SHORT_MSN'					=> 'Le compte MSNM/WLM indiqué est trop court.',
+	'TOO_SHORT_MSN'					=> 'Le compte WLM indiqué est trop court.',
 	'TOO_SHORT_NEW_PASSWORD'		=> 'Le mot de passe indiqué est trop court.',
 	'TOO_SHORT_OCCUPATION'			=> 'Les loisirs indiqués sont trop courts.',
 	'TOO_SHORT_PASSWORD_CONFIRM'	=> 'Le mot de passe de confirmation indiqué est trop court.',

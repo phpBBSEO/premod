@@ -5,7 +5,7 @@
 * translated originally by PhpBB-fr.com <http://www.phpbb-fr.com/> and phpBB.biz <http://www.phpBB.biz>
 *
 * @package language
-* @version $Id: common.php, v1.27 2010/02/09 19:07:00 Elglobo Exp $
+* @version $Id: common.php, v1.27 109:59 14/06/2011 Lolovoisin Exp $
 * @copyright (c) 2005 phpBB Group 
 * @license http://opensource.org/licenses/gpl-license.php GNU Public License 
 *
@@ -101,6 +101,7 @@ $lang = array_merge($lang, array(
 	'ACP_GROUPS_MANAGE'				=> 'Gérer les groupes',
 	'ACP_GROUPS_MANAGEMENT'			=> 'Gestion des groupes',
 	'ACP_GROUPS_PERMISSIONS'		=> 'Permissions des groupes',
+	'ACP_GROUPS_POSITION' 			=> 'Gérer la position des groupes',
 	
 	'ACP_ICONS'					=> 'Icônes de sujet',
 	'ACP_ICONS_SMILIES'			=> 'Icônes et smileys de sujet',
@@ -116,6 +117,10 @@ $lang = array_merge($lang, array(
 	'ACP_LOGGING'				=> 'Se connecte',
 	
 	'ACP_MAIN'					=> 'Index de l’administration',
+	
+	'ACP_MANAGE_ATTACHMENTS'      		=> 'Gérer les fichiers joints',
+	'ACP_MANAGE_ATTACHMENTS_EXPLAIN'  	=> 'Ici vous pouvez lister et effacer les fichiers joints des messages et des messages privés.',
+	
 	'ACP_MANAGE_EXTENSIONS'		=> 'Gérer les extensions',
 	'ACP_MANAGE_FORUMS'			=> 'Gérer les forums',
 	'ACP_MANAGE_RANKS'			=> 'Gérer les rangs',
@@ -149,15 +154,16 @@ $lang = array_merge($lang, array(
 	'ACP_REGISTER_SETTINGS'		=> 'Paramètres des inscriptions',
 
 	'ACP_RESTORE'				=> 'Restaurer',
+	
 	'ACP_FEED'					=> 'Gestion des flux',
 	'ACP_FEED_SETTINGS'			=> 'Paramètres des flux',
 
 	'ACP_SEARCH'				=> 'Recherche',
 	'ACP_SEARCH_INDEX'			=> 'Index de recherche',
 	'ACP_SEARCH_SETTINGS'		=> 'Paramètres de recherche',
-	'ACP_SEND_STATISTICS'		=> 'Envoyer un rapport de statistiques',
 
 	'ACP_SECURITY_SETTINGS'		=> 'Paramètres de sécurité',
+	'ACP_SEND_STATISTICS'		=> 'Envoyer un rapport de statistiques',
 	'ACP_SERVER_CONFIGURATION'	=> 'Configuration du serveur',
 	'ACP_SERVER_SETTINGS'		=> 'Paramètres du serveur',
 	'ACP_SIGNATURE_SETTINGS'	=> 'Paramètres de signature',
@@ -165,6 +171,7 @@ $lang = array_merge($lang, array(
 	'ACP_STYLE_COMPONENTS'		=> 'Composants des styles',
 	'ACP_STYLE_MANAGEMENT'		=> 'Gestion de style',
 	'ACP_STYLES'				=> 'Styles',
+	
 	'ACP_SUBMIT_CHANGES'		=> 'Soumettre les changements',
 	
 	'ACP_TEMPLATES'				=> 'Templates',
@@ -187,7 +194,6 @@ $lang = array_merge($lang, array(
 	'ACP_USER_ROLES'				=> 'Modèles d’utilisateur',
 	'ACP_USER_SECURITY'				=> 'Sécurité utilisateur',
 	'ACP_USER_SIG'					=> 'Signature',
-
 	'ACP_USER_WARNINGS'				=> 'Avertissements',
 
 	'ACP_VC_SETTINGS'					=> 'Paramètres de la confirmation visuelle',
@@ -208,6 +214,7 @@ $lang = array_merge($lang, array(
 	'ADMIN'					=> 'Administration',
 	'ADMIN_INDEX'			=> 'Index de l’administration',
 	'ADMIN_PANEL'			=> 'Panneau d’administration',
+	
 	'ADM_LOGOUT' 			=> 'Déconnexion&nbsp;ACP',
 	'ADM_LOGGED_OUT' 		=> 'Vous avez été déconnecté du panneau d’administration',
 
@@ -225,12 +232,16 @@ $lang = array_merge($lang, array(
 	'DOWNLOAD_AS'				=> 'Télécharger sous',
 	'DOWNLOAD_STORE'			=> 'Télécharger ou stocker le fichier joint',
 	'DOWNLOAD_STORE_EXPLAIN'	=> 'Vous pouvez directement télécharger le fichier joint ou le sauvegarder dans le répertoire <samp>store/</samp>.',
-
+	'DOWNLOADS'					=> 'Télécharger',
+	
 	'EDIT'					=> 'Editer',
 	'ENABLE'				=> 'Activer',
 	'EXPORT_DOWNLOAD'		=> 'Téléchargement',
 	'EXPORT_STORE'			=> 'Stockage',
-
+	
+	'FILES_GONE'      		=> 'Certains des fichiers joints que vous avez sélectionné n’existent pas. ils ont peut être déjà été effacés. Les fichiers joints existants vont être effacés.',
+	'FILES_STATS_WRONG'    	=> 'Les fichiers de statistiques sont probablement inexacts et doivent être resynchronisés. Valeurs actuelles: nombre de fichiers joints = %1$d, taille totale des fichiers joints = %2$s.',
+	
 	'GENERAL_OPTIONS'		=> 'Options générales',
 	'GENERAL_SETTINGS'		=> 'Paramètres généraux',
 	'GLOBAL_MASK'			=> 'Masque de permission globale',
@@ -256,6 +267,7 @@ $lang = array_merge($lang, array(
 	'NOTIFY'				=> 'Notification',
 	'NO_ADMIN'				=> 'Vous n’êtes pas autorisé à administrer ce forum.',
 	'NO_EMAILS_DEFINED'		=> 'Aucun e-mail valide indiquée.',
+	'NO_FILES_TO_DELETE' 	=> 'les fichiers joints sélectionnés pour la suppression n’existent pas.',
 	'NO_PASSWORD_SUPPLIED'	=> 'Vous devez indiquer votre mot de passe pour accéder au panneau d’administration',	
 
 	'OFF'					=> 'Off',
@@ -270,6 +282,8 @@ $lang = array_merge($lang, array(
 
 	'REMIND'							=> 'Rappeler',
 	'RESYNC'							=> 'Resynchroniser',
+	'RESYNC_FILES_STATS'       			=> 'Resynchroniser les fichiers de statistiques',
+	'RESYNC_FILES_STATS_EXPLAIN'    	=> 'Recalculer le nombre et la taille des fichiers joints dans les messages et les messages privés.',
 	'RETURN_TO'							=> 'Retour vers',
 
 	'SELECT_ANONYMOUS'		=> 'Sélectionner l’utilisateur invité',
@@ -279,8 +293,11 @@ $lang = array_merge($lang, array(
 	'SETTING_TOO_BIG'		=> 'La valeur indiquée pour le paramètre “%1$s” est trop élevée. La valeur maximale acceptée est de %2$d.',	
 	'SETTING_TOO_LONG'		=> 'La valeur indiquée pour le paramètre “%1$s” est trop longue. La longueur maximale acceptée est de %2$d.',
 	'SETTING_TOO_SHORT'		=> 'La valeur indiquée pour le paramètre “%1$s” est trop courte. La longueur minimale acceptée est de %2$d.',
+	
 	'SHOW_ALL_OPERATIONS'	=> 'Afficher toutes les opérations',
 
+	'TOTAL_SIZE' => 'Taille totale',
+	
 	'UCP'					=> 'Panneau de l’utilisateur',
 	'USERNAMES_EXPLAIN'		=> 'Indiquez un nom d’utilisateur par ligne',
 	'USER_CONTROL_PANEL'	=> 'Panneau de l’utilisateur',
@@ -352,6 +369,7 @@ $lang = array_merge($lang, array(
 	'RESET_DATE_CONFIRM'			=> 'Êtes-vous sûr de vouloir réinitialiser la date d’ouverture du forum?',
 	'RESET_ONLINE'					=> 'Réinitialiser le record des utilisateurs connectés',
 	'RESET_ONLINE_CONFIRM'			=> 'Êtes-vous sûr de vouloir réinitialiser le record des utilisateurs connectés?',
+	'RESYNC_FILES_STATS_CONFIRM'  	=> 'Êtes-vous sûr de vouloir resynchroniser les fichiers de statistiques?',
 	'RESYNC_POSTCOUNTS'				=> 'Resynchroniser les compteurs de message',
 	'RESYNC_POSTCOUNTS_EXPLAIN'		=> 'Seuls les messages existants seront pris en compte. Les messages délestés ne seront pas pris en compte.',
 	'RESYNC_POSTCOUNTS_CONFIRM'		=> 'Êtes-vous sûr de vouloir resynchroniser les compteurs de message d’utilisateur?',
@@ -655,6 +673,7 @@ $lang = array_merge($lang, array(
 
 	'LOG_RESET_DATE'			=> '<strong>Réinitialisation de la date d’ouverture du forum</strong>',
 	'LOG_RESET_ONLINE'			=> '<strong>Réinitialisation du record des utilisateurs connectés</strong>',
+	'LOG_RESYNC_FILES_STATS'  	=> '<strong>Synchronisation des fichiers de statistiques</strong>',
 	'LOG_RESYNC_POSTCOUNTS'		=> '<strong>Synchronisation des compteurs de message d’utilisateur</strong>',
 	'LOG_RESYNC_POST_MARKING'	=> '<strong>Synchronisation des sujets pointés</strong>',
 	'LOG_RESYNC_STATS'			=> '<strong>Synchronisation des statistiques de message, sujet et utilisateur</strong>',
