@@ -352,7 +352,7 @@ if ($topic_data['topic_type'] == POST_GLOBAL) {
 } else {
 	$_parent = $phpbb_seo->seo_url['forum'][$forum_id];
 }
-if (!empty($phpbb_seo->seo_opt['sql_rewrite'])) {
+if (!empty($phpbb_seo->seo_opt['sql_rewrite']) || !empty($topic_data['topic_url'])) {
 	if ( !$phpbb_seo->check_url('topic', $topic_data['topic_url'], $_parent)) {
 		if (!empty($topic_data['topic_url'])) {
 			// Here we get rid of the seo delim (-t) and put it back even in simple mod
