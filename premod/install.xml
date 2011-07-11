@@ -1,10 +1,12 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <?xml-stylesheet type="text/xsl" href="modx.prosilver.en.xsl"?>
 <!--NOTICE: Please open this file in your web browser. If presented with a security warning, you may safely tell it to allow the blocked content.-->
-<!--For security purposes, please check: http://www.phpbb.com/mods/ for the latest version of this MOD.\nAlthough MODs are checked before being allowed in the MODs Database there is no guarantee that there are no security problems within the MOD.\nNo support will be given for MODs not found within the MODs Database which can be found at http://www.phpbb.com/mods/-->
+<!--For security purposes, please check: http://www.phpbb.com/mods/ for the latest version of this MOD.
+Although MODs are checked before being allowed in the MODs Database there is no guarantee that there are no security problems within the MOD.
+No support will be given for MODs not found within the MODs Database which can be found at http://www.phpbb.com/mods/-->
 <mod xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.phpbb.com/mods/xml/modx-1.2.5.xsd">
 	<header>
-		<meta name="generator" content="MODX file generated with PP MODX Creator by tumba25 (offline version)"/>
+		<meta name="generator" content="MODX file generated with PP MODX Creator 1.0.1 by tumba25 (phpBB version)"/>
 		<license><![CDATA[http://opensource.org/osi3.0/licenses/lgpl-license.php GNU Lesser General Public License]]></license>
 		<title lang="en"><![CDATA[phpBB SEO Premod]]></title>
 		<title lang="fr"><![CDATA[Premod phpBB SEO]]></title>
@@ -102,13 +104,48 @@ Tout manquement à ces règles contribuera à mettre le support et le développe
 				<homepage><![CDATA[http://www.phpbb-seo.com/]]></homepage>
 			</author>
 		</author-group>
-		<mod-version><![CDATA[3.0.8]]></mod-version>
+		<mod-version><![CDATA[3.0.9]]></mod-version>
 		<installation>
 			<level><![CDATA[easy]]></level>
 			<time><![CDATA[900]]></time>
-			<target-version><![CDATA[3.0.8]]></target-version>
+			<target-version><![CDATA[3.0.9]]></target-version>
 		</installation>
 		<history>
+			<entry>
+				<date><![CDATA[2011-07-17]]></date>
+				<rev-version><![CDATA[3.0.9]]></rev-version>
+				<changelog lang="en">
+					<change><![CDATA[All mods Updated to comply with phpBB 3.0.9]]></change>
+					<change><![CDATA[Utlimate SEO URL 0.6.8]]></change>
+					<change><![CDATA[Fix js pagination for non rewritten links]]></change>
+					<change><![CDATA[Extend pagination rewriting to urls with no ending slash (example.com/location?start=xx vs example.com/location/pagexx.html)]]></change>
+					<change><![CDATA[Add empty test in page_header to help reducing dependencies (stk)]]></change>
+					<change><![CDATA[Use relative and unrewritten url in S_MOD_ACTION redirect param to fix what looks like a mod_security issue]]></change>
+					<change><![CDATA[Handle spaces in topic pagination (highlights and keywords param could contain some)]]></change>
+					<change><![CDATA[Use [OR] instead of the implicit [AND] for the optimization RewriteCond's in the .htaccess, since obviously, a request cannot match a directory AND a file at the same time.]]></change>
+					<change><![CDATA[Implement a convenient way to allow the zero duplicate to properly redirect an updated forum url without id Look in phpbb_seo/includes/setup_phpbb_seo.php for more details about the usage.]]></change>
+					<change><![CDATA[Allow empty suffix for topic url pagination.]]></change>
+					<change><![CDATA[Enhance viewonline tracking]]></change>
+					<change><![CDATA[Properly handle topic_url when set even if sql_rewrite is not activated]]></change>
+					<change><![CDATA[GYM Sitemaps & RSS 2.0.3]]></change>
+					<change><![CDATA[Fix the damned coma breaking xhtml validation]]></change>
+					<change><![CDATA[Fix pagination string for when custom values are used in GYM HTML]]></change>
+					<change><![CDATA[Add image size to few imgs]]></change>
+					<change><![CDATA[Fix ssl test breaking standalone usage]]></change>
+					<change><![CDATA[Get no errors in style sheets when no language files are available (user's fault), display a BIG red message]]></change>
+					<change><![CDATA[Meta tags 0.4.4]]></change>
+					<change><![CDATA[Add empty test in page_header to help reducing dependencies (stk)]]></change>
+					<change><![CDATA[Fix explain in acp stating the exact opposite of what it should]]></change>
+					<change><![CDATA[Allow a bit more length for settings in acp]]></change>
+					<change><![CDATA[No duplicate 0.6.6]]></change>
+					<change><![CDATA[Fix last topic link could use wrong forum with virtual folders and sql rewriting off]]></change>
+					<change><![CDATA[Zero duplicate 0.6.8]]></change>
+					<change><![CDATA[Fix canonical element not displayed without the no dupe]]></change>
+					<change><![CDATA[Related Topics 0.2.4]]></change>
+					<change><![CDATA[Fix LIKE query for postgres (using ILIKE). Other dbms, except mysql are yet untested, concerned users are welcome to report on the matter.]]></change>
+					<change><![CDATA[Add ability to exclude forums by id (seo_related::forum_exclude = array(2,8,98 ...))]]></change>
+				</changelog>
+			</entry>
 			<entry>
 				<date><![CDATA[2010-11-27]]></date>
 				<rev-version><![CDATA[3.0.8]]></rev-version>
@@ -128,15 +165,8 @@ Tout manquement à ces règles contribuera à mettre le support et le développe
 					<change><![CDATA[Added : Full ssl support]]></change>
 					<change><![CDATA[No duplicate 0.6.6]]></change>
 					<change><![CDATA[Better fix for wrong topic_url used when freshest topic in a sub forum and using SQL rewriting]]></change>
-					<change><![CDATA[Meta tags 0.4.4]]></change>
+					<change><![CDATA[Meta tags 0.4.2]]></change>
 					<change><![CDATA[Fix : Strip all bbcode regex now won't remove [text]]]></change>
-				</changelog>
-			</entry>
-			<entry>
-				<date><![CDATA[2010-03-07]]></date>
-				<rev-version><![CDATA[3.0.7-PL1]]></rev-version>
-				<changelog lang="en">
-					<change><![CDATA[Base Updated to phpBB 3.0.7-PL1 with no change in the phpBB SEO mods]]></change>
 				</changelog>
 			</entry>
 			<entry>
@@ -170,6 +200,13 @@ Tout manquement à ces règles contribuera à mettre le support et le développe
 					<change><![CDATA[Extend redirections to unreadposts]]></change>
 					<change><![CDATA[No duplicate 0.6.4]]></change>
 					<change><![CDATA[Fixed : Wrong topic_url used when freshest topic in a sub forum and using SQL rewriting]]></change>
+				</changelog>
+			</entry>
+			<entry>
+				<date><![CDATA[2010-03-07]]></date>
+				<rev-version><![CDATA[3.0.7-PL1]]></rev-version>
+				<changelog lang="en">
+					<change><![CDATA[Base Updated to phpBB 3.0.7-PL1 with no change in the phpBB SEO mods]]></change>
 				</changelog>
 			</entry>
 			<entry>
@@ -410,17 +447,17 @@ Tout manquement à ces règles contribuera à mettre le support et le développe
 >>>>   UPDATE INSTRUCTION   	   <<<<<
 ________________________________________
 
-Update 3.0.7-PL1 => 3.0.8 :
+Update 3.0.8 => 3.0.9 :
 First, go to http://downloads.phpbb-seo.com/seo-url-premod-12/
 where you'll be able to download the update packages
 You can update using two method :
-	1) Auto updating : "3.0.7-PL1 to 3.0.8 Auto update"
+	1) Auto updating : "3.0.8 to 3.0.9 Auto update"
 		- Upload the auto_update/install/*.* folder of the update package to install/*.*
 		- Go to ACP => SYSTEM and follow instructions.
 		The auto update method will take the eventual code change you have made into account,
 		and will attempt to merge the new files with your online modified ones.
 		It's the safest method for most, the installer will tel you if it has trouble to update some files.
-	2) Manual updating : "3.0.7-PL1 to 3.0.8 Changed Files"
+	2) Manual updating : "3.0.8 to 3.0.9 Changed Files"
 		You'll find the modified file list in the modified/ folder of the update package.
 		- Upload / merge / overwrite all file,
 		- Upload the modified/install/*.* to install/*.*,
@@ -758,18 +795,18 @@ for GYM sitemaps & RSS. Just generate a new .htaccess once you have installed th
 >>>>   MISE A JOUR	                <<<<<
 _____________________________________________
 
-Mise à jour : 3.0.7-PL1 => 3.0.8 :
+Mise à jour : 3.0.8 => 3.0.9 :
 Tout d'abord, rendez vous sur http://telecharger.phpbb-seo.com/premod-referencement-phpbb-10/
 pour télécharger un des pack de mise à jour.
 Vous pouvez mettre à jour en suivant deux méthodes :
-	1) Mise à jour automatique : "3.0.7-PL1 vers 3.0.8 MAJ automatique"
+	1) Mise à jour automatique : "3.0.8 vers 3.0.9 MAJ automatique"
 		- Uplodez le contenu du dossier auto_update/install/*.* vers install/*.*,
 		- Rendez vous à l'ACP => SYSTEM et suivez les instructions.
 		L'auto updateur prendra vos éventuelles modifications en compte et tentera
 		de merger les nouveaux fichiers avec ceux que vous auriez modifié.
 		C'est la methode la plus sûre dans la plupart des cas, l'updateur vous dira
 		s'il a des problème pour modifier certain fichiers.
-	2) Mise à jour manuelle : "3.0.7-PL1 vers 3.0.8 Fichiers modifiés"
+	2) Mise à jour manuelle : "3.0.8 vers 3.0.9 Fichiers modifiés"
 		Vous trouverez les fichiers modifiés dans le dossier modified/ de l'archive.
 		- Uploadez / mergez / écrasez tous les fichiers,
 		- Uploadez le dossier modified/install/*.* vers install/*.*,
