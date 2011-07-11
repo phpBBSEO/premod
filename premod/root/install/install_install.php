@@ -107,13 +107,13 @@ class install_install extends module
 				$this->email_admin($mode, $sub);
 				// SEO premod
 				global $db, $phpEx;
-				if (!class_exists('phpbb_db_tools')) {
+				if (!class_exists('phpbb_db_tools', false)) {
 					include('./../includes/db/db_tools.' . $phpEx);
 				}
 				$db_tools = new phpbb_db_tools($db);
 				$db_tools->db->sql_return_on_error(true);
 				$db_tools->sql_column_add(TOPICS_TABLE, 'topic_url', array('VCHAR', ''));
-				set_config('seo_premod_version', '3.0.9-RC4');
+				set_config('seo_premod_version', '3.0.9');
 				// Remove the lock file
 				@unlink($phpbb_root_path . 'cache/install_lock');
 
