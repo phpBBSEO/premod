@@ -107,13 +107,13 @@ class install_install extends module
 				$this->email_admin($mode, $sub);
 				// SEO premod
 				global $db, $phpEx;
-				if (!class_exists('phpbb_db_tools')) {
+				if (!class_exists('phpbb_db_tools', false)) {
 					include('./../includes/db/db_tools.' . $phpEx);
 				}
 				$db_tools = new phpbb_db_tools($db);
+				$db_tools->db->sql_return_on_error(true);
 				$db_tools->sql_column_add(TOPICS_TABLE, 'topic_url', array('VCHAR', ''));
-				$db_tools->sql_create_index(TOPICS_TABLE, 'topic_lpid', array('topic_last_post_id'));
-				set_config('seo_premod_version', '3.0.8');
+				set_config('seo_premod_version', '3.0.9');
 				// Remove the lock file
 				@unlink($phpbb_root_path . 'cache/install_lock');
 
@@ -1890,7 +1890,7 @@ class install_install extends module
 
 			if (!$user_id)
 			{
-				// If we can't insert this user then continue to the next one to avoid inconsistant data
+				// If we can't insert this user then continue to the next one to avoid inconsistent data
 				$this->p_master->db_error('Unable to insert bot into users table', $db->sql_error_sql, __LINE__, __FILE__, true);
 				continue;
 			}
