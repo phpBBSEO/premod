@@ -313,7 +313,7 @@ class phpbb_seo extends setup_phpbb_seo {
 	* prepare_iurl( $data, $type, $parent = '' )
 	* Prepare url first part (not for forums) with SQL based URL rewriting
 	*/
-	function prepare_iurl( &$data, $type, $parent = '' ) {
+	function prepare_iurl( $data, $type, $parent = '' ) {
 		$id = max(0, (int) $data[$type . '_id']);
 		if ( empty($this->seo_url[$type][$id]) ) {
 			if (!empty($data[$type . '_url'])) {
