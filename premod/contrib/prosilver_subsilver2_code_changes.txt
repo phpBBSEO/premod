@@ -95,16 +95,20 @@ function jumpto() {
 			base_url = anchor_parts[0];
 			anchor = '#' + anchor_parts[1];
 		}
-		if ( base_url.indexOf('?') >= 0 ) {
-			document.location.href = base_url.replace(/&amp;/g, '&') + '&start=' + seo_page + anchor;
-		} else if ( seo_page > 0 ) {
-			var seo_type1 = base_url.match(/\.[a-z0-9]+$/i);
-			if (seo_type1 !== null) {
-				document.location.href = base_url.replace(/\.[a-z0-9]+$/i, '') + seo_delim_start + seo_page + seo_type1 + anchor;
-			}
-			var seo_type2 = base_url.match(/\/$/);
-			if (seo_type2 !== null) {
-				document.location.href = base_url + seo_static_pagination + seo_page + seo_ext_pagination + anchor;
+		if ( seo_page > 0 ) {
+			var phpEXtest = false;
+			if ( base_url.indexOf('?') >= 0 || ( phpEXtest = base_url.match(/\.php$/i))) {
+				document.location.href = base_url.replace(/&amp;/g, '&') + (phpEXtest ? '?' : '&') + 'start=' + seo_page + anchor;
+			} else {
+				var ext = base_url.match(/\.[a-z0-9]+$/i);
+				if (ext) {
+					// location.ext => location-xx.ext
+					document.location.href = base_url.replace(/\.[a-z0-9]+$/i, '') + seo_delim_start + seo_page + ext + anchor;
+				} else {
+					// location and location/ to location/pagexx.html
+					var slash = base_url.match(/\/$/) ? '' : '/';
+					document.location.href = base_url + slash + seo_static_pagination + seo_page + seo_ext_pagination + anchor;
+				}
 			}
 		} else {
 			document.location.href = base_url + anchor;
@@ -178,7 +182,7 @@ styles/prosilver/template/forumlist_body.html
 #-----[ AFTER, ADD ]------------------------------------------
 #
 
-<!-- IF forumrow.LAST_POST_LINK --><i>{forumrow.LAST_POST_LINK}</i><br/><!-- ENDIF -->
+						<!-- IF forumrow.LAST_POST_LINK --><i>{forumrow.LAST_POST_LINK}</i><br/><!-- ENDIF -->
 
 #
 #-----[ OPEN ]------------------------------------------
@@ -202,10 +206,8 @@ styles/prosilver/template/overall_header.html
 <meta http-equiv="imagetoolbar" content="no" />
 <meta name="resource-type" content="document" />
 <meta name="distribution" content="global" />
-<meta name="copyright" content="2000, 2002, 2005, 2007 phpBB Group" />
 <meta name="keywords" content="" />
 <meta name="description" content="" />
-<meta http-equiv="X-UA-Compatible" content="IE=EmulateIE7; IE=EmulateIE9" />
 {META}
 <title>{SITENAME} &bull; <!-- IF S_IN_MCP -->{L_MCP} &bull; <!-- ELSEIF S_IN_UCP -->{L_UCP} &bull; <!-- ENDIF -->{PAGE_TITLE}</title>
 
@@ -222,7 +224,6 @@ styles/prosilver/template/overall_header.html
 <meta http-equiv="content-language" content="{S_USER_LANG}" />
 <meta http-equiv="imagetoolbar" content="no" />
 {META_TAG}
-<meta http-equiv="X-UA-Compatible" content="IE=EmulateIE7; IE=EmulateIE9" />
 {META}
 <!-- BEGIN gym_rsslinks -->
 <link rel="alternate" type="application/rss+xml" title="{gym_rsslinks.TITLE}" href="{gym_rsslinks.URL}" />
@@ -594,10 +595,8 @@ styles/subsilver2/template/overall_header.html
 <meta http-equiv="imagetoolbar" content="no" />
 <meta name="resource-type" content="document" />
 <meta name="distribution" content="global" />
-<meta name="copyright" content="2000, 2002, 2005, 2007 phpBB Group" />
 <meta name="keywords" content="" />
 <meta name="description" content="" />
-<meta http-equiv="X-UA-Compatible" content="IE=EmulateIE7; IE=EmulateIE9" />
 {META}
 <title>{SITENAME} &bull; <!-- IF S_IN_MCP -->{L_MCP} &bull; <!-- ELSEIF S_IN_UCP -->{L_UCP} &bull; <!-- ENDIF -->{PAGE_TITLE}</title>
 
@@ -614,7 +613,6 @@ styles/subsilver2/template/overall_header.html
 <meta http-equiv="content-style-type" content="text/css" />
 <meta http-equiv="imagetoolbar" content="no" />
 {META_TAG}
-<meta http-equiv="X-UA-Compatible" content="IE=EmulateIE7; IE=EmulateIE9" />
 {META}
 <!-- BEGIN gym_rsslinks -->
 <link rel="alternate" type="application/rss+xml" title="{gym_rsslinks.TITLE}" href="{gym_rsslinks.URL}" />
@@ -664,16 +662,20 @@ function jumpto() {
 			base_url = anchor_parts[0];
 			anchor = '#' + anchor_parts[1];
 		}
-		if ( base_url.indexOf('?') >= 0 ) {
-			document.location.href = base_url.replace(/&amp;/g, '&') + '&start=' + seo_page + anchor;
-		} else if ( seo_page > 0 ) {
-			var seo_type1 = base_url.match(/\.[a-z0-9]+$/i);
-			if (seo_type1 !== null) {
-				document.location.href = base_url.replace(/\.[a-z0-9]+$/i, '') + seo_delim_start + seo_page + seo_type1 + anchor;
-			}
-			var seo_type2 = base_url.match(/\/$/);
-			if (seo_type2 !== null) {
-				document.location.href = base_url + seo_static_pagination + seo_page + seo_ext_pagination + anchor;
+		if ( seo_page > 0 ) {
+			var phpEXtest = false;
+			if ( base_url.indexOf('?') >= 0 || ( phpEXtest = base_url.match(/\.php$/i))) {
+				document.location.href = base_url.replace(/&amp;/g, '&') + (phpEXtest ? '?' : '&') + 'start=' + seo_page + anchor;
+			} else {
+				var ext = base_url.match(/\.[a-z0-9]+$/i);
+				if (ext) {
+					// location.ext => location-xx.ext
+					document.location.href = base_url.replace(/\.[a-z0-9]+$/i, '') + seo_delim_start + seo_page + ext + anchor;
+				} else {
+					// location and location/ to location/pagexx.html
+					var slash = base_url.match(/\/$/) ? '' : '/';
+					document.location.href = base_url + slash + seo_static_pagination + seo_page + seo_ext_pagination + anchor;
+				}
 			}
 		} else {
 			document.location.href = base_url + anchor;
@@ -827,6 +829,18 @@ styles/subsilver2/template/viewforum_body.html
 #
 
 styles/subsilver2/template/viewtopic_body.html
+
+#
+#-----[ FIND ]------------------------------------------
+#
+
+<a href="#p{postrow.POST_ID}">
+
+#
+#-----[ REPLACE WITH ]------------------------------------------
+#
+
+<a href="{U_VIEW_TOPIC}#p{postrow.POST_ID}">
 
 #
 #-----[ FIND ]------------------------------------------
