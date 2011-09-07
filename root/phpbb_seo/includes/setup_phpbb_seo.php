@@ -151,6 +151,9 @@ class setup_phpbb_seo {
 		}
 		$http = 'HTTP/1.1 ';
 		header($http . $header, $replace, $code);
+		header('Cache-Control: no-store, no-cache, must-revalidate');
+		header('Pragma: no-cache');
+		header('Expires: -1');
 		header('Location: ' . $url);
 		exit_handler();
 	}
