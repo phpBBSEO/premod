@@ -55,7 +55,7 @@ class phpbb_seo {
 		// so you will need to switch to ssl for your user to use cookie based session (no sid)
 		// could be done by using an https link to login form (or within the redirect after login)
 		$this->ssl['requested'] = (bool) ((isset($_SERVER['HTTPS']) && ($_SERVER['HTTPS'] === 'on' || $_SERVER['HTTPS'] === true)) || (isset($_SERVER['SERVER_PORT']) && (int) $_SERVER['SERVER_PORT'] === 443));
-		$this->ssl['forced'] = (bool) (($config['server_protocol'] === 'https//'));
+		$this->ssl['forced'] = (bool) (($config['server_protocol'] === 'https://'));
 		$this->ssl['use'] = (bool) ($this->ssl['requested'] || $this->ssl['forced']);
 		// Server Settings, rely on DB
 		$server_protocol = $this->ssl['use'] ? 'https://' : 'http://';
