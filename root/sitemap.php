@@ -17,7 +17,7 @@ $auth->acl($user->data);
 
 $user->setup('gym_sitemaps/gym_common');
 // Start the process
-require_once($phpbb_root_path . 'gym_sitemaps/includes/gym_google.' . $phpEx);
+require($phpbb_root_path . 'gym_sitemaps/includes/gym_google.' . $phpEx);
 
 $gym_google  = new gym_google();
 exit;

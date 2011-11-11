@@ -107,8 +107,8 @@ class install_install extends module
 				$this->email_admin($mode, $sub);
 				// SEO premod
 				global $db, $phpEx;
-				if (!class_exists('phpbb_db_tools', false)) {
-					include('./../includes/db/db_tools.' . $phpEx);
+				if (!class_exists('phpbb_db_tools'/*, false*/)) {
+					require('./../includes/db/db_tools.' . $phpEx);
 				}
 				$db_tools = new phpbb_db_tools($db);
 				$db_tools->db->sql_return_on_error(true);

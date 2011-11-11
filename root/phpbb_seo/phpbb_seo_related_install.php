@@ -97,8 +97,8 @@ class seo_related_install {
 			if ($db->sql_layer == 'mysql4' || $db->sql_layer == 'mysqli') {
 				// we can proceed with trying to add fulltext
 				global $phpbb_root_path, $phpEx;
-				if (!class_exists('phpbb_db_tools')) {
-					include($phpbb_root_path . 'includes/db/db_tools.' . $phpEx);
+				if (!class_exists('phpbb_db_tools'/*, false */)) {
+					require($phpbb_root_path . 'includes/db/db_tools.' . $phpEx);
 				}
 				$db_tools = new phpbb_db_tools($db);
 				$indexes = $db_tools->sql_list_index(TOPICS_TABLE);
@@ -147,8 +147,8 @@ class seo_related_install {
 		$errno = E_USER_NOTICE;
 		$msg = $user->lang['UNINSTALLED'];
 		// use db_tools to check the index
-		if (!class_exists('phpbb_db_tools')) {
-			include($phpbb_root_path . 'includes/db/db_tools.' . $phpEx);
+		if (!class_exists('phpbb_db_tools'/*, false */)) {
+			require($phpbb_root_path . 'includes/db/db_tools.' . $phpEx);
 		}
 		$db_tools = new phpbb_db_tools($db);
 		$indexes = $db_tools->sql_list_index(TOPICS_TABLE);

@@ -11,7 +11,7 @@
 if ( !defined('IN_PHPBB') ) {
 	exit;
 }
-require_once($phpbb_root_path . 'gym_sitemaps/includes/gym_sitemaps.' . $phpEx);
+require($phpbb_root_path . 'gym_sitemaps/includes/gym_sitemaps.' . $phpEx);
 /**
 * gym_google Class
 * www.phpBB-SEO.com
