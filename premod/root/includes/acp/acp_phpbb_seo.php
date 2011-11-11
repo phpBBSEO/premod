@@ -222,7 +222,7 @@ class acp_phpbb_seo {
 					);
 				}
 				// dynamic meta tag mod
-				if (class_exists('seo_meta')) {
+				if (class_exists('seo_meta'/*, false*/)) {
 					$display_vars['vars'] += array(
 						'legend3' => 'SEO_META',
 						'seo_meta_title' =>  array('lang' => 'SEO_META_TITLE', 'validate' => 'string:0:225', 'type' => 'text:40:250', 'explain' => true, 'default' => $config['sitename']),
@@ -370,8 +370,8 @@ class acp_phpbb_seo {
 					}
 					// Let's make sure that the proper field was added to the topic table
 					if ($config_name === 'sql_rewrite' && $config_value == 1 && !$phpbb_seo->seo_opt['sql_rewrite']) {
-						if (!class_exists('phpbb_db_tools')) {
-							include($phpbb_root_path . 'includes/db/db_tools.' . $phpEx);
+						if (!class_exists('phpbb_db_tools'/*, false*/)) {
+							require($phpbb_root_path . 'includes/db/db_tools.' . $phpEx);
 						}
 						$db_tools = new phpbb_db_tools($db);
 						$db_tools->db->sql_return_on_error(true);
@@ -387,8 +387,8 @@ class acp_phpbb_seo {
 					}
 					// Let's make sure the proper index is added for the no dupe (in case it is installed and activated)
 					if ($config_name === 'no_dupe_on' && $config_value == 1 && !$phpbb_seo->seo_opt['no_dupe']['on']) {
-						if (!class_exists('phpbb_db_tools')) {
-							include($phpbb_root_path . 'includes/db/db_tools.' . $phpEx);
+						if (!class_exists('phpbb_db_tools'/*, false*/)) {
+							require($phpbb_root_path . 'includes/db/db_tools.' . $phpEx);
 						}
 						// in case we already started the phpbb_db_tools class above
 						if (empty($db_tools)) {
@@ -431,8 +431,8 @@ class acp_phpbb_seo {
 								@set_time_limit(0);
 								@ini_set('memory_limit', '128M');
 								// use db_tools to check the index
-								if (!class_exists('phpbb_db_tools')) {
-									include($phpbb_root_path . 'includes/db/db_tools.' . $phpEx);
+								if (!class_exists('phpbb_db_tools'/*, false*/)) {
+									require($phpbb_root_path . 'includes/db/db_tools.' . $phpEx);
 								}
 								if (empty($db_tools)) {
 									$db_tools = new phpbb_db_tools($db);

@@ -190,9 +190,9 @@ class display_posts {
 		if (!empty($topic_datas)) {
 			$has_result = true;
 			$bbcode_filter = false;
-			if (!class_exists('bbcode')) {
+			if (!class_exists('bbcode'/*, false*/)) {
 				global $phpbb_root_path, $phpEx;
-				include_once($phpbb_root_path . 'includes/bbcode.' . $phpEx);
+				require($phpbb_root_path . 'includes/bbcode.' . $phpEx);
 			}
 			$patterns = $replaces = array();
 			if ( !empty($master->module_config['html_msg_filters']['pattern']) ) {

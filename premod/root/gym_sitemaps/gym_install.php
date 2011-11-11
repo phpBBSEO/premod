@@ -166,7 +166,7 @@ class module {
 				$this->mode = $mode;
 			}
 			$module = $this->filename;
-			if (!class_exists($module)) {
+			if (!class_exists($module/*, false*/)) {
 				$this->error('Module "' . htmlspecialchars($module) . '" not accessible.', __LINE__, __FILE__);
 			}
 			$this->module = new $module($this);
@@ -411,10 +411,12 @@ class install_gym_sitemaps extends module {
 		global $user, $phpbb_seo, $config, $phpbb_root_path, $phpEx, $_action_types;
 		$this->p_master = &$p_master;
 		$this->version = GYM_VERSION;
-		require_once($phpbb_root_path . 'gym_sitemaps/includes/gym_common.' . $phpEx);
+		require($phpbb_root_path . 'gym_sitemaps/includes/gym_common.' . $phpEx);
 		// For Compatibility with the phpBB SEO mod rewrites
 		if (empty($phpbb_seo)) {
-			require_once($phpbb_root_path . 'gym_sitemaps/includes/phpbb_seo_class_light.' . $phpEx);
+			if (!class_exists('phpbb_seo'/*, false*/)) {
+				require($phpbb_root_path . 'gym_sitemaps/includes/phpbb_seo_class_light.' . $phpEx);
+			}
 			$phpbb_seo = new phpbb_seo();
 			define('STARTED_LIGHT', true);
 		}
@@ -475,8 +477,10 @@ class install_gym_sitemaps extends module {
 							$module_file = $phpbb_root_path . 'gym_sitemaps/acp/' . $type_module . '.' . $phpEx;
 
 							if ( file_exists($module_file) ) {
-								include_once($module_file);
-								if (class_exists($type_module)) {
+								if (!class_exists($type_module/*, false*/)) {
+									require($module_file);
+								}
+								if (class_exists($type_module/*, false*/)) {
 									$gym_module = new $type_module($this);
 									if ( method_exists($gym_module, 'acp_module')) { // Looks like we match
 										$gym_modules_acp[$otype][$_module] = $gym_module->acp_module();
@@ -516,7 +520,9 @@ class install_gym_sitemaps extends module {
 	*/
 	function add_modules($mode, $sub) {
 		global $db, $user, $phpbb_root_path, $phpEx;
-		include_once($phpbb_root_path . 'includes/acp/acp_modules.' . $phpEx);
+		if (!class_exists('acp_modules'/*, false*/)) {
+			require($phpbb_root_path . 'includes/acp/acp_modules.' . $phpEx);
+		}
 		$_module = new acp_modules();
 		if ( $this->get_module_id('ACP_GYM_SITEMAPS')  > 0 ) {
 			$url_mod = !empty($sub) ? '?mode=' . $mode : '';
@@ -611,7 +617,9 @@ class install_gym_sitemaps extends module {
 	*/
 	function remove_modules($mode, $sub) {
 		global $db, $user, $phpbb_root_path, $phpEx;
-		include_once($phpbb_root_path . 'includes/acp/acp_modules.' . $phpEx);
+		if (!class_exists('acp_modules'/*, false*/)) {
+			require($phpbb_root_path . 'includes/acp/acp_modules.' . $phpEx);
+		}
 		$_module = new acp_modules();
 		// Set the module class
 		$module_classes = array_keys($this->module_categories);

@@ -343,8 +343,10 @@ class acp_gym_sitemaps {
 		$module_class = $mode . '_' . $mode_module;
 		$module_file = $phpbb_root_path . 'gym_sitemaps/acp/' . $module_class . '.' . $phpEx;
 		if ( file_exists($module_file) ) {
-			include_once($module_file);
-			if (class_exists($module_class)) {
+			if (!class_exists($module_class/*, false*/)) {
+				include($module_file);
+			}
+			if (class_exists($module_class/*, false*/)) {
 				$gym_module = new $module_class($this);
 				if ( method_exists($gym_module, 'acp_module')) {
 					$return_array[$mode][$mode_module] = $gym_module->acp_module();
@@ -839,8 +841,10 @@ class acp_gym_sitemaps {
 		$method = 'select_' . $key;
 		$module_file = $phpbb_root_path . 'gym_sitemaps/acp/modules/' . $this->mode . '_' . $this->module . '.' . $phpEx;
 		if ( file_exists($module_file) ) {
-			include_once($module_file);
-			if (class_exists($module_class)) {
+			if (!class_exists($module_class/*, false */)) {
+				include($module_file);
+			}
+			if (class_exists($module_class/*, false */)) {
 				$gym_module = new $module_class($this);
 				if ( method_exists($gym_module, $method)) {
 					return $gym_module->$method($value, $key);

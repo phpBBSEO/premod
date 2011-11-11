@@ -11,7 +11,7 @@
 if ( !defined('IN_PHPBB') ) {
 	exit;
 }
-require_once($phpbb_root_path . 'gym_sitemaps/includes/gym_sitemaps.' . $phpEx);
+require($phpbb_root_path . 'gym_sitemaps/includes/gym_sitemaps.' . $phpEx);
 /**
 * gym_rss Class
 * www.phpBB-SEO.com
@@ -425,9 +425,9 @@ class gym_rss extends gym_sitemaps {
 		$message = censor_text($message);
 		if (!$this->rss_config['rss_nohtml']) {
 			if ($bitfield && $this->rss_config['rss_allow_bbcode']) {
-				if (!class_exists('bbcode')) {
+				if (!class_exists('bbcode'/*, false */)) {
 					global $phpbb_root_path, $phpEx;
-					include_once($phpbb_root_path . 'includes/bbcode.' . $phpEx);
+					require($phpbb_root_path . 'includes/bbcode.' . $phpEx);
 				}
 				if (empty($bbcode)) {
 					$bbcode = new bbcode($bitfield);

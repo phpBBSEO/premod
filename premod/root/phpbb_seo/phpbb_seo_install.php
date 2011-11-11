@@ -156,7 +156,7 @@ class module {
 				$this->mode = $mode;
 			}
 			$module = $this->filename;
-			if (!class_exists($module)) {
+			if (!class_exists($module/*, false*/)) {
 				$this->error('Module "' . htmlspecialchars($module) . '" not accessible.', __LINE__, __FILE__);
 			}
 			$this->module = new $module($this);
@@ -429,7 +429,9 @@ class install_phpbb_seo extends module {
 	*/
 	function add_modules($mode, $sub) {
 		global $db, $user, $phpbb_root_path, $phpEx;
-		include_once($phpbb_root_path . 'includes/acp/acp_modules.' . $phpEx);
+		if (!class_exists('acp_modules'/*, false*/)) {
+			require($phpbb_root_path . 'includes/acp/acp_modules.' . $phpEx);
+		}
 		$_module = new acp_modules();
 		if ( $this->get_module_id('ACP_MOD_REWRITE')  > 0 ) {
 			$url_mod = !empty($sub) ? '?mode=' . $mode : '';
@@ -524,7 +526,9 @@ class install_phpbb_seo extends module {
 	*/
 	function remove_modules($mode, $sub) {
 		global $db, $user, $phpbb_root_path, $phpEx;
-		include_once($phpbb_root_path . 'includes/acp/acp_modules.' . $phpEx);
+		if (!class_exists('acp_modules'/*, false*/)) {
+			require($phpbb_root_path . 'includes/acp/acp_modules.' . $phpEx);
+		}
 		$_module = new acp_modules();
 		// Set the module class
 		$module_classes = array_keys($this->module_categories);
@@ -643,8 +647,8 @@ class install_phpbb_seo extends module {
 			$this->p_master->error($user->lang['SEO_ERROR_INSTALL'] . '<br/><pre>' . implode('<br/>', $this->errors) . '</pre>', __LINE__, __FILE__);
 		}
 		$this->page_title = $user->lang['STAGE_FINAL'];
-		if (!class_exists('phpbb_db_tools')) {
-			include($phpbb_root_path . 'includes/db/db_tools.' . $phpEx);
+		if (!class_exists('phpbb_db_tools'/*, false*/)) {
+			require($phpbb_root_path . 'includes/db/db_tools.' . $phpEx);
 		}
 		$db_tools = new phpbb_db_tools($db);
 		$db_tools->db->sql_return_on_error(true);

@@ -94,7 +94,7 @@ if (!empty($action) && !empty($gym_style_type) && !empty($language) && !empty($t
 		require($phpbb_root_path . 'includes/cache.' . $phpEx);
 		require($phpbb_root_path . 'includes/db/' . $dbms . '.' . $phpEx);
 		require($phpbb_root_path . 'includes/constants.' . $phpEx);
-		require_once($phpbb_root_path . 'gym_sitemaps/includes/gym_common.' . $phpEx);
+		require($phpbb_root_path . 'gym_sitemaps/includes/gym_common.' . $phpEx);
 		$db = new $sql_db();
 		$cache = new cache();
 		// Connect to DB
