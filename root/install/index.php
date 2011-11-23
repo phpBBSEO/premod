@@ -316,7 +316,7 @@ class module
 			}
 
 			$module = $this->filename;
-			if (!class_exists($module/*, false*/))
+			if (!class_exists($module))
 			{
 				$this->error('Module "' . htmlspecialchars($module) . '" not accessible.', __LINE__, __FILE__);
 			}
