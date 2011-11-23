@@ -61,7 +61,7 @@ class display_posts {
 		// Do some reset
 		$topic_datas = $topic_ids = $forum_ids = $user_cache = $id_cache = $post_datas = $forum_datas = array();
 		$forum_id = $master->call['forum_id'];
-		$now = getdate(time() + $user->timezone + $user->dst - date('Z'));
+		$now = phpbb_gmgetdate(time() + $user->timezone + $user->dst);
 		// Get The Data, first forums
 		if ((!$s_global && !$master->call['single_forum']) || ($master->call['single_forum'] && empty($master->forum_datas[$master->call['forum_id']])) ) {
 			$sql_array = array(

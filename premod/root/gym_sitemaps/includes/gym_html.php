@@ -306,13 +306,18 @@ class gym_html extends gym_sitemaps {
 		// Generate birthday list if required ...
 		if ($this->actions['display_birthdays']) {
 			$birthday_list = '';
-			$now = getdate(time() + $user->timezone + $user->dst - date('Z'));
+			$now = phpbb_gmgetdate(time() + $user->timezone + $user->dst);
+			// Display birthdays of 29th february on 28th february in non-leap-years
+			$leap_year_birthdays = '';
+			if ($now['mday'] == 28 && $now['mon'] == 2 && !$user->format_date(time(), 'L')) {
+				$leap_year_birthdays = " OR user_birthday LIKE '" . $db->sql_escape(sprintf('%2d-%2d-', 29, 2)) . "%'";
+			}
 			$sql = 'SELECT u.user_id, u.username, u.user_colour, u.user_birthday
 				FROM ' . USERS_TABLE . ' u
 				LEFT JOIN ' . BANLIST_TABLE . " b ON (u.user_id = b.ban_userid)
 				WHERE (b.ban_id IS NULL
 					OR b.ban_exclude = 1)
-					AND u.user_birthday LIKE '" . $db->sql_escape(sprintf('%2d-%2d-', $now['mday'], $now['mon'])) . "%'
+					AND (u.user_birthday LIKE '" . $db->sql_escape(sprintf('%2d-%2d-', $now['mday'], $now['mon'])) . "%' $leap_year_birthdays)
 					AND u.user_type IN (" . USER_NORMAL . ', ' . USER_FOUNDER . ')';
 			$result = $db->sql_query($sql);
 			while ($row = $db->sql_fetchrow($result)) {
