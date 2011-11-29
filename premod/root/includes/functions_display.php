@@ -153,13 +153,14 @@ function display_forums($root_data = '', $display_moderators = true, $return_mod
 		$phpbb_seo->set_url($row['forum_name'], $forum_id, 'forum');
 		// www.phpBB-SEO.com SEO TOOLKIT END
 		// Mark forums read?
-		if ($mark_read == 'forums' || $mark_read == 'all')
+		if ($mark_read == 'forums')
 		{
 			if ($auth->acl_get('f_list', $forum_id))
 			{
 				$forum_ids[] = $forum_id;
-				continue;
 			}
+
+			continue;
 		}
 
 		// Category with no members
