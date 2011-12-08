@@ -14,7 +14,7 @@ define('IN_PHPBB', true);
 define('IN_INSTALL', true);
 $phpbb_root_path = (defined('PHPBB_ROOT_PATH')) ? PHPBB_ROOT_PATH : './../';
 $phpEx = substr(strrchr(__FILE__, '.'), 1);
-@define('GYM_VERSION', '2.0.3');
+@define('GYM_VERSION', '2.0.4');
 // Try to override some limits - maybe it helps some...
 @set_time_limit(0);
 $mem_limit = @ini_get('memory_limit');
