@@ -139,7 +139,7 @@
 		</xsl:choose>
 	</div>
 </div>
-<div class="copyright">Powered by <a href="http://www.phpbb.com/">phpBB</a> &#169; 2000 - 2010 phpBB Group</div>
+<div class="copyright">Powered by <a href="http://www.phpbb.com/">phpBB</a></div>
 <!--
 	We request you retain the full copyright notice below, as well as in all templates you may use,
 	including the link to www.phpbb-seo.com.
