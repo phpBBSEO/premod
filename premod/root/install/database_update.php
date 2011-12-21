@@ -8,7 +8,7 @@
 *
 */
 
-define('UPDATES_TO_VERSION', '3.0.10-RC2');
+define('UPDATES_TO_VERSION', '3.0.10-RC3');
 
 // Enter any version to update from to test updates. The version within the db will not be updated.
 define('DEBUG_FROM_VERSION', false);
@@ -438,7 +438,7 @@ if ($debug_from_version === false)
 		WHERE config_name = 'version'";
 	_sql($sql, $errored, $error_ary);
 	// SEO premod
-	set_config('seo_premod_version', '3.0.10-RC2');
+	set_config('seo_premod_version', '3.0.10-RC3');
 }
 
 // Reset permissions
@@ -1004,7 +1004,8 @@ function database_update_info()
 		'3.0.9'			=> array(),
 		// No changes from 3.0.10-RC1 to 3.0.10-RC2
 		'3.0.10-RC1'	=> array(),
-
+		// No changes from 3.0.10-RC2 to 3.0.10-RC3
+		'3.0.10-RC2'	=> array(),
 
 		/** @todo DROP LOGIN_ATTEMPT_TABLE.attempt_id in 3.0.11-RC1 */
 	);
@@ -2035,6 +2036,10 @@ function change_database_data(&$no_updates, $version)
 
 		// No changes from 3.0.10-RC1 to 3.0.10-RC2
 		case '3.0.10-RC1':
+		break;
+
+		// No changes from 3.0.10-RC2 to 3.0.10-RC3
+		case '3.0.10-RC2':
 		break;
 	}
 }
