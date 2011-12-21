@@ -113,7 +113,7 @@ class install_install extends module
 				$db_tools = new phpbb_db_tools($db);
 				$db_tools->db->sql_return_on_error(true);
 				$db_tools->sql_column_add(TOPICS_TABLE, 'topic_url', array('VCHAR', ''));
-				set_config('seo_premod_version', '3.0.10-RC2');
+				set_config('seo_premod_version', '3.0.10-RC3');
 				// Remove the lock file
 				@unlink($phpbb_root_path . 'cache/install_lock');
 
