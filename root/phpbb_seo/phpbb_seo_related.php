@@ -20,7 +20,7 @@ if (!defined('IN_PHPBB')) {
 * @package phpBB SEO Related topics
 */
 class seo_related {
-	var $version = '0.2.4';
+	var $version = '0.2.6';
 	var $fulltext = true;
 	var $limit = 5;
 	var $allforums = false;
