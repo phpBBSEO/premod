@@ -113,15 +113,21 @@ unset($dbpasswd);
 // Grab global variables, re-cache if necessary
 $config = $cache->obtain_config();
 // www.phpBB-SEO.com SEO TOOLKIT BEGIN
-if (empty($phpbb_seo) ) {
-	require_once($phpbb_root_path . 'phpbb_seo/phpbb_seo_class.'.$phpEx);
+if (empty($phpbb_seo)) {
+	if (!class_exists('phpbb_seo' /*, false*/)) {
+		require($phpbb_root_path . 'phpbb_seo/phpbb_seo_class.'.$phpEx);
+	}
 	$phpbb_seo = new phpbb_seo();
 	@define('PHPBB_USE_BOARD_URL_PATH', true);
 }
 // www.phpBB-SEO.com SEO TOOLKIT END
 // www.phpBB-SEO.com SEO TOOLKIT BEGIN - META
-require_once($phpbb_root_path . 'phpbb_seo/phpbb_seo_meta.'.$phpEx);
-$seo_meta = new seo_meta();
+if (empty($seo_meta)) {
+	if (!class_exists('seo_meta' /*, false*/)) {
+		require($phpbb_root_path . 'phpbb_seo/phpbb_seo_meta.'.$phpEx);
+	}
+	$seo_meta = new seo_meta();
+}
 // www.phpBB-SEO.com SEO TOOLKIT END - META
 // Add own hook handler
 require($phpbb_root_path . 'includes/hooks/index.' . $phpEx);
