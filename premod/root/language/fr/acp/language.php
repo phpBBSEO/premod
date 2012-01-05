@@ -60,6 +60,7 @@ $lang = array_merge($lang, array(
 	'LANGUAGE_PACK_DELETED' 			=> 'Le pack de langue <strong>%s</strong> a été supprimé. La langue est désormais celle par défaut du forum pour les membres qui utilisaient ce pack.',
 	'LANGUAGE_PACK_DETAILS'				=> 'Informations du pack',
 	'LANGUAGE_PACK_INSTALLED'			=> 'Le pack de langue <strong>%s</strong> a été installé.',
+	'LANGUAGE_PACK_CPF_UPDATE' 			=> 'Les chaînes de caractères pour la langue des champs de profil personnalisés ont été copiées depuis la langue par défaut. Modifiez-les si nécessaire.',
 	'LANGUAGE_PACK_ISO'					=> 'ISO',
 	'LANGUAGE_PACK_LOCALNAME'			=> 'Nom local',
 	'LANGUAGE_PACK_NAME'				=> 'Nom',

@@ -54,7 +54,7 @@ $lang = array_merge($lang, array(
 	'SYSTEM_TIMEZONE'				=> 'Fuseau horaire des invités',
 	'SYSTEM_TIMEZONE_EXPLAIN'		=> 'Fuseau horaire à utiliser pour l’affichage des heures quand les utilisateurs ne sont pas connectés (visiteurs, robots). Les membres le définissent pendant leur inscription et peuvent le changer dans leur panneau de l’utilisateur.',
 	'WARNINGS_EXPIRE'				=> 'Durée de l’avertissement',
-	'WARNINGS_EXPIRE_EXPLAIN'		=> 'Nombre de jours qui s’écoulera avant que l’avertissement expire automatiquement.',
+	'WARNINGS_EXPIRE_EXPLAIN'		=> 'Nombre de jours qui s’écoulera avant que l’avertissement n’expire automatiquement. Mettre “0” pour que l’avertissement soit permanent.',
 ));
 
 // Board Features
@@ -152,7 +152,7 @@ $lang = array_merge($lang, array(
 	'ALLOW_POST_FLASH_EXPLAIN'			=> 'Si désactivé, le BBCode <code>[FLASH]</code> sera désactivé. Autrement, le système de permission déterminera les membres pouvant utiliser le BBCode <code>[FLASH]</code>.',
 
 	'BUMP_INTERVAL'					=> 'Intervalle de remontée de sujet',
-	'BUMP_INTERVAL_EXPLAIN'			=> 'Nombre des minutes, d’heures, ou de jours entre la date du dernier message et la possibilité de remonter le sujet. Mettre “0” pour désactiver complètement la remontée des sujets.',
+	'BUMP_INTERVAL_EXPLAIN'			=> 'Nombre de minutes, d’heures, ou de jours entre la date du dernier message et la possibilité de remonter le sujet. Mettre “0” pour désactiver complètement la remontée des sujets.',
 	'CHAR_LIMIT'					=> 'Nombre maximum de caractères par message',
 	'CHAR_LIMIT_EXPLAIN'			=> 'Le nombre de caractères autorisés dans un message. Mettre “0” pour illimité.',
 	'DELETE_TIME'					=> 'Limiter le temps de suppression',
@@ -175,7 +175,7 @@ $lang = array_merge($lang, array(
 	'MAX_POST_URLS'					=> 'Nombre maximum de liens',
 	'MAX_POST_URLS_EXPLAIN'			=> 'Nombre maximum de liens dans un message. Mettre “0” pour illimité.',
 	'MIN_CHAR_LIMIT'				=> 'Nombre minimum de caractères par message',
-	'MIN_CHAR_LIMIT_EXPLAIN'		=> 'Nombre minimum de caractères qu’un utilisateur a besoin de taper dans un message/message privé',
+	'MIN_CHAR_LIMIT_EXPLAIN'		=> 'Nombre minimum de caractères que l’utilisateur doit entrer dans un message/message privé. Le minimum pour ce paramètre est “1”.',
 	'POSTING'						=> 'Publication',
 	'POSTS_PER_PAGE'				=> 'Messages par page',
 	'QUOTE_DEPTH_LIMIT'				=> 'Nombre maximum de citations imbriquées',
@@ -235,13 +235,13 @@ $lang = array_merge($lang, array(
 	'REG_LIMIT'					=> 'Tentatives d’inscription',
 	'REG_LIMIT_EXPLAIN'			=> 'Nombre de tentatives que les utilisateurs pourront faire dans la saisie du code de confirmation avant que leur session n’expire.',
 	'USERNAME_ALPHA_ONLY'		=> 'Alphanumériques seulement',
-	'USERNAME_ALPHA_SPACERS'	=> 'Alphanumériques et espaces',
+	'USERNAME_ALPHA_SPACERS'	=> 'Alphanumériques et séparateurs',
 	'USERNAME_ASCII'			=> 'ASCII (aucun caractère unicode international)',
 	'USERNAME_LETTER_NUM'		=> 'Tous chiffres et lettres',
-	'USERNAME_LETTER_NUM_SPACERS'	=> 'Tous chiffres, lettres et espaces',
-	'USERNAME_CHARS'			=> 'Limite des caractéres du nom d’utilisateur',
-	'USERNAME_CHARS_ANY'		=> 'N’importe quel caractère',
-	'USERNAME_CHARS_EXPLAIN'	=> 'Restreint du type de caractères qui peut être utilisé dans les noms d’utilisateur, les espaces comprennent: espace, -, +, _, [ et ].',
+	'USERNAME_LETTER_NUM_SPACERS'	=> 'Tous chiffres, lettres et séparateurs',
+	'USERNAME_CHARS'			=> 'Limiter les caractères du nom d’utilisateur',
+	'USERNAME_CHARS_ANY'		=> 'N’importe quels caractères',
+	'USERNAME_CHARS_EXPLAIN'	=> 'Restreindre le type de caractères autorisé dans le nom d’utilisateur. Les séparateurs comprennent: espace, -, +, _, [ et ].',
 	'USERNAME_LENGTH'			=> 'Longueur du nom d’utilisateur',
 	'USERNAME_LENGTH_EXPLAIN'	=> 'Nombre de caractères minimum et maximum dans les noms d’utilisateur.',
 ));

@@ -74,7 +74,7 @@ $lang = array_merge($lang, array(
 	'ENABLE_TOPIC_ICONS'			=> 'Activer les icônes des sujets',
 
 	'FORUM_ADMIN'						=> 'Administration des forums',
-	'FORUM_ADMIN_EXPLAIN'				=> 'Dans phpBB3 les catégories n’existent plus, tout est basé sur la notion de forum. Chaque forum peut contenir un nombre illimité de sous-forums et vous pouvez déterminer s’ils peuvent contenir ou non des messages (c’est-à-dire se comporter ou non comme une ancienne catégorie). Vous pouvez individuellement ajouter, modifier, supprimer, verrouiller, déverrouiller des forums et régler certains paramètres. Si des sujets et des messages se désynchronisent vous pouvez également re-synchroniser un forum. <strong>Vous devez copier ou régler les permissions appropriées pour les nouveaux forums créés, afin qu’ils soient visibles.</strong>',
+	'FORUM_ADMIN_EXPLAIN'				=> 'Dans phpBB3 tout est basé sur la notion de forum. Une catégorie est juste un type spécial de forum. Chaque forum peut contenir un nombre illimité de sous-forums et vous pouvez déterminer s’ils peuvent contenir ou non des messages (c’est-à-dire se comporter ou non comme une ancienne catégorie). Vous pouvez individuellement ajouter, modifier, supprimer, verrouiller, déverrouiller des forums et régler certains paramètres. Si des sujets et des messages se désynchronisent vous pouvez également re-synchroniser un forum. <strong>Vous devez copier ou régler les permissions appropriées pour les nouveaux forums créés, afin qu’ils soient visibles.</strong>',
 	'FORUM_AUTO_PRUNE'					=> 'Activer l’auto-délestage',
 	'FORUM_AUTO_PRUNE_EXPLAIN'			=> 'Déleste le forum des sujets, réglez les paramètres de fréquence/ancienneté ci-dessous.',
 	'FORUM_CREATED'						=> 'Le forum a été créé.',

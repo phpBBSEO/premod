@@ -5,7 +5,7 @@
 * translated originally by PhpBB-fr.com <http://www.phpbb-fr.com/> and phpBB.biz <http://www.phpBB.biz>
 *
 * @package language
-* @version $Id: help_faq.php, v1.27 2010/11/22 10:49:00 Lolovoisin Exp $
+* @version $Id: help_faq.php, v1.27 14:00 17/07/2011 Lolovoisin Exp $
 * @copyright (c) 2005 phpBB Group 
 * @license http://opensource.org/licenses/gpl-license.php GNU Public License 
 *
@@ -38,7 +38,7 @@ $help = array(
 	),
 	array(
 		0 => 'Pourquoi ne puis-je pas me connecter?',
-		1 => 'Plusieurs raisons peuvent expliquer cela. Premièrement, vérifiez que vos nom d’utilisateur et mot de passe sont corrects. S’ils le sont, contactez l’administrateur pour vérifier que vous n’avez pas été banni. Il est possible aussi que l’administrateur ait une erreur de configuration de son côté, et qu’il soit nécessaire de la corriger.'
+		1 => 'Plusieurs raisons peuvent expliquer cela. Premièrement, vérifiez que votre nom d’utilisateur et/ou votre mot de passe sont corrects. S’ils le sont, contactez l’administrateur pour vérifier que vous n’avez pas été banni. Il est possible aussi que l’administrateur ait une erreur de configuration de son côté, et qu’il soit nécessaire de la corriger.'
 	),
 	array(
 		0 => 'Pourquoi dois-je m’inscrire après tout?',
@@ -58,15 +58,15 @@ $help = array(
 	),
 	array(
 		0 => 'Je suis enregistré mais je ne peux pas me connecter!',
-		1 => 'Vérifiez, en premier, vos nom d’utilisateur et mot de passe. S’ils sont corrects, il y a deux possibilités. Si la gestion COPPA est active et si vous avez indiqué avoir moins de 13 ans lors de l’inscription, vous devrez alors suivre les instructions reçues. Certains forums nécessitent que toute nouvelle inscription soit activée par vous-même ou par l’administrateur avant que vous puissiez vous connecter. Cette information est indiquée lors de l’inscription. Si vous avez reçu un e-mail, suivez ses instructions. Si vous n’avez pas reçu d’e-mail, il se peut que vous ayez fourni une adresse incorrecte ou que l’e-mail ait été traité par un filtre anti-spam. Si vous êtes sûr de l’adresse e-mail fournie, contactez l’administrateur.'
+		1 => 'Vérifiez, en premier, votre nom d’utilisateur et/ou votre mot de passe. Si ils sont corrects, il y a deux possibilités. Si la gestion COPPA est active et si vous avez indiqué avoir moins de 13 ans lors de l’inscription, vous devrez alors suivre les instructions reçues. Certains forums nécessitent que toute nouvelle inscription soit activée par vous-même ou par l’administrateur avant que vous puissiez vous connecter. Cette information est indiquée lors de l’inscription. Si vous avez reçu un e-mail, suivez ses instructions. Si vous n’avez pas reçu d’e-mail, il se peut que vous ayez fourni une adresse incorrecte ou que l’e-mail ait été traité par un filtre anti-spam. Si vous êtes sûr de l’adresse e-mail fournie, contactez l’administrateur.'
 	),
 	array(
 		0 => 'Je me suis enregistré par le passé mais je ne peux plus me connecter?!',
-		1 => 'Commencez par vérifier vos nom d’utilisateur et mot de passe dans l’e-mail reçu lors de votre inscription et réessayez. Il est possible aussi que l’administrateur ait supprimé ou désactivé votre compte. En effet, il est courant de supprimer régulièrement les utilisateurs ne postant pas pour réduire la taille de la base de données. Si cela vous arrive, tentez de vous réinscrire et soyez plus investi dans le forum.'
+		1 => 'Il est possible que l’administrateur ait supprimé ou désactivé votre compte. En effet, il est courant de supprimer régulièrement les utilisateurs ne postant pas pour réduire la taille de la base de données. Si cela vous arrive, tentez de vous réinscrire et soyez plus investi sur le forum.'
 	),
 	array(
 		0 => 'Que signifie COPPA?',
-		1 => 'COPPA (ou <em>Child Online Privacy and Protection Act</em> de 1998) est une loi aux Etats-Unis qui dit que les sites Internet pouvant recueillir des informations de mineurs de moins de 13 ans doivent obtenir le consentement <strong>écrit</strong> des parents (ou d’un tuteur légal) pour la collecte de ces informations permettant d’identifier un mineur de moins de 13 ans. Si vous n’êtes pas sûr que cela s’applique à vous, lorsque vous vous inscrivez, ou au site Internet auquel vous tentez de vous inscrire, demandez une assistance légale. Notez que l’équipe du forum ne peut pas fournir de conseil légal et ne saurait être contactée pour des questions légales de toute sorte, à l’exception de celles soulignées ci-dessous.',
+		1 => 'COPPA (ou <em>Child Online Privacy and Protection Act</em> de 1998) est une loi aux Etats-Unis qui dit que les sites Internet pouvant recueillir des informations de mineurs de moins de 13 ans doivent obtenir le consentement <strong>écrit</strong> des parents (ou d’un tuteur légal) pour la collecte de ces informations permettant d’identifier un mineur de moins de 13 ans. Si vous n’êtes pas sûr que cela s’applique à vous, lorsque vous vous inscrivez, ou au site Internet auquel vous tentez de vous inscrire, demandez une assistance légale. Notez que l’équipe du forum ne peut pas fournir de conseils légaux et ne saurait être contactée pour des questions légales de toute sorte, à l’exception de celles soulignées ci-dessous.',
 	),
 	array(
 		0 => 'Pourquoi ne puis-je pas m’inscrire?',

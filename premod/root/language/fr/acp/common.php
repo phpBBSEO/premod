@@ -239,7 +239,7 @@ $lang = array_merge($lang, array(
 	'EXPORT_DOWNLOAD'		=> 'Téléchargement',
 	'EXPORT_STORE'			=> 'Stockage',
 	
-	'FILES_GONE'      		=> 'Certains des fichiers joints que vous avez sélectionné n’existent pas. ils ont peut être déjà été effacés. Les fichiers joints existants vont être effacés.',
+	'FILES_GONE'      		=> 'Certains des fichiers joints que vous avez sélectionnés n’existent pas. Ils ont peut-être déjà été effacés. Les fichiers joints existants vont être effacés.',
 	'FILES_STATS_WRONG'    	=> 'Les fichiers de statistiques sont probablement inexacts et doivent être resynchronisés. Valeurs actuelles: nombre de fichiers joints = %1$d, taille totale des fichiers joints = %2$s.',
 	
 	'GENERAL_OPTIONS'		=> 'Options générales',
@@ -266,7 +266,7 @@ $lang = array_merge($lang, array(
 
 	'NOTIFY'				=> 'Notification',
 	'NO_ADMIN'				=> 'Vous n’êtes pas autorisé à administrer ce forum.',
-	'NO_EMAILS_DEFINED'		=> 'Aucun e-mail valide indiquée.',
+	'NO_EMAILS_DEFINED'		=> 'Aucun e-mail valide indiqué.',
 	'NO_FILES_TO_DELETE' 	=> 'les fichiers joints sélectionnés pour la suppression n’existent pas.',
 	'NO_PASSWORD_SUPPLIED'	=> 'Vous devez indiquer votre mot de passe pour accéder au panneau d’administration',	
 
@@ -324,7 +324,7 @@ $lang = array_merge($lang, array(
 
 	'NO_ENTRIES'	=> 'Aucune entrée pour la période indiquée',
 
-	'SORT_IP'		=> 'Addresse IP',
+	'SORT_IP'		=> 'Adresse IP',
 	'SORT_DATE'		=> 'Date',
 	'SORT_ACTION'	=> 'Action enregistrée',
 ));
@@ -341,6 +341,16 @@ $lang = array_merge($lang, array(
 
 	'DATABASE_SERVER_INFO'	=> 'Serveur de base de données',
 	'DATABASE_SIZE'			=> 'Taille de la base de données',
+
+	// Enviroment configuration checks, mbstring related
+	'ERROR_MBSTRING_FUNC_OVERLOAD'					=> 'La fonction de surchage n’est pas configurée correctement',
+	'ERROR_MBSTRING_FUNC_OVERLOAD_EXPLAIN'			=> '<var>mbstring.func_overload</var> doit être configuré sur 0 ou 4. Vous pouvez vérifier la valeur actuelle dans la page <samp>Informations PHP</samp>.',
+	'ERROR_MBSTRING_ENCODING_TRANSLATION'			=> 'Les caractères d’encodage transparent ne sont pas configurés correctement',
+	'ERROR_MBSTRING_ENCODING_TRANSLATION_EXPLAIN'	=> '<var>mbstring.encoding_translation</var> doit être configuré sur 0. Vous pouvez vérifier la valeur actuelle dans la page <samp>Informations PHP</samp>.',
+	'ERROR_MBSTRING_HTTP_INPUT'						=> 'La conversion des caractères d’entrée HTTP n’est pas configurée correctement',
+	'ERROR_MBSTRING_HTTP_INPUT_EXPLAIN'				=> '<var>mbstring.http_input</var> doit être configuré sur <samp>pass</samp>. Vous pouvez vérifier la valeur actuelle dans la page <samp>Informations PHP</samp>.',
+	'ERROR_MBSTRING_HTTP_OUTPUT'					=> 'La conversion des caractères de sortie HTTP n’est pas configurée correctement',
+	'ERROR_MBSTRING_HTTP_OUTPUT_EXPLAIN'			=> '<var>mbstring.http_output</var> doit être configuré sur <samp>pass</samp>. Vous pouvez vérifier la valeur actuelle dans la page <samp>Informations PHP</samp>.',
 
 	'FILES_PER_DAY'		=> 'Moyenne journalière de fichiers joints',
 	'FORUM_STATS'		=> 'Statistiques du forum',
@@ -370,12 +380,12 @@ $lang = array_merge($lang, array(
 	'RESET_ONLINE'					=> 'Réinitialiser le record des utilisateurs connectés',
 	'RESET_ONLINE_CONFIRM'			=> 'Êtes-vous sûr de vouloir réinitialiser le record des utilisateurs connectés?',
 	'RESYNC_FILES_STATS_CONFIRM'  	=> 'Êtes-vous sûr de vouloir resynchroniser les fichiers de statistiques?',
-	'RESYNC_POSTCOUNTS'				=> 'Resynchroniser les compteurs de message',
+	'RESYNC_POSTCOUNTS'				=> 'Resynchroniser les compteurs de messages',
 	'RESYNC_POSTCOUNTS_EXPLAIN'		=> 'Seuls les messages existants seront pris en compte. Les messages délestés ne seront pas pris en compte.',
 	'RESYNC_POSTCOUNTS_CONFIRM'		=> 'Êtes-vous sûr de vouloir resynchroniser les compteurs de message d’utilisateur?',
 	'RESYNC_POST_MARKING'			=> 'Resynchroniser les sujets pointés',
 	'RESYNC_POST_MARKING_CONFIRM'	=> 'Êtes-vous sûr de vouloir resynchroniser les sujets pointés?',
-	'RESYNC_POST_MARKING_EXPLAIN'	=> 'Décoche tous les sujets et coche correctement les sujets ayant eus une activité durant les six derniers mois.',
+	'RESYNC_POST_MARKING_EXPLAIN'	=> 'Décoche tous les sujets et coche correctement les sujets ayant eu une activité durant les six derniers mois.',
 	'RESYNC_STATS'					=> 'Resynchroniser les statistiques',
 	'RESYNC_STATS_CONFIRM'			=> 'Êtes-vous sûr de vouloir resynchroniser les statistiques?',
 	'RESYNC_STATS_EXPLAIN'			=> 'Recalcule le nombre total de messages, sujets, utilisateurs et fichiers joints.',
@@ -542,7 +552,7 @@ $lang = array_merge($lang, array(
 
 	'LOG_TOPIC_APPROVED'		=> '<strong>Approbation d’un sujet</strong><br />» %s',
 	'LOG_TOPIC_DISAPPROVED'		=> '<strong>Refus d’un sujet “%1$s” pour la raison suivante</strong><br />%2$s',
-	'LOG_TOPIC_RESYNC'			=> '<strong>Compteurs de message synchronisés</strong><br />» %s',
+	'LOG_TOPIC_RESYNC'			=> '<strong>Compteurs de messages synchronisés</strong><br />» %s',
 	'LOG_TOPIC_TYPE_CHANGED'	=> '<strong>Modification du type de sujet</strong><br />» %s',
 	'LOG_UNLOCK'				=> '<strong>Déverrouillage d’un sujet</strong><br />» %s',
 	'LOG_UNLOCK_POST'			=> '<strong>Déverrouillage d’un message</strong><br />» %s',
@@ -562,7 +572,7 @@ $lang = array_merge($lang, array(
 	'LOG_ERROR_EMAIL'		=> '<strong>Erreur d’e-mail</strong><br />» %s',
 	
 	'LOG_FORUM_ADD'							=> '<strong>Création d’un nouveau forum</strong><br />» %s',
-	'LOG_FORUM_COPIED_PERMISSIONS'			=> '<strong>Copie de permissions de forum</strong> from %1$s<br />» %2$s',
+	'LOG_FORUM_COPIED_PERMISSIONS'			=> '<strong>Copie des permissions de forum</strong> depuis %1$s<br />» %2$s',
 	'LOG_FORUM_DEL_FORUM'					=> '<strong>Suppression d’un forum</strong><br />» %s',
 	'LOG_FORUM_DEL_FORUMS'					=> '<strong>Suppression d’un forum et de ses sous-forums</strong><br />» %s',
 	'LOG_FORUM_DEL_MOVE_FORUMS'				=> '<strong>Suppression d’un forum et sous-forums déplacés</strong> vers %1$s<br />» %2$s',
@@ -573,8 +583,8 @@ $lang = array_merge($lang, array(
 	'LOG_FORUM_DEL_POSTS_FORUMS'			=> '<strong>Suppression d’un forum, de ses messages et de ses sous-forums</strong><br />» %s',
 	'LOG_FORUM_DEL_POSTS_MOVE_FORUMS'		=> '<strong>Suppression d’un forum et de ses messages, sous-forums déplacés</strong> vers %1$s<br />» %2$s',
 	'LOG_FORUM_EDIT'						=> '<strong>Modification d’un forum</strong><br />» %s',
-	'LOG_FORUM_MOVE_DOWN'					=> '<strong>Déplacement d’un forum</strong> %1$s <strong>en dessous de</strong> %2$s',
-	'LOG_FORUM_MOVE_UP'						=> '<strong>Déplacement d’un forum</strong> %1$s <strong>au dessus de</strong> %2$s',
+	'LOG_FORUM_MOVE_DOWN'					=> '<strong>Déplacement d’un forum</strong> %1$s <strong>en-dessous de</strong> %2$s',
+	'LOG_FORUM_MOVE_UP'						=> '<strong>Déplacement d’un forum</strong> %1$s <strong>au-dessus de</strong> %2$s',
 	'LOG_FORUM_SYNC'						=> '<strong>Resynchronisation d’un forum</strong><br />» %s',
 	
 	'LOG_GENERAL_ERROR'	=> '<strong>Une erreur générale a été rencontrée</strong>: %1$s <br />» %2$s',
@@ -628,8 +638,8 @@ $lang = array_merge($lang, array(
 
 	'LOG_MODULE_DISABLE'	=> '<strong>Désactivation d’un module</strong><br />» %s',
 	'LOG_MODULE_ENABLE'		=> '<strong>Activation d’un module</strong><br />» %s',
-	'LOG_MODULE_MOVE_DOWN'	=> '<strong>Déplacement d’un module</strong><br />» %1$s au dessous de %2$s',
-	'LOG_MODULE_MOVE_UP'	=> '<strong>Déplacement d’un module</strong><br />» %1$s au dessus de %2$s',
+	'LOG_MODULE_MOVE_DOWN'	=> '<strong>Déplacement d’un module</strong><br />» %1$s au-dessous de %2$s',
+	'LOG_MODULE_MOVE_UP'	=> '<strong>Déplacement d’un module</strong><br />» %1$s au-dessus de %2$s',
 	'LOG_MODULE_REMOVED'	=> '<strong>Suppression d’un module</strong><br />» %s',
 	'LOG_MODULE_ADD'		=> '<strong>Ajout d’un module</strong><br />» %s',
 	'LOG_MODULE_EDIT'		=> '<strong>Modification d’un module</strong><br />» %s',
@@ -653,18 +663,18 @@ $lang = array_merge($lang, array(
 	'LOG_PROFILE_FIELD_EDIT'		=> '<strong>Modification d’un champ de profil</strong><br />» %s',
 	'LOG_PROFILE_FIELD_REMOVED'		=> '<strong>Suppression d’un champ de profil</strong><br />» %s',
 
-	'LOG_PRUNE'					=> '<strong>Déléstage d’un forum</strong><br />» %s',
-	'LOG_AUTO_PRUNE'			=> '<strong>Auto-déléstage d’un forum</strong><br />» %s',
+	'LOG_PRUNE'					=> '<strong>Délestage d’un forum</strong><br />» %s',
+	'LOG_AUTO_PRUNE'			=> '<strong>Auto-délestage d’un forum</strong><br />» %s',
 	'LOG_PRUNE_USER_DEAC'		=> '<strong>Désactivation de l’utilisateur</strong><br />» %s',
-	'LOG_PRUNE_USER_DEL_DEL'	=> '<strong>Déléstage d’utilisateurs et suppression de leurs messages</strong><br />» %s',
-	'LOG_PRUNE_USER_DEL_ANON'	=> '<strong>Déléstage d’utilisateurs et conservation de leurs messages</strong><br />» %s',
+	'LOG_PRUNE_USER_DEL_DEL'	=> '<strong>Délestage d’utilisateurs et suppression de leurs messages</strong><br />» %s',
+	'LOG_PRUNE_USER_DEL_ANON'	=> '<strong>Délestage d’utilisateurs et conservation de leurs messages</strong><br />» %s',
 
 	'LOG_PURGE_CACHE'			=> '<strong>Vidage du cache</strong>',
 	'LOG_PURGE_SESSIONS'		=> '<strong>Vidage des sessions</strong>',
 
 	'LOG_RANK_ADDED'		=> '<strong>Ajout d’un nouveau rang</strong><br />» %s',
 	'LOG_RANK_REMOVED'		=> '<strong>Suppression d’un rang</strong><br />» %s',
-	'LOG_RANK_UPDATED'		=> '<strong>Mis à jour d’un rang</strong><br />» %s',
+	'LOG_RANK_UPDATED'		=> '<strong>Mise à jour d’un rang</strong><br />» %s',
 
 	'LOG_REASON_ADDED'		=> '<strong>Ajout d’un rapport/raison</strong><br />» %s',
 	'LOG_REASON_REMOVED'	=> '<strong>Suppression d’un rapport/raison</strong><br />» %s',
@@ -674,7 +684,7 @@ $lang = array_merge($lang, array(
 	'LOG_RESET_DATE'			=> '<strong>Réinitialisation de la date d’ouverture du forum</strong>',
 	'LOG_RESET_ONLINE'			=> '<strong>Réinitialisation du record des utilisateurs connectés</strong>',
 	'LOG_RESYNC_FILES_STATS'  	=> '<strong>Synchronisation des fichiers de statistiques</strong>',
-	'LOG_RESYNC_POSTCOUNTS'		=> '<strong>Synchronisation des compteurs de message d’utilisateur</strong>',
+	'LOG_RESYNC_POSTCOUNTS'		=> '<strong>Synchronisation des compteurs de messages d’utilisateur</strong>',
 	'LOG_RESYNC_POST_MARKING'	=> '<strong>Synchronisation des sujets pointés</strong>',
 	'LOG_RESYNC_STATS'			=> '<strong>Synchronisation des statistiques de message, sujet et utilisateur</strong>',
 
@@ -686,22 +696,22 @@ $lang = array_merge($lang, array(
 	'LOG_STYLE_EXPORT'			=> '<strong>Export d’un style</strong><br />» %s',
 
 	'LOG_TEMPLATE_ADD_DB'			=> '<strong>Ajout d’un pack de template à la base de données</strong><br />» %s',
-	'LOG_TEMPLATE_ADD_FS'			=> '<strong>Ajout d’un pack de template au système de fichier</strong><br />» %s',
+	'LOG_TEMPLATE_ADD_FS'			=> '<strong>Ajout d’un pack de template au système de fichiers</strong><br />» %s',
 	'LOG_TEMPLATE_CACHE_CLEARED'	=> '<strong>Suppression du cache des fichiers d’un template <em>%1$s</em></strong><br />» %2$s',
 	'LOG_TEMPLATE_DELETE'			=> '<strong>Suppression d’un pack de template</strong><br />» %s',
 	'LOG_TEMPLATE_EDIT'				=> '<strong>Modification d’un pack de template <em>%1$s</em></strong><br />» %2$s',
 	'LOG_TEMPLATE_EDIT_DETAILS'		=> '<strong>Modification des informations d’un pack de template</strong><br />» %s',
 	'LOG_TEMPLATE_EXPORT'			=> '<strong>Export d’un pack de template</strong><br />» %s',
-	'LOG_TEMPLATE_REFRESHED'		=> '<strong>Rafraichissement d’un pack de template</strong><br />» %s',
+	'LOG_TEMPLATE_REFRESHED'		=> '<strong>Rafraîchissement d’un pack de template</strong><br />» %s',
 
 	'LOG_THEME_ADD_DB'			=> '<strong>Ajout d’un nouveau thème à la base de données</strong><br />» %s',
-	'LOG_THEME_ADD_FS'			=> '<strong>Ajout d’un nouveau thème au système de fichier</strong><br />» %s',
+	'LOG_THEME_ADD_FS'			=> '<strong>Ajout d’un nouveau thème au système de fichiers</strong><br />» %s',
 	'LOG_THEME_DELETE'			=> '<strong>Suppression d’un thème</strong><br />» %s',
 	'LOG_THEME_EDIT_DETAILS'	=> '<strong>Modification des informations d’un thème</strong><br />» %s',
 	'LOG_THEME_EDIT'			=> '<strong>Modification d’un thème <em>%1$s</em></strong>',
 	'LOG_THEME_EDIT_FILE'		=> '<strong>Modification d’un thème <em>%1$s</em></strong><br />» modification d’un fichier <em>%2$s</em>',
 	'LOG_THEME_EXPORT'			=> '<strong>Export d’un thème</strong><br />» %s',
-	'LOG_THEME_REFRESHED'		=> '<strong>Rafraichissement d’un thème</strong><br />» %s',
+	'LOG_THEME_REFRESHED'		=> '<strong>Rafraîchissement d’un thème</strong><br />» %s',
 
 	'LOG_UPDATE_DATABASE'	=> '<strong>Mise à jour de la base de données de la version %1$s à la version %2$s</strong>',
 	'LOG_UPDATE_PHPBB'		=> '<strong>Mise à jour de phpBB de la version %1$s à la version %2$s</strong>',
@@ -720,7 +730,7 @@ $lang = array_merge($lang, array(
 	'LOG_USER_MOVE_POSTS'	=> '<strong>Déplacement des messages de </strong><br />» “%1$s” vers le forum “%2$s”',
 	'LOG_USER_NEW_PASSWORD'	=> '<strong>Modification du mot de passe de l’utilisateur</strong><br />» %s',
 	'LOG_USER_REACTIVATE'	=> '<strong>Réactivation forcée du compte de l’utilisateur</strong><br />» %s',
-	'LOG_USER_REMOVED_NR'	=> '<strong>Suppression du status “nouvel inscrit” pour un utlisateur</strong><br />» %s',
+	'LOG_USER_REMOVED_NR'	=> '<strong>Suppression du statut “nouvel inscrit” pour un utilisateur</strong><br />» %s',
 	'LOG_USER_UPDATE_EMAIL'	=> '<strong>Modification de l’e-mail de l’utilisateur “%1$s” </strong><br />» de “%2$s” à “%3$s”',
 	'LOG_USER_UPDATE_NAME'	=> '<strong>Modification d’un nom d’utilisateur</strong><br />» de “%1$s” à “%2$s”',
 	'LOG_USER_USER_UPDATE'	=> '<strong>Mise à jour des informations de l’utilisateur</strong><br />» %s',
@@ -742,10 +752,10 @@ $lang = array_merge($lang, array(
 	'LOG_USER_GROUP_DEMOTE'			=> '<strong>Rétrogradation du chef d’un groupe d’utilisateurs</strong><br />» %s',
 	'LOG_USER_GROUP_JOIN'			=> '<strong>Adhésion à un groupe de l’utilisateur</strong><br />» %s',
 	'LOG_USER_GROUP_JOIN_PENDING'	=> '<strong>Adhésion à un groupe de l’utilisateur et demande d’approbation</strong><br />» %s',
-	'LOG_USER_GROUP_RESIGN'			=> '<strong>Désinscription à un groupe de l’utilisateur</strong><br />» %s',
-	'LOG_WARNING_DELETED'		=> '<strong>Suppresion de lavertissement de l’utilisateur</strong><br />» %s',
+	'LOG_USER_GROUP_RESIGN'			=> '<strong>Désinscription d’un groupe de l’utilisateur</strong><br />» %s',
+	'LOG_WARNING_DELETED'		=> '<strong>Suppression de l’avertissement de l’utilisateur</strong><br />» %s',
 	'LOG_WARNINGS_DELETED'		=> '<strong>Suppression de %2$s avertissements de l’utilisateur</strong><br />» %1$s', // Example: '<strong>Deleted 2 user warnings</strong><br />» username'
-	'LOG_WARNINGS_DELETED_ALL'	=> '<strong>Suppression de tous les avertissement de l’utilisateur</strong><br />» %s',
+	'LOG_WARNINGS_DELETED_ALL'	=> '<strong>Suppression de tous les avertissements de l’utilisateur</strong><br />» %s',
 
 	'LOG_WORD_ADD'			=> '<strong>Ajout d’un mot censuré</strong><br />» %s',
 	'LOG_WORD_DELETE'		=> '<strong>Suppression d’un mot censuré</strong><br />» %s',

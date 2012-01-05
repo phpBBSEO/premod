@@ -49,7 +49,7 @@ $lang = array_merge($lang, array(
 	'BBCODE_A_HELP'				=> 'Fichier joint chargé en ligne: [attachment=]nom_du_fichier.ext[/attachment]',
 	'BBCODE_B_HELP'				=> 'Texte gras: [b]texte[/b]',
 	'BBCODE_C_HELP'				=> 'Code: [code]code[/code]',
-	'BBCODE_E_HELP'				=> 'Liste: Ajouter une liste d’éléments',
+	'BBCODE_D_HELP'				=> 'Flash: [flash=largeur,hauteur]http://url[/flash]',
 	'BBCODE_F_HELP'				=> 'Taille de la police: [size=85]petit texte[/size]',
 	'BBCODE_IS_OFF'				=> 'Les %sBBCodes%s sont <em>désactivés</em>',
 	'BBCODE_IS_ON'				=> 'Les %sBBCodes%s sont <em>activés</em>',
@@ -62,7 +62,7 @@ $lang = array_merge($lang, array(
 	'BBCODE_S_HELP'				=> 'Couleur de la police: [color=red]texte[/color] Astuce : vous pouvez également utiliser color=#FF0000',
 	'BBCODE_U_HELP'				=> 'Texte souligné: [u]texte[/u]',
 	'BBCODE_W_HELP'				=> 'Insérer un lien: [url]http://url[/url] ou [url=http://url]texte descriptif[/url]',
-	'BBCODE_D_HELP'				=> 'Flash: [flash=largeur,hauteur]http://flash_url[/flash]',
+	'BBCODE_Y_HELP'				=> 'Liste: Ajouter une liste d’éléments',
 	'BUMP_ERROR'				=> 'Vous ne pouvez pas faire remonter ce sujet aussitôt après l’ajout du dernier message.',
 
 	'CANNOT_DELETE_REPLIED'		=> 'Désolé, vous ne pouvez supprimer que les messages n’ayant reçu aucune réponse.',

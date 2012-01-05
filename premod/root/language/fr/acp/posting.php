@@ -205,8 +205,8 @@ $lang = array_merge($lang, array(
 
 	'WORD'				=> 'Mot',
 	'WORD_ADDED'		=> 'La censure a été ajoutée.',
-	'WORD_REMOVED'		=> 'La censure sélectionné a été supprimée.',
-	'WORD_UPDATED'		=> 'La censure sélectionné a été mise à jour.',
+	'WORD_REMOVED'		=> 'La censure sélectionnée a été supprimée.',
+	'WORD_UPDATED'		=> 'La censure sélectionnée a été mise à jour.',
 ));
 
 // Ranks
