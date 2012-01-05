@@ -42,7 +42,7 @@ $lang = array_merge($lang, array(
 	'ADD_MODULE_CONFIRM'			=> 'Êtes-vous sûr de vouloir ajouter le module sélectionné avec le mode sélectionné?',
 	'ADD_MODULE_TITLE'				=> 'Ajouter un module',
 
-	'CANNOT_REMOVE_MODULE'	=> 'Impossible de supprimer le module parent. Supprimez ou déplacer les modules enfants avant de tenter cette action.',
+	'CANNOT_REMOVE_MODULE'	=> 'Impossible de supprimer le module parent. Supprimez ou déplacez les sous-modules avant de tenter cette action.',
 	'CATEGORY'				=> 'Catégorie',
 	'CHOOSE_MODE'			=> 'Choisissez un mode de module',
 	'CHOOSE_MODE_EXPLAIN'	=> 'Indiquez le mode qui doit être utilisé.',
@@ -57,7 +57,7 @@ $lang = array_merge($lang, array(
 	'EDIT_MODULE'			=> 'Editer le module',
 	'EDIT_MODULE_EXPLAIN'	=> 'Vous pouvez entrer une configuration particulière au module.',
 
-	'HIDDEN_MODULE'			=> 'Cacher le module',
+	'HIDDEN_MODULE'			=> 'Module caché',
 
 	'MODULE'					=> 'Module',
 	'MODULE_ADDED'				=> 'Module ajouté.',
@@ -70,7 +70,7 @@ $lang = array_merge($lang, array(
 	'MODULE_LANGNAME_EXPLAIN'	=> 'Entrez le nom du module qui sera affiché. Utilisez la variable de langue si elle est définie dans le fichier de langue.',
 	'MODULE_TYPE'				=> 'Type de module',
 
-	'NO_CATEGORY_TO_MODULE'	=> 'Impossible de convertir la catégorie en module. Supprimez ou déplacer les modules enfants avant de tenter cette action.',
+	'NO_CATEGORY_TO_MODULE'	=> 'Impossible de convertir la catégorie en module. Supprimez ou déplacez les sous-modules avant de tenter cette action.',
 	'NO_MODULE'				=> 'Aucun module n’a été trouvé.',
 	'NO_MODULE_ID'			=> 'Aucune identification du module n’a été indiquée.',
 	'NO_MODULE_LANGNAME'	=> 'Aucun nom de module n’a été indiqué.',

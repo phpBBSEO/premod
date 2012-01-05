@@ -2,7 +2,7 @@ Subject: Sujet approuvé - {TOPIC_TITLE}
 
 Bonjour {USERNAME},
 
-Vous recevez cet e-mail car votre message "{TOPIC_TITLE}" sur "{SITENAME}" a été approuvé par un modérateur ou un administrateur.
+Vous recevez cet e-mail car votre sujet "{TOPIC_TITLE}" sur "{SITENAME}" a été approuvé par un modérateur ou un administrateur.
 
 Vous pouvez y accéder à partir du lien suivant:
 

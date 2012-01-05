@@ -37,7 +37,7 @@ if (empty($lang) || !is_array($lang))
 // in a url you again do not need to specify an order e.g., 'Click %sHERE%s' is fine
 
 $lang = array_merge($lang, array(
-	'ACP_GROUPS_MANAGE_EXPLAIN'		=> 'Depuis cet écran, vous pouvez gérer tous vos groupes d’utilisateurs. Vous pouvez supprimer, créer et éditer ceux existants. De plus, vous pouvez définir les chefs de groupes, leurs types, (ouvert, fermé, caché), le nom et la description du groupe.',
+	'ACP_GROUPS_MANAGE_EXPLAIN'		=> 'Depuis cet écran, vous pouvez gérer tous vos groupes d’utilisateurs. Vous pouvez supprimer, créer et éditer ceux existants. De plus, vous pouvez définir les chefs de groupes, leurs types (ouvert, fermé, caché), le nom et la description du groupe.',
 	'ADD_USERS'						=> 'Ajouter des utilisateurs',
 	'ADD_USERS_EXPLAIN'				=> 'Vous pouvez ajouter de nouveaux utilisateurs aux groupes. Vous pouvez également choisir que ce groupe sélectionné devienne le nouveau groupe par défaut pour les utilisateurs sélectionnés. Vous pouvez les définir comme chefs de groupe. Indiquez un nom d’utilisateur par ligne.',
 
@@ -54,8 +54,8 @@ $lang = array_merge($lang, array(
 	'GROUP_CLOSED'					=> 'Fermé',
 	'GROUP_COLOR'					=> 'Couleur du groupe',
 	'GROUP_COLOR_EXPLAIN'			=> 'Définit la couleur dans laquelle les noms d’utilisateur des membres apparaîtront, laissez cette case vide pour conserver les paramètres par défaut.',
-	'GROUP_CONFIRM_ADD_USER'		=> 'Êtes-vous sûr de voir ajouter l’utilisateur %1$s au groupe?',
-	'GROUP_CONFIRM_ADD_USERS'		=> 'Êtes-vous sûr de voir ajouter les utilisateurs %1$s au groupe?',
+	'GROUP_CONFIRM_ADD_USER'		=> 'Êtes-vous sûr de vouloir ajouter l’utilisateur %1$s au groupe?',
+	'GROUP_CONFIRM_ADD_USERS'		=> 'Êtes-vous sûr de vouloir ajouter les utilisateurs %1$s au groupe?',
 	'GROUP_CREATED'					=> 'Le groupe a été créé.',
 	'GROUP_DEFAULT'					=> 'Définir comme groupe par défaut',
 	'GROUP_DEFS_UPDATED'			=> 'Le groupe a été défini par défaut pour les utilisateurs sélectionnés.',

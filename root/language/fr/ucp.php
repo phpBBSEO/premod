@@ -137,6 +137,7 @@ $lang = array_merge($lang, array(
 	'CURRENT_IMAGE'   			=> 'Image actuelle',
 	'CURRENT_PASSWORD'   		=> 'Mot de passe actuel',
 	'CURRENT_PASSWORD_EXPLAIN'  => 'Vous ne devez confirmer votre mot de passe actuel que si vous désirez modifier votre mot de passe, e-mail ou nom d’utilisateur.',
+	'CUR_PASSWORD_EMPTY' 		=> 'Vous n’avez pas indiqué votre mot de passe actuel.',
 	'CUR_PASSWORD_ERROR'   		=> 'Le mot de passe actuel indiqué est incorrect.',
 	'CUSTOM_DATEFORMAT'   		=> 'Personnalisé…',
 
@@ -267,9 +268,11 @@ $lang = array_merge($lang, array(
 	'MOVE_TO_FOLDER'   				=> 'Déplacer vers le dossier',
 	'MOVE_UP'   					=> 'Monter',
 
+	'NEW_EMAIL_CONFIRM_EMPTY' 		=> 'Vous n’avez pas saisi la confirmation de l’adresse e-mail.',
 	'NEW_EMAIL_ERROR'   			=> 'Les adresses e-mails saisies ne concordent pas.',
 	'NEW_FOLDER_NAME'   			=> 'Nouveau nom de dossier',
 	'NEW_PASSWORD'   				=> 'Nouveau mot de passe',
+	'NEW_PASSWORD_CONFIRM_EMPTY' 	=> 'Vous n’avez pas saisi la confirmation du mot de passe.',
 	'NEW_PASSWORD_ERROR'   			=> 'Les mots de passe saisis ne concordent pas.',
 	'NOTIFY_METHOD'   				=> 'Méthode de notification',
 	'NOTIFY_METHOD_BOTH'   			=> 'Les deux',

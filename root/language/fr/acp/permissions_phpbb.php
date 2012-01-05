@@ -127,7 +127,7 @@ $lang = array_merge($lang, array(
 	'acl_u_pm_download'	=> array('lang'	=> 'Peut télécharger des fichiers', 'cat' => 'pm'),
 	'acl_u_pm_bbcode'	=> array('lang'	=> 'Peut utiliser des BBCodes', 'cat' => 'pm'),
 	'acl_u_pm_smilies'	=> array('lang'	=> 'Peut utiliser des smileys', 'cat' => 'pm'),
-	'acl_u_pm_img'	=> array('lang'	=> 'Peut utiliser le BBCode[img]', 'cat' => 'pm'),
+	'acl_u_pm_img'	=> array('lang'	=> 'Peut utiliser le BBCode [img]', 'cat' => 'pm'),
 	'acl_u_pm_flash'	=> array('lang'	=> 'Peut utiliser le BBCode [flash]', 'cat' => 'pm'),
 	
 	'acl_u_sendemail'	=> array('lang'	=> 'Peut envoyer des e-mails', 'cat' => 'misc'),
