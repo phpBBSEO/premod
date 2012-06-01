@@ -8,7 +8,7 @@
 *
 */
 
-define('UPDATES_TO_VERSION', '3.0.10');
+define('UPDATES_TO_VERSION', '3.0.11-RC1');
 
 // Enter any version to update from to test updates. The version within the db will not be updated.
 define('DEBUG_FROM_VERSION', false);
@@ -438,7 +438,7 @@ if ($debug_from_version === false)
 		WHERE config_name = 'version'";
 	_sql($sql, $errored, $error_ary);
 	// SEO premod
-	set_config('seo_premod_version', '3.0.10');
+	set_config('seo_premod_version', '3.0.11-RC1');
 }
 
 // Reset permissions
@@ -966,7 +966,7 @@ function database_update_info()
 						// this column was removed from the database updater
 						// after 3.0.9-RC3 was released. It might still exist
 						// in 3.0.9-RCX installations and has to be dropped in
-						// 3.0.11 after the db_tools class is capable of properly
+						// 3.0.12 after the db_tools class is capable of properly
 						// removing a primary key.
 						// 'attempt_id'			=> array('UINT', NULL, 'auto_increment'),
 						'attempt_ip'			=> array('VCHAR:40', ''),
@@ -1008,8 +1008,10 @@ function database_update_info()
 		'3.0.10-RC2'	=> array(),
 		// No changes from 3.0.10-RC3 to 3.0.10
 		'3.0.10-RC3'	=> array(),
+		// No changes from 3.0.10 to 3.0.11-RC1
+		'3.0.10'		=> array(),
 
-		/** @todo DROP LOGIN_ATTEMPT_TABLE.attempt_id in 3.0.11-RC1 */
+		/** @todo DROP LOGIN_ATTEMPT_TABLE.attempt_id in 3.0.12-RC1 */
 	);
 }
 
@@ -2046,6 +2048,70 @@ function change_database_data(&$no_updates, $version)
 
 		// No changes from 3.0.10-RC3 to 3.0.10
 		case '3.0.10-RC3':
+		break;
+
+		// Changes from 3.0.10 to 3.0.11-RC1
+		case '3.0.10':
+			// Updates users having current style a deactivated one
+			$sql = 'SELECT style_id
+				FROM ' . STYLES_TABLE . '
+				WHERE style_active = 0';
+			$result = $db->sql_query($sql);
+
+			$deactivated_style_ids = array();
+			while ($style_id = $db->sql_fetchfield('style_id', false, $result))
+			{
+				$deactivated_style_ids[] = (int) $style_id;
+			}
+			$db->sql_freeresult($result);
+
+			if (!empty($deactivated_style_ids))
+			{
+				$sql = 'UPDATE ' . USERS_TABLE . '
+					SET user_style = ' . (int) $config['default_style'] .'
+					WHERE ' . $db->sql_in_set('user_style', $deactivated_style_ids);
+				_sql($sql, $errored, $error_ary);
+			}
+
+			// Delete orphan private messages
+			$batch_size = 500;
+
+			$sql_array = array(
+				'SELECT'	=> 'p.msg_id',
+				'FROM'		=> array(
+					PRIVMSGS_TABLE	=> 'p',
+				),
+				'LEFT_JOIN'	=> array(
+					array(
+						'FROM'	=> array(PRIVMSGS_TO_TABLE => 't'),
+						'ON'	=> 'p.msg_id = t.msg_id',
+					),
+				),
+				'WHERE'		=> 't.user_id IS NULL',
+			);
+			$sql = $db->sql_build_query('SELECT', $sql_array);
+
+			do
+			{
+				$result = $db->sql_query_limit($sql, $batch_size);
+
+				$delete_pms = array();
+				while ($row = $db->sql_fetchrow($result))
+				{
+					$delete_pms[] = (int) $row['msg_id'];
+				}
+				$db->sql_freeresult($result);
+
+				if (!empty($delete_pms))
+				{
+					$sql = 'DELETE FROM ' . PRIVMSGS_TABLE . '
+						WHERE ' . $db->sql_in_set('msg_id', $delete_pms);
+					_sql($sql, $errored, $error_ary);
+				}
+			}
+			while (sizeof($delete_pms) == $batch_size);
+
+			$no_updates = false;
 		break;
 	}
 }
