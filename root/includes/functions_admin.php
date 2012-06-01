@@ -2294,41 +2294,6 @@ function auto_prune($forum_id, $prune_mode, $prune_flags, $prune_days, $prune_fr
 }
 
 /**
-* remove_comments will strip the sql comment lines out of an uploaded sql file
-* specifically for mssql and postgres type files in the install....
-*/
-function remove_comments(&$output)
-{
-	$lines = explode("\n", $output);
-	$output = '';
-
-	// try to keep mem. use down
-	$linecount = sizeof($lines);
-
-	$in_comment = false;
-	for ($i = 0; $i < $linecount; $i++)
-	{
-		if (trim($lines[$i]) == '/*')
-		{
-			$in_comment = true;
-		}
-
-		if (!$in_comment)
-		{
-			$output .= $lines[$i] . "\n";
-		}
-
-		if (trim($lines[$i]) == '*/')
-		{
-			$in_comment = false;
-		}
-	}
-
-	unset($lines);
-	return $output;
-}
-
-/**
 * Cache moderators, called whenever permissions are changed via admin_permissions. Changes of username
 * and group names must be carried through for the moderators table
 */
@@ -2592,7 +2557,8 @@ function view_log($mode, &$log, &$log_count, $limit = 0, $offset = 0, $forum_id 
 		{
 			$sql_keywords .= $db->sql_in_set('l.log_operation', $operations) . ' OR ';
 		}
-		$sql_keywords .= 'LOWER(l.log_data) ' . implode(' OR LOWER(l.log_data) ', $keywords) . ')';
+		$sql_lower = $db->sql_lower_text('l.log_data');
+		$sql_keywords .= "$sql_lower " . implode(" OR $sql_lower ", $keywords) . ')';
 	}
 
 	if ($log_count !== false)

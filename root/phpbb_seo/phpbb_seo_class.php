@@ -412,18 +412,18 @@ class phpbb_seo extends setup_phpbb_seo {
 			$this->path = ltrim($this->path, '/');
 		}
 		$this->url_in = $this->file . ($qs ? '?' . $qs : '');
-		$url = $this->path . $this->url_in . $anchor;
+		$url = $this->path . $this->url_in;
 		if (isset($this->seo_cache[$url])) {
-			return $this->seo_cache[$url];
+			return $this->seo_cache[$url] . $anchor;
 		}
 		if ( !$this->seo_opt['url_rewrite'] || defined('ADMIN_START') || isset($this->seo_stop_dirs[$this->path]) ) {
-			return ($this->seo_cache[$url] = $url);
+			return ($this->seo_cache[$url] = $url) . $anchor;
 		}
 		$this->filename = trim(str_replace(".$phpEx", '', $this->file));
 		if ( isset($this->seo_stop_files[$this->filename]) ) {
 			// add full url
 			$url = $this->path == $phpbb_root_path ? $this->seo_path['phpbb_url'] . preg_replace('`^' . $phpbb_root_path . '`', '', $url) : $url;
-			return ($this->seo_cache[$url] = $url);
+			return ($this->seo_cache[$url] = $url) . $anchor;
 		}
 		parse_str(str_replace('&amp;', '&', $qs), $this->get_vars);
 		// strp slashes if necessary
@@ -441,9 +441,9 @@ class phpbb_seo extends setup_phpbb_seo {
 		$this->url = $this->file;
 		if ( !empty($this->rewrite_method[$this->path][$this->filename]) ) {
 			$this->{$this->rewrite_method[$this->path][$this->filename]}();
-			return ($this->seo_cache[$url] = $this->path . $this->url . $this->query_string($this->get_vars, $amp_delim, '?') . $anchor);
+			return ($this->seo_cache[$url] = $this->path . $this->url . $this->query_string($this->get_vars, $amp_delim, '?')) . $anchor;
 		} else {
-			return ($this->seo_cache[$url] = $url);
+			return ($this->seo_cache[$url] = $url) . $anchor;
 		}
 	}
 	/**
