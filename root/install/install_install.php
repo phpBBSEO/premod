@@ -116,7 +116,7 @@ class install_install extends module
 				$db_tools = new phpbb_db_tools($db);
 				$db_tools->db->sql_return_on_error(true);
 				$db_tools->sql_column_add(TOPICS_TABLE, 'topic_url', array('VCHAR', ''));
-				set_config('seo_premod_version', '3.0.11-RC1');
+				set_config('seo_premod_version', '3.0.11');
 				// Remove the lock file
 				@unlink($phpbb_root_path . 'cache/install_lock');
 
@@ -1172,7 +1172,7 @@ class install_install extends module
 
 		$sql_query = preg_replace('#phpbb_#i', $data['table_prefix'], $sql_query);
 
-		$sql_query = remove_comments($sql_query);
+		$sql_query = phpbb_remove_comments($sql_query);
 
 		$sql_query = split_sql_file($sql_query, $delimiter);
 
@@ -1210,7 +1210,7 @@ class install_install extends module
 		// Change language strings...
 		$sql_query = preg_replace_callback('#\{L_([A-Z0-9\-_]*)\}#s', 'adjust_language_keys_callback', $sql_query);
 
-		$sql_query = remove_comments($sql_query);
+		$sql_query = phpbb_remove_comments($sql_query);
 		$sql_query = split_sql_file($sql_query, ';');
 
 		foreach ($sql_query as $sql)
