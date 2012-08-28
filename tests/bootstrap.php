@@ -7,7 +7,7 @@
 *
 */
 define('IN_PHPBB', true);
-$phpbb_root_path = '../premod/root/';
+$phpbb_root_path = 'premod/root/';
 $phpEx = 'php';
 require_once $phpbb_root_path . 'includes/startup.php';
 require_once $phpbb_root_path . 'includes/constants.php';
