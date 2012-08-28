@@ -12,6 +12,7 @@ $phpEx = 'php';
 require_once $phpbb_root_path . 'includes/startup.php';
 require_once $phpbb_root_path . 'includes/constants.php';
 require_once $phpbb_root_path . 'includes/functions.php';
+require_once $phpbb_root_path . 'includes/utf/utf_tools.php';
 
 if (empty($phpbb_seo))
 {
