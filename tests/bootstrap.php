@@ -11,6 +11,7 @@ $phpbb_root_path = 'premod/root/';
 $phpEx = 'php';
 require_once $phpbb_root_path . 'includes/startup.php';
 require_once $phpbb_root_path . 'includes/constants.php';
+require_once $phpbb_root_path . 'includes/functions.php';
 
 if (empty($phpbb_seo))
 {

@@ -11,6 +11,8 @@ class class_tests extends PHPUnit_Framework_TestCase
 {
 	function drop_sid_test()
 	{
+		global $phpbb_seo;
+
 		$url_no_sid = 'http://www.phpbb-seo.com/en/site/phpbb-seo-rules-t7.html';
 		$sid = '?sid=TheSidIsHere';
 
