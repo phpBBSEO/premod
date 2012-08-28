@@ -16,4 +16,9 @@
 			<directory suffix="_tests.php">./</directory>
 		</testsuite>
 	</testsuites>
+
+	<php>
+		<var name="root_path" value="premod/root/" />
+		<var name="phpEx" value="php" />
+	</php>
 </phpunit>
