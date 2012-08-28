@@ -11,3 +11,10 @@ before_script:
 
 script:
   - phpunit --configuration tests/phpunit.xml
+
+notifications:
+  email:
+    recipients:
+      - dcz@phpbb-seo.com
+    on_success: never
+    on_failure: always
