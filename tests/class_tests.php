@@ -9,7 +9,7 @@
 
 class class_tests extends PHPUnit_Framework_TestCase
 {
-	function drop_sid_test()
+	function test_drop_sid()
 	{
 		global $phpbb_seo;
 
