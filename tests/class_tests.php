@@ -9,13 +9,41 @@
 
 class class_tests extends PHPUnit_Framework_TestCase
 {
-	function test_drop_sid()
+	function test_drop_sid_data()
+	{
+		// use only & in urls, &amp; case will be added automatically
+		// in test_drop_sid
+		return array(
+			array(
+				'case' => 'http://www.example.com/path/page.ext?sid=thesidishere',
+				'expected' => 'http://www.example.com/path/page.ext',
+			),
+			array(
+				'case' => 'http://www.example.com/path/page.ext?sid=thesidishere&var1=val1&var2=val2',
+				'expected' => 'http://www.example.com/path/page.ext?var1=val1&var2=val2',
+			),
+			array(
+				'case' => 'http://www.example.com/path/page.ext?var1=val1&var2=val2&sid=thesidishere',
+				'expected' => 'http://www.example.com/path/page.ext?var1=val1&var2=val2',
+			),
+			array(
+				'case' => 'http://www.example.com/path/page.ext?var1=val1&var2=val2&sid=thesidishere&var3=val3',
+				'expected' => 'http://www.example.com/path/page.ext?var1=val1&var2=val2&var3=val3',
+			),
+		);
+	}
+	/**
+	* @dataProvider test_drop_sid_data
+	*/
+	function test_drop_sid($case, $expected)
 	{
 		global $phpbb_seo;
-
-		$url_no_sid = 'http://www.phpbb-seo.com/en/site/phpbb-seo-rules-t7.html';
-		$sid = '?sid=TheSidIsHere';
-
-		$this->assertEquals($url_no_sid, $phpbb_seo->drop_sid($url_no_sid . $sid));
+		$this->assertEquals($expected, $phpbb_seo->drop_sid($case));
+		// also test &amp; if appropriate
+		if (strpos($case, '&') !== false) {
+			$case_amp = str_replace('&', '&amp;', $case);
+			$expected_amp = str_replace('&', '&amp;', $expected);
+			$this->assertEquals($expected_amp, $phpbb_seo->drop_sid($case_amp));
+		}
 	}
 }
