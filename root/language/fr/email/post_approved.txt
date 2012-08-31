@@ -2,7 +2,7 @@ Subject: Message approuvé - {POST_SUBJECT}
 
 Bonjour {USERNAME},
 
-Vous recevez cet e-mail car votre message "{POST_SUBJECT}" sur "{SITENAME}" a été approuvé par un modérateur ou un administrateur.
+Vous recevez cet e-mail car votre message « {POST_SUBJECT} » sur « {SITENAME} » a été approuvé par un modérateur ou un administrateur.
 
 Si vous désirez lire le message, cliquez sur le lien suivant:
 

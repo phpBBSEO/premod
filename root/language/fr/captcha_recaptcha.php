@@ -5,7 +5,7 @@
 * translated by PhpBB-fr.com <http://www.phpbb-fr.com/>
 *
 * @package language
-* @version $Id: captcha_recaptcha.php v1.26 13:52 10:17 14/06/2011 Lolovoisin $
+* @version $Id: captcha_recaptcha.php 58 2012-08-23 08:31:38Z Morgyanne $
 * @copyright (c) 2009 phpBB Group
 * @license http://opensource.org/licenses/gpl-license.php GNU Public License
 *

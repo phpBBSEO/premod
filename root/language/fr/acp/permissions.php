@@ -5,7 +5,7 @@
 * translated originally by PhpBB-fr.com <http://www.phpbb-fr.com/> and phpBB.biz <http://www.phpBB.biz>
 *
 * @package language
-* @version $Id: permissions.php, v1.25 2008/10/10 11:49:00 Elglobo Exp $
+* @version $Id: permissions.php 60 2012-08-27 07:10:06Z Morgyanne $
 * @copyright (c) 2005 phpBB Group 
 * @license http://opensource.org/licenses/gpl-license.php GNU Public License 
 *
@@ -37,7 +37,8 @@ if (empty($lang) || !is_array($lang))
 // in a url you again do not need to specify an order e.g., 'Click %sHERE%s' is fine
 
 $lang = array_merge($lang, array(
-	'ACP_PERMISSIONS_EXPLAIN'	=> '		<p>Les permissions sont très nombreuses et regroupées en quatre grandes sections qui sont:
+	'ACP_PERMISSIONS_EXPLAIN'	=> '
+		<p>Les permissions sont très nombreuses et regroupées en quatre grandes sections qui sont:
 
 		</p><h2>Permissions globales</h2>
 		<p>Elles sont utilisées pour contrôler l’accès de façon globale et sont appliquées à l’ensemble du forum. Elles sont elles-mêmes divisées en permissions des utilisateurs, groupes, administrateurs et modérateurs globaux.</p>
@@ -109,7 +110,7 @@ $lang = array_merge($lang, array(
 	'APPLY_PERMISSIONS_EXPLAIN'	=> 'Les permissions et modèles définis pour cet élément seront appliqués uniquement à cet élément et à tous les éléments cochés.',
 	'AUTH_UPDATED'				=> 'Les permissions ont été mises à jour.',
 
-	'COPY_PERMISSIONS_CONFIRM'				=> 'Êtes-vous sûr de vouloir effectuer cette opération? Attention, les permissions existantes des cibles sélectionnées seront remplacées.',
+	'COPY_PERMISSIONS_CONFIRM'				=> 'Êtes-vous sûr de vouloir effectuer cette opération ? Attention, les permissions existantes des cibles sélectionnées seront remplacées.',
 	'COPY_PERMISSIONS_FORUM_FROM_EXPLAIN'	=> 'Le forum source dont vous copiez les permissions.',
 	'COPY_PERMISSIONS_FORUM_TO_EXPLAIN'		=> 'Les forums de destination où vous voulez que les permissions copiées s’appliquent.',
 	'COPY_PERMISSIONS_FROM'					=> 'Copier les permissions de',
@@ -121,11 +122,11 @@ $lang = array_merge($lang, array(
 
 	'DEFAULT'					=> 'Défaut',
 	'DELETE_ROLE'				=> 'Supprimer le modèle',
-	'DELETE_ROLE_CONFIRM'		=> 'Êtes-vous sûr(e) de vouloir supprimer ce modèle? Les éléments auxquels ce modèle est assigné <strong>ne</strong> perdront <strong>pas</strong> leurs paramètres de permission.',
+	'DELETE_ROLE_CONFIRM'		=> 'Êtes-vous sûr de vouloir supprimer ce modèle ? Les éléments auxquels ce modèle est assigné <strong>ne</strong> perdront <strong>pas</strong> leurs paramètres de permission.',
 	'DISPLAY_ROLE_ITEMS'		=> 'Voir les éléments utilisant ce modèle',
 
-	'EDIT_PERMISSIONS'			=> 'Editer les permissions',
-	'EDIT_ROLE'					=> 'Editer le modèle',
+	'EDIT_PERMISSIONS'			=> 'Éditer les permissions',
+	'EDIT_ROLE'					=> 'Éditer le modèle',
 
 	'GROUPS_NOT_ASSIGNED'		=> 'Aucun groupe n’est assigné à ce modèle',
 
@@ -137,7 +138,7 @@ $lang = array_merge($lang, array(
 
 	'NO_AUTH_SETTING_FOUND'		=> 'Paramètres de permission non définis.',
 	'NO_ROLE_ASSIGNED'			=> 'Aucun modèle assigné…',
-	'NO_ROLE_ASSIGNED_EXPLAIN'	=> 'La configuration de ce modèle ne modifie pas les permissions sur la droite. Si vous souhaitez supprimer toutes les permissions, vous devez utiliser le lien “Tous sur <samp>NON</samp>”.',
+	'NO_ROLE_ASSIGNED_EXPLAIN'	=> 'La configuration de ce modèle ne modifie pas les permissions sur la droite. Si vous souhaitez supprimer toutes les permissions, vous devez utiliser le lien « Tous sur <samp>NON</samp> ».',
 	'NO_ROLE_AVAILABLE'			=> 'Aucun modèle disponible',
 	'NO_ROLE_NAME_SPECIFIED'	=> 'Merci de donner un nom au modèle.',
 	'NO_ROLE_SELECTED'			=> 'Le modèle n’a pas été trouvé.',
@@ -187,7 +188,7 @@ $lang = array_merge($lang, array(
 	'ROLE_DESCRIPTION_ADMIN_STANDARD'		=> 'A accès à la plupart des fonctionnalités administratives mais ne peut pas utiliser le serveur ou les outils relatifs au système.',
 	'ROLE_DESCRIPTION_ADMIN_USERGROUP'		=> 'Peut gérer des groupes et des utilisateurs: est autorisé à modifier les permissions, les paramètres, à gérer les bannissements et les rangs.',
 	'ROLE_DESCRIPTION_FORUM_BOT'			=> 'Ce modèle est recommandé pour les robots et moteurs de recherche.',
-	'ROLE_DESCRIPTION_FORUM_FULL'			=> 'Peut utiliser toutes les fonctionnalités du forum, y compris les annonces et les post-it. N’est pas concerné(e) par la limite de flood.<br />Non recommandé pour les utilisateurs normaux.',
+	'ROLE_DESCRIPTION_FORUM_FULL'			=> 'Peut utiliser toutes les fonctionnalités du forum, y compris les annonces et les post-it. N’est pas concerné par la limite de flood.<br />Non recommandé pour les utilisateurs standards.',
 	'ROLE_DESCRIPTION_FORUM_LIMITED'		=> 'Peut utiliser quelques fonctionnalités du forum, mais ne peut pas joindre de fichiers ou utiliser les icônes des messages.',
 	'ROLE_DESCRIPTION_FORUM_LIMITED_POLLS'	=> 'Comme l’Accès Limité mais peut aussi créer des sondages.',
 	'ROLE_DESCRIPTION_FORUM_NOACCESS'		=> 'Ne peut ni voir ni accéder au forum.',
@@ -195,7 +196,7 @@ $lang = array_merge($lang, array(
 	'ROLE_DESCRIPTION_FORUM_POLLS'			=> 'Comme l’Accès Standard mais peut aussi créer des sondages.',
 	'ROLE_DESCRIPTION_FORUM_READONLY'		=> 'Peut lire le forum, mais ne peut pas créer de nouveaux sujets ou répondre aux messages.',
 	'ROLE_DESCRIPTION_FORUM_STANDARD'		=> 'Peut utiliser la plupart des fonctionnalités du forum y compris les fichiers joints, mais ne peut pas verrouiller ou supprimer ses propres sujets, et ne peut pas créer de sondages.',
-	'ROLE_DESCRIPTION_FORUM_NEW_MEMBER'		=> 'Un modèle pour les membres du groupe prédéfini nouveaux utilisateurs enregistrés; contient les permission <samp>JAMAIS</samp> pour verrouiller les fonctionnalités aux nouveaux utilisateurs.',
+	'ROLE_DESCRIPTION_FORUM_NEW_MEMBER'		=> 'Un modèle pour les membres du groupe prédéfini nouveaux utilisateurs enregistrés, contient les permission <samp>JAMAIS</samp> pour verrouiller les fonctionnalités aux nouveaux utilisateurs.',
 	'ROLE_DESCRIPTION_MOD_FULL'				=> 'Peut utiliser toutes les fonctionnalités de modération, y compris le bannissement.',
 	'ROLE_DESCRIPTION_MOD_QUEUE'			=> 'Peut utiliser l’attente de modération pour valider ou éditer des messages, mais rien d’autre.',
 	'ROLE_DESCRIPTION_MOD_SIMPLE'			=> 'Peut utiliser seulement les actions de sujet de base. Ne peut pas envoyer d’avertissements ou utiliser l’attente de modération.',
@@ -205,7 +206,7 @@ $lang = array_merge($lang, array(
 	'ROLE_DESCRIPTION_USER_NOAVATAR'		=> 'A un ensemble limité de fonctionnalités et n’est pas autorisé à avoir d’avatar.',
 	'ROLE_DESCRIPTION_USER_NOPM'			=> 'A un ensemble limité de fonctionnalités et n’est pas autorisé à envoyer de messages privés.',
 	'ROLE_DESCRIPTION_USER_STANDARD'		=> 'Peut accéder à la plupart des fonctionnalités de l’utilisateur, mais pas à toutes. Par exemple, ne peut pas modifier le nom d’utilisateur ou ignorer la limite de flood.',
-	'ROLE_DESCRIPTION_USER_NEW_MEMBER'		=> 'Un modèle pour les membres du groupe prédéfini nouveaux utilisateurs enregistrés; contient les permissions <samp>JAMAIS</samp> pour verrouiller les fonctionnalités aux nouveaux utilisateurs.',
+	'ROLE_DESCRIPTION_USER_NEW_MEMBER'		=> 'Un modèle pour les membres du groupe prédéfini nouveaux utilisateurs enregistrés, contient les permissions <samp>JAMAIS</samp> pour verrouiller les fonctionnalités aux nouveaux utilisateurs.',
 
 	'ROLE_DESCRIPTION_EXPLAIN'		=> 'Vous avez la possibilité d’entrer une courte explication sur ce que fait le modèle ou ce qu’il signifie. Le texte que vous entrez sera aussi affiché dans l’écran des permissions.',
 	'ROLE_DESCRIPTION_LONG'			=> 'La description du modèle est trop longue. Limitez-la à 4000 caractères.',
@@ -224,12 +225,12 @@ $lang = array_merge($lang, array(
 	'SET_PERMISSIONS'				=> 'Régler les permissions',
 	'SET_ROLE_PERMISSIONS'			=> 'Régler les permissions du modèle',
 	'SET_USERS_PERMISSIONS'			=> 'Régler les permissions des utilisateurs',
-	'SET_USERS_FORUM_PERMISSIONS'	=> 'Régler les permissions des utilisateurs du forum',
+	'SET_USERS_FORUM_PERMISSIONS'	=> 'Régler les permissions des forums pour les utilisateurs',
 
 	'TRACE_DEFAULT'					=> 'Par défaut, chaque permission est sur <samp>NON</samp> (Désactivée). Ainsi la permission peut être outrepassée par d’autres paramètres.',
 	'TRACE_FOR'						=> 'Tracer pour',
 	'TRACE_GLOBAL_SETTING'	=> '%s (global)',
-	'TRACE_GROUP_NEVER_TOTAL_NEVER'	=> 'Cette permission de groupe est réglée sur <samp>JAMAIS</samp> tout comme le résultat total, l’ancien résultat est donc conservé..',
+	'TRACE_GROUP_NEVER_TOTAL_NEVER'	=> 'Cette permission de groupe est réglée sur <samp>JAMAIS</samp> tout comme le résultat total, l’ancien résultat est donc conservé.',
 	'TRACE_GROUP_NEVER_TOTAL_NEVER_LOCAL'	=> 'Cette permission de groupe pour ce forum est réglée sur <samp>JAMAIS</samp> tout comme le résultat total, l’ancien résultat est donc conservé.',
 	'TRACE_GROUP_NEVER_TOTAL_NO'	=> 'Cette permission de groupe est réglée sur <samp>JAMAIS</samp> ce qui devient la nouvelle valeur globale car elle n’était pas encore réglée (Paramètre sur <samp>NON</samp>).',
 	'TRACE_GROUP_NEVER_TOTAL_NO_LOCAL'	=> 'Cette permission de groupe pour ce forum est réglée sur <samp>JAMAIS</samp> ce qui devient la nouvelle valeur globale car elle n’était pas encore réglée (Paramètre sur <samp>NON</samp>).',
@@ -241,8 +242,8 @@ $lang = array_merge($lang, array(
 	'TRACE_GROUP_YES_TOTAL_NEVER_LOCAL'	=> 'Cette permission de groupe pour ce forum est réglée sur <samp>OUI</samp> mais la valeur globale <samp>JAMAIS</samp> ne peut pas être outrepassée.',
 	'TRACE_GROUP_YES_TOTAL_NO'		=> 'Cette permission de groupe est réglée sur <samp>OUI</samp> ce qui devient la nouvelle valeur globale car elle n’était pas encore réglée (Paramètre sur <samp>NON</samp>).',
 	'TRACE_GROUP_YES_TOTAL_NO_LOCAL'		=> 'Cette permission de groupe pour ce forum est réglée sur <samp>OUI</samp> ce qui devient la nouvelle valeur globale car elle n’était pas encore réglée (Paramètre sur <samp>NON</samp>).',
-	'TRACE_GROUP_YES_TOTAL_YES'		=> 'Cette permission de groupe est réglée sur <samp>OUI</samp> et la permission totale est déjà réglée sur <samp>OUI</samp> , elle est donc conservée.',
-	'TRACE_GROUP_YES_TOTAL_YES_LOCAL'		=> 'Cette permission de groupe pour ce forum est réglée sur <samp>OUI</samp> et la permission totale est déjà réglée sur <samp>OUI</samp> , elle est donc conservée.',
+	'TRACE_GROUP_YES_TOTAL_YES'		=> 'Cette permission de groupe est réglée sur <samp>OUI</samp> et la permission totale est déjà réglée sur <samp>OUI</samp>, elle est donc conservée.',
+	'TRACE_GROUP_YES_TOTAL_YES_LOCAL'		=> 'Cette permission de groupe pour ce forum est réglée sur <samp>OUI</samp> et la permission totale est déjà réglée sur <samp>OUI</samp>, elle est donc conservée.',
 	'TRACE_PERMISSION'				=> 'Tracer la permission - %s',
 	'TRACE_RESULT'					=> 'Tracer le résultat',
 	'TRACE_SETTING'					=> 'Tracer la configuration',

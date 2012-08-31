@@ -5,7 +5,7 @@
 * translated originally by PhpBB-fr.com <http://www.phpbb-fr.com/> and phpBB.biz <http://www.phpBB.biz>
 *
 * @package language
-* @version $Id: forums.php, v1.28 2010/02/24 15:34:00 Elglobo Exp $
+* @version $Id: forums.php 58 2012-08-23 08:31:38Z Morgyanne $
 * @copyright (c) 2005 phpBB Group 
 * @license http://opensource.org/licenses/gpl-license.php GNU Public License 
 *
@@ -49,7 +49,7 @@ $lang = array_merge($lang, array(
 	
 	'COPY_PERMISSIONS'				=> 'Copier les permissions depuis',
 	'COPY_PERMISSIONS_EXPLAIN'		=> 'Pour faciliter la mise en place des permissions pour votre nouveau forum, vous pouvez copier les permissions d’un forum existant.',
-	'COPY_PERMISSIONS_ADD_EXPLAIN'	=> 'Une fois créé, le forum aura les mêmes permissions que celles sélectionnées ici. Si aucun forum n’est choisi, le nouveau forum ne sera pas visible tant que ses permissions n’ont pas été définies.',
+	'COPY_PERMISSIONS_ADD_EXPLAIN'	=> 'Une fois créé, le forum aura les mêmes permissions que celles sélectionnées ici. Si aucun forum n’est choisi, le nouveau forum ne sera pas visible tant que ses permissions n’auront pas été définies.',
 	'COPY_PERMISSIONS_EDIT_EXPLAIN'	=> 'Si vous choisissez de copier les permissions, le forum aura les mêmes permissions que celles sélectionnées ici. Elles remplaceront toutes les permissions précédemment définies pour ce forum, par les permissions du forum sélectionné. Si aucun forum n’est choisi les permissions actuelles seront conservées.',
 	'COPY_TO_ACL'					=> 'Autrement, vous êtes aussi capable de %srégler de nouvelles permissions%s pour ce forum.',
 	'CREATE_FORUM'					=> 'Créer un nouveau forum',
@@ -62,7 +62,7 @@ $lang = array_merge($lang, array(
 	'DISPLAY_ACTIVE_TOPICS'				=> 'Activer les sujets actifs',
 	'DISPLAY_ACTIVE_TOPICS_EXPLAIN'		=> 'Si activé, les sujets actifs des sous-forums choisis seront affichés dans cette catégorie.',
 
-	'EDIT_FORUM'					=> 'Editer un forum',
+	'EDIT_FORUM'					=> 'Éditer un forum',
 	'ENABLE_INDEXING'				=> 'Activer l’indexation de recherche',
 	'ENABLE_INDEXING_EXPLAIN'		=> 'Si activé, les messages du forum seront indexés pour la recherche.',
 	'ENABLE_POST_REVIEW'			=> 'Activer la révision des messages',
@@ -80,7 +80,8 @@ $lang = array_merge($lang, array(
 	'FORUM_CREATED'						=> 'Le forum a été créé.',
 	'FORUM_DATA_NEGATIVE'				=> 'Les paramètres de délestage ne peuvent pas être négatifs.',
 	'FORUM_DELETE'						=> 'Supprimer le forum',
-	'FORUM_DELETE_EXPLAIN' 				=> 'Le formulaire suivant vous permet de supprimer un forum et de décider où vous désirez déplacer tous les sujets (ou forums) qu’il contient.',	'FORUM_DELETED'	=> 'Le forum a été supprimé.',
+	'FORUM_DELETE_EXPLAIN' 				=> 'Le formulaire suivant vous permet de supprimer un forum et de décider où vous désirez déplacer tous les sujets (ou forums) qu’il contient.',
+	'FORUM_DELETED'						=> 'Le forum a été supprimé.',
 	'FORUM_DESC'						=> 'Description',
 	'FORUM_DESC_EXPLAIN'				=> 'Toute balise HTML saisie sera affichée telle quelle.',
 	'FORUM_DESC_TOO_LONG'				=> 'La description du forum est trop longue. Elle ne peut contenir plus de 4000 caractères.',
@@ -103,7 +104,7 @@ $lang = array_merge($lang, array(
 	'FORUM_PASSWORD_OLD'				=> 'Le mot de passe du forum utilise un ancien type de hash et devrait être modifié.',
 	'FORUM_PASSWORD_MISMATCH'			=> 'Les mots de passe saisis ne concordent pas.',
 	'FORUM_PRUNE_SETTINGS'				=> 'Paramètres du délestage des forums',
-	'FORUM_RESYNCED'					=> 'Le forum “%s” a été resynchronisé',
+	'FORUM_RESYNCED'					=> 'Le forum « %s » a été resynchronisé',
 	'FORUM_RULES_EXPLAIN'				=> 'Les règles du forum sont affichées sur chaque page du forum.',
 	'FORUM_RULES_LINK'					=> 'Lien vers les règles',
 	'FORUM_RULES_LINK_EXPLAIN'			=> 'Vous pouvez indiquer l’URL de la page ou du message contenant vos règles. Ce paramètre annulera tout texte de règles de forum que vous avez renseigné.',
@@ -113,7 +114,7 @@ $lang = array_merge($lang, array(
 	'FORUM_STATUS'						=> 'Statut du forum',
 	'FORUM_STYLE'						=> 'Style du forum',
 	'FORUM_TOPICS_PAGE'					=> 'Sujets par page',
-	'FORUM_TOPICS_PAGE_EXPLAIN'			=> 'Cette valeur (autre que “0”) annulera le paramètre par défaut des sujets par page.',
+	'FORUM_TOPICS_PAGE_EXPLAIN'			=> 'Cette valeur (autre que « 0 ») annulera le paramètre par défaut des sujets par page.',
 	'FORUM_TYPE'						=> 'Type du forum',
 	'FORUM_UPDATED'						=> 'Les informations du forum ont été mises à jour.',
 
@@ -123,9 +124,9 @@ $lang = array_merge($lang, array(
 
 	'LINK'						=> 'Lien',
 	'LIST_INDEX'				=> 'Liste le sous-forum dans la légende du forum parent',
-	'LIST_INDEX_EXPLAIN'		=> 'Affiche ce forum sur l’index et ailleurs comme lien dans la légende de son forum parent si l’option “Lister les sous-forums dans la légende” est activée.',
+	'LIST_INDEX_EXPLAIN'		=> 'Affiche ce forum sur l’index et ailleurs comme lien dans la légende de son forum parent si l’option « Lister les sous-forums dans la légende » est activée.',
 	'LIST_SUBFORUMS'			=> 'Lister les sous-forums dans la légende',
-	'LIST_SUBFORUMS_EXPLAIN'	=> 'Affiche les sous-forums de ce forum sur l’index et ailleurs comme lien dans la légende de son forum parent si l’option “Lister le sous-forum dans la légende du forum parent” est activée.',
+	'LIST_SUBFORUMS_EXPLAIN'	=> 'Affiche les sous-forums de ce forum sur l’index et ailleurs comme lien dans la légende de son forum parent si l’option « Lister le sous-forum dans la légende du forum parent » est activée.',
 	'LOCKED'					=> 'Verrouillé',
 
 	'MOVE_POSTS_NO_POSTABLE_FORUM'	=> 'Le forum que vous avez sélectionné pour y déplacer les messages n’est pas approprié. Sélectionnez un forum destiné à recevoir des messages.',

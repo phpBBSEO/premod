@@ -5,7 +5,7 @@
 * translated originally by PhpBB-fr.com <http://www.phpbb-fr.com/> and phpBB.biz <http://www.phpBB.biz>
 *
 * @package language
-* @version $Id: board.php, v1.29 09:59 14/06/2011 lolovoisin Exp $
+* @version $Id: board.php 59 2012-08-27 06:41:52Z Morgyanne $
 * @copyright (c) 2005 phpBB Group
 * @license http://opensource.org/licenses/gpl-license.php GNU Public License
 *
@@ -45,7 +45,7 @@ $lang = array_merge($lang, array(
 	'DEFAULT_LANGUAGE'				=> 'Langue par défaut',
 	'DEFAULT_STYLE'					=> 'Style par défaut',
 	'DISABLE_BOARD'					=> 'Désactiver le forum',
-	'DISABLE_BOARD_EXPLAIN'			=> 'Ceci va rendre le forum inaccessible aux utilisateurs. Vous pouvez aussi rentrer un message court (255 caractères) pour leur en expliquer la raison.',
+	'DISABLE_BOARD_EXPLAIN'			=> 'Ceci va rendre le forum inaccessible aux utilisateurs. Vous pouvez aussi saisir un message court (255 caractères) pour leur en expliquer la raison.',
 	'OVERRIDE_STYLE'				=> 'Annuler le style de l’utilisateur',
 	'OVERRIDE_STYLE_EXPLAIN'		=> 'Remplace le style de l’utilisateur par le style par défaut.',
 	'SITE_DESC'						=> 'Description du site',
@@ -54,7 +54,7 @@ $lang = array_merge($lang, array(
 	'SYSTEM_TIMEZONE'				=> 'Fuseau horaire des invités',
 	'SYSTEM_TIMEZONE_EXPLAIN'		=> 'Fuseau horaire à utiliser pour l’affichage des heures quand les utilisateurs ne sont pas connectés (visiteurs, robots). Les membres le définissent pendant leur inscription et peuvent le changer dans leur panneau de l’utilisateur.',
 	'WARNINGS_EXPIRE'				=> 'Durée de l’avertissement',
-	'WARNINGS_EXPIRE_EXPLAIN'		=> 'Nombre de jours qui s’écoulera avant que l’avertissement n’expire automatiquement. Mettre “0” pour que l’avertissement soit permanent.',
+	'WARNINGS_EXPIRE_EXPLAIN'		=> 'Nombre de jours qui s’écoulera avant que l’avertissement n’expire automatiquement. Mettre « 0 » pour que l’avertissement soit permanent.',
 ));
 
 // Board Features
@@ -75,7 +75,7 @@ $lang = array_merge($lang, array(
 	'ALLOW_PM_REPORT'			=> 'Autoriser les utilisateurs à rapporter les messages privés',
 	'ALLOW_PM_REPORT_EXPLAIN'	=> 'Si cette option est activée, les utilisateurs ont la possibilité de rapporter aux modérateurs du forum un message privé qu’ils ont reçu ou envoyé. Ces messages privés seront alors visibles dans le panneau de modération.',
 	'ALLOW_QUICK_REPLY'			=> 'Autoriser la réponse rapide',
-	'ALLOW_QUICK_REPLY_EXPLAIN'	=> 'Cette option vous permet de désactiver le module de réponse rapide sur l’ensemble du forum. Si activé, les paramètres spécifiques de forum seront utilisés pour déterminer si la réponse rapide est affichée pour chacun des forums.',
+	'ALLOW_QUICK_REPLY_EXPLAIN'	=> 'Cette option vous permet de désactiver le module de réponse rapide sur l’ensemble du forum. Si activé, les paramètres spécifiques au forum seront utilisés pour déterminer si la réponse rapide est affichée pour chacun des forums.',
 	'ALLOW_QUICK_REPLY_BUTTON'	=> 'Soumettre et activer la réponse rapide dans tous les forums',
 	'ALLOW_SIG'					=> 'Autoriser les signatures',
 	'ALLOW_SIG_BBCODE'			=> 'Autoriser les BBCodes dans les signatures d’utilisateur',
@@ -92,7 +92,7 @@ $lang = array_merge($lang, array(
 
 // Avatar Settings
 $lang = array_merge($lang, array(
-	'ACP_AVATAR_SETTINGS_EXPLAIN'	=> 'Les avatars sont généralement de petites images uniques qu’un utilisateur choisit pour le représenter. Selon le style, ils sont normalement affichés sous le nom d’utilisateur lors de la visualisation de sujets. Vous pouvez choisir quelle méthode l’utilisateur peut utiliser pour choisir son avatar. Dans le cas où vous autorisez l’envoi d’avatar, vous devez indiquer ci-dessous le nom du répertoire en question et vous assurer des droits en écriture de ce répertoire. Notez également que les limitations de taille ne sont imposées qu’aux avatars chargés et ne concernent pas les avatars dont on aura fourni un lien externe.',
+	'ACP_AVATAR_SETTINGS_EXPLAIN'	=> 'Les avatars sont généralement de petites images uniques qu’un utilisateur choisit pour le représenter. Selon le style, ils sont normalement affichés sous le nom d’utilisateur lors de la visualisation de sujets. Vous pouvez choisir quelle méthode l’utilisateur peut utiliser pour choisir son avatar. Dans le cas où vous autorisez le transfert d’avatar, vous devez indiquer ci-dessous le nom du répertoire en question et vous assurer des droits en écriture de ce répertoire. Notez également que les limitations de taille ne sont imposées qu’aux avatars transférés et ne concernent pas les avatars dont on aura fourni un lien externe.',
 	'ALLOW_AVATARS'					=> 'Activer les avatars',
 	'ALLOW_AVATARS_EXPLAIN'			=> 'Autorise l’utilisation générale des avatars;<br />Si vous désactivez l’utilisation générale des avatars ou les avatars affichés selon une méthode particulière, les avatars désactivés ne seront plus affichés sur le forum, mais les utilisateurs seront toujours capables de télécharger leur propre avatar dans leur panneau d’utilisateur.',
 
@@ -109,7 +109,7 @@ $lang = array_merge($lang, array(
 	'MAX_AVATAR_SIZE'				=> 'Dimensions maximales d’un avatar',
 	'MAX_AVATAR_SIZE_EXPLAIN'		=> 'Largeur x Hauteur en pixels.',
 	'MAX_FILESIZE'					=> 'Taille maximale d’un avatar',
-	'MAX_FILESIZE_EXPLAIN'			=> 'Pour les avatars envoyés.',
+	'MAX_FILESIZE_EXPLAIN'			=> 'Pour les avatars transférés. Si cette valeur est « 0 », la taille du fichier transféré est uniquement limitée par votre configuration PHP.',
 	'MIN_AVATAR_SIZE'				=> 'Dimensions minimales d’un avatar',
 	'MIN_AVATAR_SIZE_EXPLAIN'		=> 'Largeur x Hauteur en pixels.',
 ));
@@ -130,17 +130,17 @@ $lang = array_merge($lang, array(
 	'ALLOW_SIG_PM'				=> 'Autoriser les signatures dans les messages privés',
 	'ALLOW_SMILIES_PM'			=> 'Autoriser les smileys dans les messages privés',
 	'BOXES_LIMIT'				=> 'Nombre de messages privés maximum par dossier',
-	'BOXES_LIMIT_EXPLAIN'		=> 'Les utilisateurs ne peuvent pas recevoir plus que ce nombre de messages dans chacun de leurs dossiers de message privé. Mettre “0” pour permettre un nombre de message illimité.',
+	'BOXES_LIMIT_EXPLAIN'		=> 'Les utilisateurs ne peuvent pas recevoir plus que ce nombre de messages dans chacun de leurs dossiers de message privé. Mettre « 0 » pour permettre un nombre de message illimité.',
 	'BOXES_MAX'					=> 'Nombre maximum de dossiers',
 	'BOXES_MAX_EXPLAIN'			=> 'Les utilisateurs peuvent créer ce nombre de dossiers pour leurs messages privés.',
 	'ENABLE_PM_ICONS'			=> 'Autoriser les icônes de sujet dans les messages privés',
 	'FULL_FOLDER_ACTION'		=> 'Action par défaut lorsqu’un dossier est plein',
-	'FULL_FOLDER_ACTION_EXPLAIN'=> 'Action par défaut à effectuer lorsque le dossier d’un utilisateur est plein, dans le cas où l’action indiquée par l’utilisateur n’est pas applicable. La seule exception s’applique au dossier des “Messages envoyés” où l’action par défaut est de toujours supprimer les anciens messages.',
+	'FULL_FOLDER_ACTION_EXPLAIN'=> 'Action par défaut à effectuer lorsque le dossier d’un utilisateur est plein, dans le cas où l’action indiquée par l’utilisateur n’est pas applicable. La seule exception s’applique au dossier des « Messages envoyés » où l’action par défaut est de toujours supprimer les anciens messages.',
 	'HOLD_NEW_MESSAGES'			=> 'Rejeter les nouveaux messages',
 	'PM_EDIT_TIME'				=> 'Temps limite d’édition',
-	'PM_EDIT_TIME_EXPLAIN'		=> 'Temps après lequel on ne peut plus éditer un message privé quand il n’a pas encore été délivré. Mettre “0” pour illimité.',
+	'PM_EDIT_TIME_EXPLAIN'		=> 'Temps après lequel on ne peut plus éditer un message privé quand il n’a pas encore été délivré. Mettre « 0 » pour illimité.',
 	'PM_MAX_RECIPIENTS'			=> 'Nombre maximum autorisé de destinataires',
-	'PM_MAX_RECIPIENTS_EXPLAIN' => 'Le nombre maximum autorisé de destinataires d’un message privé. Une valeur à “0” indique un nombre illimité de destinataires. Ce paramètre peut être ajusté pour chaque groupe dans l’écran de réglage du groupe.',
+	'PM_MAX_RECIPIENTS_EXPLAIN' => 'Le nombre maximum autorisé de destinataires d’un message privé. Une valeur à « 0 » indique un nombre illimité de destinataires. Ce paramètre peut être ajusté pour chaque groupe dans l’écran de réglage du groupe.',
 ));
 
 // Post Settings
@@ -152,11 +152,11 @@ $lang = array_merge($lang, array(
 	'ALLOW_POST_FLASH_EXPLAIN'			=> 'Si désactivé, le BBCode <code>[FLASH]</code> sera désactivé. Autrement, le système de permission déterminera les membres pouvant utiliser le BBCode <code>[FLASH]</code>.',
 
 	'BUMP_INTERVAL'					=> 'Intervalle de remontée de sujet',
-	'BUMP_INTERVAL_EXPLAIN'			=> 'Nombre de minutes, d’heures, ou de jours entre la date du dernier message et la possibilité de remonter le sujet. Mettre “0” pour désactiver complètement la remontée des sujets.',
+	'BUMP_INTERVAL_EXPLAIN'			=> 'Nombre de minutes, d’heures, ou de jours entre la date du dernier message et la possibilité de remonter le sujet. Mettre « 0 » pour désactiver complètement la remontée des sujets.',
 	'CHAR_LIMIT'					=> 'Nombre maximum de caractères par message',
-	'CHAR_LIMIT_EXPLAIN'			=> 'Le nombre de caractères autorisés dans un message. Mettre “0” pour illimité.',
+	'CHAR_LIMIT_EXPLAIN'			=> 'Le nombre de caractères autorisés dans un message. Mettre « 0 » pour illimité.',
 	'DELETE_TIME'					=> 'Limiter le temps de suppression',
-	'DELETE_TIME_EXPLAIN'			=> 'Limite le temps disponible pour effacer un nouveau message. Mettre “0” pour désactiver ce comportement.',
+	'DELETE_TIME_EXPLAIN'			=> 'Limite le temps disponible pour effacer un nouveau message. Mettre « 0 » pour désactiver ce comportement.',
 	'DISPLAY_LAST_EDITED'			=> 'Afficher la raison de la dernière édition',
 	'DISPLAY_LAST_EDITED_EXPLAIN'	=> 'Choisissez si l’information sur la date de la dernière édition doit être affichée ou non dans les messages.',
 	'EDIT_TIME'						=> 'Temps limite d’édition',
@@ -164,24 +164,24 @@ $lang = array_merge($lang, array(
 	'FLOOD_INTERVAL'				=> 'Intervalle de flood',
 	'FLOOD_INTERVAL_EXPLAIN'		=> 'Nombre de secondes qu’un utilisateur doit patienter entre la publication de nouveaux messages. Pour autoriser les utilisateurs à ignorer cela, modifiez leurs permissions.',
 	'HOT_THRESHOLD'					=> 'Seuil de popularité des sujets',
-	'HOT_THRESHOLD_EXPLAIN'			=> 'Nombre de messages requis afin qu’un sujet soit affiché comme étant populaire. Mettre “0” pour désactiver les sujets populaires.',
+	'HOT_THRESHOLD_EXPLAIN'			=> 'Nombre de messages requis afin qu’un sujet soit affiché comme étant populaire. Mettre « 0 » pour désactiver les sujets populaires.',
 	'MAX_POLL_OPTIONS'				=> 'Nombre maximum d’options de vote',
 	'MAX_POST_FONT_SIZE'			=> 'Taille maximale de la police',
-	'MAX_POST_FONT_SIZE_EXPLAIN'	=> 'Taille maximale de la police dans un message. Mettre “0” pour illimité.',
+	'MAX_POST_FONT_SIZE_EXPLAIN'	=> 'Taille maximale de la police dans un message. Mettre « 0 » pour illimité.',
 	'MAX_POST_IMG_HEIGHT'			=> 'Hauteur maximale d’une image',
-	'MAX_POST_IMG_HEIGHT_EXPLAIN'	=> 'Hauteur maximale d’un fichier image ou flash dans un message. Mettre “0” pour illimité.',
+	'MAX_POST_IMG_HEIGHT_EXPLAIN'	=> 'Hauteur maximale d’un fichier image ou flash dans un message. Mettre « 0 » pour illimité.',
 	'MAX_POST_IMG_WIDTH'			=> 'Largeur maximale d’une image',
-	'MAX_POST_IMG_WIDTH_EXPLAIN'	=> 'Largeur maximale d’un fichier image ou flash dans un message. Mettre “0” pour illimité.',
+	'MAX_POST_IMG_WIDTH_EXPLAIN'	=> 'Largeur maximale d’un fichier image ou flash dans un message. Mettre « 0 » pour illimité.',
 	'MAX_POST_URLS'					=> 'Nombre maximum de liens',
-	'MAX_POST_URLS_EXPLAIN'			=> 'Nombre maximum de liens dans un message. Mettre “0” pour illimité.',
+	'MAX_POST_URLS_EXPLAIN'			=> 'Nombre maximum de liens dans un message. Mettre « 0 » pour illimité.',
 	'MIN_CHAR_LIMIT'				=> 'Nombre minimum de caractères par message',
-	'MIN_CHAR_LIMIT_EXPLAIN'		=> 'Nombre minimum de caractères que l’utilisateur doit entrer dans un message/message privé. Le minimum pour ce paramètre est “1”.',
+	'MIN_CHAR_LIMIT_EXPLAIN'		=> 'Nombre minimum de caractères que l’utilisateur doit entrer dans un message/message privé. Le minimum pour ce paramètre est « 1 ».',
 	'POSTING'						=> 'Publication',
 	'POSTS_PER_PAGE'				=> 'Messages par page',
 	'QUOTE_DEPTH_LIMIT'				=> 'Nombre maximum de citations imbriquées',
-	'QUOTE_DEPTH_LIMIT_EXPLAIN'		=> 'Nombre maximum de citations imbriquées dans un message. Mettre “0” pour illimité.',
+	'QUOTE_DEPTH_LIMIT_EXPLAIN'		=> 'Nombre maximum de citations imbriquées dans un message. Mettre « 0 » pour illimité.',
 	'SMILIES_LIMIT'					=> 'Nombre maximum de smileys par message',
-	'SMILIES_LIMIT_EXPLAIN'			=> 'Nombre maximum de smileys dans un message. Mettre “0” pour illimité.',
+	'SMILIES_LIMIT_EXPLAIN'			=> 'Nombre maximum de smileys dans un message. Mettre « 0 » pour illimité.',
 	'SMILIES_PER_PAGE'				=> 'Smileys par page',
 	'TOPICS_PER_PAGE'				=> 'Sujets par page',
 ));
@@ -191,17 +191,17 @@ $lang = array_merge($lang, array(
 	'ACP_SIGNATURE_SETTINGS_EXPLAIN'	=> 'Vous pouvez modifier les paramètres pour les signatures.',
 
 	'MAX_SIG_FONT_SIZE'				=> 'Taille maximale de la police dans les signatures',
-	'MAX_SIG_FONT_SIZE_EXPLAIN'		=> 'Taille de police maximale autorisée dans les signatures d’utilisateur. Mettre “0” pour illimité.',
+	'MAX_SIG_FONT_SIZE_EXPLAIN'		=> 'Taille de police maximale autorisée dans les signatures d’utilisateur. Mettre « 0 » pour illimité.',
 	'MAX_SIG_IMG_HEIGHT'			=> 'Hauteur maximale d’une image dans les signatures',
-	'MAX_SIG_IMG_HEIGHT_EXPLAIN'	=> 'Hauteur maximale d’un fichier image/flash dans les signatures d’utilisateur. Mettre “0” pour illimité.',
+	'MAX_SIG_IMG_HEIGHT_EXPLAIN'	=> 'Hauteur maximale d’un fichier image/flash dans les signatures d’utilisateur. Mettre « 0 » pour illimité.',
 	'MAX_SIG_IMG_WIDTH'				=> 'Largeur maximale d’une image dans les signatures',
-	'MAX_SIG_IMG_WIDTH_EXPLAIN'		=> 'Largeur maximale d’un fichier image/flash dans les signatures d’utilisateur. Mettre “0” pour illimité.',
+	'MAX_SIG_IMG_WIDTH_EXPLAIN'		=> 'Largeur maximale d’un fichier image/flash dans les signatures d’utilisateur. Mettre « 0 » pour illimité.',
 	'MAX_SIG_LENGTH'				=> 'Longueur maximale de la signature',
 	'MAX_SIG_LENGTH_EXPLAIN'		=> 'Nombre de caractères maximum dans les signatures d’utilisateur.',
 	'MAX_SIG_SMILIES'				=> 'Nombre maximum de smileys par signature',
-	'MAX_SIG_SMILIES_EXPLAIN'		=> 'Nombre maximum de smileys dans les signatures d’utilisateur. Mettre “0” pour illimité.',
+	'MAX_SIG_SMILIES_EXPLAIN'		=> 'Nombre maximum de smileys dans les signatures d’utilisateur. Mettre « 0 » pour illimité.',
 	'MAX_SIG_URLS'					=> 'Nombre maximum de liens dans les signatures',
-	'MAX_SIG_URLS_EXPLAIN'			=> 'Nombre maximum de liens dans la signature d’utilisateur. Mettre “0” pour illimité.',
+	'MAX_SIG_URLS_EXPLAIN'			=> 'Nombre maximum de liens dans la signature d’utilisateur. Mettre « 0 » pour illimité.',
 ));
 
 // Registration Settings
@@ -209,9 +209,9 @@ $lang = array_merge($lang, array(
 	'ACP_REGISTER_SETTINGS_EXPLAIN'		=> 'Vous pouvez modifier les paramètres relatifs à l’inscription et aux profils d’utilisateurs.',
 
 	'ACC_ACTIVATION'			=> 'Activation de compte',
-	'ACC_ACTIVATION_EXPLAIN'	=> 'Cela détermine si les utilisateurs ont accès au forum immédiatement ou si une confirmation est requise. Vous pouvez également désactiver complètement les nouvelles inscriptions. “L’envoi d’e-mail” doit être autorisé afin de pouvoir choisir entre l’activation par l’utilisateur ou par l’administrateur.',
+	'ACC_ACTIVATION_EXPLAIN'	=> 'Cela détermine si les utilisateurs ont accès au forum immédiatement ou si une confirmation est requise. Vous pouvez également désactiver complètement les nouvelles inscriptions. « L’envoi d’e-mail » doit être autorisé afin de pouvoir choisir entre l’activation par l’utilisateur ou par l’administrateur.',
 	'NEW_MEMBER_POST_LIMIT'			=> 'Limite de message d’un nouveau membre',
-	'NEW_MEMBER_POST_LIMIT_EXPLAIN'	=> 'Les nouveaux membres resteront dans le groupe <em>Nouveaux utilisateurs enregistrés</em> jusqu’à qu’ils atteignent ce nombre de messages. Vous pouvez utiliser ce groupe pour éviter qu’ils utilisent le système de messagerie privé ou la révision de leurs messages. <strong>Mettre “0” pour désactiver cette fonctionnalité.</strong>',
+	'NEW_MEMBER_POST_LIMIT_EXPLAIN'	=> 'Les nouveaux membres resteront dans le groupe <em>Nouveaux utilisateurs enregistrés</em> jusqu’à qu’ils atteignent ce nombre de messages. Vous pouvez utiliser ce groupe pour éviter qu’ils utilisent le système de messagerie privé ou la révision de leurs messages. <strong>Mettre « 0 » pour désactiver cette fonctionnalité.</strong>',
 	'NEW_MEMBER_GROUP_DEFAULT'		=> 'Mettre le groupe des nouveaux utilisateurs enregistrés par défaut',
 	'NEW_MEMBER_GROUP_DEFAULT_EXPLAIN'	=> 'Si ce paramètre est activé, et qu’une limite de message pour les nouveaux membres est indiquée, les nouveaux utilisateurs enregistrés ne seront pas simplement placés dans le groupe <em>Nouveaux utilisateurs enregistrés</em>, mais ce groupe deviendra également leur groupe par défaut. Cela peut s’avérer pratique si vous voulez assigner un rang et/ou un avatar de groupe par défaut afin que les utilisateurs en héritent.',
 	'ACC_ADMIN'					=> 'Par l’administrateur',
@@ -269,17 +269,17 @@ $lang = array_merge($lang, array(
 	'ACP_FEED_TOPIC_EXPLAIN'			=> 'Permet de suivre les nouveaux messages d’un sujet en particulier.',
 	 
 	'ACP_FEED_TOPICS_NEW'				=> 'Activer le flux des nouveaux sujets',
-	'ACP_FEED_TOPICS_NEW_EXPLAIN'		=> 'Active le flux des “nouveaux sujets”, qui affiche les derniers sujets créés, y compris le premier message.',
+	'ACP_FEED_TOPICS_NEW_EXPLAIN'		=> 'Active le flux des « nouveaux sujets », qui affiche les derniers sujets créés, y compris le premier message.',
 	'ACP_FEED_TOPICS_ACTIVE'			=> 'Activer le flux des sujets actifs',
-	'ACP_FEED_TOPICS_ACTIVE_EXPLAIN'	=> 'Active le flux des “sujet actifs”, qui affiche les derniers sujets actifs, y compris le dernier message.',
+	'ACP_FEED_TOPICS_ACTIVE_EXPLAIN'	=> 'Active le flux des « sujet actifs », qui affiche les derniers sujets actifs, y compris le dernier message.',
 	'ACP_FEED_NEWS'						=> 'Flux des nouvelles',
 	'ACP_FEED_NEWS_EXPLAIN'				=> 'Sélectionne le premier message depuis ces forums. Ne sélectionnez aucun forum pour désactiver le flux des nouvelles.<br />Sélectionner plusieurs forums en maintenant la touche <samp>CTRL</samp> et en cliquant.',
 	  
 	'ACP_FEED_OVERALL_FORUMS'			=> 'Activer le flux des forums',
-	'ACP_FEED_OVERALL_FORUMS_EXPLAIN'	=> 'Active le flux de “tous les forums”, ce qui affiche une liste des forums.',
+	'ACP_FEED_OVERALL_FORUMS_EXPLAIN'	=> 'Active le flux de « tous les forums », ce qui affiche une liste des forums.',
 	 
 	'ACP_FEED_HTTP_AUTH'				=> 'Autoriser l’authentification HTTP',
-	'ACP_FEED_HTTP_AUTH_EXPLAIN'		=> 'Active l’authentification HTTP, ce qui autorise les utilisateurs à recevoir le contenu qui est masqué aux invités en ajoutant le paramètre <samp>auth=http</samp> à l’URL du flux. Notez que certaines installations de PHP nécessite d’effectuer des modifications additionnelles sur le fichier .htaccess. Toutes les instructions sont contenues dans ce fichier.',
+	'ACP_FEED_HTTP_AUTH_EXPLAIN'		=> 'Active l’authentification HTTP, ce qui autorise les utilisateurs à recevoir le contenu qui est masqué aux invités en ajoutant le paramètre <samp>auth=http</samp> à l’URL du flux. Notez que certaines installations de PHP nécessitent d’effectuer des modifications additionnelles sur le fichier .htaccess. Toutes les instructions sont contenues dans ce fichier.',
 	'ACP_FEED_ITEM_STATISTICS'			=> 'Statistiques de l’article',
 	'ACP_FEED_ITEM_STATISTICS_EXPLAIN'	=> 'Affiche les statistiques indivuelles sous les articles de flux<br />(Exemple: Posté par, date et heure, Réponses, Vues)',
 	'ACP_FEED_EXCLUDE_ID'				=> 'Exclure ces forums',
@@ -297,9 +297,9 @@ $lang = array_merge($lang, array(
 	'CAPTCHA_GD_EXPLAIN'					=> 'Utilise GD pour faire une image plus difficile à déchiffrer par les robots.',
 	'CAPTCHA_GD_FOREGROUND_NOISE_EXPLAIN'	=> 'Utiliser un bruit de fond pour faire une image plus difficile à déchiffrer par les robots.',
 	'CAPTCHA_GD_X_GRID'						=> 'Bruit de fond x-axis',
-	'CAPTCHA_GD_X_GRID_EXPLAIN'				=> 'Utiliser le paramètre ci-dessous pour rendre la confirmation visuelle plus difficile à déchiffrer. Mettre “0” pour désactiver le bruit de fond x-axis.',
+	'CAPTCHA_GD_X_GRID_EXPLAIN'				=> 'Utiliser le paramètre ci-dessous pour rendre la confirmation visuelle plus difficile à déchiffrer. Mettre « 0 » pour désactiver le bruit de fond x-axis.',
 	'CAPTCHA_GD_Y_GRID'						=> 'Bruit de fond y-axis',
-	'CAPTCHA_GD_Y_GRID_EXPLAIN'				=> 'Utiliser le paramètre ci-dessous pour rendre la confirmation visuelle plus difficile à déchiffrer. Mettre “0” pour désactiver le bruit de fond y-axis.',
+	'CAPTCHA_GD_Y_GRID_EXPLAIN'				=> 'Utiliser le paramètre ci-dessous pour rendre la confirmation visuelle plus difficile à déchiffrer. Mettre « 0 » pour désactiver le bruit de fond y-axis.',
 	'CAPTCHA_GD_WAVE'						=> 'Distorsion ondulatoire',
 	'CAPTCHA_GD_WAVE_EXPLAIN'				=> 'Cela appliquera une distorsion ondulatoire à l’image.',
  	'CAPTCHA_GD_3D_NOISE'					=> 'Ajouter des objets de bruit en 3D',
@@ -331,7 +331,7 @@ $lang = array_merge($lang, array(
 
 // Cookie Settings
 $lang = array_merge($lang, array(
-	'ACP_COOKIE_SETTINGS_EXPLAIN'		=> 'Ces informations définissent les données utilisées pour envoyer les cookies aux navigateurs de vos utilisateurs. Dans la majorité des cas, les valeurs par défaut pour les paramètres de cookie suffisent. Si vous avez besoin de les modifier, faîtes-le avec soin car des paramètres incorrects peuvent empêcher les utilisateurs de se connecter.',
+	'ACP_COOKIE_SETTINGS_EXPLAIN'		=> 'Ces informations définissent les données utilisées pour envoyer les cookies aux navigateurs de vos utilisateurs. Dans la majorité des cas, les valeurs par défaut pour les paramètres de cookie suffisent. Si vous avez besoin de les modifier, faites-le avec soin car des paramètres incorrects peuvent empêcher les utilisateurs de se connecter.',
 
 	'COOKIE_DOMAIN'				=> 'Domaine du cookie',
 	'COOKIE_NAME'				=> 'Nom du cookie',
@@ -346,13 +346,13 @@ $lang = array_merge($lang, array(
 
 // Load Settings
 $lang = array_merge($lang, array(
-	'ACP_LOAD_SETTINGS_EXPLAIN'	=> 'Vous pouvez activer et désactiver certaines fonctions du forum pour réduire la quantité de traitement requise. Sur la plupart des serveurs, il n’est pas nécessaire de désactiver ces fonctionnalités. Cependant, sur certains systèmes ou hébergements mutualisés, il peut être préférable de désactiver certaines possibilités dont vous n’avez pas réellement besoin. Vous pouvez également indiquer des limites pour la charge du système et les sessions actives au delà desquelles le forum sera hors-ligne.',
+	'ACP_LOAD_SETTINGS_EXPLAIN'	=> 'Vous pouvez activer et désactiver certaines fonctions du forum pour réduire la quantité de traitement requise. Sur la plupart des serveurs, il n’est pas nécessaire de désactiver ces fonctionnalités. Cependant, sur certains systèmes ou hébergements mutualisés, il peut être préférable de désactiver certaines possibilités dont vous n’avez pas réellement besoin. Vous pouvez également indiquer des limites pour la charge du système et les sessions actives au-delà desquelles le forum sera hors-ligne.',
 
 	'CUSTOM_PROFILE_FIELDS'			=> 'Champs de profil personnalisés',
 	'LIMIT_LOAD'					=> 'Limiter la charge système',
 	'LIMIT_LOAD_EXPLAIN'			=> 'Si la charge du système dépasse cette valeur durant une minute, le forum sera automatiquement indisponible. Une valeur à 1.0 équivaut à environ 100% d’utilisation d’un processeur. Cela ne fonctionne que sur les serveurs basés sous UNIX et où cette information est accessible. Cette valeur se réinitialise à 0 si phpBB n’arrive pas à obtenir la valeur de la charge du système.',
 	'LIMIT_SESSIONS'				=> 'Nombre de sessions',
-	'LIMIT_SESSIONS_EXPLAIN'		=> 'Si le nombre de sessions dépasse cette valeur durant une minute, le forum sera indisponible. Mettre “0” pour illimité.',
+	'LIMIT_SESSIONS_EXPLAIN'		=> 'Si le nombre de sessions dépasse cette valeur durant une minute, le forum sera indisponible. Mettre « 0 » pour illimité.',
 	'LOAD_CPF_MEMBERLIST'			=> 'Autoriser les styles à afficher les champs personnalisés dans la liste des membres',
 	'LOAD_CPF_PM'          			=> 'Afficher les champs personnalisés dans les messages privés',
 	'LOAD_CPF_VIEWPROFILE'			=> 'Afficher les champs personnalisés dans les profils d’utilisateur',
@@ -369,8 +369,8 @@ $lang = array_merge($lang, array(
 	'YES_MODERATORS'				=> 'Activer l’affichage des modérateurs',
 	'YES_ONLINE'					=> 'Activer l’affichage de la liste des utilisateurs en ligne',
 	'YES_ONLINE_EXPLAIN'			=> 'Affiche ces informations sur l’accueil, dans les forums et sujets.',
-	'YES_ONLINE_GUESTS'				=> 'Activer l’affichage des visiteurs dans “Qui est en ligne”',
-	'YES_ONLINE_GUESTS_EXPLAIN'		=> 'Affiche les informations concernant les visiteurs dans “Qui est en ligne”.',
+	'YES_ONLINE_GUESTS'				=> 'Activer l’affichage des visiteurs dans « Qui est en ligne »',
+	'YES_ONLINE_GUESTS_EXPLAIN'		=> 'Affiche les informations concernant les visiteurs dans « Qui est en ligne ».',
 	'YES_ONLINE_TRACK'				=> 'Activer l’affichage de l’état de connexion',
 	'YES_ONLINE_TRACK_EXPLAIN'		=> 'Affiche dans le profil public et les sujets le statut de l’utilisateur.',
 	'YES_POST_MARKING'				=> 'Activer les sujets pointés',
@@ -386,27 +386,27 @@ $lang = array_merge($lang, array(
 
 	'AUTH_METHOD'				=> 'Sélectionnez une méthode d’authentification',
 
-	'APACHE_SETUP_BEFORE_USE'	=> 'Vous devez configurer l’authentification apache avant de passer phpBB à cette méthode d’authentification. Gardez en tête que le nom d’utilisateur utilisé pour l’authentification apache doit être identique à votre nom d’utilisateur phpBB. L’authentification Apache peut seulement être utilisée avec <var>mod_php</var> (pas avec une version CGI) et <var>safe_mode</var> doit être désactivé.',
+	'APACHE_SETUP_BEFORE_USE'	=> 'Vous devez configurer l’authentification Apache avant de passer phpBB à cette méthode d’authentification. Gardez en tête que le nom d’utilisateur utilisé pour l’authentification Apache doit être identique à votre nom d’utilisateur phpBB. L’authentification Apache peut seulement être utilisée avec <var>mod_php</var> (pas avec une version CGI) et <var>safe_mode</var> doit être désactivé.',
 
 	'LDAP_DN'						=> 'Base LDAP vers <var>DN</var>',
-	'LDAP_DN_EXPLAIN'				=> 'Ceci est le “Distinguished Name”, situant toutes les informations utilisateurs, exemple: <samp>o=Mon entreprise, c=FR</samp>.',
+	'LDAP_DN_EXPLAIN'				=> 'Ceci est le « Distinguished Name », situant toutes les informations utilisateurs, exemple: <samp>o=Mon entreprise, c=FR</samp>.',
 	'LDAP_EMAIL'					=> 'Attribut LDAP des adresses e-mail',
 	'LDAP_EMAIL_EXPLAIN'			=> 'Ceci est le nom de l’attribut de l’e-mail de vos utilisateurs (s’il existe) afin de régler automatiquement l’adresse e-mail des nouveaux utilisateurs. Laissez cette case vide pour que l’adresse e-mail résultante soit vide pour les utilisateurs qui se connectent pour la première fois.',
 	'LDAP_INCORRECT_USER_PASSWORD'	=> 'La connexion au serveur LDAP a échoué avec les nom d’utilisateur et mot de passe indiqués.',
 	'LDAP_NO_EMAIL'					=> 'Cet attribut d’adresse e-mail n’existe pas.',
 	'LDAP_NO_IDENTITY'				=> 'Impossible de trouver un identifiant de connexion pour %s',
 	'LDAP_PASSWORD'					=> 'Mot de passe LDAP',
-	'LDAP_PASSWORD_EXPLAIN'			=> 'Laissez cette case vide pour utiliser une connexion anonyme, sinon, indiquez le mot de passe pour l’utilisateur indiqué ci-dessus. Ceci est obligatoire pour les serveurs possédant un Active Directory.<br /><em><strong>ATTENTION:</strong> Ce mot de passe sera stocké en clair dans votre de base de données et sera visible par n’importe qui ayant accès à votre base de données ou à cette page de configuration.</em>',
+	'LDAP_PASSWORD_EXPLAIN'			=> 'Laissez cette case vide pour utiliser une connexion anonyme, sinon, indiquez le mot de passe pour l’utilisateur indiqué ci-dessus. Ceci est obligatoire pour les serveurs possédant un « Active Directory ».<br /><em><strong>ATTENTION:</strong> Ce mot de passe sera stocké en clair dans votre de base de données et sera visible par n’importe qui ayant accès à votre base de données ou à cette page de configuration.</em>',
 	'LDAP_PORT'						=> 'Port du serveur LDAP',
-	'LDAP_PORT_EXPLAIN'				=> 'Si vous le souhaitez, vous pouvez indiquer un port qui devrait être employé pour se connecter au serveur LDAP au lieu du port par défaut 389.',
+	'LDAP_PORT_EXPLAIN'				=> 'Si vous le souhaitez, vous pouvez indiquer un port qui devra être employé pour se connecter au serveur LDAP au lieu du port par défaut 389.',
 	'LDAP_SERVER'					=> 'Nom du serveur LDAP',
 	'LDAP_SERVER_EXPLAIN'			=> 'Si vous utilisez LDAP, ceci est le nom d’hôte ou l’adresse IP du serveur LDAP. Sinon, vous pouvez préciser une URL comme ldap://hostname:port/',
 	'LDAP_UID'						=> 'Clé <var>uid</var> LDAP',
 	'LDAP_UID_EXPLAIN'				=> 'Ceci est la clé utilisée pour la recherche d’un identifiant de connexion, exemple: <var>uid</var>, <var>sn</var>, etc.',
 	'LDAP_USER'						=> 'Utilisateur <var>dn</var> LDAP',
-	'LDAP_USER_EXPLAIN'				=> 'Laissez cette case vide pour utiliser une connexion anonyme. Si cela est renseigné dans phpBB, utilisez le “Distinguished Name” que vous avez indiqué lors des tentatives de connexion afin de trouver l’utilisateur correct, comme <samp>uid=Nom,ou=MonUnité,o=MaCompagnie,c=FR</samp>. Requis pour les serveurs possédant un Active Directory.',
+	'LDAP_USER_EXPLAIN'				=> 'Laissez cette case vide pour utiliser une connexion anonyme. Si cela est renseigné dans phpBB, utilisez le « Distinguished Name » que vous avez indiqué lors des tentatives de connexion afin de trouver l’utilisateur correct, comme <samp>uid=Nom,ou=MonUnité,o=MaCompagnie,c=FR</samp>. Requis pour les serveurs possédant un « Active Directory ».',
 	'LDAP_USER_FILTER'				=> 'Filtre de l’utilisateur LDAP',
-	'LDAP_USER_FILTER_EXPLAIN'		=> 'Si vous le souhaitez, vous pouvez en plus limiter les objets recherchés avec des filtres additionnels. Par exemple <samp>objectClass=posixGroup</samp> deviendrait lors de l’utilisation <samp>(&amp;(uid=$username)(objectClass=posixGroup))</samp>',
+	'LDAP_USER_FILTER_EXPLAIN'		=> 'Si vous le souhaitez, vous pouvez en plus limiter les objets recherchés avec des filtres additionnels. Par exemple: <samp>objectClass=posixGroup</samp> deviendrait lors de l’utilisation <samp>(&amp;(uid=$username)(objectClass=posixGroup))</samp>',
 ));
 
 // Server Settings
@@ -416,7 +416,7 @@ $lang = array_merge($lang, array(
 	'ENABLE_GZIP'				=> 'Activer la compression GZip',
 	'ENABLE_GZIP_EXPLAIN'		=> 'Le contenu généré sera compressé avant d’être envoyé à l’utilisateur. Cela peut réduire le trafic mais également augmenter l’utilisation du CPU à la fois du côté serveur et client. Cela nécessite que l’extension PHP zlib soit chargée.',
 	'FORCE_SERVER_VARS'			=> 'Forcer les paramètres URL du serveur',
-	'FORCE_SERVER_VARS_EXPLAIN'	=> 'Si “Oui” les paramètres définis ici seront utilisés à la place des valeurs déterminées automatiquement.',
+	'FORCE_SERVER_VARS_EXPLAIN'	=> 'Si « Oui », les paramètres définis ici seront utilisés à la place des valeurs déterminées automatiquement.',
 	'ICONS_PATH'				=> 'Emplacement des icônes de message',
 	'ICONS_PATH_EXPLAIN'		=> 'Chemin depuis le répertoire racine de phpBB, exemple: <samp>images/icons</samp>',
 	'PATH_SETTINGS'				=> 'Chemins d’accès',
@@ -445,7 +445,7 @@ $lang = array_merge($lang, array(
 	'ALLOW_AUTOLOGIN'				=> 'Autoriser les connexions automatiques',
 	'ALLOW_AUTOLOGIN_EXPLAIN'		=> 'Détermine si les utilisateurs peuvent être connectés automatiquement quand ils visitent le forum.',
 	'AUTOLOGIN_LENGTH'				=> 'Expiration des clés de connexion automatique (en jours)',
-	'AUTOLOGIN_LENGTH_EXPLAIN'		=> 'Nombre de jours après lequel les clés de connexions automatiques sont supprimées ou “0” pour désactiver.',
+	'AUTOLOGIN_LENGTH_EXPLAIN'		=> 'Nombre de jours après lequel les clés de connexions automatiques sont supprimées ou « 0 » pour désactiver.',
 	'BROWSER_VALID'					=> 'Valider le navigateur',
 	'BROWSER_VALID_EXPLAIN'			=> 'Active la validation du navigateur pour chaque session, ce qui améliore la sécurité.',
 	'CHECK_DNSBL'					=> 'Comparer l’IP avec la liste noire DNS',
@@ -455,23 +455,23 @@ $lang = array_merge($lang, array(
 	'EMAIL_CHECK_MX'				=> 'Vérifier l’e-mail pour un enregistrement MX valide',
 	'EMAIL_CHECK_MX_EXPLAIN'		=> 'Si activé, le domaine de l’e-mail fourni lors de l’inscription et des modifications de profil est contrôlé, pour s’assurer qu’il possède un enregistrement MX valide.',
 	'FORCE_PASS_CHANGE'				=> 'Forcer la modification du mot de passe',
-	'FORCE_PASS_CHANGE_EXPLAIN'		=> 'Oblige l’utilisateur à modifier son mot de passe après un certain nombre de jours. Mettre “0” pour désactiver ce comportement.',
+	'FORCE_PASS_CHANGE_EXPLAIN'		=> 'Oblige l’utilisateur à modifier son mot de passe après un certain nombre de jours. Mettre « 0 » pour désactiver ce comportement.',
 	'FORM_TIME_MAX'					=> 'Temps maximum lors de l’envoi des formulaires',
-	'FORM_TIME_MAX_EXPLAIN'			=> 'Détermine le temps dont un utilisateur dispose pour envoyer un formulaire. Mettre “-1” pour désactiver. Notez qu’un formulaire peut devenir invalide si la session expire, et cela indépendamment de ce paramètre.',
+	'FORM_TIME_MAX_EXPLAIN'			=> 'Détermine le temps dont un utilisateur dispose pour envoyer un formulaire. Mettre « -1 » pour désactiver. Notez qu’un formulaire peut devenir invalide si la session expire, et cela indépendamment de ce paramètre.',
 	'FORM_SID_GUESTS'				=> 'Lier les formulaires aux sessions des invités',
 	'FORM_SID_GUESTS_EXPLAIN'		=> 'Si activé, les formulaires émis aux invités seront exclusifs à leur session. Cela peut entraîner quelques problèmes avec certains fournisseurs d’accès.',
 	'FORWARDED_FOR_VALID'			=> 'En-tête <var>X_FORWARDED_FOR</var> valide',
-	'FORWARDED_FOR_VALID_EXPLAIN'	=> 'Les sessions seront seulement continuées si l’entête <var> X_FORWARDED_FOR </var> envoyée est égale à celle envoyée avec la requête précédente. L’en-tête <var>X_FORWARDED_FOR</var> vérifiera également si les adresses IP n’ont pas été bannies.',
+	'FORWARDED_FOR_VALID_EXPLAIN'	=> 'Les sessions seront seulement continuées si l’en-tête <var> X_FORWARDED_FOR </var> envoyée est égale à celle envoyée avec la requête précédente. L’en-tête <var>X_FORWARDED_FOR</var> vérifiera également si les adresses IP n’ont pas été bannies.',
 	'IP_VALID'						=> 'Validation de session IP',
-	'IP_VALID_EXPLAIN'				=> 'Détermine quelle partie de l’adresse IP des utilisateurs sera utilisée pour valider une session : <samp>Tous</samp> compare l’adresse complète, <samp>A.B.C</samp> les premiers x.x.x, <samp>A.B</samp> les premiers x.x, <samp>Aucune</samp> désactive la vérification. Pour les adresses IPv6, <samp>A.B.C</samp> compare les 4 premiers blocs et <samp>A.B</samp> les 3 premiers blocs.',
-	'IP_LOGIN_LIMIT_MAX' 			=> 'Nombre maximal de tentatives de connexion par addresse IP',
-	'IP_LOGIN_LIMIT_MAX_EXPLAIN'  	=> 'Seuil du nombre de tentatives de connexion autorisé pour une adresse IP avant d’activer la confirmation visuelle. Mettre 0 pour désactiver la confirmation visuelle par adresse IP.',
+	'IP_VALID_EXPLAIN'				=> 'Détermine quelle partie de l’adresse IP des utilisateurs sera utilisée pour valider une session: <samp>Tous</samp> compare l’adresse complète, <samp>A.B.C</samp> les premiers x.x.x, <samp>A.B</samp> les premiers x.x, <samp>Aucune</samp> désactive la vérification. Pour les adresses IPv6, <samp>A.B.C</samp> compare les 4 premiers blocs et <samp>A.B</samp> les 3 premiers blocs.',
+	'IP_LOGIN_LIMIT_MAX' 			=> 'Nombre maximal de tentatives de connexion par adresse IP',
+	'IP_LOGIN_LIMIT_MAX_EXPLAIN'  	=> 'Seuil du nombre de tentatives de connexion autorisé pour une adresse IP avant d’activer la confirmation visuelle. Mettre « 0 » pour désactiver la confirmation visuelle par adresse IP.',
 	'IP_LOGIN_LIMIT_TIME' 			=> 'Expiration des tentatives de connexion par adresse IP',
 	'IP_LOGIN_LIMIT_TIME_EXPLAIN' 	=> 'Temps d’expiration des tentatives de connexion par adresse IP.',
 	'IP_LOGIN_LIMIT_USE_FORWARDED' 	=> 'Limite des tentatives de connexions par en-tête <var>X_FORWARDED_FOR</var>',
-	'IP_LOGIN_LIMIT_USE_FORWARDED_EXPLAIN' => 'Au lieu de limiter les tentatives de connexions par addresse IP, elles seront limitées par la valeur <var>X_FORWARDED_FOR</var>. <br /><em><strong>Attention:</strong> A activer seulement si le serveur proxy à des valeurs <var>X_FORWARDED_FOR</var> digne de confiance.</em>',
+	'IP_LOGIN_LIMIT_USE_FORWARDED_EXPLAIN' => 'Au lieu de limiter les tentatives de connexions par adresse IP, elles seront limitées par la valeur <var>X_FORWARDED_FOR</var>. <br /><em><strong>Attention:</strong> À activer seulement si le serveur proxy a des valeurs <var>X_FORWARDED_FOR</var> dignes de confiance.</em>',
 	'MAX_LOGIN_ATTEMPTS' 			=> 'Nombre maximal de tentatives de connexion par nom d’utilisateur',
-	'MAX_LOGIN_ATTEMPTS_EXPLAIN'  	=> 'Nombre maximal de tentatives de connexion autorisé par nom d’utilisateur avant d’activer la confirmation visuelle. Mettre 0 pour désactiver la confirmation visuelle par nom d’utilisateur.',
+	'MAX_LOGIN_ATTEMPTS_EXPLAIN'  	=> 'Nombre maximal de tentatives de connexion autorisé par nom d’utilisateur avant d’activer la confirmation visuelle. Mettre « 0 » pour désactiver la confirmation visuelle par nom d’utilisateur.',
 	'NO_IP_VALIDATION'				=> 'Aucune',
 	'NO_REF_VALIDATION' 			=> 'Aucune',
 	'PASSWORD_TYPE'					=> 'Complexité du mot de passe',
@@ -503,13 +503,13 @@ $lang = array_merge($lang, array(
 	'EMAIL_FUNCTION_NAME'			=> 'Nom de la fonction e-mail',
 	'EMAIL_FUNCTION_NAME_EXPLAIN'	=> 'La fonction e-mail est utilisée pour envoyer des e-mails via PHP.',
 	'EMAIL_PACKAGE_SIZE'			=> 'Taille des paquets d’e-mails',
-	'EMAIL_PACKAGE_SIZE_EXPLAIN'	=> 'Ceci est le nombre d’e-mails envoyés dans un paquet. Cette option est appliquée à la file d’attente des messages; Réglez cette option à “0” si vous rencontrez des problèmes avec des notifications de messages non délivrés.',
+	'EMAIL_PACKAGE_SIZE_EXPLAIN'	=> 'Ceci est le nombre d’e-mails envoyés dans un paquet. Cette option est appliquée à la file d’attente des messages ; réglez cette option à « 0 » si vous rencontrez des problèmes avec des notifications de messages non délivrés.',
 	'EMAIL_SIG'						=> 'Signature de l’e-mail',
 	'EMAIL_SIG_EXPLAIN'				=> 'Ce texte sera inséré à la fin de tous les e-mails envoyés par le forum.',
 	'ENABLE_EMAIL'					=> 'Autoriser l’envoi d’e-mail via le forum',
-	'ENABLE_EMAIL_EXPLAIN'			=> 'Si désactivé, aucun e-mail ne sera envoyé par le forum. <em>Notez que les paramètres d’activation de compte “par l’utilisateur” et “par l’administrateur” nécessite que ce réglage soit activé. Si vous utilisez actuellement l’un de ces deux paramètres dans les paramètres généraux d’activation, en désactivant ce réglage, les nouvelles inscriptions ne nécessiteront plus aucune activation.</em>',
+	'ENABLE_EMAIL_EXPLAIN'			=> 'Si désactivé, aucun e-mail ne sera envoyé par le forum. <em>Notez que les paramètres d’activation de compte « par l’utilisateur » et « par l’administrateur » nécessitent que ce réglage soit activé. Si vous utilisez actuellement l’un de ces deux paramètres dans les paramètres généraux d’activation, en désactivant ce réglage, les nouvelles inscriptions ne nécessiteront plus aucune activation.</em>',
 	'SMTP_AUTH_METHOD'				=> 'Méthode d’authentification SMTP',
-	'SMTP_AUTH_METHOD_EXPLAIN'		=> 'Seulement utilisé si un nom d’utilisateur et un mot de passe a été renseigné. Contactez votre fournisseur d’accès si vous n’êtes pas sûr de la méthode à utiliser.',
+	'SMTP_AUTH_METHOD_EXPLAIN'		=> 'Seulement utilisée si un nom d’utilisateur et un mot de passe ont été renseignés. Contactez votre fournisseur d’accès si vous n’êtes pas sûr de la méthode à utiliser.',
 	'SMTP_CRAM_MD5'					=> 'CRAM-MD5',
 	'SMTP_DIGEST_MD5'				=> 'DIGEST-MD5',
 	'SMTP_LOGIN'					=> 'LOGIN',
@@ -524,7 +524,7 @@ $lang = array_merge($lang, array(
 	'SMTP_USERNAME'					=> 'Nom d’utilisateur SMTP',
 	'SMTP_USERNAME_EXPLAIN'			=> 'Saisissez un nom d’utilisateur uniquement si votre serveur SMTP en requiert un.',
 	'USE_SMTP'						=> 'Utiliser un serveur SMTP pour l’envoi d’e-mails',
-	'USE_SMTP_EXPLAIN'				=> 'Sélectionnez “Oui” si vous voulez ou devez envoyer les e-mails par l’intermédiaire d’un serveur au lieu d’utiliser la fonction e-mail locale.',
+	'USE_SMTP_EXPLAIN'				=> 'Sélectionnez « Oui » si vous voulez ou devez envoyer les e-mails par l’intermédiaire d’un serveur au lieu d’utiliser la fonction e-mail locale.',
 ));
 
 // Jabber settings
@@ -535,7 +535,7 @@ $lang = array_merge($lang, array(
 	'JAB_ENABLE_EXPLAIN'		=> 'Active l’utilisation de Jabber pour l’envoi de messages et de notifications.',
 	'JAB_GTALK_NOTE'			=> 'Notez que GTalk ne marchera pas car la fonction <samp>dns_get_record</samp> est introuvable. Cette fonction n’est pas disponible dans PHP4 et elle n’est pas implémentée sur les environnements Windows. Cela ne fonctionne pas non plus sur les système basés sous BSD, y compris Mac OS.',
 	'JAB_PACKAGE_SIZE'			=> 'Taille des paquets Jabber',
-	'JAB_PACKAGE_SIZE_EXPLAIN'	=> 'Nombre de messages envoyés dans un paquet. Si mis à “0”, le message est envoyé immédiatement et ne sera pas placé en file d’attente.',
+	'JAB_PACKAGE_SIZE_EXPLAIN'	=> 'Nombre de messages envoyés dans un paquet. Si mis à « 0 », le message est envoyé immédiatement et ne sera pas placé en file d’attente.',
 	'JAB_PASSWORD'				=> 'Mot de passe Jabber',
 	'JAB_PASSWORD_EXPLAIN'		=> '<em><strong>Attention:</strong> ce mot de passe sera stocké en clair dans la base de données, visible de toute personne ayant accès à votre base de données ou à cette page de configuration.</em>',
 	'JAB_PORT'					=> 'Port Jabber',

@@ -5,7 +5,7 @@
 * translated originally by PhpBB-fr.com <http://www.phpbb-fr.com/> and phpBB.biz <http://www.phpBB.biz>
 *
 * @package language
-* @version $Id: attachments.php, v1.25 12:50 25/04/2011 lolovoisin Exp $
+* @version $Id: attachments.php 59 2012-08-27 06:41:52Z Morgyanne $
 * @copyright (c) 2005 phpBB Group 
 * @license http://opensource.org/licenses/gpl-license.php GNU Public License 
 *
@@ -38,12 +38,12 @@ if (empty($lang) || !is_array($lang))
 
 $lang = array_merge($lang, array(
 	'ACP_ATTACHMENT_SETTINGS_EXPLAIN'	=> 'Vous pouvez configurer les paramètres principaux pour les fichiers joints et les catégories spéciales associées.',
-	'ACP_EXTENSION_GROUPS_EXPLAIN'		=> 'Vous pouvez ajouter, supprimer, modifier ou désactiver vos groupes d’extensions. D’autres options incluent l’attribution d’une catégorie spéciale, la modification du mécanisme de téléchargement et la définition d’une icône de chargement qui sera affichée devant le fichier joint qui appartient au groupe.',
+	'ACP_EXTENSION_GROUPS_EXPLAIN'		=> 'Vous pouvez ajouter, supprimer, modifier ou désactiver vos groupes d’extensions. D’autres options incluent l’attribution d’une catégorie spéciale, la modification du mécanisme de téléchargement et la définition d’une icône de transfert qui sera affichée devant le fichier joint qui appartient au groupe.',
 	'ACP_MANAGE_EXTENSIONS_EXPLAIN'		=> 'Vous pouvez gérer les extensions autorisées. Pour activer vos extensions, référez-vous au panneau de gestion des groupes d’extensions. Nous recommandons vivement de ne pas autoriser les extensions de scripts tel que <code>php</code>, <code>php3</code>, <code>php4</code>, <code>phtml</code>, <code>pl</code>, <code>cgi</code>, <code>py</code>, <code>rb</code>, <code>asp</code>, <code>aspx</code>, etc.',
-	'ACP_ORPHAN_ATTACHMENTS_EXPLAIN'	=> 'Vous pouvez voir les fichiers orphelins. Cela se produit la plupart du temps quand les utilisateurs insèrent des fichiers mais n’envoient pas le message. Vous pouvez supprimer les fichiers ou les insérer à des messages existants. L’insertion aux messages requiert une ID de message valide, vous avez à déterminer cette ID de vous-même. Cela assignera le fichier joint déjà chargé au message portant l’ID que vous entrez.',
+	'ACP_ORPHAN_ATTACHMENTS_EXPLAIN'	=> 'Vous pouvez voir les fichiers orphelins. Cela se produit la plupart du temps quand les utilisateurs insèrent des fichiers mais n’envoient pas le message. Vous pouvez supprimer les fichiers ou les insérer à des messages existants. L’insertion aux messages requiert une ID de message valide, vous avez à déterminer cette ID de vous-même. Cela assignera le fichier joint déjà transféré au message portant l’ID que vous entrez.',
 	'ADD_EXTENSION'						=> 'Ajouter une extension',
 	'ADD_EXTENSION_GROUP'				=> 'Ajouter un groupe d’extensions',
-	'ADMIN_UPLOAD_ERROR'				=> 'Erreur lors de l’envoi du fichier: “%s”.',
+	'ADMIN_UPLOAD_ERROR'				=> 'Erreur lors du transfert du fichier: « %s ».',
 	'ALLOWED_FORUMS'					=> 'Forums autorisés',
 	'ALLOWED_FORUMS_EXPLAIN'			=> 'Autorise à utiliser le groupe d’extensions sur les forums sélectionnés. (ou tous si sélectionné)',
 	'ALLOWED_IN_PM_POST'				=> 'Autorisé',
@@ -58,14 +58,14 @@ $lang = array_merge($lang, array(
 	'ATTACH_EXT_GROUPS_URL'				=> 'Groupes d’extensions',
 	'ATTACH_ID'							=> 'ID',
 	'ATTACH_MAX_FILESIZE'				=> 'Taille maximale du fichier',
-	'ATTACH_MAX_FILESIZE_EXPLAIN'		=> 'Taille maximale de chaque fichier, mettre “0” pour illimité.',
+	'ATTACH_MAX_FILESIZE_EXPLAIN'		=> 'Taille maximale de chaque fichier. Si cette valeur est « 0 », la taille du fichier transféré est uniquement limitée par votre configuration PHP.',
 	'ATTACH_MAX_PM_FILESIZE'			=> 'Taille maximale des fichiers dans la messagerie privée',
-	'ATTACH_MAX_PM_FILESIZE_EXPLAIN' 	=> 'Taille maximale de chaque fichier joint à un message privé, mettre “0” pour illimité.',
+	'ATTACH_MAX_PM_FILESIZE_EXPLAIN' 	=> 'Taille maximale de chaque fichier joint à un message privé, mettre « 0 » pour illimité.',
 	'ATTACH_ORPHAN_URL'					=> 'Fichiers orphelins',
 	'ATTACH_POST_ID'					=> 'ID du message',
 	'ATTACH_POST_TYPE'          		=> 'Type du message',
 	'ATTACH_QUOTA'						=> 'Quota total de fichiers joints',
-	'ATTACH_QUOTA_EXPLAIN'				=> 'Espace disque maximum disponible pour les fichiers joints de tout le forum, mettre “0” pour illimité.',
+	'ATTACH_QUOTA_EXPLAIN'				=> 'Espace disque maximum disponible pour les fichiers joints de tout le forum, mettre « 0 » pour illimité.',
 	'ATTACH_TO_POST'					=> 'Joindre le fichier au message',
 
 	'CAT_FLASH_FILES'			=> 'Fichiers Flash',
@@ -74,7 +74,7 @@ $lang = array_merge($lang, array(
 	'CAT_RM_FILES'				=> 'Fichiers RealMedia',
 	'CAT_WM_FILES'				=> 'Fichier Windows Media',
 	'CHECK_CONTENT' 			=> 'Vérifier les fichiers joints',
-	'CHECK_CONTENT_EXPLAIN' 	=> 'Certains navigateurs peuvent se tromper en attribuant un type MIME incorrect aux fichiers chargés. Cette option permet de rejeter les fichiers qui risquent d’entraîner ce problème.',
+	'CHECK_CONTENT_EXPLAIN' 	=> 'Certains navigateurs peuvent se tromper en attribuant un type MIME incorrect aux fichiers transférés. Cette option permet de rejeter les fichiers qui risquent d’entraîner ce problème.',
 	'CREATE_GROUP'				=> 'Créer un nouveau groupe',
 	'CREATE_THUMBNAIL'			=> 'Créer une miniature',
 	'CREATE_THUMBNAIL_EXPLAIN'	=> 'Créer une miniature dans tous les cas possibles.',
@@ -84,7 +84,7 @@ $lang = array_merge($lang, array(
 	'DOWNLOAD_ADD_IPS_EXPLAIN'		=> 'Pour indiquer plusieurs adresses IPs ou noms d’hôtes différents, entrez chacun d’eux sur une nouvelle ligne. Pour indiquer une plage d’adresses IPs, séparez le début et la fin par un tiret, et utilisez * comme caractère joker.',
 	'DOWNLOAD_REMOVE_IPS_EXPLAIN'	=> 'Vous pouvez supprimer (ou ne plus exclure) plusieurs adresses IPs d’un coup en utilisant la combinaison de touches appropriée avec votre clavier et votre souris. Les adresses IPs exclues ont un fond bleu.',
 	'DISPLAY_INLINED'				=> 'Afficher les images',
-	'DISPLAY_INLINED_EXPLAIN'		=> 'Si “Non”, les images jointes seront affichées en tant que liens.',
+	'DISPLAY_INLINED_EXPLAIN'		=> 'Si « Non », les images jointes seront affichées en tant que liens.',
 	'DISPLAY_ORDER'					=> 'Ordre d’affichage des fichiers joints',
 	'DISPLAY_ORDER_EXPLAIN'			=> 'Classer les fichiers joints par date.',
 
@@ -138,8 +138,8 @@ $lang = array_merge($lang, array(
 	'NO_FILE_CAT'				=> 'Aucun',
 	'NO_IMAGE'					=> 'Aucune image',
 	'NO_THUMBNAIL_SUPPORT'		=> 'Le support des miniatures est désactivé. Pour que cela fonctionne correctement, la librairie GD doit être disponible ou Imagemagick doit être installé. Aucun des deux n’a été trouvé.',
-	'NO_UPLOAD_DIR'				=> 'Le répertoire d’envoi indiqué n’existe pas.',
-	'NO_WRITE_UPLOAD'			=> 'Vous ne possédez pas les droits en écriture sur le répertoire d’envoi indiqué. Modifiez les droits en écriture (CHMOD) de ce répertoire.',
+	'NO_UPLOAD_DIR'				=> 'Le répertoire de transfert indiqué n’existe pas.',
+	'NO_WRITE_UPLOAD'			=> 'Vous ne possédez pas les droits en écriture sur le répertoire de transfert indiqué. Modifiez les droits en écriture (CHMOD) de ce répertoire.',
 
 	'ONLY_ALLOWED_IN_PM'	=> 'Seulement autorisé dans les messages privés',
 	'ORDER_ALLOW_DENY'		=> 'Autorisé',
@@ -156,21 +156,21 @@ $lang = array_merge($lang, array(
 	'SECURE_DOWNLOAD_NOTICE'		=> 'Les téléchargements sécurisés ne sont pas activés. Les paramètres ci-dessus seront appliqués une fois les téléchargements sécurisés activés.',
 	'SECURE_DOWNLOAD_UPDATE_SUCCESS'=> 'La liste des IPs a été mise à jour.',
 	'SECURE_EMPTY_REFERRER'			=> 'Autoriser un référent vide',
-	'SECURE_EMPTY_REFERRER_EXPLAIN'	=> 'Les téléchargements sécurisés sont basés sur les référents. Voulez-vous autoriser les téléchargements pour ceux qui omettent le référant?',
+	'SECURE_EMPTY_REFERRER_EXPLAIN'	=> 'Les téléchargements sécurisés sont basés sur les référents. Voulez-vous autoriser les téléchargements pour ceux qui omettent le référant ?',
 	'SETTINGS_CAT_IMAGES'			=> 'Paramètres des catégories d’image',
 	'SPECIAL_CATEGORY'				=> 'Catégorie spéciale',
 	'SPECIAL_CATEGORY_EXPLAIN'		=> 'Les catégories spéciales proposent un affichage particulier.',
-	'SUCCESSFULLY_UPLOADED'			=> 'Le chargement est terminé.',
+	'SUCCESSFULLY_UPLOADED'			=> 'Le transfert est terminé.',
 	'SUCCESS_EXTENSION_GROUP_ADD'	=> 'Le groupe d’extension a été créé.',
 	'SUCCESS_EXTENSION_GROUP_EDIT'	=> 'Le groupe d’extension a été mis à jour.',
 
-	'UPLOADING_FILES'				=> 'Chargement de fichiers',
-	'UPLOADING_FILE_TO'				=> 'Le fichier “%1$s” a été chargé au message numéro %2$d.',
-	'UPLOAD_DENIED_FORUM'			=> 'Vous n’avez pas la permission de transférer des fichiers sur le forum “%s”.',
-	'UPLOAD_DIR'					=> 'Répertoire d’envoi',
+	'UPLOADING_FILES'				=> 'Transfert de fichiers',
+	'UPLOADING_FILE_TO'				=> 'Le fichier « %1$s » a été transféré au message numéro %2$d.',
+	'UPLOAD_DENIED_FORUM'			=> 'Vous n’avez pas la permission de transférer des fichiers sur le forum « %s ».',
+	'UPLOAD_DIR'					=> 'Répertoire de transfert',
 	'UPLOAD_DIR_EXPLAIN'			=> 'Chemin de stockage pour les fichiers joints. Notez que si vous modifiez ce répertoire tout en ayant déjà transféré des fichiers joints, vous devrez copier manuellement les fichiers au nouvel emplacement.',
-	'UPLOAD_ICON'					=> 'Icône d’envoi',
-	'UPLOAD_NOT_DIR'				=> 'L’emplacement d’envoi que vous avez indiqué ne semble pas être un répertoire.',
+	'UPLOAD_ICON'					=> 'Icône de transfert',
+	'UPLOAD_NOT_DIR'				=> 'L’emplacement de transfert que vous avez indiqué ne semble pas être un répertoire.',
 ));
 
 ?>

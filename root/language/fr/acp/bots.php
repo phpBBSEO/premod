@@ -5,7 +5,7 @@
 * translated originally by PhpBB-fr.com <http://www.phpbb-fr.com/> and phpBB.biz <http://www.phpBB.biz>
 *
 * @package language
-* @version $Id: bots.php, v1.24 2007/11/22 11:07:01 Elglobo Exp $
+* @version $Id: bots.php 58 2012-08-23 08:31:38Z Morgyanne $
 * @copyright (c) 2005 phpBB Group
 * @license http://opensource.org/licenses/gpl-license.php GNU Public License
 *
@@ -37,7 +37,7 @@ if (empty($lang) || !is_array($lang))
 // Bot settings
 $lang = array_merge($lang, array(
 	'BOTS'				=> 'Gestion des robots',
-	'BOTS_EXPLAIN'		=> 'Les “robots” ou “aspirateurs” sont des agents automatisés le plus souvent utilisés par les moteurs de recherches pour mettre à jour leurs bases de données. Etant donné que ceux-ci font rarement une utilisation appropriée des sessions, ils peuvent fausser le compteur de visiteurs, augmenter la charge du serveur et parfois ne pas indexer correctement les sites. Vous pouvez définir un type spécial d’utilisateurs afin de résoudre ces problèmes.',
+	'BOTS_EXPLAIN'		=> 'Les « robots » ou « aspirateurs » sont des agents automatisés le plus souvent utilisés par les moteurs de recherches pour mettre à jour leurs bases de données. Étant donné que ceux-ci font rarement une utilisation appropriée des sessions, ils peuvent fausser le compteur de visiteurs, augmenter la charge du serveur et parfois ne pas indexer correctement les sites. Vous pouvez définir un type spécial d’utilisateurs afin de résoudre ces problèmes.',
 	'BOT_ACTIVATE'		=> 'Activer',
 	'BOT_ACTIVE'		=> 'Robot actif',
 	'BOT_ADD'			=> 'Ajouter un robot',
@@ -46,8 +46,8 @@ $lang = array_merge($lang, array(
 	'BOT_AGENT_EXPLAIN'	=> 'Une chaîne de caractères correspondante à l’agent du robot, les correspondances partielles sont autorisées.',
 	'BOT_DEACTIVATE'	=> 'Désactiver',
 	'BOT_DELETED'		=> 'Robot supprimé.',
-	'BOT_EDIT'			=> 'Editer les robots',
-	'BOT_EDIT_EXPLAIN'	=>  'Cette page vous permet d’éditer un robot existant ou d’en ajouter un nouveau. Vous pouvez définir une chaîne de caractères pour l’agent et/ou une ou plusieurs adresses IPs (ou une série d’adresses) correspondantes. Faites attention en définissant la chaîne de caractères correspondants à l’agent ou aux adresses. Vous pouvez également indiquer un style et une langue que le robot visualisera lorsqu’il sera sur le forum. Cela peut vous permettre de réduire la bande passante utilisée en configurant un style simple pour les robots. N’oubliez pas de mettre les permissions appropriées au groupe d’utilisateurs spécial robot.',
+	'BOT_EDIT'			=> 'Éditer les robots',
+	'BOT_EDIT_EXPLAIN'	=> 'Cette page vous permet d’éditer un robot existant ou d’en ajouter un nouveau. Vous pouvez définir une chaîne de caractères pour l’agent et/ou une ou plusieurs adresses IPs (ou une série d’adresses) correspondantes. Faites attention en définissant la chaîne de caractères correspondants à l’agent ou aux adresses. Vous pouvez également indiquer un style et une langue que le robot visualisera lorsqu’il sera sur le forum. Cela peut vous permettre de réduire la bande passante utilisée en configurant un style simple pour les robots. N’oubliez pas de mettre les permissions appropriées au groupe d’utilisateurs spécial robot.',
 	'BOT_LANG'			=> 'Langue du robot',
 	'BOT_LANG_EXPLAIN'	=> 'Langue présentée au robot lors de son passage.',
 	'BOT_LAST_VISIT'	=> 'Dernière visite',

@@ -5,7 +5,7 @@
 * translated originally by PhpBB-fr.com <http://www.phpbb-fr.com/> and phpBB.biz <http://www.phpBB.biz>
 *
 * @package language
-* @version $Id: viewtopic.php, v1.25 2009/10/16 15:13:00 Elglobo Exp $
+* @version $Id: viewtopic.php 58 2012-08-23 08:31:38Z Morgyanne $
 * @copyright (c) 2005 phpBB Group 
 * @license http://opensource.org/licenses/gpl-license.php GNU Public License 
 *
@@ -61,16 +61,16 @@ $lang = array_merge($lang, array(
 
 	'FILE_NOT_FOUND_404'	=> 'Le fichier <strong>%s</strong> n’existe pas.',
 	'FORK_TOPIC'			=> 'Copier le sujet',
-	'FULL_EDITOR'			=> 'Editeur complet',
+	'FULL_EDITOR'			=> 'Éditeur complet',
 
 	'LINKAGE_FORBIDDEN'		=> 'Vous ne pouvez pas voir, télécharger ou joindre des fichiers à partir de ce site.',
 	'LOGIN_NOTIFY_TOPIC'	=> 'Vous avez demandé à surveiller ce sujet. Connectez-vous pour le voir.',
 	'LOGIN_VIEWTOPIC'		=> 'Vous devez être enregistré et connecté pour voir ce sujet.',
 
-	'MAKE_ANNOUNCE'				=> 'Mettre en “Annonce”',
-	'MAKE_GLOBAL'				=> 'Mettre en “Annonce globale”',
-	'MAKE_NORMAL'				=> 'Mettre en “Sujet standard”',
-	'MAKE_STICKY'				=> 'Mettre en “Post-it”',
+	'MAKE_ANNOUNCE'				=> 'Mettre en « Annonce »',
+	'MAKE_GLOBAL'				=> 'Mettre en « Annonce globale »',
+	'MAKE_NORMAL'				=> 'Mettre en « Sujet standard »',
+	'MAKE_STICKY'				=> 'Mettre en « Post-it »',
 	'MAX_OPTIONS_SELECT'		=> 'Vous pouvez sélectionner jusqu’à <strong>%d</strong> options',
 	'MAX_OPTION_SELECT'			=> 'Vous pouvez sélectionner <strong>1</strong> option',
 	'MISSING_INLINE_ATTACHMENT'	=> 'Le fichier joint <strong>%s</strong> n’est plus disponible.',

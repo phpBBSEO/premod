@@ -5,7 +5,7 @@
 * translated originally by PhpBB-fr.com <http://www.phpbb-fr.com/> and phpBB.biz <http://www.phpBB.biz>
 *
 * @package language
-* @version $Id: common.php, v1.27 13:53 10:21 14/06/2011 Lolovoisin Exp $
+* @version $Id: common.php 60 2012-08-27 07:10:06Z Morgyanne $
 * @copyright (c) 2005 phpBB Group 
 * @license http://opensource.org/licenses/gpl-license.php GNU Public License 
 *
@@ -41,7 +41,7 @@ if (empty($lang) || !is_array($lang))
 //
 
 $lang = array_merge($lang, array(
-	'TRANSLATION_INFO'	=> 'Traduction par: <a href="http://forums.phpbb-fr.com">phpBB-fr.com</a>',
+	'TRANSLATION_INFO'	=> 'Traduction par <a href="http://forums.phpbb-fr.com">phpBB-fr.com</a>',
 	'DIRECTION'			=> 'ltr',
 	'DATE_FORMAT'		=> '|d M Y|',	// 01 Jan 2007 (with Relative days enabled)
 	'USER_LANG'			=> 'fr',
@@ -62,7 +62,7 @@ $lang = array_merge($lang, array(
 	'ACTIVE_ERROR'					=> 'Le nom d’utilisateur indiqué est actuellement inactif. Si vous avez des problèmes pour activer votre compte, contactez l’administrateur du forum.',
 	'ADMINISTRATOR'					=> 'Administrateur',
 	'ADMINISTRATORS'				=> 'Administrateurs',
-	'AGE'							=> 'Age',
+	'AGE'							=> 'Âge',
 	'AIM'							=> 'AIM',
 	'ALLOWED'						=> 'Autorisé',
 	'ALL_FILES'						=> 'Tous les fichiers',
@@ -108,7 +108,7 @@ $lang = array_merge($lang, array(
 	'BOARD_DISABLE'			=> 'Désolé, mais ce forum est actuellement indisponible.',
 	'BOARD_DISABLED'		=> 'Ce forum est actuellement désactivé.',
 	'BOARD_UNAVAILABLE'		=> 'Désolé, mais le forum est temporairement indisponible, réessayez dans quelques minutes.',
-	'BROWSING_FORUM'		=> 'Utilisateurs parcourant ce forum : %1$s',
+	'BROWSING_FORUM'		=> 'Utilisateurs parcourant ce forum: %1$s',
 	'BROWSING_FORUM_GUEST'	=> 'Utilisateurs parcourant ce forum: %1$s et %2$d invité',
 	'BROWSING_FORUM_GUESTS'	=> 'Utilisateurs parcourant ce forum: %1$s et %2$d invités',
 	'BYTES'					=> 'Octets',
@@ -127,10 +127,10 @@ $lang = array_merge($lang, array(
 	'CONFIRM_CODE'			=> 'Code de confirmation',
 	'CONFIRM_CODE_EXPLAIN'	=> 'Entrez le code exactement comme vous le voyez dans l’image. Notez que le code n’est pas sensible à la casse.',
 	'CONFIRM_CODE_WRONG'	=> 'Le code de confirmation que vous avez entré est incorrect.',
-	'CONFIRM_OPERATION'		=> 'Êtes-vous sûr de vouloir effectuer cette opération?',
+	'CONFIRM_OPERATION'		=> 'Êtes-vous sûr de vouloir effectuer cette opération ?',
 	'CONGRATULATIONS'		=> 'Félicitations à',
 	'CONNECTION_FAILED'		=> 'La connexion a échouée.',
-	'CONNECTION_SUCCESS'	=> 'Vous êtes connecté!',
+	'CONNECTION_SUCCESS'	=> 'Vous êtes connecté !',
 	'COOKIES_DELETED'		=> 'Tous les cookies du forum ont été supprimés.',
 	'CURRENT_TIME'			=> 'Nous sommes le %s',
 
@@ -158,7 +158,7 @@ $lang = array_merge($lang, array(
 	'VIEWED_COUNTS'			=> 'Vu %d fois',
 	'VIEWED_COUNT_NONE'		=> 'Pas encore vu',
 
-	'EDIT_POST'							=> 'Editer le message',
+	'EDIT_POST'							=> 'Éditer le message',
 	'EMAIL'								=> 'E-mail', 	// Short form for EMAIL_ADDRESS
 	'EMAIL_ADDRESS'						=> 'Adresse e-mail',
 	'EMAIL_SMTP_ERROR_RESPONSE'			=> 'Un problème est survenu lors de l’envoi de l’e-mail à la <strong>ligne %1$s</strong>. Réponse: %2$s.',
@@ -175,7 +175,7 @@ $lang = array_merge($lang, array(
 	'ERR_UNWATCHING' 					=> 'Une erreur est survenue pendant la tentative de désinscription.',
 	'ERR_WATCHING' 						=> 'Une erreur est survenue pendant la tentative d’inscription.',
 	'ERR_WRONG_PATH_TO_PHPBB'			=> 'Le chemin phpBB indiqué ne semble pas être valide.',
-	'EXPAND_VIEW'						=> 'Etendre la vue',
+	'EXPAND_VIEW'						=> 'Étendre la vue',
 	'EXTENSION'							=> 'Extension',
 	'EXTENSION_DISABLED_AFTER_POSTING'	=> 'L’extension <strong>%s</strong> a été désactivée et ne peut plus être affichée.',
 
@@ -192,7 +192,7 @@ $lang = array_merge($lang, array(
 	'FORM_INVALID'			=> 'Le formulaire envoyé est invalide. Essayez à nouveau.',
 	'FORUM'					=> 'Forums',
 	'FORUMS'				=> 'Forums',
-	'FORUMS_MARKED'			=> 'Les forums sélectionnés ont été marqués comme lus.',
+	'FORUMS_MARKED'			=> 'Les forums ont été marqués comme lus.',
 	'FORUM_CAT'				=> 'Catégorie du forum',
 	'FORUM_INDEX'			=> 'Index du forum',
 	'FORUM_LINK'			=> 'Forum-lien',
@@ -280,7 +280,7 @@ $lang = array_merge($lang, array(
 	'INFORMATION'				=> 'Informations',
 	'INTERESTS'					=> 'Centres d’intérêt',
 	'INVALID_DIGEST_CHALLENGE'	=> 'Défi invalide.',
-	'INVALID_EMAIL_LOG'			=> '<strong>%s</strong> est peut-être une adresse invalide?',
+	'INVALID_EMAIL_LOG'			=> '<strong>%s</strong> est peut-être une adresse invalide ?',
 	'IP'						=> 'IP',
 	'IP_BLACKLISTED'			=> 'Votre IP %1$s a été bloquée car elle est dans la liste noire. Pour plus d’informations, consultez <a href="%2$s">%2$s</a>.',
 
@@ -450,8 +450,9 @@ $lang = array_merge($lang, array(
 	'POST_REPORTED'			=> 'Cliquer pour voir le rapport',
 	'POST_SUBJECT'			=> 'Sujet du message',
 	'POST_TIME'				=> 'Date',
-	'POST_TOPIC'			=> 'Ecrire un nouveau sujet',
+	'POST_TOPIC'			=> 'Écrire un nouveau sujet',
 	'POST_UNAPPROVED'		=> 'Ce message est en attente d’approbation',
+	'POWERED_BY'			=> 'Développé par %s',
 	'PREVIEW'				=> 'Aperçu',
 	'PREVIOUS'				=> 'Précédente',				// Used in pagination
 	'PREVIOUS_STEP'			=> 'Précédente',
@@ -461,6 +462,7 @@ $lang = array_merge($lang, array(
 	'PRIVATE_MESSAGING'		=> 'Messagerie privée',
 	'PROFILE'				=> 'Panneau de l’utilisateur',
 
+	'RANK'						=> 'Rang',
 	'READING_FORUM'				=> 'Consulte les sujets dans %s',
 	'READING_GLOBAL_ANNOUNCE'	=> 'Consulte une annonce globale',
 	'READING_LINK'				=> 'Consulte le lien du forum %s',
@@ -471,7 +473,7 @@ $lang = array_merge($lang, array(
 	'REDIRECT'					=> 'Rediriger',
 	'REDIRECTS'					=> 'Nombre de redirections',
 	'REGISTER'					=> 'M’enregistrer',
-	'REGISTERED_USERS'			=> 'Utilisateurs enregistrés :',
+	'REGISTERED_USERS'			=> 'Utilisateurs enregistrés:',
 	'REG_USERS_ONLINE'			=> 'Il y a %d utilisateurs enregistrés et ',
 	'REG_USERS_TOTAL'			=> '%d enregistrés, ',
 	'REG_USERS_TOTAL_AND'		=> '%d enregistrés et ',
@@ -655,10 +657,10 @@ $lang = array_merge($lang, array(
 	'UNREAD_PMS'			=> '<strong>%d</strong> messages non lus',
 	'UNREAD_POST'			=> 'Message non lu',
 	'UNREAD_POSTS'			=> 'Messages non lus',
-	'UNWATCH_FORUM_CONFIRM'		=> 'Êtes-vous sûr de ne plus vouloir surveiller ce forum?',
-	'UNWATCH_FORUM_DETAILED'	=> 'Êtes-vous sûr de ne plus vouloir surveiller le forum “%s”?',
-	'UNWATCH_TOPIC_CONFIRM'		=> 'Êtes-vous sûr de ne plus vouloir surveiller ce sujet?',
-	'UNWATCH_TOPIC_DETAILED'	=> 'Êtes-vous sûr de ne plus vouloir surveiller le sujet “%s”?',
+	'UNWATCH_FORUM_CONFIRM'		=> 'Êtes-vous sûr de ne plus vouloir surveiller ce forum ?',
+	'UNWATCH_FORUM_DETAILED'	=> 'Êtes-vous sûr de ne plus vouloir surveiller le forum « %s » ?',
+	'UNWATCH_TOPIC_CONFIRM'		=> 'Êtes-vous sûr de ne plus vouloir surveiller ce sujet ?',
+	'UNWATCH_TOPIC_DETAILED'	=> 'Êtes-vous sûr de ne plus vouloir surveiller le sujet « %s » ?',
 	'UNWATCHED_FORUMS'			=> 'Vous ne surveillez plus les forums sélectionnés.',
 	'UNWATCHED_TOPICS'			=> 'Vous ne surveillez plus les sujets sélectionnés.',
 	'UNWATCHED_FORUMS_TOPICS'	=> 'Vous ne surveillez plus les entrées sélectionnées.',
@@ -692,8 +694,8 @@ $lang = array_merge($lang, array(
 	'VIEW_LATEST_POST'			=> 'Voir le dernier message',
 	'VIEW_NEWEST_POST'			=> 'Voir le premier message non lu',
 	'VIEW_NOTES'				=> 'Notes sur l’utilisateur',
-	'VIEW_ONLINE_TIME'			=> 'basées sur les utilisateurs actifs de la dernière minute',
-	'VIEW_ONLINE_TIMES'			=> 'basées sur les utilisateurs actifs des %d dernières minutes',
+	'VIEW_ONLINE_TIME'			=> 'd’après le nombre d’utilisateurs actifs cette dernière minute',
+	'VIEW_ONLINE_TIMES'			=> 'd’après le nombre d’utilisateurs actifs ces %d dernières minutes',
 	'VIEW_TOPIC'				=> 'Afficher le sujet',
 	'VIEW_TOPIC_ANNOUNCEMENT'	=> 'Annonce: ',
 	'VIEW_TOPIC_GLOBAL'			=> 'Annonce globale: ',
@@ -706,10 +708,10 @@ $lang = array_merge($lang, array(
 
 	'WARNINGS'			=> 'Avertissements',
 	'WARN_USER'			=> 'Avertir l’utilisateur',
-	'WATCH_FORUM_CONFIRM'	=> 'Êtes-vous sûr de vouloir surveiller ce forum?',
-	'WATCH_FORUM_DETAILED'	=> 'Êtes-vous sûr de vouloir surveiller le forum “%s”?',
-	'WATCH_TOPIC_CONFIRM'	=> 'Êtes-vous sûr de vouloir surveiller ce sujet?',
-	'WATCH_TOPIC_DETAILED'	=> 'Êtes-vous sûr de vouloir surveiller le sujet “%s”?',
+	'WATCH_FORUM_CONFIRM'	=> 'Êtes-vous sûr de vouloir surveiller ce forum ?',
+	'WATCH_FORUM_DETAILED'	=> 'Êtes-vous sûr de vouloir surveiller le forum « %s » ?',
+	'WATCH_TOPIC_CONFIRM'	=> 'Êtes-vous sûr de vouloir surveiller ce sujet ?',
+	'WATCH_TOPIC_DETAILED'	=> 'Êtes-vous sûr de vouloir surveiller le sujet « %s » ?',
 	'WELCOME_SUBJECT'	=> 'Bienvenue sur les forums %s',
 	'WEBSITE'			=> 'Site Internet',
 	'WHOIS'				=> 'Whois',
@@ -726,7 +728,7 @@ $lang = array_merge($lang, array(
 	'YEAR_MONTH_DAY'	=> '(AAAA-MM-JJ)',
 	'YES'				=> 'Oui',
 	'YIM'				=> 'YIM',	
-	'YOU_LAST_VISIT'	=> 'Dernière visite le %s',
+	'YOU_LAST_VISIT'	=> 'Dernière visite: %s',
 	'YOU_NEW_PM'		=> 'Un nouveau message privé vous attend dans votre boîte de réception.',
 	'YOU_NEW_PMS'		=> 'De nouveaux messages privés vous attendent dans votre boîte de réception.',
 	'YOU_NO_NEW_PM'		=> 'Aucun nouveau message privé en attente.',

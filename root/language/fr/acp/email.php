@@ -5,7 +5,7 @@
 * translated originally by PhpBB-fr.com <http://www.phpbb-fr.com/> and phpBB.biz <http://www.phpBB.biz>
 *
 * @package language
-* @version $Id: email.php, v1.24 10:00 14/06/2011 Lolovoisin Exp $
+* @version $Id: email.php 58 2012-08-23 08:31:38Z Morgyanne $
 * @copyright (c) 2005 phpBB Group 
 * @license http://opensource.org/licenses/gpl-license.php GNU Public License 
 *
@@ -41,7 +41,7 @@ $lang = array_merge($lang, array(
 	'ACP_MASS_EMAIL_EXPLAIN'		=> 'Vous pouvez envoyer un e-mail à tous vos utilisateurs ou à tous les membres d’un groupe particulier. Pour cela, un e-mail sera envoyé via l’adresse administrative, avec tous les destinataires en copie cachée. Si vous envoyez le message à un grand groupe de personnes, merci de patienter après avoir validé et de ne pas arrêter la page lors du traitement. Il est normal qu’un envoi de masse prenne du temps, vous aurez une notification quand le script aura terminé.',
 	'ALL_USERS'						=> 'Tous les utilisateurs',
 	
-	'COMPOSE'				=> 'Ecrire',
+	'COMPOSE'				=> 'Écrire',
 
 	'EMAIL_SEND_ERROR'		=> 'Il y a eu une erreur lors de l’envoi de l’e-mail. Merci de consulter le %sJournal d’erreurs%s pour un message plus détaillé.',
 	'EMAIL_SENT'			=> 'Votre message a été envoyé.',
