@@ -73,6 +73,7 @@ class acp_update
 
 		// www.phpBB-SEO.com SEO TOOLKIT BEGIN
 		$phpbb_seo_update = '';
+		$up_to_date = phpbb_version_compare($latest_version, $config['version'], '<=');
 		if ($up_to_date) {
 			$phpbb_seo_update = trim(str_replace($current_version, '', $latest_version));
 		}
