@@ -1,11 +1,11 @@
-Subject: Bienvenue sur les forums de "{SITENAME}"
+Subject: Bienvenue sur les forums de « {SITENAME} »
 
 {WELCOME_MSG}
 
 Vous êtes prié de conserver cet e-mail dans vos archives. Les informations concernant votre compte:
 
 ----------------------------
-Nom d'utilisateur: {USERNAME}
+Nom d’utilisateur: {USERNAME}
 
 Adresse du forum: {U_BOARD}
 ----------------------------

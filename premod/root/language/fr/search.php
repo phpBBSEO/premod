@@ -5,7 +5,7 @@
 * translated originally by PhpBB-fr.com <http://www.phpbb-fr.com/> and phpBB.biz <http://www.phpBB.biz>
 *
 * @package language
-* @version $Id: search.php, v1.25 10:33 14/06/2011 Lolovoisin Exp $
+* @version $Id: search.php 58 2012-08-23 08:31:38Z Morgyanne $
 * @copyright (c) 2005 phpBB Group 
 * @license http://opensource.org/licenses/gpl-license.php GNU Public License 
 *
@@ -83,7 +83,7 @@ $lang = array_merge($lang, array(
 	'SEARCH_AUTHOR_EXPLAIN'   => 'Utilisez un * comme joker pour des recherches partielles.',
     'SEARCH_FIRST_POST'   => 'Premier message des sujets uniquement',
     'SEARCH_FORUMS'   => 'Rechercher dans les forums',
-    'SEARCH_FORUMS_EXPLAIN'   => 'Choisissez le forum ou les forums dans le(s)quel(s) vous souhaitez effectuer une recherche. Les sous-forums sont automatiquement inclus si vous ne désactivez pas l’option ci-dessous “Rechercher dans les sous-forums”.',
+    'SEARCH_FORUMS_EXPLAIN'   => 'Choisissez le forum ou les forums dans le(s)quel(s) vous souhaitez effectuer une recherche. Les sous-forums sont automatiquement inclus si vous ne désactivez pas l’option ci-dessous « Rechercher dans les sous-forums ».',
     'SEARCH_IN_RESULTS'   => 'Rechercher dans ces résultats',
     'SEARCH_KEYWORDS_EXPLAIN'   => 'Placez un <strong>+</strong> devant un mot qui doit être trouvé et un <strong>-</strong> devant un mot qui doit être exclu. Tapez une suite de mots séparés par des <strong>|</strong> entre crochets si uniquement un des mots doit être trouvé. Utilisez un * comme joker pour des recherches partielles.',
 	'SEARCH_MSG_ONLY'   => 'Messages uniquement',

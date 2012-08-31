@@ -5,7 +5,7 @@
 * translated by PhpBB-fr.com <http://www.phpbb-fr.com/>
 *
 * @package language
-* @version $Id: captcha_qa.php v1.27 2010/11/12 18:26:00 ABDev $
+* @version $Id: captcha_qa.php 58 2012-08-23 08:31:38Z Morgyanne $
 * @copyright (c) 2009 phpBB Group
 * @license http://opensource.org/licenses/gpl-license.php GNU Public License
 *
@@ -46,7 +46,7 @@ $lang = array_merge($lang, array(
 	'CONFIRM_QUESTION'			=> 'Question',
 
 	'ANSWER'					=> 'Réponse',
-	'EDIT_QUESTION'				=> 'Editer la question',
+	'EDIT_QUESTION'				=> 'Éditer la question',
 	'QUESTIONS'					=> 'Questions',
 	'QUESTIONS_EXPLAIN'			=> 'Pour chaque soumission d’un formulaire où vous avez activé le plugin Q&amp;A, les utilisateurs seront invités à répondre à une des questions indiquées ici. Pour utiliser ce plugin, au moins une question doit être définie dans la langue par défaut. Il devrait être simple pour votre public cible de répondre à ces questions, mais au-delà de la capacité d’un robot à lancer une recherche Google™. En utilisant un large jeu de questions modifiées régulièrement, vous obtiendrez de meilleurs résultats. Activez le contrôle strict si votre question doit prendre en compte la casse des caractères, la ponctuation ou les espaces.',
 	'QUESTION_DELETED'			=> 'Question supprimée',

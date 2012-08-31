@@ -5,7 +5,7 @@
 * translated originally by PhpBB-fr.com <http://www.phpbb-fr.com/> and phpBB.biz <http://www.phpBB.biz>
 *
 * @package language
-* @version $Id: posting.php, v1.26 2010/02/09 19:46:00 Elglobo Exp $
+* @version $Id: posting.php 59 2012-08-27 06:41:52Z Morgyanne $
 * @copyright (c) 2005 phpBB Group 
 * @license http://opensource.org/licenses/gpl-license.php GNU Public License 
 *
@@ -43,6 +43,7 @@ $lang = array_merge($lang, array(
 	'ADD_POLL'					=> 'Ajouter un sondage',
 	'ADD_POLL_EXPLAIN'			=> 'Si vous ne souhaitez pas ajouter de sondage à votre sujet, laissez ces champs vides.',
 	'ALREADY_DELETED'			=> 'Désolé, ce message a déjà été supprimé.',
+	'ATTACH_DISK_FULL'			=> 'L’espace disque n’est pas suffisant pour joindre ce fichier.',
 	'ATTACH_QUOTA_REACHED'		=> 'Désolé, le quota de fichiers joints a été atteint.',
 	'ATTACH_SIG'				=> 'Attacher ma signature (les signatures peuvent être modifiées dans le panneau de l’utilisateur)',
 
@@ -55,7 +56,7 @@ $lang = array_merge($lang, array(
 	'BBCODE_IS_ON'				=> 'Les %sBBCodes%s sont <em>activés</em>',
 	'BBCODE_I_HELP'				=> 'Texte italique: [i]texte[/i]',
 	'BBCODE_L_HELP'				=> 'Liste: [list]texte[/list]',
-	'BBCODE_LISTITEM_HELP'		=> 'Elément de liste: [*]texte[/*]',
+	'BBCODE_LISTITEM_HELP'		=> 'Élément de liste: [*]texte[/*]',
 	'BBCODE_O_HELP'				=> 'Liste ordonnée: [list=]texte[/list]',
 	'BBCODE_P_HELP'				=> 'Insérer une image: [img]http://image_url[/img]',
 	'BBCODE_Q_HELP'				=> 'Citation: [quote]texte[/quote]',
@@ -76,9 +77,9 @@ $lang = array_merge($lang, array(
 
 	'DELETE_FILE'				=> 'Supprimer le fichier',
 	'DELETE_MESSAGE'			=> 'Supprimer le message',
-	'DELETE_MESSAGE_CONFIRM'	=> 'Êtes-vous sûr de vouloir supprimer ce message?',
+	'DELETE_MESSAGE_CONFIRM'	=> 'Êtes-vous sûr de vouloir supprimer ce message ?',
 	'DELETE_OWN_POSTS'			=> 'Désolé, vous ne pouvez supprimer que vos propres messages.',
-	'DELETE_POST_CONFIRM'		=> 'Êtes-vous sûr de vouloir supprimer ce message?',
+	'DELETE_POST_CONFIRM'		=> 'Êtes-vous sûr de vouloir supprimer ce message ?',
 	'DISALLOWED_CONTENT' 		=> 'Le chargement a été rejeté car le fichier envoyé a été identifié comme un éventuel vecteur d’attaque.',
 	'DELETE_POST_WARN'			=> 'Une fois supprimé, le message ne pourra pas être récupéré',
 	'DISABLE_BBCODE'			=> 'Désactiver les BBCodes',
@@ -92,7 +93,7 @@ $lang = array_merge($lang, array(
 
 	'EDIT_REASON'				=> 'Raison de l’édition du message',
 	'EMPTY_FILEUPLOAD'			=> 'Le fichier chargé est vide ou n’existe pas.',
-	'EMPTY_MESSAGE'				=> 'Votre message est vide!',
+	'EMPTY_MESSAGE'				=> 'Votre message est vide !',
 	'EMPTY_REMOTE_DATA'			=> 'Le fichier n’a pas pu être chargé, essayez de le charger manuellement.',
 
 	'FLASH_IS_OFF'				=> '[flash] est <em>désactivé</em>',
@@ -146,7 +147,7 @@ $lang = array_merge($lang, array(
 	'PLACE_INLINE'				=> 'Insérer dans le message',
 	'POLL_DELETE'				=> 'Supprimer le sondage',
 	'POLL_FOR'					=> 'Durée du sondage',
-	'POLL_FOR_EXPLAIN'			=> 'Mettre “0” ou laissez vide pour ne jamais terminer le sondage.',
+	'POLL_FOR_EXPLAIN'			=> 'Mettre « 0 » ou laissez vide pour ne jamais terminer le sondage.',
 	'POLL_MAX_OPTIONS'			=> 'Option(s) par utilisateur',
 	'POLL_MAX_OPTIONS_EXPLAIN'	=> 'Ceci est le nombre d’options que chaque utilisateur peut choisir quand il vote.',
 	'POLL_OPTIONS'				=> 'Options du sondage',
@@ -181,13 +182,13 @@ $lang = array_merge($lang, array(
 	'SAVE'						=> 'Sauvegarder',
 	'SAVE_DATE'					=> 'Sauvegardé le',
 	'SAVE_DRAFT'				=> 'Sauvegarder le brouillon',
-	'SAVE_DRAFT_CONFIRM'		=> 'Notez que les brouillons sauvegardés ne contiennent que le titre et le message, tout autre élément sera supprimé. Souhaitez-vous sauvegarder votre brouillon maintenant?',
+	'SAVE_DRAFT_CONFIRM'		=> 'Notez que les brouillons sauvegardés ne contiennent que le titre et le message, tout autre élément sera supprimé. Souhaitez-vous sauvegarder votre brouillon maintenant ?',
 	'SMILIES'					=> 'Smileys',
 	'SMILIES_ARE_OFF'			=> 'Les smileys sont <em>désactivés</em>',
 	'SMILIES_ARE_ON'			=> 'Les smileys sont <em>activés</em>',
 	'STICKY_ANNOUNCE_TIME_LIMIT'=> 'Durée du post-it ou de l’annonce',
-	'STICK_TOPIC_FOR'			=> 'Epingler pendant',
-	'STICK_TOPIC_FOR_EXPLAIN'	=> 'Mettre “0” ou laissez cette case vide pour une durée illimitée des post-it/annonces. Notez que ce nombre est relatif à la date du message.',
+	'STICK_TOPIC_FOR'			=> 'Épingler pendant',
+	'STICK_TOPIC_FOR_EXPLAIN'	=> 'Mettre « 0 » ou laisser cette case vide pour une durée illimitée des post-it/annonces. Notez que ce nombre est relatif à la date du message.',
 	'STYLES_TIP'				=> 'Astuce: les mises en forme peuvent être appliquées rapidement en sélectionnant le texte.',
 
 	'TOO_FEW_CHARS'				=> 'Votre message contient trop peu de caractères.',

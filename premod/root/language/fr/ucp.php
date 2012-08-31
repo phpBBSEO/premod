@@ -5,7 +5,7 @@
 * translated originally by PhpBB-fr.com <http://www.phpbb-fr.com/> and phpBB.biz <http://www.phpBB.biz>
 *
 * @package language
-* @version $Id: ucp.php, v1.26 10:35 14/06/2011 Lolovoisin Exp $
+* @version $Id: ucp.php 59 2012-08-27 06:41:52Z Morgyanne $
 * @copyright (c) 2005 phpBB Group 
 * @license http://opensource.org/licenses/gpl-license.php GNU Public License 
 *
@@ -38,21 +38,21 @@ if (empty($lang) || !is_array($lang))
 
 // Privacy policy and T&C
 $lang = array_merge($lang, array(
-	'TERMS_OF_USE_CONTENT' => 'En accédant à “%1$s” (désigné ici par “nous”, “notre”, “nos”, “%1$s”, “%2$s”), vous acceptez d’être légalement responsable des conditions suivantes. Si vous n’acceptez pas d’être légalement responsable de toutes les conditions suivantes, alors n’accédez pas et/ou n’utilisez pas “%1$s”. Nous pouvons modifier celles-ci à n’importe quel moment et nous ferons tout pour que vous en soyez informé, bien qu’il soit prudent de vérifier régulièrement celles-ci par vous-même. Si vous continuez d’utiliser “%1$s” alors que des changements ont été effectués, vous acceptez d’être légalement responsable des conditions découlant des mises à jour et/ou modifications.<br />
+	'TERMS_OF_USE_CONTENT' => 'En accédant à « %1$s » (désigné ici par « nous », « notre », « nos », « %1$s », « %2$s »), vous acceptez d’être légalement responsable des conditions suivantes. Si vous n’acceptez pas d’être légalement responsable de toutes les conditions suivantes, alors n’accédez pas et/ou n’utilisez pas « %1$s ». Nous pouvons modifier celles-ci à n’importe quel moment et nous ferons tout pour que vous en soyez informé, bien qu’il soit prudent de vérifier régulièrement celles-ci par vous-même. Si vous continuez d’utiliser « %1$s » alors que des changements ont été effectués, vous acceptez d’être légalement responsable des conditions découlant des mises à jour et/ou modifications.<br />
 	<br />
-	Notre forum est de type phpBB (désigné ici par “ils”, “eux”, “leur”, “logiciel phpBB”, “www.phpbb.com”, “Groupe phpBB”, “Equipes phpBB”) qui est un script libre de forum, déclaré sous la licence “<a href="http://opensource.org/licenses/gpl-license.php">General Public License</a>” (désigné ici par “GPL”) et qui peut être téléchargé depuis <a href="http://www.phpbb.com/">www.phpbb.com</a>. Le logiciel phpBB facilite seulement les discussions basées sur internet. Le groupe phpBB n’est pas responsable de ce que nous acceptons et/ou n’acceptons pas, comme contenu ou conduite permis. Pour de plus amples informations au sujet de phpBB, merci de consulter: <a href="http://www.phpbb.com/">http://www.phpbb.com/</a>.<br />
+	Notre forum est de type phpBB (désigné ici par « ils », « eux », « leur », « logiciel phpBB », « www.phpbb.com », « Groupe phpBB », « Équipes phpBB ») qui est un script libre de forum, déclaré sous la licence « <a href="http://opensource.org/licenses/gpl-license.php">General Public License</a> » (désigné ici par « GPL ») et qui peut être téléchargé depuis <a href="http://www.phpbb.com/">www.phpbb.com</a>. Le logiciel phpBB facilite seulement les discussions basées sur Internet. Le groupe phpBB n’est pas responsable de ce que nous acceptons et/ou n’acceptons pas, comme contenu ou conduite permis. Pour de plus amples informations au sujet de phpBB, merci de consulter: <a href="http://www.phpbb.com/">http://www.phpbb.com/</a>.<br />
 	<br />
-	Vous acceptez de ne pas publier de contenu abusif, obscène, vulgaire, diffamatoire, choquant, menaçant, à caractère sexuel ou autre qui peut transgresser les lois de votre pays, du pays où “%1$s” est hébergé ou les lois internationales. Le faire peut vous mener à un bannissement immédiat et permanent, avec une notification à votre fournisseur d’accès à internet si nous le jugeons nécessaire. L’adresse IP de tous les messages est enregistrée pour aider au renforcement de ces conditions. Vous acceptez que “%1$s” supprime, édite, déplace ou verrouille n’importe quel sujet lorsque nous estimons que cela est nécessaire. En tant qu’utilisateur, vous acceptez que toutes les informations que vous avez entrées soient stockées dans notre base de données. Bien que ces informations ne soient pas diffusées à une tierce partie sans votre consentement, ni “%1$s”, ni phpBB ne pourront être tenus comme responsables en cas de tentative de piratage visant à compromettre les données.
+	Vous acceptez de ne pas publier de contenu abusif, obscène, vulgaire, diffamatoire, choquant, menaçant, à caractère sexuel ou autre qui peut transgresser les lois de votre pays, du pays où « %1$s » est hébergé ou les lois internationales. Le faire peut vous mener à un bannissement immédiat et permanent, avec une notification à votre fournisseur d’accès à Internet si nous le jugeons nécessaire. L’adresse IP de tous les messages est enregistrée pour aider au renforcement de ces conditions. Vous acceptez que « %1$s » supprime, édite, déplace ou verrouille n’importe quel sujet lorsque nous estimons que cela est nécessaire. En tant qu’utilisateur, vous acceptez que toutes les informations que vous avez entrées soient stockées dans notre base de données. Bien que ces informations ne soient pas diffusées à une tierce partie sans votre consentement, ni « %1$s », ni phpBB ne pourront être tenus comme responsables en cas de tentative de piratage visant à compromettre les données.
 	',
-	'PRIVACY_POLICY'      => 'Cette politique explique en détail comment “%1$s” et ses sociétés affiliées (désignés ici par “nous”, “notre”, “nos”, “%1$s”, “%2$s”) et phpBB (désigné ici par “ils”, “eux”, “leur”, “logiciel phpBB”, “www.phpbb.com”, “Groupe phpBB”, “Equipes phpBB”) utilisent n’importe quelle information collectée pendant n’importe quelle session d’utilisation de votre part (désignée ici “vos informations”).<br />
+	'PRIVACY_POLICY'      => 'Cette politique explique en détail comment « %1$s » et ses sociétés affiliées (désignés ici par « nous », « notre », « nos », « %1$s », « %2$s ») et phpBB (désigné ici par « ils », « eux », « leur », « logiciel phpBB », « www.phpbb.com », « Groupe phpBB », « Équipes phpBB ») utilisent n’importe quelle information collectée pendant n’importe quelle session d’utilisation de votre part (désignée ici par « vos informations »).<br />
 	<br />
-	Vos informations sont collectées de deux manières. Premièrement, en naviguant sur “%1$s”, le logiciel phpBB créera un certain nombre de cookies, qui sont des petits fichiers textes téléchargés dans les fichiers temporaires du navigateur internet de votre ordinateur. Les deux premiers cookies ne contiennent qu’un identifiant utilisateur (désigné ici par “ID de l’utilisateur”) et un identifiant de session invité (désigné ici par “ID de la session”), qui vous sont automatiquement assignés par le logiciel phpBB. Un troisième cookie sera créé une fois que vous naviguerez sur les sujets de “%1$s” et est utilisé pour stocker les informations sur les sujets que vous avez lus, ce qui améliore votre navigation sur le forum .<br />
+	Vos informations sont collectées de deux manières. Premièrement, en naviguant sur « %1$s », le logiciel phpBB créera un certain nombre de cookies, qui sont des petits fichiers textes téléchargés dans les fichiers temporaires du navigateur Internet de votre ordinateur. Les deux premiers cookies ne contiennent qu’un identifiant utilisateur (désigné ici par « ID de l’utilisateur ») et un identifiant de session invité (désigné ici par « ID de la session »), qui vous sont automatiquement assignés par le logiciel phpBB. Un troisième cookie sera créé une fois que vous naviguerez sur les sujets de « %1$s » et est utilisé pour stocker les informations sur les sujets que vous avez lus, ce qui améliore votre navigation sur le forum.<br />
 	<br />
-	Nous pouvons également créer des cookies externes au logiciel phpBB tout en naviguant sur “%1$s”, bien que ceux-ci soient hors de portée du document qui est prévu pour couvrir seulement les pages créées par le logiciel phpBB. La seconde manière est de récupérer l’information que vous nous envoyez et que nous collectons. Ceci peut être, et n’est pas limité à: la publication en tant qu’utilisateur invité (désignée ici par “messages invités”), l’inscription sur “%1$s” (désignée ici par “votre compte”) et les messages que vous envoyez après l’inscription et lors d’une connexion (désignés ici par “vos messages”).<br />
+	Nous pouvons également créer des cookies externes au logiciel phpBB tout en naviguant sur « %1$s », bien que ceux-ci soient hors de portée du document qui est prévu pour couvrir seulement les pages créées par le logiciel phpBB. La seconde manière est de récupérer l’information que vous nous envoyez et que nous collectons. Ceci peut être, et n’est pas limité à: la publication en tant qu’utilisateur invité (désignée ici par « messages invités »), l’inscription sur « %1$s » (désignée ici par « votre compte ») et les messages que vous envoyez après l’inscription et lors d’une connexion (désignés ici par « vos messages »).<br />
 	<br />
-	Votre compte contiendra au minimum un identifiant unique (désigné ici par “votre nom d’utilisateur”), un mot de passe personnel utilisé pour la connexion à votre compte (désigné ici par “votre mot de passe”), et une adresse e-mail personnelle valide (désignée ici par “votre e-mail”). Vos informations pour votre compte sur “%1$s” sont protégées par les lois de protection des données applicables dans le pays qui nous héberge. Toute information en-dehors de votre nom d’utilisateur, de votre mot de passe et de votre adresse e-mail requise par “%1$s” durant la procédure d’inscription, qu’elle soit obligatoire ou non, reste à la discrétion de “%1$s”. Dans tous les cas, vous pouvez choisir quelle information de votre compte sera affichée publiquement. De plus, dans votre profil, vous pouvez souscrire ou non à l’envoi automatique d’e-mail par le logiciel phpBB.<br />
+	Votre compte contiendra au minimum un identifiant unique (désigné ici par « votre nom d’utilisateur »), un mot de passe personnel utilisé pour la connexion à votre compte (désigné ici par « votre mot de passe »), et une adresse e-mail personnelle valide (désignée ici par « votre e-mail »). Vos informations pour votre compte sur « %1$s » sont protégées par les lois de protection des données applicables dans le pays qui nous héberge. Toute information en-dehors de votre nom d’utilisateur, de votre mot de passe et de votre adresse e-mail requise par « %1$s » durant la procédure d’inscription, qu’elle soit obligatoire ou non, reste à la discrétion de « %1$s ». Dans tous les cas, vous pouvez choisir quelle information de votre compte sera affichée publiquement. De plus, dans votre profil, vous pouvez souscrire ou non à l’envoi automatique d’e-mail par le logiciel phpBB.<br />
 	<br />
-	Votre mot de passe est crypté (hashage à sens unique) afin qu’il soit sécurisé. Cependant, il est recommandé de ne pas utiliser le même mot de passe sur plusieurs sites internet différents. Votre mot de passe est le moyen d’accès à votre compte sur “%1$s”, conservez-le soigneusement et en aucun cas une personne affiliée de “%1$s”, de phpBB ou une d’une tierce partie ne peut vous demander légitimement votre mot de passe. Si vous oubliez votre mot de passe, vous pouvez utiliser la fonction “J’ai perdu mon mot de passe” fournie par le logiciel phpBB. Ce processus vous demandera de fournir votre nom d’utilisateur et votre e-mail, alors le logiciel phpBB générera un nouveau mot de passe qui vous permettra de vous reconnecter.<br />
+	Votre mot de passe est crypté (hashage à sens unique) afin qu’il soit sécurisé. Cependant, il est recommandé de ne pas utiliser le même mot de passe sur plusieurs sites Internet différents. Votre mot de passe est le moyen d’accès à votre compte sur « %1$s », conservez-le soigneusement et en aucun cas une personne affiliée de « %1$s », de phpBB ou une d’une tierce partie ne peut vous demander légitimement votre mot de passe. Si vous oubliez votre mot de passe, vous pouvez utiliser la fonction « J’ai perdu mon mot de passe » fournie par le logiciel phpBB. Ce processus vous demandera de fournir votre nom d’utilisateur et votre e-mail, alors le logiciel phpBB générera un nouveau mot de passe qui vous permettra de vous reconnecter.<br />
 	',
 ));
 
@@ -63,10 +63,10 @@ $lang = array_merge($lang, array(
 	'ACCOUNT_ACTIVE_PROFILE'   		=> 'Votre compte a été réactivé.',
 	'ACCOUNT_ADDED'   				=> 'Merci de votre inscription, votre compte a été créé. Vous pouvez vous connecter en utilisant votre nom d’utilisateur et votre mot de passe.',
 	'ACCOUNT_COPPA'   				=> 'Votre compte a été créé mais il doit être activé, consultez vos e-mails pour en savoir plus.',
-	'ACCOUNT_EMAIL_CHANGED'   		=> 'Votre compte a été mis à jour. Néanmoins, vous devez le réactiver. Une clef d’activation a été renvoyée à votre nouvelle adresse e-mail. Vérifiez vos e-mails pour plus d’informations.',
+	'ACCOUNT_EMAIL_CHANGED'   		=> 'Votre compte a été mis à jour. Néanmoins, vous devez le réactiver. Une clé d’activation a été renvoyée à votre nouvelle adresse e-mail. Vérifiez vos e-mails pour plus d’informations.',
 	'ACCOUNT_EMAIL_CHANGED_ADMIN'   => 'Votre compte a été mis à jour. Néanmoins, les administrateurs du forum doivent réactiver votre compte. Un e-mail leur a été envoyé, vous serez prévenu dès que votre compte sera réactivé.',
 	'ACCOUNT_INACTIVE'   			=> 'Votre compte a été créé. Cependant, il doit être activé. Une clé d’activation vous a été envoyée par e-mail. Vérifiez vos e-mails pour plus d’informations.',
-	'ACCOUNT_INACTIVE_ADMIN'   		=> 'Votre compte a été créé. Cependant, un administrateur doit le valider. Un courrier lui a été envoyé et vous serez informé de l’activation de votre compte.',
+	'ACCOUNT_INACTIVE_ADMIN'   		=> 'Votre compte a été créé. Cependant, un administrateur doit le valider. Un e-mail lui a été envoyé et vous serez informé de l’activation de votre compte.',
 	'ACTIVATION_EMAIL_SENT'   		=> 'Le message d’activation a été envoyé à votre adresse e-mail.',
 	'ACTIVATION_EMAIL_SENT_ADMIN'	=> 'Le message d’activation a été envoyé aux adresses e-mail des administrateurs.',
 	'ADD'  							=> 'Ajouter',
@@ -89,7 +89,7 @@ $lang = array_merge($lang, array(
 	'ATTACHMENTS_DELETED'   		=> 'Les fichiers joints ont été supprimés.',
 	'ATTACHMENT_DELETED'   			=> 'Le fichier joint a été supprimé.',
 	'AVATAR_CATEGORY'   			=> 'Catégorie',
-	'AVATAR_EXPLAIN'   				=> 'Dimensions maximales; largeur: %1$d pixels, hauteur: %2$d pixels, taille: %3$.2f Kio.',
+	'AVATAR_EXPLAIN'   				=> 'Dimensions maximales ; largeur: %1$d pixels, hauteur: %2$d pixels, taille: %3$.2f Kio.',
 	'AVATAR_FEATURES_DISABLED'   	=> 'La fonctionnalité des avatars est actuellement désactivée.',
 	'AVATAR_GALLERY'   				=> 'Galerie locale',
 	'AVATAR_GENERAL_UPLOAD_ERROR'   => 'Impossible de charger l’avatar vers %s',
@@ -119,8 +119,8 @@ $lang = array_merge($lang, array(
 	'CANNOT_REMOVE_FOLDER'   	=> 'Ce dossier ne peut pas être supprimé.',
 	'CHANGE_DEFAULT_GROUP'   	=> 'Changer de groupe par défaut',
 	'CHANGE_PASSWORD'   		=> 'Changer de mot de passe',
-	'CLICK_GOTO_FOLDER'     	=> '%1$s Aller à votre dossier “%3$s” %2$s',
-	'CLICK_RETURN_FOLDER'   	=> '%1$s Retour à votre dossier “%3$s” %2$s',
+	'CLICK_GOTO_FOLDER'     	=> '%1$s Aller à votre dossier « %3$s » %2$s',
+	'CLICK_RETURN_FOLDER'   	=> '%1$s Retour à votre dossier « %3$s » %2$s',
 	'CONFIRMATION'   			=> 'Confirmation d’inscription',
 	'CONFIRM_CHANGES'   		=> 'Confirmation des modifications',
 	'CONFIRM_EMAIL'   			=> 'Confirmation de l’adresse e-mail',
@@ -136,7 +136,8 @@ $lang = array_merge($lang, array(
 	'CREATE_FOLDER'   			=> 'Nouveau dossier…',
 	'CURRENT_IMAGE'   			=> 'Image actuelle',
 	'CURRENT_PASSWORD'   		=> 'Mot de passe actuel',
-	'CURRENT_PASSWORD_EXPLAIN'  => 'Vous ne devez confirmer votre mot de passe actuel que si vous désirez modifier votre mot de passe, e-mail ou nom d’utilisateur.',
+	'CURRENT_PASSWORD_EXPLAIN'  => 'Vous ne devez indiquer votre mot de passe actuel que si vous désirez modifier votre adresse e-mail ou nom d’utilisateur.',
+	'CURRENT_CHANGE_PASSWORD_EXPLAIN' => 'Pour modifier votre mot de passe, adresse e-mail ou nom d’utilisateur, vous devez indiquer votre mot de passe actuel.',
 	'CUR_PASSWORD_EMPTY' 		=> 'Vous n’avez pas indiqué votre mot de passe actuel.',
 	'CUR_PASSWORD_ERROR'   		=> 'Le mot de passe actuel indiqué est incorrect.',
 	'CUSTOM_DATEFORMAT'   		=> 'Personnalisé…',
@@ -151,18 +152,18 @@ $lang = array_merge($lang, array(
 	'DELETED_TOPIC'   			=> 'Le sujet a été supprimé.',
 	'DELETE_ATTACHMENT'   		=> 'Supprimer le fichier joint',
 	'DELETE_ATTACHMENTS'   		=> 'Supprimer les fichiers joints',
-	'DELETE_ATTACHMENT_CONFIRM' => 'Êtes-vous sûr de vouloir supprimer ce fichier joint?',
-	'DELETE_ATTACHMENTS_CONFIRM'=> 'Êtes-vous sûr de vouloir supprimer ces fichiers joints?',
+	'DELETE_ATTACHMENT_CONFIRM' => 'Êtes-vous sûr de vouloir supprimer ce fichier joint ?',
+	'DELETE_ATTACHMENTS_CONFIRM'=> 'Êtes-vous sûr de vouloir supprimer ces fichiers joints ?',
 	'DELETE_AVATAR'   			=> 'Supprimer l’image',
-	'DELETE_COOKIES_CONFIRM'   	=> 'Êtes-vous sûr de vouloir supprimer tous les cookies de ce forum?',
+	'DELETE_COOKIES_CONFIRM'   	=> 'Êtes-vous sûr de vouloir supprimer tous les cookies de ce forum ?',
 	'DELETE_MARKED_PM'   		=> 'Supprimer les messages sélectionnés',
-	'DELETE_MARKED_PM_CONFIRM'  => 'Êtes-vous sûr de vouloir supprimer tous les messages sélectionnés?',
+	'DELETE_MARKED_PM_CONFIRM'  => 'Êtes-vous sûr de vouloir supprimer tous les messages sélectionnés ?',
 	'DELETE_OLDEST_MESSAGES'   	=> 'Supprimer les anciens messages',
 	'DELETE_MESSAGE'   			=> 'Supprimer le message',
-	'DELETE_MESSAGE_CONFIRM'   	=> 'Êtes-vous sûr de vouloir supprimer ce message privé?',
+	'DELETE_MESSAGE_CONFIRM'   	=> 'Êtes-vous sûr de vouloir supprimer ce message privé ?',
 	'DELETE_MESSAGES_IN_FOLDER' => 'Supprimer définitivement tous les messages du dossier des messages supprimés',
 	'DELETE_RULE'   			=> 'Supprimer le filtre',
-	'DELETE_RULE_CONFIRM'   	=> 'Êtes-vous sûr de vouloir supprimer ce filtre?',
+	'DELETE_RULE_CONFIRM'   	=> 'Êtes-vous sûr de vouloir supprimer ce filtre ?',
 	'DEMOTE_SELECTED'   		=> 'Rétrograder de la sélection',
 	'DISABLE_CENSORS'   		=> 'Activer la censure de mots',
 	'DISPLAY_GALLERY'   		=> 'Afficher la galerie',
@@ -186,16 +187,16 @@ $lang = array_merge($lang, array(
 	'EXPORT_AS_MSG'   			=> 'Exporter en MSG',
 	'EXPORT_FOLDER'   			=> 'Exporter le dossier',
 
-	'FIELD_REQUIRED'   					=> 'Le champ “%s” doit être rempli.',
-	'FIELD_TOO_SHORT'   				=> 'Le champ “%1$s” est trop court, il doit comporter %2$d caractères au minimum.',
-	'FIELD_TOO_LONG'   					=> 'Le champ “%1$s” est trop long, il doit comporter %2$d caractères au maximum.',
-	'FIELD_TOO_SMALL'   				=> 'La valeur de “%1$s” est trop petite, elle doit être de %2$d au minimum.',
-	'FIELD_TOO_LARGE'   				=> 'La valeur de “%1$s” est trop grande, elle doit être de %2$d au maximum.',
-	'FIELD_INVALID_CHARS_NUMBERS_ONLY'  => 'Le champ “%s” comporte des caractères invalides, seuls les nombres sont permis.',
-	'FIELD_INVALID_CHARS_ALPHA_ONLY'   	=> 'Le champ “%s” comporte des caractères invalides, seuls les caractères alphanumériques sont permis.',
-	'FIELD_INVALID_CHARS_SPACERS_ONLY'  => 'Le champ “%s” comporte des caractères invalides, seuls les alphanumériques, espaces ou les caractères -+_[] sont permis.',
-	'FIELD_INVALID_DATE'   				=> 'Le champ “%s” a une date invalide.',
-	'FIELD_INVALID_VALUE'       		=> 'Le champ “%s” a une valeur invalide.',
+	'FIELD_REQUIRED'   					=> 'Le champ « %s » doit être rempli.',
+	'FIELD_TOO_SHORT'   				=> 'Le champ « %1$s » est trop court, il doit comporter %2$d caractères au minimum.',
+	'FIELD_TOO_LONG'   					=> 'Le champ « %1$s » est trop long, il doit comporter %2$d caractères au maximum.',
+	'FIELD_TOO_SMALL'   				=> 'La valeur de « %1$s » est trop petite, elle doit être de %2$d au minimum.',
+	'FIELD_TOO_LARGE'   				=> 'La valeur de « %1$s » est trop grande, elle doit être de %2$d au maximum.',
+	'FIELD_INVALID_CHARS_NUMBERS_ONLY'  => 'Le champ « %s » comporte des caractères invalides, seuls les nombres sont permis.',
+	'FIELD_INVALID_CHARS_ALPHA_ONLY'   	=> 'Le champ « %s » comporte des caractères invalides, seuls les caractères alphanumériques sont permis.',
+	'FIELD_INVALID_CHARS_SPACERS_ONLY'  => 'Le champ « %s » comporte des caractères invalides, seuls les alphanumériques, espaces ou les caractères -+_[] sont permis.',
+	'FIELD_INVALID_DATE'   				=> 'Le champ « %s » a une date invalide.',
+	'FIELD_INVALID_VALUE'       		=> 'Le champ « %s » a une valeur invalide.',
 
 	'FOE_MESSAGE'   			=> 'Message d’un ignoré',
 	'FOES_EXPLAIN'   			=> 'Les ignorés sont les membres dont les messages ne seront pas entièrement visibles, mais ils peuvent toujours vous envoyer des messages privés. Notez que vous ne pouvez pas ignorer les modérateurs ou les administrateurs.',
@@ -221,7 +222,7 @@ $lang = array_merge($lang, array(
 	'FWD_SUBJECT'   			=> 'Sujet: %s',
 	'FWD_DATE'   				=> 'Date: %s',
 	'FWD_FROM'   				=> 'De: %s',
-	'FWD_TO'   					=> 'A: %s',
+	'FWD_TO'   					=> 'À: %s',
 
 	'GLOBAL_ANNOUNCEMENT'   => 'Annonce globale',
 
@@ -259,7 +260,7 @@ $lang = array_merge($lang, array(
 	'MESSAGE_REMOVED_FROM_OUTBOX'   => 'Ce message a été supprimé par son auteur avant d’avoir été délivré.',
 	'MESSAGE_SENT_ON'   			=> 'le',
 	'MESSAGE_STORED'   				=> 'Votre message a été envoyé.',
-	'MESSAGE_TO'   					=> 'A',
+	'MESSAGE_TO'   					=> 'À',
 	'MESSAGES_DELETED'   			=> 'Les messages ont été supprimés',
 	'MOVE_DELETED_MESSAGES_TO'   	=> 'Déplacer les messages supprimés vers',
 	'MOVE_DOWN'   					=> 'Descendre',
@@ -290,7 +291,7 @@ $lang = array_merge($lang, array(
 	'NOT_ADDED_FOES_FRIENDS'   		=> 'Vous ne pouvez pas ajouter à votre liste d’ignorés des utilisateurs qui sont sur votre liste d’amis.',
 	'NOT_ADDED_FOES_SELF'   		=> 'Vous ne pouvez pas vous ajouter à votre liste d’ignorés.',
 	'NOT_AGREE'   					=> 'Je n’accepte pas ces conditions',
-	'NOT_ENOUGH_SPACE_FOLDER'   	=> 'Le dossier “%s” est plein. L’action n’a pas été effectuée.',
+	'NOT_ENOUGH_SPACE_FOLDER'   	=> 'Le dossier « %s » est plein. L’action n’a pas été effectuée.',
 	'NOT_MOVED_MESSAGE'   			=> 'Vous avez actuellement un message en attente car le dossier est plein.',
 	'NOT_MOVED_MESSAGES'   			=> 'Vous avez %d messages en attente car le dossier est plein.',
 	'NO_ACTION_MODE'   				=> 'Aucune action indiquée.',
@@ -329,7 +330,7 @@ $lang = array_merge($lang, array(
 	'NO_SAVED_DRAFTS'   		=> 'Aucun brouillon sauvegardé.',
 	'NO_TO_RECIPIENT'   		=> 'Aucun',
 	'NO_WATCHED_FORUMS'   		=> 'Vous ne surveillez aucun forum.',
-	'NO_WATCHED_SELECTED'		=> 'Vous n’avez sélectionné aucun forums ou sujets surveillés.',
+	'NO_WATCHED_SELECTED'		=> 'Vous n’avez sélectionné aucuns forums ou sujets surveillés.',
 	'NO_WATCHED_TOPICS'   		=> 'Vous ne surveillez aucun sujet.',
 
 	'PASS_TYPE_ALPHA_EXPLAIN'   => 'Le mot de passe doit avoir une longueur comprise entre %1$d et %2$d caractères et doit contenir des lettres de casse mélangée et des chiffres.',
@@ -353,7 +354,7 @@ $lang = array_merge($lang, array(
 	'PM_TO'   					=> 'Envoyer à',
 	'PM_USERS_REMOVED_NO_PM'   	=> 'Certains utilisateurs n’ont pas pu être ajoutés car ils ont désactivé leur boîte de messagerie privée.',
 	'POPUP_ON_PM'   			=> 'Fenêtre pop-up lors de nouveaux messages privés',
-	'POST_EDIT_PM'   			=> 'Editer le message',
+	'POST_EDIT_PM'   			=> 'Éditer le message',
 	'POST_FORWARD_PM'   		=> 'Transmettre le message',
 	'POST_NEW_PM'   			=> 'Envoyer',
 	'POST_PM_LOCKED'   			=> 'La messagerie privée est verrouillée.',
@@ -371,10 +372,10 @@ $lang = array_merge($lang, array(
    	'RELEASE_MESSAGES'   				=> '%sRecevoir les messages en attente%s… ils seront reclassés dans les dossiers adéquats si l’espace nécessaire est disponible.',
 	'REMOVE_ADDRESS'   					=> 'Supprimer l’adresse',
 	'REMOVE_SELECTED_BOOKMARKS'  		=> 'Supprimer les favoris sélectionnés',
-	'REMOVE_SELECTED_BOOKMARKS_CONFIRM' => 'Souhaitez-vous supprimer les favoris sélectionnés?',
+	'REMOVE_SELECTED_BOOKMARKS_CONFIRM' => 'Souhaitez-vous supprimer les favoris sélectionnés ?',
 	'REMOVE_BOOKMARK_MARKED'  	 		=> 'Supprimer',
 	'REMOVE_FOLDER'   					=> 'Supprimer le dossier',
-	'REMOVE_FOLDER_CONFIRM'   			=> 'Souhaitez-vous supprimer ce dossier?',
+	'REMOVE_FOLDER_CONFIRM'   			=> 'Souhaitez-vous supprimer ce dossier ?',
 	'RENAME'   							=> 'Renommer',
 	'RENAME_FOLDER'   					=> 'Renommer le dossier',
 	'REPLIED_MESSAGE'   				=> 'Réponse au message',
@@ -386,6 +387,7 @@ $lang = array_merge($lang, array(
 	'RULE_ADDED'   						=> 'Le filtre a été ajouté.',
 	'RULE_ALREADY_DEFINED'  			=> 'Ce filtre existe déjà.',
 	'RULE_DELETED'   					=> 'Ce filtre a été supprimé.',
+	'RULE_LIMIT_REACHED'				=> 'Vous ne pouvez pas ajouter de filtre supplémentaire. Vous avez atteint le nombre maximum de filtres.',
 	'RULE_NOT_DEFINED'   				=> 'Ce filtre est incorrect.',
 	'RULE_REMOVED_MESSAGE'   			=> 'Un message privé a été supprimé en raison des filtres de la messagerie privée.',
 	'RULE_REMOVED_MESSAGES'   			=> '%d messages privés ont été supprimés en raison des filtres de la messagerie privée.',
@@ -407,7 +409,7 @@ $lang = array_merge($lang, array(
 	'SORT_SIZE'   				=> 'Taille du fichier',
 
 	'TIMEZONE'   			=> 'Fuseau horaire',
-	'TO'   					=> 'A',
+	'TO'   					=> 'À',
 	'TOO_MANY_RECIPIENTS' 	=> 'Vous avez essayé d’envoyer un message privé à trop de destinataires à la fois.',
 	'TOO_MANY_REGISTERS'   	=> 'Vous avez atteint le nombre maximum de tentatives d’inscription. Réessayez plus tard.',
 
@@ -508,9 +510,9 @@ $lang = array_merge($lang, array(
 
 	'YOUR_DETAILS'   		=> 'Votre activité',
 	'YOUR_FOES'   			=> 'Vos ignorés',
-	'YOUR_FOES_EXPLAIN'   	=> 'Pour supprimer des utilisateurs “ignorés”, sélectionnez-les et cliquez sur envoyer.',
+	'YOUR_FOES_EXPLAIN'   	=> 'Pour supprimer des utilisateurs « ignorés », sélectionnez-les et cliquez sur envoyer.',
 	'YOUR_FRIENDS'   		=> 'Vos amis',
-	'YOUR_FRIENDS_EXPLAIN'  => 'Pour supprimer des utilisateurs “amis”, sélectionnez-les et cliquez sur envoyer.',
+	'YOUR_FRIENDS_EXPLAIN'  => 'Pour supprimer des utilisateurs « amis », sélectionnez-les et cliquez sur envoyer.',
 	'YOUR_WARNINGS'   		=> 'Votre niveau d’avertissement',
 
 	'PM_ACTION' => array(

@@ -5,7 +5,7 @@
 * translated originally by PhpBB-fr.com <http://www.phpbb-fr.com/> and phpBB.biz <http://www.phpBB.biz>
 *
 * @package language
-* @version $Id: search.php, v1.24 2009/05/27 21:21:00 Elglobo Exp $
+* @version $Id: search.php 58 2012-08-23 08:31:38Z Morgyanne $
 * @copyright (c) 2005 phpBB Group 
 * @license http://opensource.org/licenses/gpl-license.php GNU Public License 
 *
@@ -41,8 +41,8 @@ $lang = array_merge($lang, array(
 	'ACP_SEARCH_SETTINGS_EXPLAIN'			=> 'Vous pouvez définir quelle méthode d’indexation de recherche sera utilisée pour l’indexation des messages et l’exécution des recherches. Vous pouvez définir différentes options qui peuvent influencer sur la puissance de calcul requise. Certains de ces paramètres sont les mêmes pour toutes les méthodes d’indexation du moteur de recherche.',
 	
 	'COMMON_WORD_THRESHOLD'					=> 'Seuil de mot commun',
-	'COMMON_WORD_THRESHOLD_EXPLAIN'			=> 'Si un mot est contenu dans un nombre de messages supérieur au pourcentage indiqué, ce mot sera défini comme commun. Ces mots seront par la suite ignorés lors des recherches. Mettre “0” pour désactiver cette option. Cette option ne fonctionne que s’il y a plus de 100 messages sur votre forum. Si vous voulez que les mots actuellement considérés comme communs soient reconsidérés, vous devez recréer l’index.',
-	'CONFIRM_SEARCH_BACKEND'				=> 'Voulez-vous réellement changer la méthode d’indexation? Vous devrez recréer un index de recherche pour la nouvelle méthode. Si vous ne prévoyez pas de réutiliser l’ancienne méthode d’indexation vous pouvez la supprimer pour libérer des ressources système.',
+	'COMMON_WORD_THRESHOLD_EXPLAIN'			=> 'Si un mot est contenu dans un nombre de messages supérieur au pourcentage indiqué, ce mot sera défini comme commun. Ces mots seront par la suite ignorés lors des recherches. Mettre « 0 » pour désactiver cette option. Cette option ne fonctionne que s’il y a plus de 100 messages sur votre forum. Si vous voulez que les mots actuellement considérés comme communs soient reconsidérés, vous devez recréer l’index.',
+	'CONFIRM_SEARCH_BACKEND'				=> 'Voulez-vous réellement changer la méthode d’indexation ? Vous devrez recréer un index de recherche pour la nouvelle méthode. Si vous ne prévoyez pas de réutiliser l’ancienne méthode d’indexation vous pouvez la supprimer pour libérer des ressources système.',
 	'CONTINUE_DELETING_INDEX'				=> 'Continuer le précédent processus de suppression de l’index',
 	'CONTINUE_DELETING_INDEX_EXPLAIN'		=> 'Une suppression d’index de recherche a été commencée. Celle-ci doit être terminée ou annulée pour pouvoir accéder à la page de recherche.',
 	'CONTINUE_INDEXING'						=> 'Continuer le précédent processus d’indexation',
@@ -76,11 +76,11 @@ $lang = array_merge($lang, array(
 	'MAX_SEARCH_CHARS'						=> 'Caractères maximum indexés par la recherche',
 	'MAX_SEARCH_CHARS_EXPLAIN'				=> 'Seuls les mots inférieurs ou égaux à ce nombre de caractères seront indexés.',
 	'MAX_NUM_SEARCH_KEYWORDS'				=> 'Nombre maximum de mots clés autorisés',
-	'MAX_NUM_SEARCH_KEYWORDS_EXPLAIN'		=> 'Nombre maximum de mots que l’utilisateur est capable de rechercher. Une valeur à “0” autorise un nombre illimité de mots.',
+	'MAX_NUM_SEARCH_KEYWORDS_EXPLAIN'		=> 'Nombre maximum de mots que l’utilisateur est capable de rechercher. Une valeur à « 0 » autorise un nombre illimité de mots.',
 	'MIN_SEARCH_CHARS'						=> 'Caractères minimum indexés par la recherche',
 	'MIN_SEARCH_CHARS_EXPLAIN'				=> 'Seuls les mots supérieurs ou égaux à ce nombre de caractères seront indexés.',
 	'MIN_SEARCH_AUTHOR_CHARS'				=> 'Caractères minimum du nom de l’auteur',
-	'MIN_SEARCH_AUTHOR_CHARS_EXPLAIN'		=> 'Les utilisateurs doivent entrer au moins ce nombre de caractères en exécutant une recherche par auteur avec un joker Si le nom d’auteur est plus court que ce nombre vous pourrez tout de même rechercher ses messages en saisissant son nom complet.',
+	'MIN_SEARCH_AUTHOR_CHARS_EXPLAIN'		=> 'Les utilisateurs doivent entrer au moins ce nombre de caractères en exécutant une recherche par auteur avec un joker. Si le nom d’auteur est plus court que ce nombre vous pourrez tout de même rechercher ses messages en saisissant son nom complet.',
 	
 	'PROGRESS_BAR'							=> 'Barre de progression',
 	
@@ -93,13 +93,13 @@ $lang = array_merge($lang, array(
 	'SEARCH_INTERVAL'						=> 'Intervalle de flood des utilisateurs',
 	'SEARCH_INTERVAL_EXPLAIN'				=> 'Nombre de secondes que les utilisateurs doivent attendre entre chaque recherche. Cet intervalle est contrôlé indépendamment pour chaque utilisateur.',
 	'SEARCH_STORE_RESULTS'					=> 'Durée de la mise en cache des résultats',
-	'SEARCH_STORE_RESULTS_EXPLAIN'			=> 'Les résultats de la recherche mis en cache expireront après cette durée, en secondes. Mettre “0” pour désactiver la mise en cache de la recherche.',
+	'SEARCH_STORE_RESULTS_EXPLAIN'			=> 'Les résultats de la recherche mis en cache expireront après cette durée, en secondes. Mettre « 0 » pour désactiver la mise en cache de la recherche.',
 	'SEARCH_TYPE'							=> 'Méthode d’indexation de la recherche',
 	'SEARCH_TYPE_EXPLAIN'					=> 'phpBB vous permet de choisir la méthode d’indexation utilisée pour la recherche de texte dans le contenu des messages. Par défaut, la recherche utilisera la recherche FULLTEXT de phpBB.',
 	'SWITCHED_SEARCH_BACKEND'				=> 'Vous avez modifié la méthode d’indexation de la recherche. Afin d’utiliser la nouvelle méthode d’indexation, vous devrez vous assurer qu’il existe bien un index de recherche pour celle-ci.',
 	
 	'TOTAL_WORDS'							=> 'Nombre total de mots indexés',
-	'TOTAL_MATCHES'							=> 'Nombre total de mots indexées en relation avec les messages',
+	'TOTAL_MATCHES'							=> 'Nombre total de mots indexés en relation avec les messages',
 	
 	'YES_SEARCH'							=> 'Activer la fonction de recherche',
 	'YES_SEARCH_EXPLAIN'					=> 'Active la fonctionnalité de recherche, ce qui inclut la recherche des membres.',

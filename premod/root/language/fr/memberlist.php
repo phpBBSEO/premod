@@ -5,7 +5,7 @@
 * translated originally by PhpBB-fr.com <http://www.phpbb-fr.com/> and phpBB.biz <http://www.phpBB.biz>
 *
 * @package language
-* @version $Id: memberlist.php, v1.26 10:30 14/06/2011 Lolovoisin Exp $
+* @version $Id: memberlist.php 59 2012-08-27 06:41:52Z Morgyanne $
 * @copyright (c) 2005 phpBB Group 
 * @license http://opensource.org/licenses/gpl-license.php GNU Public License 
 *
@@ -58,8 +58,8 @@ $lang = array_merge($lang, array(
    'EMPTY_MESSAGE_IM'		=> 'Vous devez entrer un message à envoyer.',
    'EMPTY_NAME_EMAIL'   => 'Vous devez entrer le nom réel du destinataire.',
    'EMPTY_SUBJECT_EMAIL'   => 'Vous devez indiquer un sujet pour l’e-mail.',
-   'EQUAL_TO'   => 'Egal à',
-   'FIND_USERNAME_EXPLAIN'   => 'Utilisez ce formulaire pour rechercher un membre. Vous n’avez pas besoin de compléter tous les champs. Pour effectuer une recherche partielle, utilisez un * comme joker. Utilisez le format de date <kbd>AAAA-MM-JJ</kbd>, par exemple: <samp>2004-02-29</samp>. Utilisez les cases à cocher pour sélectionner un ou plusieurs noms d’utilisateurs (plusieurs noms d’utilisateurs peuvent être acceptés selon le formulaire lui-même) puis cliquez sur “Valider la sélection” pour retourner au formulaire précédent.',
+   'EQUAL_TO'   => 'Égal à',
+   'FIND_USERNAME_EXPLAIN'   => 'Utilisez ce formulaire pour rechercher un membre. Vous n’avez pas besoin de compléter tous les champs. Pour effectuer une recherche partielle, utilisez un * comme joker. Utilisez le format de date <kbd>AAAA-MM-JJ</kbd>, par exemple: <samp>2004-02-29</samp>. Utilisez les cases à cocher pour sélectionner un ou plusieurs noms d’utilisateurs (plusieurs noms d’utilisateurs peuvent être acceptés en fonction du formulaire) puis cliquez sur « Valider la sélection » pour retourner au formulaire précédent.',
    'FLOOD_EMAIL_LIMIT'   => 'Vous ne pouvez pas envoyer un autre e-mail si rapidement. Réessayez à nouveau dans quelques instants.',
    'GROUP_LEADER'   => 'Modérateur du groupe',
    'HIDE_MEMBER_SEARCH'   => 'Cacher la recherche des membres',
@@ -69,7 +69,7 @@ $lang = array_merge($lang, array(
    'IM_DOWNLOAD_APP'   => 'Télécharger l’application',
    'IM_ICQ'   => 'Notez que les membres ont pu choisir de ne pas recevoir de messages instantanés non sollicités.',
    'IM_JABBER'   => 'Notez que les membres ont pu choisir de ne pas recevoir de messages instantanés non sollicités.',
-   'IM_JABBER_SUBJECT'   => 'Ceci est un message automatique, merci de ne pas y répondre! Message de l’utilisateur %1$s le %2$s.',
+   'IM_JABBER_SUBJECT'   => 'Ceci est un message automatique, merci de ne pas y répondre ! Message de l’utilisateur %1$s le %2$s.',
    'IM_MESSAGE'   => 'Votre message',
    'IM_MSNM'   => 'Notez que pour utiliser cette fonction vous devez avoir installé Windows Live Messenger.',
    'IM_MSNM_BROWSER'   => 'Votre navigateur ne supporte pas cela.',
@@ -97,7 +97,7 @@ $lang = array_merge($lang, array(
    'ORDER'   => 'Ordre',
    'OTHER'   => 'Autre',
    'POST_IP'   => 'Posté depuis IP/domaine',
-   'RANK'   => 'Rang',
+
    'REAL_NAME'   => 'Nom du destinataire',
    'RECIPIENT'   => 'Destinataire',
    'REMOVE_FOE'   => 'Supprimer de ma liste d’ignorés',

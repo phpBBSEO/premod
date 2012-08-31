@@ -5,7 +5,7 @@
 * translated originally by PhpBB-fr.com <http://www.phpbb-fr.com/> and phpBB.biz <http://www.phpBB.biz>
 *
 * @package language
-* @version $Id: users.php, v1.25 13:53 17/01/2011 Lolovoisin Exp $
+* @version $Id: users.php 59 2012-08-27 06:41:52Z Morgyanne $
 * @copyright (c) 2005 phpBB Group
 * @license http://opensource.org/licenses/gpl-license.php GNU Public License
 *
@@ -43,7 +43,7 @@ $lang = array_merge($lang, array(
 	'BAN_ALREADY_ENTERED'	=> 'Ce bannissement a déjà été effectué. Aucune mise à jour n’a été effectuée.',
 	'BAN_SUCCESSFUL'		=> 'Le bannissement a été ajouté.',
 
-	'CANNOT_BAN_ANONYMOUS'			=> 'Vous n’êtes pas autorisé à bannir le compte de l’utilisateur invité. Les permissions des visiteurs peuvent être définies depuis l’onglet “Permissions”.',
+	'CANNOT_BAN_ANONYMOUS'			=> 'Vous n’êtes pas autorisé à bannir le compte de l’utilisateur invité. Les permissions des visiteurs peuvent être définies depuis l’onglet « Permissions ».',
 	'CANNOT_BAN_FOUNDER'			=> 'Vous n’êtes pas autorisé à bannir les comptes des administrateurs fondateurs.',
 	'CANNOT_BAN_YOURSELF'			=> 'Vous n’êtes pas autorisé à vous bannir.',
 	'CANNOT_DEACTIVATE_BOT'			=> 'Vous n’êtes pas autorisé à désactiver les comptes de robots. Désactivez plutôt le robot dans la page des robots.',
@@ -60,7 +60,7 @@ $lang = array_merge($lang, array(
 
 	'DELETE_POSTS'			=> 'Supprimer ses messages',
 	'DELETE_USER'			=> 'Supprimer cet utilisateur',
-	'DELETE_USER_EXPLAIN'	=> 'Merci de noter que la suppression d’un utilisateur est une action irréversible.',
+	'DELETE_USER_EXPLAIN'	=> 'Notez que la suppression d’un utilisateur est une action irréversible. Les messages privés non lus envoyés par l’utilisateur seront supprimés et ne seront pas accessibles aux destinataires.',
 
 	'FORCE_REACTIVATION_SUCCESS'	=> 'La réactivation a été forcée.',
 	'FOUNDER'						=> 'Fondateur',
@@ -125,6 +125,7 @@ $lang = array_merge($lang, array(
 	'USER_GROUP_SPECIAL'			=> 'L’utilisateur est membre des groupes prédéfinis',
 	'USER_LIFTED_NR'				=> 'Le statut de nouvel inscrit a été supprimé.',
 	'USER_NO_ATTACHMENTS'			=> 'Aucun fichier joint à afficher.',
+	'USER_NO_POSTS_TO_DELETE'		=> 'L’utilisateur n’a aucun message à conserver ou à supprimer.',
 	'USER_OUTBOX_EMPTIED'			=> 'La boîte d’envoi de l’utilisateur a été vidée.',
 	'USER_OUTBOX_EMPTY'				=> 'La boîte d’envoi de l’utilisateur était déjà vide.',
 	'USER_OVERVIEW_UPDATED'			=> 'Les informations de cet utilisateur ont été mises à jour.',
