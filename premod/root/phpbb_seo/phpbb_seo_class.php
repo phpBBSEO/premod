@@ -329,7 +329,7 @@ class phpbb_seo extends setup_phpbb_seo {
 	* drop the sid's in url
 	*/
 	function drop_sid( $url ) {
-		return (strpos($url, 'sid=') !== false) ? trim(preg_replace(array('`&(amp;)?sid=[a-z0-9]*(&amp;|&)?`', '`(\?)sid=[a-z0-9]*`'), array('\2', '\1'), $url), '?') : $url;
+		return (strpos($url, 'sid=') !== false) ? trim(preg_replace(array('`&(amp;)?sid=[a-z0-9]+(&amp;|&)?`i', '`(\?)sid=[a-z0-9]+(&amp;|&)?`i'), array('\2', '\1'), $url), '?') : $url;
 	}
 	/**
 	* set_user_url( $username, $user_id = 0 )
