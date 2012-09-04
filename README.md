@@ -21,7 +21,15 @@ Build Status: [![Build Status](https://secure.travis-ci.org/phpBBSEO/phpbb_seo_p
 BUILDING PACKAGES
 -----------------
 
-For building phpBB SEO Premod's packages you need to use [Phing](http://www.phing.info/trac/), available via PEAR. You need to install `zip` libraries on an Ubuntu box.
+For building phpBB SEO Premod's packages you need to use [Phing](http://www.phing.info/trac/), available via PEAR.
+
+
+
+On an Ubuntu box you need to install some packages before:
+
+	sudo apt-get install zip
+
+
 
 From the build directory, run:
 
