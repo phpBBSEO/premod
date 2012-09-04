@@ -12,7 +12,7 @@
 
 	<property name="filename" value="phpBB3-SEO-Premod_V_${new_version}.zip" />
 
-	<!-- create a phpBB SEO Premod full package -->
+	<!-- create a full phpBB SEO Premod package -->
 	<target name="full-package" depends="phpunit">
 		<delete dir="build/release" />
 		<mkdir dir="build/release" />

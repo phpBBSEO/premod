@@ -16,3 +16,18 @@ CONTINUOS INTEGRATION
 We have unit and functional tests in order to prevent regressions. These tests are performed by [Travis CI](http://travis-ci.org/).
 
 Build Status: [![Build Status](https://secure.travis-ci.org/phpBBSEO/phpbb_seo_premod.png?branch=master)](http://travis-ci.org/phpBBSEO/phpbb_seo_premod)
+
+
+BUILDING PACKAGES
+-----------------
+
+For building phpBB SEO Premod's packages you need to use [Phing](http://www.phing.info/trac/), available via PEAR. You need to install `zip` libraries on an Ubuntu box.
+
+From the build directory, run:
+
+	phing <target-name>
+
+
+There are the following target available:
+
+	- full-package: create a full phpBB SEO Premod package
