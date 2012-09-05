@@ -47,17 +47,8 @@
 		<mkdir dir="build/${dir.auto_update}/update/old" />
 		<mkdir dir="build/${dir.temporary}" />
 
-		<copy todir="build/${dir.auto_update}/docs">
-			<fileset dir="premod/root/docs">
-				<include>**</include>
-			</fileset>
-		</copy>
-
-		<copy todir="build/${dir.auto_update}/install">
-			<fileset dir="premod/root/install">
-				<include>**</include>
-			</fileset>
-		</copy>
+		<exec command="cp -R premod/root/docs build/${dir.auto_update}/docs" passthru="true" />
+		<exec command="cp -R premod/root/install build/${dir.auto_update}/install" passthru="true" />
 
 		<exec dir="build/${dir.auto_update}" command="echo -e 'More info at : ${en_release_link}\nPlus d'infos sur : ${fr_release_link}\n' > readme.txt" passthru="true" />
 
