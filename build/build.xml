@@ -6,7 +6,7 @@
 	<property name="prev_version" value="3.0.10" />
 	<property name="older_versions" value="3.0.0, 3.0.1, 3.0.2, 3.0.3, 3.0.4, 3.0.5, 3.0.6, 3.0.7, 3.0.8, 3.0.9" />
 
-	<property name="repository" value="git://github.com/bokehteknology/Bokeh-Platform.git" />
+	<property name="repository" value="git://github.com/phpBBSEO/phpbb_seo_premod.git" />
 
 	<property name="en_release_link" value="http://www.phpbb-seo.com/en/site-announcements/premod-3-0-11-released-t8970.html" />
 	<property name="fr_release_link" value="http://www.phpbb-seo.com/fr/annonces-site/premod-3-0-11-disponible-t6656.html" />
