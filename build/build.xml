@@ -17,9 +17,9 @@
 
 	<property name="filename" value="phpBB3-SEO-Premod_V_${new_version}.zip" />
 
-	<property name="dir.auto_update" value="auto_update">
-	<property name="dir.package" value="release">
-	<property name="dir.temporary" value="tmp">
+	<property name="dir.auto_update" value="auto_update" />
+	<property name="dir.package" value="release" />
+	<property name="dir.temporary" value="tmp" />
 
 	<property name="dirs" value="${dir.auto_update}, ${dir.package}" />
 
