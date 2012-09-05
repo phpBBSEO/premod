@@ -5,6 +5,11 @@
 	<property name="new_version" value="3.0.11" />
 	<property name="prev_version" value="3.0.10" />
 	<property name="older_versions" value="3.0.0, 3.0.1, 3.0.2, 3.0.3, 3.0.4, 3.0.5, 3.0.6, 3.0.7, 3.0.8, 3.0.9" />
+
+	<property name="repository" value="git://github.com/bokehteknology/Bokeh-Platform.git" />
+
+	<property name="en_release_link" value="http://www.phpbb-seo.com/en/site-announcements/premod-3-0-11-released-t8970.html" />
+	<property name="fr_release_link" value="http://www.phpbb-seo.com/fr/annonces-site/premod-3-0-11-disponible-t6656.html" />
 	<!-- END -->
 
 	<property name="old_versions" value="${older_versions}, ${prev_version}" />
@@ -12,19 +17,68 @@
 
 	<property name="filename" value="phpBB3-SEO-Premod_V_${new_version}.zip" />
 
+	<property name="dir.auto_update" value="auto_update">
+	<property name="dir.package" value="release">
+	<property name="dir.temporary" value="tmp">
+
+	<property name="dirs" value="${dir.auto_update}, ${dir.package}" />
+
 	<!-- create a full phpBB SEO Premod package -->
 	<target name="full-package" depends="phpunit">
-		<delete dir="build/release" />
-		<mkdir dir="build/release" />
+		<foreach list="${dirs}" param="dir" target="clean" />
+		<foreach list="${dirs}" param="dir" target="prepare" />
 
 		<echo msg="Creating package..." />
-		<exec dir="premod" command="zip -r -q ../build/release/${filename} ./*" passthru="true" />
+		<exec dir="premod" command="zip -r -q ../build/${dir.package}/${filename} ./*" passthru="true" />
 
 		<echo msg="phpBB SEO Premod package created!" />
 	</target>
 
+	<!-- create an Automated Update Package -->
+	<target name="auto-update">
+		<foreach list="${dirs}" param="dir" target="clean" />
+		<foreach list="${dirs}" param="dir" target="prepare" />
+
+		<echo msg="Creating Automated Update Package..." />
+
+		<mkdir dir="${dir.auto_update}/install" />
+		<mkdir dir="${dir.auto_update}/update" />
+		<mkdir dir="${dir.auto_update}/update/new" />
+		<mkdir dir="${dir.auto_update}/update/old" />
+		<mkdir dir="${dir.temporary}" />
+
+		<copy todir="build/${dir.auto_update}/docs">
+			<fileset dir="premod/root/docs">
+				<include>**</include>
+			</fileset>
+		</copy>
+
+		<copy todir="build/${dir.auto_update}/install">
+			<fileset dir="premod/root/install">
+				<include>**</include>
+			</fileset>
+		</copy>
+
+		<exec dir="build/${dir.auto_update}" command="echo -e 'More info at : ${en_release_link}\nPlus d'infos sur : ${fr_release_link}\n' > readme.txt" passthru="true" />
+
+		<delete file="build/${dir.auto_update}/install/install_install.php" />
+		<delete file="build/${dir.auto_update}/install/install_convert.php" />
+		<delete dir="build/${dir.auto_update}/install/schemas" />
+		<delete dir="build/${dir.auto_update}/install/convertors" />
+
+		<echo msg="Automated Update Package created!" />
+	</target>
+
 	<target name="phpunit">
 		<exec command="phpunit --configuration tests/phpunit.xml" passthru="true" />
+	</target>
+
+	<target name="clean">
+		<delete dir="build/${dir}" />
+	</target>
+
+	<target name="prepare">
+		<mkdir dir="build/${dir}" />
 	</target>
 
 </project>
