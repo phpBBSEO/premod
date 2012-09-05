@@ -41,11 +41,11 @@
 
 		<echo msg="Creating Automated Update Package..." />
 
-		<mkdir dir="${dir.auto_update}/install" />
-		<mkdir dir="${dir.auto_update}/update" />
-		<mkdir dir="${dir.auto_update}/update/new" />
-		<mkdir dir="${dir.auto_update}/update/old" />
-		<mkdir dir="${dir.temporary}" />
+		<mkdir dir="build/${dir.auto_update}/install" />
+		<mkdir dir="build/${dir.auto_update}/update" />
+		<mkdir dir="build/${dir.auto_update}/update/new" />
+		<mkdir dir="build/${dir.auto_update}/update/old" />
+		<mkdir dir="build/${dir.temporary}" />
 
 		<copy todir="build/${dir.auto_update}/docs">
 			<fileset dir="premod/root/docs">
