@@ -15,23 +15,28 @@
 	<property name="old_versions" value="${older_versions}, ${prev_version}" />
 	<property name="versions" value="${old_versions}, ${new_version}" />
 
-	<property name="filename" value="phpBB3-SEO-Premod_V_${new_version}.zip" />
+	<property name="file.auto_update" value="phpBB_SEO-${prev_version}_to_${new_version}.zip" />
+	<property name="file.full_package" value="phpBB3-SEO-Premod_V_${new_version}.zip" />
 
 	<property name="dir.auto_update" value="auto_update" />
-	<property name="dir.package" value="release" />
+	<property name="dir.full_package" value="full_package" />
+	<property name="dir.package" value="releases" />
 	<property name="dir.temporary" value="tmp" />
 
-	<property name="dirs" value="${dir.auto_update}, ${dir.package}" />
+	<property name="dirs" value="${dir.auto_update}, ${dir.full_package}, ${dir.package}" />
 
 	<!-- create a full phpBB SEO Premod package -->
 	<target name="full-package" depends="phpunit">
 		<foreach list="${dirs}" param="dir" target="clean" />
 		<foreach list="${dirs}" param="dir" target="prepare" />
 
-		<delete file="premod/root/install/install_update.php" />
+		<echo msg="Working on tree..." />
+		<exec command="cp -R premod/root build/${dir.full_package}" passthru="true" />
+		<exec command="sed -i 's/%mode%/seo_premod/g' build/${dir.full_package}/install/index.php" passthru="true" />
+		<delete file="build/${dir.full_package}/install/install_update.php" />
 
 		<echo msg="Creating package..." />
-		<exec dir="premod" command="zip -r -q ../build/${dir.package}/${filename} ./*" passthru="true" />
+		<exec dir="build/${dir.full_package}" command="zip -r -q ../${dir.package}/${file.full_package} ./*" passthru="true" />
 
 		<echo msg="phpBB SEO Premod package created!" />
 	</target>
@@ -41,7 +46,7 @@
 		<foreach list="${dirs}" param="dir" target="clean" />
 		<foreach list="${dirs}" param="dir" target="prepare" />
 
-		<echo msg="Creating Automated Update Package..." />
+		<echo msg="Working on tree..." />
 
 		<mkdir dir="build/${dir.auto_update}/install" />
 		<mkdir dir="build/${dir.auto_update}/install/update" />
@@ -52,6 +57,8 @@
 		<exec command="cp -R premod/root/docs build/${dir.auto_update}/docs" passthru="true" />
 		<exec command="cp -R premod/root/install/* build/${dir.auto_update}/install/" passthru="true" />
 
+		<exec command="sed -i 's/%mode%/seo_premod/g' build/${dir.full_package}/install/index.php" passthru="true" />
+
 		<echo file="build/${dir.auto_update}/readme.txt" append="false">More info at : ${en_release_link}
 Plus d'infos sur : ${fr_release_link}</echo>
 
@@ -61,6 +68,9 @@ Plus d'infos sur : ${fr_release_link}</echo>
 		<delete file="build/${dir.auto_update}/install/install_convert.php" />
 		<delete file="build/${dir.auto_update}/install/install_install.php" />
 		<delete file="build/${dir.auto_update}/install/install_phpbb_seo.php" />
+
+		<echo msg="Creating Automated Update Package..." />
+		<exec dir="build/${dir.auto_update}" command="zip -r -q ../${dir.package}/${file.auto_update} ./*" passthru="true" />
 
 		<echo msg="Automated Update Package created!" />
 	</target>
