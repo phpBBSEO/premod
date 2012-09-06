@@ -160,7 +160,7 @@ define('CHMOD_READ', 4);
 define('CHMOD_WRITE', 2);
 define('CHMOD_EXECUTE', 1);
 
-$mode = request_var('mode', 'seo_premod');
+$mode = request_var('mode', '%MODE%');
 $sub = request_var('sub', '');
 
 // Set PHP error handler to ours
