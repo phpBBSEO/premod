@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<project name="phpBB SEO Premod" description="The phpBB SEO Premod is a fully Search Engine Optimization friendly premodded version of phpBB" default="full-package" basedir="../">
+<project name="phpBB SEO Premod" description="The phpBB SEO Premod is a fully Search Engine Optimization friendly premodded version of phpBB" default="all" basedir="../">
 	<!-- phpBB SEO Premod - CONFIGURATION -->
 	<property name="new_version" value="3.0.11" />
 	<property name="prev_version" value="3.0.10" />
@@ -25,19 +25,19 @@
 
 	<property name="dirs" value="${dir.auto_update}, ${dir.full_package}, ${dir.package}" />
 
-	<!-- create a full phpBB SEO Premod package -->
-	<target name="full-package" depends="phpunit">
-		<foreach list="${dirs}" param="dir" target="clean" />
-		<foreach list="${dirs}" param="dir" target="prepare" />
+	<!-- build all packages -->
+	<target name="all" depends="clean,prepare,phpunit,full-package,auto-update" />
 
+	<!-- create a full phpBB SEO Premod package -->
+	<target name="full-package">
 		<echo msg="Working on tree..." />
 		<exec command="cp -R premod/root/* build/${dir.full_package}/" passthru="true" />
 
 		<delete file="build/${dir.full_package}/install/install_update.php" />
 
 		<exec command="sed -i 's/%MODE%/seo_premod/g' build/${dir.full_package}/install/index.php" passthru="true" />
-		<exec command="sed -i 's/%PREMOD_VERSION%/$(new_version)/g' build/${dir.full_package}/install/database_update.php" passthru="true" />
-		<exec command="sed -i 's/%PREMOD_VERSION%/$(new_version)/g' build/${dir.full_package}/install/install_install.php" passthru="true" />
+		<exec command="sed -i 's/%PREMOD_VERSION%/${new_version}/g' build/${dir.full_package}/install/database_update.php" passthru="true" />
+		<exec command="sed -i 's/%PREMOD_VERSION%/${new_version}/g' build/${dir.full_package}/install/install_install.php" passthru="true" />
 
 		<echo msg="Creating package..." />
 		<exec dir="build/${dir.full_package}" command="zip -r -q ../${dir.package}/${file.full_package} ./*" passthru="true" />
@@ -47,9 +47,6 @@
 
 	<!-- create an Automated Update Package -->
 	<target name="auto-update">
-		<foreach list="${dirs}" param="dir" target="clean" />
-		<foreach list="${dirs}" param="dir" target="prepare" />
-
 		<echo msg="Working on tree..." />
 
 		<mkdir dir="build/${dir.auto_update}/install" />
@@ -62,7 +59,7 @@
 		<exec command="cp -R premod/root/install/* build/${dir.auto_update}/install/" passthru="true" />
 
 		<exec command="sed -i 's/%MODE%/overview/g' build/${dir.auto_update}/install/index.php" passthru="true" />
-		<exec command="sed -i 's/%PREMOD_VERSION%/$(new_version)/g' build/${dir.auto_update}/install/database_update.php" passthru="true" />
+		<exec command="sed -i 's/%PREMOD_VERSION%/${new_version}/g' build/${dir.auto_update}/install/database_update.php" passthru="true" />
 
 		<echo file="build/${dir.auto_update}/readme.txt" append="false">More info at : ${en_release_link}
 Plus d'infos sur : ${fr_release_link}</echo>
@@ -85,10 +82,18 @@ Plus d'infos sur : ${fr_release_link}</echo>
 	</target>
 
 	<target name="clean">
+		<foreach list="${dirs}" param="dir" target="clean-dir" />
+	</target>
+
+	<target name="clean-dir">
 		<delete dir="build/${dir}" />
 	</target>
 
 	<target name="prepare">
+		<foreach list="${dirs}" param="dir" target="prepare-dir" />
+	</target
+
+	<target name="prepare-dir">
 		<mkdir dir="build/${dir}" />
 	</target>
 
