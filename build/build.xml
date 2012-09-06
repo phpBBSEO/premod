@@ -31,9 +31,13 @@
 		<foreach list="${dirs}" param="dir" target="prepare" />
 
 		<echo msg="Working on tree..." />
-		<exec command="cp -R premod/root build/${dir.full_package}" passthru="true" />
-		<exec command="sed -i 's/%mode%/seo_premod/g' build/${dir.full_package}/install/index.php" passthru="true" />
+		<exec command="cp -R premod/root/* build/${dir.full_package}/" passthru="true" />
+
 		<delete file="build/${dir.full_package}/install/install_update.php" />
+
+		<exec command="sed -i 's/%MODE%/seo_premod/g' build/${dir.full_package}/install/index.php" passthru="true" />
+		<exec command="sed -i 's/%PREMOD_VERSION%/$(new_version)/g' build/${dir.full_package}/install/database_update.php" passthru="true" />
+		<exec command="sed -i 's/%PREMOD_VERSION%/$(new_version)/g' build/${dir.full_package}/install/install_install.php" passthru="true" />
 
 		<echo msg="Creating package..." />
 		<exec dir="build/${dir.full_package}" command="zip -r -q ../${dir.package}/${file.full_package} ./*" passthru="true" />
@@ -57,7 +61,8 @@
 		<exec command="cp -R premod/root/docs build/${dir.auto_update}/docs" passthru="true" />
 		<exec command="cp -R premod/root/install/* build/${dir.auto_update}/install/" passthru="true" />
 
-		<exec command="sed -i 's/%mode%/seo_premod/g' build/${dir.full_package}/install/index.php" passthru="true" />
+		<exec command="sed -i 's/%MODE%/overview/g' build/${dir.auto_update}/install/index.php" passthru="true" />
+		<exec command="sed -i 's/%PREMOD_VERSION%/$(new_version)/g' build/${dir.auto_update}/install/database_update.php" passthru="true" />
 
 		<echo file="build/${dir.auto_update}/readme.txt" append="false">More info at : ${en_release_link}
 Plus d'infos sur : ${fr_release_link}</echo>
