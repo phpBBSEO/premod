@@ -6,9 +6,9 @@
 * @license http://opensource.org/licenses/gpl-2.0.php GNU General Public License v2
 *
 */
-
-require_once dirname(__FILE__) . '/../../phpBB/includes/functions.php';
-require_once dirname(__FILE__) . '/../../phpBB/includes/functions_content.php';
+global $phpbb_root_path;
+require_once dirname(__FILE__) . '/../' . $phpbb_root_path . 'includes/functions.php';
+require_once dirname(__FILE__) . '/../' . $phpbb_root_path . 'includes/functions_content.php';
 
 class phpbb_text_processing_make_clickable_test extends phpbb_test_case
 {

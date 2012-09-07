@@ -6,8 +6,8 @@
 * @license http://opensource.org/licenses/gpl-2.0.php GNU General Public License v2
 *
 */
-
-require_once dirname(__FILE__) . '/../../phpBB/includes/functions.php';
+global $phpbb_root_path;
+require_once dirname(__FILE__) . '/../' . $phpbb_root_path . 'includes/functions.php';
 
 class phpbb_wrapper_version_compare_test extends phpbb_test_case
 {
@@ -17,7 +17,7 @@ class phpbb_wrapper_version_compare_test extends phpbb_test_case
 		$this->assertEquals(0, phpbb_version_compare('1.0.0', '1.0.0'));
 		$this->assertEquals(1, phpbb_version_compare('1.0.1', '1.0.0'));
 	}
-	
+
 	public function test_three_parameters()
 	{
 		$this->assertEquals(true, phpbb_version_compare('1.0.0', '1.0.1', '<'));
@@ -113,7 +113,7 @@ class phpbb_wrapper_version_compare_test extends phpbb_test_case
 			phpbb_version_compare($version1, $version2),
 			"Result of version comparison ($version1, $version2) = $expected is incorrect."
 		);
-		
+
 	}
 
 	public function alpha_beta_test_data()

@@ -9,6 +9,9 @@
 
 define('IN_PHPBB', true);
 $phpbb_root_path = 'premod/root/';
+// uri to phpBB
+$_phpbb_uri = 'premod/root/';
+
 $phpEx = 'php';
 require_once $phpbb_root_path . 'includes/startup.php';
 

@@ -6,19 +6,20 @@
 * @license http://opensource.org/licenses/gpl-2.0.php GNU General Public License v2
 *
 */
-
+global $phpbb_root_path;
 require_once dirname(__FILE__) . '/base.php';
 
-require_once dirname(__FILE__) . '/../../phpBB/includes/functions.php';
-require_once dirname(__FILE__) . '/../../phpBB/includes/session.php';
+require_once dirname(__FILE__) . '/../' . $phpbb_root_path . 'includes/functions.php';
+require_once dirname(__FILE__) . '/../' . $phpbb_root_path . 'includes/session.php';
 
 class phpbb_security_extract_current_page_test extends phpbb_security_test_base
 {
 	public static function security_variables()
 	{
+		global $_phpbb_uri;
 		return array(
-			array('http://localhost/phpBB/index.php', 'mark=forums&x="><script>alert(/XSS/);</script>', 'mark=forums&x=%22%3E%3Cscript%3Ealert(/XSS/);%3C/script%3E'),
-			array('http://localhost/phpBB/index.php', 'mark=forums&x=%22%3E%3Cscript%3Ealert(/XSS/);%3C/script%3E', 'mark=forums&x=%22%3E%3Cscript%3Ealert(/XSS/);%3C/script%3E'),
+			array('http://localhost/'. $_phpbb_uri .'index.php', 'mark=forums&x="><script>alert(/XSS/);</script>', 'mark=forums&x=%22%3E%3Cscript%3Ealert(/XSS/);%3C/script%3E'),
+			array('http://localhost/'. $_phpbb_uri .'index.php', 'mark=forums&x=%22%3E%3Cscript%3Ealert(/XSS/);%3C/script%3E', 'mark=forums&x=%22%3E%3Cscript%3Ealert(/XSS/);%3C/script%3E'),
 		);
 	}
 

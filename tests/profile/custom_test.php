@@ -6,8 +6,8 @@
 * @license http://opensource.org/licenses/gpl-2.0.php GNU General Public License v2
 *
 */
-
-require_once dirname(__FILE__) . '/../../phpBB/includes/functions_profile_fields.php';
+global $phpbb_root_path;
+require_once dirname(__FILE__) . '/../' . $phpbb_root_path . 'includes/functions_profile_fields.php';
 
 class phpbb_profile_custom_test extends phpbb_database_test_case
 {

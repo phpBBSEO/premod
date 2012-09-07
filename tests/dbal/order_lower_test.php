@@ -55,7 +55,7 @@ class phpbb_dbal_order_lower_test extends phpbb_database_test_case
 					'theme_id'			=> 2,
 					'imageset_id'		=> 2
 				)
-			), 
+			),
 			$db->sql_fetchrowset($result)
 		);
 	}

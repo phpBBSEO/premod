@@ -6,9 +6,9 @@
 * @license http://opensource.org/licenses/gpl-2.0.php GNU General Public License v2
 *
 */
-
-require_once dirname(__FILE__) . '/../../phpBB/includes/functions.php';
-require_once dirname(__FILE__) . '/../../phpBB/includes/functions_content.php';
+global $phpbb_root_path;
+require_once dirname(__FILE__) . '/../' . $phpbb_root_path . 'includes/functions.php';
+require_once dirname(__FILE__) . '/../' . $phpbb_root_path . 'includes/functions_content.php';
 require_once dirname(__FILE__) . '/../mock_user.php';
 require_once dirname(__FILE__) . '/../mock/cache.php';
 
@@ -19,7 +19,7 @@ class phpbb_text_processing_censor_text_test extends phpbb_test_case
 		global $cache, $user;
 		$cache = new phpbb_mock_cache;
 		$user = new phpbb_mock_user;
-		
+
 		$user->optionset('viewcensors', false);
 
 		return array(
@@ -61,7 +61,7 @@ class phpbb_text_processing_censor_text_test extends phpbb_test_case
 			array('badword1 badword2 badword3 badword4', 'replacement1 replacement2 replacement3 replacement4'),
 			array('badword1 badword2 badword3 badword4d', 'replacement1 replacement2 replacement3 badword4d'),
 			array('abadword1 badword2 badword3 badword4', 'replacement1 replacement2 replacement3 replacement4'),
-			
+
 			array("new\nline\ntest", "new\nline\ntest"),
 			array("tab\ttest\t", "tab\ttest\t"),
 			array('öäü', 'öäü'),

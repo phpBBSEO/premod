@@ -6,8 +6,8 @@
 * @license http://opensource.org/licenses/gpl-2.0.php GNU General Public License v2
 *
 */
-
-require_once dirname(__FILE__) . '/../../phpBB/includes/functions.php';
+global $phpbb_root_path;
+require_once dirname(__FILE__) . '/../' . $phpbb_root_path . 'includes/functions.php';
 
 class phpbb_regex_email_test extends phpbb_test_case
 {
@@ -34,7 +34,7 @@ class phpbb_regex_email_test extends phpbb_test_case
 			//array('"John Doe"@example.com'),
 			//array('Alice@[192.168.2.1]'),		// IPv4
 			//array('Bob@[2001:0db8:85a3:08d3:1319:8a2e:0370:7344]'), // IPv6
-			
+
 			// http://fightingforalostcause.net/misc/2006/compare-email-regex.php
 			array('l3tt3rsAndNumb3rs@domain.com'),
 			array('has-dash@domain.com'),
@@ -78,7 +78,7 @@ class phpbb_regex_email_test extends phpbb_test_case
 			array('abc,def@example.com'),		// invalid character ,
 			array('abc<def@example.com'),		// invalid character <
 			array('abc>def@example.com'),		// invalid character >
-			
+
 			// http://fightingforalostcause.net/misc/2006/compare-email-regex.php
 			array('missingDomain@.com'),
 			array('@missingLocal.org'),

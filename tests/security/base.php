@@ -15,7 +15,7 @@ abstract class phpbb_security_test_base extends phpbb_test_case
 	protected function setUp()
 	{
 		global $user, $phpbb_root_path;
-
+		global $_phpbb_uri;
 		// Put this into a global function being run by every test to init a proper user session
 		$_SERVER['HTTP_HOST']		= 'localhost';
 		$_SERVER['SERVER_NAME']		= 'localhost';
@@ -23,9 +23,9 @@ abstract class phpbb_security_test_base extends phpbb_test_case
 		$_SERVER['SERVER_PORT']		= 80;
 		$_SERVER['REMOTE_ADDR']		= '127.0.0.1';
 		$_SERVER['QUERY_STRING']	= '';
-		$_SERVER['REQUEST_URI']		= '/tests/';
-		$_SERVER['SCRIPT_NAME']		= '/tests/index.php';
-		$_SERVER['PHP_SELF']		= '/tests/index.php';
+		$_SERVER['REQUEST_URI']		= '/' . $_phpbb_uri;
+		$_SERVER['SCRIPT_NAME']		= '/' . $_phpbb_uri . 'index.php';
+		$_SERVER['PHP_SELF']		= '/' . $_phpbb_uri . 'index.php';
 		$_SERVER['HTTP_USER_AGENT']	= 'Mozilla/5.0 (Windows; U; Windows NT 6.0; de; rv:1.8.1.14) Gecko/20080404 Firefox/2.0.0.14';
 		$_SERVER['HTTP_ACCEPT_LANGUAGE']	= 'de-de,de;q=0.8,en-us;q=0.5,en;q=0.3';
 

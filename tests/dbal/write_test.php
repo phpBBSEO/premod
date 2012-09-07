@@ -6,8 +6,8 @@
 * @license http://opensource.org/licenses/gpl-2.0.php GNU General Public License v2
 *
 */
-
-require_once dirname(__FILE__) . '/../../phpBB/includes/functions.php';
+global $phpbb_root_path;
+require_once dirname(__FILE__) . '/../' . $phpbb_root_path . 'includes/functions.php';
 
 class phpbb_dbal_write_test extends phpbb_database_test_case
 {
@@ -64,7 +64,7 @@ class phpbb_dbal_write_test extends phpbb_database_test_case
 			FROM phpbb_config';
 		$result = $db->sql_query($sql);
 		$rows = $db->sql_fetchrowset($result);
-		
+
 		$this->assertEquals(1, sizeof($rows));
 		$this->assertEquals('config2', $rows[0]['config_name']);
 
