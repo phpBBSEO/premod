@@ -23,7 +23,7 @@ class phpbb_security_redirect_test extends phpbb_security_test_base
 			array('bad://localhost/' . $_phpbb_uri . 'index.php', 'Tried to redirect to potentially insecure url.', false),
 			array('http://www.otherdomain.com/somescript.php', false, 'http://localhost/' . rtrim($_phpbb_uri,  '/')),
 			array("http://localhost/' . $_phpbb_uri . 'memberlist.php\n\rConnection: close", 'Tried to redirect to potentially insecure url.', false),
-			array('javascript:test', false, 'http://localhost/' . $_phpbb_uri . 'tests/javascript:test'),
+			array('javascript:test', false, 'http://localhost/' . $_phpbb_uri . '../../javascript:test'),
 			array('http://localhost/' . $_phpbb_uri . 'index.php;url=', 'Tried to redirect to potentially insecure url.', false),
 		);
 	}
