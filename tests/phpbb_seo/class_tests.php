@@ -7,6 +7,9 @@
 *
 */
 
+/**
+* @group phpbb_seo
+*/
 class phpbb_seo_class_tests extends phpbb_test_case
 {
 	function _drop_sid_data()
