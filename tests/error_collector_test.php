@@ -6,9 +6,9 @@
 * @license http://opensource.org/licenses/gpl-2.0.php GNU General Public License v2
 *
 */
-global $phpbb_root_path;
-require_once dirname(__FILE__) . '/' . $phpbb_root_path . 'includes/functions.php';
-require_once dirname(__FILE__) . '/' . $phpbb_root_path . 'includes/error_collector.php';
+global $phpbb_root_path_from_test_root;
+require_once dirname(__FILE__) . $phpbb_root_path_from_test_root . 'includes/functions.php';
+require_once dirname(__FILE__) . $phpbb_root_path_from_test_root . 'includes/error_collector.php';
 
 class phpbb_error_collector_test extends phpbb_test_case
 {
