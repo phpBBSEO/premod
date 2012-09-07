@@ -7,7 +7,7 @@
 *
 */
 
-class class_tests extends PHPUnit_Framework_TestCase
+class phpbb_seo_class_tests extends phpbb_test_case
 {
 	function _drop_sid_data()
 	{
