@@ -27,6 +27,9 @@
 	</groups>
 
 	<php>
+		<var name="phpbb_root_path" value="premod/root/" />
+		<var name="phpEx" value="php" />
+
 		<!-- "Real" test database -->
 		<!-- uncomment, otherwise sqlite memory runs -->
 		<server name="PHPBB_TEST_DBMS" value="postgres"/>
