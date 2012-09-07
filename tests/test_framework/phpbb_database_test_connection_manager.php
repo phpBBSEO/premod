@@ -7,7 +7,7 @@
 *
 */
 
-require_once dirname(__FILE__) . '/../../phpBB/includes/functions_install.php';
+require_once dirname(__FILE__) . '/../../premod/root/includes/functions_install.php';
 
 class phpbb_database_test_connection_manager
 {
@@ -104,7 +104,7 @@ class phpbb_database_test_connection_manager
 	{
 		$this->ensure_connected(__METHOD__);
 
-		$directory = dirname(__FILE__) . '/../../phpBB/install/schemas/';
+		$directory = dirname(__FILE__) . '/../../premod/root/install/schemas/';
 		$this->load_schema_from_file($directory);
 	}
 
