@@ -6,8 +6,8 @@
 * @license http://opensource.org/licenses/gpl-2.0.php GNU General Public License v2
 *
 */
-global $phpbb_root_path;
-require_once dirname(__FILE__) . '/../' . $phpbb_root_path . 'includes/session.php';
+global $phpbb_root_path_from_test;
+require_once dirname(__FILE__) . $phpbb_root_path_from_test . 'includes/session.php';
 
 class phpbb_user_lang_test extends phpbb_test_case
 {

@@ -6,9 +6,9 @@
 * @license http://opensource.org/licenses/gpl-2.0.php GNU General Public License v2
 *
 */
-global $phpbb_root_path;
-require_once dirname(__FILE__) . '/../' . $phpbb_root_path . 'includes/functions.php';
-require_once dirname(__FILE__) . '/../' . $phpbb_root_path . 'includes/db/db_tools.php';
+global $phpbb_root_path_from_test;
+require_once dirname(__FILE__) . $phpbb_root_path_from_test . 'includes/functions.php';
+require_once dirname(__FILE__) . $phpbb_root_path_from_test . 'includes/db/db_tools.php';
 
 class phpbb_dbal_db_tools_test extends phpbb_database_test_case
 {

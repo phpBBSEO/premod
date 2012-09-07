@@ -6,8 +6,8 @@
 * @license http://opensource.org/licenses/gpl-2.0.php GNU General Public License v2
 *
 */
-global $phpbb_root_path;
-require_once dirname(__FILE__) . '/../' . $phpbb_root_path . 'includes/functions_install.php';
+global $phpbb_root_path_from_test;
+require_once dirname(__FILE__) . $phpbb_root_path_from_test . 'includes/functions_install.php';
 
 class phpbb_database_test_connection_manager
 {
@@ -102,10 +102,10 @@ class phpbb_database_test_connection_manager
 	*/
 	public function load_schema()
 	{
-		global $phpbb_root_path;
+		global $phpbb_root_path_from_test;
 		$this->ensure_connected(__METHOD__);
 
-		$directory = dirname(__FILE__) . '/../' . $phpbb_root_path . 'install/schemas/';
+		$directory = dirname(__FILE__) . $phpbb_root_path_from_test . 'install/schemas/';
 		$this->load_schema_from_file($directory);
 	}
 

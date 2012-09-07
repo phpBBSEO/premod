@@ -7,8 +7,8 @@
 *
 */
 use Symfony\Component\BrowserKit\CookieJar;
-global $phpbb_root_path;
-require_once __DIR__ . '/../' . $phpbb_root_path . 'includes/functions_install.php';
+global $phpbb_root_path_from_test;
+require_once __DIR__ . $phpbb_root_path_from_test . 'includes/functions_install.php';
 
 class phpbb_functional_test_case extends phpbb_test_case
 {
@@ -204,7 +204,7 @@ class phpbb_functional_test_case extends phpbb_test_case
 
 	protected function add_lang($lang_file)
 	{
-		global $phpbb_root_path;
+		global $phpbb_root_path_from_test;
 		if (is_array($lang_file))
 		{
 			foreach ($lang_file as $file)
@@ -213,7 +213,7 @@ class phpbb_functional_test_case extends phpbb_test_case
 			}
 		}
 
-		$lang_path = __DIR__ . '/../' . $phpbb_root_path . "language/en/$lang_file.php";
+		$lang_path = __DIR__ . $phpbb_root_path_from_test . "language/en/$lang_file.php";
 
 		$lang = array();
 

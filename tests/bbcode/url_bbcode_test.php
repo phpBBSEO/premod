@@ -7,11 +7,11 @@
 *
 */
 
-global $phpbb_root_path;
-require_once dirname(__FILE__) . '/../' . $phpbb_root_path . 'includes/functions.php';
-require_once dirname(__FILE__) . '/../' . $phpbb_root_path . 'includes/functions_content.php';
-require_once dirname(__FILE__) . '/../' . $phpbb_root_path . 'includes/bbcode.php';
-require_once dirname(__FILE__) . '/../' . $phpbb_root_path . 'includes/message_parser.php';
+global $phpbb_root_path_from_test;
+require_once dirname(__FILE__) . $phpbb_root_path_from_test . 'includes/functions.php';
+require_once dirname(__FILE__) . $phpbb_root_path_from_test . 'includes/functions_content.php';
+require_once dirname(__FILE__) . $phpbb_root_path_from_test . 'includes/bbcode.php';
+require_once dirname(__FILE__) . $phpbb_root_path_from_test . 'includes/message_parser.php';
 require_once dirname(__FILE__) . '/../mock_user.php';
 
 class phpbb_url_bbcode_test extends phpbb_test_case

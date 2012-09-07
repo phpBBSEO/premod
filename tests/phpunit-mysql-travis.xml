@@ -27,7 +27,9 @@
 	</groups>
 
 	<php>
-		<var name="phpbb_root_path" value="../premod/root/" />
+		<var name="phpbb_root_path" value="premod/root/" />
+		<var name="phpbb_root_path_from_test" value="/../../premod/root/" />
+		<var name="phpbb_root_path_from_test_root" value="/../premod/root/" />
 		<var name="phpEx" value="php" />
 		<var name="_phpbb_uri" value="premod/root/" />
 		<server name="PHPBB_TEST_DBMS" value="mysqli" />

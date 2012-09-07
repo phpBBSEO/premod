@@ -8,7 +8,9 @@
 */
 
 define('IN_PHPBB', true);
-$phpbb_root_path = '../premod/root/';
+$phpbb_root_path = 'premod/root/';
+$phpbb_root_path_from_test = '/../../' . $phpbb_root_path;
+$phpbb_root_path_from_test_root = '/../' . $phpbb_root_path;
 // uri to phpBB
 $_phpbb_uri = 'premod/root/';
 

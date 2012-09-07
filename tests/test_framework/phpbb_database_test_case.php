@@ -75,10 +75,10 @@ abstract class phpbb_database_test_case extends PHPUnit_Extensions_Database_Test
 	public function new_dbal()
 	{
 		global $phpbb_root_path, $phpEx;
-
+		global $phpbb_root_path_from_test;
 		$config = $this->get_database_config();
 
-		require_once dirname(__FILE__) . '/../' . $phpbb_root_path . 'includes/db/' . $config['dbms'] . '.php';
+		require_once dirname(__FILE__) . $phpbb_root_path_from_test . 'includes/db/' . $config['dbms'] . '.php';
 		$dbal = 'dbal_' . $config['dbms'];
 		$db = new $dbal();
 		$db->sql_connect($config['dbhost'], $config['dbuser'], $config['dbpasswd'], $config['dbname'], $config['dbport']);

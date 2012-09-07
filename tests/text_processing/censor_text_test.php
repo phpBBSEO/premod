@@ -6,9 +6,9 @@
 * @license http://opensource.org/licenses/gpl-2.0.php GNU General Public License v2
 *
 */
-global $phpbb_root_path;
-require_once dirname(__FILE__) . '/../' . $phpbb_root_path . 'includes/functions.php';
-require_once dirname(__FILE__) . '/../' . $phpbb_root_path . 'includes/functions_content.php';
+global $phpbb_root_path_from_test;
+require_once dirname(__FILE__) . $phpbb_root_path_from_test . 'includes/functions.php';
+require_once dirname(__FILE__) . $phpbb_root_path_from_test . 'includes/functions_content.php';
 require_once dirname(__FILE__) . '/../mock_user.php';
 require_once dirname(__FILE__) . '/../mock/cache.php';
 
