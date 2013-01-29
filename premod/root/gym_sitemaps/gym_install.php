@@ -3,7 +3,7 @@
 *
 * @package phpBB SEO GYM Sitemaps
 * @version $Id$
-* @copyright (c) 2006 - 2010 www.phpbb-seo.com
+* @copyright (c) 2006 - 2013 www.phpbb-seo.com
 * @license http://opensource.org/osi3.0/licenses/lgpl-license.php GNU Lesser General Public License
 *
 */
@@ -39,7 +39,7 @@ require($phpbb_root_path . 'includes/functions_install.' . $phpEx);
 // Start session management
 $user->session_begin();
 $auth->acl($user->data);
-$user->setup('gym_sitemaps/install');
+$user->setup(array('gym_sitemaps/install', 'mods/info_acp_gym_sitemaps'));
 // Security check
 // Circumvent a potential phpbb bug with paths
 $redirect = append_sid(generate_board_url() . "/gym_sitemaps/gym_install.$phpEx");
