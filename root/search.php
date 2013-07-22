@@ -83,7 +83,7 @@ switch ($search_id)
 			login_box('', $user->lang['LOGIN_EXPLAIN_UNREADSEARCH']);
 		}
 	break;
-	
+
 	// The "new posts" search uses user_lastvisit which is user based, so it should require user to log in.
 	case 'newposts':
 		if ($user->data['user_id'] == ANONYMOUS)
@@ -91,7 +91,7 @@ switch ($search_id)
 			login_box('', $user->lang['LOGIN_EXPLAIN_NEWPOSTS']);
 		}
 	break;
-	
+
 	default:
 		// There's nothing to do here for now ;)
 	break;
@@ -650,7 +650,7 @@ if ($keywords || $author || $author_id || $search_id || $submit)
 	if ( $phpbb_seo->seo_opt['rewrite_usermsg'] && (!empty($author) || !empty($author_id)) ) {
 		$author_name = '';
 		if (!empty($author_id)) {
-			$sql = $sql = 'SELECT username
+			$sql = 'SELECT username
 				FROM ' . USERS_TABLE . "
 				WHERE user_id = $author_id
 				AND user_type IN (" . USER_NORMAL . ', ' . USER_FOUNDER . ')';
@@ -661,7 +661,7 @@ if ($keywords || $author || $author_id || $search_id || $submit)
 			}
 		}
 		if (!empty($author) && (strpos($author, '*') === false) ) {
-			$sql = $sql = 'SELECT user_id
+			$sql = 'SELECT user_id
 				FROM ' . USERS_TABLE . "
 				WHERE username_clean = '" . $db->sql_escape(utf8_clean_string($author)) . "'
 				AND user_type IN (" . USER_NORMAL . ', ' . USER_FOUNDER . ')';
