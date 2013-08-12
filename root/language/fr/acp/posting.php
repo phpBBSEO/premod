@@ -1,13 +1,13 @@
 <?php
-/** 
+/**
 *
 * posting [Standard french]
 * translated originally by PhpBB-fr.com <http://www.phpbb-fr.com/> and phpBB.biz <http://www.phpBB.biz>
 *
 * @package language
-* @version $Id: posting.php 58 2012-08-23 08:31:38Z Morgyanne $
-* @copyright (c) 2005 phpBB Group 
-* @license http://opensource.org/licenses/gpl-license.php GNU Public License 
+* @version $Id: posting.php 72 2013-08-04 09:57:55Z papicx $
+* @copyright (c) 2005 phpBB Group
+* @license http://opensource.org/licenses/gpl-license.php GNU Public License
 *
 */
 
@@ -41,8 +41,8 @@ if (empty($lang) || !is_array($lang))
 $lang = array_merge($lang, array(
 	'ACP_BBCODES_EXPLAIN'		=> 'Le BBCode est une implémentation spéciale du HTML qui offre un plus grand contrôle sur l’affichage des messages. Depuis cette page, vous pouvez ajouter, supprimer ou éditer des BBCodes personnalisés.',
 	'ADD_BBCODE'				=> 'Ajouter un nouveau BBCode',
-	
-	'BBCODE_DANGER'				=> 'Le BBCode que vous tentez d’ajouter semble utiliser un champs {TEXT} à l’intèrieur d’un attribut HTML. Ceci est une éventuelle faille de sécurité XSS. Essayez d’utiliser à la place des variables plus restrictives comme {SIMPLETEXT} ou {INTEXT}. Procédez uniquement si vous comprenez les risques potentiels et que vous jugez l’utilisation de {TEXT} absolument inévitable.',
+
+	'BBCODE_DANGER'				=> 'Le BBCode que vous tentez d’ajouter semble utiliser un champ {TEXT} à l’intérieur d’un attribut HTML. Ceci est une éventuelle faille de sécurité XSS. Essayez d’utiliser à la place des variables plus restrictives comme {SIMPLETEXT} ou {INTEXT}. Procédez uniquement si vous comprenez les risques potentiels et que vous jugez l’utilisation de {TEXT} absolument inévitable.',
 	'BBCODE_DANGER_PROCEED'		=> 'Procédez', //'I understand the risk',
 
 	'BBCODE_ADDED'				=> 'BBCode ajouté.',
@@ -51,7 +51,8 @@ $lang = array_merge($lang, array(
 	'BBCODE_HELPLINE'			=> 'Ligne d’aide',
 	'BBCODE_HELPLINE_EXPLAIN'	=> 'Ce champ contient le texte du BBCode qui sera affiché lors du passage de la souris.',
 	'BBCODE_HELPLINE_TEXT'		=> 'Texte de la ligne d’aide',
-	'BBCODE_HELPLINE_TOO_LONG' 	=> 'Le texte saisi pour la ligne d’aide est trop long.',
+	'BBCODE_HELPLINE_TOO_LONG'	=> 'Le texte saisi pour la ligne d’aide est trop long.',
+
 	'BBCODE_INVALID_TAG_NAME'	=> 'Le nom de la balise BBCode que vous avez sélectionné existe déjà.',
 	'BBCODE_INVALID'			=> 'Votre BBCode est construit dans une forme invalide.',
 	'BBCODE_OPEN_ENDED_TAG'		=> 'Votre BBCode personnalisé doit contenir une balise d’ouverture et de fermeture.',
@@ -83,7 +84,8 @@ $lang = array_merge($lang, array(
 		'NUMBER'		=> 'Une série de chiffres',
 		'EMAIL'			=> 'Une adresse e-mail valide',
 		'URL'			=> 'Une URL valide utilisant un quelconque protocole (http, ftp, etc. ne peuvent pas être utilisés pour des exploits javascripts). Si aucun n’est donné, « http:// » sera préfixé par défaut à la chaîne.',
-		'LOCAL_URL'		=> 'Une URL locale. L’URL doit être relative à la page du sujet et ne peut contenir un nom de serveur ou un protocole.',
+		'LOCAL_URL'		=> 'Une URL locale. L’URL doit être relative à la page du sujet et ne peut contenir un nom de serveur ou un protocole, du fait que les liens sont préfixés de « %s ».',
+		'RELATIVE_URL'	=> 'Une URL relative. Vous pouvez utiliser celle-ci pour faire correspondre des parties d’une URL, mais attention : une URL complète est une URL relative valide. Lorsque vous souhaitez utiliser des URL relatives de votre forum, utilisez la variable LOCAL_URL.',
 		'COLOR'			=> 'Une couleur HTML peut être, au choix, soit une forme numérique <samp>#FF1234</samp> ou un <a href="http://www.w3.org/TR/CSS21/syndata.html#value-def-color">nom de couleur CSS</a> comme par exemple <samp>fuchsia</samp> ou <samp>InactiveBorder</samp>'
 	)
 ));
@@ -104,11 +106,11 @@ $lang = array_merge($lang, array(
 	'CURRENT_SMILIES'			=> 'Smileys actuels',
 	'CURRENT_SMILIES_EXPLAIN'	=> 'Choisissez que faire avec les smileys actuellement installés.',
 
-	'DISPLAY_ON_POSTING'	=> 'Afficher sur la page de rédaction d’un message',
+	'DISPLAY_ON_POSTING'		=> 'Afficher sur la page de rédaction d’un message',
 	'DISPLAY_POSTING'			=> 'Sur la page de rédaction d’un message',
 	'DISPLAY_POSTING_NO'		=> 'Absent de la page de rédaction d’un message',
-	
-	
+
+
 
 	'EDIT_ICONS'				=> 'Éditer les icônes',
 	'EDIT_SMILIES'				=> 'Éditer les smileys',
@@ -170,7 +172,7 @@ $lang = array_merge($lang, array(
 	'SMILIES_EDIT'				=> 'Éditer le smiley',
 	'SMILIE_NO_CODE'			=> 'Le smiley « %s » a été ignoré car aucun code n’a été saisi.',
 	'SMILIE_NO_EMOTION'			=> 'Le smiley « %s » a été ignoré car aucun smiley n’a été indiqué.',
-	'SMILIE_NO_FILE'      		=> 'Le smiley « %s » a été ignoré car le fichier est manquant.',
+	'SMILIE_NO_FILE'			=> 'Le smiley « %s » a été ignoré car le fichier est manquant.',
 	'SMILIES_NONE_EDITED'		=> 'Aucun smiley n’a été mis à jour.',
 	'SMILIES_ONE_EDITED'		=> 'Le smiley a été mis à jour.',
 	'SMILIES_EDITED'			=> 'Les smileys ont été mis à jour.',
@@ -184,6 +186,7 @@ $lang = array_merge($lang, array(
 	'SMILIES_ORDER'				=> 'Classement du smiley',
 	'SMILIES_URL'				=> 'Image du smiley',
 	'SMILIES_WIDTH'				=> 'Largeur du smiley',
+
 	'TOO_MANY_SMILIES'			=> 'Limite de %d smileys atteinte.',
 
 	'WRONG_PAK_TYPE'	=> 'Le pack indiqué ne contient pas les données appropriées.',

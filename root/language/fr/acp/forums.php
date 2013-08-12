@@ -1,13 +1,13 @@
 <?php
-/** 
+/**
 *
 * acp_forums [Standard french]
 * translated originally by PhpBB-fr.com <http://www.phpbb-fr.com/> and phpBB.biz <http://www.phpBB.biz>
 *
 * @package language
-* @version $Id: forums.php 58 2012-08-23 08:31:38Z Morgyanne $
-* @copyright (c) 2005 phpBB Group 
-* @license http://opensource.org/licenses/gpl-license.php GNU Public License 
+* @version $Id: forums.php 71 2013-07-23 21:38:34Z papicx $
+* @copyright (c) 2005 phpBB Group
+* @license http://opensource.org/licenses/gpl-license.php GNU Public License
 *
 */
 
@@ -46,7 +46,6 @@ $lang = array_merge($lang, array(
 	'AUTO_PRUNE_VIEWED_EXPLAIN'	=> 'Nombre de jours depuis la dernière consultation et la suppression du sujet.',
 
 	'CONTINUE'						=> 'Continuer',
-	
 	'COPY_PERMISSIONS'				=> 'Copier les permissions depuis',
 	'COPY_PERMISSIONS_EXPLAIN'		=> 'Pour faciliter la mise en place des permissions pour votre nouveau forum, vous pouvez copier les permissions d’un forum existant.',
 	'COPY_PERMISSIONS_ADD_EXPLAIN'	=> 'Une fois créé, le forum aura les mêmes permissions que celles sélectionnées ici. Si aucun forum n’est choisi, le nouveau forum ne sera pas visible tant que ses permissions n’auront pas été définies.',
@@ -80,7 +79,7 @@ $lang = array_merge($lang, array(
 	'FORUM_CREATED'						=> 'Le forum a été créé.',
 	'FORUM_DATA_NEGATIVE'				=> 'Les paramètres de délestage ne peuvent pas être négatifs.',
 	'FORUM_DELETE'						=> 'Supprimer le forum',
-	'FORUM_DELETE_EXPLAIN' 				=> 'Le formulaire suivant vous permet de supprimer un forum et de décider où vous désirez déplacer tous les sujets (ou forums) qu’il contient.',
+	'FORUM_DELETE_EXPLAIN'				=> 'Le formulaire suivant vous permet de supprimer un forum et de décider où vous désirez déplacer tous les sujets (ou forums) qu’il contient.',
 	'FORUM_DELETED'						=> 'Le forum a été supprimé.',
 	'FORUM_DESC'						=> 'Description',
 	'FORUM_DESC_EXPLAIN'				=> 'Toute balise HTML saisie sera affichée telle quelle.',
@@ -119,7 +118,7 @@ $lang = array_merge($lang, array(
 	'FORUM_UPDATED'						=> 'Les informations du forum ont été mises à jour.',
 
 	'FORUM_WITH_SUBFORUMS_NOT_TO_LINK'		=> 'Vous souhaitez modifier en un forum-lien, un forum contenant des sous-forums et dans lequel vous pouviez rédiger des messages. Avant de procéder, déplacez tous les sous-forums hors de ce forum, car une fois le forum modifié en un forum-lien, vous ne pourrez plus consulter les sous-forums.',	
-	
+
 	'GENERAL_FORUM_SETTINGS'	=> 'Paramètres généraux du forum',
 
 	'LINK'						=> 'Lien',
@@ -146,7 +145,7 @@ $lang = array_merge($lang, array(
 	'PRUNE_STICKY'				=> 'Délester les post-it',
 	'PRUNE_OLD_POLLS'			=> 'Délester les anciens sondages',
 	'PRUNE_OLD_POLLS_EXPLAIN'	=> 'Supprime les sujets avec des sondages sans vote suivant l’ancienneté des messages délestés automatiquement.',
-	
+
 	'REDIRECT_ACL'	=> 'Vous pouvez désormais %sdéfinir les permissions%s de ce forum.',
 
 	'SYNC_IN_PROGRESS'			=> 'Synchronisation du forum',

@@ -2,7 +2,7 @@ Subject: Notification de nouveau sujet - {FORUM_NAME}
 
 Bonjour {USERNAME},
 
-Vous recevez cet e-mail car vous surveillez le forum, « {FORUM_NAME} » sur « {SITENAME} ». Ce forum a reçu un nouveau sujet depuis votre dernière visite, « {TOPIC_TITLE} ». Vous pouvez utiliser le lien suivant pour voir le forum. Aucune autre notification ne vous sera envoyée jusqu’à votre prochaine visite sur le forum.
+Vous recevez cet e-mail car vous surveillez le forum, « {FORUM_NAME} » sur « {SITENAME} ». Ce forum a reçu un nouveau sujet<!-- IF AUTHOR_NAME --> par {AUTHOR_NAME}<!-- ENDIF --> depuis votre dernière visite, « {TOPIC_TITLE} ». Vous pouvez utiliser le lien suivant pour voir le forum. Aucune autre notification ne vous sera envoyée jusqu’à votre prochaine visite sur le forum.
 
 {U_FORUM}
 

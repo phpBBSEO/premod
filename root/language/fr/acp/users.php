@@ -5,7 +5,7 @@
 * translated originally by PhpBB-fr.com <http://www.phpbb-fr.com/> and phpBB.biz <http://www.phpBB.biz>
 *
 * @package language
-* @version $Id: users.php 59 2012-08-27 06:41:52Z Morgyanne $
+* @version $Id: users.php 69 2013-07-16 18:05:36Z papicx $
 * @copyright (c) 2005 phpBB Group
 * @license http://opensource.org/licenses/gpl-license.php GNU Public License
 *
@@ -68,7 +68,7 @@ $lang = array_merge($lang, array(
 
 	'GROUP_APPROVE'					=> 'Accepter le membre',
 	'GROUP_DEFAULT'					=> 'Groupe par défaut',
-	'GROUP_DELETE'					=> 'Supprimer le membre du groupe',
+	'GROUP_DELETE'					=> 'Retirer ce membre du groupe',
 	'GROUP_DEMOTE'					=> 'Rétrograder le chef de groupe',
 	'GROUP_PROMOTE'					=> 'Promouvoir en chef de groupe',
 
@@ -115,7 +115,7 @@ $lang = array_merge($lang, array(
 	'USER_ADMIN_SIG_REMOVED'		=> 'La signature de cet utilisateur a été supprimée.',
 	'USER_ATTACHMENTS_REMOVED'		=> 'Les fichiers joints de cet utilisateur ont été supprimés.',
 	'USER_AVATAR_NOT_ALLOWED'		=> 'L’avatar ne peut pas être affiché car les avatars ont été désactivés.',
-	'USER_AVATAR_UPDATED'			=> 'Les informations avatar de cet utilisateur ont été mis à jour.',
+	'USER_AVATAR_UPDATED'			=> 'Les informations de l’avatar de cet utilisateur ont été mises à jour.',
 	'USER_AVATAR_TYPE_NOT_ALLOWED'	=> 'L’avatar actuel ne peut pas être affiché car ce type d’avatar a été désactivté.',
 	'USER_CUSTOM_PROFILE_FIELDS'	=> 'Champs de profil personnalisés',
 	'USER_DELETED'					=> 'Cet utilisateur a été supprimé.',

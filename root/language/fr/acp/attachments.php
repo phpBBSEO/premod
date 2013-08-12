@@ -1,13 +1,13 @@
 <?php
-/** 
+/**
 *
 * acp_attachments [Standard french]
 * translated originally by PhpBB-fr.com <http://www.phpbb-fr.com/> and phpBB.biz <http://www.phpBB.biz>
 *
 * @package language
-* @version $Id: attachments.php 59 2012-08-27 06:41:52Z Morgyanne $
-* @copyright (c) 2005 phpBB Group 
-* @license http://opensource.org/licenses/gpl-license.php GNU Public License 
+* @version $Id: attachments.php 71 2013-07-23 21:38:34Z papicx $
+* @copyright (c) 2005 phpBB Group
+* @license http://opensource.org/licenses/gpl-license.php GNU Public License
 *
 */
 
@@ -60,10 +60,9 @@ $lang = array_merge($lang, array(
 	'ATTACH_MAX_FILESIZE'				=> 'Taille maximale du fichier',
 	'ATTACH_MAX_FILESIZE_EXPLAIN'		=> 'Taille maximale de chaque fichier. Si cette valeur est « 0 », la taille du fichier transféré est uniquement limitée par votre configuration PHP.',
 	'ATTACH_MAX_PM_FILESIZE'			=> 'Taille maximale des fichiers dans la messagerie privée',
-	'ATTACH_MAX_PM_FILESIZE_EXPLAIN' 	=> 'Taille maximale de chaque fichier joint à un message privé, mettre « 0 » pour illimité.',
+	'ATTACH_MAX_PM_FILESIZE_EXPLAIN'	=> 'Taille maximale de chaque fichier joint à un message privé, mettre « 0 » pour illimité.',
 	'ATTACH_ORPHAN_URL'					=> 'Fichiers orphelins',
 	'ATTACH_POST_ID'					=> 'ID du message',
-	'ATTACH_POST_TYPE'          		=> 'Type du message',
 	'ATTACH_QUOTA'						=> 'Quota total de fichiers joints',
 	'ATTACH_QUOTA_EXPLAIN'				=> 'Espace disque maximum disponible pour les fichiers joints de tout le forum, mettre « 0 » pour illimité.',
 	'ATTACH_TO_POST'					=> 'Joindre le fichier au message',
@@ -73,8 +72,8 @@ $lang = array_merge($lang, array(
 	'CAT_QUICKTIME_FILES'		=> 'Fichiers Quicktime',
 	'CAT_RM_FILES'				=> 'Fichiers RealMedia',
 	'CAT_WM_FILES'				=> 'Fichier Windows Media',
-	'CHECK_CONTENT' 			=> 'Vérifier les fichiers joints',
-	'CHECK_CONTENT_EXPLAIN' 	=> 'Certains navigateurs peuvent se tromper en attribuant un type MIME incorrect aux fichiers transférés. Cette option permet de rejeter les fichiers qui risquent d’entraîner ce problème.',
+	'CHECK_CONTENT'				=> 'Vérifier les fichiers joints',
+	'CHECK_CONTENT_EXPLAIN'		=> 'Certains navigateurs peuvent se tromper en attribuant un type MIME incorrect aux fichiers transférés. Cette option permet de rejeter les fichiers qui risquent d’entraîner ce problème.',
 	'CREATE_GROUP'				=> 'Créer un nouveau groupe',
 	'CREATE_THUMBNAIL'			=> 'Créer une miniature',
 	'CREATE_THUMBNAIL_EXPLAIN'	=> 'Créer une miniature dans tous les cas possibles.',

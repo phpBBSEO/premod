@@ -5,7 +5,7 @@
 * translated originally by PhpBB-fr.com <http://www.phpbb-fr.com/> and phpBB.biz <http://www.phpBB.biz>
 *
 * @package language
-* @version $Id: groups.php 58 2012-08-23 08:31:38Z Morgyanne $
+* @version $Id: groups.php 71 2013-07-23 21:38:34Z papicx $
 * @copyright (c) 2005 phpBB Group
 * @license http://opensource.org/licenses/gpl-license.php GNU Public License
 *
@@ -47,6 +47,7 @@ $lang = array_merge($lang, array(
 
 	'GROUPS_NO_MEMBERS'				=> 'Aucun membre dans ce groupe',
 	'GROUPS_NO_MODS'				=> 'Aucun chef de groupe défini',
+
 	'GROUP_APPROVE'					=> 'Accepter le membre',
 	'GROUP_APPROVED'				=> 'Membres acceptés',
 	'GROUP_AVATAR'					=> 'Avatar du groupe',
@@ -59,7 +60,7 @@ $lang = array_merge($lang, array(
 	'GROUP_CREATED'					=> 'Le groupe a été créé.',
 	'GROUP_DEFAULT'					=> 'Définir comme groupe par défaut',
 	'GROUP_DEFS_UPDATED'			=> 'Le groupe a été défini par défaut pour les utilisateurs sélectionnés.',
-	'GROUP_DELETE'					=> 'Supprimer le membre du groupe',
+	'GROUP_DELETE'					=> 'Retirer ce membre du groupe',
 	'GROUP_DELETED'					=> 'Le groupe a été supprimé, les utilisateurs de ce groupe ont été transférés dans le groupe par défaut.',
 	'GROUP_DEMOTE'					=> 'Rétrograder le chef de groupe',
 	'GROUP_DESC'					=> 'Description du groupe',
@@ -70,7 +71,7 @@ $lang = array_merge($lang, array(
 	'GROUP_FOUNDER_MANAGE_EXPLAIN'	=> 'Limite la gestion de ce groupe aux fondateurs. Les utilisateurs ayant des permissions de groupes peuvent voir ce groupe, ainsi que les membres du groupe.',
 	'GROUP_HIDDEN'					=> 'Invisible',
 	'GROUP_LANG'					=> 'Langue du groupe',
-	'GROUP_LEAD'					=> 'Chefs de groupe',
+	'GROUP_LEAD'					=> 'Chef(s) de groupe',
 	'GROUP_LEADERS_ADDED'			=> 'De nouveaux chefs de groupe ont été ajoutés.',
 	'GROUP_LEGEND'					=> 'Afficher le groupe dans la légende',
 	'GROUP_LIST'					=> 'Membres actuels',
@@ -86,8 +87,8 @@ $lang = array_merge($lang, array(
 	'GROUP_NAME_TAKEN'				=> 'Le nom du groupe que vous avez entré est déjà utilisé, sélectionnez-en un autre.',
 	'GROUP_OPEN'					=> 'Ouvert',
 	'GROUP_PENDING'					=> 'Membres en attente',
-	'GROUP_MAX_RECIPIENTS' 			=> 'Nombre maximum autorisé de destinataires pour un message privé',
-	'GROUP_MAX_RECIPIENTS_EXPLAIN' 	=> 'Le nombre maximum autorisé de destinataires pour un message privé. Une valeur à « 0 » indique que le nombre utilisé sera celui spécifié dans la configuration du forum.',
+	'GROUP_MAX_RECIPIENTS'			=> 'Nombre maximum autorisé de destinataires pour un message privé',
+	'GROUP_MAX_RECIPIENTS_EXPLAIN'	=> 'Le nombre maximum autorisé de destinataires pour un message privé. Une valeur à « 0 » indique que le nombre utilisé sera celui spécifié dans la configuration du forum.',
 	'GROUP_OPTIONS_SAVE'			=> 'Options du groupe',
 	'GROUP_PROMOTE'					=> 'Promouvoir en chef de groupe',
 	'GROUP_RANK'					=> 'Rang du groupe',
@@ -95,13 +96,13 @@ $lang = array_merge($lang, array(
 	'GROUP_RECEIVE_PM_EXPLAIN'		=> 'Notez que les groupes invisibles ne peuvent pas recevoir de messages privés, malgré ce paramètre.',
 	'GROUP_REQUEST'					=> 'À la demande',
 	'GROUP_SETTINGS_SAVE'			=> 'Paramètres du groupe',
-	'GROUP_TYPE'					=> 'Type du groupe',
-	'GROUP_TYPE_EXPLAIN'			=> 'Cela détermine quels utilisateurs peuvent joindre ou voir ce groupe.',
 	'GROUP_SKIP_AUTH'				=> 'Exempte le chef de groupe des permissions',
 	'GROUP_SKIP_AUTH_EXPLAIN'		=> 'Si activé, le chef de groupe n’héritera pas des permissions de ce groupe.',
+	'GROUP_TYPE'					=> 'Type du groupe',
+	'GROUP_TYPE_EXPLAIN'			=> 'Cela détermine quels utilisateurs peuvent rejoindre ou voir ce groupe.',
 	'GROUP_UPDATED'					=> 'Les préférences du groupe ont été mises à jour.',
 
-	'GROUP_USERS_ADDED'				=> 'De nouveaux utilisateurs ont été ajoutés.',
+	'GROUP_USERS_ADDED'				=> 'De nouveaux utilisateurs ont été ajoutés au groupe.',
 	'GROUP_USERS_EXIST'				=> 'Les utilisateurs sélectionnés sont déjà membres de ce groupe.',
 	'GROUP_USERS_REMOVE'			=> 'Utilisateurs supprimés du groupe et transférés dans le groupe par défaut.',
 
@@ -113,7 +114,7 @@ $lang = array_merge($lang, array(
 	'NO_PERMISSIONS'			=> 'Ne pas copier de permissions',
 	'NO_USERS'					=> 'Vous n’avez indiqué aucun utilisateur.',
 	'NO_USERS_ADDED'			=> 'Aucun utilisateur n’a été ajouté au groupe.',
-	'NO_VALID_USERS' 			=> 'Vous n’avez indiqué aucun utilisateur éligible pour cette action.',
+	'NO_VALID_USERS'			=> 'Vous n’avez indiqué aucun utilisateur éligible pour cette action.',
 
 	'SPECIAL_GROUPS'			=> 'Groupes prédéfinis',
 	'SPECIAL_GROUPS_EXPLAIN'	=> 'Les groupes prédéfinis sont des groupes spéciaux, ils ne peuvent pas être supprimés ou directement modifiés. Vous pouvez néanmoins y ajouter des utilisateurs et modifier les paramètres de base.',

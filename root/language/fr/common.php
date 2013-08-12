@@ -1,13 +1,13 @@
 <?php
-/** 
+/**
 *
 * common [Standard french]
 * translated originally by PhpBB-fr.com <http://www.phpbb-fr.com/> and phpBB.biz <http://www.phpBB.biz>
 *
 * @package language
-* @version $Id: common.php 60 2012-08-27 07:10:06Z Morgyanne $
-* @copyright (c) 2005 phpBB Group 
-* @license http://opensource.org/licenses/gpl-license.php GNU Public License 
+* @version $Id: common.php 71 2013-07-23 21:38:34Z papicx $
+* @copyright (c) 2005 phpBB Group
+* @license http://opensource.org/licenses/gpl-license.php GNU Public License
 *
 */
 
@@ -37,7 +37,7 @@ if (empty($lang) || !is_array($lang))
 // in a url you again do not need to specify an order e.g., 'Click %sHERE%s' is fine
 //
 // Some characters you may want to copy&paste:
-// ’ » “ ” …
+// ’ « » “ ” …
 //
 
 $lang = array_merge($lang, array(
@@ -79,7 +79,7 @@ $lang = array_merge($lang, array(
 	'ATTACHED_IMAGE_NOT_IMAGE'		=> 'Le fichier image que vous essayez de joindre n’est pas valide.',
 	'AUTHOR'						=> 'Auteur',
 	'AUTH_NO_PROFILE_CREATED'		=> 'Impossible de créer le nouveau profil de l’utilisateur.',
-	'AVATAR_DISALLOWED_CONTENT' 	=> 'Le chargement a été rejeté car le fichier chargé a été identifié comme un vecteur éventuel d’attaque.',
+	'AVATAR_DISALLOWED_CONTENT'		=> 'Le chargement a été rejeté car le fichier chargé a été identifié comme un vecteur éventuel d’attaque.',
 	'AVATAR_DISALLOWED_EXTENSION'	=> 'Ce fichier ne peut pas être affiché car l’extension <strong>%s</strong> n’est pas autorisée.',
 	'AVATAR_EMPTY_REMOTE_DATA'		=> 'L’avatar indiqué n’a pas pu être chargé car les données distantes semblent être invalides ou corrompues.',
 	'AVATAR_EMPTY_FILEUPLOAD'		=> 'Le fichier avatar chargé est vide.',
@@ -122,7 +122,7 @@ $lang = array_merge($lang, array(
 	'COLLAPSE_VIEW'			=> 'Réduire la vue',
 	'CLOSE_WINDOW'			=> 'Fermer la fenêtre',
 	'COLOUR_SWATCH'			=> 'Palette de couleurs',
-	'COMMA_SEPARATOR'		=> ', ',		// Used in pagination of ACP & prosilver, use localised comma if appropriate, eg: Ideographic or Arabic
+	'COMMA_SEPARATOR'		=> ', ',	// Used in pagination of ACP & prosilver, use localised comma if appropriate, eg: Ideographic or Arabic
 	'CONFIRM'				=> 'Confirmer',
 	'CONFIRM_CODE'			=> 'Code de confirmation',
 	'CONFIRM_CODE_EXPLAIN'	=> 'Entrez le code exactement comme vous le voyez dans l’image. Notez que le code n’est pas sensible à la casse.',
@@ -161,6 +161,7 @@ $lang = array_merge($lang, array(
 	'EDIT_POST'							=> 'Éditer le message',
 	'EMAIL'								=> 'E-mail', 	// Short form for EMAIL_ADDRESS
 	'EMAIL_ADDRESS'						=> 'Adresse e-mail',
+	'EMAIL_INVALID_EMAIL'				=> 'L’adresse e-mail que vous avez saisie est invalide.',
 	'EMAIL_SMTP_ERROR_RESPONSE'			=> 'Un problème est survenu lors de l’envoi de l’e-mail à la <strong>ligne %1$s</strong>. Réponse: %2$s.',
 	'EMPTY_SUBJECT'						=> 'Vous devez indiquer un titre pour poster un nouveau sujet.',
 	'EMPTY_MESSAGE_SUBJECT'				=> 'Vous devez indiquer un sujet quand vous envoyez un nouveau message.',
@@ -172,8 +173,8 @@ $lang = array_merge($lang, array(
 	'ERR_JAB_AUTH'						=> 'Impossible de s’authentifier sur le serveur Jabber.',
 	'ERR_JAB_CONNECT'					=> 'Impossible de se connecter sur le serveur Jabber.',
 	'ERR_UNABLE_TO_LOGIN'				=> 'Le nom d’utilisateur ou le mot de passe indiqué est incorrect.',
-	'ERR_UNWATCHING' 					=> 'Une erreur est survenue pendant la tentative de désinscription.',
-	'ERR_WATCHING' 						=> 'Une erreur est survenue pendant la tentative d’inscription.',
+	'ERR_UNWATCHING'					=> 'Une erreur est survenue pendant la tentative de désinscription.',
+	'ERR_WATCHING'						=> 'Une erreur est survenue pendant la tentative d’inscription.',
 	'ERR_WRONG_PATH_TO_PHPBB'			=> 'Le chemin phpBB indiqué ne semble pas être valide.',
 	'EXPAND_VIEW'						=> 'Étendre la vue',
 	'EXTENSION'							=> 'Extension',
@@ -202,7 +203,7 @@ $lang = array_merge($lang, array(
 	'FORUM_RULES_LINK'		=> 'Cliquez pour voir les règles du forum',
 	'FROM'					=> 'de',
 	'FSOCK_DISABLED'		=> 'Impossible de finir cette opération car la fonction <var>fsockopen</var> est désactivée ou le serveur requis n’a pas pu être trouvé.',
-	'FSOCK_TIMEOUT' 		=> 'Le temps d’attente a été dépassé lors de la lecture du flux réseau.',
+	'FSOCK_TIMEOUT'			=> 'Le temps d’attente a été dépassé lors de la lecture du flux réseau.',
 
 	'FTP_FSOCK_HOST'				=> 'Serveur FTP',
 	'FTP_FSOCK_HOST_EXPLAIN'		=> 'Serveur FTP utilisé pour se connecter à votre site.',
@@ -255,22 +256,22 @@ $lang = array_merge($lang, array(
 	'G_GLOBAL_MODERATORS'		=> 'Modérateurs globaux',
 	'G_NEWLY_REGISTERED'		=> 'Nouveaux utilisateurs enregistrés',
 
-	'HIDDEN_USERS_ONLINE'		=> '%d utilisateurs invisibles en ligne',
-	'HIDDEN_USERS_TOTAL'		=> '%d invisibles',
-	'HIDDEN_USERS_TOTAL_AND'	=> '%d invisibles et ',
-	'HIDDEN_USERS_ZERO_ONLINE'	=> '0 utilisateur invisible en ligne',
-	'HIDDEN_USERS_ZERO_TOTAL'	=> '0 invisible',
+	'HIDDEN_USERS_ONLINE'			=> '%d utilisateurs invisibles en ligne',
+	'HIDDEN_USERS_TOTAL'			=> '%d invisibles',
+	'HIDDEN_USERS_TOTAL_AND'		=> '%d invisibles et ',
+	'HIDDEN_USERS_ZERO_ONLINE'		=> '0 utilisateur invisible en ligne',
+	'HIDDEN_USERS_ZERO_TOTAL'		=> '0 invisible',
 	'HIDDEN_USERS_ZERO_TOTAL_AND'	=> '0 invisible et ',
-	'HIDDEN_USER_ONLINE'		=> '%d utilisateur invisible en ligne',
-	'HIDDEN_USER_TOTAL'			=> '%d invisible',
-	'HIDDEN_USER_TOTAL_AND'		=> '%d invisible et ',
-	'HIDE_GUESTS'				=> 'Masquer les invités',
-	'HIDE_ME'					=> 'Cacher mon statut en ligne pour cette session',
-	'HOURS'						=> 'Heures',
-	'HOME'						=> 'Accueil',
+	'HIDDEN_USER_ONLINE'			=> '%d utilisateur invisible en ligne',
+	'HIDDEN_USER_TOTAL'				=> '%d invisible',
+	'HIDDEN_USER_TOTAL_AND'			=> '%d invisible et ',
+	'HIDE_GUESTS'					=> 'Masquer les invités',
+	'HIDE_ME'						=> 'Cacher mon statut en ligne pour cette session',
+	'HOURS'							=> 'Heures',
+	'HOME'							=> 'Accueil',
 
 	'ICQ'						=> 'ICQ',
-	'ICQ_STATUS'				=> 'Statut ICQ',	
+	'ICQ_STATUS'				=> 'Statut ICQ',
 	'IF'						=> 'Si',
 	'IMAGE'						=> 'Image',
 	'IMAGE_FILETYPE_INVALID'	=> 'Le type de fichier image %d pour le type mime %s n’est pas supporté.',
@@ -325,7 +326,7 @@ $lang = array_merge($lang, array(
 	'MARK'					=> 'Cocher',
 	'MARK_ALL'				=> 'Tout cocher',
 	'MARK_FORUMS_READ'		=> 'Marquer tous les forums comme lus',
-	'MARK_SUBFORUMS_READ' 	=> 'Marquer tous les sous-forums comme lus',
+	'MARK_SUBFORUMS_READ'	=> 'Marquer tous les sous-forums comme lus',
 	'MB'					=> 'Mo',
 	'MIB'					=> 'Mio',
 	'MCP'					=> 'Panneau de modération',
@@ -343,7 +344,7 @@ $lang = array_merge($lang, array(
 	'MODERATORS'			=> 'Modérateurs',
 	'MONTH'					=> 'Mois',
 	'MOVE'					=> 'Déplacer',
-	'MSNM'					=> 'WLM',	
+	'MSNM'					=> 'WLM',
 
 	'NA'						=> 'N/A',
 	'NEWEST_USER'				=> 'L’utilisateur enregistré le plus récent est <strong>%s</strong>',
@@ -391,6 +392,7 @@ $lang = array_merge($lang, array(
 	'NO_POSTS_TIME_FRAME'		=> 'Aucun message n’a été posté dans ce sujet pour la période indiquée.',
 	'NO_FEED_ENABLED'			=> 'Les flux ne sont pas disponibles sur ce forum.',
 	'NO_FEED'					=> 'Le flux demandé n’est pas disponible.',
+	'NO_STYLE_DATA'				=> 'Impossible d’obtenir les données de style',
 	'NO_SUBJECT'				=> 'Aucun sujet indiqué',			// Used for posts having no subject defined but displayed within management pages.
 	'NO_SUCH_SEARCH_MODULE'		=> 'La recherche indiquée n’existe pas.',
 	'NO_SUPPORTED_AUTH_METHODS'	=> 'Aucune méthode d’authentification supportée.',
@@ -404,12 +406,12 @@ $lang = array_merge($lang, array(
 	'NO_USER'					=> 'L’utilisateur demandé n’existe pas.',
 	'NO_USERS'					=> 'Les utilisateurs demandés n’existent pas.',
 	'NO_USER_SPECIFIED'			=> 'Aucun nom d’utilisateur indiqué.',
-	
+
 	// Nullar/Singular/Plural language entry. The key numbers define the number range in which a certain grammatical expression is valid.
-	'NUM_POSTS_IN_QUEUE' => array(
-		0 => 'Aucun message en attente', // 0
-		1 => '1 message en attente', // 1
-		2 => '%d messages en attente', // 2+
+	'NUM_POSTS_IN_QUEUE'	=> array(
+		0			=> 'Aucun message en attente',	// 0
+		1			=> '1 message en attente',		// 1
+		2			=> '%d messages en attente',		// 2+
 	),
 
 	'OCCUPATION'				=> 'Emploi',
@@ -422,7 +424,6 @@ $lang = array_merge($lang, array(
 	'OPTIONS'					=> 'Options',
 
 	'PAGE_OF'				=> 'Page <strong>%1$d</strong> sur <strong>%2$d</strong>',
-	'PAGE_TITLE_NUMBER'		=> 'Page %s',
 	'PASSWORD'				=> 'Mot de passe',
 	'PIXEL'					=> 'px',
 	'PLAY_QUICKTIME_FILE'	=> 'Jouer le fichier Quicktime',
@@ -488,7 +489,7 @@ $lang = array_merge($lang, array(
 	'REPLIES'					=> 'Réponses',
 	'REPLY_WITH_QUOTE'			=> 'Répondre en citant le message',
 	'REPLYING_GLOBAL_ANNOUNCE'	=> 'Répond à une annonce globale',
-	'REPLYING_MESSAGE'			=> 'Répond au message dans %s',
+	'REPLYING_MESSAGE'			=> 'Répond à un message dans %s',
 	'REPORT_BY'					=> 'Rapporté par',
 	'REPORT_POST'				=> 'Rapporter le message',
 	'REPORTING_POST'			=> 'Rapporter un message',
@@ -503,7 +504,7 @@ $lang = array_merge($lang, array(
 	'FEED'						=> 'Flux',
 	'FEED_NEWS'					=> 'Nouvelles informations',
 	'FEED_TOPICS_ACTIVE'		=> 'Sujets actifs',
- 	'FEED_TOPICS_NEW'			=> 'Nouveaux sujets',
+	'FEED_TOPICS_NEW'			=> 'Nouveaux sujets',
 	'RULES_ATTACH_CAN'			=> 'Vous <strong>pouvez</strong> joindre des fichiers',
 	'RULES_ATTACH_CANNOT'		=> 'Vous <strong>ne pouvez pas</strong> joindre des fichiers',
 	'RULES_DELETE_CAN'			=> 'Vous <strong>pouvez</strong> supprimer vos messages',
@@ -529,14 +530,14 @@ $lang = array_merge($lang, array(
 	'SEARCHING_FORUMS'			=> 'Recherche dans les forums',
 	'SEARCH_ACTIVE_TOPICS'		=> 'Voir les sujets actifs',
 	'SEARCH_FOR'				=> 'Rechercher',
-	'SEARCH_FORUM'				=> 'Dans ce forum…',	
+	'SEARCH_FORUM'				=> 'Dans ce forum…',
 	'SEARCH_NEW'				=> 'Voir les nouveaux messages',
 	'SEARCH_POSTS_BY'			=> 'Rechercher les messages de',
 	'SEARCH_SELF'				=> 'Voir mes messages',
 	'SEARCH_TOPIC'				=> 'Dans ce sujet…',
 	'SEARCH_UNANSWERED'			=> 'Voir les messages sans réponses',
 	'SEARCH_UNREAD'				=> 'Voir les messages non lus',
-	'SEARCH_USER_POSTS'  		=> 'Rechercher les messages de l’utilisateur',
+	'SEARCH_USER_POSTS'			=> 'Rechercher les messages de l’utilisateur',
 	'SECONDS'					=> 'secondes',
 	'SELECT'					=> 'Sélectionner',
 	'SELECT_ALL_CODE'			=> 'Tout sélectionner',
@@ -570,15 +571,17 @@ $lang = array_merge($lang, array(
 	'SUBJECT'					=> 'Sujet',
 	'SUBMIT'					=> 'Envoyer',
 
+	'TB'				=> 'To',	// Tera octects
 	'TERMS_USE'			=> 'Conditions d’utilisation',
 	'TEST_CONNECTION'	=> 'Test de connexion',
 	'THE_TEAM'			=> 'L’équipe du forum',
+	'TIB'				=> 'Tio',	// Tera octects
 	'TIME'				=> 'Date',
 
 	'TOO_LARGE'						=> 'La valeur saisie est trop grande.',
 	'TOO_LARGE_MAX_RECIPIENTS'		=> 'La valeur du réglage <strong>Nombre maximum autorisé de destinataires par message privé</strong> que vous avez saisie est trop grande.',
 
-	'TOO_LONG' 			=> 'La valeur saisie est trop longue.',
+	'TOO_LONG'						=> 'La valeur saisie est trop longue.',
 
 	'TOO_LONG_AIM'					=> 'Le pseudonyme AIM indiqué est trop long.',
 	'TOO_LONG_CONFIRM_CODE'			=> 'Le code de confirmation indiqué est trop long.',
@@ -599,7 +602,8 @@ $lang = array_merge($lang, array(
 	'TOO_LONG_YIM'					=> 'Le nom Yahoo! Messenger indiqué est trop long.',
 
 	'TOO_MANY_VOTE_OPTIONS'			=> 'Vous avez sélectionné trop d’options de vote.',
-	'TOO_SHORT' 					=> 'La valeur saisie est trop courte.',
+
+	'TOO_SHORT'						=> 'La valeur saisie est trop courte.',
 
 	'TOO_SHORT_AIM'					=> 'Le pseudonyme AIM indiqué est trop court.',
 	'TOO_SHORT_CONFIRM_CODE'		=> 'Le code de confirmation indiqué est trop court.',
@@ -676,6 +680,7 @@ $lang = array_merge($lang, array(
 	'USER_POSTS'			=> '%d Messages',
 	'USERS'					=> 'Utilisateurs',
 	'USE_PERMISSIONS'		=> 'Tester les permissions de l’utilisateur',
+
 	'USER_NEW_PERMISSION_DISALLOWED'	=> 'Nous sommes désolés, mais vous n’êtes pas autorisé à utiliser cette fonctionnalité. Vous venez juste de vous inscrire, et il vous est nécessaire de participer plus pour utiliser cette fonctionnalité.',
 
 	'VARIANT_DATE_SEPARATOR'	=> ' / ',	// Used in date format dropdown, eg: "Today, 13:37 / 01 Jan 2007, 13:37" ... to join a relative date with calendar date
@@ -718,6 +723,7 @@ $lang = array_merge($lang, array(
 	'WHO_IS_ONLINE'		=> 'Qui est en ligne',
 	'WRONG_PASSWORD'	=> 'Vous avez entré un mot de passe incorrect.',
 
+	'WRONG_DATA_COLOUR'			=> 'La valeur de couleur saisie est invalide.',
 	'WRONG_DATA_ICQ'			=> 'Le numéro que vous avez entré n’est pas un numéro ICQ valide.',
 	'WRONG_DATA_JABBER'			=> 'Le nom que vous avez entré n’est pas un nom de compte Jabber valide.',
 	'WRONG_DATA_LANG'			=> 'La langue que vous avez indiquée n’est pas valide.',
@@ -727,7 +733,7 @@ $lang = array_merge($lang, array(
 	'YEAR'				=> 'Année',
 	'YEAR_MONTH_DAY'	=> '(AAAA-MM-JJ)',
 	'YES'				=> 'Oui',
-	'YIM'				=> 'YIM',	
+	'YIM'				=> 'YIM',
 	'YOU_LAST_VISIT'	=> 'Dernière visite: %s',
 	'YOU_NEW_PM'		=> 'Un nouveau message privé vous attend dans votre boîte de réception.',
 	'YOU_NEW_PMS'		=> 'De nouveaux messages privés vous attendent dans votre boîte de réception.',
@@ -797,7 +803,7 @@ $lang = array_merge($lang, array(
 		'-7'	=> 'UTC - 7 heures',
 		'-6'	=> 'UTC - 6 heures',
 		'-5'	=> 'UTC - 5 heures',
-		'-4.5' 	=> 'UTC - 4:30 heures',
+		'-4.5'	=> 'UTC - 4:30 heures',
 		'-4'	=> 'UTC - 4 heures',
 		'-3.5'	=> 'UTC - 3:30 heures',
 		'-3'	=> 'UTC - 3 heures',
@@ -841,11 +847,11 @@ $lang = array_merge($lang, array(
 		'-7'	=> '[UTC - 7] Montagnes Rocheuses',
 		'-6'	=> '[UTC - 6] Centre',
 		'-5'	=> '[UTC - 5] Est',
-		'-4.5'   => '[UTC - 4:30] Venezuela',
+		'-4.5'	=> '[UTC - 4:30] Venezuela',
 		'-4'	=> '[UTC - 4] Atlantique',
 		'-3.5'	=> '[UTC - 3:30] Terre-Neuve',
 		'-3'	=> '[UTC - 3] Amazonie, Groenland Central',
-		'-2'	=> '[UTC - 2] Fernando de Noronha, Géorgie du Sud &amp; les Îles Sandwich du Sud',
+		'-2'	=> '[UTC - 2] Fernando de Noronha, Géorgie du Sud et les Îles Sandwich du Sud',
 		'-1'	=> '[UTC - 1] Açores, Cap-Vert, Groenland de l’Est',
 		'0'		=> '[UTC] Europe de l’Ouest, Méridien de Greenwich',
 		'1'		=> '[UTC + 1] Europe Centrale, Afrique de l’Ouest',
@@ -878,9 +884,9 @@ $lang = array_merge($lang, array(
 	'dateformats'	=> array(
 		'd M Y, H:i'			=> '01 Jan 2007, 13:37',
 		'd M Y H:i'				=> '01 Jan 2007 13:37',
-		'M j, \'y, H:i'		=> 'Jan 10, \'07, 13:37',
+		'M j, \'y, H:i'			=> 'Jan 10, \'07, 13:37',
 		'D M d, Y g:i a'		=> 'Lun Jan 01, 2007 1:37 pm',
-		'F j, Y, g:i a'		=> 'Janvier 10, 2007, 1:37 pm',
+		'F j, Y, g:i a'			=> 'Janvier 10, 2007, 1:37 pm',
 		'|d M Y|, H:i'			=> '[Jours relatifs], 13:37 / 10 Jan 2007, 13:37',
 		'|F j, Y|, g:i a'		=> '[Jours relatifs], 1:37 pm / Janvier 10, 2007, 1:37 pm'
 	),

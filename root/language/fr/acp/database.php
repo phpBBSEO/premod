@@ -1,13 +1,13 @@
 <?php
-/** 
+/**
 *
 * acp_database [Standard french]
 * translated originally by PhpBB-fr.com <http://www.phpbb-fr.com/> and phpBB.biz <http://www.phpBB.biz>
 *
 * @package language
-* @version $Id: database.php 58 2012-08-23 08:31:38Z Morgyanne $
-* @copyright (c) 2005 phpBB Group 
-* @license http://opensource.org/licenses/gpl-license.php GNU Public License 
+* @version $Id: database.php 71 2013-07-23 21:38:34Z papicx $
+* @copyright (c) 2005 phpBB Group
+* @license http://opensource.org/licenses/gpl-license.php GNU Public License
 *
 */
 
@@ -37,10 +37,10 @@ if (empty($lang) || !is_array($lang))
 // in a url you again do not need to specify an order e.g., 'Click %sHERE%s' is fine
 
 // Database Backup/Restore
-$lang = array_merge($lang, array(	
+$lang = array_merge($lang, array(
 	'ACP_BACKUP_EXPLAIN'	=> 'Vous pouvez sauvegarder les données de votre forum. Vous pouvez stocker l’archive de sauvegarde dans votre répertoire <samp>store/</samp> ou la télécharger. Suivant votre configuration, vous pouvez utiliser différents modes de compression.',
 	'ACP_RESTORE_EXPLAIN'	=> 'Vous pouvez procéder à une restauration de votre forum à partir d’un fichier de sauvegarde. Si votre serveur le permet, vous pouvez utiliser la compression gzip ou bzip2, le fichier sera automatiquement décompressé. <strong><color=red>ATTENTION: </color></strong>Cette opération écrase toutes les données existantes. Le processus peut prendre du temps, ne quittez pas cette page avant la fin de la restauration. Les sauvegardes sont stockées dans le répertoire <samp>store/</samp> et sont supposées être générées par la fonctionnalité de sauvegarde de phpBB. La restauration de sauvegardes non créées par phpBB peut ne pas fonctionner.',
-	
+
 	'BACKUP_DELETE'		=> 'Le fichier de sauvegarde a été effacé.',
 	'BACKUP_INVALID'	=> 'Fichier de sauvegarde invalide.',
 	'BACKUP_OPTIONS'	=> 'Options de sauvegarde',
@@ -58,10 +58,10 @@ $lang = array_merge($lang, array(
 	'FILE_WRITE_FAIL'	=> 'Impossible d’écrire le fichier dans le répertoire de stockage.',
 	'FULL_BACKUP'		=> 'Complète',
 
-	'RESTORE_FAILURE'		=> 'Le fichier de sauvegarde est peut-être corrompu.',
-	'RESTORE_OPTIONS'		=> 'Options de restauration',
-	'RESTORE_SELECTED_BACKUP' => 'Êtes-vous sûr de vouloir restaurer la sauvegarde sélectionnée ?',
-	'RESTORE_SUCCESS'		=> 'La base de données a été restaurée.<br /><br />Votre forum devrait être tel qu’il l’était avant la sauvegarde.',
+	'RESTORE_FAILURE'			=> 'Le fichier de sauvegarde est peut-être corrompu.',
+	'RESTORE_OPTIONS'			=> 'Options de restauration',
+	'RESTORE_SELECTED_BACKUP'	=> 'Êtes-vous sûr de vouloir restaurer la sauvegarde sélectionnée ?',
+	'RESTORE_SUCCESS'			=> 'La base de données a été restaurée.<br /><br />Votre forum devrait être tel qu’il l’était avant la sauvegarde.',
 
 	'SELECT_ALL'			=> 'Tout sélectionner',
 	'SELECT_FILE'			=> 'Sélectionner un fichier',
