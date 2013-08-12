@@ -1,13 +1,13 @@
 <?php
-/** 
+/**
 *
 * posting [Standard french]
 * translated originally by PhpBB-fr.com <http://www.phpbb-fr.com/> and phpBB.biz <http://www.phpBB.biz>
 *
 * @package language
-* @version $Id: posting.php 59 2012-08-27 06:41:52Z Morgyanne $
-* @copyright (c) 2005 phpBB Group 
-* @license http://opensource.org/licenses/gpl-license.php GNU Public License 
+* @version $Id: posting.php 71 2013-07-23 21:38:34Z papicx $
+* @copyright (c) 2005 phpBB Group
+* @license http://opensource.org/licenses/gpl-license.php GNU Public License
 *
 */
 
@@ -55,9 +55,9 @@ $lang = array_merge($lang, array(
 	'BBCODE_IS_OFF'				=> 'Les %sBBCodes%s sont <em>désactivés</em>',
 	'BBCODE_IS_ON'				=> 'Les %sBBCodes%s sont <em>activés</em>',
 	'BBCODE_I_HELP'				=> 'Texte italique: [i]texte[/i]',
-	'BBCODE_L_HELP'				=> 'Liste: [list]texte[/list]',
-	'BBCODE_LISTITEM_HELP'		=> 'Élément de liste: [*]texte[/*]',
-	'BBCODE_O_HELP'				=> 'Liste ordonnée: [list=]texte[/list]',
+	'BBCODE_L_HELP'				=> 'Liste: [list][*]texte[/list]',
+	'BBCODE_LISTITEM_HELP'		=> 'Élément de liste: [*]texte',
+	'BBCODE_O_HELP'				=> 'Liste ordonnée: par exemple [list=1][*]Point 1[/list] ou [list=a][*]Point a[/list]',
 	'BBCODE_P_HELP'				=> 'Insérer une image: [img]http://image_url[/img]',
 	'BBCODE_Q_HELP'				=> 'Citation: [quote]texte[/quote]',
 	'BBCODE_S_HELP'				=> 'Couleur de la police: [color=red]texte[/color] Astuce : vous pouvez également utiliser color=#FF0000',
@@ -80,11 +80,11 @@ $lang = array_merge($lang, array(
 	'DELETE_MESSAGE_CONFIRM'	=> 'Êtes-vous sûr de vouloir supprimer ce message ?',
 	'DELETE_OWN_POSTS'			=> 'Désolé, vous ne pouvez supprimer que vos propres messages.',
 	'DELETE_POST_CONFIRM'		=> 'Êtes-vous sûr de vouloir supprimer ce message ?',
-	'DISALLOWED_CONTENT' 		=> 'Le chargement a été rejeté car le fichier envoyé a été identifié comme un éventuel vecteur d’attaque.',
 	'DELETE_POST_WARN'			=> 'Une fois supprimé, le message ne pourra pas être récupéré',
 	'DISABLE_BBCODE'			=> 'Désactiver les BBCodes',
 	'DISABLE_MAGIC_URL'			=> 'Désactiver les liens',
 	'DISABLE_SMILIES'			=> 'Désactiver les smileys',
+	'DISALLOWED_CONTENT'		=> 'Le chargement a été rejeté car le fichier envoyé a été identifié comme un éventuel vecteur d’attaque.',
 	'DISALLOWED_EXTENSION'		=> 'L’extension %s n’est pas autorisée.',
 	'DRAFT_LOADED'				=> 'Brouillon chargé dans la zone de rédaction de message, vous pouvez finir votre message maintenant.<br />Le brouillon sera supprimé dès que vous aurez posté votre message.',
 	'DRAFT_LOADED_PM'			=> 'Brouillon chargé dans la zone de rédaction de message privé, vous pouvez finir votre message maintenant.<br />Le brouillon sera supprimé dès que vous aurez envoyé votre message privé.',

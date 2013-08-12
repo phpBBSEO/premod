@@ -1,12 +1,12 @@
 <?php
-/** 
+/**
 *
 * viewforum [Standard french]
 * translated originally by PhpBB-fr.com <http://www.phpbb-fr.com/> and phpBB.biz <http://www.phpBB.biz>
 *
 * @package language
-* @version $Id: viewforum.php 58 2012-08-23 08:31:38Z Morgyanne $
-* @copyright (c) 2005 phpBB Group 
+* @version $Id: viewforum.php 71 2013-07-23 21:38:34Z papicx $
+* @copyright (c) 2005 phpBB Group
 * @license http://opensource.org/licenses/gpl-license.php GNU Public License 
 *
 */
@@ -21,7 +21,7 @@ if (!defined('IN_PHPBB'))
 
 if (empty($lang) || !is_array($lang))
 {
-   $lang = array();
+	$lang = array();
 }
 
 // DEVELOPERS PLEASE NOTE

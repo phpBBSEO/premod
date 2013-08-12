@@ -5,7 +5,7 @@
 * translated originally by PhpBB-fr.com <http://www.phpbb-fr.com/> and phpBB.biz <http://www.phpBB.biz>
 *
 * @package language
-* @version $Id: language.php 58 2012-08-23 08:31:38Z Morgyanne $
+* @version $Id: language.php 71 2013-07-23 21:38:34Z papicx $
 * @copyright (c) 2005 phpBB Group
 * @license http://opensource.org/licenses/gpl-license.php GNU Public License
 *
@@ -57,10 +57,10 @@ $lang = array_merge($lang, array(
 	'LANGUAGE_FILES'					=> 'Fichiers de langue',
 	'LANGUAGE_KEY'						=> 'Clé de langue',
 	'LANGUAGE_PACK_ALREADY_INSTALLED'	=> 'Ce pack de langue est déjà installé.',
-	'LANGUAGE_PACK_DELETED' 			=> 'Le pack de langue <strong>%s</strong> a été supprimé. La langue est désormais celle par défaut du forum pour les membres qui utilisaient ce pack.',
+	'LANGUAGE_PACK_DELETED'				=> 'Le pack de langue <strong>%s</strong> a été supprimé. La langue est désormais celle par défaut du forum pour les membres qui utilisaient ce pack.',
 	'LANGUAGE_PACK_DETAILS'				=> 'Informations du pack',
 	'LANGUAGE_PACK_INSTALLED'			=> 'Le pack de langue <strong>%s</strong> a été installé.',
-	'LANGUAGE_PACK_CPF_UPDATE' 			=> 'Les chaînes de caractères pour la langue des champs de profil personnalisés ont été copiées depuis la langue par défaut. Modifiez-les si nécessaire.',
+	'LANGUAGE_PACK_CPF_UPDATE'			=> 'Les chaînes de caractères pour la langue des champs de profil personnalisés ont été copiées depuis la langue par défaut. Modifiez-les si nécessaire.',
 	'LANGUAGE_PACK_ISO'					=> 'ISO',
 	'LANGUAGE_PACK_LOCALNAME'			=> 'Nom local',
 	'LANGUAGE_PACK_NAME'				=> 'Nom',

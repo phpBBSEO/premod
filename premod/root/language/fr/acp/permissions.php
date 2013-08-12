@@ -1,13 +1,13 @@
 <?php
-/** 
+/**
 *
 * acp_permissions [Standard french]
 * translated originally by PhpBB-fr.com <http://www.phpbb-fr.com/> and phpBB.biz <http://www.phpBB.biz>
 *
 * @package language
-* @version $Id: permissions.php 60 2012-08-27 07:10:06Z Morgyanne $
-* @copyright (c) 2005 phpBB Group 
-* @license http://opensource.org/licenses/gpl-license.php GNU Public License 
+* @version $Id: permissions.php 71 2013-07-23 21:38:34Z papicx $
+* @copyright (c) 2005 phpBB Group
+* @license http://opensource.org/licenses/gpl-license.php GNU Public License
 *
 */
 
@@ -38,9 +38,9 @@ if (empty($lang) || !is_array($lang))
 
 $lang = array_merge($lang, array(
 	'ACP_PERMISSIONS_EXPLAIN'	=> '
-		<p>Les permissions sont très nombreuses et regroupées en quatre grandes sections qui sont:
+		<p>Les permissions sont très nombreuses et regroupées en quatre grandes sections qui sont:</p>
 
-		</p><h2>Permissions globales</h2>
+		<h2>Permissions globales</h2>
 		<p>Elles sont utilisées pour contrôler l’accès de façon globale et sont appliquées à l’ensemble du forum. Elles sont elles-mêmes divisées en permissions des utilisateurs, groupes, administrateurs et modérateurs globaux.</p>
 
 		<h2>Permissions de forums</h2>
@@ -54,8 +54,9 @@ $lang = array_merge($lang, array(
 
 		<br />
 
-		<p>Pour de plus amples informations sur la configuration et la gestion des permissions de votre forum phpBB3, consultez le <a href="http://www.phpbb.com/support/documentation/3.0/quickstart/quick_permissions.html">Chapitre 1.5 de notre Guide de Démarrage Rapide</a>.</p>
+		<p>Pour de plus amples informations sur la configuration et la gestion des permissions de votre forum phpBB3, consultez la <a href="http://forums.phpbb-fr.com/documentation-phpbb3/sujet149600.html#p1037956">[Doc] Régler les permissions d’un forum (simple)</a>.</p>
 	',
+
 	'ACL_NEVER'				=> 'Jamais',
 	'ACL_SET'				=> 'Configuration des Permissions',
 	'ACL_SET_EXPLAIN'		=> 'Les permissions sont basées sur un simple système <samp>OUI</samp>/<samp>NON</samp>. Régler une option sur <samp>JAMAIS</samp> pour un utilisateur ou groupe d’utilisateurs l’emporte sur toute autre valeur qui lui était assignée. Si vous ne souhaitez pas assigner de valeur à une option pour cet utilisateur ou ce groupe, sélectionnez <samp>NON</samp>. Si des valeurs sont assignées ailleurs pour cette option, elles seront utilisées de préférence, autrement <samp>JAMAIS</samp> est appliqué. Tous les objets sélectionnés (avec la case de choix devant eux) copieront l’ensemble de permissions que vous aurez défini.',
@@ -115,7 +116,7 @@ $lang = array_merge($lang, array(
 	'COPY_PERMISSIONS_FORUM_TO_EXPLAIN'		=> 'Les forums de destination où vous voulez que les permissions copiées s’appliquent.',
 	'COPY_PERMISSIONS_FROM'					=> 'Copier les permissions de',
 	'COPY_PERMISSIONS_TO'					=> 'Appliquer les permissions à',
-	
+
 	'CREATE_ROLE'				=> 'Créer un modèle',
 	'CREATE_ROLE_FROM'			=> 'Utiliser les paramètres de…',
 	'CUSTOM'					=> 'Personnaliser…',
@@ -183,6 +184,7 @@ $lang = array_merge($lang, array(
 	'ROLE_USER_STANDARD'		=> 'Fonctionnalités standards',
 	'ROLE_USER_NEW_MEMBER'		=> 'Fonctionnalités nouvel utilisateur enregistré',
 
+
 	'ROLE_DESCRIPTION_ADMIN_FORUM'			=> 'Peut accéder à la gestion et à la configuration des permissions du forum.',
 	'ROLE_DESCRIPTION_ADMIN_FULL'			=> 'A accès à toutes les fonctions administratives du forum.<br />Non recommandé.',
 	'ROLE_DESCRIPTION_ADMIN_STANDARD'		=> 'A accès à la plupart des fonctionnalités administratives mais ne peut pas utiliser le serveur ou les outils relatifs au système.',
@@ -229,21 +231,21 @@ $lang = array_merge($lang, array(
 
 	'TRACE_DEFAULT'					=> 'Par défaut, chaque permission est sur <samp>NON</samp> (Désactivée). Ainsi la permission peut être outrepassée par d’autres paramètres.',
 	'TRACE_FOR'						=> 'Tracer pour',
-	'TRACE_GLOBAL_SETTING'	=> '%s (global)',
+	'TRACE_GLOBAL_SETTING'			=> '%s (global)',
 	'TRACE_GROUP_NEVER_TOTAL_NEVER'	=> 'Cette permission de groupe est réglée sur <samp>JAMAIS</samp> tout comme le résultat total, l’ancien résultat est donc conservé.',
 	'TRACE_GROUP_NEVER_TOTAL_NEVER_LOCAL'	=> 'Cette permission de groupe pour ce forum est réglée sur <samp>JAMAIS</samp> tout comme le résultat total, l’ancien résultat est donc conservé.',
-	'TRACE_GROUP_NEVER_TOTAL_NO'	=> 'Cette permission de groupe est réglée sur <samp>JAMAIS</samp> ce qui devient la nouvelle valeur globale car elle n’était pas encore réglée (Paramètre sur <samp>NON</samp>).',
+	'TRACE_GROUP_NEVER_TOTAL_NO'		=> 'Cette permission de groupe est réglée sur <samp>JAMAIS</samp> ce qui devient la nouvelle valeur globale car elle n’était pas encore réglée (Paramètre sur <samp>NON</samp>).',
 	'TRACE_GROUP_NEVER_TOTAL_NO_LOCAL'	=> 'Cette permission de groupe pour ce forum est réglée sur <samp>JAMAIS</samp> ce qui devient la nouvelle valeur globale car elle n’était pas encore réglée (Paramètre sur <samp>NON</samp>).',
-	'TRACE_GROUP_NEVER_TOTAL_YES'	=> 'Cette permission de groupe est réglée sur <samp>JAMAIS</samp> ce qui outrepasse le <samp>OUI</samp> pour appliquer <samp>JAMAIS</samp> pour cet utilisateur.',
+	'TRACE_GROUP_NEVER_TOTAL_YES'		=> 'Cette permission de groupe est réglée sur <samp>JAMAIS</samp> ce qui outrepasse le <samp>OUI</samp> pour appliquer <samp>JAMAIS</samp> pour cet utilisateur.',
 	'TRACE_GROUP_NEVER_TOTAL_YES_LOCAL'	=> 'Cette permission de groupe pour ce forum est réglée sur <samp>JAMAIS</samp> ce qui outrepasse le <samp>OUI</samp> pour appliquer <samp>JAMAIS</samp> pour cet utilisateur.',
-	'TRACE_GROUP_NO'				=> 'Cette permission de groupe est réglée sur <samp>NON</samp> pour ce groupe, ainsi l’ancienne valeur est conservée.',
-	'TRACE_GROUP_NO_LOCAL'			=> 'Cette permission de groupe est réglée sur <samp>NON</samp> pour ce groupe dans ce forum, ainsi l’ancienne valeur est conservée.',
-	'TRACE_GROUP_YES_TOTAL_NEVER'	=> 'Cette permission de groupe est réglée sur <samp>OUI</samp> mais la valeur globale <samp>JAMAIS</samp> ne peut pas être outrepassée.',
+	'TRACE_GROUP_NO'					=> 'Cette permission de groupe est réglée sur <samp>NON</samp> pour ce groupe, ainsi l’ancienne valeur est conservée.',
+	'TRACE_GROUP_NO_LOCAL'				=> 'Cette permission de groupe est réglée sur <samp>NON</samp> pour ce groupe dans ce forum, ainsi l’ancienne valeur est conservée.',
+	'TRACE_GROUP_YES_TOTAL_NEVER'		=> 'Cette permission de groupe est réglée sur <samp>OUI</samp> mais la valeur globale <samp>JAMAIS</samp> ne peut pas être outrepassée.',
 	'TRACE_GROUP_YES_TOTAL_NEVER_LOCAL'	=> 'Cette permission de groupe pour ce forum est réglée sur <samp>OUI</samp> mais la valeur globale <samp>JAMAIS</samp> ne peut pas être outrepassée.',
-	'TRACE_GROUP_YES_TOTAL_NO'		=> 'Cette permission de groupe est réglée sur <samp>OUI</samp> ce qui devient la nouvelle valeur globale car elle n’était pas encore réglée (Paramètre sur <samp>NON</samp>).',
-	'TRACE_GROUP_YES_TOTAL_NO_LOCAL'		=> 'Cette permission de groupe pour ce forum est réglée sur <samp>OUI</samp> ce qui devient la nouvelle valeur globale car elle n’était pas encore réglée (Paramètre sur <samp>NON</samp>).',
-	'TRACE_GROUP_YES_TOTAL_YES'		=> 'Cette permission de groupe est réglée sur <samp>OUI</samp> et la permission totale est déjà réglée sur <samp>OUI</samp>, elle est donc conservée.',
-	'TRACE_GROUP_YES_TOTAL_YES_LOCAL'		=> 'Cette permission de groupe pour ce forum est réglée sur <samp>OUI</samp> et la permission totale est déjà réglée sur <samp>OUI</samp>, elle est donc conservée.',
+	'TRACE_GROUP_YES_TOTAL_NO'			=> 'Cette permission de groupe est réglée sur <samp>OUI</samp> ce qui devient la nouvelle valeur globale car elle n’était pas encore réglée (Paramètre sur <samp>NON</samp>).',
+	'TRACE_GROUP_YES_TOTAL_NO_LOCAL'	=> 'Cette permission de groupe pour ce forum est réglée sur <samp>OUI</samp> ce qui devient la nouvelle valeur globale car elle n’était pas encore réglée (Paramètre sur <samp>NON</samp>).',
+	'TRACE_GROUP_YES_TOTAL_YES'			=> 'Cette permission de groupe est réglée sur <samp>OUI</samp> et la permission totale est déjà réglée sur <samp>OUI</samp>, elle est donc conservée.',
+	'TRACE_GROUP_YES_TOTAL_YES_LOCAL'	=> 'Cette permission de groupe pour ce forum est réglée sur <samp>OUI</samp> et la permission totale est déjà réglée sur <samp>OUI</samp>, elle est donc conservée.',
 	'TRACE_PERMISSION'				=> 'Tracer la permission - %s',
 	'TRACE_RESULT'					=> 'Tracer le résultat',
 	'TRACE_SETTING'					=> 'Tracer la configuration',
@@ -251,25 +253,25 @@ $lang = array_merge($lang, array(
 	'TRACE_USER_GLOBAL_YES_TOTAL_YES'		=> 'La permission de l’utilisateur sur le forum est sur <samp>OUI</samp>, mais la permission commune étant déjà réglée sur <samp>OUI</samp>, elle est conservée. %sTracer la permission globale%s',
 	'TRACE_USER_GLOBAL_YES_TOTAL_NEVER'		=> 'La permission de l’utilisateur sur le forum est sur <samp>OUI</samp>, ce qui outrepasse le résultat actuel <samp>JAMAIS</samp>. %sTracer la permission globale%s',
 	'TRACE_USER_GLOBAL_NEVER_TOTAL_KEPT'	=> 'La permission de l’utilisateur sur le forum est sur <samp>JAMAIS</samp> ce qui n’influence pas la permission locale. %sTracer la permission globale%s',
-	
+
 	'TRACE_USER_FOUNDER'					=> 'L’utilisateur est un fondateur, c’est pourquoi les permissions d’administration sont toujours réglées sur <samp>OUI</samp>.',
 	'TRACE_USER_KEPT'						=> 'La permission de l’utilisateur est réglée sur <samp>NON</samp>, ainsi l’ancienne valeur globale est conservée.',
-	'TRACE_USER_KEPT_LOCAL'						=> 'La permission de l’utilisateur pour ce forum est réglée sur <samp>NON</samp>, ainsi l’ancienne valeur globale est conservée.',
+	'TRACE_USER_KEPT_LOCAL'					=> 'La permission de l’utilisateur pour ce forum est réglée sur <samp>NON</samp>, ainsi l’ancienne valeur globale est conservée.',
 	'TRACE_USER_NEVER_TOTAL_NEVER'			=> 'La permission de l’utilisateur est réglée sur <samp>JAMAIS</samp> et la valeur commune est réglée sur <samp>JAMAIS</samp>, donc rien n’est modifié.',
-	'TRACE_USER_NEVER_TOTAL_NEVER_LOCAL'			=> 'La permission de l’utilisateur pour ce forum est réglée sur <samp>JAMAIS</samp> et la valeur commune est réglée sur <samp>JAMAIS</samp>, donc rien n’est modifié.',
+	'TRACE_USER_NEVER_TOTAL_NEVER_LOCAL'	=> 'La permission de l’utilisateur pour ce forum est réglée sur <samp>JAMAIS</samp> et la valeur commune est réglée sur <samp>JAMAIS</samp>, donc rien n’est modifié.',
 	'TRACE_USER_NEVER_TOTAL_NO'				=> 'La permission de l’utilisateur est réglée sur <samp>JAMAIS</samp> ce qui devient la valeur commune car elle était réglée sur NON.',
-	'TRACE_USER_NEVER_TOTAL_NO_LOCAL'				=> 'La permission de l’utilisateur pour ce forum est réglée sur <samp>JAMAIS</samp> ce qui devient la valeur commune car elle était réglée sur NON.',
+	'TRACE_USER_NEVER_TOTAL_NO_LOCAL'		=> 'La permission de l’utilisateur pour ce forum est réglée sur <samp>JAMAIS</samp> ce qui devient la valeur commune car elle était réglée sur NON.',
 	'TRACE_USER_NEVER_TOTAL_YES'			=> 'La permission de l’utilisateur est réglée sur <samp>JAMAIS</samp> et outrepasse le <samp>OUI</samp> précédent.',
-	'TRACE_USER_NEVER_TOTAL_YES_LOCAL'			=> 'La permission de l’utilisateur pour ce forum est réglée sur <samp>JAMAIS</samp> et outrepasse le <samp>OUI</samp> précédent.',
+	'TRACE_USER_NEVER_TOTAL_YES_LOCAL'		=> 'La permission de l’utilisateur pour ce forum est réglée sur <samp>JAMAIS</samp> et outrepasse le <samp>OUI</samp> précédent.',
 	'TRACE_USER_NO_TOTAL_NO'				=> 'La permission de l’utilisateur est réglée sur <samp>NON</samp> et la valeur commune était réglée sur NON ainsi par défaut sur <samp>JAMAIS</samp>.',
-	'TRACE_USER_NO_TOTAL_NO_LOCAL'				=> 'La permission de l’utilisateur pour ce forum est réglée sur <samp>NON</samp> et la valeur commune était réglée sur NON ainsi par défaut sur <samp>JAMAIS</samp>.',
+	'TRACE_USER_NO_TOTAL_NO_LOCAL'			=> 'La permission de l’utilisateur pour ce forum est réglée sur <samp>NON</samp> et la valeur commune était réglée sur NON ainsi par défaut sur <samp>JAMAIS</samp>.',
 	'TRACE_USER_YES_TOTAL_NEVER'			=> 'La permission de l’utilisateur est réglée sur <samp>OUI</samp> mais la valeur commune est sur <samp>JAMAIS</samp> et ne peut pas être outrepassée.',
-	'TRACE_USER_YES_TOTAL_NEVER_LOCAL'			=> 'La permission de l’utilisateur pour ce forum est réglée sur <samp>OUI</samp> mais la valeur commune est sur <samp>JAMAIS</samp> et ne peut pas être outrepassée.',
+	'TRACE_USER_YES_TOTAL_NEVER_LOCAL'		=> 'La permission de l’utilisateur pour ce forum est réglée sur <samp>OUI</samp> mais la valeur commune est sur <samp>JAMAIS</samp> et ne peut pas être outrepassée.',
 	'TRACE_USER_YES_TOTAL_NO'				=> 'La permission de l’utilisateur est réglée sur <samp>OUI</samp> ce qui devient la valeur commune car elle était réglée sur <samp>NON</samp>.',
-	'TRACE_USER_YES_TOTAL_NO_LOCAL'				=> 'La permission de l’utilisateur pour ce forum est réglée sur <samp>OUI</samp> ce qui devient la valeur commune car elle était réglée sur <samp>NON</samp>.',
+	'TRACE_USER_YES_TOTAL_NO_LOCAL'			=> 'La permission de l’utilisateur pour ce forum est réglée sur <samp>OUI</samp> ce qui devient la valeur commune car elle était réglée sur <samp>NON</samp>.',
 	'TRACE_USER_YES_TOTAL_YES'				=> 'La permission de l’utilisateur est réglée sur <samp>OUI</samp> et la valeur commune est réglée sur <samp>OUI</samp>, donc rien n’est modifié.',
-	'TRACE_USER_YES_TOTAL_YES_LOCAL'				=> 'La permission de l’utilisateur pour ce forum est réglée sur <samp>OUI</samp> et la valeur commune est réglée sur <samp>OUI</samp>, donc rien n’est modifié.',
-	'TRACE_WHO'									=> 'Qui',
+	'TRACE_USER_YES_TOTAL_YES_LOCAL'		=> 'La permission de l’utilisateur pour ce forum est réglée sur <samp>OUI</samp> et la valeur commune est réglée sur <samp>OUI</samp>, donc rien n’est modifié.',
+	'TRACE_WHO'								=> 'Qui',
 	'TRACE_TOTAL'							=> 'Total',
 
 	'USERS_NOT_ASSIGNED'			=> 'Aucun utilisateur n’est assigné à ce modèle',
@@ -281,7 +283,7 @@ $lang = array_merge($lang, array(
 	'VIEW_GLOBAL_PERMS'		=> 'Permissions globales',
 	'VIEW_PERMISSIONS'		=> 'Voir les permissions',
 
-	'WRONG_PERMISSION_TYPE'	=> 'Mauvais type de permission sélectionné.',
+	'WRONG_PERMISSION_TYPE'				=> 'Mauvais type de permission sélectionné.',
 	'WRONG_PERMISSION_SETTING_FORMAT'	=> 'Les paramètres des permissions sont enregistrés dans un mauvais format, phpBB est incapable de les traiter correctement.',
 ));
 

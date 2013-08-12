@@ -1,12 +1,12 @@
 <?php
-/** 
+/**
 *
 * viewtopic [Standard french]
 * translated originally by PhpBB-fr.com <http://www.phpbb-fr.com/> and phpBB.biz <http://www.phpBB.biz>
 *
 * @package language
-* @version $Id: viewtopic.php 58 2012-08-23 08:31:38Z Morgyanne $
-* @copyright (c) 2005 phpBB Group 
+* @version $Id: viewtopic.php 71 2013-07-23 21:38:34Z papicx $
+* @copyright (c) 2005 phpBB Group
 * @license http://opensource.org/licenses/gpl-license.php GNU Public License 
 *
 */
@@ -41,7 +41,7 @@ $lang = array_merge($lang, array(
 	'ATTACHMENT_FUNCTIONALITY_DISABLED'	=> 'Les fichiers joints ont été désactivés.',
 
 	'BOOKMARK_ADDED'		=> 'Le sujet a été ajouté aux favoris.',
-	'BOOKMARK_ERR' 			=> 'Le sujet n’a pas pu être ajouté aux favoris. Essayez à nouveau.',
+	'BOOKMARK_ERR'			=> 'Le sujet n’a pas pu être ajouté aux favoris. Essayez à nouveau.',
 	'BOOKMARK_REMOVED'		=> 'Le sujet a été supprimé des favoris.',
 	'BOOKMARK_TOPIC'		=> 'Ajouter ce sujet aux favoris',
 	'BOOKMARK_TOPIC_REMOVE'	=> 'Supprimer ce sujet des favoris',
@@ -83,7 +83,7 @@ $lang = array_merge($lang, array(
 	'NO_VOTE_OPTION'		=> 'Vous devez choisir une option lorsque vous votez.',
 	'NO_VOTES'				=> 'Aucun vote',
 
-	'POLL_ENDED_AT'         => 'Le sondage s’est terminé le %s',
+	'POLL_ENDED_AT'			=> 'Le sondage s’est terminé le %s',
 	'POLL_RUN_TILL'			=> 'Le sondage est actif jusqu’au %s',
 	'POLL_VOTED_OPTION'		=> 'Vous avez voté pour cette option',
 	'PRINT_TOPIC'			=> 'Imprimer le sujet',
@@ -94,8 +94,8 @@ $lang = array_merge($lang, array(
 
 	'REPLY_TO_TOPIC'		=> 'Répondre au sujet',
 	'RETURN_POST'			=> '%sRevenir au message%s',
-	'SHOW_QR'				=> 'Réponse rapide',
 
+	'SHOW_QR'				=> 'Réponse rapide',
 	'SUBMIT_VOTE'			=> 'Voter',
 
 	'TOTAL_VOTES'			=> 'Nombre total de votes',
@@ -111,8 +111,8 @@ $lang = array_merge($lang, array(
 	'VIEW_UNREAD_POST'		=> 'Voir le premier message non lu',
 	'VISIT_WEBSITE'			=> 'Site Internet',
 	'VOTE_SUBMITTED'		=> 'Votre vote a été pris en compte.',
-	'VOTE_CONVERTED'      	=> 'La modification d’un vote n’est pas possible pour les sondages issus d’une conversion.',
-	
+	'VOTE_CONVERTED'		=> 'La modification d’un vote n’est pas possible pour les sondages issus d’une conversion.',
+
 ));
 
 ?>

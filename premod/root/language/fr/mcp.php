@@ -1,12 +1,12 @@
 <?php
-/** 
+/**
 *
 * mcp [Standard french]
 * translated originally by PhpBB-fr.com <http://www.phpbb-fr.com/> and phpBB.biz <http://www.phpBB.biz>
 *
 * @package language
-* @version $Id: mcp.php 58 2012-08-23 08:31:38Z Morgyanne $
-* @copyright (c) 2005 phpBB Group 
+* @version $Id: mcp.php 71 2013-07-23 21:38:34Z papicx $
+* @copyright (c) 2005 phpBB Group
 * @license http://opensource.org/licenses/gpl-license.php GNU Public License 
 *
 */
@@ -68,11 +68,11 @@ $lang = array_merge($lang, array(
 	'CLOSE_REPORT_CONFIRM'	=> 'Êtes-vous sûr de vouloir clôturer le rapport sélectionné ?',
 	'CLOSE_REPORTS'			=> 'Clôturer les rapports',
 	'CLOSE_REPORTS_CONFIRM'	=> 'Êtes-vous sûr de vouloir clôturer les rapports sélectionnés ?',
+
 	'DELETE_PM_REPORT'			=> 'Supprimer le rapport de MP',
 	'DELETE_PM_REPORT_CONFIRM'	=> 'Êtes-vous sûr de vouloir supprimer le rapport de MP sélectionné ?',
 	'DELETE_PM_REPORTS'			=> 'Supprimer les rapports de MP',
 	'DELETE_PM_REPORTS_CONFIRM'	=> 'Êtes-vous sûr de vouloir supprimer les rapports de MP sélectionnés ?',
-
 	'DELETE_POSTS'				=> 'Supprimer les messages',
 	'DELETE_POSTS_CONFIRM'		=> 'Êtes-vous sûr de vouloir supprimer ces messages ?',
 	'DELETE_POST_CONFIRM'		=> 'Êtes-vous sûr de vouloir supprimer ce message ?',
@@ -141,7 +141,7 @@ $lang = array_merge($lang, array(
 
 	'MARKED_NOTES_DELETED'		=> 'Tous les commentaires sur l’utilisateur ont été supprimés.',
 
-	'MCP_ADD'						=> 'Ajouter un avertissement',
+	'MCP_ADD'					=> 'Ajouter un avertissement',
 
 	'MCP_BAN'					=> 'Bannissements',
 	'MCP_BAN_EMAILS'			=> 'Bannir des adresses e-mail',
@@ -187,7 +187,7 @@ $lang = array_merge($lang, array(
 	'MCP_PM_REPORTS_CLOSED_EXPLAIN'	=> 'Voici une liste de tous les rapports de messages privés qui ont été résolus.',
 	'MCP_PM_REPORTS_OPEN'			=> 'Rapports de MP ouverts',
 	'MCP_PM_REPORTS_OPEN_EXPLAIN'	=> 'Voici une liste de tous les rapports de messages privés qui doivent toujours être pris en charge.',
-	
+
 	'MCP_REPORTS'					=> 'Messages rapportés',
 	'MCP_REPORT_DETAILS'			=> 'Détails du rapport',
 	'MCP_REPORTS_CLOSED'			=> 'Rapports clôturés',
@@ -248,17 +248,16 @@ $lang = array_merge($lang, array(
 
 	'ONLY_TOPIC'			=> 'Seulement le sujet « %s »',
 	'OTHER_USERS'			=> 'Autres utilisateurs postant à partir de cette IP',
-	
+
 	'PM_REPORT_CLOSED_SUCCESS'	=> 'Le rapport de MP sélectionné a été clôturé.',
 	'PM_REPORT_DELETED_SUCCESS'	=> 'Le rapport de MP sélectionné a été supprimé.',
 	'PM_REPORTED_SUCCESS'		=> 'Le message privé a été rapporté.',
 	'PM_REPORT_TOTAL'			=> 'Au total, il y a <strong>1</strong> rapport de MP à revoir.',
-	'PM_REPORTS_TOTAL'			=> 'Au total, il y a <strong>%d</strong> rapports de MP à revoir.',
 	'PM_REPORTS_CLOSED_SUCCESS'	=> 'Les rapports de MP sélectionnés ont été clôturés.',
 	'PM_REPORTS_DELETED_SUCCESS'=> 'Les rapports de MP sélectionnés ont été supprimés.',
+	'PM_REPORTS_TOTAL'			=> 'Au total, il y a <strong>%d</strong> rapports de MP à revoir.',
 	'PM_REPORTS_ZERO_TOTAL'		=> 'Aucun rapport de MP à revoir.',
 	'PM_REPORT_DETAILS'			=> 'Détails du rapport de message privé',
-
 	'POSTER'					=> 'Posteur',
 	'POSTS_APPROVED_SUCCESS'	=> 'Les messages sélectionnés ont été approuvés.',
 	'POSTS_DELETED_SUCCESS'		=> 'Les messages sélectionnés ont été supprimés de la base de données.',
@@ -376,7 +375,7 @@ $lang = array_merge($lang, array(
 
 	'VIEW_DETAILS'			=> 'Voir les détails',
 	'VIEW_PM'				=> 'Voir le message privé',
-	'VIEW_POST' 			=> 'Voir le message',
+	'VIEW_POST'				=> 'Voir le message',
 
 	'WARNED_USERS'			=> 'Utilisateurs avertis',
 	'WARNED_USERS_EXPLAIN'	=> 'Liste des utilisateurs dont les avertissements donnés sont encore valables.',

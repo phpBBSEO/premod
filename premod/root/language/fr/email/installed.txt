@@ -17,6 +17,6 @@ Adresse du forum: {U_BOARD}
 Des informations utiles peuvent être consultées dans le dossier "docs" de votre installation, ou sur le forum de support francophone - http://forums.phpbb-fr.com
 
 Dans le but de conserver votre forum en sécurité, nous vous recommandons fortement de vous tenir au courant des mises à jour du logiciel. Pour votre convenance, une inscription à la newsletter du groupe phpBB est disponible sur la page ci-dessous.
-http://www.phpbb.com/support/
+https://www.phpbb.com/support/
 
 {EMAIL_SIG}

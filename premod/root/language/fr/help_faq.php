@@ -1,18 +1,17 @@
 <?php
-/** 
+/**
 *
 * help_faq [Standard french]
 * translated originally by PhpBB-fr.com <http://www.phpbb-fr.com/> and phpBB.biz <http://www.phpBB.biz>
 *
 * @package language
-* @version $Id: help_faq.php 61 2012-08-27 08:03:01Z Morgyanne $
-* @copyright (c) 2005 phpBB Group 
+* @version $Id: help_faq.php 72 2013-08-04 09:57:55Z papicx $
+* @copyright (c) 2005 phpBB Group
 * @license http://opensource.org/licenses/gpl-license.php GNU Public License 
 *
 */
 
 /**
-* DO NOT CHANGE
 */
 if (!defined('IN_PHPBB'))
 {
@@ -335,7 +334,7 @@ $help = array(
 	),
 	array(
 		0 => 'Pourquoi la fonctionnalité X n’est pas disponible ?',
-		1 => 'Ce programme a été écrit et mis sous licence par le Groupe phpBB. Si vous pensez qu’une fonctionnalité nécessite d’être ajoutée, ou si vous souhaitez signaler un bug, visitez le site Internet <a href="http://area51.phpbb.com/">« Area51 »</a> de phpBB où vous trouverez les ressources pour le faire.'
+		1 => 'Ce programme a été écrit et mis sous licence par le Groupe phpBB. Si vous pensez qu’une fonctionnalité nécessite d’être ajoutée, visitez la page <a href="https://www.phpbb.com/ideas/">phpBB Ideas Centre</a> (en anglais) où vous pouvez voter pour des idées proposées ou suggérer de nouvelles fonctionnalités.'
 	),
 	array(
 		0 => 'Qui contacter pour les abus ou les questions légales concernant ce forum ?',

@@ -1,13 +1,13 @@
 <?php
-/** 
+/**
 *
 * acp_ban [Standard french]
 * translated originally by PhpBB-fr.com <http://www.phpbb-fr.com/> and phpBB.biz <http://www.phpBB.biz>
 *
 * @package language
-* @version $Id: ban.php 58 2012-08-23 08:31:38Z Morgyanne $
-* @copyright (c) 2005 phpBB Group 
-* @license http://opensource.org/licenses/gpl-license.php GNU Public License 
+* @version $Id: ban.php 71 2013-07-23 21:38:34Z papicx $
+* @copyright (c) 2005 phpBB Group
+* @license http://opensource.org/licenses/gpl-license.php GNU Public License
 *
 */
 
@@ -69,11 +69,11 @@ $lang = array_merge($lang, array(
 
 	'LENGTH_BAN_INVALID'		=> 'La date indiquée doit être au format <kbd>AAAA-MM-JJ</kbd>.',
 
-	'OPTIONS_BANNED' 			=> 'Banni(s)',
-	'OPTIONS_EXCLUDED' 			=> 'Exclu(s)',
+	'OPTIONS_BANNED'			=> 'Banni(s)',
+	'OPTIONS_EXCLUDED'			=> 'Exclu(s)',
 
 	'PERMANENT'		=> 'Permanent',
-	
+
 	'UNTIL'						=> 'Jusqu’à',
 	'USER_BAN'					=> 'Bannir un ou plusieurs noms d’utilisateurs',
 	'USER_BAN_EXCLUDE_EXPLAIN'	=> 'Si activé, permet d’exclure de toutes les interdictions courantes les noms d’utilisateurs renseignés.',
@@ -81,8 +81,6 @@ $lang = array_merge($lang, array(
 	'USER_NO_BANNED'			=> 'Aucun nom d’utilisateur banni',
 	'USER_UNBAN'				=> 'Débannir ou ne plus exclure des noms d’utilisateurs',
 	'USER_UNBAN_EXPLAIN'		=> 'Vous pouvez débannir (ou ne plus exclure) plusieurs noms d’utilisateurs d’un coup, en utilisant la combinaison de touches appropriée avec votre clavier et votre souris. Les noms d’utilisateurs exclus sont grisés et en gras.',
-	
-
 ));
 
 ?>

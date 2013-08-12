@@ -5,7 +5,7 @@
 * translated originally by PhpBB-fr.com <http://www.phpbb-fr.com/> and phpBB.biz <http://www.phpBB.biz>
 *
 * @package language
-* @version $Id: board.php 59 2012-08-27 06:41:52Z Morgyanne $
+* @version $Id: board.php 71 2013-07-23 21:38:34Z papicx $
 * @copyright (c) 2005 phpBB Group
 * @license http://opensource.org/licenses/gpl-license.php GNU Public License
 *
@@ -54,7 +54,7 @@ $lang = array_merge($lang, array(
 	'SYSTEM_TIMEZONE'				=> 'Fuseau horaire des invités',
 	'SYSTEM_TIMEZONE_EXPLAIN'		=> 'Fuseau horaire à utiliser pour l’affichage des heures quand les utilisateurs ne sont pas connectés (visiteurs, robots). Les membres le définissent pendant leur inscription et peuvent le changer dans leur panneau de l’utilisateur.',
 	'WARNINGS_EXPIRE'				=> 'Durée de l’avertissement',
-	'WARNINGS_EXPIRE_EXPLAIN'		=> 'Nombre de jours qui s’écoulera avant que l’avertissement n’expire automatiquement. Mettre « 0 » pour que l’avertissement soit permanent.',
+	'WARNINGS_EXPIRE_EXPLAIN'		=> 'Nombre de jours qui s’écoulera avant qu’un avertissement n’expire automatiquement. Mettre « 0 » pour que l’avertissement soit permanent.',
 ));
 
 // Board Features
@@ -93,9 +93,9 @@ $lang = array_merge($lang, array(
 // Avatar Settings
 $lang = array_merge($lang, array(
 	'ACP_AVATAR_SETTINGS_EXPLAIN'	=> 'Les avatars sont généralement de petites images uniques qu’un utilisateur choisit pour le représenter. Selon le style, ils sont normalement affichés sous le nom d’utilisateur lors de la visualisation de sujets. Vous pouvez choisir quelle méthode l’utilisateur peut utiliser pour choisir son avatar. Dans le cas où vous autorisez le transfert d’avatar, vous devez indiquer ci-dessous le nom du répertoire en question et vous assurer des droits en écriture de ce répertoire. Notez également que les limitations de taille ne sont imposées qu’aux avatars transférés et ne concernent pas les avatars dont on aura fourni un lien externe.',
+
 	'ALLOW_AVATARS'					=> 'Activer les avatars',
 	'ALLOW_AVATARS_EXPLAIN'			=> 'Autorise l’utilisation générale des avatars;<br />Si vous désactivez l’utilisation générale des avatars ou les avatars affichés selon une méthode particulière, les avatars désactivés ne seront plus affichés sur le forum, mais les utilisateurs seront toujours capables de télécharger leur propre avatar dans leur panneau d’utilisateur.',
-
 	'ALLOW_LOCAL'					=> 'Activer la galerie d’avatars',
 	'ALLOW_REMOTE'					=> 'Autoriser les avatars distants',
 	'ALLOW_REMOTE_EXPLAIN'			=> 'Avatars liés depuis un autre site',
@@ -124,7 +124,7 @@ $lang = array_merge($lang, array(
 	'ALLOW_FORWARD_PM'			=> 'Autoriser le transfert des messages privés',
 	'ALLOW_IMG_PM'				=> 'Autoriser l’utilisation du BBCode <code>[IMG]</code>',
 	'ALLOW_MASS_PM'				=> 'Autoriser l’envoi de messages privés à plusieurs utilisateurs et groupes',
-	'ALLOW_MASS_PM_EXPLAIN' 	=> 'L’envoi aux groupes peut être ajusté par groupe dans l’écran de réglage du groupe.',
+	'ALLOW_MASS_PM_EXPLAIN'		=> 'L’envoi aux groupes peut être ajusté par groupe dans l’écran de réglage du groupe.',
 	'ALLOW_PRINT_PM'			=> 'Autoriser la visualisation de l’impression dans la messagerie privée',
 	'ALLOW_QUOTE_PM'			=> 'Autoriser les citations dans les messages privés',
 	'ALLOW_SIG_PM'				=> 'Autoriser les signatures dans les messages privés',
@@ -140,7 +140,7 @@ $lang = array_merge($lang, array(
 	'PM_EDIT_TIME'				=> 'Temps limite d’édition',
 	'PM_EDIT_TIME_EXPLAIN'		=> 'Temps après lequel on ne peut plus éditer un message privé quand il n’a pas encore été délivré. Mettre « 0 » pour illimité.',
 	'PM_MAX_RECIPIENTS'			=> 'Nombre maximum autorisé de destinataires',
-	'PM_MAX_RECIPIENTS_EXPLAIN' => 'Le nombre maximum autorisé de destinataires d’un message privé. Une valeur à « 0 » indique un nombre illimité de destinataires. Ce paramètre peut être ajusté pour chaque groupe dans l’écran de réglage du groupe.',
+	'PM_MAX_RECIPIENTS_EXPLAIN'	=> 'Le nombre maximum autorisé de destinataires d’un message privé. Une valeur à « 0 » indique un nombre illimité de destinataires. Ce paramètre peut être ajusté pour chaque groupe dans l’écran de réglage du groupe.',
 ));
 
 // Post Settings
@@ -208,17 +208,18 @@ $lang = array_merge($lang, array(
 $lang = array_merge($lang, array(
 	'ACP_REGISTER_SETTINGS_EXPLAIN'		=> 'Vous pouvez modifier les paramètres relatifs à l’inscription et aux profils d’utilisateurs.',
 
-	'ACC_ACTIVATION'			=> 'Activation de compte',
-	'ACC_ACTIVATION_EXPLAIN'	=> 'Cela détermine si les utilisateurs ont accès au forum immédiatement ou si une confirmation est requise. Vous pouvez également désactiver complètement les nouvelles inscriptions. « L’envoi d’e-mail » doit être autorisé afin de pouvoir choisir entre l’activation par l’utilisateur ou par l’administrateur.',
+	'ACC_ACTIVATION'				=> 'Activation de compte',
+	'ACC_ACTIVATION_EXPLAIN'		=> 'Cela détermine si les utilisateurs ont accès au forum immédiatement ou si une confirmation est requise. Vous pouvez également désactiver complètement les nouvelles inscriptions. « L’envoi d’e-mail » doit être autorisé afin de pouvoir choisir entre l’activation par l’utilisateur ou par l’administrateur.',
 	'NEW_MEMBER_POST_LIMIT'			=> 'Limite de message d’un nouveau membre',
 	'NEW_MEMBER_POST_LIMIT_EXPLAIN'	=> 'Les nouveaux membres resteront dans le groupe <em>Nouveaux utilisateurs enregistrés</em> jusqu’à qu’ils atteignent ce nombre de messages. Vous pouvez utiliser ce groupe pour éviter qu’ils utilisent le système de messagerie privé ou la révision de leurs messages. <strong>Mettre « 0 » pour désactiver cette fonctionnalité.</strong>',
 	'NEW_MEMBER_GROUP_DEFAULT'		=> 'Mettre le groupe des nouveaux utilisateurs enregistrés par défaut',
 	'NEW_MEMBER_GROUP_DEFAULT_EXPLAIN'	=> 'Si ce paramètre est activé, et qu’une limite de message pour les nouveaux membres est indiquée, les nouveaux utilisateurs enregistrés ne seront pas simplement placés dans le groupe <em>Nouveaux utilisateurs enregistrés</em>, mais ce groupe deviendra également leur groupe par défaut. Cela peut s’avérer pratique si vous voulez assigner un rang et/ou un avatar de groupe par défaut afin que les utilisateurs en héritent.',
+
 	'ACC_ADMIN'					=> 'Par l’administrateur',
 	'ACC_DISABLE'				=> 'Désactiver l’inscription',
 	'ACC_NONE'					=> 'Pas de vérification (accès immédiat)',
 	'ACC_USER'					=> 'Par l’utilisateur (vérification de l’e-mail)',
-//	'ACC_USER_ADMIN'				=> 'User + Admin',
+//	'ACC_USER_ADMIN'			=> 'User + Admin',
 	'ALLOW_EMAIL_REUSE'			=> 'Autoriser les adresses e-mail à être réutilisées',
 	'ALLOW_EMAIL_REUSE_EXPLAIN'	=> 'Plusieurs utilisateurs peuvent s’enregistrer avec la même adresse e-mail.',
 	'COPPA'						=> 'COPPA',
@@ -250,43 +251,43 @@ $lang = array_merge($lang, array(
 $lang = array_merge($lang, array(
 	'ACP_FEED_MANAGEMENT'				=> 'Paramètres généraux de publication des flux',
 	'ACP_FEED_MANAGEMENT_EXPLAIN'		=> 'Ce module rend disponible différents flux ATOM, en parsant les BBCodes dans les messages pour les rendre lisible dans des flux extérieurs.',
-	 
+
 	'ACP_FEED_GENERAL'					=> 'Paramètres de flux général',
- 	'ACP_FEED_POST_BASED'				=> 'Paramètres de flux de message',
+	'ACP_FEED_POST_BASED'				=> 'Paramètres de flux de message',
 	'ACP_FEED_TOPIC_BASED'				=> 'Paramètres de flux de sujet',
- 	'ACP_FEED_SETTINGS_OTHER'			=> 'Autres flux et paramétrages',
-	 
+	'ACP_FEED_SETTINGS_OTHER'			=> 'Autres flux et paramétrages',
+
 	'ACP_FEED_ENABLE'					=> 'Activer les flux',
 	'ACP_FEED_ENABLE_EXPLAIN'			=> 'Active ou non, les flux ATOM pour le forum entier.<br />En désactivant les flux, peu importe la manière dont sont réglées les options ci-dessous.',
 	'ACP_FEED_LIMIT'					=> 'Nombre d’articles',
 	'ACP_FEED_LIMIT_EXPLAIN'			=> 'Le nombre maximum d’articles de flux à afficher.',
-	 
+
 	'ACP_FEED_OVERALL'					=> 'Activer les flux sur l’ensemble du forum',
 	'ACP_FEED_OVERALL_EXPLAIN'			=> 'Permet de suivre les nouveaux messages sur l’ensemble du forum.',
 	'ACP_FEED_FORUM'					=> 'Activer les flux par forum',
 	'ACP_FEED_FORUM_EXPLAIN'			=> 'Permet de suivre les nouveaux messages d’un forum et ses sous-forums.',
 	'ACP_FEED_TOPIC'					=> 'Activer les flux par sujet',
 	'ACP_FEED_TOPIC_EXPLAIN'			=> 'Permet de suivre les nouveaux messages d’un sujet en particulier.',
-	 
+
 	'ACP_FEED_TOPICS_NEW'				=> 'Activer le flux des nouveaux sujets',
 	'ACP_FEED_TOPICS_NEW_EXPLAIN'		=> 'Active le flux des « nouveaux sujets », qui affiche les derniers sujets créés, y compris le premier message.',
 	'ACP_FEED_TOPICS_ACTIVE'			=> 'Activer le flux des sujets actifs',
 	'ACP_FEED_TOPICS_ACTIVE_EXPLAIN'	=> 'Active le flux des « sujet actifs », qui affiche les derniers sujets actifs, y compris le dernier message.',
 	'ACP_FEED_NEWS'						=> 'Flux des nouvelles',
 	'ACP_FEED_NEWS_EXPLAIN'				=> 'Sélectionne le premier message depuis ces forums. Ne sélectionnez aucun forum pour désactiver le flux des nouvelles.<br />Sélectionner plusieurs forums en maintenant la touche <samp>CTRL</samp> et en cliquant.',
-	  
+
 	'ACP_FEED_OVERALL_FORUMS'			=> 'Activer le flux des forums',
 	'ACP_FEED_OVERALL_FORUMS_EXPLAIN'	=> 'Active le flux de « tous les forums », ce qui affiche une liste des forums.',
-	 
+
 	'ACP_FEED_HTTP_AUTH'				=> 'Autoriser l’authentification HTTP',
 	'ACP_FEED_HTTP_AUTH_EXPLAIN'		=> 'Active l’authentification HTTP, ce qui autorise les utilisateurs à recevoir le contenu qui est masqué aux invités en ajoutant le paramètre <samp>auth=http</samp> à l’URL du flux. Notez que certaines installations de PHP nécessitent d’effectuer des modifications additionnelles sur le fichier .htaccess. Toutes les instructions sont contenues dans ce fichier.',
 	'ACP_FEED_ITEM_STATISTICS'			=> 'Statistiques de l’article',
 	'ACP_FEED_ITEM_STATISTICS_EXPLAIN'	=> 'Affiche les statistiques indivuelles sous les articles de flux<br />(Exemple: Posté par, date et heure, Réponses, Vues)',
 	'ACP_FEED_EXCLUDE_ID'				=> 'Exclure ces forums',
-	'ACP_FEED_EXCLUDE_ID_EXPLAIN'		=> 'Le contenu de ces forums <strong>se sera pas inclus dans les flux</strong>. Ne sélectionnez aucun forum pour lire les données de tous les forums.<br />Sélectionner plusieurs forums en maintenant la touche <samp>CTRL</samp> et en cliquant.',
+	'ACP_FEED_EXCLUDE_ID_EXPLAIN' => 'Sélectionnez les forums à exclure des flux, en maintenant la touche <samp>CTRL</samp> ou la touche <samp>COMMAND</samp> et en cliquant.<br />Ne sélectionnez aucun forum pour lire les données de tous les forums dans les flux.',
 ));
 
- // Visual Confirmation Settings
+// Visual Confirmation Settings
 $lang = array_merge($lang, array(
 	'ACP_VC_SETTINGS_EXPLAIN'				=> 'Vous pouvez sélectionner et configurer les plugins, qui sont conçus pour bloquer les soumissions automatisées de formulaires par des robots. Ces plugins fonctionnent généralement en défiant l’utilisateur via un <em>CAPTCHA</em>, un test conçu pour être complexe à résoudre pour les ordinateurs.',
 	'AVAILABLE_CAPTCHAS'					=> 'Plugins disponibles',
@@ -302,14 +303,13 @@ $lang = array_merge($lang, array(
 	'CAPTCHA_GD_Y_GRID_EXPLAIN'				=> 'Utiliser le paramètre ci-dessous pour rendre la confirmation visuelle plus difficile à déchiffrer. Mettre « 0 » pour désactiver le bruit de fond y-axis.',
 	'CAPTCHA_GD_WAVE'						=> 'Distorsion ondulatoire',
 	'CAPTCHA_GD_WAVE_EXPLAIN'				=> 'Cela appliquera une distorsion ondulatoire à l’image.',
- 	'CAPTCHA_GD_3D_NOISE'					=> 'Ajouter des objets de bruit en 3D',
+	'CAPTCHA_GD_3D_NOISE'					=> 'Ajouter des objets de bruit en 3D',
 	'CAPTCHA_GD_3D_NOISE_EXPLAIN'			=> 'Cela ajoutera des objets supplémentaires à l’image, par-dessus les lettres.',
 	'CAPTCHA_GD_FONTS'						=> 'Utiliser différentes polices',
 	'CAPTCHA_GD_FONTS_EXPLAIN'				=> 'Ce paramètre contrôle le nombre différent de formes de lettres qui sont utilisées. Vous pouvez seulement utiliser les formes par défaut ou introduire des lettres modifiées. L’ajout de lettres en minuscule est également possible.',
 	'CAPTCHA_FONT_DEFAULT'					=> 'Défaut',
 	'CAPTCHA_FONT_NEW'						=> 'Nouvelles formes',
 	'CAPTCHA_FONT_LOWER'					=> 'Utiliser également des minuscules',
-
 	'CAPTCHA_NO_GD'							=> 'Image simple',
 	'CAPTCHA_PREVIEW_MSG'					=> 'Vos modifications n’ont pas été sauvegardées, ceci est juste un aperçu.',
 	'CAPTCHA_PREVIEW_EXPLAIN'				=> 'Voici le plugin tel qu’il apparaîtrait avec vos paramètres actuels.',
@@ -354,7 +354,6 @@ $lang = array_merge($lang, array(
 	'LIMIT_SESSIONS'				=> 'Nombre de sessions',
 	'LIMIT_SESSIONS_EXPLAIN'		=> 'Si le nombre de sessions dépasse cette valeur durant une minute, le forum sera indisponible. Mettre « 0 » pour illimité.',
 	'LOAD_CPF_MEMBERLIST'			=> 'Autoriser les styles à afficher les champs personnalisés dans la liste des membres',
-	'LOAD_CPF_PM'          			=> 'Afficher les champs personnalisés dans les messages privés',
 	'LOAD_CPF_VIEWPROFILE'			=> 'Afficher les champs personnalisés dans les profils d’utilisateur',
 	'LOAD_CPF_VIEWTOPIC'			=> 'Afficher les champs personnalisés dans les pages de sujet',
 	'LOAD_USER_ACTIVITY'			=> 'Afficher l’activité des utilisateurs',
@@ -369,8 +368,8 @@ $lang = array_merge($lang, array(
 	'YES_MODERATORS'				=> 'Activer l’affichage des modérateurs',
 	'YES_ONLINE'					=> 'Activer l’affichage de la liste des utilisateurs en ligne',
 	'YES_ONLINE_EXPLAIN'			=> 'Affiche ces informations sur l’accueil, dans les forums et sujets.',
-	'YES_ONLINE_GUESTS'				=> 'Activer l’affichage des visiteurs dans « Qui est en ligne »',
-	'YES_ONLINE_GUESTS_EXPLAIN'		=> 'Affiche les informations concernant les visiteurs dans « Qui est en ligne ».',
+	'YES_ONLINE_GUESTS'				=> 'Activer l’affichage des visiteurs dans « Qui est en ligne ? »',
+	'YES_ONLINE_GUESTS_EXPLAIN'		=> 'Affiche les informations concernant les visiteurs dans « Qui est en ligne ? ».',
 	'YES_ONLINE_TRACK'				=> 'Activer l’affichage de l’état de connexion',
 	'YES_ONLINE_TRACK_EXPLAIN'		=> 'Affiche dans le profil public et les sujets le statut de l’utilisateur.',
 	'YES_POST_MARKING'				=> 'Activer les sujets pointés',
@@ -435,7 +434,7 @@ $lang = array_merge($lang, array(
 	'SMILIES_PATH_EXPLAIN'		=> 'Chemin depuis le répertoire racine de phpBB, exemple: <samp>images/smilies</samp>',
 	'UPLOAD_ICONS_PATH'			=> 'Emplacement des icônes de groupes d’extensions',
 	'UPLOAD_ICONS_PATH_EXPLAIN'	=> 'Chemin depuis le répertoire racine de phpBB, exemple: <samp>images/upload_icons</samp>',
-	));
+));
 
 // Security Settings
 $lang = array_merge($lang, array(
@@ -464,26 +463,26 @@ $lang = array_merge($lang, array(
 	'FORWARDED_FOR_VALID_EXPLAIN'	=> 'Les sessions seront seulement continuées si l’en-tête <var> X_FORWARDED_FOR </var> envoyée est égale à celle envoyée avec la requête précédente. L’en-tête <var>X_FORWARDED_FOR</var> vérifiera également si les adresses IP n’ont pas été bannies.',
 	'IP_VALID'						=> 'Validation de session IP',
 	'IP_VALID_EXPLAIN'				=> 'Détermine quelle partie de l’adresse IP des utilisateurs sera utilisée pour valider une session: <samp>Tous</samp> compare l’adresse complète, <samp>A.B.C</samp> les premiers x.x.x, <samp>A.B</samp> les premiers x.x, <samp>Aucune</samp> désactive la vérification. Pour les adresses IPv6, <samp>A.B.C</samp> compare les 4 premiers blocs et <samp>A.B</samp> les 3 premiers blocs.',
-	'IP_LOGIN_LIMIT_MAX' 			=> 'Nombre maximal de tentatives de connexion par adresse IP',
-	'IP_LOGIN_LIMIT_MAX_EXPLAIN'  	=> 'Seuil du nombre de tentatives de connexion autorisé pour une adresse IP avant d’activer la confirmation visuelle. Mettre « 0 » pour désactiver la confirmation visuelle par adresse IP.',
-	'IP_LOGIN_LIMIT_TIME' 			=> 'Expiration des tentatives de connexion par adresse IP',
-	'IP_LOGIN_LIMIT_TIME_EXPLAIN' 	=> 'Temps d’expiration des tentatives de connexion par adresse IP.',
-	'IP_LOGIN_LIMIT_USE_FORWARDED' 	=> 'Limite des tentatives de connexions par en-tête <var>X_FORWARDED_FOR</var>',
-	'IP_LOGIN_LIMIT_USE_FORWARDED_EXPLAIN' => 'Au lieu de limiter les tentatives de connexions par adresse IP, elles seront limitées par la valeur <var>X_FORWARDED_FOR</var>. <br /><em><strong>Attention:</strong> À activer seulement si le serveur proxy a des valeurs <var>X_FORWARDED_FOR</var> dignes de confiance.</em>',
-	'MAX_LOGIN_ATTEMPTS' 			=> 'Nombre maximal de tentatives de connexion par nom d’utilisateur',
-	'MAX_LOGIN_ATTEMPTS_EXPLAIN'  	=> 'Nombre maximal de tentatives de connexion autorisé par nom d’utilisateur avant d’activer la confirmation visuelle. Mettre « 0 » pour désactiver la confirmation visuelle par nom d’utilisateur.',
+	'IP_LOGIN_LIMIT_MAX'			=> 'Nombre maximal de tentatives de connexion par adresse IP',
+	'IP_LOGIN_LIMIT_MAX_EXPLAIN'	=> 'Seuil du nombre de tentatives de connexion autorisé pour une adresse IP avant d’activer la confirmation visuelle. Mettre « 0 » pour désactiver la confirmation visuelle par adresse IP.',
+	'IP_LOGIN_LIMIT_TIME'			=> 'Expiration des tentatives de connexion par adresse IP',
+	'IP_LOGIN_LIMIT_TIME_EXPLAIN'	=> 'Temps d’expiration des tentatives de connexion par adresse IP.',
+	'IP_LOGIN_LIMIT_USE_FORWARDED'	=> 'Limite des tentatives de connexions par en-tête <var>X_FORWARDED_FOR</var>',
+	'IP_LOGIN_LIMIT_USE_FORWARDED_EXPLAIN'	=> 'Au lieu de limiter les tentatives de connexions par adresse IP, elles seront limitées par la valeur <var>X_FORWARDED_FOR</var>. <br /><em><strong>Attention:</strong> À activer seulement si le serveur proxy a des valeurs <var>X_FORWARDED_FOR</var> dignes de confiance.</em>',
+	'MAX_LOGIN_ATTEMPTS'			=> 'Nombre maximal de tentatives de connexion par nom d’utilisateur',
+	'MAX_LOGIN_ATTEMPTS_EXPLAIN'	=> 'Nombre maximal de tentatives de connexion autorisé par nom d’utilisateur avant d’activer la confirmation visuelle. Mettre « 0 » pour désactiver la confirmation visuelle par nom d’utilisateur.',
 	'NO_IP_VALIDATION'				=> 'Aucune',
-	'NO_REF_VALIDATION' 			=> 'Aucune',
+	'NO_REF_VALIDATION'				=> 'Aucune',
 	'PASSWORD_TYPE'					=> 'Complexité du mot de passe',
 	'PASSWORD_TYPE_EXPLAIN'			=> 'Détermine la complexité requise pour définir ou modifier un mot de passe, les options suivantes incluent les précédentes.',
 	'PASS_TYPE_ALPHA'				=> 'Doit contenir des lettres et des chiffres',
 	'PASS_TYPE_ANY'					=> 'Aucune condition',
 	'PASS_TYPE_CASE'				=> 'Doit contenir des minuscules et majuscules',
 	'PASS_TYPE_SYMBOL'				=> 'Doit contenir des symboles',
-	'REF_HOST' 						=> 'Valider uniquement l’hôte',
-	'REF_PATH' 						=> 'Valider également le chemin',
-	'REFERER_VALID' 				=> 'Valider le référant',
-	'REFERER_VALID_EXPLAIN'  		=> 'Si activé, le référant des requêtes POST sera comparé au paramétrage effectué pour le chemin de l’hôte ou du script. Ceci peut entraîner certains problèmes avec les forums utilisant plusieurs domaines ou des connexions externes.',
+	'REF_HOST'						=> 'Valider uniquement l’hôte',
+	'REF_PATH'						=> 'Valider également le chemin',
+	'REFERER_VALID'					=> 'Valider le référant',
+	'REFERER_VALID_EXPLAIN'			=> 'Si activé, le référant des requêtes POST sera comparé au paramétrage effectué pour le chemin de l’hôte ou du script. Ceci peut entraîner certains problèmes avec les forums utilisant plusieurs domaines ou des connexions externes.',
 	'TPL_ALLOW_PHP'					=> 'Autoriser le PHP dans les templates',
 	'TPL_ALLOW_PHP_EXPLAIN'			=> 'Si cette option est activée, les instructions <code>PHP</code> et <code>INCLUDEPHP</code> seront reconnues et analysées dans les templates.',
 ));

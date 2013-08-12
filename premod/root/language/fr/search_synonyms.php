@@ -1,18 +1,14 @@
 <?php
-/** 
+/**
 *
 * search_synonyms [Standard french]
 * translated originally by PhpBB-fr.com <http://www.phpbb-fr.com/> and phpBB.biz <http://www.phpBB.biz>
 *
 * @package language
-* @version $Id: search_synonyms.php 58 2012-08-23 08:31:38Z Morgyanne $
-* @copyright (c) 2005 phpBB Group 
+* @version $Id: search_synonyms.php 71 2013-07-23 21:38:34Z papicx $
+* @copyright (c) 2005 phpBB Group
 * @license http://opensource.org/licenses/gpl-license.php GNU Public License 
 *
-*/
-
-/**
-* DO NOT CHANGE
 */
 
 if (!defined('IN_PHPBB'))
@@ -31,7 +27,7 @@ $synonyms = array(
 	'anemia'			=> 'anaemia',
 	'anemic'			=> 'anaemic',
 	'anesthesia'		=> 'anaesthesia',
-	'appologize'		=> 'appologise',
+	'apologize'			=> 'apologise',
 	'archean'			=> 'archaean',
 	'archeology'		=> 'archaeology',
 	'archeozoic'		=> 'archaeozoic',
