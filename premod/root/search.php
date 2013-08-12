@@ -83,7 +83,7 @@ switch ($search_id)
 			login_box('', $user->lang['LOGIN_EXPLAIN_UNREADSEARCH']);
 		}
 	break;
-
+	
 	// The "new posts" search uses user_lastvisit which is user based, so it should require user to log in.
 	case 'newposts':
 		if ($user->data['user_id'] == ANONYMOUS)
@@ -91,7 +91,7 @@ switch ($search_id)
 			login_box('', $user->lang['LOGIN_EXPLAIN_NEWPOSTS']);
 		}
 	break;
-
+	
 	default:
 		// There's nothing to do here for now ;)
 	break;
@@ -686,7 +686,8 @@ if ($keywords || $author || $author_id || $search_id || $submit)
 	$template->assign_vars(array(
 		'SEARCH_TITLE'		=> $l_search_title,
 		'SEARCH_MATCHES'	=> $l_search_matches,
-		'SEARCH_WORDS'		=> $search->search_query,
+		'SEARCH_WORDS'		=> $keywords,
+		'SEARCHED_QUERY'	=> $search->search_query,
 		'IGNORED_WORDS'		=> (sizeof($search->common_words)) ? implode(' ', $search->common_words) : '',
 		'PAGINATION'		=> generate_pagination($u_search, $total_match_count, $per_page, $start),
 		'PAGE_NUMBER'		=> on_page($total_match_count, $per_page, $start),

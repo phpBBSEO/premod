@@ -160,7 +160,7 @@ define('CHMOD_READ', 4);
 define('CHMOD_WRITE', 2);
 define('CHMOD_EXECUTE', 1);
 
-$mode = request_var('mode', '%MODE%');
+$mode = request_var('mode', 'seo_premod');
 $sub = request_var('sub', '');
 
 // Set PHP error handler to ours
@@ -570,7 +570,7 @@ class module
 		echo '		</div>';
 		echo '	</div>';
 		echo '	<div id="page-footer">';
-		echo '		Powered by <a href="http://www.phpbb.com/">phpBB</a>&reg; Forum Software &copy; phpBB Group';
+		echo '		Powered by <a href="https://www.phpbb.com/">phpBB</a>&reg; Forum Software &copy; phpBB Group';
 		echo '	</div>';
 		echo '</div>';
 		echo '</body>';

@@ -196,6 +196,7 @@ if ($post_data['forum_password'])
 {
 	login_forum_box(array(
 		'forum_id'			=> $forum_id,
+		'forum_name'		=> $post_data['forum_name'],
 		'forum_password'	=> $post_data['forum_password'])
 	);
 }
@@ -1041,7 +1042,7 @@ if ($submit || $preview || $refresh)
 					$forum_type = (int) $db->sql_fetchfield('forum_type');
 					$db->sql_freeresult($result);
 
-					if ($forum_type != FORUM_POST || !$auth->acl_get('f_post', $to_forum_id) || (!$auth->acl_get('m_approve', $to_forum_id) && !$auth->acl_get('f_noapprove', $to_forum_id)))
+					if ($forum_type != FORUM_POST || !$auth->acl_get('f_post', $to_forum_id) || !$auth->acl_get('f_noapprove', $to_forum_id))
 					{
 						$to_forum_id = 0;
 					}
@@ -1165,8 +1166,9 @@ if ($submit || $preview || $refresh)
 				$captcha->reset();
 			}
 
-			// Check the permissions for post approval. Moderators are not affected.
-			if ((!$auth->acl_get('f_noapprove', $data['forum_id']) && !$auth->acl_get('m_approve', $data['forum_id']) && empty($data['force_approved_state'])) || (isset($data['force_approved_state']) && !$data['force_approved_state']))
+			// Check the permissions for post approval.
+			// Moderators must go through post approval like ordinary users.
+			if ((!$auth->acl_get('f_noapprove', $data['forum_id']) && empty($data['force_approved_state'])) || (isset($data['force_approved_state']) && !$data['force_approved_state']))
 			{
 				meta_refresh(10, $redirect_url);
 				$message = ($mode == 'edit') ? $user->lang['POST_EDITED_MOD'] : $user->lang['POST_STORED_MOD'];
