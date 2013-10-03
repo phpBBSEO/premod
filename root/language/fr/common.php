@@ -5,7 +5,7 @@
 * translated originally by PhpBB-fr.com <http://www.phpbb-fr.com/> and phpBB.biz <http://www.phpBB.biz>
 *
 * @package language
-* @version $Id: common.php 71 2013-07-23 21:38:34Z papicx $
+* @version $Id: common.php 79 2013-10-01 00:10:32Z Skouat $
 * @copyright (c) 2005 phpBB Group
 * @license http://opensource.org/licenses/gpl-license.php GNU Public License
 *
@@ -392,7 +392,7 @@ $lang = array_merge($lang, array(
 	'NO_POSTS_TIME_FRAME'		=> 'Aucun message n’a été posté dans ce sujet pour la période indiquée.',
 	'NO_FEED_ENABLED'			=> 'Les flux ne sont pas disponibles sur ce forum.',
 	'NO_FEED'					=> 'Le flux demandé n’est pas disponible.',
-	'NO_STYLE_DATA'				=> 'Impossible d’obtenir les données de style',
+	'NO_STYLE_DATA'				=> 'Impossible de récupérer les données de style',
 	'NO_SUBJECT'				=> 'Aucun sujet indiqué',			// Used for posts having no subject defined but displayed within management pages.
 	'NO_SUCH_SEARCH_MODULE'		=> 'La recherche indiquée n’existe pas.',
 	'NO_SUPPORTED_AUTH_METHODS'	=> 'Aucune méthode d’authentification supportée.',
@@ -571,11 +571,11 @@ $lang = array_merge($lang, array(
 	'SUBJECT'					=> 'Sujet',
 	'SUBMIT'					=> 'Envoyer',
 
-	'TB'				=> 'To',	// Tera octects
+	'TB'				=> 'To',	// téraoctet
 	'TERMS_USE'			=> 'Conditions d’utilisation',
 	'TEST_CONNECTION'	=> 'Test de connexion',
 	'THE_TEAM'			=> 'L’équipe du forum',
-	'TIB'				=> 'Tio',	// Tera octects
+	'TIB'				=> 'Tio',	// tébioctect
 	'TIME'				=> 'Date',
 
 	'TOO_LARGE'						=> 'La valeur saisie est trop grande.',
@@ -723,7 +723,7 @@ $lang = array_merge($lang, array(
 	'WHO_IS_ONLINE'		=> 'Qui est en ligne',
 	'WRONG_PASSWORD'	=> 'Vous avez entré un mot de passe incorrect.',
 
-	'WRONG_DATA_COLOUR'			=> 'La valeur de couleur saisie est invalide.',
+	'WRONG_DATA_COLOUR'			=> 'La valeur saisie pour la couleur est invalide.',
 	'WRONG_DATA_ICQ'			=> 'Le numéro que vous avez entré n’est pas un numéro ICQ valide.',
 	'WRONG_DATA_JABBER'			=> 'Le nom que vous avez entré n’est pas un nom de compte Jabber valide.',
 	'WRONG_DATA_LANG'			=> 'La langue que vous avez indiquée n’est pas valide.',

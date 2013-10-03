@@ -5,7 +5,7 @@
 * translated originally by PhpBB-fr.com <http://www.phpbb-fr.com/> and phpBB.biz <http://www.phpBB.biz>
 *
 * @package language
-* @version $Id: posting.php 71 2013-07-23 21:38:34Z papicx $
+* @version $Id: posting.php 79 2013-10-01 00:10:32Z Skouat $
 * @copyright (c) 2005 phpBB Group
 * @license http://opensource.org/licenses/gpl-license.php GNU Public License
 *
@@ -57,7 +57,7 @@ $lang = array_merge($lang, array(
 	'BBCODE_I_HELP'				=> 'Texte italique: [i]texte[/i]',
 	'BBCODE_L_HELP'				=> 'Liste: [list][*]texte[/list]',
 	'BBCODE_LISTITEM_HELP'		=> 'Élément de liste: [*]texte',
-	'BBCODE_O_HELP'				=> 'Liste ordonnée: par exemple [list=1][*]Point 1[/list] ou [list=a][*]Point a[/list]',
+	'BBCODE_O_HELP'				=> 'Liste numérotée: par exemple [list=1][*]Point 1[/list] ou [list=a][*]Point a[/list]',
 	'BBCODE_P_HELP'				=> 'Insérer une image: [img]http://image_url[/img]',
 	'BBCODE_Q_HELP'				=> 'Citation: [quote]texte[/quote]',
 	'BBCODE_S_HELP'				=> 'Couleur de la police: [color=red]texte[/color] Astuce : vous pouvez également utiliser color=#FF0000',

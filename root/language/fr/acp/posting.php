@@ -5,7 +5,7 @@
 * translated originally by PhpBB-fr.com <http://www.phpbb-fr.com/> and phpBB.biz <http://www.phpBB.biz>
 *
 * @package language
-* @version $Id: posting.php 72 2013-08-04 09:57:55Z papicx $
+* @version $Id: posting.php 79 2013-10-01 00:10:32Z Skouat $
 * @copyright (c) 2005 phpBB Group
 * @license http://opensource.org/licenses/gpl-license.php GNU Public License
 *
@@ -83,9 +83,9 @@ $lang = array_merge($lang, array(
 		'IDENTIFIER'	=> 'Caractères alphabétiques latins (A-Z), chiffres, - et _',
 		'NUMBER'		=> 'Une série de chiffres',
 		'EMAIL'			=> 'Une adresse e-mail valide',
-		'URL'			=> 'Une URL valide utilisant un quelconque protocole (http, ftp, etc. ne peuvent pas être utilisés pour des exploits javascripts). Si aucun n’est donné, « http:// » sera préfixé par défaut à la chaîne.',
-		'LOCAL_URL'		=> 'Une URL locale. L’URL doit être relative à la page du sujet et ne peut contenir un nom de serveur ou un protocole, du fait que les liens sont préfixés de « %s ».',
-		'RELATIVE_URL'	=> 'Une URL relative. Vous pouvez utiliser celle-ci pour faire correspondre des parties d’une URL, mais attention : une URL complète est une URL relative valide. Lorsque vous souhaitez utiliser des URL relatives de votre forum, utilisez la variable LOCAL_URL.',
+		'URL'			=> 'Une adresse URL valide. Le protocole peut être spécifié mais HTTP, FTP, etc. ne peuvent pas être utilisés pour des exploits JavaScript. Si aucun protocole n’est spécifié, le protocole HTTP est assumé par défaut, et l’adresse URL compléte sera préfixée de « http:// ». Utile pour des liens externes.',
+		'LOCAL_URL'		=> 'Une adresse URL locale. Ni le protocole ni le serveur ne doivent être spécifiés, l’adresse URL complète sera préfixée de « %s ». Elle doit donc être relative à la page du sujet. Utile pour des liens internes dans une implémentation stable.',
+		'RELATIVE_URL'	=> 'Une adresse URL relative. Il suffit de la préfixer avec le contenu de la variable LOCAL_URL pour obtenir l’adresse URL complète. Attention, une adresse URL complète est aussi une adresse relative qui est valide, ceci peut poser problème. Utile pour des liens internes dans une implémentation pouvant changer.',
 		'COLOR'			=> 'Une couleur HTML peut être, au choix, soit une forme numérique <samp>#FF1234</samp> ou un <a href="http://www.w3.org/TR/CSS21/syndata.html#value-def-color">nom de couleur CSS</a> comme par exemple <samp>fuchsia</samp> ou <samp>InactiveBorder</samp>'
 	)
 ));

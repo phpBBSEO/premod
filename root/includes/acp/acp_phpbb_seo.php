@@ -711,8 +711,11 @@ class acp_phpbb_seo {
 			$htaccess_tpl .= '<b style="color:blue"># REWRITE BASE</b>' . "\n";
 			$htaccess_tpl .= '<b style="color:green">RewriteBase</b> <b>/{REWRITEBASE}</b>' . "\n";
 			$htaccess_tpl .= '<b style="color:blue"># HERE IS A GOOD PLACE TO FORCE CANONICAL DOMAIN</b>' . "\n";
+			$htaccess_tpl .= '<b style="color:blue"># Define fully qualified ssl aware protocol</b>' . "\n";
+			$htaccess_tpl .= '<b style="color:blue"># RewriteCond %{SERVER_PORT}s ^(443(s)|[0-9]+s)$</b>' . "\n";
+			$htaccess_tpl .= '<b style="color:blue"># RewriteRule ^.*$ - [env=HttpFullProto:http%2://]</b>' . "\n";
 			$htaccess_tpl .= '<b style="color:blue"># RewriteCond %{HTTP_HOST} !^' . str_replace(array('https://', 'http://', '.'), array('', '', '\\.'), trim($phpbb_seo->seo_path['root_url'], '/ ')) . '$ [NC]</b>' . "\n";
-			$htaccess_tpl .= '<b style="color:blue"># RewriteRule ^(.*)$ ' . $phpbb_seo->seo_path['root_url'] . '{REWRITEBASE}$1 [QSA,L,R=301]</b>' . "\n\n";
+			$htaccess_tpl .= '<b style="color:blue"># RewriteRule ^(.*)$ ' . str_replace(array('https://', 'http://'), '%{ENV:HttpFullProto}', $phpbb_seo->seo_path['root_url']) . '{REWRITEBASE}$1 [QSA,L,R=301]</b>' . "\n\n";
 			$htaccess_tpl .= '<b style="color:blue"># DO NOT GO FURTHER IF THE REQUESTED FILE / DIR DOES EXISTS</b>' . "\n";
 			$htaccess_tpl .= '<b style="color:green">RewriteCond</b> %{REQUEST_FILENAME} -f [OR]' . "\n";
 			$htaccess_tpl .= '<b style="color:green">RewriteCond</b> %{REQUEST_FILENAME} -d' . "\n";
