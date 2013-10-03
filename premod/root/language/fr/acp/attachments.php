@@ -5,7 +5,7 @@
 * translated originally by PhpBB-fr.com <http://www.phpbb-fr.com/> and phpBB.biz <http://www.phpBB.biz>
 *
 * @package language
-* @version $Id: attachments.php 71 2013-07-23 21:38:34Z papicx $
+* @version $Id: attachments.php 73 2013-09-15 17:02:43Z papicx $
 * @copyright (c) 2005 phpBB Group
 * @license http://opensource.org/licenses/gpl-license.php GNU Public License
 *
@@ -167,7 +167,7 @@ $lang = array_merge($lang, array(
 	'UPLOADING_FILE_TO'				=> 'Le fichier « %1$s » a été transféré au message numéro %2$d.',
 	'UPLOAD_DENIED_FORUM'			=> 'Vous n’avez pas la permission de transférer des fichiers sur le forum « %s ».',
 	'UPLOAD_DIR'					=> 'Répertoire de transfert',
-	'UPLOAD_DIR_EXPLAIN'			=> 'Chemin de stockage pour les fichiers joints. Notez que si vous modifiez ce répertoire tout en ayant déjà transféré des fichiers joints, vous devrez copier manuellement les fichiers au nouvel emplacement.',
+	'UPLOAD_DIR_EXPLAIN'			=> 'Chemin de stockage pour les fichiers joints. Notez que si vous modifiez ce répertoire alors que des fichiers joints s’y trouvent déjà, vous devrez les déplacer manuellement vers le nouvel emplacement.',
 	'UPLOAD_ICON'					=> 'Icône de transfert',
 	'UPLOAD_NOT_DIR'				=> 'L’emplacement de transfert que vous avez indiqué ne semble pas être un répertoire.',
 ));

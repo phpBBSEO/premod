@@ -2,7 +2,7 @@ Subject: Activation du nouveau mot de passe
 
 Bonjour {USERNAME}
 
-Vous recevez cet e-mail parce que vous avez (ou quelqu’un qui prétend être vous) demandé qu’un nouveau mot de passe vous soit envoyé pour votre compte sur « {SITENAME} ». Si vous n’avez pas demandé cet e-mail, vous pouvez l’ignorer. Si vous continuez à le recevoir, contactez l’administrateur du forum.
+Vous recevez cette notification car vous avez (ou quelqu’un qui prétend être vous) demandé qu’un nouveau mot de passe vous soit envoyé pour votre compte sur « {SITENAME} ». Si vous n’avez pas demandé cet e-mail, vous pouvez l’ignorer. Si vous continuez à le recevoir, contactez l’administrateur du forum.
 
 Pour utiliser le nouveau mot de passe, vous avez besoin de l’activer. Pour ce faire, cliquez sur le lien fourni ci-dessous.
 

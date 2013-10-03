@@ -5,9 +5,9 @@
 * translated originally by PhpBB-fr.com <http://www.phpbb-fr.com/> and phpBB.biz <http://www.phpBB.biz>
 *
 * @package language
-* @version $Id: help_faq.php 72 2013-08-04 09:57:55Z papicx $
+* @version $Id: help_faq.php 79 2013-10-01 00:10:32Z Skouat $
 * @copyright (c) 2005 phpBB Group
-* @license http://opensource.org/licenses/gpl-license.php GNU Public License 
+* @license http://opensource.org/licenses/gpl-license.php GNU Public License
 *
 */
 
@@ -330,11 +330,11 @@ $help = array(
 	),
 	array(
 		0 => 'Qui sont les auteurs de ce forum ?',
-		1 => 'Ce logiciel (dans sa forme originale) est produit, distribué et son copyright est détenu par le <a href="http://www.phpbb.com/">Groupe phpBB</a>. Il est rendu accessible sous la Licence Publique Générale GNU et peut être distribué gratuitement. Consultez le lien pour plus d’informations.'
+		1 => 'Ce logiciel (dans sa forme originale) est produit, distribué et son copyright est détenu par le <a href="https://www.phpbb.com/">Groupe phpBB</a>. Il est rendu accessible sous la Licence Publique Générale GNU et peut être distribué gratuitement. Consultez le lien pour plus d’informations.'
 	),
 	array(
 		0 => 'Pourquoi la fonctionnalité X n’est pas disponible ?',
-		1 => 'Ce programme a été écrit et mis sous licence par le Groupe phpBB. Si vous pensez qu’une fonctionnalité nécessite d’être ajoutée, visitez la page <a href="https://www.phpbb.com/ideas/">phpBB Ideas Centre</a> (en anglais) où vous pouvez voter pour des idées proposées ou suggérer de nouvelles fonctionnalités.'
+		1 => 'Ce logiciel a été écrit et mis sous licence par le Groupe phpBB. Si vous pensez qu’une fonctionnalité nécessite d’être ajoutée, visitez la page <a href="https://www.phpbb.com/ideas/">phpBB Ideas Centre</a> (en anglais) où vous pouvez voter pour des idées proposées ou suggérer de nouvelles fonctionnalités.'
 	),
 	array(
 		0 => 'Qui contacter pour les abus ou les questions légales concernant ce forum ?',

@@ -5,7 +5,7 @@
 * translated originally by PhpBB-fr.com <http://www.phpbb-fr.com/> and phpBB.biz <http://www.phpBB.biz>
 *
 * @package language
-* @version $Id: search.php 71 2013-07-23 21:38:34Z papicx $
+* @version $Id: search.php 79 2013-10-01 00:10:32Z Skouat $
 * @copyright (c) 2005 phpBB Group
 * @license http://opensource.org/licenses/gpl-license.php GNU Public License
 *
@@ -54,7 +54,7 @@ $lang = array_merge($lang, array(
 	'DELETING_INDEX_IN_PROGRESS_EXPLAIN'	=> 'La méthode d’indexation de la recherche est en train de vider son index. Cela peut prendre quelques minutes.',
 
 	'FULLTEXT_MYSQL_INCOMPATIBLE_VERSION'	=> 'L’indexation FULLTEXT de MySQL ne peut être utilisée qu’à partir de MySQL 4 ou supérieur.',
-	'FULLTEXT_MYSQL_NOT_SUPPORTED'			=> 'Les indexations FULLTEXT de MySQL ne peuvent être utilisées qu’avec les tables MyISAM. MySQL 5.6.4 ou supérieur est requis pour les index fulltext dans les tables InnoDB.',
+	'FULLTEXT_MYSQL_NOT_SUPPORTED'			=> 'Les indexations FULLTEXT de MySQL ne peuvent être utilisées qu’avec les tables MyISAM ou InnoDB. MySQL 5.6.4 ou supérieur est requis pour les index FULLTEXT dans les tables InnoDB.',
 	'FULLTEXT_MYSQL_TOTAL_POSTS'			=> 'Nombre total de messages indexés',
 	'FULLTEXT_MYSQL_MBSTRING'				=> 'Support des caractères non-latin UTF-8 utilisant mbstring:',
 	'FULLTEXT_MYSQL_PCRE'					=> 'Support des caractères non-latin UTF-8 utilisant PCRE:',

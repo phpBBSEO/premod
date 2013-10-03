@@ -5,7 +5,7 @@
 * translated originally by PhpBB-fr.com <http://www.phpbb-fr.com/> and phpBB.biz <http://www.phpBB.biz>
 *
 * @package language
-* @version $Id: forums.php 71 2013-07-23 21:38:34Z papicx $
+* @version $Id: forums.php 73 2013-09-15 17:02:43Z papicx $
 * @copyright (c) 2005 phpBB Group
 * @license http://opensource.org/licenses/gpl-license.php GNU Public License
 *
@@ -87,7 +87,7 @@ $lang = array_merge($lang, array(
 	'FORUM_EDIT_EXPLAIN'				=> 'Le formulaire suivant vous permet de personnaliser ce forum. Notez que la modération et les paramètres de contrôle des messages sont définis via les permissions pour chaque utilisateur ou groupe.',
 	'FORUM_IMAGE'						=> 'Image du forum',
 	'FORUM_IMAGE_EXPLAIN'				=> 'Emplacement relatif au répertoire racine de phpBB, d’une image supplémentaire à associer à ce forum.',
-	'FORUM_IMAGE_NO_EXIST'				=> 'L’image du forum spécifiée n’existe pas',
+	'FORUM_IMAGE_NO_EXIST'				=> 'L’image spécifiée pour ce forum n’existe pas.',
 	'FORUM_LINK_EXPLAIN'				=> 'URL complète (incluant le protocole, exemple <samp>http://</samp> ) qui enverra l’utilisateur vers ce forum.',
 	'FORUM_LINK_TRACK'					=> 'Compter les redirections',
 	'FORUM_LINK_TRACK_EXPLAIN'			=> 'Enregistre le nombre de fois que le lien a été cliqué.',

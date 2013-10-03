@@ -5,7 +5,7 @@
 * translated originally by PhpBB-fr.com <http://www.phpbb-fr.com/> and phpBB.biz <http://www.phpBB.biz>
 *
 * @package language
-* @version $Id: board.php 71 2013-07-23 21:38:34Z papicx $
+* @version $Id: board.php 79 2013-10-01 00:10:32Z Skouat $
 * @copyright (c) 2005 phpBB Group
 * @license http://opensource.org/licenses/gpl-license.php GNU Public License
 *
@@ -284,7 +284,7 @@ $lang = array_merge($lang, array(
 	'ACP_FEED_ITEM_STATISTICS'			=> 'Statistiques de l’article',
 	'ACP_FEED_ITEM_STATISTICS_EXPLAIN'	=> 'Affiche les statistiques indivuelles sous les articles de flux<br />(Exemple: Posté par, date et heure, Réponses, Vues)',
 	'ACP_FEED_EXCLUDE_ID'				=> 'Exclure ces forums',
-	'ACP_FEED_EXCLUDE_ID_EXPLAIN' => 'Sélectionnez les forums à exclure des flux, en maintenant la touche <samp>CTRL</samp> ou la touche <samp>COMMAND</samp> et en cliquant.<br />Ne sélectionnez aucun forum pour lire les données de tous les forums dans les flux.',
+	'ACP_FEED_EXCLUDE_ID_EXPLAIN'		=> 'Sélectionnez les forums à exclure des flux, en maintenant la touche <samp>CTRL</samp> ou la touche <samp>COMMAND</samp> et en cliquant.<br />Ne sélectionnez aucun forum pour lire les données de tous les forums dans les flux.',
 ));
 
 // Visual Confirmation Settings

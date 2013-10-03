@@ -5,7 +5,7 @@
 * translated originally by PhpBB-fr.com <http://www.phpbb-fr.com/> and phpBB.biz <http://www.phpBB.biz>
 *
 * @package language
-* @version $Id: ucp.php 72 2013-08-04 09:57:55Z papicx $
+* @version $Id: ucp.php 79 2013-10-01 00:10:32Z Skouat $
 * @copyright (c) 2005 phpBB Group
 * @license http://opensource.org/licenses/gpl-license.php GNU Public License
 *
@@ -40,7 +40,7 @@ if (empty($lang) || !is_array($lang))
 $lang = array_merge($lang, array(
 	'TERMS_OF_USE_CONTENT'	=> 'En accédant à « %1$s » (désigné ici par « nous », « notre », « nos », « %1$s », « %2$s »), vous acceptez d’être légalement responsable des conditions suivantes. Si vous n’acceptez pas d’être légalement responsable de toutes les conditions suivantes, alors n’accédez pas et/ou n’utilisez pas « %1$s ». Nous pouvons modifier celles-ci à n’importe quel moment et nous ferons tout pour que vous en soyez informé, bien qu’il soit prudent de vérifier régulièrement celles-ci par vous-même. Si vous continuez d’utiliser « %1$s » alors que des changements ont été effectués, vous acceptez d’être légalement responsable des conditions découlant des mises à jour et/ou modifications.<br />
 	<br />
-	Notre forum est de type phpBB (désigné ici par « ils », « eux », « leur », « logiciel phpBB », « www.phpbb.com », « Groupe phpBB », « Équipes phpBB ») qui est un script libre de forum, déclaré sous la licence « <a href="http://opensource.org/licenses/gpl-license.php">General Public License</a> » (désigné ici par « GPL ») et qui peut être téléchargé depuis <a href="http://www.phpbb.com/">www.phpbb.com</a>. Le logiciel phpBB facilite seulement les discussions basées sur Internet. Le groupe phpBB n’est pas responsable de ce que nous acceptons et/ou n’acceptons pas, comme contenu ou conduite permis. Pour de plus amples informations au sujet de phpBB, merci de consulter: <a href="http://www.phpbb.com/">http://www.phpbb.com/</a>.<br />
+	Notre forum est de type phpBB (désigné ici par « ils », « eux », « leur », « logiciel phpBB », « www.phpbb.com », « Groupe phpBB », « Équipes phpBB ») qui est un script libre de forum, déclaré sous la licence « <a href="http://opensource.org/licenses/gpl-license.php">General Public License</a> » (désigné ici par « GPL ») et qui peut être téléchargé depuis <a href="https://www.phpbb.com/">www.phpbb.com</a>. Le logiciel phpBB facilite seulement les discussions basées sur Internet. Le groupe phpBB n’est pas responsable de ce que nous acceptons et/ou n’acceptons pas, comme contenu ou conduite permis. Pour de plus amples informations au sujet de phpBB, merci de consulter: <a href="https://www.phpbb.com/">https://www.phpbb.com/</a>.<br />
 	<br />
 	Vous acceptez de ne pas publier de contenu abusif, obscène, vulgaire, diffamatoire, choquant, menaçant, à caractère sexuel ou autre qui peut transgresser les lois de votre pays, du pays où « %1$s » est hébergé ou les lois internationales. Le faire peut vous mener à un bannissement immédiat et permanent, avec une notification à votre fournisseur d’accès à Internet si nous le jugeons nécessaire. L’adresse IP de tous les messages est enregistrée pour aider au renforcement de ces conditions. Vous acceptez que « %1$s » supprime, édite, déplace ou verrouille n’importe quel sujet lorsque nous estimons que cela est nécessaire. En tant qu’utilisateur, vous acceptez que toutes les informations que vous avez entrées soient stockées dans notre base de données. Bien que ces informations ne soient pas diffusées à une tierce partie sans votre consentement, ni « %1$s », ni phpBB ne pourront être tenus comme responsables en cas de tentative de piratage visant à compromettre les données.
 	',
@@ -257,7 +257,7 @@ $lang = array_merge($lang, array(
 	'MESSAGE_BY_AUTHOR'				=> 'de',
 	'MESSAGE_COLOURS'				=> 'Couleurs du message',
 	'MESSAGE_DELETED'				=> 'Le message a été supprimé.',
-	'MESSAGE_EDITED'				=> 'Message édité.',
+	'MESSAGE_EDITED'				=> 'Le message a été édité.',
 	'MESSAGE_HISTORY'				=> 'Historique du message',
 	'MESSAGE_REMOVED_FROM_OUTBOX'	=> 'Ce message a été supprimé par son auteur.',
 	'MESSAGE_SENT_ON'				=> 'le',
@@ -419,7 +419,7 @@ $lang = array_merge($lang, array(
 	'UCP_ACTIVATE'			=> 'Activer le compte',
 	'UCP_ADMIN_ACTIVATE'	=> 'Notez que vous devez entrer une adresse e-mail valide pour activer votre compte. L’administrateur vérifiera votre compte et s’il est accepté vous recevrez un e-mail à l’adresse indiquée.',
 	'UCP_AIM'				=> 'Messagerie instantanée AOL',
-	'UCP_ATTACHMENTS'		=> 'Gestion des fichiers joints',
+	'UCP_ATTACHMENTS'		=> 'Fichier(s) joint(s)',
 	'UCP_COPPA_BEFORE'		=> 'Avant le %s',
 	'UCP_COPPA_ON_AFTER'	=> 'Le ou après le %s',
 	'UCP_EMAIL_ACTIVATE'	=> 'Notez que vous devez entrer une adresse e-mail valide pour activer votre compte. Vous recevrez un e-mail à l’adresse indiquée contenant le lien d’activation de votre compte.',
