@@ -112,7 +112,7 @@ Tout manquement à ces règles contribuera à mettre le support et le développe
 		</installation>
 		<history>
 			<entry>
-				<date><![CDATA[2013/10/07]]></date>
+				<date><![CDATA[2013/15/07]]></date>
 				<rev-version><![CDATA[3.0.12]]></rev-version>
 				<changelog lang="en">
 					<change><![CDATA[Zero duplicate : Fix anecdotal bug with group pagination]]></change>
