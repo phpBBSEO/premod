@@ -2,15 +2,15 @@ Subject: Bienvenue sur les forums de « {SITENAME} »
  
 {WELCOME_MSG}
 
-Conservez cet e-mail dans vos archives. Les informations de votre compte sont les suivantes:
+Conservez cet e-mail dans vos archives. Les informations de votre compte sont les suivantes :
 
 ----------------------------
-Nom d’utilisateur: {USERNAME}
+Nom d’utilisateur : {USERNAME}
 
-Adresse du forum: {U_BOARD}
+Adresse du forum : {U_BOARD}
 ----------------------------
 
-Cliquez sur le lien suivant afin d’activer votre compte:
+Cliquez sur le lien suivant afin d’activer votre compte :
 
 {U_ACTIVATE}
 

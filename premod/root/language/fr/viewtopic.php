@@ -2,10 +2,11 @@
 /**
 *
 * viewtopic [Standard french]
-* translated originally by PhpBB-fr.com <http://www.phpbb-fr.com/> and phpBB.biz <http://www.phpBB.biz>
+* @translated originally by phpBB.biz and phpBB-fr.com
+* @translated currently by phpBB-fr.com (http://www.phpbb-fr.com)
 *
 * @package language
-* @version $Id: viewtopic.php 79 2013-10-01 00:10:32Z Skouat $
+* @version $Id$
 * @copyright (c) 2005 phpBB Group
 * @license http://opensource.org/licenses/gpl-license.php GNU Public License
 *
@@ -35,6 +36,10 @@ if (empty($lang) || !is_array($lang))
 // You do not need this where single placeholders are used, e.g. 'Message %d' is fine
 // equally where a string contains only two placeholders which are used to wrap text
 // in a url you again do not need to specify an order e.g., 'Click %sHERE%s' is fine
+//
+// Some characters you may want to copy&paste:
+// ’ « » “ ” …
+//
 
 $lang = array_merge($lang, array(
 	'ATTACHMENT'						=> 'Fichier(s) joint(s)',
@@ -54,23 +59,23 @@ $lang = array_merge($lang, array(
 	'DELETE_TOPIC'			=> 'Supprimer le sujet',
 	'DOWNLOAD_NOTICE'		=> 'Vous n’avez pas les permissions nécessaires pour voir les fichiers joints à ce message.',
 
-	'EDITED_TIMES_TOTAL'	=> 'Dernière édition par %1$s le %2$s, édité %3$d fois.',
-	'EDITED_TIME_TOTAL'		=> 'Dernière édition par %1$s le %2$s, édité %3$d fois.',
-	'EMAIL_TOPIC'			=> 'Envoyer par e-mail à un ami',
+	'EDITED_TIMES_TOTAL'	=> 'Modifié en dernier par %1$s le %2$s, modifié %3$d fois.',
+	'EDITED_TIME_TOTAL'		=> 'Modifié en dernier par %1$s le %2$s, modifié %3$d fois.',
+	'EMAIL_TOPIC'			=> 'Envoyer le sujet par e-mail',
 	'ERROR_NO_ATTACHMENT'	=> 'Le fichier joint sélectionné n’est plus disponible.',
 
 	'FILE_NOT_FOUND_404'	=> 'Le fichier <strong>%s</strong> n’existe pas.',
 	'FORK_TOPIC'			=> 'Copier le sujet',
 	'FULL_EDITOR'			=> 'Éditeur complet',
 
-	'LINKAGE_FORBIDDEN'		=> 'Vous ne pouvez pas voir, télécharger ou joindre des fichiers à partir de ce site.',
+	'LINKAGE_FORBIDDEN'		=> 'Vous n’avez pas l’autorisation de consulter, télécharger ou de mettre en lien un fichier joint vers ou depuis de ce site.',
 	'LOGIN_NOTIFY_TOPIC'	=> 'Vous avez demandé à surveiller ce sujet. Connectez-vous pour le voir.',
 	'LOGIN_VIEWTOPIC'		=> 'Vous devez être enregistré et connecté pour voir ce sujet.',
 
-	'MAKE_ANNOUNCE'				=> 'Mettre en « Annonce »',
-	'MAKE_GLOBAL'				=> 'Mettre en « Annonce globale »',
-	'MAKE_NORMAL'				=> 'Mettre en « Sujet standard »',
-	'MAKE_STICKY'				=> 'Mettre en « Post-it »',
+	'MAKE_ANNOUNCE'				=> 'Changer en « Annonce »',
+	'MAKE_GLOBAL'				=> 'Changer en « Annonce globale »',
+	'MAKE_NORMAL'				=> 'Changer en « Sujet standard »',
+	'MAKE_STICKY'				=> 'Changer en « Post-it »',
 	'MAX_OPTIONS_SELECT'		=> 'Vous pouvez sélectionner jusqu’à <strong>%d</strong> options',
 	'MAX_OPTION_SELECT'			=> 'Vous pouvez sélectionner <strong>1</strong> option',
 	'MISSING_INLINE_ATTACHMENT'	=> 'Le fichier joint <strong>%s</strong> n’est plus disponible.',

@@ -2,10 +2,11 @@
 /**
 *
 * acp_forums [Standard french]
-* translated originally by PhpBB-fr.com <http://www.phpbb-fr.com/> and phpBB.biz <http://www.phpBB.biz>
+* @translated originally by phpBB.biz and phpBB-fr.com
+* @translated currently by phpBB-fr.com (http://www.phpbb-fr.com)
 *
 * @package language
-* @version $Id: forums.php 73 2013-09-15 17:02:43Z papicx $
+* @version $Id$
 * @copyright (c) 2005 phpBB Group
 * @license http://opensource.org/licenses/gpl-license.php GNU Public License
 *
@@ -35,11 +36,15 @@ if (empty($lang) || !is_array($lang))
 // You do not need this where single placeholders are used, e.g. 'Message %d' is fine
 // equally where a string contains only two placeholders which are used to wrap text
 // in a url you again do not need to specify an order e.g., 'Click %sHERE%s' is fine
+//
+// Some characters you may want to copy&paste:
+// ’ « » “ ” …
+//
 
 // Forum Admin
 $lang = array_merge($lang, array(
 	'AUTO_PRUNE_DAYS'			=> 'Ancienneté des messages délestés automatiquement',
-	'AUTO_PRUNE_DAYS_EXPLAIN'	=> 'Nombre de jours depuis le dernier message et la suppression du sujet.',
+	'AUTO_PRUNE_DAYS_EXPLAIN'	=> 'Nombre de jours depuis le dernier message avant suppression du sujet.',
 	'AUTO_PRUNE_FREQ'			=> 'Fréquence du délestage automatique',
 	'AUTO_PRUNE_FREQ_EXPLAIN'	=> 'Durée en jours entre les événements de délestage.',
 	'AUTO_PRUNE_VIEWED'			=> 'Ancienneté des messages vus délestés automatiquement',
@@ -53,7 +58,7 @@ $lang = array_merge($lang, array(
 	'COPY_TO_ACL'					=> 'Autrement, vous êtes aussi capable de %srégler de nouvelles permissions%s pour ce forum.',
 	'CREATE_FORUM'					=> 'Créer un nouveau forum',
 
-	'DECIDE_MOVE_DELETE_CONTENT'		=> 'Supprimer ou déplacer le contenu vers un forum',
+	'DECIDE_MOVE_DELETE_CONTENT'		=> 'Supprimer le contenu ou le déplacer vers un forum',
 	'DECIDE_MOVE_DELETE_SUBFORUMS'		=> 'Supprimer ou déplacer les sous-forums vers un forum',
 	'DEFAULT_STYLE'						=> 'Style par défaut',
 	'DELETE_ALL_POSTS'					=> 'Supprimer les messages',
@@ -61,7 +66,7 @@ $lang = array_merge($lang, array(
 	'DISPLAY_ACTIVE_TOPICS'				=> 'Activer les sujets actifs',
 	'DISPLAY_ACTIVE_TOPICS_EXPLAIN'		=> 'Si activé, les sujets actifs des sous-forums choisis seront affichés dans cette catégorie.',
 
-	'EDIT_FORUM'					=> 'Éditer un forum',
+	'EDIT_FORUM'					=> 'Modifier un forum',
 	'ENABLE_INDEXING'				=> 'Activer l’indexation de recherche',
 	'ENABLE_INDEXING_EXPLAIN'		=> 'Si activé, les messages du forum seront indexés pour la recherche.',
 	'ENABLE_POST_REVIEW'			=> 'Activer la révision des messages',
@@ -86,7 +91,7 @@ $lang = array_merge($lang, array(
 	'FORUM_DESC_TOO_LONG'				=> 'La description du forum est trop longue. Elle ne peut contenir plus de 4000 caractères.',
 	'FORUM_EDIT_EXPLAIN'				=> 'Le formulaire suivant vous permet de personnaliser ce forum. Notez que la modération et les paramètres de contrôle des messages sont définis via les permissions pour chaque utilisateur ou groupe.',
 	'FORUM_IMAGE'						=> 'Image du forum',
-	'FORUM_IMAGE_EXPLAIN'				=> 'Emplacement relatif au répertoire racine de phpBB, d’une image supplémentaire à associer à ce forum.',
+	'FORUM_IMAGE_EXPLAIN'				=> 'Emplacement, relatif au répertoire racine de phpBB, d’une image supplémentaire à associer à ce forum.',
 	'FORUM_IMAGE_NO_EXIST'				=> 'L’image spécifiée pour ce forum n’existe pas.',
 	'FORUM_LINK_EXPLAIN'				=> 'URL complète (incluant le protocole, exemple <samp>http://</samp> ) qui enverra l’utilisateur vers ce forum.',
 	'FORUM_LINK_TRACK'					=> 'Compter les redirections',
@@ -97,12 +102,12 @@ $lang = array_merge($lang, array(
 	'FORUM_PASSWORD'					=> 'Mot de passe',
 	'FORUM_PASSWORD_CONFIRM'			=> 'Confirmation du mot de passe',
 	'FORUM_PASSWORD_CONFIRM_EXPLAIN'	=> 'Uniquement si un mot de passe a été saisi.',
-	'FORUM_PASSWORD_EXPLAIN'			=> 'Indique un mot de passe pour ce forum, utilisez de préférence le système de permissions.',
+	'FORUM_PASSWORD_EXPLAIN'			=> 'Définissez un mot de passe pour ce forum, utilisez de préférence le système de permissions.',
 	'FORUM_PASSWORD_UNSET'				=> 'Supprimer le mot de passe du forum',
 	'FORUM_PASSWORD_UNSET_EXPLAIN'		=> 'Cochez cette case si vous souhaitez supprimer le mot de passe du forum.',
-	'FORUM_PASSWORD_OLD'				=> 'Le mot de passe du forum utilise un ancien type de hash et devrait être modifié.',
+	'FORUM_PASSWORD_OLD'				=> 'Le mot de passe du forum doit être modifié car il utilise une ancienne méthode de hachage.',
 	'FORUM_PASSWORD_MISMATCH'			=> 'Les mots de passe saisis ne concordent pas.',
-	'FORUM_PRUNE_SETTINGS'				=> 'Paramètres du délestage des forums',
+	'FORUM_PRUNE_SETTINGS'				=> 'Paramètres de délestage des forums',
 	'FORUM_RESYNCED'					=> 'Le forum « %s » a été resynchronisé',
 	'FORUM_RULES_EXPLAIN'				=> 'Les règles du forum sont affichées sur chaque page du forum.',
 	'FORUM_RULES_LINK'					=> 'Lien vers les règles',
@@ -117,15 +122,15 @@ $lang = array_merge($lang, array(
 	'FORUM_TYPE'						=> 'Type du forum',
 	'FORUM_UPDATED'						=> 'Les informations du forum ont été mises à jour.',
 
-	'FORUM_WITH_SUBFORUMS_NOT_TO_LINK'		=> 'Vous souhaitez modifier en un forum-lien, un forum contenant des sous-forums et dans lequel vous pouviez rédiger des messages. Avant de procéder, déplacez tous les sous-forums hors de ce forum, car une fois le forum modifié en un forum-lien, vous ne pourrez plus consulter les sous-forums.',	
+	'FORUM_WITH_SUBFORUMS_NOT_TO_LINK'		=> 'Vous souhaitez modifier un forum contenant des sous-forums en un forum-lien. Avant de procéder, déplacez tous les sous-forums hors de ce forum, car une fois le forum modifié en un forum-lien, vous ne pourrez plus consulter les sous-forums.',	
 
 	'GENERAL_FORUM_SETTINGS'	=> 'Paramètres généraux du forum',
 
 	'LINK'						=> 'Lien',
-	'LIST_INDEX'				=> 'Liste le sous-forum dans la légende du forum parent',
-	'LIST_INDEX_EXPLAIN'		=> 'Affiche ce forum sur l’index et ailleurs comme lien dans la légende de son forum parent si l’option « Lister les sous-forums dans la légende » est activée.',
+	'LIST_INDEX'				=> 'Lister le sous-forum dans la légende du forum parent',
+	'LIST_INDEX_EXPLAIN'		=> 'Si cette option est activée, ce forum sera listé sous la forme d’un lien dans la légende de tous ses forums parents ayant l’option « Lister les sous-forums dans la légende » activée.',
 	'LIST_SUBFORUMS'			=> 'Lister les sous-forums dans la légende',
-	'LIST_SUBFORUMS_EXPLAIN'	=> 'Affiche les sous-forums de ce forum sur l’index et ailleurs comme lien dans la légende de son forum parent si l’option « Lister le sous-forum dans la légende du forum parent » est activée.',
+	'LIST_SUBFORUMS_EXPLAIN'	=> 'Si cette option est activée, tous ses sous-forums, ayant l’option « Lister le sous-forum dans la légende du forum parent » activée, apparaitront sous la forme d’un lien dans la légende de ce forum.',
 	'LOCKED'					=> 'Verrouillé',
 
 	'MOVE_POSTS_NO_POSTABLE_FORUM'	=> 'Le forum que vous avez sélectionné pour y déplacer les messages n’est pas approprié. Sélectionnez un forum destiné à recevoir des messages.',

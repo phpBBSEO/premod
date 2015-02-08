@@ -2,10 +2,11 @@
 /**
 *
 * help_bbcode [Standard french]
-* translated originally by PhpBB-fr.com <http://www.phpbb-fr.com/> and phpBB.biz <http://www.phpBB.biz>
+* @translated originally by phpBB.biz and phpBB-fr.com
+* @translated currently by phpBB-fr.com (http://www.phpbb-fr.com)
 *
 * @package language
-* @version $Id: help_bbcode.php 79 2013-10-01 00:10:32Z Skouat $
+* @version $Id$
 * @copyright (c) 2005 phpBB Group
 * @license http://opensource.org/licenses/gpl-license.php GNU Public License
 *
@@ -29,6 +30,10 @@ if (!defined('IN_PHPBB'))
 // You do not need this where single placeholders are used, e.g. 'Message %d' is fine
 // equally where a string contains only two placeholders which are used to wrap text
 // in a url you again do not need to specify an order e.g., 'Click %sHERE%s' is fine
+//
+// Some characters you may want to copy&paste:
+// ’ « » “ ” …
+//
 
 $help = array(
 	array(
@@ -90,7 +95,7 @@ $help = array(
 	),
 	array(
 		0 => 'Liens vers un autre site',
-		1 => 'Le BBCode permet de créer des URI (Indicateurs de Ressources Uniformes) ou URL de différentes façons.<ul><li>La première est d’utiliser les balises <strong>[url=][/url]</strong>, ce que vous taperez après le signe = se comportera comme une URL. Par exemple, pour un lien vers phpBB-fr.com, vous pouvez utiliser:<br /><br /><strong>[url=http://forums.phpbb-fr.com/]</strong>Visitez phpBB !<strong>[/url]</strong><br /><br />Ce qui générera le lien, <a href="http://forums.phpbb-fr.com/">Visitez phpBB !</a> Vous noterez que le lien s’ouvre soit dans la même fenêtre, soit dans une nouvelle fenêtre selon les préférences du navigateur.</li> <li>Si vous désirez que l’URL elle-même soit affichée comme un lien, vous pouvez simplement utiliser:<br /><br /><strong>[url]</strong>http://forums.phpbb-fr.com/<strong>[/url]</strong><br /><br />Ce qui générera le lien, <a href="http://forums.phpbb-fr.com/">http://forums.phpbb-fr.com/</a></li><li>De plus, phpBB autorise les <em>Liens Magiques</em>, ce qui transforme automatiquement les URL correctement écrites en lien sans indiquer de balise ou même http://. Par exemple, si vous tapez forums.phpbb-fr.com, un lien <a href="http://forums.phpbb-fr.com/">forums.phpbb-fr.com</a> sera affiché automatiquement à la lecture de votre message.</li><li>La même chose s’applique aux adresses e-mails, vous pouvez indiquer l’adresse explicitement, comme par exemple:<br /><br /><strong>[email]</strong>personne@domain.adr<strong>[/email]</strong><br /><br />ce qui affichera <a href="mailto:personne@domain.adr">personne@domain.adr</a> ou bien vous pouvez simplement taper personne@domain.adr dans votre message et cela sera automatiquement converti lors de la consultation.</li></ul>Comme avec toutes les balises BBCode, vous pouvez encapsuler avec des URL d’autres balises telles que <strong>[img][/img]</strong> (voir l’entrée suivante), <strong>[b][/b]</strong>, etc. Comme avec les balises de mise en forme, c’est à vous de vous assurer de les ouvrir et de les fermer correctement, par exemple:<br /><br /><strong>[url=http://www.google.fr/][img]</strong>http://www.google.com/intl/fr_ALL/images/logo.gif<strong>[/url][/img]</strong><br /><br />n’est <span style="text-decoration: underline">pas</span> correct ce qui peut entraîner la suppression de votre message, donc faites attention.'
+		1 => 'Le BBCode permet de créer des URI (Indicateurs de Ressources Uniformes) ou URL de différentes façons.<ul><li>La première est d’utiliser les balises <strong>[url=][/url]</strong>, ce que vous taperez après le signe = se comportera comme une URL. Par exemple, pour un lien vers phpBB-fr.com, vous pouvez utiliser:<br /><br /><strong>[url=http://www.phpbb-fr.com/]</strong>Visitez phpBB !<strong>[/url]</strong><br /><br />Ce qui générera le lien, <a href="http://www.phpbb-fr.com/">Visitez phpBB !</a> Vous noterez que le lien s’ouvre soit dans la même fenêtre, soit dans une nouvelle fenêtre selon les préférences du navigateur.</li> <li>Si vous désirez que l’URL elle-même soit affichée comme un lien, vous pouvez simplement utiliser:<br /><br /><strong>[url]</strong>http://www.phpbb-fr.com/<strong>[/url]</strong><br /><br />Ce qui générera le lien, <a href="http://www.phpbb-fr.com/">http://www.phpbb-fr.com/</a></li><li>De plus, phpBB autorise les <em>Liens Magiques</em>, ce qui transforme automatiquement les URL correctement écrites en lien sans indiquer de balise ou même http://. Par exemple, si vous tapez www.phpbb-fr.com, un lien <a href="http://www.phpbb-fr.com/">www.phpbb-fr.com</a> sera affiché automatiquement à la lecture de votre message.</li><li>La même chose s’applique aux adresses e-mails, vous pouvez indiquer l’adresse explicitement, comme par exemple:<br /><br /><strong>[email]</strong>personne@domain.adr<strong>[/email]</strong><br /><br />ce qui affichera <a href="mailto:personne@domain.adr">personne@domain.adr</a> ou bien vous pouvez simplement taper personne@domain.adr dans votre message et cela sera automatiquement converti lors de la consultation.</li></ul>Comme avec toutes les balises BBCode, vous pouvez encapsuler avec des URL d’autres balises telles que <strong>[img][/img]</strong> (voir l’entrée suivante), <strong>[b][/b]</strong>, etc. Comme avec les balises de mise en forme, c’est à vous de vous assurer de les ouvrir et de les fermer correctement, par exemple:<br /><br /><strong>[url=https://www.phpbb.com/][img]</strong>http://www.phpbb.com/theme/images/logos/blue/160x52.png<strong>[/url][/img]</strong><br /><br />n’est <span style="text-decoration: underline">pas</span> correct ce qui peut entraîner la suppression de votre message, donc faites attention.'
 	),
 	array(
 		0 => '--',
@@ -98,7 +103,7 @@ $help = array(
 	),
 	array(
 		0 => 'Ajout d’une image dans un message',
-		1 => 'Le BBCode permet d’inclure des images dans vos messages à l’aide d’une balise. Il y a deux choses importantes à se rappeler lors de l’utilisation de cette balise qui sont d’une part, que beaucoup d’utilisateurs n’apprécient pas qu’il y ait beaucoup d’images dans les messages et d’autre part, que l’image affichée doit être disponible sur Internet (elle ne peut être uniquement que sur votre ordinateur, sauf si vous avez un serveur Web !). Pour afficher une image, vous devez encadrer son URL entre des balises <strong>[img][/img]</strong>. Par exemple:<br /><br /><strong>[img]</strong>http://www.google.com/intl/fr_ALL/images/logo.gif<strong>[/img]</strong><br /><br />Comme noté dans la section URL ci-dessus, vous pouvez entourer l’image entre des balises <strong>[url][/url]</strong> si désiré, exemple:<br /><br /><strong>[url=http://www.google.fr/][img]</strong>http://www.google.com/intl/fr_ALL/images/logo.gif<strong>[/img][/url]</strong><br /><br />affichera<br /><br /><a href="http://www.google.fr/"><img src="http://www.google.com/intl/fr_ALL/images/logo.gif" alt="" /></a>'
+		1 => 'Le BBCode permet d’inclure des images dans vos messages à l’aide d’une balise. Il y a deux choses importantes à se rappeler lors de l’utilisation de cette balise qui sont d’une part, que beaucoup d’utilisateurs n’apprécient pas qu’il y ait beaucoup d’images dans les messages et d’autre part, que l’image affichée doit être disponible sur Internet (elle ne peut être uniquement que sur votre ordinateur, sauf si vous avez un serveur Web !). Pour afficher une image, vous devez encadrer son URL entre des balises <strong>[img][/img]</strong>. Par exemple :<br /><br /><strong>[img]</strong>https://www.phpbb.com/theme/images/logos/blue/160x52.png<strong>[/img]</strong><br /><br />Comme noté dans la section URL ci-dessus, vous pouvez entourer l’image entre des balises <strong>[url][/url]</strong> si désiré, exemple:<br /><br /><strong>[url=https://www.phpbb.com/][img]</strong>https://www.phpbb.com/theme/images/logos/blue/160x52.png<strong>[/img][/url]</strong><br /><br />affichera<br /><br /><a href="https://www.phpbb.com/"><img src="http://www.phpbb.com/theme/images/logos/blue/160x52.png" alt="" /></a>'
 	),
 	array(
 		0 => 'Joindre un fichier à un message',
@@ -111,7 +116,7 @@ $help = array(
 	array(
 		0 => 'Puis-je ajouter mes balises ?',
 		1 => 'Si vous êtes administrateur du forum et avez les autorisations nécessaires, vous pouvez ajouter des BBcodes supplémentaires via la section &quot;BBcodes&quot; dans le sous menu &quot;Messages&quot;.'
-	)
+	),
 );
 
 ?>

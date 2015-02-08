@@ -2,10 +2,11 @@
 /**
 *
 * acp_users [Standard french]
-* translated originally by PhpBB-fr.com <http://www.phpbb-fr.com/> and phpBB.biz <http://www.phpBB.biz>
+* @translated originally by phpBB.biz and phpBB-fr.com
+* @translated currently by phpBB-fr.com (http://www.phpbb-fr.com)
 *
 * @package language
-* @version $Id: users.php 69 2013-07-16 18:05:36Z papicx $
+* @version $Id$
 * @copyright (c) 2005 phpBB Group
 * @license http://opensource.org/licenses/gpl-license.php GNU Public License
 *
@@ -35,28 +36,33 @@ if (empty($lang) || !is_array($lang))
 // You do not need this where single placeholders are used, e.g. 'Message %d' is fine
 // equally where a string contains only two placeholders which are used to wrap text
 // in a url you again do not need to specify an order e.g., 'Click %sHERE%s' is fine
+//
+// Some characters you may want to copy&paste:
+// ’ « » “ ” …
+//
 
 $lang = array_merge($lang, array(
 	'ADMIN_SIG_PREVIEW'		=> 'Aperçu de la signature',
-	'AT_LEAST_ONE_FOUNDER'	=> 'Vous n’êtes pas autorisé à passer ce fondateur en utilisateur normal. Il est nécessaire d’avoir au moins un fondateur sur le forum. Si vous voulez modifier le statut de cet utilisateur, vous devez tout d’abord promouvoir un autre utilisateur en tant que fondateur.',
+	'AT_LEAST_ONE_FOUNDER'	=> 'Il est impossible de rétrograder ce fondateur en utilisateur normal. Sur le forum, il doit toujours y avoir au moins un fondateur. Si vous voulez changer le statut de fondateur de cet utilisateur, vous devez au préalable promouvoir un autre utilisateur comme fondateur.',
 
-	'BAN_ALREADY_ENTERED'	=> 'Ce bannissement a déjà été effectué. Aucune mise à jour n’a été effectuée.',
+	'BAN_ALREADY_ENTERED'	=> 'Ce bannissement a déjà été effectué. La liste des bannissements n’a pas été mise à jour.',
 	'BAN_SUCCESSFUL'		=> 'Le bannissement a été ajouté.',
 
 	'CANNOT_BAN_ANONYMOUS'			=> 'Vous n’êtes pas autorisé à bannir le compte de l’utilisateur invité. Les permissions des visiteurs peuvent être définies depuis l’onglet « Permissions ».',
-	'CANNOT_BAN_FOUNDER'			=> 'Vous n’êtes pas autorisé à bannir les comptes des administrateurs fondateurs.',
+	'CANNOT_BAN_FOUNDER'			=> 'Vous n’êtes pas autorisé à bannir les comptes des fondateurs.',
 	'CANNOT_BAN_YOURSELF'			=> 'Vous n’êtes pas autorisé à vous bannir.',
-	'CANNOT_DEACTIVATE_BOT'			=> 'Vous n’êtes pas autorisé à désactiver les comptes de robots. Désactivez plutôt le robot dans la page des robots.',
-	'CANNOT_DEACTIVATE_FOUNDER'		=> 'Vous n’êtes pas autorisé à désactiver les comptes des administrateurs fondateurs.',
+	'CANNOT_DEACTIVATE_BOT'			=> 'Vous n’êtes pas autorisé à désactiver les comptes des robots. Désactivez plutôt le robot dans la page des robots.',
+	'CANNOT_DEACTIVATE_FOUNDER'		=> 'Vous n’êtes pas autorisé à désactiver les comptes des fondateurs.',
 	'CANNOT_DEACTIVATE_YOURSELF'	=> 'Vous n’êtes pas autorisé à désactiver votre propre compte.',
 	'CANNOT_FORCE_REACT_BOT'		=> 'Vous n’êtes pas autorisé à forcer la réactivation sur les comptes de robots. Réactivez plutôt le robot dans la page des robots.',
-	'CANNOT_FORCE_REACT_FOUNDER'	=> 'Vous n’êtes pas autorisé à forcer la réactivation sur les comptes des administrateurs fondateurs.',
+	'CANNOT_FORCE_REACT_FOUNDER'	=> 'Vous n’êtes pas autorisé à forcer la réactivation sur les comptes des fondateurs.',
 	'CANNOT_FORCE_REACT_YOURSELF'	=> 'Vous n’êtes pas autorisé à forcer la réactivation de votre propre compte.',
 	'CANNOT_REMOVE_ANONYMOUS'		=> 'Vous n’êtes pas autorisé à supprimer le compte de l’utilisateur invité.',
+	'CANNOT_REMOVE_FOUNDER'			=> 'Vous n’êtes pas autorisé à supprimer les comptes des fondateurs.',
 	'CANNOT_REMOVE_YOURSELF'		=> 'Vous n’êtes pas autorisé à supprimer votre propre compte.',
 	'CANNOT_SET_FOUNDER_IGNORED'	=> 'Vous ne pouvez pas promouvoir des utilisateurs ignorés en fondateurs.',
-	'CANNOT_SET_FOUNDER_INACTIVE'	=> 'Vous devez activer les utilisateurs avant de les promouvoir au statut d’administrateurs fondateurs, seuls les utilisateurs activés peuvent être promus.',
-	'CONFIRM_EMAIL_EXPLAIN'			=> 'Vous êtes seulement obligé de renseigner cette case si vous modifiez l’adresse e-mail de cet utilisateur.',
+	'CANNOT_SET_FOUNDER_INACTIVE'	=> 'Vous devez activer les utilisateurs avant de les promouvoir au statut de fondateurs, seuls les utilisateurs activés peuvent être promus.',
+	'CONFIRM_EMAIL_EXPLAIN'			=> 'Vous n’avez besoin de renseigner ce champ que si vous modifiez l’adresse email de l’utilisateur.',
 
 	'DELETE_POSTS'			=> 'Supprimer ses messages',
 	'DELETE_USER'			=> 'Supprimer cet utilisateur',
@@ -76,7 +82,7 @@ $lang = array_merge($lang, array(
 
 	'LAST_ACTIVE'			=> 'Dernière visite le',
 
-	'MOVE_POSTS_EXPLAIN'	=> 'Merci de sélectionner le forum où vous désirez déplacer tous les messages de cet utilisateur.',
+	'MOVE_POSTS_EXPLAIN'	=> 'Veuillez sélectionner le forum dans lequel seront déplacés tous les messages de cet utilisateur.',
 
 	'NO_SPECIAL_RANK'		=> 'Aucun rang spécial sélectionné',
 	'NO_WARNINGS'			=> 'Aucun avertissement.',
@@ -84,8 +90,8 @@ $lang = array_merge($lang, array(
 
 	'QUICK_TOOLS'			=> 'Outils rapides',
 
-	'REGISTERED'			=> 'Inscrit le',
-	'REGISTERED_IP'			=> 'Adresse IP lors de son inscription',
+	'REGISTERED'			=> 'Enregistré le',
+	'REGISTERED_IP'			=> 'Adresse IP utilisée lors de l’enregistrement',
 	'RETAIN_POSTS'			=> 'Conserver ses messages',
 
 	'SELECT_FORM'			=> 'Sélectionner un formulaire',
@@ -110,7 +116,7 @@ $lang = array_merge($lang, array(
 	'USER_ADMIN_DEL_SIG'			=> 'Supprimer sa signature',
 	'USER_ADMIN_EXPLAIN'			=> 'Vous pouvez modifier les informations d’un utilisateur et certaines options particulières.',
 	'USER_ADMIN_FORCE'				=> 'Forcer la réactivation',
-	'USER_ADMIN_LEAVE_NR'			=> 'Supprimer des nouveaux inscrits',
+	'USER_ADMIN_LEAVE_NR'			=> 'Supprimer du groupe « Nouveaux utilisateurs enregistrés ».',
 	'USER_ADMIN_MOVE_POSTS'			=> 'Déplacer ses messages',
 	'USER_ADMIN_SIG_REMOVED'		=> 'La signature de cet utilisateur a été supprimée.',
 	'USER_ATTACHMENTS_REMOVED'		=> 'Les fichiers joints de cet utilisateur ont été supprimés.',
@@ -123,7 +129,7 @@ $lang = array_merge($lang, array(
 	'USER_GROUP_NORMAL'				=> 'L’utilisateur est membre des groupes définis',
 	'USER_GROUP_PENDING'			=> 'En attente d’acceptation dans les groupes',
 	'USER_GROUP_SPECIAL'			=> 'L’utilisateur est membre des groupes prédéfinis',
-	'USER_LIFTED_NR'				=> 'Le statut de nouvel inscrit a été supprimé.',
+	'USER_LIFTED_NR'				=> 'Le statut de nouvel utilisateur enregistré a été supprimé.',
 	'USER_NO_ATTACHMENTS'			=> 'Aucun fichier joint à afficher.',
 	'USER_NO_POSTS_TO_DELETE'		=> 'L’utilisateur n’a aucun message à conserver ou à supprimer.',
 	'USER_OUTBOX_EMPTIED'			=> 'La boîte d’envoi de l’utilisateur a été vidée.',
@@ -137,7 +143,7 @@ $lang = array_merge($lang, array(
 	'USER_RANK'						=> 'Rang de l’utilisateur',
 	'USER_RANK_UPDATED'				=> 'Le rang de cet utilisateur a été mis à jour.',
 	'USER_SIG_UPDATED'				=> 'La signature de cet utilisateur a été mise à jour.',
-	'USER_WARNING_LOG_DELETED'		=> 'Aucune information disponible. La liste d’entrées a probablement été supprimée.',
+	'USER_WARNING_LOG_DELETED'		=> 'Aucune information disponible. L’enregistrement a probablement été supprimé du journal.',
 	'USER_TOOLS'					=> 'Outils de base',
 ));
 

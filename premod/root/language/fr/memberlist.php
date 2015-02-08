@@ -2,10 +2,11 @@
 /**
 *
 * memberlist [Standard french]
-* translated originally by PhpBB-fr.com <http://www.phpbb-fr.com/> and phpBB.biz <http://www.phpBB.biz>
+* @translated originally by phpBB.biz and phpBB-fr.com
+* @translated currently by phpBB-fr.com (http://www.phpbb-fr.com)
 *
 * @package language
-* @version $Id: memberlist.php 79 2013-10-01 00:10:32Z Skouat $
+* @version $Id$
 * @copyright (c) 2005 phpBB Group
 * @license http://opensource.org/licenses/gpl-license.php GNU Public License
 *
@@ -35,6 +36,10 @@ if (empty($lang) || !is_array($lang))
 // You do not need this where single placeholders are used, e.g. 'Message %d' is fine
 // equally where a string contains only two placeholders which are used to wrap text
 // in a url you again do not need to specify an order e.g., 'Click %sHERE%s' is fine
+//
+// Some characters you may want to copy&paste:
+// ’ « » “ ” …
+//
 
 $lang = array_merge($lang, array(
 	'ABOUT_USER'			=> 'Profil',
@@ -60,15 +65,15 @@ $lang = array_merge($lang, array(
 	'EMAIL_TOPIC_EXPLAIN'	=> 'Ce message sera envoyé au format texte, ne pas inclure de code HTML ni de BBCode. Notez que les informations sur le sujet sont déjà incluses dans le message. L’adresse de réponse à ce message sera votre adresse e-mail.',
 	'EMPTY_ADDRESS_EMAIL'	=> 'Vous devez fournir une adresse e-mail valide pour le destinataire.',
 	'EMPTY_MESSAGE_EMAIL'	=> 'Vous devez écrire un message.',
-	'EMPTY_MESSAGE_IM'		=> 'Vous devez entrer un message à envoyer.',
-	'EMPTY_NAME_EMAIL'		=> 'Vous devez entrer le nom réel du destinataire.',
+	'EMPTY_MESSAGE_IM'		=> 'Vous devez écrire un message à envoyer.',
+	'EMPTY_NAME_EMAIL'		=> 'Vous devez saisir le nom réel du destinataire.',
 	'EMPTY_SUBJECT_EMAIL'	=> 'Vous devez indiquer un sujet pour l’e-mail.',
 	'EQUAL_TO'				=> 'Égal à',
 
-	'FIND_USERNAME_EXPLAIN'	=> 'Utilisez ce formulaire pour rechercher un membre. Vous n’avez pas besoin de compléter tous les champs. Pour effectuer une recherche partielle, utilisez un * comme joker. Utilisez le format de date <kbd>AAAA-MM-JJ</kbd>, par exemple: <samp>2004-02-29</samp>. Utilisez les cases à cocher pour sélectionner un ou plusieurs noms d’utilisateurs (plusieurs noms d’utilisateurs peuvent être acceptés en fonction du formulaire) puis cliquez sur « Valider la sélection » pour retourner au formulaire précédent.',
-	'FLOOD_EMAIL_LIMIT'		=> 'Vous ne pouvez pas envoyer un autre e-mail si rapidement. Réessayez à nouveau dans quelques instants.',
+	'FIND_USERNAME_EXPLAIN'	=> 'Utilisez ce formulaire pour rechercher un membre. Vous n’avez pas besoin de compléter tous les champs. Pour effectuer une recherche partielle, utilisez le caractère « * » comme joker. Utilisez le format de date <kbd>AAAA-MM-JJ</kbd>, par exemple : <samp>2004-02-29</samp>. En fonction du formulaire, vous pouvez utiliser les cases à cocher pour sélectionner un ou plusieurs noms d’utilisateur puis cliquez sur « Valider la sélection » pour retourner au formulaire précédent.',
+	'FLOOD_EMAIL_LIMIT'		=> 'Vous ne pouvez pas envoyer un autre e-mail si rapidement. Veuillez réessayer ultérieurement.',
 
-	'GROUP_LEADER'			=> 'Modérateur du groupe',
+	'GROUP_LEADER'			=> 'Chef du groupe',
 
 	'HIDE_MEMBER_SEARCH'	=> 'Cacher la recherche des membres',
 
@@ -78,33 +83,33 @@ $lang = array_merge($lang, array(
 	'IM_DOWNLOAD_APP'		=> 'Télécharger l’application',
 	'IM_ICQ'				=> 'Notez que les membres ont pu choisir de ne pas recevoir de messages instantanés non sollicités.',
 	'IM_JABBER'				=> 'Notez que les membres ont pu choisir de ne pas recevoir de messages instantanés non sollicités.',
-	'IM_JABBER_SUBJECT'		=> 'Ceci est un message automatique, merci de ne pas y répondre ! Message de l’utilisateur %1$s le %2$s.',
+	'IM_JABBER_SUBJECT'		=> 'Ceci est un message automatique, merci de ne pas y répondre ! Message du membre %1$s le %2$s.',
 	'IM_MESSAGE'			=> 'Votre message',
 	'IM_MSNM'				=> 'Notez que pour utiliser cette fonction vous devez avoir installé Windows Live Messenger.',
 	'IM_MSNM_BROWSER'		=> 'Votre navigateur ne supporte pas cela.',
 	'IM_MSNM_CONNECT'		=> 'Windows Live Messenger n’est pas connecté.\nVous devez vous connecter pour continuer.',
 	'IM_NAME'				=> 'Votre nom',
-	'IM_NO_DATA'			=> 'Aucune information de contact pour cet utilisateur.',
-	'IM_NO_JABBER'			=> 'Désolé, la transmission de messages instantanés des utilisateurs Jabber n’est pas supportée sur ce forum. Votre devez avoir un client Jabber installé sur votre système pour contacter le destinataire ci-dessus.',
+	'IM_NO_DATA'			=> 'Aucune information de contact pour ce membre.',
+	'IM_NO_JABBER'			=> 'Désolé, la transmission de messages instantanés vers des utilisateurs Jabber n’est pas supportée sur ce forum. Votre devez avoir un client Jabber installé sur votre système pour contacter le destinataire ci-dessus.',
 	'IM_RECIPIENT'			=> 'Destinataire',
 	'IM_SEND'				=> 'Envoyer un message',
 	'IM_SEND_MESSAGE'		=> 'Envoyer un message',
-	'IM_SENT_JABBER'		=> 'Votre message vers %1$s a été envoyé.',
+	'IM_SENT_JABBER'		=> 'Votre message destiné à %1$s a été envoyé.',
 	'IM_USER'				=> 'Envoyer un message instantané',
 
 	'LAST_ACTIVE'				=> 'Dernière visite',
 	'LESS_THAN'					=> 'Moins que',
-	'LIST_USER'					=> '1 utilisateur',
-	'LIST_USERS'				=> '%d utilisateurs',
-	'LOGIN_EXPLAIN_LEADERS'		=> 'L’administrateur exige que vous soyez enregistré et connecté pour voir la liste des membres de l’équipe.',
-	'LOGIN_EXPLAIN_MEMBERLIST'	=> 'L’administrateur exige que vous soyez enregistré et connecté pour voir la liste des membres.',
-	'LOGIN_EXPLAIN_SEARCHUSER'	=> 'L’administrateur exige que vous soyez enregistré et connecté pour rechercher des membres.',
-	'LOGIN_EXPLAIN_VIEWPROFILE'	=> 'L’administrateur exige que vous soyez enregistré et connecté pour voir les profils.',
+	'LIST_USER'					=> '1 membre',
+	'LIST_USERS'				=> '%d membres',
+	'LOGIN_EXPLAIN_LEADERS'		=> 'Le forum exige que vous soyez enregistré et connecté pour pouvoir consulter la liste des membres de l’équipe.',
+	'LOGIN_EXPLAIN_MEMBERLIST'	=> 'Le forum exige que vous soyez enregistré et connecté pour pouvoir consulter la liste des membres.',
+	'LOGIN_EXPLAIN_SEARCHUSER'	=> 'Le forum exige que vous soyez enregistré et connecté pour rechercher des membres.',
+	'LOGIN_EXPLAIN_VIEWPROFILE'	=> 'Le forum exige que vous soyez enregistré et connecté pour pouvoir consulter le profil des membres.',
 
 	'MORE_THAN'				=> 'Plus que',
 
 	'NO_EMAIL'				=> 'Vous ne pouvez pas envoyer d’e-mail à ce membre.',
-	'NO_VIEW_USERS'			=> 'Vous ne pouvez pas voir la liste des membres ou les profils.',
+	'NO_VIEW_USERS'			=> 'Vous ne pouvez pas consulter la liste des membres ou les profils.',
 
 	'ORDER'					=> 'Ordre',
 	'OTHER'					=> 'Autre',
@@ -130,18 +135,18 @@ $lang = array_merge($lang, array(
 	'SORT_POST_COUNT'		=> 'Nombre de messages',
 
 	'USERNAME_BEGINS_WITH'	=> 'Noms commençant par',
-	'USER_ADMIN'			=> 'Administrer l’utilisateur',
+	'USER_ADMIN'			=> 'Administrer le membre',
 	'USER_BAN'				=> 'Bannissement',
-	'USER_FORUM'			=> 'Statistiques de l’utilisateur',
+	'USER_FORUM'			=> 'Statistiques du membre',
 	'USER_LAST_REMINDED'	=> array(
 		0		=> 'Aucun rappel envoyé actuellement',
 		1		=> '%1$d rappel envoyé<br />» %2$s',
-		2		=> '%1$d rappels envoyés<br />» %2$s',
 	),
 	'USER_ONLINE'			=> 'En ligne',
 	'USER_PRESENCE'			=> 'Présence sur le forum',
+	'USERS_PER_PAGE'		=> 'Membres par page',
 
-	'VIEWING_PROFILE'		=> 'Vue du profil - %s',
+	'VIEWING_PROFILE'		=> 'Profil de - %s',
 	'VISITED'				=> 'Dernière visite',
 
 	'WWW'					=> 'Site Internet',
