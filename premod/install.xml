@@ -108,9 +108,16 @@ Tout manquement à ces règles contribuera à mettre le support et le développe
 		<installation>
 			<level><![CDATA[easy]]></level>
 			<time><![CDATA[900]]></time>
-			<target-version><![CDATA[3.0.12]]></target-version>
+			<target-version><![CDATA[3.0.13-PL1]]></target-version>
 		</installation>
 		<history>
+			<entry>
+				<date><![CDATA[2015/02/09]]></date>
+				<rev-version><![CDATA[3.0.13-PL1]]></rev-version>
+				<changelog lang="en">
+					<change><![CDATA[Maintenance version to follow phpBB]]></change>
+				</changelog>
+			</entry>
 			<entry>
 				<date><![CDATA[2013/15/07]]></date>
 				<rev-version><![CDATA[3.0.12]]></rev-version>
@@ -480,17 +487,17 @@ Tout manquement à ces règles contribuera à mettre le support et le développe
 >>>>   UPDATE INSTRUCTION   	   <<<<<
 ________________________________________
 
-Update 3.0.11 => 3.0.12 :
+Update 3.0.12 => 3.0.13-PL1 :
 First, go to http://downloads.phpbb-seo.com/seo-url-premod-12/
 where you'll be able to download the update packages
 You can update using two method :
-	1) Auto updating : "3.0.11 to 3.0.12 Auto update"
+	1) Auto updating : "3.0.12 to 3.0.13-PL1 Auto update"
 		- Upload the auto_update/install/*.* folder of the update package to install/*.*
 		- Go to ACP => SYSTEM and follow instructions.
 		The auto update method will take the eventual code change you have made into account,
 		and will attempt to merge the new files with your online modified ones.
 		It's the safest method for most, the installer will tel you if it has trouble to update some files.
-	2) Manual updating : "3.0.11 to 3.0.12 Changed Files"
+	2) Manual updating : "3.0.12 to 3.0.13-PL1 Changed Files"
 		You'll find the modified file list in the modified/ folder of the update package.
 		- Upload / merge / overwrite all file,
 		- Upload the modified/install/*.* to install/*.*,
@@ -828,18 +835,18 @@ for GYM sitemaps & RSS. Just generate a new .htaccess once you have installed th
 >>>>   MISE A JOUR	                <<<<<
 _____________________________________________
 
-Mise à jour : 3.0.11 => 3.0.12 :
+Mise à jour : 3.0.12 => 3.0.13-PL1 :
 Tout d'abord, rendez vous sur http://telecharger.phpbb-seo.com/premod-referencement-phpbb-10/
 pour télécharger un des pack de mise à jour.
 Vous pouvez mettre à jour en suivant deux méthodes :
-	1) Mise à jour automatique : "3.0.11 vers 3.0.12 MAJ automatique"
+	1) Mise à jour automatique : "3.0.12 vers 3.0.13-PL1 MAJ automatique"
 		- Uplodez le contenu du dossier auto_update/install/*.* vers install/*.*,
 		- Rendez vous à l'ACP => SYSTEM et suivez les instructions.
 		L'auto updateur prendra vos éventuelles modifications en compte et tentera
 		de merger les nouveaux fichiers avec ceux que vous auriez modifié.
 		C'est la methode la plus sûre dans la plupart des cas, l'updateur vous dira
 		s'il a des problème pour modifier certain fichiers.
-	2) Mise à jour manuelle : "3.0.11 vers 3.0.12 Fichiers modifiés"
+	2) Mise à jour manuelle : "3.0.12 vers 3.0.13-PL1 Fichiers modifiés"
 		Vous trouverez les fichiers modifiés dans le dossier modified/ de l'archive.
 		- Uploadez / mergez / écrasez tous les fichiers,
 		- Uploadez le dossier modified/install/*.* vers install/*.*,
