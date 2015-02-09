@@ -2,10 +2,11 @@
 /**
 *
 * acp_email [Standard french]
-* translated originally by PhpBB-fr.com <http://www.phpbb-fr.com/> and phpBB.biz <http://www.phpBB.biz>
+* @translated originally by phpBB.biz and phpBB-fr.com
+* @translated currently by phpBB-fr.com (http://www.phpbb-fr.com)
 *
 * @package language
-* @version $Id: email.php 71 2013-07-23 21:38:34Z papicx $
+* @version $Id$
 * @copyright (c) 2005 phpBB Group
 * @license http://opensource.org/licenses/gpl-license.php GNU Public License
 *
@@ -35,19 +36,23 @@ if (empty($lang) || !is_array($lang))
 // You do not need this where single placeholders are used, e.g. 'Message %d' is fine
 // equally where a string contains only two placeholders which are used to wrap text
 // in a url you again do not need to specify an order e.g., 'Click %sHERE%s' is fine
+//
+// Some characters you may want to copy&paste:
+// ’ « » “ ” …
+//
 
 // Email settings
 $lang = array_merge($lang, array(
-	'ACP_MASS_EMAIL_EXPLAIN'		=> 'Vous pouvez envoyer un e-mail à tous vos utilisateurs ou à tous les membres d’un groupe particulier. Pour cela, un e-mail sera envoyé via l’adresse administrative, avec tous les destinataires en copie cachée. Si vous envoyez le message à un grand groupe de personnes, merci de patienter après avoir validé et de ne pas arrêter la page lors du traitement. Il est normal qu’un envoi de masse prenne du temps, vous aurez une notification quand le script aura terminé.',
+	'ACP_MASS_EMAIL_EXPLAIN'		=> 'Vous pouvez envoyer un e-mail à tous vos utilisateurs ayant activé l’option « Recevoir les e-mails des administrateurs », individuellement ou aux membres d’un groupe en particulier. Pour cela, un e-mail sera envoyé depuis l’adresse administrative et tous les destinataires seront en copie cachée. Par défaut, un e-mail est limité à 20 destinataires ; au-delà de ce nombre et pour chaque tranche de 20 destinataires un nouvel e-mail sera émis. Si vous envoyez le message à un grand groupe de personnes, veuillez patienter après avoir validé et de ne pas arrêter la page lors du traitement. Il est normal qu’un envoi de masse prenne du temps, vous serez informé lorsque le script sera terminé',
 	'ALL_USERS'						=> 'Tous les utilisateurs',
 
 	'COMPOSE'				=> 'Écrire',
 
-	'EMAIL_SEND_ERROR'		=> 'Il y a eu une erreur lors de l’envoi de l’e-mail. Merci de consulter le %sJournal d’erreurs%s pour un message plus détaillé.',
+	'EMAIL_SEND_ERROR'		=> 'Il y a eu une erreur lors de l’envoi de l’e-mail. Merci de consulter le %sJournal des erreurs%s pour un message plus détaillé.',
 	'EMAIL_SENT'			=> 'Votre message a été envoyé.',
 	'EMAIL_SENT_QUEUE'		=> 'Votre message a été mis en attente pour l’envoi.',
 
-	'LOG_SESSION'			=> 'Enregistre la session mail dans les journaux d’erreurs critiques',
+	'LOG_SESSION'			=> 'Enregistre la session mail dans le journal des erreurs critiques',
 
 	'SEND_IMMEDIATELY'		=> 'Envoyer immédiatement',
 	'SEND_TO_GROUP'			=> 'Envoyer au groupe',

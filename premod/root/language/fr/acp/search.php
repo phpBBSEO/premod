@@ -2,10 +2,11 @@
 /**
 *
 * acp_search [Standard french]
-* translated originally by PhpBB-fr.com <http://www.phpbb-fr.com/> and phpBB.biz <http://www.phpBB.biz>
+* @translated originally by phpBB.biz and phpBB-fr.com
+* @translated currently by phpBB-fr.com (http://www.phpbb-fr.com)
 *
 * @package language
-* @version $Id: search.php 79 2013-10-01 00:10:32Z Skouat $
+* @version $Id$
 * @copyright (c) 2005 phpBB Group
 * @license http://opensource.org/licenses/gpl-license.php GNU Public License
 *
@@ -35,6 +36,10 @@ if (empty($lang) || !is_array($lang))
 // You do not need this where single placeholders are used, e.g. 'Message %d' is fine
 // equally where a string contains only two placeholders which are used to wrap text
 // in a url you again do not need to specify an order e.g., 'Click %sHERE%s' is fine
+//
+// Some characters you may want to copy&paste:
+// ’ « » “ ” …
+//
 
 $lang = array_merge($lang, array(
 	'ACP_SEARCH_INDEX_EXPLAIN'				=> 'Vous pouvez gérer les méthodes d’indexation de la recherche. Comme le moteur de recherche n’utilise qu’une seule méthode d’indexation, vous devriez supprimer toutes les indexations inutilisées. Après la modification de certains paramètres de recherche (comme le nombre minimum/maximum de caractères), il serait préférable de recréer l’index pour qu’il prenne en compte ces modifications.',
@@ -53,18 +58,18 @@ $lang = array_merge($lang, array(
 	'DELETING_INDEX_IN_PROGRESS'			=> 'Suppression de l’index de recherche.',
 	'DELETING_INDEX_IN_PROGRESS_EXPLAIN'	=> 'La méthode d’indexation de la recherche est en train de vider son index. Cela peut prendre quelques minutes.',
 
-	'FULLTEXT_MYSQL_INCOMPATIBLE_VERSION'	=> 'L’indexation FULLTEXT de MySQL ne peut être utilisée qu’à partir de MySQL 4 ou supérieur.',
-	'FULLTEXT_MYSQL_NOT_SUPPORTED'			=> 'Les indexations FULLTEXT de MySQL ne peuvent être utilisées qu’avec les tables MyISAM ou InnoDB. MySQL 5.6.4 ou supérieur est requis pour les index FULLTEXT dans les tables InnoDB.',
+	'FULLTEXT_MYSQL_INCOMPATIBLE_VERSION'	=> 'L’indexation FULLTEXT de MySQL ne peut être utilisée qu’avec MySQL version 4 ou supérieure.',
+	'FULLTEXT_MYSQL_NOT_SUPPORTED'			=> 'Les indexations FULLTEXT de MySQL ne peuvent être utilisées qu’avec les tables MyISAM ou InnoDB. MySQL version 5.6.4 ou supérieure est requise pour les index FULLTEXT dans les tables InnoDB.',
 	'FULLTEXT_MYSQL_TOTAL_POSTS'			=> 'Nombre total de messages indexés',
-	'FULLTEXT_MYSQL_MBSTRING'				=> 'Support des caractères non-latin UTF-8 utilisant mbstring:',
-	'FULLTEXT_MYSQL_PCRE'					=> 'Support des caractères non-latin UTF-8 utilisant PCRE:',
+	'FULLTEXT_MYSQL_MBSTRING'				=> 'Support des caractères non-latin UTF-8 utilisant mbstring :',
+	'FULLTEXT_MYSQL_PCRE'					=> 'Support des caractères non-latin UTF-8 utilisant PCRE :',
 	'FULLTEXT_MYSQL_MBSTRING_EXPLAIN'		=> 'Si PCRE n’a pas les propriétés de caractère unicode, la recherche s’effectuera en utilisant le moteur d’expressions régulières mbstring.',
 	'FULLTEXT_MYSQL_PCRE_EXPLAIN'			=> 'La recherche nécessite les propriétés de caractère unicode PCRE, disponibles seulement depuis PHP 4.4, 5.1 et supérieur, si vous voulez effectuer une recherche sur des caractères non-latin.',
 	'FULLTEXT_MYSQL_MIN_SEARCH_CHARS_EXPLAIN'	=> 'Les mots comportant ce nombre de caractères seront indexés pour la recherche. Il n’y a que vous ou votre hébergeur qui puissiez changer la configuration de MySQL.',
 	'FULLTEXT_MYSQL_MAX_SEARCH_CHARS_EXPLAIN'	=> 'Les mots ne dépassant pas ce nombre de caractères seront indexés pour la recherche. Il n’y a que vous ou votre hébergeur qui puissiez changer la configuration de MySQL.',
 
 	'GENERAL_SEARCH_SETTINGS'				=> 'Paramètres généraux de recherche',
-	'GO_TO_SEARCH_INDEX'					=> 'Aller à la page d’index de la recherche',
+	'GO_TO_SEARCH_INDEX'					=> 'Aller à la page « Index de la recherche »',
 
 	'INDEX_STATS'							=> 'Statistiques de l’index',
 	'INDEXING_IN_PROGRESS'					=> 'Indexation en cours',
@@ -80,15 +85,15 @@ $lang = array_merge($lang, array(
 	'MIN_SEARCH_CHARS'						=> 'Caractères minimum indexés par la recherche',
 	'MIN_SEARCH_CHARS_EXPLAIN'				=> 'Seuls les mots supérieurs ou égaux à ce nombre de caractères seront indexés.',
 	'MIN_SEARCH_AUTHOR_CHARS'				=> 'Caractères minimum du nom de l’auteur',
-	'MIN_SEARCH_AUTHOR_CHARS_EXPLAIN'		=> 'Les utilisateurs doivent entrer au moins ce nombre de caractères en exécutant une recherche par auteur avec un joker. Si le nom d’auteur est plus court que ce nombre vous pourrez tout de même rechercher ses messages en saisissant son nom complet.',
+	'MIN_SEARCH_AUTHOR_CHARS_EXPLAIN'		=> 'Les utilisateurs doivent saisir au moins ce nombre de caractères pour effectuer une recherche par auteur avec un joker (*). Si le nom d’auteur est plus court que ce nombre vous pourrez tout de même rechercher ses messages en saisissant son nom complet.',
 
 	'PROGRESS_BAR'							=> 'Barre de progression',
 
 	'SEARCH_GUEST_INTERVAL'					=> 'Intervalle de flood des invités',
 	'SEARCH_GUEST_INTERVAL_EXPLAIN'			=> 'Nombre de secondes que les invités doivent attendre entre chaque recherche. Si un invité lance une recherche, tous les autres doivent attendre que ce délai soit écoulé.',
-	'SEARCH_INDEX_CREATE_REDIRECT'			=> 'Tous les messages ayant un id inférieur à %1$d ont été indexés, actuellement %2$d messages l’ont été.<br />Le taux actuel d’indexation est de %3$.1f messages par seconde.<br />Indexation en cours…',
-	'SEARCH_INDEX_DELETE_REDIRECT'			=> 'Tous les messages ayant un id inférieur à %1$d ont été effacés de l’index de recherche.<br />Effacement en cours…',
-	'SEARCH_INDEX_CREATED'					=> 'Tous les messages du forum ont été indexés.',  
+	'SEARCH_INDEX_CREATE_REDIRECT'			=> 'Tous les messages jusqu’à l’ID de message %1$d ont été indexés, un lot de %2$d messages a été traité.<br />Le taux actuel d’indexation est de %3$.1f messages par seconde.<br />Indexation en cours…',
+	'SEARCH_INDEX_DELETE_REDIRECT'			=> 'Tous les messages jusqu’à l’ID de message %1$d ont été effacés de l’index de recherche.<br />Effacement en cours…',
+	'SEARCH_INDEX_CREATED'					=> 'Tous les messages du forum ont été indexés.',
 	'SEARCH_INDEX_REMOVED'					=> 'L’index de recherche a été supprimé.',
 	'SEARCH_INTERVAL'						=> 'Intervalle de flood des utilisateurs',
 	'SEARCH_INTERVAL_EXPLAIN'				=> 'Nombre de secondes que les utilisateurs doivent attendre entre chaque recherche. Cet intervalle est contrôlé indépendamment pour chaque utilisateur.',

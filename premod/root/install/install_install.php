@@ -116,7 +116,7 @@ class install_install extends module
 				$db_tools = new phpbb_db_tools($db);
 				$db_tools->db->sql_return_on_error(true);
 				$db_tools->sql_column_add(TOPICS_TABLE, 'topic_url', array('VCHAR', ''));
-				set_config('seo_premod_version', '3.0.12');
+				set_config('seo_premod_version', '3.0.13-PL1');
 				// Remove the lock file
 				@unlink($phpbb_root_path . 'cache/install_lock');
 
@@ -281,8 +281,8 @@ class install_install extends module
 			$checks = array(
 				array('func_overload', '&', MB_OVERLOAD_MAIL|MB_OVERLOAD_STRING),
 				array('encoding_translation', '!=', 0),
-				array('http_input', '!=', 'pass'),
-				array('http_output', '!=', 'pass')
+				array('http_input', '!=', array('pass', '')),
+				array('http_output', '!=', array('pass', ''))
 			);
 
 			foreach ($checks as $mb_checks)
@@ -303,7 +303,8 @@ class install_install extends module
 					break;
 
 					case '!=':
-						if ($ini_val != $mb_checks[2])
+						if (!is_array($mb_checks[2]) && $ini_val != $mb_checks[2] ||
+							is_array($mb_checks[2]) && !in_array($ini_val, $mb_checks[2]))
 						{
 							$result = '<strong style="color:red">' . $lang['NO'] . '</strong>';
 							$passed['mbstring'] = false;
@@ -1632,6 +1633,45 @@ class install_install extends module
 				$_module->move_module_by($row, 'move_up', 5);
 			}
 
+			if ($module_class == 'mcp')
+			{
+				// Move pm report details module 3 down...
+				$sql = 'SELECT *
+					FROM ' . MODULES_TABLE . "
+					WHERE module_basename = 'pm_reports'
+						AND module_class = 'mcp'
+						AND module_mode = 'pm_report_details'";
+				$result = $db->sql_query($sql);
+				$row = $db->sql_fetchrow($result);
+				$db->sql_freeresult($result);
+
+				$_module->move_module_by($row, 'move_down', 3);
+
+				// Move closed pm reports module 3 down...
+				$sql = 'SELECT *
+					FROM ' . MODULES_TABLE . "
+					WHERE module_basename = 'pm_reports'
+						AND module_class = 'mcp'
+						AND module_mode = 'pm_reports_closed'";
+				$result = $db->sql_query($sql);
+				$row = $db->sql_fetchrow($result);
+				$db->sql_freeresult($result);
+
+				$_module->move_module_by($row, 'move_down', 3);
+
+				// Move open pm reports module 3 down...
+				$sql = 'SELECT *
+					FROM ' . MODULES_TABLE . "
+					WHERE module_basename = 'pm_reports'
+						AND module_class = 'mcp'
+						AND module_mode = 'pm_reports'";
+				$result = $db->sql_query($sql);
+				$row = $db->sql_fetchrow($result);
+				$db->sql_freeresult($result);
+
+				$_module->move_module_by($row, 'move_down', 3);
+			}
+
 			if ($module_class == 'ucp')
 			{
 				// Move attachment module 4 down...
@@ -2053,8 +2093,8 @@ class install_install extends module
 		'smtp_delivery'			=> array('lang' => 'USE_SMTP',			'type' => 'radio:yes_no', 'explain' => true),
 		'smtp_host'				=> array('lang' => 'SMTP_SERVER',		'type' => 'text:25:50', 'explain' => false),
 		'smtp_auth'				=> array('lang' => 'SMTP_AUTH_METHOD',	'type' => 'select', 'options' => '$this->module->mail_auth_select(\'{VALUE}\')', 'explain' => true),
-		'smtp_user'				=> array('lang' => 'SMTP_USERNAME',		'type' => 'text:25:255', 'explain' => true),
-		'smtp_pass'				=> array('lang' => 'SMTP_PASSWORD',		'type' => 'password:25:255', 'explain' => true),
+		'smtp_user'				=> array('lang' => 'SMTP_USERNAME',		'type' => 'text:25:255', 'explain' => true, 'options' => array('autocomplete' => 'off')),
+		'smtp_pass'				=> array('lang' => 'SMTP_PASSWORD',		'type' => 'password:25:255', 'explain' => true, 'options' => array('autocomplete' => 'off')),
 
 		'legend2'				=> 'SERVER_URL_SETTINGS',
 		'cookie_secure'			=> array('lang' => 'COOKIE_SECURE',		'type' => 'radio:enabled_disabled', 'explain' => true),

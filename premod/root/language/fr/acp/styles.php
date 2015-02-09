@@ -2,10 +2,11 @@
 /**
 *
 * acp_styles [Standard french]
-* translated originally by PhpBB-fr.com <http://www.phpbb-fr.com/> and phpBB.biz <http://www.phpBB.biz>
+* @translated originally by phpBB.biz and phpBB-fr.com
+* @translated currently by phpBB-fr.com (http://www.phpbb-fr.com)
 *
 * @package language
-* @version $Id: styles.php 71 2013-07-23 21:38:34Z papicx $
+* @version $Id$
 * @copyright (c) 2005 phpBB Group
 * @license http://opensource.org/licenses/gpl-license.php GNU Public License
 *
@@ -35,20 +36,24 @@ if (empty($lang) || !is_array($lang))
 // You do not need this where single placeholders are used, e.g. 'Message %d' is fine
 // equally where a string contains only two placeholders which are used to wrap text
 // in a url you again do not need to specify an order e.g., 'Click %sHERE%s' is fine
+//
+// Some characters you may want to copy&paste:
+// ’ « » “ ” …
+//
 
 $lang = array_merge($lang, array(
 	'ACP_IMAGESETS_EXPLAIN'	=> 'Un pack d’images comprend tous les boutons, forums, répertoires, etc. et d’autres images qui sont utilisées sur le forum. Vous pouvez modifier, exporter ou supprimer les pack d’images existants et en importer ou en activer de nouveaux.',
-	'ACP_STYLES_EXPLAIN'	=> 'Vous pouvez gérer les styles disponibles sur votre forum. Un style consiste en un template, un thème et un pack d’images. Vous pouvez modifier le style existant, supprimer, désactiver, réactiver, créer ou en importer de nouveaux. Vous pouvez également voir à quoi ressemblera le style, en utilisant la fonction « Aperçu ». Le style par défaut est mis en évidence par un astérisque (*). Le nombre total d’utilisateurs pour chaque style est également indiqué, notez que cela écrase les styles des utilisateurs qui ne sont pas ici.',
-	'ACP_TEMPLATES_EXPLAIN'	=> 'Un template est une page HTML qui comprend toutes les balises utilisées pour gérer la mise en page de votre forum. Vous pouvez éditer, supprimer, exporter, importer et prévisualiser l’ensemble du template. Vous pouvez également modifier le code du template utilisé pour produire des BBCodes.',
+	'ACP_STYLES_EXPLAIN'	=> 'Vous pouvez gérer les styles disponibles sur votre forum. Un style consiste en un template, un thème et un pack d’images. Vous pouvez modifier le style existant, supprimer, désactiver, réactiver, créer ou en importer de nouveaux. Vous pouvez également voir à quoi ressemblera le style, en utilisant la fonction « Aperçu ». Le style par défaut est mis en évidence par un astérisque (*). Le nombre total de membres pour chaque style est également indiqué, notez que le remplacement forcé du style des utilisateurs ne sera pas répercuté ici.',
+	'ACP_TEMPLATES_EXPLAIN'	=> 'Un template est une page HTML qui comprend toutes les balises utilisées pour gérer la mise en page de votre forum. Vous pouvez modifier, supprimer, exporter, importer et prévisualiser l’ensemble du template. Vous pouvez également modifier le code du template utilisé pour produire des BBCodes.',
 	'ACP_THEMES_EXPLAIN'	=> 'Un thème est l’ensemble des couleurs et images appliqué à un template pour définir l’aspect de votre forum. Le nombre d’options disponibles dépend de la configuration de votre serveur et de l’installation de phpBB, reportez-vous au manuel d’utilisation pour plus de détails. Notez que l’utilisation d’un style différent comme base de travail est optionnel.',
 	'ADD_IMAGESET'			=> 'Ajouter un pack d’images',
-	'ADD_IMAGESET_EXPLAIN'	=> 'Vous pouvez créer un pack d’images. Selon la configuration du serveur et vos accès aux permissions des fichiers, vous aurez plus ou moins d’options disponibles. Par exemple, vous pouvez vous baser sur un pack d’images existant. Vous pouvez également charger ou importer (depuis le répertoire <em>store</em>) une archive de pack d’images. Si vous chargez ou importez un pack, il peut prendre le même nom que celui de l’archive dont il est extrait, pour cela, laissez le nom du pack d’images vide.',
+	'ADD_IMAGESET_EXPLAIN'	=> 'Vous pouvez créer un pack d’images. Selon la configuration du serveur et vos accès aux permissions des fichiers, vous aurez plus ou moins d’options disponibles. Par exemple, vous pouvez vous baser sur un pack d’images existant. Vous pouvez également tranférer ou importer (depuis le répertoire <em>store</em>) une archive de pack d’images. Si vous tranférez ou importez un pack, il peut prendre le même nom que celui de l’archive dont il est extrait, pour cela, laissez le nom du pack d’images vide.',
 	'ADD_STYLE'				=> 'Créer un style',
-	'ADD_STYLE_EXPLAIN'		=> 'Vous pouvez créer un nouveau style. Selon la configuration du serveur et vos accès aux permissions des fichiers, vous aurez plus ou moins d’options disponibles. Par exemple, il vous est peut-être possible de baser un style sur un style existant, vous pouvez également charger ou importer (depuis le répertoire <em>store</em>) une archive de style. Si vous chargez ou importez un style, il sera renommé automatiquement.',
+	'ADD_STYLE_EXPLAIN'		=> 'Vous pouvez créer un nouveau style. Selon la configuration du serveur et vos accès aux permissions des fichiers, vous aurez plus ou moins d’options disponibles. Par exemple, il vous est peut-être possible de baser un style sur un style existant, vous pouvez également tranférer ou importer (depuis le répertoire <em>store</em>) une archive de style. Si vous tranférez ou importez un style, il sera renommé automatiquement.',
 	'ADD_TEMPLATE'			=> 'Créer un template',
-	'ADD_TEMPLATE_EXPLAIN'	=> 'Vous pouvez ajouter un nouveau template. Selon la configuration du serveur et vos accès aux permissions des fichiers, vous aurez plus ou moins d’options disponibles. Par exemple, vous pouvez baser un template sur un template existant, vous pouvez également charger ou importer (depuis le répertoire <em>store</em>) une archive de template. Si vous chargez ou importez un template, il peut prendre le même nom que celui de l’archive dont il est extrait, pour cela, laissez le nom du template vide.',
+	'ADD_TEMPLATE_EXPLAIN'	=> 'Vous pouvez ajouter un nouveau template. Selon la configuration du serveur et vos accès aux permissions des fichiers, vous aurez plus ou moins d’options disponibles. Par exemple, vous pouvez baser un template sur un template existant, vous pouvez également tranférer ou importer (depuis le répertoire <em>store</em>) une archive de template. Si vous tranférez ou importez un template, il peut prendre le même nom que celui de l’archive dont il est extrait, pour cela, laissez le nom du template vide.',
 	'ADD_THEME'				=> 'Créer un thème',
-	'ADD_THEME_EXPLAIN'		=> 'Vous pouvez ajouter un nouveau thème. Selon la configuration du serveur et vos accès aux permissions des fichiers, vous aurez plus ou moins d’options disponibles. Par exemple, vous pouvez baser un thème sur un thème existant, vous pouvez également charger ou importer (depuis le répertoire <em>store</em>) une archive de thème. Si vous chargez ou importez un thème, il peut prendre le même nom que celui de l’archive dont il est extrait, pour cela, laissez le nom du thème vide.',
+	'ADD_THEME_EXPLAIN'		=> 'Vous pouvez ajouter un nouveau thème. Selon la configuration du serveur et vos accès aux permissions des fichiers, vous aurez plus ou moins d’options disponibles. Par exemple, vous pouvez baser un thème sur un thème existant, vous pouvez également tranférer ou importer (depuis le répertoire <em>store</em>) une archive de thème. Si vous tranférez ou importez un thème, il peut prendre le même nom que celui de l’archive dont il est extrait, pour cela, laissez le nom du thème vide.',
 	'ARCHIVE_FORMAT'		=> 'Type d’archive',
 	'AUTOMATIC_EXPLAIN'		=> 'Laissez cette case vide pour tenter une détection automatique.',
 
@@ -75,7 +80,7 @@ $lang = array_merge($lang, array(
 	'CURRENT_IMAGE'					=> 'Image actuelle',
 
 	'DEACTIVATE_DEFAULT'		=> 'Vous ne pouvez pas désactiver le style par défaut.',
-	'DELETE_FROM_FS'			=> 'Supprimer le système de fichiers',
+	'DELETE_FROM_FS'			=> 'Supprimer définitivement les fichiers. Attention ! Cette action est irréversible.',
 	'DELETE_IMAGESET'			=> 'Supprimer un pack d’images',
 	'DELETE_IMAGESET_EXPLAIN'	=> 'Vous pouvez supprimer le pack d’images sélectionné de la base de données. Notez que l’opération est irréversible. Il est recommandé de l’exporter au préalable pour une éventuelle utilisation future.',
 	'DELETE_STYLE'				=> 'Supprimer un style',
@@ -87,22 +92,21 @@ $lang = array_merge($lang, array(
 	'DETAILS'					=> 'Détails',
 	'DIMENSIONS_EXPLAIN'		=> 'Sélectionnez « Oui » pour prendre en compte les paramètres largeur/hauteur.',
 
-
 	'EDIT_DETAILS_IMAGESET'				=> 'Modifier les informations du pack d’images',
-	'EDIT_DETAILS_IMAGESET_EXPLAIN'		=> 'Vous pouvez éditer certaines informations du pack d’images comme son nom, etc.',
+	'EDIT_DETAILS_IMAGESET_EXPLAIN'		=> 'Vous pouvez modifier certaines informations du pack d’images comme son nom, etc.',
 	'EDIT_DETAILS_STYLE'				=> 'Modifier un style',
 	'EDIT_DETAILS_STYLE_EXPLAIN'		=> 'En modifiant le formulaire ci-dessous, vous pouvez modifier un style existant. Vous pouvez modifier la combinaison template/pack d’images. Vous pouvez définir un style par défaut.',
-	'EDIT_DETAILS_TEMPLATE'				=> 'Éditer les paramètres du template',
+	'EDIT_DETAILS_TEMPLATE'				=> 'Modifier les paramètres du template',
 	'EDIT_DETAILS_TEMPLATE_EXPLAIN'		=> 'Vous pouvez modifier les paramètres particuliers du template, comme son nom par exemple. Vous pouvez également choisir de modifier le mode de sauvegarde du template de la base données au fichier de sauvegarde et vice-versa. Cette possibilité dépend de votre configuration de PHP et du CHMOD du répertoire de votre template.',
-	'EDIT_DETAILS_THEME'				=> 'Éditer les paramètres du thème',
+	'EDIT_DETAILS_THEME'				=> 'Modifier les paramètres du thème',
 	'EDIT_DETAILS_THEME_EXPLAIN'		=> 'Vous pouvez modifier les paramètres particuliers du thème, comme son nom par exemple. Vous pouvez également choisir de modifier le mode de sauvegarde du template de la base données au fichier de sauvegarde et vice-versa. Cette possibilité dépend de votre configuration de PHP et du CHMOD du répertoire de votre thème.',
-	'EDIT_IMAGESET'						=> 'Éditer un pack d’images',
+	'EDIT_IMAGESET'						=> 'Modifier un pack d’images',
 	'EDIT_IMAGESET_EXPLAIN'				=> 'Vous pouvez modifier les images qui composent le pack d’images. Vous pouvez également indiquer les dimensions d’affichage de ces images. Si vous indiquez ce paramètre, vous risquez de perturber l’affichage de certains navigateurs, si vous ne les indiquez pas, vous baissez quelque peu la taille d’enregistrement dans la base de données.',
-	'EDIT_TEMPLATE'						=> 'Éditer un template',
-	'EDIT_TEMPLATE_EXPLAIN'				=> 'Vous pouvez éditer votre template directement. Attention, ces modifications sont permanentes et irréversibles une fois validées. Si PHP peut modifier les fichiers templates directement dans votre répertoire, les modifications seront automatiquement répercutées sur les fichiers concernés. Si PHP ne peut modifier les fichiers, ils seront copiés dans la base de données et les changements ne pourront être effectués qu’à partir de celle-ci. Faites attention quand vous éditez votre template, n’oubliez pas de fermer correctement toutes les variables {XXXX} et tout ce qui y est rattaché.',
+	'EDIT_TEMPLATE'						=> 'Modifier un template',
+	'EDIT_TEMPLATE_EXPLAIN'				=> 'Vous pouvez modifier votre template directement. Attention, ces modifications sont permanentes et irréversibles une fois validées. Si PHP peut modifier les fichiers templates directement dans votre répertoire, les modifications seront automatiquement répercutées sur les fichiers concernés. Si PHP ne peut modifier les fichiers, ils seront copiés dans la base de données et les changements ne pourront être effectués qu’à partir de celle-ci. Faites attention quand vous modifiez votre template, n’oubliez pas de fermer correctement toutes les variables {XXXX} et tout ce qui y est rattaché.',
 	'EDIT_TEMPLATE_STORED_DB'			=> 'Le fichier template n’a pas pu être écrit, il a été stocké dans la base de données avec les modifications apportées.',
-	'EDIT_THEME'						=> 'Éditer le thème',
-	'EDIT_THEME_EXPLAIN'				=> 'Vous pouvez éditer le thème sélectionné, modifier les couleurs, les images, etc.',
+	'EDIT_THEME'						=> 'Modifier le thème',
+	'EDIT_THEME_EXPLAIN'				=> 'Vous pouvez modifier le thème sélectionné, changer les couleurs, les images, etc.',
 	'EDIT_THEME_STORED_DB'				=> 'La feuille de style n’a pas pu être écrite, elle a été stockée dans la base de données avec les modifications apportées.',
 	'EDIT_THEME_STORE_PARSED'			=> 'Le thème nécessite que sa feuille de style soit analysée. Ceci n’est possible que si elle est stockée dans la base de données.',
 	'EDITOR_DISABLED'					=> 'L’éditeur de template est désactivé.',
@@ -276,11 +280,11 @@ $lang = array_merge($lang, array(
 	'INHERITING_FROM'			=> 'Hérité de',
 	'INSTALL_IMAGESET'			=> 'Installer un pack d’images',
 	'INSTALL_IMAGESET_EXPLAIN'	=> 'Vous pouvez installer votre pack d’images. Vous pouvez modifier certaines informations si vous le désirez ou utiliser les paramètres par défaut.',
-	'INSTALL_STYLE'				=> 'Installer un Style',
+	'INSTALL_STYLE'				=> 'Installer un style',
 	'INSTALL_STYLE_EXPLAIN'		=> 'Vous pouvez installer un nouveau style et les éléments qui en dépendent éventuellement. Si vous avez déjà installé certains éléments, ils ne seront pas écrasés. Certains styles nécessitent que certains éléments soient déjà installés. Si vous essayez d’installer ce type de style et que les éléments ne sont pas présents vous en serez averti.',
-	'INSTALL_TEMPLATE'			=> 'Installer un Template',
+	'INSTALL_TEMPLATE'			=> 'Installer un template',
 	'INSTALL_TEMPLATE_EXPLAIN'	=> 'Vous pouvez installer un nouveau template. Selon la configuration de votre serveur, vous aurez plus ou moins d’options à votre disposition.',
-	'INSTALL_THEME'				=> 'Installer un Thème',
+	'INSTALL_THEME'				=> 'Installer un thème',
 	'INSTALL_THEME_EXPLAIN'		=> 'Vous pouvez installer votre thème. Vous pouvez modifier les éléments que vous souhaitez ou mettre les paramètres par défaut.',
 	'INSTALLED_IMAGESET'		=> 'Packs d’images installés',
 	'INSTALLED_STYLE'			=> 'Styles installés',
@@ -347,7 +351,7 @@ $lang = array_merge($lang, array(
 	'STYLE_ACTIVE'				=> 'Style actif',
 	'STYLE_ADDED'				=> 'Style ajouté.',
 	'STYLE_DEACTIVATE'			=> 'Désactiver le style',
-	'STYLE_DEFAULT'				=> 'Mettre ce style par défaut',
+	'STYLE_DEFAULT'				=> 'Définir comme style par défaut',
 	'STYLE_DELETED'				=> 'Style supprimé.',
 	'STYLE_DETAILS_UPDATED'		=> 'Style modifié.',
 	'STYLE_ERR_ARCHIVE'			=> 'Sélectionnez le type d’archivage souhaité.',
@@ -366,7 +370,7 @@ $lang = array_merge($lang, array(
 	'STYLE_NAME'				=> 'Nom du style',
 	'STYLE_TEMPLATE'			=> 'Template',
 	'STYLE_THEME'				=> 'Thème',
-	'STYLE_USED_BY'				=> 'Utilisé par',
+	'STYLE_USED_BY'				=> 'Utilisé par (robots inclus)',
 
 	'TEMPLATE_ADDED'			=> 'Template ajouté et stocké dans les fichiers système.',
 	'TEMPLATE_ADDED_DB'			=> 'Template ajouté et stocké dans la base de données.',

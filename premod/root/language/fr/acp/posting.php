@@ -1,11 +1,12 @@
 <?php
 /**
 *
-* posting [Standard french]
-* translated originally by PhpBB-fr.com <http://www.phpbb-fr.com/> and phpBB.biz <http://www.phpBB.biz>
+* acp_posting [Standard french]
+* @translated originally by phpBB.biz and phpBB-fr.com
+* @translated currently by phpBB-fr.com (http://www.phpbb-fr.com)
 *
 * @package language
-* @version $Id: posting.php 79 2013-10-01 00:10:32Z Skouat $
+* @version $Id$
 * @copyright (c) 2005 phpBB Group
 * @license http://opensource.org/licenses/gpl-license.php GNU Public License
 *
@@ -34,22 +35,26 @@ if (empty($lang) || !is_array($lang))
 //
 // You do not need this where single placeholders are used, e.g. 'Message %d' is fine
 // equally where a string contains only two placeholders which are used to wrap text
-// in a URL you again do not need to specify an order e.g., 'Click %sHERE%s' is fine
+// in a url you again do not need to specify an order e.g., 'Click %sHERE%s' is fine
+//
+// Some characters you may want to copy&paste:
+// ’ « » “ ” …
+//
 
 // BBCodes
 // Note to translators: you can translate everything but what's between { and }
 $lang = array_merge($lang, array(
-	'ACP_BBCODES_EXPLAIN'		=> 'Le BBCode est une implémentation spéciale du HTML qui offre un plus grand contrôle sur l’affichage des messages. Depuis cette page, vous pouvez ajouter, supprimer ou éditer des BBCodes personnalisés.',
+	'ACP_BBCODES_EXPLAIN'		=> 'Le BBCode est une implémentation spéciale du HTML qui offre un plus grand contrôle sur l’affichage des messages. Depuis cette page, vous pouvez ajouter, supprimer ou modifier des BBCodes personnalisés.',
 	'ADD_BBCODE'				=> 'Ajouter un nouveau BBCode',
 
 	'BBCODE_DANGER'				=> 'Le BBCode que vous tentez d’ajouter semble utiliser un champ {TEXT} à l’intérieur d’un attribut HTML. Ceci est une éventuelle faille de sécurité XSS. Essayez d’utiliser à la place des variables plus restrictives comme {SIMPLETEXT} ou {INTEXT}. Procédez uniquement si vous comprenez les risques potentiels et que vous jugez l’utilisation de {TEXT} absolument inévitable.',
 	'BBCODE_DANGER_PROCEED'		=> 'Procédez', //'I understand the risk',
 
 	'BBCODE_ADDED'				=> 'BBCode ajouté.',
-	'BBCODE_EDITED'				=> 'BBCode édité.',
+	'BBCODE_EDITED'				=> 'BBCode modifié.',
 	'BBCODE_NOT_EXIST'			=> 'Le BBCode que vous avez sélectionné n’existe pas.',
 	'BBCODE_HELPLINE'			=> 'Ligne d’aide',
-	'BBCODE_HELPLINE_EXPLAIN'	=> 'Ce champ contient le texte du BBCode qui sera affiché lors du passage de la souris.',
+	'BBCODE_HELPLINE_EXPLAIN'	=> 'Ce champ contient le texte du BBCode qui sera affiché lors du survol de la souris.',
 	'BBCODE_HELPLINE_TEXT'		=> 'Texte de la ligne d’aide',
 	'BBCODE_HELPLINE_TOO_LONG'	=> 'Le texte saisi pour la ligne d’aide est trop long.',
 
@@ -63,8 +68,8 @@ $lang = array_merge($lang, array(
 	'BBCODE_USAGE_EXAMPLE'		=> '[highlight={COLOR}]{TEXT}[/highlight]<br /><br />[font={SIMPLETEXT1}]{SIMPLETEXT2}[/font]',
 	'BBCODE_USAGE_EXPLAIN'		=> 'Vous pouvez définir la façon d’utiliser le BBCode. Remplacez n’importe quelle variable d’entrée par la chaîne de symboles correspondante (%svoir ci-dessous%s).',
 
-	'EXAMPLE'						=> 'Exemple:',
-	'EXAMPLES'						=> 'Exemples:',
+	'EXAMPLE'						=> 'Exemple :',
+	'EXAMPLES'						=> 'Exemples :',
 
 	'HTML_REPLACEMENT'				=> 'Code HTML de remplacement',
 	'HTML_REPLACEMENT_EXAMPLE'		=> '&lt;span style="background-color: {COLOR};"&gt;{TEXT}&lt;/span&gt;<br /><br />&lt;span style="font-family: {SIMPLETEXT1};"&gt;{SIMPLETEXT2}&lt;/span&gt;',
@@ -72,28 +77,28 @@ $lang = array_merge($lang, array(
 
 	'TOKEN'					=> 'Chaîne de symboles',
 	'TOKENS'				=> 'Chaînes de symboles',
-	'TOKENS_EXPLAIN'		=> 'Les marques sont des conteneurs pour les utilisateurs. Les entrées ne seront validées que si elles trouvent la définition correspondante. Si besoin, vous pouvez les numéroter en y ajoutant un nombre comme dernier caractère entre des accolades, exemple: {TEXT1}, {TEXT2}.<br /><br />Vous pouvez utiliser, en plus du remplacement HTML, une chaîne de langue dans votre répertoire language/ comme ceci: {L_<em>&lt;STRINGNAME&gt;</em>} où <em>&lt;STRINGNAME&gt;</em> est le nom de la chaîne traduite que vous souhaitez ajouter. Par exemple, {L_WROTE} sera affiché en tant que « a écrit » ou sa traduction selon la langue locale de l’utilisateur.<br /><br /><strong>Notez que seules les chaînes listées ci-dessous sont autorisées à être utilisées dans les BBCodes personnalisés.</strong>',
-	'TOKEN_DEFINITION'		=> 'Que peut-il être ?',
+	'TOKENS_EXPLAIN'		=> 'Les chaînes de symboles sont des conteneurs pour les saisies des utilisateurs. Les entrées ne seront validées que si elles trouvent la définition correspondante. Si besoin, vous pouvez les numéroter en y ajoutant un nombre comme dernier caractère entre les accolades, exemple : {TEXT1}, {TEXT2}.<br /><br />En plus du remplacement HTML, vous pouvez utiliser les clés de langue présentes dans votre dossier language/ comme ceci : {L_<em>&lt;STRINGNAME&gt;</em>} où <em>&lt;STRINGNAME&gt;</em> est le nom de la chaîne traduite que vous souhaitez ajouter. Par exemple, {L_WROTE} affichera « a écrit » ou son équivalence selon la langue locale de l’utilisateur.<br /><br /><strong>Notez que seules les chaînes listées ci-dessous sont autorisées à être utilisées dans les BBCodes personnalisés.</strong>',
+	'TOKEN_DEFINITION'		=> 'Que peut-elle être ?',
 	'TOO_MANY_BBCODES'		=> 'Vous ne pouvez pas créer d’autres BBCodes. Supprimez un ou plusieurs BBCodes puis réessayez.',
 
 	'tokens'	=>	array(
-		'TEXT'			=> 'Du texte, incluant des caractères étrangers, chiffres, etc. Vous ne devriez pas utiliser cette marque dans les tags HTML. Essayez d’utiliser à la place les marques IDENTIFIER, INTTEXT ou SIMPLETEXT.',
-		'SIMPLETEXT'	=> 'Caractères alphabétiques latins (A-Z), chiffres, espaces, virgules, points, -, +, et _',
-		'INTTEXT'		=> 'Caractères à lettre unicode, nombres, espaces, virgules, points, -, +, _ et espaces.',
-		'IDENTIFIER'	=> 'Caractères alphabétiques latins (A-Z), chiffres, - et _',
+		'TEXT'			=> 'Tout texte, y compris les caractères étrangers, chiffres, etc.<br />Vous ne devriez pas utiliser cette chaîne de symboles dans les balises HTML. À la place, essayez d’utiliser IDENTIFIER, INTTEXT ou SIMPLETEXT.',
+		'SIMPLETEXT'	=> 'Caractères de l’alphabet latin (A-Z), chiffres, espaces, virgules, points, moins, plus, tirets et tirets bas (underscore).',
+		'INTTEXT'		=> 'Caractères Unicode des catégories « Lettres » et « Chiffres », espaces, virgules, points, moins, plus, tirets et tirets bas (underscore).',
+		'IDENTIFIER'	=> 'Caractères de l’alphabet latin (A-Z), chiffres, tirets et tirets bas (underscore).',
 		'NUMBER'		=> 'Une série de chiffres',
 		'EMAIL'			=> 'Une adresse e-mail valide',
-		'URL'			=> 'Une adresse URL valide. Le protocole peut être spécifié mais HTTP, FTP, etc. ne peuvent pas être utilisés pour des exploits JavaScript. Si aucun protocole n’est spécifié, le protocole HTTP est assumé par défaut, et l’adresse URL compléte sera préfixée de « http:// ». Utile pour des liens externes.',
-		'LOCAL_URL'		=> 'Une adresse URL locale. Ni le protocole ni le serveur ne doivent être spécifiés, l’adresse URL complète sera préfixée de « %s ». Elle doit donc être relative à la page du sujet. Utile pour des liens internes dans une implémentation stable.',
-		'RELATIVE_URL'	=> 'Une adresse URL relative. Il suffit de la préfixer avec le contenu de la variable LOCAL_URL pour obtenir l’adresse URL complète. Attention, une adresse URL complète est aussi une adresse relative qui est valide, ceci peut poser problème. Utile pour des liens internes dans une implémentation pouvant changer.',
+		'URL'			=> 'Une adresse URL valide. Le protocole peut être spécifié mais HTTP, FTP, etc. ne peuvent pas être utilisés pour des exploits JavaScript. Si aucun protocole n’est spécifié, l’adresse URL compléte sera préfixée de « http:// ».',
+		'LOCAL_URL'		=> 'Une adresse URL locale. Ni le protocole ni le serveur ne doivent être spécifiés, l’adresse URL complète sera préfixée de « %s ». Elle doit donc être relative à la page du sujet.',
+		'RELATIVE_URL'	=> 'Une adresse URL relative. Il suffit de la préfixer avec le contenu de la variable LOCAL_URL pour obtenir l’adresse URL complète. Attention, une adresse URL complète est aussi une adresse relative qui est valide, ceci peut poser problème.',
 		'COLOR'			=> 'Une couleur HTML peut être, au choix, soit une forme numérique <samp>#FF1234</samp> ou un <a href="http://www.w3.org/TR/CSS21/syndata.html#value-def-color">nom de couleur CSS</a> comme par exemple <samp>fuchsia</samp> ou <samp>InactiveBorder</samp>'
-	)
+	),
 ));
 
 // Smilies and topic icons
 $lang = array_merge($lang, array(
-	'ACP_ICONS_EXPLAIN'		=> 'Depuis cette page, vous pouvez ajouter, supprimer ou éditer les icônes que les utilisateurs pourront ajouter à leur sujet ou message. Ces icônes sont généralement affichées à côté des titres des sujets sur la liste des forums, ou des titres des messages sur la liste des sujets. Vous pouvez également installer et créer de nouveaux packs d’icônes.',
-	'ACP_SMILIES_EXPLAIN'	=> 'Les smileys ou émoticônes sont généralement de petites images, parfois des images animées qui sont utilisées pour exprimer une émotion ou un sentiment. Depuis cette page, vous pouvez ajouter, supprimer ou éditer les smileys que les utilisateurs peuvent utiliser dans leurs messages et messages privés. Vous pouvez également installer et créer de nouveaux packs de smileys.',
+	'ACP_ICONS_EXPLAIN'		=> 'Depuis cette page, vous pouvez ajouter, supprimer ou modifier les icônes que les utilisateurs pourront ajouter à leur sujet ou message. Ces icônes sont généralement affichées à côté des titres des sujets sur la liste des forums, ou des titres des messages sur la liste des sujets. Vous pouvez également installer et créer de nouveaux packs d’icônes.',
+	'ACP_SMILIES_EXPLAIN'	=> 'Les smileys ou émoticônes sont généralement de petites images, parfois des images animées qui sont utilisées pour exprimer une émotion ou un sentiment. Depuis cette page, vous pouvez ajouter, supprimer ou modifier les smileys que les utilisateurs peuvent utiliser dans leurs messages et messages privés. Vous pouvez également installer et créer de nouveaux packs de smileys.',
 	'ADD_SMILIES'			=> 'Ajouter de multiples smileys',
 	'ADD_SMILEY_CODE'		=> 'Ajouter un code de smiley additionnel',
 	'ADD_ICONS'				=> 'Ajouter de multiples icônes',
@@ -110,10 +115,8 @@ $lang = array_merge($lang, array(
 	'DISPLAY_POSTING'			=> 'Sur la page de rédaction d’un message',
 	'DISPLAY_POSTING_NO'		=> 'Absent de la page de rédaction d’un message',
 
-
-
-	'EDIT_ICONS'				=> 'Éditer les icônes',
-	'EDIT_SMILIES'				=> 'Éditer les smileys',
+	'EDIT_ICONS'				=> 'Modifier les icônes',
+	'EDIT_SMILIES'				=> 'Modifier les smileys',
 	'EMOTION'					=> 'Émotion',
 	'EXPORT_ICONS'				=> 'Exporter et télécharger vers icons.pak',
 	'EXPORT_ICONS_EXPLAIN'		=> '%sEn cliquant sur ce lien, la configuration de vos icônes installées sera regroupée dans le pack <samp>icons.pak</samp> qui, une fois téléchargé, peut être utilisé pour créer un fichier <samp>.zip</samp> ou <samp>.tgz</samp> qui contient toutes vos icônes, ainsi que le fichier de configuration <samp>icons.pak</samp>%s.',
@@ -128,7 +131,7 @@ $lang = array_merge($lang, array(
 	'ICONS_ADDED'			=> 'Les icônes ont été ajoutées.',
 	'ICONS_CONFIG'			=> 'Configuration de l’icône',
 	'ICONS_DELETED'			=> 'L’icône a été supprimée.',
-	'ICONS_EDIT'			=> 'Éditer l’icône',
+	'ICONS_EDIT'			=> 'Modifier l’icône',
 	'ICONS_ONE_EDITED'		=> 'L’icône a été mise à jour.',
 	'ICONS_NONE_EDITED'		=> 'Aucune icône n’a été mise à jour.',
 	'ICONS_EDITED'			=> 'Les icônes ont été mises à jour.',
@@ -138,7 +141,7 @@ $lang = array_merge($lang, array(
 	'ICONS_IMPORT_SUCCESS'	=> 'Le pack d’icônes a été importé.',
 	'ICONS_LOCATION'		=> 'Emplacement de l’icône',
 	'ICONS_NOT_DISPLAYED'	=> 'Les icônes suivantes ne sont pas affichées sur la page de rédaction',
-	'ICONS_ORDER'			=> 'Classement de l’icône',
+	'ICONS_ORDER'			=> 'Position de l’icône',
 	'ICONS_URL'				=> 'Image de l’icône',
 	'ICONS_WIDTH'			=> 'Largeur de l’icône',
 	'IMPORT_ICONS'			=> 'Installer un pack d’icônes',
@@ -169,9 +172,9 @@ $lang = array_merge($lang, array(
 	'SMILIES_CODE'				=> 'Code du smiley',
 	'SMILIES_CONFIG'			=> 'Configuration du smiley',
 	'SMILIES_DELETED'			=> 'Le smiley a été supprimé.',
-	'SMILIES_EDIT'				=> 'Éditer le smiley',
+	'SMILIES_EDIT'				=> 'Modifier le smiley',
 	'SMILIE_NO_CODE'			=> 'Le smiley « %s » a été ignoré car aucun code n’a été saisi.',
-	'SMILIE_NO_EMOTION'			=> 'Le smiley « %s » a été ignoré car aucun smiley n’a été indiqué.',
+	'SMILIE_NO_EMOTION'			=> 'Le smiley « %s » a été ignoré car aucune émotion n’a été saisie.',
 	'SMILIE_NO_FILE'			=> 'Le smiley « %s » a été ignoré car le fichier est manquant.',
 	'SMILIES_NONE_EDITED'		=> 'Aucun smiley n’a été mis à jour.',
 	'SMILIES_ONE_EDITED'		=> 'Le smiley a été mis à jour.',
@@ -183,24 +186,24 @@ $lang = array_merge($lang, array(
 	'SMILIES_IMPORT_SUCCESS'	=> 'Le pack de smileys a été importé.',
 	'SMILIES_LOCATION'			=> 'Emplacement du smiley',
 	'SMILIES_NOT_DISPLAYED'		=> 'Les smileys suivants ne sont pas affichés sur la page de rédaction',
-	'SMILIES_ORDER'				=> 'Classement du smiley',
+	'SMILIES_ORDER'				=> 'Position du smiley',
 	'SMILIES_URL'				=> 'Image du smiley',
 	'SMILIES_WIDTH'				=> 'Largeur du smiley',
 
-	'TOO_MANY_SMILIES'			=> 'Limite de %d smileys atteinte.',
+	'TOO_MANY_SMILIES'			=> 'Limite de %d smiley(s) atteinte.',
 
 	'WRONG_PAK_TYPE'	=> 'Le pack indiqué ne contient pas les données appropriées.',
 ));
 
 // Word censors
 $lang = array_merge($lang, array(
-	'ACP_WORDS_EXPLAIN'		=> 'Depuis ce panneau de contrôle, vous pouvez ajouter, éditer et supprimer les mots qui seront automatiquement censurés sur votre forum. Les gens seront toujours autorisés à s’inscrire avec un nom d’utilisateur contenant ces mots. Les jokers (*) sont acceptés dans le champ, exemple: *test* censurera détestable, test* censurera testament, *test censurera contest.',
+	'ACP_WORDS_EXPLAIN'		=> 'Depuis ce panneau de contrôle, vous pouvez ajouter, modifier et supprimer les mots qui seront automatiquement censurés sur votre forum. Les gens seront toujours autorisés à s’inscrire avec un nom d’utilisateur contenant ces mots. Les jokers (*) sont acceptés dans le champ, exemple : *test* censurera « détestable », test* censurera « testament », *test censurera « contest ».',
 	'ADD_WORD'				=> 'Ajouter un nouveau mot',
 
-	'EDIT_WORD'		=> 'Éditer la censure',
-	'ENTER_WORD'	=> 'Vous devez entrer un mot et son remplaçant.',
+	'EDIT_WORD'		=> 'Modifier la censure',
+	'ENTER_WORD'	=> 'Vous devez saisir un mot et son remplaçant.',
 
-	'NO_WORD'	=> 'Aucun mot sélectionné à éditer.',
+	'NO_WORD'	=> 'Aucun mot sélectionné à modifier.',
 
 	'REPLACEMENT'	=> 'Remplacement',
 
@@ -214,7 +217,7 @@ $lang = array_merge($lang, array(
 
 // Ranks
 $lang = array_merge($lang, array(
-	'ACP_RANKS_EXPLAIN'		=> 'Utilisez ce formulaire pour ajouter, éditer, visionner ou supprimer des rangs. Vous pouvez aussi créer des rangs spéciaux qui pourront être attribués à un utilisateur via la gestion de l’utilisateur.',
+	'ACP_RANKS_EXPLAIN'		=> 'Utilisez ce formulaire pour ajouter, modifier, visionner ou supprimer des rangs. Vous pouvez aussi créer des rangs spéciaux qui pourront être attribués à un utilisateur via la gestion de l’utilisateur.',
 	'ADD_RANK'				=> 'Ajouter un nouveau rang',
 
 	'MUST_SELECT_RANK'		=> 'Vous devez sélectionner un rang.',
@@ -242,7 +245,7 @@ $lang = array_merge($lang, array(
 
 	'DELETE_DISALLOW_EXPLAIN'	=> 'Vous pouvez retirer un nom de la liste en le sélectionnant puis en cliquant sur envoyer.',
 	'DELETE_DISALLOW_TITLE'		=> 'Supprimer un nom interdit',
-	'DISALLOWED_ALREADY'		=> 'Le nom entré ne peut être interdit. Il peut soit déjà être interdit, soit être déjà utilisé sur le forum.',
+	'DISALLOWED_ALREADY'		=> 'Le nom saisi est déjà interdit.',
 	'DISALLOWED_DELETED'		=> 'Le nom interdit a été supprimé.',
 	'DISALLOW_SUCCESSFUL'		=> 'Le nom interdit a été ajouté.',
 
@@ -270,8 +273,8 @@ $lang = array_merge($lang, array(
 	'REASON_ALREADY_EXIST'		=> 'Une raison existe déjà avec ce titre, entrez un autre titre pour cette raison.',
 	'REASON_DESCRIPTION'		=> 'Description de la raison',
 	'REASON_DESC_TRANSLATED'	=> 'Description affichée de la raison',
-	'REASON_EDIT'				=> 'Éditer la raison du rapport',
-	'REASON_EDIT_EXPLAIN'		=> 'Vous pouvez ajouter ou éditer une raison. Si la raison est traduite, la version traduite sera utilisée au lieu de la description entrée ici.',
+	'REASON_EDIT'				=> 'Modifier la raison du rapport',
+	'REASON_EDIT_EXPLAIN'		=> 'Vous pouvez ajouter ou modifier une raison. Si la raison est traduite, la version traduite sera utilisée au lieu de la description entrée ici.',
 	'REASON_REMOVED'			=> 'La raison du rapport a été supprimée.',
 	'REASON_TITLE'				=> 'Titre de la raison',
 	'REASON_TITLE_TRANSLATED'	=> 'Titre affiché de la raison',

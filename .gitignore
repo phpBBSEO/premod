@@ -1,4 +1,5 @@
 *~
+/premod/root/config.php
 /premod/root/cache/*.html
 /premod/root/cache/*.php
 /premod/root/cache/*.lock
@@ -17,6 +18,11 @@
 !/premod/root/images/avatars/upload/index.htm
 /premod/root/images/ranks/*
 !/premod/root/images/ranks/index.htm
+
+/premod/root/phpbb_seo/cache/*
+!/premod/root/phpbb_seo/cache/.htaccess
+/premod/root/gym_sitemaps/cache/*
+!/premod/root/gym_sitemaps/cache/.htaccess
 
 /tests/phpbb_unit_tests.sqlite*
 /tests/tmp/*

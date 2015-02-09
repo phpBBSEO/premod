@@ -2,10 +2,11 @@
 /**
 *
 * search [Standard french]
-* translated originally by PhpBB-fr.com <http://www.phpbb-fr.com/> and phpBB.biz <http://www.phpBB.biz>
+* @translated originally by phpBB.biz and phpBB-fr.com
+* @translated currently by phpBB-fr.com (http://www.phpbb-fr.com)
 *
 * @package language
-* @version $Id: search.php 71 2013-07-23 21:38:34Z papicx $
+* @version $Id$
 * @copyright (c) 2005 phpBB Group
 * @license http://opensource.org/licenses/gpl-license.php GNU Public License
 *
@@ -35,6 +36,10 @@ if (empty($lang) || !is_array($lang))
 // You do not need this where single placeholders are used, e.g. 'Message %d' is fine
 // equally where a string contains only two placeholders which are used to wrap text
 // in a url you again do not need to specify an order e.g., 'Click %sHERE%s' is fine
+//
+// Some characters you may want to copy&paste:
+// ’ « » “ ” …
+//
 
 $lang = array_merge($lang, array(
 	'ALL_AVAILABLE'			=> 'Tous disponibles',
@@ -44,22 +49,22 @@ $lang = array_merge($lang, array(
 
 	'FOUND_SEARCH_MATCH'		=> '%d résultat trouvé',
 	'FOUND_SEARCH_MATCHES'		=> '%d résultats trouvés',
-	'FOUND_MORE_SEARCH_MATCHES'	=> 'La recherche a trouvé plus de %d résultats',
+	'FOUND_MORE_SEARCH_MATCHES'	=> 'La recherche a trouvé plus de %d résultat(s)',
 
 	'GLOBAL'				=> 'Annonce globale',
 
 	'IGNORED_TERMS'			=> 'ignoré',
-	'IGNORED_TERMS_EXPLAIN'	=> 'Les mots suivants de votre recherche ont été ignorés parce qu’ils sont trop communs: <strong>%s</strong>.',
+	'IGNORED_TERMS_EXPLAIN'	=> 'Les mots suivants de votre recherche ont été ignorés parce qu’ils sont trop communs : <strong>%s</strong>.',
 
 	'JUMP_TO_POST'			=> 'Aller au message',
 
 	'LOGIN_EXPLAIN_EGOSEARCH'		=> 'Vous devez être enregistré et connecté afin de voir vos propres messages.',
-	'LOGIN_EXPLAIN_UNREADSEARCH'	=> 'Vous devez être enregistré et connecté pour voir les messages non lus.',
-	'LOGIN_EXPLAIN_NEWPOSTS'		=> 'Vous devez être enregistré et connecté pour voir les nouveaux messages depuis votre dernière visite.',
+	'LOGIN_EXPLAIN_UNREADSEARCH'	=> 'Vous devez être enregistré et connecté afin de voir les messages non lus.',
+	'LOGIN_EXPLAIN_NEWPOSTS'		=> 'Vous devez être enregistré et connecté afin de voir les nouveaux messages depuis votre dernière visite.',
 
-	'MAX_NUM_SEARCH_KEYWORDS_REFINE'	=> 'Vous avez spécifié un nombre de mots trop important à rechercher. N’entrez pas plus de %1$d mots.',
+	'MAX_NUM_SEARCH_KEYWORDS_REFINE'	=> 'Vous avez spécifié un nombre de mots trop important à rechercher. Ne saisissez pas plus de %1$d mot(s).',
 
-	'NO_KEYWORDS'			=> 'Vous devez indiquer au moins un mot pour effectuer une recherche. Chaque mot doit se composer d’au moins %d caractères et ne doit pas en contenir plus de %d en excluant les jokers.',
+	'NO_KEYWORDS'			=> 'Vous devez indiquer au moins un mot pour effectuer une recherche. Chaque mot doit être composé d’au moins %d caractère(s) et ne doit pas en contenir plus de %d en excluant les jokers.',
 	'NO_RECENT_SEARCHES'	=> 'Aucune recherche n’a été effectuée récemment.',
 	'NO_SEARCH'				=> 'Désolé mais vous n’êtes pas autorisé à utiliser le système de recherche.',
 	'NO_SEARCH_RESULTS'		=> 'Aucun sujet ou message ne correspond à vos critères de recherche.',
@@ -102,7 +107,7 @@ $lang = array_merge($lang, array(
 	'SORT_POST_SUBJECT'			=> 'Sujet du message',
 	'SORT_TIME'					=> 'Date',
 
-	'TOO_FEW_AUTHOR_CHARS'	=> 'Vous devez indiquer au moins %d caractères du nom de l’auteur.',
+	'TOO_FEW_AUTHOR_CHARS'	=> 'Vous devez indiquer au moins %d caractère(s) du nom de l’auteur.',
 ));
 
 ?>

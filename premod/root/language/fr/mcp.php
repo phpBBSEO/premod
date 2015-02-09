@@ -2,10 +2,11 @@
 /**
 *
 * mcp [Standard french]
-* translated originally by PhpBB-fr.com <http://www.phpbb-fr.com/> and phpBB.biz <http://www.phpBB.biz>
+* @translated originally by phpBB.biz and phpBB-fr.com
+* @translated currently by phpBB-fr.com (http://www.phpbb-fr.com)
 *
 * @package language
-* @version $Id: mcp.php 79 2013-10-01 00:10:32Z Skouat $
+* @version $Id$
 * @copyright (c) 2005 phpBB Group
 * @license http://opensource.org/licenses/gpl-license.php GNU Public License
 *
@@ -35,6 +36,10 @@ if (empty($lang) || !is_array($lang))
 // You do not need this where single placeholders are used, e.g. 'Message %d' is fine
 // equally where a string contains only two placeholders which are used to wrap text
 // in a url you again do not need to specify an order e.g., 'Click %sHERE%s' is fine
+//
+// Some characters you may want to copy&paste:
+// ’ « » “ ” …
+//
 
 $lang = array_merge($lang, array(
 	'ACTION'				=> 'Action',
@@ -44,19 +49,19 @@ $lang = array_merge($lang, array(
 	'ADD_WARNING'			=> 'Ajouter un avertissement',
 	'ADD_WARNING_EXPLAIN'	=> 'Pour envoyer un avertissement à cet utilisateur, remplissez le formulaire suivant. Utilisez seulement du texte. Le HTML, les BBCodes, etc. ne sont pas autorisés.',
 	'ALL_ENTRIES'			=> 'Toutes les entrées',
-	'ALL_NOTES_DELETED'		=> 'Les commentaires sur l’utilisateur ont été supprimés.',
+	'ALL_NOTES_DELETED'		=> 'Tous les commentaires sur l’utilisateur ont été supprimés.',
 	'ALL_REPORTS'			=> 'Tous les rapports',
 	'ALREADY_REPORTED'		=> 'Ce message a déjà été rapporté.',
 	'ALREADY_REPORTED_PM'	=> 'Ce message privé a déjà été rapporté.',
-	'ALREADY_WARNED'		=> 'Un avertissement a déjà été publié pour ce message.',
+	'ALREADY_WARNED'		=> 'Un avertissement a déjà été donné pour ce message.',
 	'APPROVE'				=> 'Approuver',
 	'APPROVE_POST'			=> 'Approuver le message',
 	'APPROVE_POST_CONFIRM'	=> 'Êtes-vous sûr de vouloir approuver ce message ?',
 	'APPROVE_POSTS'			=> 'Approuver les messages',
 	'APPROVE_POSTS_CONFIRM'	=> 'Êtes-vous sûr de vouloir approuver les messages sélectionnés ?',
 
-	'CANNOT_MOVE_SAME_FORUM'=> 'Vous ne pouvez pas déplacer un sujet dans un forum où il se trouve déjà.',
-	'CANNOT_WARN_ANONYMOUS'	=> 'Vous ne pouvez pas avertir un visiteur.',
+	'CANNOT_MOVE_SAME_FORUM'=> 'Vous ne pouvez pas déplacer un sujet dans le forum où il se trouve déjà.',
+	'CANNOT_WARN_ANONYMOUS'	=> 'Vous ne pouvez pas donner un avertissement à un invité.',
 	'CANNOT_WARN_SELF'		=> 'Vous ne pouvez pas vous donner un avertissement.',
 	'CAN_LEAVE_BLANK'		=> 'Ceci peut être laissé vide.',
 	'CHANGE_POSTER'			=> 'Changer le nom du posteur',
@@ -81,7 +86,7 @@ $lang = array_merge($lang, array(
 	'DELETE_REPORTS'			=> 'Supprimer les rapports',
 	'DELETE_REPORTS_CONFIRM'	=> 'Êtes-vous sûr de vouloir supprimer les rapports sélectionnés ?',
 	'DELETE_SHADOW_TOPIC'		=> 'Supprimer le sujet-traceur',
-	'DELETE_TOPICS'				=> 'Supprimer les sujets choisis',
+	'DELETE_TOPICS'				=> 'Supprimer les sujets sélectionnés',
 	'DELETE_TOPICS_CONFIRM'		=> 'Êtes-vous sûr de vouloir supprimer ces sujets ?',
 	'DELETE_TOPIC_CONFIRM'		=> 'Êtes-vous sûr de vouloir supprimer ce sujet ?',
 	'DISAPPROVE'				=> 'Désapprouver',
@@ -93,30 +98,30 @@ $lang = array_merge($lang, array(
 	'DISPLAY_LOG'				=> 'Afficher les entrées précédentes',
 	'DISPLAY_OPTIONS'			=> 'Options d’affichage',
 
-	'EMPTY_REPORT'					=> 'Vous devez entrer une description si vous sélectionnez cette raison.',
+	'EMPTY_REPORT'					=> 'Vous devez saisir une description si vous sélectionnez cette raison.',
 	'EMPTY_TOPICS_REMOVED_WARNING'	=> 'Notez qu’un ou plusieurs sujets ont été supprimés de la base de données car ils étaient ou devenaient vides.',
 
 	'FEEDBACK'				=> 'Fiches de suivi',
 	'FORK'					=> 'Copier',
 	'FORK_TOPIC'			=> 'Copier le sujet',
 	'FORK_TOPIC_CONFIRM'	=> 'Êtes-vous sûr de vouloir copier ce sujet ?',
-	'FORK_TOPICS'			=> 'Copier les sujets choisis',
+	'FORK_TOPICS'			=> 'Copier les sujets sélectionnés',
 	'FORK_TOPICS_CONFIRM'	=> 'Êtes-vous sûr de vouloir copier les sujets sélectionnés ?',
 	'FORUM_DESC'			=> 'Description',
 	'FORUM_NAME'			=> 'Nom du forum',
 	'FORUM_NOT_EXIST'		=> 'Le forum que vous avez sélectionné n’existe pas.',
-	'FORUM_NOT_POSTABLE'	=> 'Le forum que vous avez sélectionné ne peut pas être mis en place.',
+	'FORUM_NOT_POSTABLE'	=> 'Le forum que vous avez sélectionné ne peut pas recevoir de messages.',
 	'FORUM_STATUS'			=> 'Statut du forum',
 	'FORUM_STYLE'			=> 'Style du forum',
 
 	'GLOBAL_ANNOUNCEMENT'	=> 'Annonce globale',
 
 	'IP_INFO'				=> 'Information IP',
-	'IPS_POSTED_FROM'		=> 'Cet utilisateur a posté avec les adresses IP:',
+	'IPS_POSTED_FROM'		=> 'Cet utilisateur a posté avec les adresses IP :',
 
-	'LATEST_LOGS'				=> 'Les 5 dernières actions notées',
-	'LATEST_REPORTED'			=> 'Les 5 derniers rapports',
-	'LATEST_REPORTED_PMS'		=> 'Les 5 derniers rapport de MP',
+	'LATEST_LOGS'				=> 'Les 5 dernières entrées du journal de modération',
+	'LATEST_REPORTED'			=> 'Les 5 derniers rapports de message',
+	'LATEST_REPORTED_PMS'		=> 'Les 5 derniers rapports de MP',
 	'LATEST_UNAPPROVED'			=> 'Les 5 derniers messages en attente de modération',
 	'LATEST_WARNING_TIME'		=> 'Dernier avertissement donné',
 	'LATEST_WARNINGS'			=> 'Les 5 derniers avertissements',
@@ -125,27 +130,27 @@ $lang = array_merge($lang, array(
 	'LIST_REPORTS'				=> '%d rapports',
 	'LOCK'						=> 'Verrouiller',
 	'LOCK_POST_POST'			=> 'Verrouiller le message',
-	'LOCK_POST_POST_CONFIRM'	=> 'Êtes-vous sûr de vouloir empêcher l’édition de ce message ?',
+	'LOCK_POST_POST_CONFIRM'	=> 'Êtes-vous sûr de vouloir empêcher la modification de ce message ?',
 	'LOCK_POST_POSTS'			=> 'Verrouiller les messages sélectionnés',
-	'LOCK_POST_POSTS_CONFIRM'	=> 'Êtes-vous sûr de vouloir empêcher l’édition de ces messages ?',
+	'LOCK_POST_POSTS_CONFIRM'	=> 'Êtes-vous sûr de vouloir empêcher la modification de ces messages ?',
 	'LOCK_TOPIC_CONFIRM'		=> 'Êtes-vous sûr de vouloir verrouiller ce sujet ?',
 	'LOCK_TOPICS'				=> 'Verrouiller les sujets sélectionnés',
 	'LOCK_TOPICS_CONFIRM'		=> 'Êtes-vous sûr de vouloir verrouiller tous les sujets sélectionnés ?',
-	'LOGS_CURRENT_TOPIC'		=> 'Notations actuellement visionnées:',
+	'LOGS_CURRENT_TOPIC'		=> 'Vous consultez les journaux de :',
 	'LOGIN_EXPLAIN_MCP'			=> 'Pour modérer ce forum vous devez vous connecter.',
 	'LOGVIEW_VIEWTOPIC'			=> 'Voir le sujet',
 	'LOGVIEW_VIEWLOGS'			=> 'Consulter le journal des sujets',
 	'LOGVIEW_VIEWFORUM'			=> 'Voir le forum',
-	'LOOKUP_ALL'				=> 'Rechercher toutes les IPs',
+	'LOOKUP_ALL'				=> 'Rechercher toutes les IP',
 	'LOOKUP_IP'					=> 'Rechercher une IP',
 
-	'MARKED_NOTES_DELETED'		=> 'Tous les commentaires sur l’utilisateur ont été supprimés.',
+	'MARKED_NOTES_DELETED'		=> 'Les commentaires sélectionnés de l’utilisateur ont été supprimés.',
 
 	'MCP_ADD'					=> 'Ajouter un avertissement',
 
 	'MCP_BAN'					=> 'Bannissements',
 	'MCP_BAN_EMAILS'			=> 'Bannir des adresses e-mail',
-	'MCP_BAN_IPS'				=> 'Bannir des IPs',
+	'MCP_BAN_IPS'				=> 'Bannir des IP',
 	'MCP_BAN_USERNAMES'			=> 'Bannir des utilisateurs',
 
 	'MCP_LOGS'						=> 'Journal de modération',
@@ -175,25 +180,25 @@ $lang = array_merge($lang, array(
 	'MCP_MAKE_NORMALS'				=> 'Mettre en « Sujets normaux »',
 	'MCP_MAKE_NORMALS_CONFIRM'		=> 'Êtes-vous sûr de vouloir mettre les sujets sélectionnés en « Sujets normaux » ?',
 
-	'MCP_NOTES'						=> 'Fiche de suivi',
+	'MCP_NOTES'						=> 'Fiches de suivi',
 	'MCP_NOTES_FRONT'				=> 'Première page',
 	'MCP_NOTES_USER'				=> 'Détails',
 
-	'MCP_POST_REPORTS'				=> 'Rapports issus de ce message',
+	'MCP_POST_REPORTS'				=> 'Rapports émis pour ce message',
 
-	'MCP_PM_REPORTS'				=> 'MPs rapportés',
+	'MCP_PM_REPORTS'				=> 'MP rapportés',
 	'MCP_PM_REPORT_DETAILS'			=> 'Détails du rapport de MP',
 	'MCP_PM_REPORTS_CLOSED'			=> 'Rapports de MP clôturés',
 	'MCP_PM_REPORTS_CLOSED_EXPLAIN'	=> 'Voici une liste de tous les rapports de messages privés qui ont été résolus.',
 	'MCP_PM_REPORTS_OPEN'			=> 'Rapports de MP ouverts',
-	'MCP_PM_REPORTS_OPEN_EXPLAIN'	=> 'Voici une liste de tous les rapports de messages privés qui doivent toujours être pris en charge.',
+	'MCP_PM_REPORTS_OPEN_EXPLAIN'	=> 'Voici une liste de tous les rapports de messages privés qui sont encore à traiter.',
 
 	'MCP_REPORTS'					=> 'Messages rapportés',
 	'MCP_REPORT_DETAILS'			=> 'Détails du rapport',
 	'MCP_REPORTS_CLOSED'			=> 'Rapports clôturés',
-	'MCP_REPORTS_CLOSED_EXPLAIN'	=> 'Liste de tous les rapports de messages qui ont été précédemment résolus.',
+	'MCP_REPORTS_CLOSED_EXPLAIN'	=> 'Liste de tous les rapports de messages qui ont été résolus.',
 	'MCP_REPORTS_OPEN'				=> 'Rapports en cours',
-	'MCP_REPORTS_OPEN_EXPLAIN'		=> 'Liste de tous les messages rapportés qui doivent toujours être traités.',
+	'MCP_REPORTS_OPEN_EXPLAIN'		=> 'Liste de tous les messages rapportés qui sont encore à traiter.',
 
 	'MCP_QUEUE'								=> 'En attente de modération',
 	'MCP_QUEUE_APPROVE_DETAILS'				=> 'Approuver les détails',
@@ -211,7 +216,7 @@ $lang = array_merge($lang, array(
 	'MCP_WARN_USER'			=> 'Avertir le membre',
 
 	'MERGE_POSTS_CONFIRM'	=> 'Êtes-vous sûr de vouloir déplacer les messages sélectionnés ?',
-	'MERGE_TOPIC_EXPLAIN'	=> 'L’utilisation du formulaire ci-dessous vous permet de déplacer les messages sélectionnés dans un autre sujet. Ces messages seront déplacés de ce sujet et fusionnés dans l’autre sujet. Ces messages ne seront pas réordonnés et apparaîtront comme si les utilisateurs les avaient postés dans le nouveau sujet.<br />Entrez l’id du sujet de destination ou cliquez sur « Sélectionner le sujet » pour en rechercher un.',
+	'MERGE_TOPIC_EXPLAIN'	=> 'L’utilisation du formulaire ci-dessous vous permet de déplacer les messages sélectionnés dans un autre sujet. Ces messages seront déplacés de ce sujet et fusionnés dans l’autre sujet. Ces messages ne seront pas réordonnés et apparaîtront comme si les utilisateurs les avaient postés dans le nouveau sujet.<br />Saississez l’id du sujet de destination ou cliquez sur « Sélectionner le sujet » pour en rechercher un.',
 	'MERGE_TOPIC_ID'		=> 'Id du sujet de destination',
 	'MERGE_TOPICS'			=> 'Fusionner les sujets',
 	'MERGE_TOPICS_CONFIRM'	=> 'Êtes-vous sûr de vouloir fusionner les sujets sélectionnés ?',
@@ -231,7 +236,7 @@ $lang = array_merge($lang, array(
 	'NOT_MODERATOR'					=> 'Vous n’êtes pas modérateur de ce forum.',
 	'NO_DESTINATION_FORUM'			=> 'Sélectionnez un forum de destination.',
 	'NO_DESTINATION_FORUM_FOUND'	=> 'Il n’y a aucun forum de destination disponible.',
-	'NO_ENTRIES'					=> 'Aucune entrée de notation pour cette période.',
+	'NO_ENTRIES'					=> 'Aucune entrée au journal n’existe pour cette période.',
 	'NO_FEEDBACK'					=> 'Aucune fiche de suivi n’existe pour cet utilisateur.',
 	'NO_FINAL_TOPIC_SELECTED'		=> 'Vous devez sélectionner un sujet de destination pour fusionner les messages.',
 	'NO_MATCHES_FOUND'				=> 'Aucun résultat trouvé.',
@@ -252,11 +257,11 @@ $lang = array_merge($lang, array(
 	'PM_REPORT_CLOSED_SUCCESS'	=> 'Le rapport de MP sélectionné a été clôturé.',
 	'PM_REPORT_DELETED_SUCCESS'	=> 'Le rapport de MP sélectionné a été supprimé.',
 	'PM_REPORTED_SUCCESS'		=> 'Le message privé a été rapporté.',
-	'PM_REPORT_TOTAL'			=> 'Au total, il y a <strong>1</strong> rapport de MP à revoir.',
+	'PM_REPORT_TOTAL'			=> 'Il y a <strong>1</strong> rapport de MP à passer en revue.',
 	'PM_REPORTS_CLOSED_SUCCESS'	=> 'Les rapports de MP sélectionnés ont été clôturés.',
 	'PM_REPORTS_DELETED_SUCCESS'=> 'Les rapports de MP sélectionnés ont été supprimés.',
-	'PM_REPORTS_TOTAL'			=> 'Au total, il y a <strong>%d</strong> rapports de MP à revoir.',
-	'PM_REPORTS_ZERO_TOTAL'		=> 'Aucun rapport de MP à revoir.',
+	'PM_REPORTS_TOTAL'			=> 'Au total, il y a <strong>%d</strong> rapports de MP à passer en revue.',
+	'PM_REPORTS_ZERO_TOTAL'		=> 'Il n’y a aucun rapport de MP à passer en revue.',
 	'PM_REPORT_DETAILS'			=> 'Détails du rapport de message privé',
 	'POSTER'					=> 'Posteur',
 	'POSTS_APPROVED_SUCCESS'	=> 'Les messages sélectionnés ont été approuvés.',
@@ -283,20 +288,20 @@ $lang = array_merge($lang, array(
 	'REPORTED_ON_DATE'			=> 'le',
 	'REPORTS_CLOSED_SUCCESS'	=> 'Les rapports sélectionnés ont été clôturés.',
 	'REPORTS_DELETED_SUCCESS'	=> 'Les rapports sélectionnés ont été supprimés.',
-	'REPORTS_TOTAL'				=> 'Il y a, au total, <strong>%d</strong> rapports à passer en revue.',
+	'REPORTS_TOTAL'				=> 'Au total, il y a <strong>%d</strong> rapports à passer en revue.',
 	'REPORTS_ZERO_TOTAL'		=> 'Il n’y a aucun rapport à passer en revue.',
 	'REPORT_CLOSED'				=> 'Ce rapport a déjà été clôturé.',
 	'REPORT_CLOSED_SUCCESS'		=> 'Le rapport sélectionné a été clôturé.',
 	'REPORT_DELETED_SUCCESS'	=> 'Le rapport sélectionné a été supprimé.',
 	'REPORT_DETAILS'			=> 'Détails du rapport',
 	'REPORT_MESSAGE'			=> 'Rapporter ce message',
-	'REPORT_MESSAGE_EXPLAIN'	=> 'Utilisez ce formulaire pour rapporter le message privé sélectionné. En général, le rapport ne devra être utilisé que si le message ne respecte pas les règles du forum. <strong>En rapportant un message privé, son contenu sera visible à tous les modérateurs.</strong>',
+	'REPORT_MESSAGE_EXPLAIN'	=> 'Utilisez ce formulaire pour rapporter le message privé sélectionné. En général, le rapport ne devra être utilisé que si le message ne respecte pas les règles du forum. <strong>Notez que rapporter un message privé rendra son contenu visible par tous les modérateurs.</strong>',
 	'REPORT_NOTIFY'				=> 'M’informer',
 	'REPORT_NOTIFY_EXPLAIN'		=> 'Vous informer quand votre rapport a été traité.',
 	'REPORT_POST_EXPLAIN'		=> 'Utilisez ce formulaire pour rapporter le message sélectionné aux modérateurs du forum et aux administrateurs. En général, le rapport ne devra être utilisé que si le message ne respecte pas les règles du forum.',
 	'REPORT_REASON'				=> 'Raison du rapport',
 	'REPORT_TIME'				=> 'Date du rapport',
-	'REPORT_TOTAL'				=> 'Il reste <strong>1</strong> rapport à passer en revue.',
+	'REPORT_TOTAL'				=> 'Il y a <strong>1</strong> rapport à passer en revue.',
 	'RESYNC'					=> 'Resynchroniser',
 	'RETURN_MESSAGE'			=> '%sRetourner au message%s',
 	'RETURN_NEW_FORUM'			=> '%sAller au nouveau forum%s',
@@ -354,16 +359,16 @@ $lang = array_merge($lang, array(
 	'TOPIC_UNLOCKED_SUCCESS'	=> 'Le sujet sélectionné a été déverrouillé.',
 	'TOTAL_WARNINGS'			=> 'Total des avertissements',
 
-	'UNAPPROVED_POSTS_TOTAL'		=> 'Il y a, au total, <strong>%d</strong> messages en attente de modération.',
-	'UNAPPROVED_POSTS_ZERO_TOTAL'	=> 'Il n’y a aucun message en attente de modération.',
-	'UNAPPROVED_POST_TOTAL'			=> 'Il reste <strong>1</strong> message en attente de modération.',
+	'UNAPPROVED_POSTS_TOTAL'		=> 'Au total, il y a <strong>%d</strong> messages en attente d’approbation.',
+	'UNAPPROVED_POSTS_ZERO_TOTAL'	=> 'Il n’y a aucun message en attente d’approbation.',
+	'UNAPPROVED_POST_TOTAL'			=> 'Il y a <strong>1</strong> message en attente d’approbation.',
 	'UNLOCK'						=> 'Déverrouiller',
 	'UNLOCK_POST'					=> 'Déverrouiller le message',
-	'UNLOCK_POST_EXPLAIN'			=> 'Autorise l’édition',
+	'UNLOCK_POST_EXPLAIN'			=> 'Autorise la modification',
 	'UNLOCK_POST_POST'				=> 'Déverrouiller le message',
-	'UNLOCK_POST_POST_CONFIRM'		=> 'Êtes-vous sûr de vouloir déverrouiller ce message et ainsi en autoriser l’édition ?',
+	'UNLOCK_POST_POST_CONFIRM'		=> 'Êtes-vous sûr de vouloir déverrouiller ce message et ainsi en autoriser la modification ?',
 	'UNLOCK_POST_POSTS'				=> 'Déverrouiller les messages sélectionnés',
-	'UNLOCK_POST_POSTS_CONFIRM'		=> 'Êtes-vous sûr de vouloir déverrouiller ces messages et ainsi en autoriser l’édition ?',
+	'UNLOCK_POST_POSTS_CONFIRM'		=> 'Êtes-vous sûr de vouloir déverrouiller ces messages et ainsi en autoriser la modification ?',
 	'UNLOCK_TOPIC'					=> 'Déverrouiller le sujet',
 	'UNLOCK_TOPIC_CONFIRM'			=> 'Êtes-vous sûr de vouloir déverrouiller ce sujet ?',
 	'UNLOCK_TOPICS'					=> 'Déverrouiller les sujets sélectionnés',
@@ -379,12 +384,12 @@ $lang = array_merge($lang, array(
 
 	'WARNED_USERS'			=> 'Utilisateurs avertis',
 	'WARNED_USERS_EXPLAIN'	=> 'Liste des utilisateurs dont les avertissements donnés sont encore valables.',
-	'WARNING_PM_BODY'		=> 'Ce qui suit est un avertissement qui vous a été adressé par un administrateur ou un modérateur.[quote]%s[/quote]',
+	'WARNING_PM_BODY'		=> 'Ce qui suit est un avertissement qui vous a été donné par un administrateur ou un modérateur.[quote]%s[/quote]',
 	'WARNING_PM_SUBJECT'	=> 'Avertissement !',
-	'WARNING_POST_DEFAULT'	=> 'Ceci est un avertissement concernant ce message que vous avez posté: %s .',
+	'WARNING_POST_DEFAULT'	=> 'Ceci est un avertissement concernant ce message que vous avez posté : %s .',
 	'WARNINGS_ZERO_TOTAL'	=> 'Aucun avertissement.',
 
-	'YOU_SELECTED_TOPIC'	=> 'Vous avez sélectionné le sujet n° %d: %s.',
+	'YOU_SELECTED_TOPIC'	=> 'Vous avez sélectionné le sujet n° %d : %s.',
 
 	'report_reasons'		=> array(
 		'TITLE'	=> array(
@@ -398,7 +403,7 @@ $lang = array_merge($lang, array(
 			'SPAM'		=> 'Le message rapporté est un message publicitaire pour un site Internet ou autre.',
 			'OFF_TOPIC'	=> 'Le message rapporté est hors sujet.',
 			'OTHER'		=> 'Le message rapporté ne s’adapte à aucune autre catégorie, utilisez le champ d’information complémentaire.',
-		)
+		),
 	),
 ));
 

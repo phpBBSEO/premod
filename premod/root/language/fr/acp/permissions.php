@@ -2,10 +2,11 @@
 /**
 *
 * acp_permissions [Standard french]
-* translated originally by PhpBB-fr.com <http://www.phpbb-fr.com/> and phpBB.biz <http://www.phpBB.biz>
+* @translated originally by phpBB.biz and phpBB-fr.com
+* @translated currently by phpBB-fr.com (http://www.phpbb-fr.com)
 *
 * @package language
-* @version $Id: permissions.php 71 2013-07-23 21:38:34Z papicx $
+* @version $Id$
 * @copyright (c) 2005 phpBB Group
 * @license http://opensource.org/licenses/gpl-license.php GNU Public License
 *
@@ -35,10 +36,14 @@ if (empty($lang) || !is_array($lang))
 // You do not need this where single placeholders are used, e.g. 'Message %d' is fine
 // equally where a string contains only two placeholders which are used to wrap text
 // in a url you again do not need to specify an order e.g., 'Click %sHERE%s' is fine
+//
+// Some characters you may want to copy&paste:
+// ’ « » “ ” …
+//
 
 $lang = array_merge($lang, array(
 	'ACP_PERMISSIONS_EXPLAIN'	=> '
-		<p>Les permissions sont très nombreuses et regroupées en quatre grandes sections qui sont:</p>
+		<p>Les permissions sont très nombreuses et regroupées en quatre grandes sections qui sont :</p>
 
 		<h2>Permissions globales</h2>
 		<p>Elles sont utilisées pour contrôler l’accès de façon globale et sont appliquées à l’ensemble du forum. Elles sont elles-mêmes divisées en permissions des utilisateurs, groupes, administrateurs et modérateurs globaux.</p>
@@ -47,34 +52,34 @@ $lang = array_merge($lang, array(
 		<p>Elles sont utilisées pour contrôler l’accès de base aux forums. Elles sont elles-mêmes divisées en permissions des forums, modérateurs des forums, permissions des forums pour les utilisateurs et permissions des forums pour les groupes.</p>
 
 		<h2>Modèles de permissions</h2>
-		<p>Ils sont utilisés afin de créer différents ensembles de permissions pour les différents types de permission pouvant être assignés plus tard à une base de modèles de base. Les modèles par défaut doivent couvrir l’administration des petits et grands forums, cependant dans chacune des quatre divisions, vous pouvez ajouter/éditer/supprimer des modèles selon vos souhaits.</p>
+		<p>Ils sont utilisés afin de créer différents ensembles de permissions pour les différents types de permissions pouvant être assignés plus tard à une base de modèles de base. Les modèles par défaut doivent couvrir l’administration des petits et grands forums, cependant dans chacune des quatre divisions, vous pouvez ajouter/modifier/supprimer des modèles selon vos souhaits.</p>
 
 		<h2>Masques de permissions</h2>
 		<p>Ils sont utilisés afin de voir les permissions effectives assignées aux utilisateurs, modérateurs (locaux et globaux), administrateurs du forum.</p>
 
 		<br />
 
-		<p>Pour de plus amples informations sur la configuration et la gestion des permissions de votre forum phpBB3, consultez la <a href="http://forums.phpbb-fr.com/documentation-phpbb3/sujet149600.html#p1037956">[Doc] Régler les permissions d’un forum (simple)</a>.</p>
+		<p>Pour de plus amples informations sur la configuration et la gestion des permissions de votre forum phpBB3, consultez la documentation <a href="http://forums.phpbb-fr.com/documentation/utilisation-de-phpbb/regler-les-permissions-dun-forum-simple-a43-view.html">Régler les permissions d’un forum (simple)</a>.</p>
 	',
 
 	'ACL_NEVER'				=> 'Jamais',
-	'ACL_SET'				=> 'Configuration des Permissions',
-	'ACL_SET_EXPLAIN'		=> 'Les permissions sont basées sur un simple système <samp>OUI</samp>/<samp>NON</samp>. Régler une option sur <samp>JAMAIS</samp> pour un utilisateur ou groupe d’utilisateurs l’emporte sur toute autre valeur qui lui était assignée. Si vous ne souhaitez pas assigner de valeur à une option pour cet utilisateur ou ce groupe, sélectionnez <samp>NON</samp>. Si des valeurs sont assignées ailleurs pour cette option, elles seront utilisées de préférence, autrement <samp>JAMAIS</samp> est appliqué. Tous les objets sélectionnés (avec la case de choix devant eux) copieront l’ensemble de permissions que vous aurez défini.',
-	'ACL_SETTING'			=> 'Configuration',
+	'ACL_SET'				=> 'Configuration des permissions',
+	'ACL_SET_EXPLAIN'		=> 'Les permissions sont basées sur un simple système <strong>OUI</strong>/<strong>NON</strong>. Régler une option sur <strong>JAMAIS</strong> pour un utilisateur ou groupe d’utilisateurs l’emporte sur toute autre valeur qui lui était assignée. Si vous ne souhaitez pas assigner de valeur à une option pour cet utilisateur ou ce groupe, sélectionnez <strong>NON</strong>. Si des valeurs sont assignées ailleurs pour cette option, elles seront utilisées de préférence, autrement <strong>JAMAIS</strong> est appliqué. Tous les objets sélectionnés (avec la case de choix devant eux) copieront l’ensemble de permissions que vous aurez défini.',
+	'ACL_SETTING'			=> 'Permissions',
 
 	'ACL_TYPE_A_'			=> 'Permissions d’administration',
-	'ACL_TYPE_F_'			=> 'Permissions des Forums',
-	'ACL_TYPE_M_'			=> 'Permissions de Modération',
-	'ACL_TYPE_U_'			=> 'Permissions de l’Utilisateur',
+	'ACL_TYPE_F_'			=> 'Permissions des forums',
+	'ACL_TYPE_M_'			=> 'Permissions de modération',
+	'ACL_TYPE_U_'			=> 'Permissions de l’utilisateur',
 
 	'ACL_TYPE_GLOBAL_A_'	=> 'Permissions d’administration',
-	'ACL_TYPE_GLOBAL_U_'	=> 'Permissions de l’Utilisateur',
+	'ACL_TYPE_GLOBAL_U_'	=> 'Permissions de l’utilisateur',
 	'ACL_TYPE_GLOBAL_M_'	=> 'Permissions des modérateurs globaux',
 	'ACL_TYPE_LOCAL_M_'		=> 'Permissions des modérateurs',
 	'ACL_TYPE_LOCAL_F_'		=> 'Permissions des forums',
 
 	'ACL_NO'				=> 'Non',
-	'ACL_VIEW'				=> 'Aperçu des Permissions',
+	'ACL_VIEW'				=> 'Aperçu des permissions',
 	'ACL_VIEW_EXPLAIN'		=> 'Vous pouvez voir les permissions effectives de l’utilisateur/du groupe. Un rectangle rouge indique que l’utilisateur/le groupe n’a pas la permission, un rectangle vert indique que l’utilisateur/le groupe a la permission.',
 	'ACL_YES'				=> 'Oui',
 
@@ -84,11 +89,11 @@ $lang = array_merge($lang, array(
 	'ACP_FORUM_PERMISSIONS_COPY_EXPLAIN'		=> 'Vous pouvez copier les permissions d’un forum vers d’autres forums.',
 	'ACP_GLOBAL_MODERATORS_EXPLAIN'				=> 'Vous pouvez attribuer les droits de modérateur global aux utilisateurs ou aux groupes. Ces modérateurs sont des modérateurs ordinaires excepté qu’ils ont accès à tous les forums.',
 	'ACP_GROUPS_FORUM_PERMISSIONS_EXPLAIN'		=> 'Vous pouvez attribuer les permissions des forums aux groupes.',
-	'ACP_GROUPS_PERMISSIONS_EXPLAIN'			=> 'Vous pouvez attribuer les permissions globales aux groupes d’utilisateur, de modérateur global et d’administrateur. Les permissions d’utilisateur incluent des possibilités comme l’utilisation d’avatar, l’envoi de messages privés, etc. les permissions de modérateur global comme l’approbation des messages, la gestion des sujets, la gestion des bannissements, etc. et enfin les permissions d’administrateur comme la modification de permissions, la gestion des BBCodes personnalisés, la gestion des forums, etc. Les permissions individuelles des utilisateurs ne doivent être modifiées que dans de rares occasions, la méthode appropriée est l’intégration d’utilisateurs dans des groupes puis l’attribution de permissions à ces groupes.',
-	'ACP_ADMIN_ROLES_EXPLAIN'					=> 'Vous pouvez gérer les modèles des permissions des administrateurs. Les modèles sont des permissions effectives, si vous modifiez un modèle les éléments auxquels ce modèle était assigné verront aussi leurs permissions modifiées.',
-	'ACP_FORUM_ROLES_EXPLAIN'					=> 'Vous pouvez gérer les modèles des permissions des forums. Les modèles sont des permissions effectives, si vous modifiez un modèle les éléments auxquels ce modèle était assigné verront leurs permissions modifiées aussi.',
-	'ACP_MOD_ROLES_EXPLAIN'						=> 'Vous pouvez gérer les modèles des permissions des modérateurs. Les modèles sont des permissions effectives, si vous modifiez un modèle les éléments auxquels ce modèle était assigné verront leurs permissions modifiées aussi.',
-	'ACP_USER_ROLES_EXPLAIN'					=> 'Vous pouvez gérer les modèles des permissions des utilisateurs. Les modèles sont des permissions effectives, si vous modifiez un modèle les éléments auxquels ce modèle était assigné verront leurs permissions modifiées aussi.',
+	'ACP_GROUPS_PERMISSIONS_EXPLAIN'			=> 'Vous pouvez attribuer des permissions globales aux groupes - permissions d’utilisateur, de modérateur global et d’administrateur. Les permissions d’utilisateur incluent des possibilités telles que : l’utilisation d’un avatar, l’envoi de messages privés, etc. Les permissions de modérateur global permettent, entre autres, l’approbation des messages, la gestion des sujets, la gestion des bannissements, etc. Enfin, les permissions d’administrateur autorisent la modification de permissions, la gestion des BBCodes personnalisés, la gestion des forums, etc. Les permissions individuelles des utilisateurs ne doivent être modifiées que dans de rares occasions, la méthode appropriée étant l’intégration d’utilisateurs dans des groupes puis l’attribution de permissions à ces mêmes groupes.',
+	'ACP_ADMIN_ROLES_EXPLAIN'					=> 'Vous pouvez gérer les modèles des permissions des administrateurs. Les modèles sont des permissions effectives. Si vous modifiez un modèle, les éléments auxquels ce modèle était assigné verront aussi leurs permissions modifiées.',
+	'ACP_FORUM_ROLES_EXPLAIN'					=> 'Vous pouvez gérer les modèles des permissions des forums. Les modèles sont des permissions effectives. Si vous modifiez un modèle, les éléments auxquels ce modèle était assigné verront leurs permissions modifiées aussi.',
+	'ACP_MOD_ROLES_EXPLAIN'						=> 'Vous pouvez gérer les modèles des permissions des modérateurs. Les modèles sont des permissions effectives. Si vous modifiez un modèle, les éléments auxquels ce modèle était assigné verront leurs permissions modifiées aussi.',
+	'ACP_USER_ROLES_EXPLAIN'					=> 'Vous pouvez gérer les modèles des permissions des utilisateurs. Les modèles sont des permissions effectives. Si vous modifiez un modèle, les éléments auxquels ce modèle était assigné verront leurs permissions modifiées aussi.',
 	'ACP_USERS_FORUM_PERMISSIONS_EXPLAIN'		=> 'Vous pouvez attribuer les permissions des forums aux utilisateurs.',
 	'ACP_USERS_PERMISSIONS_EXPLAIN'				=> 'Vous pouvez attribuer les permissions globales aux utilisateurs - permissions d’utilisateur, permissions de modérateur global et permissions d’administrateur. Les permissions d’utilisateur incluent des possibilités comme l’utilisation d’avatar, l’envoi de messages privés, etc. les permissions de modérateur global comme l’approbation des messages, la gestion des sujets, la gestion des bannissements, etc. et enfin les permissions d’administrateur comme la modification de permissions, la gestion des BBCodes personnalisés, la gestion des forums, etc. Pour modifier les permissions d’un grand nombre d’utilisateurs, le système de permissions des groupes est la méthode la plus appropriée. Les permissions individuelles des utilisateurs ne doivent être modifiées que dans de rares occasions, la méthode appropriée est l’intégration d’utilisateurs dans des groupes et l’attribution de permissions à ces groupes.',
 	'ACP_VIEW_ADMIN_PERMISSIONS_EXPLAIN'		=> 'Vous pouvez consulter les permissions effectives des administrateurs assignées aux utilisateurs ou groupes sélectionnés',
@@ -102,10 +107,10 @@ $lang = array_merge($lang, array(
 	'ADD_USERS'					=> 'Ajouter des utilisateurs',
 	'ADVANCED_PERMISSIONS'		=> 'Permissions avancées',
 	'ALL_GROUPS'				=> 'Sélectionner tous les groupes',
-	'ALL_NEVER'					=> 'Tous sur <samp>JAMAIS</samp>',
-	'ALL_NO'					=> 'Tous sur <samp>NON</samp>',
+	'ALL_NEVER'					=> 'Tous sur <strong>JAMAIS</strong>',
+	'ALL_NO'					=> 'Tous sur <strong>NON</strong>',
 	'ALL_USERS'					=> 'Sélectionner tous les utilisateurs',
-	'ALL_YES'					=> 'Tous sur <samp>OUI</samp>',
+	'ALL_YES'					=> 'Tous sur <strong>OUI</strong>',
 	'APPLY_ALL_PERMISSIONS'		=> 'Appliquer toutes les permissions',
 	'APPLY_PERMISSIONS'			=> 'Appliquer les permissions',
 	'APPLY_PERMISSIONS_EXPLAIN'	=> 'Les permissions et modèles définis pour cet élément seront appliqués uniquement à cet élément et à tous les éléments cochés.',
@@ -113,7 +118,7 @@ $lang = array_merge($lang, array(
 
 	'COPY_PERMISSIONS_CONFIRM'				=> 'Êtes-vous sûr de vouloir effectuer cette opération ? Attention, les permissions existantes des cibles sélectionnées seront remplacées.',
 	'COPY_PERMISSIONS_FORUM_FROM_EXPLAIN'	=> 'Le forum source dont vous copiez les permissions.',
-	'COPY_PERMISSIONS_FORUM_TO_EXPLAIN'		=> 'Les forums de destination où vous voulez que les permissions copiées s’appliquent.',
+	'COPY_PERMISSIONS_FORUM_TO_EXPLAIN'		=> 'Les forums de destination auxquels vous voulez que les permissions copiées s’appliquent.',
 	'COPY_PERMISSIONS_FROM'					=> 'Copier les permissions de',
 	'COPY_PERMISSIONS_TO'					=> 'Appliquer les permissions à',
 
@@ -126,8 +131,8 @@ $lang = array_merge($lang, array(
 	'DELETE_ROLE_CONFIRM'		=> 'Êtes-vous sûr de vouloir supprimer ce modèle ? Les éléments auxquels ce modèle est assigné <strong>ne</strong> perdront <strong>pas</strong> leurs paramètres de permission.',
 	'DISPLAY_ROLE_ITEMS'		=> 'Voir les éléments utilisant ce modèle',
 
-	'EDIT_PERMISSIONS'			=> 'Éditer les permissions',
-	'EDIT_ROLE'					=> 'Éditer le modèle',
+	'EDIT_PERMISSIONS'			=> 'Modifier les permissions',
+	'EDIT_ROLE'					=> 'Modifier le modèle',
 
 	'GROUPS_NOT_ASSIGNED'		=> 'Aucun groupe n’est assigné à ce modèle',
 
@@ -139,13 +144,13 @@ $lang = array_merge($lang, array(
 
 	'NO_AUTH_SETTING_FOUND'		=> 'Paramètres de permission non définis.',
 	'NO_ROLE_ASSIGNED'			=> 'Aucun modèle assigné…',
-	'NO_ROLE_ASSIGNED_EXPLAIN'	=> 'La configuration de ce modèle ne modifie pas les permissions sur la droite. Si vous souhaitez supprimer toutes les permissions, vous devez utiliser le lien « Tous sur <samp>NON</samp> ».',
+	'NO_ROLE_ASSIGNED_EXPLAIN'	=> 'La configuration de ce modèle ne modifie pas les permissions sur la droite. Si vous souhaitez supprimer toutes les permissions, vous devez utiliser le lien « Tous sur <strong>NON</strong> ».',
 	'NO_ROLE_AVAILABLE'			=> 'Aucun modèle disponible',
 	'NO_ROLE_NAME_SPECIFIED'	=> 'Merci de donner un nom au modèle.',
 	'NO_ROLE_SELECTED'			=> 'Le modèle n’a pas été trouvé.',
 	'NO_USER_GROUP_SELECTED'	=> 'Vous n’avez pas sélectionné d’utilisateur ou de groupe.',
 
-	'ONLY_FORUM_DEFINED'	=> 'Vous n’avez défini que des forums dans votre sélection. Sélectionnez aussi, au moins, un utilisateur ou un groupe.',
+	'ONLY_FORUM_DEFINED'	=> 'Votre sélection ne contient que des forums. Sélectionnez aussi, au moins, un utilisateur ou un groupe.',
 
 	'PERMISSION_APPLIED_TO_ALL'		=> 'Les permissions et modèles seront aussi appliqués à tous les objets cochés',
 	'PLUS_SUBFORUMS'				=> '+Sous-forums',
@@ -153,14 +158,14 @@ $lang = array_merge($lang, array(
 	'REMOVE_PERMISSIONS'			=> 'Supprimer des permissions',
 	'REMOVE_ROLE'					=> 'Supprimer un modèle',
 	'RESULTING_PERMISSION'			=> 'Permission résultante',
-	'ROLE'							=> 'modèle',
-	'ROLE_ADD_SUCCESS'				=> 'modèle ajouté.',
+	'ROLE'							=> 'Modèle',
+	'ROLE_ADD_SUCCESS'				=> 'Le modèle a été ajouté.',
 	'ROLE_ASSIGNED_TO'				=> 'Utilisateurs/groupes assignés à %s',
-	'ROLE_DELETED'					=> 'modèle supprimé.',
+	'ROLE_DELETED'					=> 'Le modèle a été supprimé.',
 	'ROLE_DESCRIPTION'				=> 'Description du modèle',
 
 	'ROLE_ADMIN_FORUM'			=> 'Administrateur du forum',
-	'ROLE_ADMIN_FULL'			=> 'Super Administrateur',
+	'ROLE_ADMIN_FULL'			=> 'Super administrateur',
 	'ROLE_ADMIN_STANDARD'		=> 'Administrateur standard',
 	'ROLE_ADMIN_USERGROUP'		=> 'Administrateur des utilisateurs et des groupes',
 	'ROLE_FORUM_BOT'			=> 'Accès robots',
@@ -169,11 +174,11 @@ $lang = array_merge($lang, array(
 	'ROLE_FORUM_LIMITED_POLLS'	=> 'Accès limité + Sondages',
 	'ROLE_FORUM_NOACCESS'		=> 'Aucun accès',
 	'ROLE_FORUM_ONQUEUE'		=> 'Attente de modération',
-	'ROLE_FORUM_POLLS'			=> 'Accès standard + Sondages',
+	'ROLE_FORUM_POLLS'			=> 'Accès standard + sondages',
 	'ROLE_FORUM_READONLY'		=> 'Accès en lecture uniquement',
 	'ROLE_FORUM_STANDARD'		=> 'Accès standard',
 	'ROLE_FORUM_NEW_MEMBER'		=> 'Accès nouvel utilisateur enregistré',
-	'ROLE_MOD_FULL'				=> 'Super Modérateur',
+	'ROLE_MOD_FULL'				=> 'Super modérateur',
 	'ROLE_MOD_QUEUE'			=> 'Modérateur suppléant',
 	'ROLE_MOD_SIMPLE'			=> 'Modérateur simple',
 	'ROLE_MOD_STANDARD'			=> 'Modérateur standard',
@@ -184,23 +189,22 @@ $lang = array_merge($lang, array(
 	'ROLE_USER_STANDARD'		=> 'Fonctionnalités standards',
 	'ROLE_USER_NEW_MEMBER'		=> 'Fonctionnalités nouvel utilisateur enregistré',
 
-
 	'ROLE_DESCRIPTION_ADMIN_FORUM'			=> 'Peut accéder à la gestion et à la configuration des permissions du forum.',
 	'ROLE_DESCRIPTION_ADMIN_FULL'			=> 'A accès à toutes les fonctions administratives du forum.<br />Non recommandé.',
 	'ROLE_DESCRIPTION_ADMIN_STANDARD'		=> 'A accès à la plupart des fonctionnalités administratives mais ne peut pas utiliser le serveur ou les outils relatifs au système.',
-	'ROLE_DESCRIPTION_ADMIN_USERGROUP'		=> 'Peut gérer des groupes et des utilisateurs: est autorisé à modifier les permissions, les paramètres, à gérer les bannissements et les rangs.',
+	'ROLE_DESCRIPTION_ADMIN_USERGROUP'		=> 'Peut gérer des groupes et des utilisateurs : est autorisé à modifier les permissions, les paramètres, à gérer les bannissements et les rangs.',
 	'ROLE_DESCRIPTION_FORUM_BOT'			=> 'Ce modèle est recommandé pour les robots et moteurs de recherche.',
-	'ROLE_DESCRIPTION_FORUM_FULL'			=> 'Peut utiliser toutes les fonctionnalités du forum, y compris les annonces et les post-it. N’est pas concerné par la limite de flood.<br />Non recommandé pour les utilisateurs standards.',
-	'ROLE_DESCRIPTION_FORUM_LIMITED'		=> 'Peut utiliser quelques fonctionnalités du forum, mais ne peut pas joindre de fichiers ou utiliser les icônes des messages.',
-	'ROLE_DESCRIPTION_FORUM_LIMITED_POLLS'	=> 'Comme l’Accès Limité mais peut aussi créer des sondages.',
+	'ROLE_DESCRIPTION_FORUM_FULL'			=> 'Peut utiliser toutes les fonctionnalités du forum, y compris les annonces et les post-it. N’est pas concerné par la limite de flood.<br />Non recommandé pour les utilisateurs standard.',
+	'ROLE_DESCRIPTION_FORUM_LIMITED'		=> 'Peut utiliser quelques fonctionnalités du forum, mais ne peut pas joindre de fichiers ou utiliser les icônes de messages.',
+	'ROLE_DESCRIPTION_FORUM_LIMITED_POLLS'	=> 'Comme le modèle « accès limité » mais peut aussi créer des sondages.',
 	'ROLE_DESCRIPTION_FORUM_NOACCESS'		=> 'Ne peut ni voir ni accéder au forum.',
 	'ROLE_DESCRIPTION_FORUM_ONQUEUE'		=> 'Peut utiliser la plupart des fonctionnalités du forum y compris les fichiers joints, mais les messages et les sujets doivent être approuvés par un modérateur.',
-	'ROLE_DESCRIPTION_FORUM_POLLS'			=> 'Comme l’Accès Standard mais peut aussi créer des sondages.',
+	'ROLE_DESCRIPTION_FORUM_POLLS'			=> 'Comme le modèle « accès standard » mais peut aussi créer des sondages.',
 	'ROLE_DESCRIPTION_FORUM_READONLY'		=> 'Peut lire le forum, mais ne peut pas créer de nouveaux sujets ou répondre aux messages.',
-	'ROLE_DESCRIPTION_FORUM_STANDARD'		=> 'Peut utiliser la plupart des fonctionnalités du forum y compris les fichiers joints, mais ne peut pas verrouiller ou supprimer ses propres sujets, et ne peut pas créer de sondages.',
-	'ROLE_DESCRIPTION_FORUM_NEW_MEMBER'		=> 'Un modèle pour les membres du groupe prédéfini nouveaux utilisateurs enregistrés, contient les permission <samp>JAMAIS</samp> pour verrouiller les fonctionnalités aux nouveaux utilisateurs.',
+	'ROLE_DESCRIPTION_FORUM_STANDARD'		=> 'Peut utiliser la plupart des fonctionnalités du forum y compris les fichiers joints, mais ne peut pas verrouiller ou supprimer ses propres sujets, ni créer de sondages.',
+	'ROLE_DESCRIPTION_FORUM_NEW_MEMBER'		=> 'Un modèle pour les membres du groupe prédéfini nouveaux utilisateurs enregistrés, contient les permissions <strong>JAMAIS</strong> pour verrouiller les fonctionnalités aux nouveaux utilisateurs.',
 	'ROLE_DESCRIPTION_MOD_FULL'				=> 'Peut utiliser toutes les fonctionnalités de modération, y compris le bannissement.',
-	'ROLE_DESCRIPTION_MOD_QUEUE'			=> 'Peut utiliser l’attente de modération pour valider ou éditer des messages, mais rien d’autre.',
+	'ROLE_DESCRIPTION_MOD_QUEUE'			=> 'Peut utiliser l’attente de modération pour valider ou modifier des messages, mais rien d’autre.',
 	'ROLE_DESCRIPTION_MOD_SIMPLE'			=> 'Peut utiliser seulement les actions de sujet de base. Ne peut pas envoyer d’avertissements ou utiliser l’attente de modération.',
 	'ROLE_DESCRIPTION_MOD_STANDARD'			=> 'Peut utiliser la plupart des outils de modération, mais ne peut pas bannir les utilisateurs ou modifier l’auteur du message.',
 	'ROLE_DESCRIPTION_USER_FULL'			=> 'Peut utiliser toutes les fonctionnalités disponibles du forum pour les utilisateurs, y compris modifier le nom d’utilisateur ou ignorer la limite de flood.<br />Non recommandé.',
@@ -208,12 +212,12 @@ $lang = array_merge($lang, array(
 	'ROLE_DESCRIPTION_USER_NOAVATAR'		=> 'A un ensemble limité de fonctionnalités et n’est pas autorisé à avoir d’avatar.',
 	'ROLE_DESCRIPTION_USER_NOPM'			=> 'A un ensemble limité de fonctionnalités et n’est pas autorisé à envoyer de messages privés.',
 	'ROLE_DESCRIPTION_USER_STANDARD'		=> 'Peut accéder à la plupart des fonctionnalités de l’utilisateur, mais pas à toutes. Par exemple, ne peut pas modifier le nom d’utilisateur ou ignorer la limite de flood.',
-	'ROLE_DESCRIPTION_USER_NEW_MEMBER'		=> 'Un modèle pour les membres du groupe prédéfini nouveaux utilisateurs enregistrés, contient les permissions <samp>JAMAIS</samp> pour verrouiller les fonctionnalités aux nouveaux utilisateurs.',
+	'ROLE_DESCRIPTION_USER_NEW_MEMBER'		=> 'Un modèle pour les membres du groupe prédéfini nouveaux utilisateurs enregistrés, contient les permissions <strong>JAMAIS</strong> pour verrouiller les fonctionnalités aux nouveaux utilisateurs.',
 
-	'ROLE_DESCRIPTION_EXPLAIN'		=> 'Vous avez la possibilité d’entrer une courte explication sur ce que fait le modèle ou ce qu’il signifie. Le texte que vous entrez sera aussi affiché dans l’écran des permissions.',
+	'ROLE_DESCRIPTION_EXPLAIN'		=> 'Vous avez la possibilité de saisir une courte explication sur ce que fait le modèle ou ce qu’il signifie. Le texte que vous saisissez sera aussi affiché dans l’écran des permissions.',
 	'ROLE_DESCRIPTION_LONG'			=> 'La description du modèle est trop longue. Limitez-la à 4000 caractères.',
 	'ROLE_DETAILS'					=> 'Détails du modèle',
-	'ROLE_EDIT_SUCCESS'				=> 'Le modèle a été édité.',
+	'ROLE_EDIT_SUCCESS'				=> 'Le modèle a été modifié.',
 	'ROLE_NAME'						=> 'Nom du modèle',
 	'ROLE_NAME_ALREADY_EXIST'		=> 'Un modèle nommé <strong>%s</strong> existe déjà pour le type de permission indiqué.',
 	'ROLE_NOT_ASSIGNED'				=> 'Le modèle n’a pas encore été assigné.',
@@ -229,48 +233,48 @@ $lang = array_merge($lang, array(
 	'SET_USERS_PERMISSIONS'			=> 'Régler les permissions des utilisateurs',
 	'SET_USERS_FORUM_PERMISSIONS'	=> 'Régler les permissions des forums pour les utilisateurs',
 
-	'TRACE_DEFAULT'					=> 'Par défaut, chaque permission est sur <samp>NON</samp> (Désactivée). Ainsi la permission peut être outrepassée par d’autres paramètres.',
+	'TRACE_DEFAULT'					=> 'Par défaut, chaque permission est réglée sur <strong>NON</strong> (non configurée). Ainsi la permission peut être outrepassée par d’autres paramètres.',
 	'TRACE_FOR'						=> 'Tracer pour',
 	'TRACE_GLOBAL_SETTING'			=> '%s (global)',
-	'TRACE_GROUP_NEVER_TOTAL_NEVER'	=> 'Cette permission de groupe est réglée sur <samp>JAMAIS</samp> tout comme le résultat total, l’ancien résultat est donc conservé.',
-	'TRACE_GROUP_NEVER_TOTAL_NEVER_LOCAL'	=> 'Cette permission de groupe pour ce forum est réglée sur <samp>JAMAIS</samp> tout comme le résultat total, l’ancien résultat est donc conservé.',
-	'TRACE_GROUP_NEVER_TOTAL_NO'		=> 'Cette permission de groupe est réglée sur <samp>JAMAIS</samp> ce qui devient la nouvelle valeur globale car elle n’était pas encore réglée (Paramètre sur <samp>NON</samp>).',
-	'TRACE_GROUP_NEVER_TOTAL_NO_LOCAL'	=> 'Cette permission de groupe pour ce forum est réglée sur <samp>JAMAIS</samp> ce qui devient la nouvelle valeur globale car elle n’était pas encore réglée (Paramètre sur <samp>NON</samp>).',
-	'TRACE_GROUP_NEVER_TOTAL_YES'		=> 'Cette permission de groupe est réglée sur <samp>JAMAIS</samp> ce qui outrepasse le <samp>OUI</samp> pour appliquer <samp>JAMAIS</samp> pour cet utilisateur.',
-	'TRACE_GROUP_NEVER_TOTAL_YES_LOCAL'	=> 'Cette permission de groupe pour ce forum est réglée sur <samp>JAMAIS</samp> ce qui outrepasse le <samp>OUI</samp> pour appliquer <samp>JAMAIS</samp> pour cet utilisateur.',
-	'TRACE_GROUP_NO'					=> 'Cette permission de groupe est réglée sur <samp>NON</samp> pour ce groupe, ainsi l’ancienne valeur est conservée.',
-	'TRACE_GROUP_NO_LOCAL'				=> 'Cette permission de groupe est réglée sur <samp>NON</samp> pour ce groupe dans ce forum, ainsi l’ancienne valeur est conservée.',
-	'TRACE_GROUP_YES_TOTAL_NEVER'		=> 'Cette permission de groupe est réglée sur <samp>OUI</samp> mais la valeur globale <samp>JAMAIS</samp> ne peut pas être outrepassée.',
-	'TRACE_GROUP_YES_TOTAL_NEVER_LOCAL'	=> 'Cette permission de groupe pour ce forum est réglée sur <samp>OUI</samp> mais la valeur globale <samp>JAMAIS</samp> ne peut pas être outrepassée.',
-	'TRACE_GROUP_YES_TOTAL_NO'			=> 'Cette permission de groupe est réglée sur <samp>OUI</samp> ce qui devient la nouvelle valeur globale car elle n’était pas encore réglée (Paramètre sur <samp>NON</samp>).',
-	'TRACE_GROUP_YES_TOTAL_NO_LOCAL'	=> 'Cette permission de groupe pour ce forum est réglée sur <samp>OUI</samp> ce qui devient la nouvelle valeur globale car elle n’était pas encore réglée (Paramètre sur <samp>NON</samp>).',
-	'TRACE_GROUP_YES_TOTAL_YES'			=> 'Cette permission de groupe est réglée sur <samp>OUI</samp> et la permission totale est déjà réglée sur <samp>OUI</samp>, elle est donc conservée.',
-	'TRACE_GROUP_YES_TOTAL_YES_LOCAL'	=> 'Cette permission de groupe pour ce forum est réglée sur <samp>OUI</samp> et la permission totale est déjà réglée sur <samp>OUI</samp>, elle est donc conservée.',
+	'TRACE_GROUP_NEVER_TOTAL_NEVER'	=> 'Cette permission de groupe est réglée sur <strong>JAMAIS</strong> tout comme le résultat total, l’ancien résultat est donc conservé.',
+	'TRACE_GROUP_NEVER_TOTAL_NEVER_LOCAL'	=> 'Cette permission de groupe pour ce forum est réglée sur <strong>JAMAIS</strong> tout comme le résultat total, l’ancien résultat est donc conservé.',
+	'TRACE_GROUP_NEVER_TOTAL_NO'		=> 'Cette permission de groupe est réglée sur <strong>JAMAIS</strong> ce qui devient la nouvelle valeur globale car elle n’était pas encore réglée (Paramètré sur <strong>NON</strong>).',
+	'TRACE_GROUP_NEVER_TOTAL_NO_LOCAL'	=> 'Cette permission de groupe pour ce forum est réglée sur <strong>JAMAIS</strong> ce qui devient la nouvelle valeur globale car elle n’était pas encore réglée (Paramètré sur <strong>NON</strong>).',
+	'TRACE_GROUP_NEVER_TOTAL_YES'		=> 'Cette permission de groupe est réglée sur <strong>JAMAIS</strong> ce qui outrepasse le <strong>OUI</strong> pour appliquer <strong>JAMAIS</strong> pour cet utilisateur.',
+	'TRACE_GROUP_NEVER_TOTAL_YES_LOCAL'	=> 'Cette permission de groupe pour ce forum est réglée sur <strong>JAMAIS</strong> ce qui outrepasse le <strong>OUI</strong> pour appliquer <strong>JAMAIS</strong> pour cet utilisateur.',
+	'TRACE_GROUP_NO'					=> 'Cette permission est réglée sur <strong>NON</strong> pour ce groupe, ainsi l’ancienne valeur est conservée.',
+	'TRACE_GROUP_NO_LOCAL'				=> 'Cette permission est réglée sur <strong>NON</strong> pour ce groupe dans ce forum, ainsi l’ancienne valeur est conservée.',
+	'TRACE_GROUP_YES_TOTAL_NEVER'		=> 'Cette permission de groupe est réglée sur <strong>OUI</strong> mais la valeur globale <strong>JAMAIS</strong> ne peut pas être outrepassée.',
+	'TRACE_GROUP_YES_TOTAL_NEVER_LOCAL'	=> 'Cette permission de groupe pour ce forum est réglée sur <strong>OUI</strong> mais la valeur globale <strong>JAMAIS</strong> ne peut pas être outrepassée.',
+	'TRACE_GROUP_YES_TOTAL_NO'			=> 'Cette permission de groupe est réglée sur <strong>OUI</strong> ce qui devient la nouvelle valeur globale car elle n’était pas encore réglée (Paramètré sur <strong>NON</strong>).',
+	'TRACE_GROUP_YES_TOTAL_NO_LOCAL'	=> 'Cette permission de groupe pour ce forum est réglée sur <strong>OUI</strong> ce qui devient la nouvelle valeur globale car elle n’était pas encore réglée (Paramètré sur <strong>NON</strong>).',
+	'TRACE_GROUP_YES_TOTAL_YES'			=> 'Cette permission de groupe est réglée sur <strong>OUI</strong> et la permission totale est déjà réglée sur <strong>OUI</strong>, elle est donc conservée.',
+	'TRACE_GROUP_YES_TOTAL_YES_LOCAL'	=> 'Cette permission de groupe pour ce forum est réglée sur <strong>OUI</strong> et la permission totale est déjà réglée sur <strong>OUI</strong>, elle est donc conservée.',
 	'TRACE_PERMISSION'				=> 'Tracer la permission - %s',
-	'TRACE_RESULT'					=> 'Tracer le résultat',
-	'TRACE_SETTING'					=> 'Tracer la configuration',
+	'TRACE_RESULT'					=> 'Résultat du traçage',
+	'TRACE_SETTING'					=> 'Tracer la permission',
 
-	'TRACE_USER_GLOBAL_YES_TOTAL_YES'		=> 'La permission de l’utilisateur sur le forum est sur <samp>OUI</samp>, mais la permission commune étant déjà réglée sur <samp>OUI</samp>, elle est conservée. %sTracer la permission globale%s',
-	'TRACE_USER_GLOBAL_YES_TOTAL_NEVER'		=> 'La permission de l’utilisateur sur le forum est sur <samp>OUI</samp>, ce qui outrepasse le résultat actuel <samp>JAMAIS</samp>. %sTracer la permission globale%s',
-	'TRACE_USER_GLOBAL_NEVER_TOTAL_KEPT'	=> 'La permission de l’utilisateur sur le forum est sur <samp>JAMAIS</samp> ce qui n’influence pas la permission locale. %sTracer la permission globale%s',
+	'TRACE_USER_GLOBAL_YES_TOTAL_YES'		=> 'La permission de l’utilisateur sur le forum est sur <strong>OUI</strong>, mais la permission commune étant déjà réglée sur <strong>OUI</strong>, elle est conservée. %sTracer la permission globale%s',
+	'TRACE_USER_GLOBAL_YES_TOTAL_NEVER'		=> 'La permission de l’utilisateur sur le forum est sur <strong>OUI</strong>, ce qui outrepasse le résultat actuel <strong>JAMAIS</strong>. %sTracer la permission globale%s',
+	'TRACE_USER_GLOBAL_NEVER_TOTAL_KEPT'	=> 'La permission de l’utilisateur sur le forum est sur <strong>JAMAIS</strong> ce qui n’influence pas la permission locale. %sTracer la permission globale%s',
 
-	'TRACE_USER_FOUNDER'					=> 'L’utilisateur est un fondateur, c’est pourquoi les permissions d’administration sont toujours réglées sur <samp>OUI</samp>.',
-	'TRACE_USER_KEPT'						=> 'La permission de l’utilisateur est réglée sur <samp>NON</samp>, ainsi l’ancienne valeur globale est conservée.',
-	'TRACE_USER_KEPT_LOCAL'					=> 'La permission de l’utilisateur pour ce forum est réglée sur <samp>NON</samp>, ainsi l’ancienne valeur globale est conservée.',
-	'TRACE_USER_NEVER_TOTAL_NEVER'			=> 'La permission de l’utilisateur est réglée sur <samp>JAMAIS</samp> et la valeur commune est réglée sur <samp>JAMAIS</samp>, donc rien n’est modifié.',
-	'TRACE_USER_NEVER_TOTAL_NEVER_LOCAL'	=> 'La permission de l’utilisateur pour ce forum est réglée sur <samp>JAMAIS</samp> et la valeur commune est réglée sur <samp>JAMAIS</samp>, donc rien n’est modifié.',
-	'TRACE_USER_NEVER_TOTAL_NO'				=> 'La permission de l’utilisateur est réglée sur <samp>JAMAIS</samp> ce qui devient la valeur commune car elle était réglée sur NON.',
-	'TRACE_USER_NEVER_TOTAL_NO_LOCAL'		=> 'La permission de l’utilisateur pour ce forum est réglée sur <samp>JAMAIS</samp> ce qui devient la valeur commune car elle était réglée sur NON.',
-	'TRACE_USER_NEVER_TOTAL_YES'			=> 'La permission de l’utilisateur est réglée sur <samp>JAMAIS</samp> et outrepasse le <samp>OUI</samp> précédent.',
-	'TRACE_USER_NEVER_TOTAL_YES_LOCAL'		=> 'La permission de l’utilisateur pour ce forum est réglée sur <samp>JAMAIS</samp> et outrepasse le <samp>OUI</samp> précédent.',
-	'TRACE_USER_NO_TOTAL_NO'				=> 'La permission de l’utilisateur est réglée sur <samp>NON</samp> et la valeur commune était réglée sur NON ainsi par défaut sur <samp>JAMAIS</samp>.',
-	'TRACE_USER_NO_TOTAL_NO_LOCAL'			=> 'La permission de l’utilisateur pour ce forum est réglée sur <samp>NON</samp> et la valeur commune était réglée sur NON ainsi par défaut sur <samp>JAMAIS</samp>.',
-	'TRACE_USER_YES_TOTAL_NEVER'			=> 'La permission de l’utilisateur est réglée sur <samp>OUI</samp> mais la valeur commune est sur <samp>JAMAIS</samp> et ne peut pas être outrepassée.',
-	'TRACE_USER_YES_TOTAL_NEVER_LOCAL'		=> 'La permission de l’utilisateur pour ce forum est réglée sur <samp>OUI</samp> mais la valeur commune est sur <samp>JAMAIS</samp> et ne peut pas être outrepassée.',
-	'TRACE_USER_YES_TOTAL_NO'				=> 'La permission de l’utilisateur est réglée sur <samp>OUI</samp> ce qui devient la valeur commune car elle était réglée sur <samp>NON</samp>.',
-	'TRACE_USER_YES_TOTAL_NO_LOCAL'			=> 'La permission de l’utilisateur pour ce forum est réglée sur <samp>OUI</samp> ce qui devient la valeur commune car elle était réglée sur <samp>NON</samp>.',
-	'TRACE_USER_YES_TOTAL_YES'				=> 'La permission de l’utilisateur est réglée sur <samp>OUI</samp> et la valeur commune est réglée sur <samp>OUI</samp>, donc rien n’est modifié.',
-	'TRACE_USER_YES_TOTAL_YES_LOCAL'		=> 'La permission de l’utilisateur pour ce forum est réglée sur <samp>OUI</samp> et la valeur commune est réglée sur <samp>OUI</samp>, donc rien n’est modifié.',
+	'TRACE_USER_FOUNDER'					=> 'L’utilisateur est un fondateur, c’est pourquoi les permissions d’administration sont toujours réglées sur <strong>OUI</strong>.',
+	'TRACE_USER_KEPT'						=> 'La permission de l’utilisateur est réglée sur <strong>NON</strong>, ainsi l’ancienne valeur globale est conservée.',
+	'TRACE_USER_KEPT_LOCAL'					=> 'La permission de l’utilisateur pour ce forum est réglée sur <strong>NON</strong>, ainsi l’ancienne valeur globale est conservée.',
+	'TRACE_USER_NEVER_TOTAL_NEVER'			=> 'La permission de l’utilisateur est réglée sur <strong>JAMAIS</strong> et la valeur commune est réglée sur <strong>JAMAIS</strong>, donc rien n’est modifié.',
+	'TRACE_USER_NEVER_TOTAL_NEVER_LOCAL'	=> 'La permission de l’utilisateur pour ce forum est réglée sur <strong>JAMAIS</strong> et la valeur commune est réglée sur <strong>JAMAIS</strong>, donc rien n’est modifié.',
+	'TRACE_USER_NEVER_TOTAL_NO'				=> 'La permission de l’utilisateur est réglée sur <strong>JAMAIS</strong> ce qui devient la valeur commune car elle était réglée sur NON.',
+	'TRACE_USER_NEVER_TOTAL_NO_LOCAL'		=> 'La permission de l’utilisateur pour ce forum est réglée sur <strong>JAMAIS</strong> ce qui devient la valeur commune car elle était réglée sur NON.',
+	'TRACE_USER_NEVER_TOTAL_YES'			=> 'La permission de l’utilisateur est réglée sur <strong>JAMAIS</strong> et outrepasse le <strong>OUI</strong> précédent.',
+	'TRACE_USER_NEVER_TOTAL_YES_LOCAL'		=> 'La permission de l’utilisateur pour ce forum est réglée sur <strong>JAMAIS</strong> et outrepasse le <strong>OUI</strong> précédent.',
+	'TRACE_USER_NO_TOTAL_NO'				=> 'La permission de l’utilisateur est réglée sur <strong>NON</strong> et la valeur commune était réglée sur NON ainsi par défaut sur <strong>JAMAIS</strong>.',
+	'TRACE_USER_NO_TOTAL_NO_LOCAL'			=> 'La permission de l’utilisateur pour ce forum est réglée sur <strong>NON</strong> et la valeur commune était réglée sur NON ainsi par défaut sur <strong>JAMAIS</strong>.',
+	'TRACE_USER_YES_TOTAL_NEVER'			=> 'La permission de l’utilisateur est réglée sur <strong>OUI</strong> mais la valeur commune est sur <strong>JAMAIS</strong> et ne peut pas être outrepassée.',
+	'TRACE_USER_YES_TOTAL_NEVER_LOCAL'		=> 'La permission de l’utilisateur pour ce forum est réglée sur <strong>OUI</strong> mais la valeur commune est sur <strong>JAMAIS</strong> et ne peut pas être outrepassée.',
+	'TRACE_USER_YES_TOTAL_NO'				=> 'La permission de l’utilisateur est réglée sur <strong>OUI</strong> ce qui devient la valeur commune car elle était réglée sur <strong>NON</strong>.',
+	'TRACE_USER_YES_TOTAL_NO_LOCAL'			=> 'La permission de l’utilisateur pour ce forum est réglée sur <strong>OUI</strong> ce qui devient la valeur commune car elle était réglée sur <strong>NON</strong>.',
+	'TRACE_USER_YES_TOTAL_YES'				=> 'La permission de l’utilisateur est réglée sur <strong>OUI</strong> et la valeur commune est réglée sur <strong>OUI</strong>, donc rien n’est modifié.',
+	'TRACE_USER_YES_TOTAL_YES_LOCAL'		=> 'La permission de l’utilisateur pour ce forum est réglée sur <strong>OUI</strong> et la valeur commune est réglée sur <strong>OUI</strong>, donc rien n’est modifié.',
 	'TRACE_WHO'								=> 'Qui',
 	'TRACE_TOTAL'							=> 'Total',
 
