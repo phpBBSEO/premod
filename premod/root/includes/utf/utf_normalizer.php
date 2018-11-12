@@ -16,6 +16,11 @@ if (!defined('IN_PHPBB'))
 }
 
 /**
+ * Modifications:
+ *
+ */
+
+/**
 * Some Unicode characters encoded in UTF-8
 *
 * Preserved for compatibility
