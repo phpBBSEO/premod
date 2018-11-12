@@ -436,7 +436,7 @@ if ($debug_from_version === false)
 		WHERE config_name = 'version'";
 	_sql($sql, $errored, $error_ary);
 	// SEO premod
-	set_config('seo_premod_version', '3.0.12');
+	set_config('seo_premod_version', '3.0.13-PL1');
 }
 
 // Reset permissions
