@@ -524,6 +524,9 @@ function validate_config_vars($config_vars, &$cfg_array, &$error)
 
 				$cfg_array[$config_name] = trim($destination);
 
+			// Absolute file path
+			case 'absolute_path':
+			case 'absolute_path_writable':
 			// Path being relative (still prefixed by phpbb_root_path), but with the ability to escape the root dir...
 			case 'path':
 			case 'wpath':
@@ -532,6 +535,7 @@ function validate_config_vars($config_vars, &$cfg_array, &$error)
 				{
 					break;
 				}
+
 
 				$cfg_array[$config_name] = trim($cfg_array[$config_name]);
 
